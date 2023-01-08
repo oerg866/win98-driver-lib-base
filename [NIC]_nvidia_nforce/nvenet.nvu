@@ -1,0 +1,39 @@
+Set Display Name=Nvidia Ethernet Driver
+; Remove any NVIDIA device driver if present
+UninstallService nvenet
+RemoveDevice pci,VEN_10DE,net
+
+; Now try to delete files used by Ethernet driver
+DelOemInfs nv*,Version,Class,net,version,Provider,%Nvidia%
+DelIniIfMatched {windir}\inf\internet\NVidiaNVENET.inf,Version,Class,net,version,Provider,%Nvidia%
+DelIniIfMatched {windir}\inf\internet\NVidiaNVENET9x.inf,Version,Class,net,version,Provider,%Nvidia%
+
+DelBoot {sysdir}\jedih2rx.bin
+DelBoot {sysdir}\jedireg.pat
+DelBoot {sysdir}\nvenet.cat
+DelBoot {sysdir}\NVENET.sys
+DelBoot {sysdir}\Drivers\NVENET.sys
+DelBoot {sysdir}\nvenet9x.inf
+DelBoot {sysdir}\ramsed.bin
+DelBoot {windir}\APPLOG\NVUENET.LGD
+DelBoot {windir}\APPLOG\NVUENET.LGC
+DelBoot {windir}\APPLOG\NVUNINST.LGD
+DelBoot {windir}\APPLOG\NVUNINST.LGC
+
+; also delete its uninstaller binary
+DelBoot {sysdir}\nvuenet.exe
+DelBoot {sysdir}\nvcoe.dll
+
+EnumRegCmd HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkCards\{*},call CheckProvider
+
+DelReg HKLM\SYSTEM\{*ControlSet}\Services\nvenet
+DelReg HKLM\SYSTEM\{*ControlSet}\Services\EventLog\System\nvenet
+
+[CheckProvider]
+GetReg Description={Current Root Key}\{Current Reg Key}\Description
+if {Description}=NVIDIA nForce MCP Networking Controller then call RemoveEthernetDevice
+
+[RemoveEthernetDevice]
+GetReg EthernetService={Current Root Key}\{Current Reg Key}\ServiceName
+DelReg {Current Root Key}\{Current Reg Key}
+DelReg HKLM\System\CurrentControlSet\Services\TCPIP\Parameters\Interfaces\{EthernetService}

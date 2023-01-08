@@ -1,0 +1,303 @@
+;; 9/29/95
+
+[Version]
+Signature="$Windows 95$"
+Class=OPTi924MEDIA
+provider=%OPTi%
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%OPTiMediaClassName%
+HKR,,Icon,,"0"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%MfgName%=OPTiMediaChips
+
+[ControlFlags]
+ExcludeFromSelect=*OPT0000,
+ExcludeFromSelect=*OPT0005,
+ExcludeFromSelect=*OPT0002,
+
+[OPTiMediaChips]
+%*OPT0000.DeviceDesc%=OPT0000_Device, *OPT0000
+%*OPT0005.DeviceDesc%=OPT0005_Device, *OPT0005
+%*OPT0002.DeviceDesc%=OPT0002_Device, *OPT0002
+;"Device Setup"=OPT_Device
+
+;---------------------------------------------------------------;
+
+[OPT0000_Device]
+DelReg=OPT.DelReg
+DelFiles=OPT0000.DelList
+LogConfig=OPTi0000.LC
+AddReg=OPT0000.AddReg, CUSTOM.AddReg
+UpdateInis=OPTi0000.UpdateInis
+
+[OPT0005_Device]
+DelReg=OPT.DelReg
+LogConfig=OPTi0005.LC
+AddReg=OPT0005_Device.AddReg
+
+[OPT0002_Device]
+DelReg=OPT.DelReg
+DelReg=OPT0002.DelReg
+DelFiles=OPT0000.DelList
+LogConfig=OPTi0002.LC
+DelFiles=OPTi0002.DelList
+AddReg=OPT0002.AddReg
+UpdateInis=OPTi0002.UpdateInis
+
+;---------------------------------------------------------------;
+
+[OPTi0000.UpdateInis]
+system.ini,386Enh,"device=vsndsys.386"
+system.ini,386Enh,"device=vsnd924.386"
+system.ini,386Enh,"device=vsnd16d.386"
+system.ini,386Enh,"device=vadlib.386"
+system.ini,386Enh,"device=vsbpd.386"
+
+system.ini,drivers,"wave*=snd16.drv",,1
+system.ini,drivers,"midi*=snd16.drv",,1
+system.ini,drivers,"aux*=snd16.drv",,1
+system.ini,drivers,"mixer*=snd16.drv",,1
+
+system.ini,drivers,"wave*=snd924.drv",,1
+system.ini,drivers,"midi*=snd924.drv",,1
+system.ini,drivers,"midi*=mpu401p.drv",,1
+system.ini,drivers,"aux*=snd924.drv",,1
+system.ini,drivers,"mixer*=snd924.drv",,1
+
+system.ini,drivers,"wave*=sndsys.drv",,1
+system.ini,drivers,"midi*=sndsys.drv",,1
+system.ini,drivers,"aux*=sndsys.drv",,1
+system.ini,drivers,"mixer*=sndsys.drv",,1
+
+system.ini,drivers32,,"MSACM.imaadpcm=imaadpcm32.acm"
+system.ini,drivers32,,"MSACM.msadpcm=msadp32.acm"
+system.ini,drivers32,,"MSACM.msgsm610=msgsm32.acm"
+system.ini,drivers32,,"MSACM.trspch=tssoft32.acm"
+system.ini,drivers32,,"MSACM.msg711=msg711.acm"
+
+[OPTi0002.UpdateInis]
+system.ini,drivers,"midi*=mpu401.drv",,1
+system.ini,drivers,"midi*=mpu401p.drv",,1
+system.ini,drivers,"midi*=rdmpu401.drv",,1
+
+;---------------------------------------------------------------;
+
+
+[OPTi0000.LC]
+ConfigPriority=NORMAL
+
+[OPTi0001.LC]
+ConfigPriority=NORMAL
+
+[OPTi0005.LC]
+ConfigPriority=NORMAL
+
+[OPTi0002.LC]
+ConfigPriority=NORMAL
+
+;---------------------------------------------------------------;
+;
+; The .Det sections are added to the devnode at detection time
+; only.  The PreCopySection is simply setting the NoSetupUI
+; flag so that the critical pieces (such as logical 
+; configurations) are in place at the time the device is started 
+; during first boot.
+;
+;---------------------------------------------------------------;
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+[*OPT0000.Det]
+AddReg=PreCopySection
+
+[*OPT0005.Det]
+AddReg=PreCopySection
+
+[*OPT0002.Det]
+AddReg=PreCopySection
+
+;---------------------------------------------------------------;
+
+[OPT0000.CopyList]
+snd924p.drv,,
+sndopl3p.drv,,
+snd924p.vxd,,
+
+[OPTi0002.CopyList]
+sndm401p.drv,,
+sndm401p.vxd,,
+
+[OPT0005.CopyList]
+snd924p.drv,,
+sndopl3p.drv,,
+snd924p.vxd,,
+sndm401p.drv,,
+sndm401p.vxd,,
+
+
+;---------------------------------------------------------------;
+
+[OPT0000.DelList]
+vsnd924.386,,,1
+snd924.drv,,,1
+vsndsys.386,,,1
+sndsys.drv,,,1
+vsbpd.386,,,1
+vadlib.386,,,1
+nullwave.drv,,,1
+
+[OPTi0002.DelList]
+mpu401.drv
+mpu401p.drv
+rdmpu401.drv
+
+;---------------------------------------------------------------;
+[OPT.DelReg]
+; Do not force this delete
+HKLM,Enum\Root\OPTi924MEDIA
+
+;---------------------------------------------------------------;
+
+[OPT0005_Device.AddReg]
+HKR,,DeviceDriver,,snd924p.vxd
+HKR,,DevLoader,,*CONFIGMG
+
+;---------------------------------------------------------------;
+
+[OPT0000.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+HKR,Drivers\wave,,,
+HKR,Drivers\mixer,,,
+HKR,Drivers\aux,,,
+
+HKR,,Driver,,snd924p.vxd
+HKR,Drivers\wave\snd924p.drv,Description ,,%*OPT0000.DeviceDesc%
+HKR,Drivers\wave\snd924p.drv,Driver,,snd924p.drv
+HKR,Drivers\mixer\snd924p.drv,Description,,%*OPT0000.DeviceDesc%
+HKR,Drivers\mixer\snd924p.drv,Driver,,snd924p.drv
+HKR,Drivers\aux\snd924p.drv,Description  ,,%*OPT0000.DeviceDesc%
+HKR,Drivers\aux\snd924p.drv,Driver,,snd924p.drv
+HKR,Drivers\midi\sndopl3p.drv,Description ,,%V_INTERNAL%
+HKR,Drivers\midi\sndopl3p.drv,Driver,,sndopl3p.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+
+[OPT0002.AddReg]
+HKR,,Devloader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+
+HKR,,Driver,,sndm401p.vxd
+HKR,Drivers\midi\sndm401p.drv,Driver,,sndm401p.drv
+HKR,Drivers\midi\sndm401p.drv,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+HKR,Drivers\midi\sndm401p.drv,Description,,%V_EXTERNAL%
+
+;---------------------------------------------------------------;
+
+[CUSTOM.AddReg]
+; These are Manufacturer specific.
+HKR,Config,,,
+HKR,Config,ChipType,,"82C924"
+HKR,Config,ExtCODEC,,"No"
+HKR,Config,ExtSynth,,"O3"
+HKR,Config,ExtWaveTable,,"No"
+HKR,Config,VxDVersion,,"4.00"
+HKR,Config,KeyCode,1,1A
+HKR,Config,"Single Mode DMA",1,00
+
+; Start of customizeable Mixer driver section;
+; "Yes" means no customization; "No" means customize.
+HKR,Config,Default_Codec_Mapping,,"Yes"
+
+; TYPE 1 - CHANNEL NAME SECTION
+; Specify the customized names for the channels
+HKR,Config,AUX1_Src_Name,,"Line/CD"
+HKR,Config,AUX2_Src_Name,,"Midi"
+HKR,Config,DAC_Src_Name,,"Wave"
+
+; TYPE 2 - EXTRA CONTROLS Thru Internal H/W Resources
+; Specify if extra ON/OFF controls are desired and how many,
+; maximum is 3. These are controled thru internal pins.
+HKR,Config,Total_Internal_Controls,1,00
+
+; Control definitions
+HKR,Config,Internal_Control_1_Name,,"SRS-3D"
+HKR,Config,Internal_Control_1_By,,"XCTL0"
+HKR,Config,Internal_Control_1_OnVal,1,01
+HKR,Config,Internal_Control_2_Name,,""
+HKR,Config,Internal_Control_2_By,,""
+HKR,Config,Internal_Control_2_OnVal,1,01
+HKR,Config,Internal_Control_3_Name,,""
+HKR,Config,Internal_Control_3_By,,""
+HKR,Config,Internal_Control_3_OnVal,1,01
+
+; TYPE 3 - EXTRA CONTROLS Thru External H/W Resources
+; Specify if extra ON/OFF controls are desired and how many,
+; maximum is 3. These are controled thru external DLLs.
+HKR,Config,Total_External_Controls,1,00
+
+; Control definitions
+HKR,Config,External_Control_1_Name,,"External1"
+HKR,Config,External_Control_1_By,,"XCONTL_1.DLL"
+HKR,Config,External_Control_2_Name,,""
+HKR,Config,External_Control_2_By,,"XCONTL_2.DLL"
+HKR,Config,External_Control_3_Name,,""
+HKR,Config,External_Control_3_By,,"XCONTL_3.DLL"
+
+;---------------------------------------------------------------;
+
+[DestinationDirs]
+DefaultDestDir = 11	; LDID_SYS
+
+[SourceDisksNames]
+1="OPTi Plug-N-Play 82C924 Multimedia Disk",,0001
+
+[SourceDisksFiles]
+snd924p.vxd=1
+snd924p.drv=1
+sndopl3p.drv=1
+
+sndm401p.drv=1
+sndm401p.vxd=1
+
+;---------------------------------------------------------------;
+
+;---------------------------------------------------------------;
+
+[Strings]
+;Non-localized strings
+KEY_WARNVER="SYSTEM\CurrentControlSet\Control\SessionManager\WarnVerDLLs"
+KEY_CHKVER="SYSTEM\CurrentControlSet\Control\SessionManager\CheckVerDLLs"
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+
+;Localized strings
+OPTi="OPTi Inc."
+MfgName="OPTi Inc."
+*OPT0000.DeviceDesc="OPTi Plug-N-Play Sound System"
+*OPT0001.DeviceDesc="OPTi Plug-N-Play Game Port"
+*OPT0005.DeviceDesc="OPTi Plug-N-Play Master Controller"
+*OPT0002.DeviceDesc="OPTi Plug-N-Play MPU-401"
+OPTiMediaClassName="OPTi Plug-N-Play Sound System"
+V_CLSWAVEFORM="Audio"
+V_CLSMIDI="MIDI"
+V_CLSMIXER="Mixer"
+V_CLSAUX="Auxiliary"
+V_GENERAL="General MIDI Instrument"
+V_INTERNAL="OPTi Plug-N-Play FM Synthesis"
+V_EXTERNAL="OPTi Plug-N-Play MPU-401"
+

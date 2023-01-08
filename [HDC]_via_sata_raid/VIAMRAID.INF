@@ -1,0 +1,106 @@
+; VIAMRAID.INF for win98-me
+; All rights reserved by  VIA Technologies, Inc. 2003
+
+[Version]
+;CatalogFile=viamraid.cat
+signature="$CHICAGO$"
+;Class=hdc
+;ClassGUID={4d36e96a-e325-11ce-bfc1-08002be10318}
+Class=SCSIAdapter
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%VIA%
+DriverVer=11/08/2006, 2.0.950.540
+
+; Class Install
+;[ClassInstall32.NT]
+;Addreg=HDC_Class
+
+;[HDC_Class]
+;HKR,,,,%HDCClassName%
+
+; Class Install
+[ClassInstall32.NT]
+Addreg=SCSIReg
+
+[SCSIReg]
+HKR,,,,%SCSIClassName%
+HKR,,Installer32,,"SysSetup.Dll,ScsiClassInstaller"
+HKR,,Icon,,"-10"
+HKR,,LegacyInfOption,,"SCSI"
+
+[Manufacturer]
+%VIA%=VIA
+
+[VIA]
+%PCI\VEN_1106&DEV_3349.DeviceDesc% = VIAMRAID , PCI\VEN_1106&DEV_3349&CC_0104
+%PCI\VEN_1106&DEV_6287.DeviceDesc% = VIAMRAID , PCI\VEN_1106&DEV_6287&CC_0106
+%PCI\VEN_1106&DEV_0591.DeviceDesc% = VIAMRAID , PCI\VEN_1106&DEV_0591&CC_0104
+%PCI\VEN_1106&DEV_3249.DeviceDesc% = VIAMRAID , PCI\VEN_1106&DEV_3249&CC_0104
+%PCI\VEN_1106&DEV_3149.DeviceDesc% = VIAMRAID , PCI\VEN_1106&DEV_3149&CC_0104
+%PCI\VEN_1106&DEV_3164.DeviceDesc% = VIAMRAID , PCI\VEN_1106&DEV_3164&CC_0104
+%PCI\VEN_1106&DEV_0581.DeviceDesc% = VIAMRAID , PCI\VEN_1106&DEV_0581&CC_0104
+%PCI\VEN_1106&DEV_7372.DeviceDesc% = VIAMRAID , PCI\VEN_1106&DEV_7372&CC_0104
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+System32Dir    = 11 ; System32
+MoveMiniPort   = 12;
+
+;*********************** VIA RAID ************************
+[viamraid]
+CopyFiles=MoveMiniPort
+AddReg=ios,viamraid.reg
+Reboot
+;*************************************************************
+;These addreg sections should be used when installins services to indicate
+;which interface types are safe for PNP and which aren't.  INTERFACE_TYPE
+;is defined in NTDDK.H
+
+[pnpsafe_pci_addreg]
+HKR, "Parameters\PnpInterface", "5", 0x00010001, 0x00000001
+
+[pnpsafe_isa_addreg]
+HKR, "Parameters\PnpInterface", "1", 0x00010001, 0x00000001
+
+[pnpsafe_eisa_addreg]
+HKR, "Parameters\PnpInterface", "2", 0x00010001, 0x00000001
+
+[pnpsafe_mca_addreg]
+HKR, "Parameters\PnpInterface", "3", 0x00010001, 0x00000001
+
+[cardbus_interface_type]
+HKR, "ScsiPort", "LegacyInterfaceType", 0x00010001, 0x00000005
+
+;*************************************************************
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[viamraid.reg]
+HKR,,PortDriver,,viamraid.mpd
+
+[SourceDisksFiles]
+viamraid.mpd = 1
+viamraid.inf = 1
+viamvsd.vxd = 1
+
+[MoveMiniPort]
+viamraid.mpd
+viamvsd.vxd
+
+[SourceDisksNames]
+1 = %VIA_DiskNames%,, 
+
+[strings]
+HDCClassName            = "Hard disk controllers"
+SCSIClassName		= "VIA RAID Controller"
+VIA="VIA Technologies, Inc."
+VIA_DiskNames           = ""
+PCI\VEN_1106&DEV_3349.DeviceDesc = "VIA VT8251 AHCI RAID Controller"
+PCI\VEN_1106&DEV_6287.DeviceDesc = "VIA VT8251 AHCI Controller"
+PCI\VEN_1106&DEV_0591.DeviceDesc = "VIA VT8237A RAID Controller"
+PCI\VEN_1106&DEV_3249.DeviceDesc = "VIA VT6421 RAID Controller"
+PCI\VEN_1106&DEV_3149.DeviceDesc = "VIA SATA RAID Controller"
+PCI\VEN_1106&DEV_3164.DeviceDesc = "VIA VT6410 RAID Controller"
+PCI\VEN_1106&DEV_0581.DeviceDesc = "VIA CX700/VX700 RAID Controller"
+PCI\VEN_1106&DEV_7372.DeviceDesc = "VIA VT8237S SATA RAID Controller"

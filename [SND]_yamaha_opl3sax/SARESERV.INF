@@ -1,0 +1,29 @@
+[Version]
+signature="$CHICAGO$"
+Class=nodriver
+Provider=%String0%
+LayoutFile=LAYOUT.INF
+SetupClass=BASE
+
+; Class Install
+[ClassInstall]
+Addreg=NODRIVERClassReg
+
+[NODRIVERClassReg]
+HKR,,,,%NoneName%
+HKR,,NoInstallClass,,1
+HKR,,SilentInstall,,1
+
+[Manufacturer]
+%String1%=YAMAHA
+
+[YAMAHA]
+%String2%=OPL3SA2_Reserved,*YMH002F
+
+[OPL3SA2_Reserved]
+
+[Strings]
+NoneName="Other detected devices"
+String0="YAMAHA"
+String1="YAMAHA"
+String2="YAMAHA OPL3-SAx Reserved"

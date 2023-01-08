@@ -1,0 +1,118 @@
+\HELP\NETWARE\CLIENT32.TXT
+
+                         NETGEAR FA311/FA312 PCI Adapter
+                  ---------------------------------------------
+             Novell Client 32 Driver Installation for DOS/Windows 3.11
+             ---------------------------------------------------------
+
+  Client 32 for DOS/ Windows 3.11
+  -------------------------------
+
+    Install DOS Client 32 Driver During Client 32 Installation
+    ----------------------------------------------------------
+    1.  Shut down the computer and install the FA312 or FA311 adapter
+        into the system.
+      
+    2.  At MS-DOS prompt, start the Client 32 installation by executing
+        the "INSTALL" command.
+
+    3.  Follow the installation procedure of Novell NetWare Client 32.
+
+    4.  In "Select a LAN Driver Type" window, select "32-bit" LAN driver.
+
+    5.  In "32-Bit Network Board Drivers" window, select "USER SPECIFIED
+        32-BIT DRIVER".
+
+    6.  In "Insert The Driver Disk" window, input the drive/directory
+        path to the FA31x.LAN driver and FA31x.LDI files on the floppy disk.
+
+          eg. A:\NETWARE\32BITLAN
+
+    7.  Select "NETGEAR FA311/FA312 PCI Adapter Driver" .  Select the
+        desired parameters, eg. NetworkMedia, Frame Type, Node Address,
+        and continue with the installation procedure.
+
+        Note: The LineSpeed default is Auto-negotiation and the other 
+              options are
+
+              LineSpeed=1             (Auto-negotiation)
+              LineSpeed=2 FDUP=1      (10Mbps full-duplex)
+              LineSpeed=2 FDUP=2      (10Mbps half-duplex)
+              LineSpeed=3 FDUP=1      (100Mbps full-duplex)
+              LineSpeed=3 FDUP=2      (100Mbps half-duplex)
+
+    8.  After the installation, a STARTNET.BAT batch file will be created.
+        Please check the STARTNET.BAT file for the right parameters.
+
+
+    Install Windows 3.1X Client 32 Driver During Client 32 Installation
+    -------------------------------------------------------------------
+    1.  In Microsoft Windows environment, run "SETUP" command to start
+        Client 32 installation.
+
+    2.  In "ODI Driver Selection" window, select "32 bit" mode and "Other
+        Boards".
+
+    3.  Enter the path and filename of the ODI driver in "ODI Driver Path"
+        window.  For exmaple, C:\NETWARE\32BITLAN\FA31x.LAN.
+
+    4.  Follow the installation setps of Novell NetWare Client 32.
+
+    5.  After the installation, a STARTNET.BAT batch file will be created.
+        Please check the STARTNET.BAT file contains the right parameters.
+
+
+  Install Client 32 Driver After Novell NetWare Client 32 for
+            DOS/Windows 3.1x is already installed
+  -----------------------------------------------------------
+  Copy the LAN driver, FA31x.LAN, and the LDI file, FA31x.LDI, from the
+  \32BITLAN directory to the \Novell\Client32 directory, and use a text
+  editor to edit the STARTNET.BAT file directly.
+
+    Content of STARTNET.BAT (for 32-bit LAN driver)
+    -----------------------------------------------
+    SET NWLANGUAGE=ENGLISH
+    C:\NOVELL\DOSCLNT\NIOS.EXE
+    LOAD C:\NOVELL\CLIENT32\LSLC32.NLM
+    LOAD C:\NOVELL\CLIENT32\CMSM.NLM
+    LOAD C:\NOVELL\CLIENT32\ETHERTSM.NLM
+    LOAD C:\NOVELL\CLIENT32\FA31x.LAN FRAME=ETHERNET_802.2 SLOT=??
+    LOAD C:\NOVELL\CLIENT32\FA31x.LAN FRAME=ETHERNET_802.3 SLOT=??
+    LOAD C:\NOVELL\CLIENT32\FA31x.LAN FRAME=ETHERNET_II    SLOT=??
+    LOAD C:\NOVELL\CLIENT32\FA31x.LAN FRAME=ETHERNET_SNAP  SLOT=??
+    LOAD C:\NOVELL\CLIENT32\IPX.NLM           <-- Binding driver
+    LOAD C:\NOVELL\CLIENT32\CLIENT32.NLM      <-- Finding server
+
+
+    Parameters supported by the FA31x.LAN o driver
+    ---------------------------------------------------------
+
+    SLOT       1  - Forces the driver to search for the specified board
+
+    LineSpeed    - Select connection type of the Fast Ethernet PCI
+                    adapter card.
+
+                    = 1   Auto-Negotiation
+                    = 2   Line speed = 10
+                    = 3   Line speed = 100
+
+    FDUP          - Select the duplex mode of the adapter card.  This
+                    parameter works only when LineSpeed is not set to Auto-
+                    Negotiation.
+
+                    = 1   Full duplex on
+                    = 2   Full duplex off
+
+    > LOAD C:\NOVELL\CLIENT32\FA31x.LAN LineSpeed=2 FDUP=1
+
+
+    TroubleShooting
+    ---------------
+    If you experience the "Command Line Parameter for FA31x" warning
+    message when STARTNET.BAT is executed, provide the slot number
+    at the command line in STARTNET.BAT as illustrated below.
+
+    > LOAD C:\NOVELL\CLIENT32\FA31x.LAN FRAME=ETHERNET_802.3 SLOT=1
+
+    SLOT must be the correct value as found by the driver.
+

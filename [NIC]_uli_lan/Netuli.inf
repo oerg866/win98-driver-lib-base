@@ -1,0 +1,236 @@
+; /****************************************************************************
+; ** Copyright 2004, ULi Electronics Inc., All Rights Reserved.              **
+; ** This file is the installation file for the M5261/M5263 Based Fast       **
+; ** Ethernet Controller                                                     **
+; ** V3.10                                                                   **
+; ****************************************************************************/
+
+[version]
+Signature   = "$Chicago$"
+Compatible  = 1
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %ULIR%
+DriverVer   = 04/20/2005, 5.1.2000.0351
+;LayoutFile  = layout.inf
+;CatalogFile = ULILAN.cat
+
+[Manufacturer]
+%ULIR% = ULICOM
+
+;One of This will be display
+[ControlFlags]
+ExcludeFromSelect = PCI\VEN_10B9&DEV_5261
+ExcludeFromSelect = PCI\VEN_10B9&DEV_5263
+ExcludeFromSelect = PCI\VEN_10B9&DEV_5261&SUBSYS_526110B9
+ExcludeFromSelect = PCI\VEN_10B9&DEV_5263&SUBSYS_526310B9
+ExcludeFromSelect = PCI\VEN_10B9&DEV_5261&SUBSYS_016817FF			
+ExcludeFromSelect = PCI\VEN_10B9&DEV_5261&SUBSYS_52611849
+
+[ULICOM]
+; DisplayName           Section       DeviceID
+; -----------           -------       --------
+%ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5261
+%ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5263
+%ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5261&SUBSYS_526110B9
+%ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5263&SUBSYS_526310B9
+%ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5261&SUBSYS_016817FF
+%ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5261&SUBSYS_52611849
+
+;=============================================================================
+;
+; WIN9x
+;
+;=============================================================================
+[ULI5261.ndi]
+AddReg    = ULI5261.id.reg, 5261.pci.reg, ULI5261.con.reg, ULI9.win.reg
+CopyFiles = uli9pci.win.CopyFiles
+
+
+;=============================================================================
+;
+; WINNT specific entry
+;
+;=============================================================================
+[ULI5261.ndi.NT]
+Characteristics = 0x84
+BusType         = 5
+AddReg          = ULI5261.id.reg, ULI9PCI.reg, 5261.pci.reg, ULI5261.con.reg
+CopyFIles       = ULI9PCI.CopyFiles
+
+
+[ULI5261.ndi.NT.Services]
+AddService = ULI5261, 2, ULI5261.Service, common.EventLog
+
+
+[ULI9PCI.CopyFiles]
+ULILAN.SYS,,,2
+
+
+;=============================================================================
+;
+; Win9x id registry sections
+; These are not needed by NT
+;
+;=============================================================================
+;Common
+[ULI5261.id.reg]
+;Window2000 Not used(NDI register) But Windows 98 Used
+HKR, Ndi, DeviceID, 0, "PCI\VEN_10B9&DEV_5261"
+;Driver Read
+HKR,,AdapterPCIID,0,"526110B9"
+
+;=============================================================================
+;
+; Win9x flags section
+; Flags are not needed by NT
+;
+;=============================================================================
+;****************************************************************************
+; PCI common parameters
+;****************************************************************************
+;Common
+[5261.pci.reg]
+;params
+;Read in the Driver
+HKR,                            , AdapterType, 0,"5"
+HKR,                            , BusType,     0,"5"            ;; PCI
+
+;StoreAndForward
+HKR, Ndi\params\StoreAndForward,     ParamDesc, 0,"Store And Forward"
+HKR, Ndi\params\StoreAndForward,       default, 0,"1"
+HKR, Ndi\params\StoreAndForward,          type, 0,"enum"
+HKR, Ndi\params\StoreAndForward\enum,        0, 0,"Disabled"
+HKR, Ndi\params\StoreAndForward\enum,        1, 0,"Enabled"
+;Windows 2000 does not support Ndi\Params\param-key-name\flag values.
+;HKR,NDI\params\StoreAndForward,flag,1,20,00,00,00
+
+;Transmit Threshold
+HKR, Ndi\params\TransmitThreshold,   ParamDesc,,"Transmit Threshold"
+HKR, Ndi\params\TransmitThreshold,     default, 0,"80"
+HKR, Ndi\params\TransmitThreshold,        type, 0,"enum"
+HKR, Ndi\params\TransmitThreshold\enum,     0, 0,"Low"
+HKR, Ndi\params\TransmitThreshold\enum,     40, 0,"Medium"
+HKR, Ndi\params\TransmitThreshold\enum,     80, 0,"High"
+
+
+;ACPI Enable/Disable
+HKR,Ndi\params\ACPIEnable,ParamDesc,,"PME"
+HKR,Ndi\params\ACPIEnable,default,,"4"
+HKR,Ndi\params\ACPIEnable,type,,"enum"
+HKR,Ndi\params\ACPIEnable\enum,0,,"Disabled"
+HKR,Ndi\params\ACPIEnable\enum,1,,"Link Change" 
+HKR,Ndi\params\ACPIEnable\enum,2,,"Magic Packet"
+HKR,Ndi\params\ACPIEnable\enum,3,,"Pattern Match"
+HKR,Ndi\params\ACPIEnable\enum,4,,"ALL"
+;HKR,NDI\params\ACPIEnable,flag,1,20,00,00,00
+
+[ULI5261.con.reg]
+;Common
+;ConnectionType
+HKR, Ndi\params\ConnectionType,      ParamDesc,  0,"Connection Type"
+HKR, Ndi\params\ConnectionType,      default,    0,"0"
+HKR, Ndi\params\ConnectionType,      type,       0,"enum"
+HKR, Ndi\params\ConnectionType\enum, 0,          0,"AutoSense"
+HKR, Ndi\params\ConnectionType\enum, 2,          0,"100Mbps"
+HKR, Ndi\params\ConnectionType\enum, 4,          0,"100Mbps Full_Duplex"
+HKR, Ndi\params\ConnectionType\enum, 1,          0,"10Mbps"
+HKR, Ndi\params\ConnectionType\enum, 3,          0,"10Mbps Full_Duplex"
+;HKR, NDI\params\ConnectionType,      flag,      1,20,00,00,00
+
+;=============================================================================
+;
+; ULI5261 NT specific
+;
+;=============================================================================
+
+[ULI9PCI.reg]
+;Point to Serivce Name
+HKR, Ndi,                       Service,    0, "ULI5261"
+; use ndis5 as the upper bound because NT supports it
+;Used in Win98 not in Windows 2000
+HKR, Ndi\Interfaces,            DefUpper,   0, "ndis5"
+HKR, Ndi\Interfaces,            DefLower,   0, "ethernet"
+;Upper driver and Lower adapter
+HKR, Ndi\Interfaces,            UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,            LowerRange, 0, "ethernet"
+;Langcy Driver used. Now useless
+HKR,                            ,WIN98Timer,   0,"0"
+
+[ULI5261.Service]
+DisplayName     = %ULI9PCI.Service.DispName%
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_DEMAND_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\ULILAN.SYS
+LoadOrderGroup  = NDIS
+
+;Service Section Call
+[common.EventLog]
+AddReg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+;=============================================================================
+;
+; ULI5261 Win9x specific
+;
+;=============================================================================
+[ULI9.win.reg]
+HKR, ,              DevLoader,          0, "*ndis"
+HKR, ,              DeviceVxDs,         0, "ULILAN.SYS"
+
+HKR, NDIS,          LogDriverName,      0, "ULI5261"
+HKR, NDIS,          MajorNdisVersion,   1, 05
+HKR, NDIS,          MinorNdisVersion,   1, 00
+
+HKR, ,              EnumPropPages,      0, "netdi.dll,EnumPropPages"
+; memphis appears to not support the ndis5 upper range, so use ndis3
+HKR, Ndi\Interfaces,DefUpper,           0, "ndis3,ndis4,ndis5"
+HKR, Ndi\Interfaces,DefLower,           0, "ethernet"
+HKR, Ndi\Interfaces,UpperRange,         0, "ndis3,ndis4,ndis5"
+HKR, Ndi\Interfaces,LowerRange,         0, "ethernet"
+HKR,                            ,WIN98Timer,   0,"1"
+
+;=============================================================================
+;
+;Ndis driver selection
+;
+;=============================================================================
+HKR,Ndi\params\NdisVersion,ParamDesc,,"NDIS Version"
+HKR,Ndi\params\NdisVersion,default,,0
+HKR,Ndi\params\NdisVersion,type,,enum
+HKR,Ndi\params\NdisVersion\enum,0,,"Auto Selection"
+HKR,NDI\params\NdisVersion,flag,1,20,00,00,00
+
+
+;=============================================================================
+;
+; DestinationDirs
+;
+;=============================================================================
+[uli9pci.win.CopyFiles]
+ULILAN.SYS
+
+
+
+[DestinationDirs]
+DefaultDestDir        =         12
+ULI9PCI.CopyFiles     =         12
+uli9pci.win.CopyFiles =         11
+
+
+[SourceDisksNames]
+50=%DISK_NAME%,,,
+
+[SourceDisksFiles]
+ULILAN.sys = 50, , 77
+
+
+[Strings]
+ULIR                      = "ULi Electronics Inc."
+ULI5261.DeviceDesc	  = "ULi PCI Fast Ethernet Controller"
+ULI9PCI.Service.DispName  = "ULi Based Ethernet NT Driver"
+DISK_NAME 		  = "ULi Drivers Disk  "

@@ -1,0 +1,116 @@
+; This INF file installs the 680 Medley ATA Raid driver on Windows 98/ME, NT 4.0,
+; Windows 2000, and Windows XP systems.
+
+[Version]
+Signature="$Chicago$"
+Class=SCSIAdapter
+ClassGuid={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%SII%
+CatalogFile=pnp680r.cat
+DriverVer=05/31/2002, 1.0.1.7
+
+; Class Install
+[ClassInstall]
+Addreg=SCSIReg
+
+[SCSIReg]
+HKR,,,,%SCSIClassName%
+HKR,,EnumPropPages,,"iosclass.dll,SCSIEnumPropPages"
+HKR,,Icon,,-10
+
+
+[SourceDisksNames]
+1="Silicon Image Ultra-133 Medley ATA Raid Driver Installation Disk",pnp680r.sys,,
+
+[SourceDisksFiles]
+pnp680r.sys = 1
+pnp680r.mpd = 1
+SiiSupp.vxd = 1
+
+[DestinationDirs]
+DefaultDestDir	= 12
+DriverFiles		= 12
+DriverFiles.NT	= 12
+
+[DriverFiles]
+pnp680r.mpd,,,0x20
+SiiSupp.vxd,,,0x20
+
+[DriverFiles.NTX86]
+pnp680r.sys,,,0x20
+
+[Manufacturer]
+%SII%=SII_HDC
+
+[SII_HDC]
+%PCI\VEN_1095&DEV_0680.DeviceDesc%=DUAL_DMA_IDE, PCI\VEN_1095&DEV_0680&SUBSYS_36801095
+
+[DUAL_DMA_IDE]
+Copyfiles=DriverFiles
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedControllersList
+
+[DUAL_DMA_IDE.NTX86]
+Copyfiles=DriverFiles.NTX86
+
+[DUAL_DMA_IDE.NTX86.Services]
+AddService=Pnp680r,0x00000003,DUAL_DMA_IDE_Service_Install, Miniport_EventLog_Inst
+
+[DUAL_DMA_IDE_Service_Install]
+DisplayName=%SII680IDE.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\pnp680r.sys
+LoadOrderGroup=Scsi miniport
+AddReg=PnPSupport_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedControllersList_AddReg
+
+; Mark device as supporting Plug & Play on the PCI(5) bus.
+[PnPSupport_AddReg]
+HKR,Parameters\PnPInterface,5,0x00010001,1
+
+
+; List of devices with known configuration issues.
+[ProblemDeviceList_AddReg]
+HKR,ProblemDevices
+
+[SupportedControllersList_AddReg]
+HKR,SupportedSubsystemIDs,%PCI\VEN_1095&DEV_0680.DeviceDesc%,0x00010001, 0x36801095
+
+
+; List of devices with known configuration issues.
+[Win98ProblemDeviceList]
+HKLM,%Win98ProblemDeviceSubKey%
+
+[Win98SupportedControllersList]
+;;NOTE: CHANGE THE DWORD VALUE FROM 0x06801095 TO 0x36801095
+;;		ONCE A 680 RAID BIOS IS AVAILABLE!!!
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1095&DEV_0680.DeviceDesc%,0x00010001, 0x36801095
+
+;*************************************************************
+;The NT EventLog entries are the same for all SCSI miniports.
+[Miniport_EventLog_Inst]
+AddReg = Miniport_EventLog_AddReg
+
+[Miniport_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,0x00010001,7
+
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[WIN98.REG]
+HKR,,PortDriver,,pnp680r.mpd
+
+
+[Strings]
+SII="Silicon Image"
+SCSIClassName="SCSI and RAID controllers"
+PCI\VEN_1095&DEV_0680.DeviceDesc="Silicon Image SiI 0680 Ultra-133 Medley ATA Raid Controller"
+SII680IDE.SvcDesc="Silicon Image SiI 0680 Medley Raid Controller"
+Win98ProblemDeviceSubKey = "System\CurrentControlSet\Services\PnP680r\ProblemDevices"
+Win98SupportedControllersSubKey = "System\CurrentControlSet\Services\PnP680r\SupportedSubsystemIDs"
+

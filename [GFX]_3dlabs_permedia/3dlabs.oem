@@ -1,0 +1,31 @@
+
+[Version]
+Signature=$CHICAGO$
+Class="3D Accelerators"
+Provider=%String0%
+
+[Manufacturer]
+%String1%=3Dlabs
+
+[3Dlabs]
+%String2%=GlintSX,PCI\VEN_3D3D&DEV_0001
+%String3%=GlintTX,PCI\VEN_3D3D&DEV_0002
+%String3%=GlintTX,PCI\VEN_3D3D&DEV_0006
+%String4%=Delta,PCI\VEN_3D3D&DEV_0003
+%String5%=Permedia,PCI\VEN_3D3D&DEV_1004
+
+[GlintSX]
+
+[GlintTX]
+
+[Delta]
+
+[Permedia]
+
+[Strings]
+String0="3Dlabs Incorporated"
+String1="3Dlabs Incorporated"
+String2="Glint 300SX"
+String3="Glint 500TX"
+String4="Delta Geometry Processor"
+String5="Permedia"

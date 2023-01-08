@@ -1,0 +1,194 @@
+\HELP\FAQ.TXT
+
+         NETGEAR Model Fa311/FA312 Frequently Asked Questions
+         ----------------------------------------------------
+
+  Updated Jan 10, 2001
+
+  1.   Drivers and Installation Procedures 
+
+  1.1  The installation guide that comes with my adapter cards shows
+       only the Windows 98 installation procedures. What about instal-
+       lation guide for my NT system? And what about SCO Unix and Novell
+       NetWare?
+
+       Installation procedures for environments other than Windows 98
+       can be found on the installation disk under the HELP directory.
+       For example, instruction for NT 4.0 is located in \HELP\WINNT.
+       Alternatively, you can view the instruction by typing A:\HELP
+       to view the installation procedures of the various environments.
+
+  1.2  Where can I get the latest version of drivers?
+
+       Latest versions of drivers as well as software distributed with
+       all NETGEAR products are available on the Support Page:
+
+          http://www.netgear.com/support/
+
+  1.3  Is the driver available for my operating system?
+
+       We provide drivers for most of the operating environments. Below
+       is a list of what the Fa311/FA312 supports.
+
+         * Microsoft Windows 95
+         * Microsoft Windows 98
+         * Microsoft Windows NT 4.0
+         * Microsoft Windows 2000
+         * Microsoft Windows ME
+         * SCO OpenServer
+         * RedHat of Linux 
+         * Novell NetWare 32-bit Client for DOS or Windows 3.x
+         * Novell NetWare server 4.1x
+         * Novell NetWare server 5.0
+         * Novell NetWare Client / Windows 95
+         * NDIS 2 for DOS (LANtastic 5.0 & 6.0)
+
+  2.   Cable and other Hardware Questions
+
+  2.1  I have put the card into one of the slots of my PC, but it is
+       not being recognized by the PC. Why?
+
+       You should make sure the card is plugged into a PCI slot. The
+       PCI slot is shorter in length compared to the ISA slots. You
+       must also make sure the PCI slot supports BUS MASTERING. Some older 
+       PC will have support for bus mastering on only one of the PCI slots.
+       This information can be obtained from the manuals of your PC.
+
+  2.2  Does the Model Fa311/FA312 adapter card support full-duplex opration?
+
+       The Model Fa311/FA312 adapter cards can operate in either full or
+       half duplex.  Its duplex mode is automatically negotiated with the
+       switch/hub that the adapter card is connected.  Alternatively, you
+       can fix the duplex mode.  The method to configure the Model FA312/
+       FA311 adapter card is unique to each driver/operating system.  Please
+       refer the installation instruction of each operating system for further
+       detail.
+
+  2.3  What is the maximum distance between my PC and the hub?
+
+       A simple interpretation of the IEEE specification is 100 meters
+       using Category 5 cables.
+
+  2.4  The cable length between my PC and the hub is within 100 meters,
+       but I still cannot establish a link (the link LED fails to come
+       on). Is there a problem with my hub, switch or the network adapter?
+
+       You can check the health of your network devices and network
+       adapter by connecting them using a short ready-made Cat 5 cable
+       (preferably a pre-tested one that is available from most computer
+       shops). If a link still cannot be established, then there may be
+       a problem with the card. Otherwise, we have a cable problem.
+
+       The most common problem encountered is of the quality of the
+       cable. Since we are sending very high frequency signals down
+       the wire, a good quality cable is mandatory. You should verify
+       your cable is from a name brand manufacturer, especially if you
+       are planning to have a long cable. Another common problem is faulty
+       crimping of the connectors (RJ45) at either end of the cable. You
+       should check the color-coded configuration as well as loose con-
+       nectors. If these steps do not solve the problem, you may have to
+       ask for professional help to test your cable using a cable tester.
+
+  3.   IRQ and other conflicts 
+
+  3.1  When I am installing the Fa311/FA312, I run into IRQ conflict. Can I
+       change the IRQ setting and how?
+
+       IRQs (Interrupt Requests) are communication channels which
+       allow hardware devices such as an adaptor card to talk to the
+       processor. Some devices require setting jumpers for the IRQ.
+       All PCI adapters use a software approach and let either the
+       operating system or the BIOS to assigning the IRQ number. If
+       you run into IRQ conflict, it is usually that your system resources
+       is running low. You may have to disable some of the devices which
+       you are not using such as the USB port or the IDE port on your
+       older sound card in order to free up IRQs.
+
+  3.2  After the Fa311/FA312 is installed, my system takes a lot of time
+       to shutdown. What can I do to fix it?
+
+       We have seen a number of incidents of this symptom and found
+       various problems with the interactions of the operating system
+       and device drivers during shut down. Since there are many devices
+       being manufactured for the PC, it is impossible to compile an
+       exhaustive compatibility test. It should be safe to power off
+       the computer after a couple of minutes. If you are adventurous,
+       you may try one of the following:
+
+       * Try removing the NETBEUI protocol stack if you don't need it
+         by going to Network Neighborhood, click Properties and select
+         NetBEUI and click Remove and OK.
+
+       * Try using the Real Mode NDIS driver by going to Network Neighbor-
+         hood, select Netgear Fa311/FA312 Fast Ethernet PCI Adapter and
+         choose the Driver Type tab, click the Real Mode (16 bit) NDIS
+         driver check box
+
+       * If you have a HP Pavilion system, remark the CD drive line in
+         your CONFIG.SYS by adding the word REM at the beginning of the
+         line.
+
+  4.   Connecting and Sharing
+
+  4.1  Can I connect two computers together without using a hub?
+
+       If you only have two systems that you want to get them connected
+       together to do some file and printer sharing, you can save the
+       cost of buying a hub by connecting the adapter cards using a cros-
+       sover cable. Crossover cables, which are different from the normal
+       UTP cables in their pin configuration, are available in most
+       computer shops.  If you want to make one yourself, the cable is
+       wired as below.
+
+         1 <-> 3         4<->4
+         2 <-> 6         5<->5
+         3 <-> 1         7<->7
+         6 <-> 2         8<->8
+
+  4.2  I have two computers connected without problems. However, I can't
+       seem to be able to access the files and the printer.
+
+       In order to share resources such as files and printers on a PC
+       with other users on the network, you must configure the PC to do
+       so. Below is a step by step guide to get that set up in the
+       Windows 95/98 environment.
+
+       * Make sure a protocol is installed - This is the protocol used
+         by the two computers to talk to each other. We'll use the NetBEUI
+         protocol that should have been installed by default when you
+         install your network card. To confirm, you can click the right
+         mouse button on the Network Neighborhood icon on your desktop
+         and choose Properties.  You should see NetBEUI displayed. Repeat
+         this on the other computer.
+
+       * Tell Windows that you want to share resources on a computer with
+         others - On the computer you want to have resources shared by
+         others, right click on the Network Neighborhood icon and select
+         Properties. Select File and Print Sharing. Check the I want to
+         be able to give other access to my files and the I want to be
+         able to allow others to print to my printers boxes as you see
+         appropriate.
+
+       * Tell Windows what resources you want shared - Go to Windows
+         Explorer, right click on the resources (such as printers, drives
+         and folders) you want to make available to the network and choose
+         Sharing. Select Shared as and type in name you want this resource
+         to be identified on the network (e.g. CDRIVE for your disk drive
+         and LASER for your laser printer). You can also specify access
+         rights and passwords for the resource using the same dialog box.
+
+       * Assign drive names and printer ports by mapping them - At this
+         point, on the other PC, you should be able to see the shared
+         resources by browsing the Network Neighborhood. Right click on
+         the resources will allow you to assign drive names and printer
+         port.
+
+       You can find additional information on how to set up a network in
+       our Network Starter Guide:
+
+
+         http://www.netgear.com/support/networkguide/index.shtml#nwos
+
+
+
+

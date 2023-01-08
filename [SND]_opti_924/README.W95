@@ -1,0 +1,350 @@
+                    OPTi 82C924 Windows 95 Drivers
+                            Version 4.00.20 
+                                12/06/95
+
+
+UPDATE NOTES
+
+    This latest version is an update from version 4.00.10 and
+    contains the following updates:
+
+    1) Bug fix for recording using Single DMA Channel
+
+    2) Bug fix for Sound Blaster Stereo effect in DOS Box
+
+
+INSTALLATION PROCESS
+
+    If you do not have a previous copy of the drivers installed, and 
+    you are installing this Sound Card plus Driver package for the
+    first time, you may proceed to the FIRST TIME INSTALLATION section. 
+    However, if you are updating your previous installed drivers, you 
+    MUST follow the UPDATE PREVIOUS DRIVERS section below in order to 
+    succesfully install the new drivers.
+
+    UPDATING PREVIOUS DRIVERS
+
+    [Updating "OPTi Plug-N-Play Sound System" Driver]
+
+    1. You should have the latest drivers on a floppy diskette ready
+       for installation.
+
+    2. Start Windows 95 and proceed to the Control Panel folder and 
+       select (double click) the Add New Hardware icon. This will 
+       add/update the OPTi Sound Device and it's associated drivers.
+
+    3. When prompted by Windows 95 for the Auto-Scan option for 
+       detecting new devices on your System - select NO and proceed
+       to the next page.
+
+    4. Windows 95 will display a list of known devices that you 
+       currently wish to install. Select "Other Devices" eventhough
+       the name of the device is included in the list. This forces
+       Windows 95 to perform a fresh install for your device. Select
+       Next to proceed.
+
+    5. Windows 95 will again display a list containing manufacturer 
+       names and at which point you should ignore the list and select
+       the "Have Disk..." button. This tells Windows 95 to read
+       special installation instructions from your diskette to 
+       correctly install the drivers for your OPTi Sound device.
+       You will have to direct Windows 95 to the proper location of 
+       the floppy diskette.
+
+    6. Once information from the floppy diskette has been read by
+       Windows 95, a list of devices available for installation will
+       be displayed. This list contains driver setup options pertaining
+       to your Sound Card's capabilities. For example, if your Sound
+       Card has an IDE CD-ROM interface which you wish to connect your
+       IDE CD-ROM to, select the appropriate option to enable this
+       setup. If your Sound Card does not contain any options other
+       than Audio functions, then just select the first option.
+
+    7. Windows 95 will now proceed to install the drivers needed for 
+       your device and configure your device accordingly. Once your 
+       device has been successfully configured, Windows 95 will prompt 
+       you to restart your system - select Yes for the new drivers to 
+       take effect. YOU MUST REBOOT for the changes to take effect!
+
+    8. Install REAL MODE DOS Support: During the system reboot process
+       the DOS Installer will be invoked automatically. Please follow 
+       the instruction of DOS Installer and it will setup the  sound 
+       card properly for the Real Mode DOS games or applications.
+
+
+    FIRST TIME INSTALLATION
+    
+    Install the Sound Card into your system and reboot your machine; 
+    Windows 95 should detect new PnP resource on your Sound Card and
+    prompt you for the installation files. At this point, insert the
+    OPTi 82C924 Windows 95 Driver diskette into your floppy drive and 
+    let Windows 95's Device Manager direct you through the installation
+    of the drivers.
+
+    When Device Manager finds a new device but cannot determine/find the
+    correct driver for the device, it will prompt you for the location 
+    of the drivers associated with the device and will expect that the
+    drivers are from a floppy diskette. At this time, select OK if the 
+    option "Drivers from disk..." is enabled and Device Manager will 
+    proceed to copy the drivers from the diskette. However, if the option 
+    "Windows Compatible Driver" is enabled, select OK as well to direct 
+    Device Manager to make use of default drivers for that particular 
+    device.
+
+
+
+RECONFIGURATION OF RESOURCES
+
+    The OPTi 82C924 device is a fully Plug-n-Play device and all it's
+    resources should be reconfigurable on-the-fly unless due to a
+    similar conflicting device present in the system.
+
+    To reconfigure the resources, use the SYSTEM icon located in your
+    Control Panel folder and choose Device Manager. From Device Manager,
+    double click the "OPTi Plug-N-Play Sound System" option and the
+    list of installed OPTi Audio devices will be displayed. Double click
+    on the device which you wish to change resources for. Once resources
+    have been changed, the driver will be automatically reconfigured to 
+    operate with the new resources and function as before.
+
+
+
+AUDIO SUPPORT under REAL MODE DOS
+
+    [Systems with Win95/DOS Setup]
+    To enable support for DOS Games or multimedia applications under
+    a REAL MODE DOS environment, please follow the Step 8 of INSTALL
+    PROCESS. If you decide not to do DOS setup now, it's OK to skip it.
+    Type C:\SND4DOS at real mode DOS prompt at any time will bring up
+    the DOS Installer.
+
+    [Systems with Dual Boot Win95/Win31 Setup]
+    Please run OPTi's Win31/DOS Install package at Real Mode DOS
+    prompt. When prompted during the installation for the path to 
+    your Windows directory, specify the path if you have Windows 
+    3.1 installed on your system (under a seperate directory from 
+    Windows 95). Select None if you do not have Windows 3.1 installed.
+
+
+
+
+AUDIO SUPPORT under WINDOWS 95 DOS BOX
+
+    DOS Game support has been added for this release and is fully 
+    functional. During the setup for your DOS games, you must ensure that
+    the current resources assigned to the sound card matches with the
+    current settings requested by your DOS game. To find out what resources
+    are currently assigned to the sound card, proceed to open the properties
+    box associated with the "OPTi Plug-N-Play Sound System" (Device Manager)
+    and select the Resource tab. From the Resources box, you should see the
+    current I/O Address range for Input/Output Range Number 1. We recommend 
+    the 220 Hex address range as opposed to the 240 Hex be selected as most 
+    games support 220 Hex by default. We also recommend the Interrupt and 
+    Direct Memory Access settings of 7 and 1 respectively. Reconfigure these 
+    resources as appropriate and select OK for Device Manager to dynamically 
+    change and update your current resources and configure the hardware. 
+    At this point, you may setup your DOS game with the settings which you 
+    have just configured.
+
+    Also, if you have a Wave Table Device on board or attached to your
+    sound card, you should also follow the recommended steps above but
+    this time check on the "OPTi Plug-N-Play MPU-401" device settings
+    instead. You will need it's current settings if you wish to enable
+    General MIDI support in your DOS games.
+
+    To ensure an ideal environment for DOS games, it is recommended that
+    you modify the Idle Sensitivity property of your DOS Game environment
+    to High. To do this, press the ALT+ENTER keys to change to a DOS Box
+    Window (if not already in a Windowed session) and click on the top left
+    hand corner of the DOS Box Window. A drop down menu will appear and
+    at which point you should select Properties. Select the Misc tab and
+    proceed to modify the above mentioned property.
+
+
+
+HOT-KEY SUPPORT under WINDOWS 95 DOS BOX
+
+    The following are the Hot-Keys and their associated channel controls.
+
+    <CNTRL>+<ALT>+M     = Decrease Master Volume
+    <SHIFT>+<ALT>+M     = Increase Master Volume
+    <CNTRL>+<SHIFT>+M   = Mute Master Volume
+
+    <CNTRL>+<ALT>+V     = Decrease Voice (Digital Sound) Volume
+    <SHIFT>+<ALT>+V     = Increase Voice (Digital Sound) Volume
+    <CNTRL>+<SHIFT>+V   = Mute Voice (Digital Sound) Volume
+
+    <CNTRL>+<ALT>+F     = Decrease FM Music Volume
+    <SHIFT>+<ALT>+F     = Increase FM Music Volume
+    <CNTRL>+<SHIFT>+F   = Mute FM Music Volume
+
+
+
+FULL-DUPLEX DUAL-DMA SUPPORT
+
+    To enable Dual-DMA channel operation for simultaneous playback and
+    recording, please ensure the following:
+   
+    1. The DMA resource settings under Device Manager must be different
+       and paired as follows: 
+                              
+               Playback DMA:   0    1    3
+               Recording DMA:  1    0    0
+
+    2. The frequency format (eg. 11KHz, 22KHz..) must be the same during
+       simultaneous playback and recording.
+                              
+    3. Full-Duplex is only supported if you have CS4231/CS4248 Class CODECs
+       interfaced with the 82C924 PnP Audio Controller.
+
+
+
+KARAOKE SUPPORT
+
+    The customizeable option for supporting Karaoke Sing-A-Long basically
+    turns on the LoopBack channel of the AD1848 class CODEC as well as
+    forcing the input MUX to Microphone. This will ensure that the ADC
+    signal is properly fed back to the output channel for amplification
+    using the DAC volume control. The following options may be specified 
+    in the CUSTOM.AddReg section of the INF file.
+
+    To enable support for Karaoke Sing-A-Long, the following must be
+    specified:
+
+    ..,Karaoke_Src_Name,,"Voice"          
+
+
+    To customize default settings for the Mic input gain plus the Loopback 
+    attenuation, the following must be specified:
+
+    ..,"LeftKaraokeMicVol",1,0080        // Low Byte then High Byte
+    ..,"RightKaraokeMicVol",1,0080       
+    ..,"KaraokeLoopBackVol",1,FFFF       
+
+    Valid range is from 0000 -> FFFF ( 0 to 64K )
+
+
+MIXER CUSTOMIZATION
+
+    Mixer driver customization info should be specified in the SND924P.INF
+    file which is located in the installation diskette and is required by
+    Windows 95 during installation of the drivers. 
+
+    By default, this file instructs the Mixer driver not to support
+    any customizations and only the manufacturer's default channel
+    mappings and controls are supported.
+
+    To enable mixer customizations, proceed to the [CUSTOM.AddReg]
+    section in this file and modify the "Default_Codec_Mapping"
+    field from "Yes" to "No". This tells the mixer driver not to
+    use the manufacturer's default mixer mappings but to expect
+    customized channels mappings and controls instead.
+
+
+    TYPE 1) Channel Mapping Customization
+
+      The following are defaults:
+      ..,AUX1_Src_Name,,"CD"                // For AUX 1 Channel
+      ..,AUX2_Src_Name,,"Synth"             // For AUX 2 Channel
+      ..,DAC_Src_Name,,"Wave"               // For LOC and ROC channels
+      ..,MIX_Src_Name,,"Mix"                // For loopback Mix Channel
+
+      ..,Karaoke_Src_Name,,"Voice"          // For enabling Karaoke
+
+
+      Below are supported only if you have the extended CODEC on board
+      such as CS4231 or AD1845.
+
+      ..,LINE_Src_Name,,"Line"              // For LINE Channel
+
+      ..,MIC_Src_Name,,"Mic"                // For Microphone Channel
+                                            // Supported by AD1845 Only
+
+      ..,MONOIN_Src_Name,,"Alarm"           // 
+
+      Channel mapping customization allows renaming of a source to
+      a different name thus changing the original assumed source
+      mapping of the channel. 
+
+
+    TYPE 2) Extra internal controls through existing H/W resource 
+            - for controls using general purpose output bits of CODEC 
+            or MC device.
+
+      These internal controls are of the ON/OFF type controlled by a
+      single toggling bit.
+
+      The following are valid:
+
+      ..,Total_Internal_Controls,1,n    // Total number of controls desired,
+                                        // maximum is 3.
+                                        // Default is assumed to be none.
+
+      ..,Internal_Control_1_Name,,"SRS-3D"      // Name to call this control.
+
+      ..,Internal_Control_1_OnVal,1,00 or 01    // What is the default ON bit.
+                                                // Default is 01.
+
+      ..,Internal_Control_1_By,,"XCTL0" | "XCTL1" | "GPOUT"
+
+         // What bits to use for control based on the following
+         // available on the default H/W.
+         XCTL0 - OUT 0 bit located at index 10 of CODEC registers
+         XCTL1 - OUT 1 bit located at index 10 of CODEC registers
+         GPOUT - General Purpose Output bit at MC4
+
+        
+      ..,Internal_Control_2_Name,,""
+      ..,Internal_Control_2_OnVal,1,00 or 01
+      ..,Internal_Control_2_By,,""
+
+        .
+        .
+
+      ..,Internal_Control_n_Name,,""
+      ..,Internal_Control_n_OnVal,1,00 or 01
+      ..,Internal_Control_n_By,,""
+
+
+    TYPE 3) Extra external controls through external logic 
+            (Requires DLL from third party).
+
+      ..,Total_External_Controls,1,n  // Total number of controls desired,
+                                      // maximum is 3.
+                                      // Default is assumed to be none.
+
+      ..,External_Control_1_Name,,"SRS-3D"    // Name to call this control.
+      ..,External_Control_1_By,,"XCONT_1.DLL" // The accompanying DLL. Each
+                                              // external control has it's own
+                                              // unique DLL.
+
+      ..,External_Control_2_Name,,""          // Name to call this control.
+      ..,External_Control_2_By,,"XCONT_2.DLL"
+
+      ..,External_Control_3_Name,,""          // Name to call this control.
+      ..,External_Control_3_By,,"XCONT_3.DLL"
+
+
+      Each external control has it's own set of exported functions for 
+      the driver to call. For example, external control 1 will have the
+      following 3 functions:
+
+                XControl_1_Init();
+                XControl_1_On();
+                XControl_1_Off();
+
+      The accompanying DLL must explicitly export these functions exactly 
+      as named above.
+
+
+    ** NOTES **
+
+    1) Internal and External Controls must be of the ON/OFF control types; 
+       any other types are not supported for now.
+
+    2) In order to make use of the ON/OFF controls in the Volume Control
+       application bundled with Windows 95, you will have to enable the 
+       "Advance Controls" option under the "Properties" menu item.
+
+                                %% END %%
+

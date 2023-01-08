@@ -1,0 +1,8 @@
+[Initialize]
+HelpNo=
+Dsxgmixer=no
+
+[Installmode]
+silent=no
+auto=no
+autoreboot=no

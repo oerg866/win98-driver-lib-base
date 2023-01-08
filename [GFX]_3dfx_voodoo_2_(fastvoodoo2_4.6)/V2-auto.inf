@@ -1,0 +1,27 @@
+;-----------------------------------------------------------------------
+; INF file for Voodoo2 based 3D Accelerators running under Windows 95/98
+; (c) 1998-1999 - 3dfx Interactive, Inc.
+; 
+; Updates autoexec.bat for backwards compatiblities with older games
+; 
+;-----------------------------------------------------------------------
+
+[version]
+;Class=MEDIA
+signature="$CHICAGO$"
+
+; Install sections
+;----------------------------------------
+[DefaultInstall]
+UpdateAutoBat=Voodoo2.autobat
+
+[Voodoo2.autobat]
+CmdAdd=Rem,"Added for Voodoo2"
+CmdAdd=set,"SST_GRXCLK=90"
+CmdAdd=set,"SST_FT_CLK_DEL=0x4"
+CmdAdd=set,"SST_TF0_CLK_DEL=0x6"
+CmdAdd=set,"SST_TF1_CLK_DEL=0x6"
+CmdAdd=set,"SST_VIN_CLKDEL=0x1"
+CmdAdd=set,"SST_VOUT_CLKDEL=0x0"
+CmdAdd=set,"SST_TMUMEM_SIZE=2"
+

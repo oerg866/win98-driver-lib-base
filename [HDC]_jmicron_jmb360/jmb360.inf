@@ -1,0 +1,54 @@
+; JMB360.INF --  This is a INF that installs support
+;                for the JMicron JMB360 device under both
+;                Windows 98 and Windows 2000
+
+; Copyright (c) 2005 JMicron Corporation
+
+[Version]
+signature="$CHICAGO$"
+Class=SCSIAdapter
+Provider=%JMICRON%
+DriverVer=6/25/2005,0.92
+;CatalogFile=jmb360.cat          ; and win98
+
+[DestinationDirs]
+DefaultDestDir = 12
+MoveMiniport = 12
+VXDFileSection = 12
+
+[Manufacturer]
+%JMICRON%=JMICRON.MFG
+
+[JMICRON.MFG]
+%JMICRON.DeviceDesc0% = jmb360, PCI\VEN_197B&DEV_2360&SUBSYS_03601849
+%JMICRON.DeviceDesc0% = jmb360, PCI\VEN_197B&DEV_2360&SUBSYS_2360197B
+
+[jmb360]
+Copyfiles=MoveMiniPort, VXDFileSection
+AddReg=StdIos.reg, jmb360.reg
+Reboot
+
+[MoveMiniport]
+jmb360.mpd
+
+[VXDFileSection]
+jmb360.vxd
+
+[StdIos.reg]
+HKR,,DevLoader,0,*IOS
+
+[jmb360.reg]
+HKR,,Miniport,0,jmb360.mpd
+HKR,,PortDriver,,jmb360.mpd
+
+[ControlFlags]
+
+[SourceDiskSFiles]
+jmb360.mpd=1
+jmb360.vxd=1
+
+[Strings]
+JMICRON.DeviceDesc0 = "JMicron JMB360 ATA/ATAPI Controller"
+JMICRON = "JMicron"
+
+

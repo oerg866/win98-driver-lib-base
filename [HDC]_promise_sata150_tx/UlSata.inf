@@ -1,0 +1,200 @@
+[Version]
+signature="$CHICAGO$"
+Provider=%PROMISE%
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Class=SCSIAdapter
+CatalogFile=UlSata.cat
+DriverVer=06/12/2003,1.00.0.27
+
+; Class Install
+[ClassInstall32.NT]
+Addreg=SCSIReg
+
+[SCSIReg]
+HKR,,,,%SCSIClassName%
+HKR,,Installer32,,"SysSetup.Dll,ScsiClassInstaller"
+HKR,,Icon,,"-10"
+HKR,,LegacyInfOption,,"SCSI"
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+System32Dir    = 11 ; System32
+MoveMiniPort   = 12;
+MoveMiniPort.NT = 12;
+promiseinf = 17,"other";	INF directory
+RenMiniport.back = 12
+RenMiniport = 12
+PTISETUP=11;
+ADVPACK=11;
+
+[ControlFlags]
+;
+; Exclude the following devices from Select Device list.
+; These represent 'combination' driver nodes, for which there are separate items to be
+; presented to the user.  These combination nodes are only used when figuring out what
+; driver node to associate with a pre-existing service.
+;
+; CopyFilesOnly=PCI\VEN_105A&DEV_4D30&SUBSYS_4D33105A&REV_02
+
+[Manufacturer]
+%Promise%=Promise
+
+[Promise]
+%PCI\VEN_105A&DEV_6626.DeviceDesc%=Ultra618PCI,PCI\VEN_105A&DEV_6626
+%PCI\VEN_105A&DEV_3375.DeviceDesc%=Ultra375PCI,PCI\VEN_105A&DEV_3375
+%PCI\VEN_105A&DEV_3318.DeviceDesc%=Ultra318PCI,PCI\VEN_105A&DEV_3318
+
+
+;************** 618 **************
+[ultra618PCI]
+CopyFiles=MoveMiniPort,PTISETUP,ADVPACK
+AddReg=ios,UlSataPCI.reg,RegUninstall618
+
+[ultra618PCI.Uninstall]
+DelReg=RegUninstall618.del,ultra618PCI.Del.Reg
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+
+;************** 375 **************
+[ultra375PCI]
+CopyFiles=MoveMiniPort,PTISETUP,ADVPACK
+AddReg=ios,UlSataPCI.reg,RegUninstall375
+
+[ultra375PCI.Uninstall]
+DelReg=RegUninstall375.del,UltraPCI.Del.Reg
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+
+;************** 318 **************
+[ultra318PCI]
+CopyFiles=MoveMiniPort,PTISETUP,ADVPACK
+AddReg=ios,UlSataPCI.reg,RegUninstall318
+
+[ultra318PCI.Uninstall]
+DelReg=RegUninstall318.del,UltraPCI.Del.Reg
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+
+;***************************************
+
+[ultraPCI_Service_Inst]
+ServiceType    = 1      ; SERVICE_KERNEL_DRIVER
+StartType      = 0      ; SERVICE_BOOT_START
+ErrorControl   = 1      ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\ulsata.sys
+LoadOrderGroup = SCSI Miniport
+AddReg         = pnpsafe_pci_addreg
+
+;*************************************************************
+;These addreg sections should be used when installins services to indicate
+;which interface types are safe for PNP and which aren't.  INTERFACE_TYPE
+;is defined in NTDDK.H
+
+[pnpsafe_pci_addreg]
+HKR, "Parameters\PnpInterface", "5", 0x00010001, 0x00000001
+
+[pnpsafe_isa_addreg]
+HKR, "Parameters\PnpInterface", "1", 0x00010001, 0x00000001
+
+[pnpsafe_eisa_addreg]
+HKR, "Parameters\PnpInterface", "2", 0x00010001, 0x00000001
+
+[pnpsafe_mca_addreg]
+HKR, "Parameters\PnpInterface", "3", 0x00010001, 0x00000001
+
+[cardbus_interface_type]
+HKR, "ScsiPort", "LegacyInterfaceType", 0x00010001, 0x00000005
+
+;*************************************************************
+;The EventLog entries are the same for all SCSI miniports.
+[Miniport_EventLog_Inst]
+AddReg = Miniport_EventLog_AddReg
+
+[Miniport_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,%REG_DWORD%,7
+
+;**************** Uninstall for U133
+[RegUninstall618.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra618,"DisplayName",,%PCI\VEN_105A&DEV_6626.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra618,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%UlSata.inf;ultra618PCI.Uninstall;VEN_105A&DEV_6626"
+
+[RegUninstall375.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra375,"DisplayName",,%PCI\VEN_105A&DEV_3375.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra375,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%UlSata.inf;ultra375PCI.Uninstall;VEN_105A&DEV_3375"
+
+[RegUninstall318.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra375,"DisplayName",,%PCI\VEN_105A&DEV_3318.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra375,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%UlSata.inf;ultra318PCI.Uninstall;VEN_105A&DEV_3318"
+
+[RegUninstall618.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra618
+
+[RegUninstall375.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra375
+
+[RegUninstall318.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra318
+
+[Ultra618PCI.Del.Reg]
+HKLM,Enum\PCI\VEN_105A&DEV_6626
+
+[Ultra375PCI.Del.Reg]
+HKLM,Enum\PCI\VEN_105A&DEV_3375
+
+[Ultra318PCI.Del.Reg]
+HKLM,Enum\PCI\VEN_105A&DEV_3318
+
+[UlSataPCI.PosDup]
+*BUS0042
+
+[*BUS0042.Det]
+AddReg=ForceMPCopy
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[UlSataPCI.reg]
+HKR,,PortDriver,,UlSata.mpd
+
+[ForceMPCopy]
+HKR,,NoSetupUI,,1
+
+[SourceDisksFiles]
+UlSata.mpd = 1
+UlSata.inf = 1
+pu66vsd.VXD = 1
+PTISTP.dll = 1
+advpack.dll = 1
+SMARTVSD.VXD = 1
+UlSavsd.VXD = 1
+
+[MoveMiniPort]
+UlSata.mpd
+pu66vsd.VXD
+smartvsd.VXD
+UlSavsd.VXD
+
+[RenMiniport]
+SMARTVSD.VXX,SMARTVSD.VXD
+
+[RenMiniport.back]
+SMARTVSD.VXD,SMARTVSD.VXX
+
+[PTISETUP]
+PTISTP.dll
+
+[promiseinf]
+%Promise%UlSata.inf
+
+[MoveMiniPort.NT]
+;Ultra.sys
+
+
+[SourceDisksNames]
+1 = "Promise SATA TX Series Driver Diskette",,,,
+2 = "Windows system",,,,
+
+[strings]
+Promise="Promise Technology"
+PCI\VEN_105A&DEV_6626.DeviceDesc="Win98-ME Promise Ultra618 (tm) IDE Controller"
+PCI\VEN_105A&DEV_3375.DeviceDesc="Win98-ME Promise SATA150 TX2plus (tm) IDE Controller"
+PCI\VEN_105A&DEV_3318.DeviceDesc="Win98-ME Promise SATA150 TX4 (tm) IDE Controller"

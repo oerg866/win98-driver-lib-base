@@ -1,0 +1,148 @@
+\HELP\WINNT\NT40.TXT
+
+                     NETGEAR Fa311/FA312 PCI Adapter
+                ---------------------------------------------
+               Driver Installation for Microsoft Windows NT 4.0
+               ------------------------------------------------
+
+  Getting Started
+  ---------------
+  The followin example illustrates the installation of the FA312 adapter
+  card.  The sample procedure also applies to the FA311 adapter card.
+
+  Installation Procedure
+  ----------------------
+  1.  The Windows NT 4.0 CD-ROM or diskettes are needed for the following
+      procedure.
+
+  2.  Insert the FA312 network adapter into your computer and power up your
+      Windows NT 4.0 system normally.
+
+  3.  After the system boots up properly, double-click on "My Computer" on
+      the desktop.
+
+  4.  In the System window, double click on the "Control Panel" icon in the
+      system window.
+
+  5.  In the Control Panel window, double-click on the "Networks" icon.
+
+  6.  Select the "Adapters" menu tab. Click on the "Add" button.
+
+  7.  Click on "Have disk".
+
+  8.  Insert the driver disk into the floppy drive.  Enter the drive leter
+      where the Drivers and Diagnostics disk is inserted.
+
+      Enter "A:\" if the drive letter for the floppy drive is A.
+
+  9.  Select the "NETGEAR FA311/FA312 PCI adapter".
+
+  10. Windows NT will copy the driver files from the driver disk.  It also
+      will pop up with the Configure Network Adapter window.  You can change
+      the "NetworkMedia" and "RxBufferCount" parameters.
+
+      For "NetworkMedia", choose the "AutoSense" option. The driver will
+      auto-detect the media that is connecting to the adapter.
+      
+      Other possible connection type selections are "10Base-T", "10Base-T
+      full_duplex", "100Base-TX", and "100Base-TX full_duplex".
+      
+      Caution: Unless necessary, do not modify the NetworkAddress field.
+      The driver will use the default unique Ethernet address contained in
+      the serial ROM on the adapter.       
+
+  11. After completing the file copy process, Windows NT will prompt you for
+      reboot the PC.  Click on YES to restart the system.
+
+
+  Make Installation Startup Disk set from Windows NT Server
+  ---------------------------------------------------------
+  1.  Copy all files from the \CLIENTS directory in the Windows
+      NT Server CD into the hard disk of the server.  In the example
+      below, we assume that all files are copied into the \CLIENTS
+      directory.
+
+  2.  Remove the Read-only file property of the WCNET.INF file and modify
+      it as below (It should be at the path "\CLIENTS\MSCLIENT\NETSETUP"):
+
+      a. Find the section listed below                
+
+      -----------------------------------------
+      [netcard]
+      ;   key = description, MSID, type, media, mode, install, protini, style
+      -----------------------------------------
+
+      b. Append the following line
+  
+      -----------------------------------------
+      FA312="NETGEAR FA31X",999,ndis,ethernet,0x01,FA31x,FA31x_nif
+      -----------------------------------------
+
+      c. Find the section listed below
+
+      -----------------------------------------
+      ;
+      ; Netcard Install and Protocol Sections
+      ;
+      -----------------------------------------
+
+      d. Append the following two sections 
+
+      -----------------------------------------
+      ; NETGEAR FA31x
+      [FA31x]
+      ndis2=1:FA31x.dos
+
+      [FA312_nif]
+      drivername=FA31x$
+      -----------------------------------------
+
+  3.  Remove the Read-only attributes of the WCSETUP.INF file and modify
+      it as below  (It should be at the path "\CLIENTS\MSCLIENT\NETSETUP"):
+
+      a. Find the section listed below
+
+      -----------------------------------------
+      [netdrivers]
+      -----------------------------------------
+
+      b. Append the following line at the end of the section
+
+      -----------------------------------------
+      1=,FA31x.dos,,FA31x.dos,
+      -----------------------------------------
+
+  4.  Copy the NDIS2 for DOS driver "FA31x.DOS" at the root directory of
+      the driver disk "A:\" to the same "\CLIENTS\MSCLIENT\NETSETUP"
+      directory.
+
+      Now file modification and addition are complete.
+
+  5.  From the Windows NT Server desktop, open the Network Client
+      Administrtor.
+
+      Click on "Start" from desktop, highlight "Program", highlight
+      "Administrator Tools" and "Network Client Administrator".
+  
+  6.  Click the "Make Network Installation Startup Disk", then click "OK".
+
+  7.  In the "Target Workstation Configuration" dialog box, select the 
+      "Network Client v3.0 for MS-DOS and Windows" item of the "Network
+      Client" list box.
+
+  8.  Select the "NETGEAR FA31x" item of the "Network Adapter Card" list box.
+      Then click "OK" button.
+
+  9.  Insert a MS-DOS bootable floppy diskette to the drive A:.
+
+  10. In the "Network Startup Disk Configuration" dialog box, specify the
+      settings of your startup diskette.   Then click "OK".
+
+      The possible settings are computer name, DHCP/TCP/IP settings, etc.
+
+  11. Now, the system will copy the related files to the floppy diskette.
+
+      The creation of "over the network installation disk" is complete.
+      For more information, please refer to the on line help.
+
+

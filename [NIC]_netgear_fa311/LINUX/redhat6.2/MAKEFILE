@@ -1,0 +1,7 @@
+all: fa31x.o
+
+fa31x.o: fa31x.c fa31x.h
+	gcc -D__KERNEL__ -DMODULE -DMODVERSIONS -w -Wstrict-prototypes -O -m486 -c fa31x.c
+
+clean: 
+	rm -f core *.o

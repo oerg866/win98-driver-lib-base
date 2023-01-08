@@ -1,0 +1,56 @@
+; 
+; ITERAID.INF
+; 
+; INF file of IT8212 ATA RAID controller for Windows 98/ME
+; Copyright (c) 2003 Integrated Technology Express, Inc. All rights reserved
+;
+
+[Version]
+Signature="$CHICAGO$"
+Class=SCSIAdapter
+Provider=%ITE%
+DriverVer=08/04/2005
+catalogfile=iteraid.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+MoveMiniPort = 12
+VXDFileSection = 12
+
+[Manufacturer]
+%ITE%=ITE.MFG
+
+[ITE.MFG]
+%ITE.DeviceDesc0% = iteraid, PCI\VEN_1283&DEV_8212
+%ITE.DeviceDesc0% = iteraid, PCI\VEN_1283&DEV_8211
+
+[iteraid]
+Copyfiles=MoveMiniPort, VXDFileSection
+AddReg=StdIos.reg, iteraid.reg
+Reboot
+
+[MoveMiniPort]
+iteraid.mpd
+
+[VXDFileSection]
+itepm.vxd
+
+[StdIos.reg]
+HKR,,DevLoader,0,*IOS
+
+[iteraid.reg]
+HKR,,Miniport,0,iteraid.mpd
+HKR,,PortDriver,,iteraid.mpd
+
+[ControlFlags]
+
+[SourceDisksNames]
+1=ITE IT8212 ATA RAID Windows 98/ME Installation disk,Instd1,0000-0000
+
+[SourceDiskSFiles]
+iteraid.mpd=1
+itepm.vxd=1
+
+[Strings]
+ITE.DeviceDesc0 = "ITE IT8212 ATA RAID Controller"
+ITE = "ITE Tech, Inc."

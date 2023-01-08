@@ -1,0 +1,24 @@
+HEIDI.TXT
+
+Version 1.4
+
+To install the latest version of your GLINT Heidi driver, locate
+your 3DStudio Max directory on your hard drive and then enter
+the Drivers sub-directory. Rename the file in there 'wglint.hdi'
+to 'wglint.bak'. Then copy the new 'wglint.hdi' from this floppy,
+to the Drivers directory.
+
+You can now run 3DStudio Max, and the new driver will be used.
+
+Please note that when using the GLINT Heidi driver under Windows 95 
+the following software components must also be installed:
+
+	Direct X version 3 or later, and
+	The Microsoft OpenGL binaries, opengl32.dll and glu32.dll.
+
+If using PERMEDIA or PERMEDIA NT cards, the best performance can
+be achieved through running in 32768 color mode.
+
+If using GLINT 500TX based cards, the best performance can be
+achieved by running in TrueColor.
+

@@ -1,0 +1,634 @@
+; This INF file installs the Silicon Image Serial ATA Raid driver
+; for the SiI 3x12 controller on systems running Windows 98/ME,
+; Windows NT 4.0, Windows 2000, Windows XP, Windows Server 2003, and Windows Vista.
+;
+; Copyright (C) 2002-2007 by Silicon Image, Inc.
+; All rights reserved
+
+[Version]
+Signature="$Chicago$"
+Class=SCSIAdapter
+ClassGuid={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%SI%
+CatalogFile=SI3112r.cat
+DriverVer=02/01/2007, 1.0.60.0
+
+[SourceDisksNames]
+1=%Si3112r_Media%,SI3112r.sys,,
+
+[SourceDisksFiles]
+SI3112r.sys	= 1
+SiISupp.vxd	= 1
+SilSupp.cpl	= 1
+SiWinAcc.sys	= 1
+
+[DestinationDirs]
+DefaultDestDir	= 12
+DllFiles	= 11
+
+[DriverFiles_9X]
+SI3112r.mpd,SI3112r.sys,,0x20
+SiISupp.vxd,,,0x20
+
+[DriverFiles_NT_2K]
+SI3112r.sys,,,0x20
+
+[DriverFiles_XP]
+SI3112r.sys,,,0x20
+SiWinAcc.sys,,,0x20
+
+[DllFiles]
+SilSupp.cpl,,,0x20
+
+[Manufacturer]
+%SI%=SI_HDC,NTx86.5.1
+%ATI%=ATI_HDC,NTx86.5.1
+
+[SI_HDC]
+%PCI\VEN_1095&DEV_3112.DeviceDesc%=SI_3112, PCI\VEN_1095&DEV_3112
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512, PCI\VEN_1095&DEV_3512
+
+[SI_HDC.NTx86.5.1]
+%PCI\VEN_1095&DEV_3112.DeviceDesc%=SI_3112_XP, PCI\VEN_1095&DEV_3112
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512
+
+; ATI subsystem IDs 
+[ATI_HDC]
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E&SUBSYS_436E1002
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E&SUBSYS_A43110FD
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E&SUBSYS_F3631297
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E&SUBSYS_07201462
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E&SUBSYS_B0031458
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E&SUBSYS_92691509
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E&SUBSYS_5005148C
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E&SUBSYS_0A44174B
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E&SUBSYS_0A45174B
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E&SUBSYS_00301462
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E&SUBSYS_100516F3
+%PCI\VEN_1002&DEV_4379.DeviceDesc%=ATI_4379, PCI\VEN_1002&DEV_4379&SUBSYS_43791002
+%PCI\VEN_1002&DEV_437A.DeviceDesc%=ATI_437A, PCI\VEN_1002&DEV_437A&SUBSYS_437A1002
+%PCI\VEN_1002&DEV_4379.DeviceDesc%=ATI_4379, PCI\VEN_1002&DEV_4379&SUBSYS_3009103C
+%PCI\VEN_1002&DEV_437A.DeviceDesc%=ATI_437A, PCI\VEN_1002&DEV_437A&SUBSYS_3009103C
+
+; ATI subsystem IDs 
+[ATI_HDC.NTx86.5.1]
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_436E1002
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_A43110FD
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_F3631297
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_07201462
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_B0031458
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_92691509
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_5005148C
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_0A44174B
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_0A45174B
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_00301462
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_100516F3
+%PCI\VEN_1002&DEV_4379.DeviceDesc%=ATI_4379_XP, PCI\VEN_1002&DEV_4379&SUBSYS_43791002
+%PCI\VEN_1002&DEV_437A.DeviceDesc%=ATI_437A_XP, PCI\VEN_1002&DEV_437A&SUBSYS_437A1002
+%PCI\VEN_1002&DEV_4379.DeviceDesc%=ATI_4379_XP, PCI\VEN_1002&DEV_4379&SUBSYS_3009103C
+%PCI\VEN_1002&DEV_437A.DeviceDesc%=ATI_437A_XP, PCI\VEN_1002&DEV_437A&SUBSYS_3009103C
+
+;; Win9x install sections
+;;
+[SI_3112]
+Copyfiles=DriverFiles_9X, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedControllersList
+
+[SI_3512]
+Copyfiles=DriverFiles_9X, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedControllersList
+
+[ATI_436E]
+Copyfiles=DriverFiles_9X, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedControllersList
+
+[ATI_4379]
+Copyfiles=DriverFiles_9X, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedControllersList
+
+[ATI_437A]
+Copyfiles=DriverFiles_9X, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedControllersList
+
+;; Windows NT4.0 and Windows 2000 install sections
+;;
+[SI_3112.NTX86]
+Copyfiles=DriverFiles_NT_2K, DllFiles
+
+[SI_3112.NTX86.Services]
+AddService=SI3112r,0x00000002,SI_3112_Service_Install, Miniport_EventLog_Inst
+
+[SI_3112.NTX86.CoInstallers]
+AddReg = SI_3X12_CoInstall_AddReg
+CopyFiles=SI_3X12.CoInstallersCopy
+
+
+[SI_3512.NTX86]
+Copyfiles=DriverFiles_NT_2K, DllFiles
+
+[SI_3512.NTX86.Services]
+AddService=SI3112r,0x00000002,SI_3512_Service_Install, Miniport_EventLog_Inst
+
+[SI_3512.NTX86.CoInstallers]
+AddReg = SI_3X12_CoInstall_AddReg
+CopyFiles=SI_3X12.CoInstallersCopy
+
+[ATI_436E.NTX86]
+Copyfiles=DriverFiles_NT_2K, DllFiles
+
+[ATI_436E.NTX86.Services]
+AddService=SI3112r,0x00000002,ATI_436E_Service_Install, Miniport_EventLog_Inst
+
+[ATI_436E.NTX86.CoInstallers]
+AddReg = SI_3X12_CoInstall_AddReg
+CopyFiles=SI_3X12.CoInstallersCopy
+
+[ATI_4379.NTX86]
+Copyfiles=DriverFiles_NT_2K, DllFiles
+
+[ATI_4379.NTX86.Services]
+AddService=SI3112r,0x00000002,ATI_4379_Service_Install, Miniport_EventLog_Inst
+
+[ATI_4379.NTX86.CoInstallers]
+AddReg = SI_3X12_CoInstall_AddReg
+CopyFiles=SI_3X12.CoInstallersCopy
+
+[ATI_437A.NTX86]
+Copyfiles=DriverFiles_NT_2K, DllFiles
+
+[ATI_437A.NTX86.Services]
+AddService=SI3112r,0x00000002,ATI_437A_Service_Install, Miniport_EventLog_Inst
+
+[ATI_437A.NTX86.CoInstallers]
+AddReg = SI_3X12_CoInstall_AddReg
+CopyFiles=SI_3X12.CoInstallersCopy
+
+
+;; Windows XP install sections
+;;
+[SI_3112_XP]
+Copyfiles=DriverFiles_XP, DllFiles
+
+[SI_3112_XP.Services]
+AddService=SI3112r,0x00000002,SI_3112_Service_Install, Miniport_EventLog_Inst
+AddService=SiFilter,,FilterService_Install
+
+[SI_3112_XP.CoInstallers]
+AddReg = SI_3X12_CoInstall_AddReg
+CopyFiles=SI_3X12.CoInstallersCopy
+
+[SI_3512_XP]
+Copyfiles=DriverFiles_XP, DllFiles
+
+[SI_3512_XP.Services]
+AddService=SI3112r,0x00000002,SI_3512_Service_Install, Miniport_EventLog_Inst
+AddService=SiFilter,,FilterService_Install
+
+[SI_3512_XP.CoInstallers]
+AddReg = SI_3X12_CoInstall_AddReg
+CopyFiles=SI_3X12.CoInstallersCopy
+
+[ATI_436E_XP]
+Copyfiles=DriverFiles_XP, DllFiles
+
+[ATI_436E_XP.Services]
+AddService=SI3112r,0x00000002,ATI_436E_Service_Install, Miniport_EventLog_Inst
+AddService=SiFilter,,FilterService_Install
+
+[ATI_436E_XP.CoInstallers]
+AddReg = SI_3X12_CoInstall_AddReg
+CopyFiles=SI_3X12.CoInstallersCopy
+
+[ATI_4379_XP]
+Copyfiles=DriverFiles_XP, DllFiles
+
+[ATI_4379_XP.Services]
+AddService=SI3112r,0x00000002,ATI_4379_Service_Install, Miniport_EventLog_Inst
+AddService=SiFilter,,FilterService_Install
+
+[ATI_4379_XP.CoInstallers]
+AddReg = SI_3X12_CoInstall_AddReg
+CopyFiles=SI_3X12.CoInstallersCopy
+
+[ATI_437A_XP]
+Copyfiles=DriverFiles_XP, DllFiles
+
+[ATI_437A_XP.Services]
+AddService=SI3112r,0x00000002,ATI_437A_Service_Install, Miniport_EventLog_Inst
+AddService=SiFilter,,FilterService_Install
+
+[ATI_437A_XP.CoInstallers]
+AddReg = SI_3X12_CoInstall_AddReg
+CopyFiles=SI_3X12.CoInstallersCopy
+
+[SI_3X12_CoInstall_AddReg]
+HKR,,CoInstallers32,0x00010000,"SilSupp.cpl, CoInstHandler"
+
+[SI_3X12.CoInstallersCopy]
+; no need to copy files
+
+[SI_3112_Service_Install]
+DisplayName=%SII3112R.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SI3112r.sys
+LoadOrderGroup=Scsi miniport
+DelReg=NT4WorkAround_DelReg
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+AddReg=PortConfigure_AddReg
+
+[SI_3512_Service_Install]
+DisplayName=%SII3512R.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SI3112r.sys
+LoadOrderGroup=Scsi miniport
+DelReg=NT4WorkAround_DelReg
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+AddReg=PortConfigure_AddReg
+
+
+[ATI_436E_Service_Install]
+DisplayName=%ATI436E.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SI3112r.sys
+LoadOrderGroup=Scsi miniport
+DelReg=NT4WorkAround_DelReg
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+AddReg=PortConfigure_AddReg
+
+[ATI_4379_Service_Install]
+DisplayName=%ATI4379.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SI3112r.sys
+LoadOrderGroup=Scsi miniport
+DelReg=NT4WorkAround_DelReg
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+AddReg=PortConfigure_AddReg
+
+[ATI_437A_Service_Install]
+DisplayName=%ATI437A.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SI3112r.sys
+LoadOrderGroup=Scsi miniport
+DelReg=NT4WorkAround_DelReg
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+AddReg=PortConfigure_AddReg
+
+
+[FilterService_Install]
+DisplayName=SATALink driver accelerator
+ServiceType=1
+StartType=0
+ErrorControl=0
+ServiceBinary=%12%\SiWinAcc.sys
+LoadOrderGroup=Filter
+
+; Mark device as supporting Plug & Play on the PCI(5) bus.
+[PnPSupport_AddReg]
+HKR,Parameters\PnPInterface,5,0x00010001,1
+
+[PortConfigure_AddReg]
+HKR,Parameters\Device,NumberOfRequests,0x00010001, 64
+HKR,Parameters\Device,MaximumSGList,0x00010001, 33
+
+
+; Remove dummy registry value that may have been created during text mode
+; setup of Windows NT4.0.  This value is created to work around the inability
+; text mode setup to create multiple subkeys at a time.
+[NT4WorkAround_DelReg]
+HKR, Parameters, NT40WorkAround
+
+; List of possible obsolete problem device list entries that should be
+; removed prior to the addition of the replacement problem device list
+; entries.
+[ProblemDeviceList_DelReg]
+HKR,ProblemDevices, %ObsProblemDev1Name%
+HKR,ProblemDevices, %ObsProblemDev2Name%
+
+; List of devices with known configuration issues.
+[ProblemDeviceList_AddReg]
+HKR,ProblemDevices
+HKR,ProblemDevices, %ProblemDev1Name%, 0, %ProblemDev1Value%
+HKR,ProblemDevices, %ProblemDev2Name%, 0, %ProblemDev2Value%
+HKR,ProblemDevices, %ProblemDev3Name%, 0, %ProblemDev3Value%
+HKR,ProblemDevices, %ProblemDev4Name%, 0, %ProblemDev4Value%
+HKR,ProblemDevices, %ProblemDev5Name%, 0, %ProblemDev5Value%
+HKR,ProblemDevices, %ProblemDev6Name%, 0, %ProblemDev6Value%
+HKR,ProblemDevices, %ProblemDev7Name%, 0, %ProblemDev7Value%
+HKR,ProblemDevices, %ProblemDev8Name%, 0, %ProblemDev8Value%
+HKR,ProblemDevices, %ProblemDev9Name%, 0, %ProblemDev9Value%
+HKR,ProblemDevices, %ProblemDev10Name%, 0, %ProblemDev10Value%
+HKR,ProblemDevices, %ProblemDev11Name%, 0, %ProblemDev11Value%
+HKR,ProblemDevices, %ProblemDev12Name%, 0, %ProblemDev12Value%
+
+
+; List of controller subsystem IDs to be supported by the SI3112r.sys driver on
+; NT/Win2K/XP/Server 2003 systems.
+[SupportedSubSystemIds_AddReg]
+HKR,SupportedSubsystemIDs,%PCI\VEN_1095&DEV_3112.DeviceDesc%,0x00010001, 0x61121095
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (intel 3422)",0x00010001, 0x34228086
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Super Micro 6112)",0x00010001, 0x611215D9
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Gigabyte B003)",0x00010001, 0xB0031458
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (ECS A011)",0x00010001, 0xA0111019
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (ECS A012)",0x00010001, 0xA0121019
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (ECS A013)",0x00010001, 0xA0131019
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (ECS A014)",0x00010001, 0xA0141019
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (ECS A015)",0x00010001, 0xA0151019
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1014)",0x00010001, 0x1014147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 100B)",0x00010001, 0x100B147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1402)",0x00010001, 0x1402147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1404)",0x00010001, 0x1404147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1802)",0x00010001, 0x1802147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1804)",0x00010001, 0x1804147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1C00)",0x00010001, 0x1C00147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Leadtek 5930)",0x00010001, 0x5930107D
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Tyan 2495)",0x00010001, 249510F1
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Tyan 2570)",0x00010001, 257010F1
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Asus 809D)",0x00010001, 0x809D1043
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (AOpen 0270)",0x00010001, 0x0270A0A0
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (AOpen 044D)",0x00010001, 0x044DA0A0
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (AOpen 044C)",0x00010001, 0x044CA0A0
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (FIC 9201)",0x00010001, 0x92011905
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (FIC 9215)",0x00010001, 0x92151905
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (FIC 904C)",0x00010001, 0x904C1905
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (FIC 904B)",0x00010001, 0x904B1905
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (SOYO A418)",0x00010001, 0xA41810FD
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (SOYO A419)",0x00010001, 0xA41910FD
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (SOYO A719)",0x00010001, 0xA71910FD
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (EPoX 9017)",0x00010001, 0x90171695
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Shuttle C200)",0x00010001, 0xC2001297
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Shuttle C201)",0x00010001, 0xC2011297
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Iwill 15D4)",0x00010001, 0x15D40035
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Albatron 3402)",0x00010001, 0x340217F2
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (DFI 1004)",0x00010001, 0x100415BD
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Chaintech F641)",0x00010001, 0xF641270F
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C0F)",0x00010001, 0x0C0F105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C13)",0x00010001, 0x0C13105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C58)",0x00010001, 0x0C58105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C40)",0x00010001, 0x0C40105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C41)",0x00010001, 0x0C41105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C42)",0x00010001, 0x0C42105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C43)",0x00010001, 0x0C43105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C44)",0x00010001, 0x0C44105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C22)",0x00010001, 0x0C22105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C2A)",0x00010001, 0x0C2A105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (HP 2A1E)",0x00010001, 0x2A1E103C
+HKR,SupportedSubsystemIDs,%PCI\VEN_1095&DEV_3512.DeviceDesc%,0x00010001, 0x65121095
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Gigabyte B003)",0x00010001, 0xB0031458
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1014)",0x00010001, 0x1014147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1021)",0x00010001, 0x1021147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 100B)",0x00010001, 0x100B147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1C06)",0x00010001, 0x1C06147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1C00)",0x00010001, 0x1C00147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1C03)",0x00010001, 0x1C03147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1C04)",0x00010001, 0x1C04147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1406)",0x00010001, 0x1406147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1407)",0x00010001, 0x1407147B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (EPoX 9019)",0x00010001, 0x90191695
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Shuttle C202)",0x00010001, 0xC2021297
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Shuttle C203)",0x00010001, 0xC2031297
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Shuttle C204)",0x00010001, 0xC2041297
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Wistron 534D)",0x00010001, 0x534D108E
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Wistron 02C5)",0x00010001, 0x02C51095
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (HP 2A1E)",0x00010001, 0x2A1E103C
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Foxconn 0C22)",0x00010001, 0x0C22105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Foxconn 0C2A)",0x00010001, 0x0C2A105B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (MSI 9145)",0x00010001, 0x91451462
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (ACER 006C)",0x00010001, 0x006C1025
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (ACER 010D)",0x00010001, 0x010D1025
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (SITECOM 0010)",0x00010001, 0x0010182D
+HKR,SupportedSubsystemIDs,%PCI\VEN_1002&DEV_436E.DeviceDesc%,0x00010001, 0x436E1002
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (Soyo 350S)",0x00010001, 0xA43110FD
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (Shuttle FT63)",0x00010001, 0xF3631297
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (Gigabyte 350M)",0x00010001, 0xB0031458
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (FIC 350)",0x00010001, 0x92691509
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (TUL A350)",0x00010001, 0x5005148C
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (MSI 7072)",0x00010001, 0x07201462
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (ATI 0A44)",0x00010001, 0x0A44174B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (ATI 0A45)",0x00010001, 0x0A45174B
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (MSI 0030)",0x00010001, 0x00301462
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (Jetway A353DM)",0x00010001, 0x100516F3
+HKR,SupportedSubsystemIDs,%PCI\VEN_1002&DEV_4379.DeviceDesc%,0x00010001, 0x43791002
+HKR,SupportedSubsystemIDs,%PCI\VEN_1002&DEV_437A.DeviceDesc%,0x00010001, 0x437A1002
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_4379.DeviceDesc% (MSI 7050)",0x00010001, 0x3009103C
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1002&DEV_437A.DeviceDesc% (MSI 7050)",0x00010001, 0x3009103C
+  
+[Win98ProblemDeviceList_DelReg]
+HKLM,%Win98ProblemDeviceSubKey%, %ObsProblemDev1Name%
+HKLM,%Win98ProblemDeviceSubKey%, %ObsProblemDev2Name%
+
+
+; List of devices with known configuration issues.
+[Win98ProblemDeviceList]
+HKLM,%Win98ProblemDeviceSubKey%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev1Name%, 0, %ProblemDev1Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev2Name%, 0, %ProblemDev2Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev3Name%, 0, %ProblemDev3Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev4Name%, 0, %ProblemDev4Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev5Name%, 0, %ProblemDev5Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev6Name%, 0, %ProblemDev6Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev7Name%, 0, %ProblemDev7Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev8Name%, 0, %ProblemDev8Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev9Name%, 0, %ProblemDev9Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev10Name%, 0, %ProblemDev10Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev11Name%, 0, %ProblemDev11Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev12Name%, 0, %ProblemDev12Value%
+
+[Win98SupportedControllersList]
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1095&DEV_3112.DeviceDesc%,0x00010001, 0x95,0x10,0x12,0x61
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (intel 3422)",0x00010001, 0x86,0x80,0x22,0x34
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Super Micro 6112)",0x00010001, 0xD9,0x15,0x12,0x61
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Gigabyte B003)",0x00010001, 0x58,0x14,0x03,0xB0
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (ECS A011)",0x00010001, 0x19,0x10,0x11,0xA0
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (ECS A012)",0x00010001, 0x19,0x10,0x12,0xA0
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (ECS A013)",0x00010001, 0x19,0x10,0x13,0xA0
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (ECS A014)",0x00010001, 0x19,0x10,0x14,0xA0
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (ECS A015)",0x00010001, 0x19,0x10,0x15,0xA0
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1014)",0x00010001, 0x7B,0x14,0x14,0x10
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 100B)",0x00010001, 0x7B,0x14,0x0B,0x10
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1402)",0x00010001, 0x7B,0x14,0x02,0x14
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1404)",0x00010001, 0x7B,0x14,0x04,0x14
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1802)",0x00010001, 0x7B,0x14,0x02,0x18
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1804)",0x00010001, 0x7B,0x14,0x04,0x18
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Abit 1C00)",0x00010001, 0x7B,0x14,0x00,0x1C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Leadtek 5930)",0x00010001, 0x7D,0x10,0x30,0x59
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Tyan 2495)",0x00010001, 0xF1,0x10,0x95,0x24
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Tyan 2570)",0x00010001, 0xF1,0x10,0x70,0x25
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Asus 809D)",0x00010001, 0x43,0x10,0x9D,0x80
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (AOpen 0270)",0x00010001, 0xA0,0xA0,0x70,0x02
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (AOpen 044D)",0x00010001, 0xA0,0xA0,0x4D,0x04
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (AOpen 044C)",0x00010001, 0xA0,0xA0,0x4C,0x04
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (FIC 9201)",0x00010001, 0x05,0x19,0x01,0x92
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (FIC 9215)",0x00010001, 0x05,0x19,0x15,0x92
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (FIC 904C)",0x00010001, 0x05,0x19,0x4C,0x90
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (FIC 904B)",0x00010001, 0x05,0x19,0x4B,0x90
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (SOYO A418)",0x00010001, 0xFD,0x10,0x18,0xA4
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (SOYO A419)",0x00010001, 0xFD,0x10,0x19,0xA4
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (SOYO A719)",0x00010001, 0xFD,0x10,0x19,0xA7
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (EPoX 9017)",0x00010001, 0x95,0x16,0x17,0x90
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Shuttle C200)",0x00010001, 0x97,0x12,0x00,0xC2
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Shuttle C201)",0x00010001, 0x97,0x12,0x01,0xC2
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Iwill 15D4)",0x00010001, 0x35,0x00,0xD4,0x15
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Albatron 3402)",0x00010001, 0xF2,0x17,0x02,0x34
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (DFI 1004)",0x00010001, 0xBD,0x15,0x04,0x10
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Chaintech F641)",0x00010001, 0x0F,0x27,0x41,0xF6
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C0F)",0x00010001, 0x5B,0x10,0x0F,0x0C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C13)",0x00010001, 0x5B,0x10,0x13,0x0C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C58)",0x00010001, 0x5B,0x10,0x58,0x0C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C40)",0x00010001, 0x5B,0x10,0x40,0x0C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C41)",0x00010001, 0x5B,0x10,0x41,0x0C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C42)",0x00010001, 0x5B,0x10,0x42,0x0C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C43)",0x00010001, 0x5B,0x10,0x43,0x0C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C44)",0x00010001, 0x5B,0x10,0x44,0x0C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C22)",0x00010001, 0x5B,0x10,0x22,0x0C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (Foxconn 0C2A)",0x00010001, 0x5B,0x10,0x2A,0x0C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3112.DeviceDesc% (HP 2A1E)",0x00010001, 0x3C,0x10,0x1E,0x2A
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1095&DEV_3512.DeviceDesc%,0x00010001, 0x95,0x10,0x12,0x65
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Gigabyte B003)",0x00010001, 0x58,0x14,0x03,0xB0
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1014)",0x00010001, 0x7B,0x14,0x14,0x10
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1021)",0x00010001, 0x7B,0x14,0x21,0x10
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 100B)",0x00010001, 0x7B,0x14,0x0B,0x10
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1C06)",0x00010001, 0x7B,0x14,0x06,0x1C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1C00)",0x00010001, 0x7B,0x14,0x00,0x1C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1C03)",0x00010001, 0x7B,0x14,0x03,0x1C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1C04)",0x00010001, 0x7B,0x14,0x04,0x1C
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1406)",0x00010001, 0x7B,0x14,0x06,0x14
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Abit 1407)",0x00010001, 0x7B,0x14,0x07,0x14
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (EPoX 9019)",0x00010001, 0x95,0x16,0x19,0x90
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Shuttle C202)",0x00010001, 0x97,0x12,0x02,0xC2
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Shuttle C203)",0x00010001, 0x97,0x12,0x03,0xC2
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Shuttle C204)",0x00010001, 0x97,0x12,0x04,0xC2
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Wistron 534D)",0x00010001, 0x8E,0x10,0x4D,0x53
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (Wistron 02C5)",0x00010001, 0x95,0x10,0xC5,0x02
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (HP 2A1E)",0x00010001, 0x3C,0x10,0x1E,0x2A
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (MSI 9145)",0x00010001, 0x62,0x14,0x45,0x91
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (ACER 006C)",0x00010001, 0x25,0x10,0x6C,0x00
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (ACER 010D)",0x00010001, 0x25,0x10,0x0D,0x01
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3512.DeviceDesc% (SITECOM 0010)",0x00010001, 0x2D,0x18,0x10,0x00
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1002&DEV_436E.DeviceDesc%,0x00010001, 0x02,0x10,0x6E,0x43
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (Soyo 350S)",0x00010001, 0xFD,0x10,0x31,0xA4
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (Shuttle FT63)",0x00010001, 0x97,0x12,0x63,0xF3
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (MSI 7072)",0x00010001, 0x62,0x14,0x20,0x07
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (Gigabyte 350M)",0x00010001, 0x58,0x14,0x03,0xB0
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (FIC 350)",0x00010001, 0x09,0x15,0x69,0x92
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (TUL A350)",0x00010001, 0x8C,0x14,0x05,0x50
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (ATI 0A44)",0x00010001, 0x4B,0x17,0x44,0x0A
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (ATI 0A45)",0x00010001, 0x4B,0x17,0x45,0x0A
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (MSI 0030)",0x00010001, 0x62,0x14,0x30,0x00
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_436E.DeviceDesc% (Jetway A353DM)",0x00010001, 0xF3,0x16,0x05,0x10
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1002&DEV_4379.DeviceDesc%,0x00010001, 0x02,0x10,0x79,0x43
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1002&DEV_437A.DeviceDesc%,0x00010001, 0x02,0x10,0x7A,0x43
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_4379.DeviceDesc% (MSI 7050)",0x00010001, 0x3C,0x10,0x09,0x30
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1002&DEV_437A.DeviceDesc% (MSI 7050)",0x00010001, 0x3C,0x10,0x09,0x30
+ 
+;*************************************************************
+;The NT EventLog entries are the same for all SCSI miniports.
+[Miniport_EventLog_Inst]
+AddReg = Miniport_EventLog_AddReg
+
+[Miniport_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,0x00010001,7
+
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[WIN98.REG]
+HKR,,PortDriver,,SI3112r.mpd
+
+
+[Strings]
+Si3112r_Media="Silicon Image SiI 3x12 SATARaid Driver Installation Disk"
+SI="Silicon Image"
+ATI="ATI"
+SCSIClassName="SCSI and RAID controllers"
+
+PCI\VEN_1095&DEV_3112.DeviceDesc="Silicon Image SiI 3112 SATARaid Controller"
+SII3112R.SvcDesc="Silicon Image SiI 3112 SATARaid Controller"
+
+PCI\VEN_1095&DEV_3512.DeviceDesc="Silicon Image SiI 3512 SATARaid Controller"
+SII3512R.SvcDesc="Silicon Image SiI 3512 SATARaid Controller"
+
+PCI\VEN_1002&DEV_436E.DeviceDesc="ATI 436E Serial ATA Controller"
+ATI436E.SvcDesc="ATI-436E Serial ATA Controller"
+
+PCI\VEN_1002&DEV_4379.DeviceDesc="ATI 4379 Serial ATA Controller"
+ATI4379.SvcDesc="ATI-4379 Serial ATA Controller"
+
+PCI\VEN_1002&DEV_437A.DeviceDesc="ATI 437A Serial ATA Controller"
+ATI437A.SvcDesc="ATI-437A Serial ATA Controller"
+
+
+Win98ProblemDeviceSubKey = "System\CurrentControlSet\Services\Si3112r\ProblemDevices"
+Win98SupportedControllersSubKey = "System\CurrentControlSet\Services\Si3112r\SupportedSubsystemIDs"
+
+ObsProblemDev1Name="ST330013AS                              108b    "
+ObsProblemDev2Name="ST330013AS                              1.20    "
+
+ProblemDev1Name="Maxtor 4D060H3                          DAK05GK0"
+ProblemDev1Value="MaxMode = UDMA-5"
+
+ProblemDev2Name="ST320012AS"
+ProblemDev2Value="Mod15Write"
+
+ProblemDev3Name="ST330013AS"
+ProblemDev3Value="Mod15Write"
+
+ProblemDev4Name="ST340017AS"
+ProblemDev4Value="Mod15Write"
+
+ProblemDev5Name="ST360015AS"
+ProblemDev5Value="Mod15Write"
+
+ProblemDev6Name="ST380023AS"
+ProblemDev6Value="Mod15Write"
+
+ProblemDev7Name="ST3120023AS"
+ProblemDev7Value="Mod15Write"
+
+ProblemDev8Name="ST340014ASL"
+ProblemDev8Value="Mod15Write"
+
+ProblemDev9Name="ST360014ASL"
+ProblemDev9Value="Mod15Write"
+
+ProblemDev10Name="ST380011ASL"
+ProblemDev10Value="Mod15Write"
+
+ProblemDev11Name="ST3120022ASL"
+ProblemDev11Value="Mod15Write"
+
+ProblemDev12Name="ST3160021ASL"
+ProblemDev12Value="Mod15Write"
+

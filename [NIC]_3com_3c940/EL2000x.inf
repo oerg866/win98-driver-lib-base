@@ -1,0 +1,411 @@
+; EL2000x.inf
+; Windows Installation File
+; %ver 1.16.46 - 10/03/2003 (EAA) 
+; (C)Copyright 2003 3Com Corporation
+; (C)Copyright 2003 Marvell
+
+
+[version]
+signature  				= "$CHICAGO$"
+Compatible		 		= 1
+Class     				= Net
+ClassGUID  				= {4D36E972-E325-11CE-BFC1-08002BE10318}
+provider   				= %V_MS%
+catalogfile				= EL2000.CAT
+DriverVer 				= 07/31/2003,1.00.00.0046
+MillenniumPreferred 			= .ME
+
+[Manufacturer]
+%V_3COM%				= 3COM,ME,NT,NT.5.1
+
+[SourceDisksNames]
+50					= %Source_Disk_Name%,,, 
+
+
+; All Operating systems Only
+[SourceDisksFiles]
+EL2K_9X.sys = 50
+EL2K_2K.sys = 50
+EL2K_XP.sys = 50
+EL2K_CPP.dll = 50
+
+[ControlFlags]
+ExcludeFromSelect.NT			= *
+
+
+[3COM]
+%OEM.DeviceDesc%			= OEM.ndi,		PCI\VEN_10B7&DEV_1700
+
+; Win 9X Only *******
+
+[3C940.ndi]
+DriverVer				= 07/31/2003,1.00.00.0046
+AddReg					= 3C940.ndi.reg, EL2000x_Addreg, EL2000x.common.params
+CopyFiles				= EL2000x.ndis, Other
+
+[3C940.ndi_ME]
+DriverVer				= 07/31/2003,1.00.00.0046
+AddReg					= 3C940.ndi.reg, EL2000x_Addreg, EL2000x.common.params
+CopyFiles				= EL2000x.ndis, Other
+
+[3C2000.ndi]
+DriverVer				= 07/31/2003,1.00.00.0046
+AddReg					= 3C2000.ndi.reg, EL2000x_Addreg, EL2000x.common.params
+CopyFiles				= EL2000x.ndis, Other
+
+[3C2000.ndi_ME]
+DriverVer				= 07/31/2003,1.00.00.0046
+AddReg					= 3C2000.ndi.reg, EL2000x_Addreg, EL2000x.common.params
+CopyFiles				= EL2000x.ndis, Other
+
+[OEM.ndi]
+DriverVer				= 07/31/2003,1.00.00.0046
+AddReg					= 3C2000.ndi.reg, EL2000x_Addreg, EL2000x.common.params
+CopyFiles				= EL2000x.ndis, Other
+
+[OEM.ndi_ME]
+DriverVer				= 07/31/2003,1.00.00.0046
+AddReg					= 3C2000.ndi.reg, EL2000x_Addreg, EL2000x.common.params
+CopyFiles				= EL2000x.ndis, Other
+
+
+[3C940.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_10B7&DEV_1700&SUBSYS_001010B7"
+
+[3C2000.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_10B7&DEV_1700&SUBSYS_002010B7"
+
+[OEM.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_10B7&DEV_1700"
+
+[EL2000x_Addreg]
+HKR,,DevLoader,,*ndis
+HKR,,DeviceVxDs,,EL2K_9X.sys
+HKR,,AdapterType,,5
+HKR,,BusType,,5
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,Ndi,Service,,"EL2000"
+HKR,NDIS,LogDriverName,,"EL2000" 
+HKR,Ndi\Interfaces,DefUpper,,"ndis3,ndis4,ndis5"
+HKR,Ndi\Interfaces,UpperRange,,"ndis5,ndis4,ndis3"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+HKR,, EnumPropPages32, 0, "EL2K_CPP.dll,NetPropPageProvider"
+HKLM,Software\3Com\TCAUDIAG\TCAUM99X,DriverNames,,"SYSTEM\EL2K_9X.sys"
+HKR,Ndi\Install,ndis3,,"EL2000.ndis"
+HKR,,DeviceVxDs,,EL2K_9X.sys
+
+
+; End Win 9X Only *******
+
+
+
+
+; Win 2000 Only *******
+
+
+[3C940.ndi.NT]
+Characteristics				= 0x84	; NCF_PHYSICAL + NCF_HAS_UI
+BusType         			= 5
+AddReg          			= EL2000x.reg.NT, EL2000x.common.params
+CopyFiles       			= EL2000x.DriverFiles.NT, Other
+
+[3C940.ndi.NT.Services]
+AddService      			= EL2000, 2, EL2000x.Service.NT, common.EventLog.NT
+
+[3C2000.ndi.NT]
+Characteristics				= 0x84	; NCF_PHYSICAL + NCF_HAS_UI
+BusType         			= 5
+AddReg          			= EL2000x.reg.NT, EL2000x.common.params
+CopyFiles       			= EL2000x.DriverFiles.NT, Other
+
+[3C2000.ndi.NT.Services]
+AddService      			= EL2000, 2, EL2000x.Service.NT, common.EventLog.NT
+
+[OEM.ndi.NT]
+Characteristics				= 0x84	; NCF_PHYSICAL + NCF_HAS_UI
+BusType         			= 5
+AddReg          			= EL2000x.reg.NT, EL2000x.common.params
+CopyFiles       			= EL2000x.DriverFiles.NT, Other
+
+[OEM.ndi.NT.Services]
+AddService      			= EL2000, 2, EL2000x.Service.NT, common.EventLog.NT
+
+
+[EL2000x.reg.NT]
+;HKR, Ndi, HelpText,, %HelpText%
+HKR, Ndi\Interfaces, UpperRange,, "ndis5"
+HKR, Ndi\Interfaces, LowerRange,, "ethernet"
+HKR, Ndi, Service,, "EL2000"
+HKR,, EnumPropPages32, 0, "EL2K_CPP.dll,NetPropPageProvider"
+
+[EL2000x.Service.NT]
+DisplayName	= %EL2000x.Service.DispName%
+ServiceType	= 1
+StartType 	= 3
+ErrorControl 	= 1
+ServiceBinary  	= %12%\EL2K_2K.sys
+LoadOrderGroup 	= NDIS
+
+[common.EventLog.NT]
+AddReg = common.AddEventLog.NT.reg
+
+[common.AddEventLog.NT.reg]
+HKR,, EventMessageFile,	0x00020000, "%%SystemRoot%%\System32\Drivers\EL2K_2K.sys"
+HKR,, TypesSupported,	0x00010001, 7
+
+
+; End Win 2000 Only *******
+
+
+
+
+
+
+; Win XP Only ******* 
+
+[3C940.ndi.NT.5.1]
+Characteristics				= 0x84	; NCF_PHYSICAL + NCF_HAS_UI
+BusType         			= 5
+AddReg          			= EL2000x.reg.NT.5.1, EL2000x.common.params
+CopyFiles       			= EL2000x.DriverFiles.NT.5.1, Other
+
+[3C940.ndi.NT.5.1.Services]
+AddService      			= EL2000, 2, EL2000x.Service.NT.5.1, common.EventLog.NT.5.1
+
+[3C2000.ndi.NT.5.1]
+Characteristics				= 0x84	; NCF_PHYSICAL + NCF_HAS_UI
+BusType         			= 5
+AddReg          			= EL2000x.reg.NT.5.1, EL2000x.common.params
+CopyFiles       			= EL2000x.DriverFiles.NT.5.1, Other
+
+[3C2000.ndi.NT.5.1.Services]
+AddService      			= EL2000, 2, EL2000x.Service.NT.5.1, common.EventLog.NT.5.1
+
+[OEM.ndi.NT.5.1]
+Characteristics				= 0x84	; NCF_PHYSICAL + NCF_HAS_UI
+BusType         			= 5
+AddReg          			= EL2000x.reg.NT.5.1, EL2000x.common.params
+CopyFiles       			= EL2000x.DriverFiles.NT.5.1, Other
+
+[OEM.ndi.NT.5.1.Services]
+AddService      			= EL2000, 2, EL2000x.Service.NT.5.1, common.EventLog.NT.5.1
+
+
+[EL2000x.reg.NT.5.1]
+HKR, Ndi,               Service,    0, "EL2000"
+HKR, Ndi\Interfaces,    UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,    LowerRange, 0, "ethernet"
+HKR,, EnumPropPages32, 0, "EL2K_CPP.dll,NetPropPageProvider"
+
+[EL2000x.Service.NT.5.1]
+DisplayName     =  %EL2000x.Service.DispName%
+ServiceType     = 1 
+StartType       = 3 
+ErrorControl    = 1 
+ServiceBinary   = %12%\EL2K_XP.sys
+LoadOrderGroup  = NDIS
+AddReg          = TextModeFlags.reg.NT.5.1
+
+
+[common.EventLog.NT.5.1]
+AddReg = EL2000x.AddEventLog.reg.NT.5.1
+
+[EL2000x.AddEventLog.reg.NT.5.1]
+HKR,, EventMessageFile, 0x00020000, "%SystemRoot%\System32\netevent.dll;%SystemRoot%\System32\drivers\EL2K_XP.sys"
+HKR,, TypesSupported,   0x00010001, 7
+
+[TextModeFlags.reg.NT.5.1]
+HKR,,TextModeFlags, 0x00010001, 0x0001
+
+; End Win XP Only *******
+
+
+
+[EL2000x.common.params]
+
+
+HKR, Ndi\Params\NetworkAddress,	ParamDesc,,	%NetAddress%
+HKR, Ndi\Params\NetworkAddress,	Type,,		"edit"
+HKR, Ndi\Params\NetworkAddress,	LimitText,,	"18"
+HKR, Ndi\Params\NetworkAddress,	UpperCase,,	"1"
+HKR, Ndi\Params\NetworkAddress,	Default,,	""
+HKR, Ndi\Params\NetworkAddress,	Optional,,	"1"
+
+HKR, Ndi\Params\MaxFrameSize,	ParamDesc,,	%MaxFrSize%
+HKR, Ndi\Params\MaxFrameSize,	Type,,		"int"
+HKR, Ndi\Params\MaxFrameSize,	Base,,		"10"
+HKR, Ndi\Params\MaxFrameSize,	Min,,		"64"
+HKR, Ndi\Params\MaxFrameSize,	Max,,		"9014"
+HKR, Ndi\Params\MaxFrameSize,	Step,,		"1"
+HKR, Ndi\Params\MaxFrameSize,	Default,,	"1514"
+
+HKR, Ndi\Params\HwChecksum,	ParamDesc,,	%HwCsum%
+HKR, Ndi\Params\HwChecksum,	Type,,		"enum"
+HKR, Ndi\Params\HwChecksum\enum,1,,		%On%
+HKR, Ndi\Params\HwChecksum\enum,0,,		%Off%
+HKR, Ndi\Params\HwChecksum,	Default,,	"1"
+
+HKR, Ndi\Params\Moderate,	ParamDesc,,	%IntMod%
+HKR, Ndi\Params\Moderate,	Type,,		"enum"
+HKR, Ndi\Params\Moderate\enum,1,,		%On%
+HKR, Ndi\Params\Moderate\enum,0,,		%Off%
+HKR, Ndi\Params\Moderate,	Default,,	"1"
+
+HKR, Ndi\Params\FixedIntMod,	ParamDesc,,	%MaxIrq%
+HKR, Ndi\Params\FixedIntMod,	Type,,		"int"
+HKR, Ndi\Params\FixedIntMod,	Base,,		"10"
+HKR, Ndi\Params\FixedIntMod,	Min,,		"1000"
+HKR, Ndi\Params\FixedIntMod,	Max,,		"30000"
+HKR, Ndi\Params\FixedIntMod,	Step,,		"1"
+HKR, Ndi\Params\FixedIntMod,	Default,,	"5000"
+
+HKR, Ndi\Params\MessageLog,	ParamDesc,,	%LogMsg%
+HKR, Ndi\Params\MessageLog,	Type,,		"enum"
+HKR, Ndi\Params\MessageLog\enum,4,,		%Non%
+HKR, Ndi\Params\MessageLog\enum,3,,		%Err%
+HKR, Ndi\Params\MessageLog\enum,2,,		%Wrn%
+HKR, Ndi\Params\MessageLog\enum,1,,		%Sta%
+HKR, Ndi\Params\MessageLog\enum,0,,		%All%
+HKR, Ndi\Params\MessageLog,	Default,,	"1"
+
+HKR, Ndi\Params\MaxReceives,	ParamDesc,,	%NumRcv%
+HKR, Ndi\Params\MaxReceives,	Type,,		"int"
+HKR, Ndi\Params\MaxReceives,	Base,,		"10"
+HKR, Ndi\Params\MaxReceives,	Min,,		"3"
+HKR, Ndi\Params\MaxReceives,	Max,,		"500"
+HKR, Ndi\Params\MaxReceives,	Step,,		"1"
+HKR, Ndi\Params\MaxReceives,	Default,,	"50"
+
+HKR, Ndi\Params\MaxTransmits,	ParamDesc,,	%NumTx%
+HKR, Ndi\Params\MaxTransmits,	Type,,		"int"
+HKR, Ndi\Params\MaxTransmits,	Base,,		"10"
+HKR, Ndi\Params\MaxTransmits,	Min,,		"4"
+HKR, Ndi\Params\MaxTransmits,	Max,,		"200"
+HKR, Ndi\Params\MaxTransmits,	Step,,		"1"
+HKR, Ndi\Params\MaxTransmits,	Default,,	"50"
+
+HKR, Ndi\Params\FlowControl_A,	ParamDesc,,	%FlowCtrlA%
+HKR, Ndi\Params\FlowControl_A,	Type,,		"enum"
+HKR, Ndi\Params\FlowControl_A\enum,3,,		%bothFC%
+HKR, Ndi\Params\FlowControl_A\enum,2,,		%sym%
+HKR, Ndi\Params\FlowControl_A\enum,1,,		%asym%
+HKR, Ndi\Params\FlowControl_A\enum,0,,		%noFc%
+HKR, Ndi\Params\FlowControl_A,	Default,,	"3"
+
+HKR, Ndi\Params\IEEE8021P,	ParamDesc,,	%PriorityTagging%
+HKR, Ndi\Params\IEEE8021P,	Type,,		"enum"
+HKR, Ndi\Params\IEEE8021P\enum, 1,,		%Enable%
+HKR, Ndi\Params\IEEE8021P\enum, 0,,		%Disable%
+HKR, Ndi\Params\IEEE8021P,	Default,,	"0"
+
+HKR,Ndi\params\media_type,	default,,	%media_default%
+HKR,Ndi\params\media_type, 	ParamDesc,,	%media_type%
+HKR,Ndi\params\media_type,	type,,		"enum"
+HKR,Ndi\params\media_type,	optional,,	"0"
+HKR,Ndi\params\media_type\enum,	Autoselect,,	%media_auto%
+HKR,Ndi\params\media_type\enum,	1000FULL,,	%media_1000_full%
+HKR,Ndi\params\media_type\enum,	100FULL,,	%media_100_full%
+HKR,Ndi\params\media_type\enum,	100HALF,,	%media_100_half%
+HKR,Ndi\params\media_type\enum,	10FULL,,	%media_10_full%
+HKR,Ndi\params\media_type\enum,	10HALF,,	%media_10_half%
+
+HKR, Ndi\Params\WakeUpModeCap,       ParamDesc, , %WakeUpCaps%
+HKR, Ndi\Params\WakeUpModeCap,       default,   , "27"
+HKR, Ndi\Params\WakeUpModeCap,       type,      , "enum"
+HKR, Ndi\Params\WakeUpModeCap\enum,  0,  	, "None"
+HKR, Ndi\Params\WakeUpModeCap\enum,  25,  	, "Magic Packet"
+HKR, Ndi\Params\WakeUpModeCap\enum,  26,  	, "Wake Up Frame"
+HKR, Ndi\Params\WakeUpModeCap\enum,  27,  	, "Both"
+
+HKR,, MaxMulticast,,         "128"
+HKR,, WaitForRxResources,,   "1"
+HKR,, SGMapRegistersNeeded,, "64"
+HKR,, WakeUpModeCap,,	     "27"
+HKR,, TCAUDIAG,,	     "tcaum998"
+
+
+
+
+; File Section for Windows 9x *******
+
+[EL2000x.ndis]
+EL2K_9X.sys,,,2
+
+; File Section for Windows 2000 *******
+
+[EL2000x.DriverFiles.NT]
+EL2K_2K.sys,,,2
+
+; File Section for Windows XP *******
+
+[EL2000x.DriverFiles.NT.5.1]
+EL2K_XP.sys,,,2
+
+[Other]
+EL2K_CPP.dll,,,2
+
+[DestinationDirs]
+DefaultDestDir        			= 11
+Other					= 11
+EL2000x.ndis				= 11
+EL2000x.DriverFiles.NT  		= 12
+EL2000x.DriverFiles.NT.5.1		= 12
+
+
+
+[strings]
+V_MS					= "3Com"
+V_3COM					= "3Com"
+Source_Disk_Name			= "ECD100P200"
+disable					= "Disable"
+enable					= "Enable"
+NetAddress             			= "Network Address"
+MaxFrSize             			= "Maximum Frame Size"
+HwCsum                			= "Hardware Checksumming"
+WakeUpCaps            			= "Wake Up Capabilities"
+IntMod                  		= "Interrupt Moderation"
+MaxIrq                  		= "Max IRQ per Sec"
+LogMsg                  		= "Log Status Messages"
+NumRcv                  		= "Number of Receive Buffers"
+NumTx                   		= "Number of Transmit Buffers"
+On                	      		= "On"
+Off               	      		= "Off"
+Non               	      		= "None"
+Err               	      		= "Errors"
+Wrn                	     		= "Warnings"
+Sta               	      		= "Status Messages"
+All               	      		= "All Messages"
+FlowCtrlA				= "FlowControl"
+bothFC					= "Asymmetrical and Symmetrical Flow Control"
+sym					= "Symmetrical Flow Control"
+asym					= "Asymmetrical Flow Control"
+noFc					= "No Flow Control"
+PriorityTagging				= "802.1p Support"
+media_1000_full				="1000 Mb, Full Duplex"
+media_100_full 				="100 Mb, Full Duplex"
+media_100_half				="100 Mb, Half Duplex"
+media_10_full 				="10 Mb, Full Duplex"
+media_10_half 				="10 Mb, Half Duplex"
+media_type 				="Media Type"
+media_default 				="Autoselect"
+media_auto				="Auto"
+
+EL2000x.Service.DispName      		= "3Com 3C2000x EtherLink XL Adapter"
+ProductSoftwareDescription 		= "3Com 3C2000x Adapter Driver"
+ProductSoftwareTitle 			= "3Com 3C2000x Adapter Driver"
+ProductMajorVersion 			= "1"
+ProductMinorVersion 			= "0"
+ProductSoftwareName 			= "EL2000"
+ProductReview 				= "1"
+SoftwareType 				= "driver"
+NetRuleSoftwareType 			= "EL2000xSys ndisDriver EL2000xDriver"
+NetRuleSoftwareBindForm 		= """EL2000xSys"" yes no container"
+NetRuleSoftwareClass 			= "EL2000xDriver basic"
+NetRuleSoftwareBindable 		= "EL2000xDriver EL2000xAdapter non exclusive 100"
+
+3C940.DeviceDesc			= "3Com Gigabit LOM (3C940)"
+3C2000.DeviceDesc			= "3Com Gigabit NIC (3C2000)"
+3C2000K2.DeviceDesc			= "3Com Gigabit NIC (3C2000)"
+OEM.DeviceDesc				= "3Com Gigabit NIC"

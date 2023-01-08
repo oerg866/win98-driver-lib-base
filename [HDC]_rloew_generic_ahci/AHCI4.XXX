@@ -1,0 +1,96 @@
+; Copyright (c) 2017-2018 Rudolph R. Loew
+
+; Version 2.0
+
+[version]
+signature="$CHICAGO$"
+Class=hdc
+ClassGUID={4d36e96a-e325-11ce-bfc1-08002be10318}
+Provider=%RL%
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+222 = %DiskId%,"",222
+
+[SourceDisksFiles]
+ahci.pdr = 222
+
+;Class Install
+[ClassInstall]
+AddReg=HDC_Class
+
+[HDC_Class]
+HKR,,,,%HDCClassName%
+HKR,,Icon,,-9
+
+[Manufacturer]
+%RL-Drivers%=RL_HDC
+
+[RL_HDC]
+
+%PCI\CC_0106.DeviceDesc%= MULTI_GOODAHCI, PCI\CC_0106;Generic PCI AHCI
+%MF\AHCI0.DeviceDesc% = GOODAHCI, MF\AHCI0
+%MF\AHCI1.DeviceDesc% = GOODAHCI, MF\AHCI1
+%MF\AHCI2.DeviceDesc% = GOODAHCI, MF\AHCI2
+%MF\AHCI3.DeviceDesc% = GOODAHCI, MF\AHCI3
+
+[GOODAHCI]
+AddReg = AHCI_AddReg
+CopyFiles = Drivers_Dir
+
+[GOODAHCI.HW]
+
+[MULTI_GOODAHCI]
+AddReg=PCIMF.Reg
+
+[MULTI_GOODAHCI.HW]
+AddReg=MULTI_GOODAHCI.RegHW
+
+[MULTI_GOODAHCI.RegHW]
+HKR,Child0000,HardwareID,,MF\AHCI0
+HKR,Child0000,ResourceMap,1,00,01,02,03,04,05,06,07
+HKR,Child0000,MFFlags,1,0C,00,00,00
+HKR,Child0001,HardwareID,,MF\AHCI1
+HKR,Child0001,ResourceMap,1,00,01,02,03,04,05,06,07
+HKR,Child0001,MFFlags,1,0C,00,00,00
+HKR,Child0002,HardwareID,,MF\AHCI2
+HKR,Child0002,ResourceMap,1,00,01,02,03,04,05,06,07
+HKR,Child0002,MFFlags,1,0C,00,00,00
+HKR,Child0003,HardwareID,,MF\AHCI3
+HKR,Child0003,ResourceMap,1,00,01,02,03,04,05,06,07
+HKR,Child0003,MFFlags,1,0C,00,00,00
+
+[PCIMF.Reg]
+HKR,,DevLoader,,*CONFIGMG
+HKR,,Enumerator,,*CONFIGMG
+HKR,,CMDrivFlags,1,03,00,00,00
+
+[DontStopChild.RegHW]
+HKR,,ConfigFlags,1,80,00,00,00
+
+[Drivers_Dir]
+ahci.pdr
+
+[AHCI_AddReg]
+HKR,,DriverDesc,,"AHCI Port Driver"
+HKR,,DevLoader,,*IOS
+HKR,,PortDriver,,AHCI.PDR
+
+[HDC_HW_REG]
+HKR,,NoSetupUI,,1
+
+[ControlFlags]
+ExcludeFromSelect=MF\AHCI0,MF\AHCI1,MF\AHCI2,MF\AHCI3
+
+[Strings]
+HDCClassName            = "Hard disk controllers"
+RL                      = "RLoew"
+RL-Drivers= "(AHCI hard disk drivers)"
+PCI\CC_0106.DeviceDesc  = "Standard 4-Port PCI AHCI Controller"
+MF\AHCI0.DeviceDesc= "AHCI Port 0"
+MF\AHCI1.DeviceDesc= "AHCI Port 1"
+MF\AHCI2.DeviceDesc= "AHCI Port 2"
+MF\AHCI3.DeviceDesc= "AHCI Port 3"
+DiskId = "R. Loew AHCI Driver Installation Disk"

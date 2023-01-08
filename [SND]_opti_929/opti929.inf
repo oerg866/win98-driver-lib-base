@@ -1,0 +1,602 @@
+;; 8/28/95
+
+[Version]
+Signature="$Windows 95$"
+Class=OPT0929MEDIA
+provider=%OPTi%
+
+[ControlFlags]
+ExcludeFromSelect=MF\OPT0929_Dev0
+ExcludeFromSelect=MF\OPT0929_Dev1
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"0"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%MfgName%=OPTiMediaChips
+
+[OPTiMediaChips]
+%*OPT0929.Device0Desc%=OPT0929_Device0, *OPT0929
+%*OPT0929.Device1Desc%=OPT0929_Device1, *OPT0929
+%*OPT0929.Device2Desc%=OPT0929_Device2, *OPT0929
+%*OPT0929.Device3Desc%=OPT0929_Device3, *OPT0929
+%*OPT0929.Device4Desc%=OPT0929_Device4, *OPT0929
+%*OPT0929.Device5Desc%=OPT0929_Device5, *OPT0929
+%*OPT0929.Device6Desc%=OPT0929_Device6, *OPT0929
+
+;---------------------------------------------------------------;
+[OPT0929_Device0]
+DelReg=OPT0929.DelReg
+LogConfig=OPT0929.LC0_0_0, OPT0929.LC0_0_1, OPT0929.LC0_1_0, OPT0929.LC0_1_1,OPT0929.LC0_2_0, OPT0929.LC0_2_1, OPT0929.LC0_3_0, OPT0929.LC0_3_1
+AddReg=OPT0929MF.Reg
+CopyFiles=OPT0929.CopyList, OPT.CopyINF
+UpdateIniFields=Drivers.fields
+
+[OPT0929_Device1]
+DelReg=OPT0929.DelReg
+LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
+AddReg=OPT0929MF.Reg
+CopyFiles=OPT0929.CopyList, OPT.CopyINF
+UpdateIniFields=Drivers.fields
+
+[OPT0929_Device3]
+DelReg=OPT0929.DelReg
+LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
+AddReg=OPT0929MF.Reg
+CopyFiles=OPT0929.CopyList, OPT.CopyINF
+UpdateIniFields=Drivers.fields
+
+[OPT0929_Device4]
+DelReg=OPT0929.DelReg
+LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
+AddReg=OPT0929MF.Reg
+CopyFiles=OPT0929.CopyList, OPT.CopyINF
+UpdateIniFields=Drivers.fields
+
+[OPT0929_Device5]
+DelReg=OPT0929.DelReg
+LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
+AddReg=OPT0929MF.Reg
+CopyFiles=OPT0929.CopyList, OPT.CopyINF
+UpdateIniFields=Drivers.fields
+
+[OPT0929_Device6]
+DelReg=OPT0929.DelReg
+LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
+AddReg=OPT0929MF.Reg
+CopyFiles=OPT0929.CopyList, OPT.CopyINF
+UpdateIniFields=Drivers.fields
+
+[OPT0929_Device2]
+DelReg=OPT0929.DelReg
+LogConfig=OPT0929.LC2_0_0, OPT0929.LC2_0_1, OPT0929.LC2_1_0, OPT0929.LC2_1_1,OPT0929.LC2_2_0, OPT0929.LC2_2_1, OPT0929.LC2_3_0, OPT0929.LC2_3_1
+AddReg=OPT0929MF.Reg
+CopyFiles=OPT0929.CopyList, OPT.CopyINF
+UpdateIniFields=Drivers.fields
+
+
+[OPT0929MF.Reg]
+HKR,,DevLoader,,*CONFIGMG
+HKR,,Enumerator,,*CONFIGMG
+HKR,,DeviceDriver,,mfvxd.vxd
+
+[OPT0929.CopyList]
+snd929p.drv,,
+sndopl3p.drv,,
+snd929p.vxd,,
+sndm401p.vxd,,
+sndm401p.drv,,
+mfvxd.vxd,,
+
+[OPT.CopyINF]
+snd929p.inf,snd929p.in_
+
+
+
+[Drivers.fields]
+system.ini,boot,drivers,msmixmgr.dll
+system.ini,boot,drivers,mmmixer.dll
+
+;---------------------------------------------------------------;
+[OPT0929_Device0.HW]
+AddReg=OPT0929.RegHW0
+
+[OPT0929.RegHW0]
+HKR,Child0000,HardwareID,,MF\OPT0929_Dev0
+HKR,Child0001,HardwareID,,MF\OPT0929_Dev1
+HKR,Child0002,HardwareID,,*PNPB02F
+
+;---------------------------------------------------------------;
+[OPT0929_Device1.HW]
+AddReg=OPT0929.RegHW1,OPT0929.RegHWSony
+
+[OPT0929.RegHW1]
+HKR,Child0000,HardwareID,,MF\OPT0929_Dev0
+HKR,Child0001,HardwareID,,MF\OPT0929_Dev1
+HKR,Child0002,HardwareID,,*PNPB02F
+
+[OPT0929.RegHWSony]
+HKR,Child0003,HardwareID,,*PNPA02B
+
+[OPT0929.RegHWPana]
+HKR,Child0003,HardwareID,,*PNPA003
+
+[OPT0929.RegHWMitOSP]
+HKR,Child0003,HardwareID,,*PNPA030
+
+[OPT0929.RegHWMitNSP]
+HKR,Child0003,HardwareID,,*PNPA031
+
+[OPT0929.RegHWMitDP]
+HKR,Child0003,HardwareID,,*PNPA032
+
+[OPT0929_Device3.HW]
+AddReg=OPT0929.RegHW1,OPT0929.RegHWPana
+
+[OPT0929_Device4.HW]
+AddReg=OPT0929.RegHW1,OPT0929.RegHWMitOSP
+
+[OPT0929_Device5.HW]
+AddReg=OPT0929.RegHW1,OPT0929.RegHWMitNSP
+
+[OPT0929_Device6.HW]
+AddReg=OPT0929.RegHW1,OPT0929.RegHWMitDP
+
+;---------------------------------------------------------------;
+[OPT0929_Device2.HW]
+AddReg=OPT0929.RegHW2
+
+[OPT0929.RegHW2]
+HKR,Child0000,HardwareID,,MF\OPT0929_Dev0
+HKR,Child0001,HardwareID,,MF\OPT0929_Dev1
+HKR,Child0002,HardwareID,,*PNPB02F
+HKR,Child0003,HardwareID,,*PNP0600
+
+[OPT0929.DelReg]
+
+
+;---------------------------------------------------------------;
+
+[OPT0929.LC0_0_0]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=7, 10
+IRQConfig=10, 9, 7, 5
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+[OPT0929.LC0_0_1]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=9, 11
+IRQConfig=10, 9, 7, 5
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+// No Game
+[OPT0929.LC0_1_0]
+ConfigPriority=NORMAL
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=7, 10
+IRQConfig=10, 9, 7, 5
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+// No Game
+[OPT0929.LC0_1_1]
+ConfigPriority=NORMAL
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=11, 9
+IRQConfig=10, 9, 7, 5
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+
+; No MPU401
+[OPT0929.LC0_2_0]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=7, 10
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+; No MPU401
+[OPT0929.LC0_2_1]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=11, 9 
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+; No MPU401 No game
+[OPT0929.LC0_3_0]
+ConfigPriority=NORMAL
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=7, 10
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+; No MPU401 No game
+[OPT0929.LC0_3_1]
+ConfigPriority=NORMAL
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=11, 9
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+
+;--------------------------------------------------------------------
+
+[OPT0929.LC1_0_0]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=320-323, 340-343, 360-363, 330-333
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=7, 10
+IRQConfig=10, 9, 7, 5
+IRQConfig=5,7,9,10,11
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+[OPT0929.LC1_0_1]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=320-323, 340-343, 360-363, 330-333
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=9, 11
+IRQConfig=10, 9, 7, 5
+IRQConfig=5,7,9,10,11
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+// No Game
+[OPT0929.LC1_1_0]
+ConfigPriority=NORMAL
+IOConfig=320-323, 340-343, 360-363, 330-333
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=7, 10
+IRQConfig=10, 9, 7, 5
+IRQConfig=5,7,9,10,11
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+// No Game
+[OPT0929.LC1_1_1]
+ConfigPriority=NORMAL
+IOConfig=320-323, 340-343, 360-363, 330-333
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=11, 9
+IRQConfig=10, 9, 7, 5
+IRQConfig=5,7,9,10,11
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+
+; No MPU401
+[OPT0929.LC1_2_0]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=320-323, 340-343, 360-363, 330-333
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=7, 10
+IRQConfig=5,7,9,10,11
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+; No MPU401
+[OPT0929.LC1_2_1]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=320-323, 340-343, 360-363, 330-333
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=11, 9 
+IRQConfig=5,7,9,10,11
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+; No MPU401 No game
+[OPT0929.LC1_3_0]
+ConfigPriority=NORMAL
+IOConfig=320-323, 340-343, 360-363, 330-333
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=7, 10
+IRQConfig=5,7,9,10,11
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+; No MPU401 No game
+[OPT0929.LC1_3_1]
+ConfigPriority=NORMAL
+IOConfig=320-323, 340-343, 360-363, 330-333
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=11, 9
+IRQConfig=5,7,9,10,11
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+;----------------------------------------------------------------------
+
+[OPT0929.LC2_0_0]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=170-177
+IOConfig=376-377
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=7, 10
+IRQConfig=10, 9, 7, 5
+IRQConfig=15
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+[OPT0929.LC2_0_1]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=170-177
+IOConfig=376-377
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=9, 11
+IRQConfig=10, 9, 7, 5
+IRQConfig=15
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+// No Game
+[OPT0929.LC2_1_0]
+ConfigPriority=NORMAL
+IOConfig=170-177
+IOConfig=376-377
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=7, 10
+IRQConfig=10, 9, 7, 5
+IRQConfig=15
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+// No Game
+[OPT0929.LC2_1_1]
+ConfigPriority=NORMAL
+IOConfig=170-177
+IOConfig=376-377
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=11, 9
+IRQConfig=10, 9, 7, 5
+IRQConfig=15
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+
+; No MPU401
+[OPT0929.LC2_2_0]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=170-177
+IOConfig=376-377
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=7, 10
+IRQConfig=15
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+; No MPU401
+[OPT0929.LC2_2_1]
+ConfigPriority=NORMAL
+IOConfig=201-201                                     ; 00 JOYSTICK
+IOConfig=170-177
+IOConfig=376-377
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=11, 9 
+IRQConfig=15
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+; No MPU401 No game
+[OPT0929.LC2_3_0]
+ConfigPriority=NORMAL
+IOConfig=170-177
+IOConfig=376-377
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=7, 10
+IRQConfig=15
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+; No MPU401 No game
+[OPT0929.LC2_3_1]
+ConfigPriority=NORMAL
+IOConfig=170-177
+IOConfig=376-377
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IRQConfig=11, 9
+IRQConfig=15
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+;---------------------------------------------------------------;
+;
+; The .Det sections are added to the devnode at detection time
+; only.  The PreCopySection is simply setting the NoSetupUI
+; flag so that the critical pieces (such as logical 
+; configurations) are in place at the time the device is started 
+; during first boot.
+;
+;---------------------------------------------------------------;
+[Det.DevINFs]
+*pnpb02f=joystick.inf
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+[*OPT0929.Det]
+AddReg=PreCopySection
+
+[OPT0929_Device0.FactDef]
+ConfigPriority=NORMAL
+IOConfig=201-201
+IOConfig=220-22F
+IOConfig=530-537
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IOConfig=300-301
+IRQConfig=5
+IRQConfig= 7
+DMAConfig= 3 
+DMAConfig= 3 
+
+
+[OPT0929_Device1.FactDef]
+ConfigPriority=NORMAL
+IOConfig=220-22F
+IOConfig=530-537
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IOConfig=300-301
+IRQConfig=5
+IRQConfig= 7
+DMAConfig= 3 
+DMAConfig= 3 
+
+
+[OPT0929_Device2.FactDef]
+ConfigPriority=NORMAL
+IOConfig=201-201
+IOConfig=170-177
+IOConfig=376-377
+IOConfig=220-22F
+IOConfig=530-537
+IOConfig=388-38B
+IOConfig=F8D-F93 
+IOConfig=300-301
+IRQConfig= 5
+IRQConfig= 7
+IRQConfig= 15 
+DMAConfig= 3 
+DMAConfig= 3 
+
+
+;---------------------------------------------------------------;
+
+[DestinationDirs]
+DefaultDestDir = 11	; LDID_SYS
+OPT.CopyINF = 17	
+
+[SourceDisksNames]
+1="OPTi MediaChips Multimedia Disk",,0001
+
+[SourceDisksFiles]
+snd929p.vxd=1
+snd929p.drv=1
+sndopl3p.drv=1
+
+sndm401p.drv=1
+sndm401p.vxd=1
+
+;---------------------------------------------------------------;
+
+;---------------------------------------------------------------;
+
+[Strings]
+;Non-localized strings
+KEY_WARNVER="SYSTEM\CurrentControlSet\Control\SessionManager\WarnVerDLLs"
+KEY_CHKVER="SYSTEM\CurrentControlSet\Control\SessionManager\CheckVerDLLs"
+
+;Localized strings
+OPTi="OPTi Inc."
+MfgName="OPTi Inc."
+*OPT0929.Device0Desc="OPTi 929 Sound System: Sound/Game"
+*OPT0929.Device1Desc="OPTi 929 Sound System: Sound/Game/Sony Pro CD-ROM"
+*OPT0929.Device2Desc="OPTi 929 Sound System: Sound/Game/IDE CD-ROM"
+*OPT0929.Device3Desc="OPTi 929 Sound System: Sound/Game/MKEPanasonic CD-ROM"
+*OPT0929.Device4Desc="OPTi 929 Sound System: Sound/Game/Mitsumi Older Single Speed CD-ROM"
+*OPT0929.Device5Desc="OPTi 929 Sound System: Sound/Game/Mitsumi Newer Single Speed CD-ROM"
+*OPT0929.Device6Desc="OPTi 929 Sound System: Sound/Game/Mitsumi Double Speed CD-ROM"
+MF\OPT9290.DeviceDesc="OPTi 929 Sound/OPL3 Device"
+MF\OPT9291.DeviceDesc="OPTi 929 MPU-401 Device"
+MediaClassName="OPTi 82C929 Sound System"
+V_CLSWAVEFORM="Audio"
+V_CLSMIDI="MIDI"
+V_CLSMIXER="Mixer"
+V_CLSAUX="Auxiliary"
+V_GENERAL="General MIDI Instrument"
+V_INTERNAL="OPTi 929 FM Synthesis"
+V_EXTERNAL="OPTi 929 MPU-401"

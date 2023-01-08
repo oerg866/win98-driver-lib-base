@@ -1,0 +1,105 @@
+Windows 98 AHCI Driver
+
+Copyright (C) 2017-2019
+by Rudolph R. Loew
+All Rights Reserved.
+
+
+LICENSE AGREEMENT: 
+
+LICENSE: Rudolph Loew grants you a nonexclusive license to use the 
+accompanying copyrighted software program(s) (the "SOFTWARE"), which 
+includes any associated software components, and any online or electronic
+documentation, on a single Computer, subject to the terms and restrictions
+set forth in this License Agreement.
+
+For purposes of this Agreement, a single Computer means that you are only
+able to use the Software on a single Computer at a time. You may Install the
+AHCI Driver on a single Computer. If you want to transfer the Software to
+another Computer, you must remove the AHCI Driver from the first Computer.
+
+You are not permitted to sell or otherwise distribute any AHCI Driver Files,
+
+You are not permitted to lease, rent, or sublicense the SOFTWARE, use the
+SOFTWARE on more Computers than allowed by your license, or in any other
+unauthorized manner. Further, no license is granted to you in the human
+readable code of the SOFTWARE (source code). Except as provided below, this
+License Agreement does not grant you any rights to patents, copyrights,
+trade secrets, trademarks, or any other rights in respect to the SOFTWARE.
+
+By installing, running, or otherwise using the SOFTWARE, you agree to be
+bound by the terms of this License Agreement.
+
+RESTRICTIONS: Modification, reverse engineering, reverse compiling, or 
+disassembly of the SOFTWARE is expressly prohibited, except and only to the
+extent that such activity is expressly permitted by applicable law.
+Disclosure of any details of the Software is expressly prohibited.
+
+WARNING:
+
+THE POTENTIAL EXISTS FOR DATA LOSS OR PERMANENT LOSS TO OCCUR DUE TO ERRORS
+IN THE DRIVER OR IF THE DRIVER FILES ARE BYPASSED OR OVERWRITTEN. DO NOT USE
+IN CRITICAL SYSTEMS OR WHERE HUMAN SAFETY IS INVOLVED.
+
+NO WARRANTY: THE SOFTWARE AND DOCUMENTATION ARE PROVIDED ON AN "AS IS"
+BASIS AND ALL RISK IS WITH YOU. RUDOLPH LOEW MAKES NO WARRANTIES, 
+EXPRESS, IMPLIED OR STATUTORY, AS TO ANY MATTER WHATSOEVER. IN 
+PARTICULAR, ANY AND ALL WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD PARTIES RIGHTS ARE 
+EXPRESSLY EXCLUDED. FURTHER, RUDOLPH LOEW MAKES NO REPRESENTATIONS OR 
+WARRANTIES THAT THE SOFTWARE AND DOCUMENTATION PROVIDED ARE FREE OF 
+ERRORS OR VIRUSES OR THAT THE SOFTWARE AND DOCUMENTATION ARE SUITABLE FOR 
+YOUR INTENDED USE. 
+
+LIMITATION OF LIABILITY: IN NO EVENT SHALL RUDOLPH LOEW OR HIS SUPPLIERS 
+BE LIABLE TO YOU OR ANY OTHER PARTY FOR ANY INCIDENTAL, SPECIAL OR 
+CONSEQUENTIAL DAMAGES, LOSS OF DATA OR DATA BEING RENDERED INACCURATE, 
+LOSS OF PROFITS OR REVENUE, OR INTERRUPTION OF BUSINESS IN ANY WAY 
+ARISING OUT OF OR RELATED TO THE USE OR INABILITY TO USE THE SOFTWARE 
+AND/OR DOCUMENTATION, REGARDLESS OF THE FORM OF ACTION, WHETHER IN 
+CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT PRODUCT LIABILITY OR 
+OTHERWISE, EVEN IF ANY REPRESENTATIVE OF RUDOLPH LOEW OR HIS SUPPLIERS 
+HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THIS DISCLAIMER OF 
+LIABILITY FOR DAMAGES WILL NOT BE AFFECTED BY ANY FAILURE OF THE SOLE AND 
+EXCLUSIVE REMEDIES HEREUNDER. 
+
+EXPORT RULES: You agree that the SOFTWARE will not be shipped, transferred
+or exported into any country or used in any manner prohibited by the United
+States Export Administration Act or any other export laws, restrictions or
+regulations (collectively the "Export Laws"). In addition, if the SOFTWARE
+is identified as export controlled items under the Export Laws, you
+represent and warrant that you are not a citizen, or otherwise located
+within, an embargoed nation (including without limitation Iran, Iraq, Syria,
+Sudan, Libya, Cuba, North Korea, and Serbia) and that you are not otherwise
+prohibited under the Export Laws from receiving the SOFTWARE. All rights to
+Use the SOFTWARE are granted on condition that such rights are forfeited if
+you fail to comply with the terms of this Agreement.
+
+GOVERNING LAW: This Agreement will be governed by and construed in accordance
+with the laws in force of the State of New York. The respective courts of
+Nassau County, New York shall have jurisdiction over all disputes relating
+to this Agreement.
+
+GENERAL PROVISIONS. If any part of this Agreement is found void and
+unenforceable, it will not affect the validity of the balance of the
+Agreement, which shall remain valid and enforceable according to its terms.
+This Agreement shall not prejudice the statutory rights of any party dealing
+as a consumer. This Agreement may only be modified by a writing signed by
+Rudolph Loew. Updates may be licensed to you by Rudolph Loew with additional
+or different terms. This is the entire agreement between Rudolph Loew and
+you relating to the SOFTWARE and it supersedes any prior representations,
+discussions, undertakings, communications or advertising relating to the
+SOFTWARE.
+
+MODIFICATIONS: Prices and Terms may change at any time. Download the current
+Version of the test Program from http://rloew1.no-ip.com.
+
+Compliance with Licenses. If you are a business or organization, you agree
+that upon request from Rudolph Loew or his authorised representative, you
+will within thirty (30) days fully document and certify that use of any and
+all SOFTWARE at the time of the request is in conformity with your valid
+licenses from Rudolph Loew.
+
+Should you have any questions concerning this License Agreement, or if
+you desire to contact Rudolph Loew for any reason, please contact 
+Rudolph Loew by electronic mail at: rloew@hotmail.com.

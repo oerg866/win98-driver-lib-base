@@ -1,0 +1,149 @@
+[Version]
+signature="$CHICAGO$"
+Provider=%PROMISE%
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Class=SCSIAdapter
+CatalogFile=ulsata2.cat
+DriverVer=05/28/2004, 1.00.0.25
+
+; Class Install
+[ClassInstall32.NT]
+Addreg=SCSIReg
+
+[SCSIReg]
+;HKR,,,,%SCSIClassName%
+HKR,,Installer32,,"SysSetup.Dll,ScsiClassInstaller"
+HKR,,Icon,,"-10"
+HKR,,LegacyInfOption,,"SCSI"
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+System32Dir    = 11 ; System32
+MoveMiniPort   = 12;
+MoveMiniPort.NT = 12;
+promiseinf = 17,"other";	INF directory
+RenMiniport.back = 12
+RenMiniport = 12
+PTISETUP=11;
+
+[ControlFlags]
+;
+; Exclude the following devices from Select Device list.
+; These represent 'combination' driver nodes, for which there are separate items to be
+; presented to the user.  These combination nodes are only used when figuring out what
+; driver node to associate with a pre-existing service.
+;
+; CopyFilesOnly=PCI\VEN_105A&DEV_4D30&SUBSYS_4D33105A&REV_02
+
+[Manufacturer]
+%Promise%=Promise
+
+[Promise]
+%PCI\VEN_105A&DEV_3D74.DeviceDesc%=ultra579PCI,PCI\VEN_105A&DEV_3574
+%PCI\VEN_105A&DEV_3D18.DeviceDesc%=ultra579PCI,PCI\VEN_105A&DEV_3D18
+
+;************** 579 **************
+[ultra579PCI]
+CopyFiles=MoveMiniPort,PTISETUP
+AddReg=ios,ulsata2PCI.reg
+
+[ultra579PCI.Uninstall]
+DelReg=RegUninstall579.del,UltraPCI.Del.Reg
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+
+;*************************************************************
+;These addreg sections should be used when installins services to indicate
+;which interface types are safe for PNP and which aren't.  INTERFACE_TYPE
+;is defined in NTDDK.H
+
+[pnpsafe_pci_addreg]
+HKR, "Parameters\PnpInterface", "5", 0x00010001, 0x00000001
+
+;*************************************************************
+[ulsata2_cache_addreg]
+;HKR, "Parameters\Cache", "DefSize", 0x00010001, 0x00900000
+;HKR, "Parameters\Cache", "Flag",, "TRUE"
+;HKR, "Parameters\Cache", "CACHEON", 0x00010001, 0x00000001
+;HKR, "Parameters\Cache", "DrvSetting", 0x00010001, 0x00000000
+HKR, "Parameters\Cache", "LongBurstDisable", 0x00010001, 0x00000001
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Run","PtiuPbmd",,"Rundll32.exe ulutil2.dll,SetWriteBack"
+
+;*************************************************************
+[ulsata2_capabilities_addreg]
+HKR, "Parameters\Capabilities", "TAG_CMD", 0x00010001, 0x00000000
+
+;*************************************************************
+;The EventLog entries are the same for all SCSI miniports.
+[Miniport_EventLog_Inst]
+AddReg = Miniport_EventLog_AddReg
+
+[Miniport_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,%REG_DWORD%,7
+
+;**************** Uninstall for U133
+[RegUninstall579.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra579,"DisplayName",,%PCI\VEN_105A&DEV_3D74.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra579,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%ulsata2.inf;ultra579PCI.Uninstall;VEN_105A&DEV_3D74"
+
+[RegUninstall579.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra579
+
+[ultra579PCI.Del.Reg]
+HKLM,Enum\PCI\VEN_105A&DEV_3D74
+HKLM,Enum\PCI\VEN_105A&DEV_3D18
+
+[ulsata2PCI.PosDup]
+*BUS0042
+
+[*BUS0042.Det]
+AddReg=ForceMPCopy
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[ulsata2PCI.reg]
+HKR,,PortDriver,,ulsata2.mpd
+
+[ForceMPCopy]
+HKR,,NoSetupUI,,1
+
+[SourceDisksFiles]
+ulsata2.mpd = 1
+ulsata2.inf = 1
+pu66vsd.VXD = 1
+PTISTP.dll = 1
+SMARTVSD.VXD = 1
+ulsa2vsd.VXD = 1
+
+[MoveMiniPort]
+ulsata2.mpd
+pu66vsd.VXD
+smartvsd.VXD
+ulsa2vsd.VXD
+
+[RenMiniport]
+SMARTVSD.VXX,SMARTVSD.VXD
+
+[RenMiniport.back]
+SMARTVSD.VXD,SMARTVSD.VXX
+
+[PTISETUP]
+PTISTP.dll
+
+[promiseinf]
+%Promise%ulsata2.inf
+
+[MoveMiniPort.NT]
+;Ultra.sys
+
+
+[SourceDisksNames]
+1 = "Promise SATA TX Series Driver Diskette",,,,
+2 = "Windows system",,,,
+
+[strings]
+Promise="Promise Technology"
+PCI\VEN_105A&DEV_3D74.DeviceDesc="Win98-ME Promise SATAII150 579 (tm) IDE Controller"
+PCI\VEN_105A&DEV_3D18.DeviceDesc="Win98-ME Promise SATAII150 518 (tm) IDE Controller"

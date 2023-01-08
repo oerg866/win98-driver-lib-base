@@ -1,0 +1,185 @@
+;; Windows 98, Windows ME, Windows 2000 and Windows XP combined inf for NDIS5 driver
+;;
+;; Realtek RTL8150 USB 10/100 Fast Ethernet Adapter
+;;
+;; Copyright 1996-2003, Realtek Semiconductor Corporation
+;;
+;; this release is primarily for WHQL test.
+
+
+[Version]
+Signature    = "$Chicago$"
+Compatible   = 1
+Class      = Net
+ClassGUID  = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider   = %Realtek%
+DriverVer = 03/19/2004,5.1191.0319.2004
+
+[Manufacturer]
+%Realtek%   = Realtek
+
+[ControlFlags]
+ExcludeFromSelect = USB\VID_0BDA&PID_8150
+
+[Realtek]
+%RTL8150.DeviceDesc% = RTL8150.ndi,USB\VID_0BDA&PID_8150
+
+
+;;****************************************************************************
+;; Windows 98
+;;****************************************************************************
+[RTL8150.ndi]
+DriverVer       = 3/19/2004,1191
+AddReg = RTL8150.Reg, RTL8150.common.reg
+CopyFiles       = RTL8150.CopyFiles98
+
+;;****************************************************************************
+;; Windows 2000
+;;****************************************************************************
+[RTL8150.ndi.NT]
+AddReg = RTL8150.NT.Reg, RTL8150.common.reg
+Characteristics = 0x84
+BusType         = 15 
+CopyFiles       = RTL8150.CopyFiles
+
+
+[RTL8150.ndi.NT.Services]
+AddService = USB-100, 2, rtsnt.Service, RTL8150.EventLog
+
+;;---------------------------------------------------------------------------------------------------------------------
+;; RTL8150 Parrameters
+;;---------------------------------------------------------------------------------------------------------------------
+;*******************************************************************************
+; Windows 98
+;*******************************************************************************
+[RTL8150.Reg]
+HKR, Ndi, DeviceID, 0, USB\VID_0BDA&PID_8150
+
+HKR,Ndi,CardType,,"PNP"
+
+HKR, , DriverDesc, 0, "Realtek RTL8150 USB 10/100 LAN Adapter"
+HKR, , DevLoader,,*ndis,*ntkern,*ndis
+HKR, , DeviceVxDs,,RTL8150.SYS
+HKR, , EnumPropPages, 0, netdi.dll, EnumPropPages
+
+; NDIS Info
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0a
+HKR,NDIS,LogDriverName,,USB-100
+
+; Interfaces
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+HKR,Ndi\Interfaces,DefUpper,,"ndis3"
+HKR,Ndi\Interfaces,UpperRange,,"ndis3"
+
+;*******************************************************************************
+; RTL8150 common paramters
+;*******************************************************************************
+[RTL8150.common.reg]
+HKR, Ndi\params\DuplexMode,      ParamDesc, 0, %DuplexMode%
+HKR, Ndi\params\DuplexMode,      type,      0, "enum"
+HKR, Ndi\params\DuplexMode,      default,   0, "0"
+HKR, Ndi\params\DuplexMode\enum, 0,         0, %dmAutoMode%
+HKR, Ndi\params\DuplexMode\enum, 1,         0, %dm10HalfMode%
+HKR, Ndi\params\DuplexMode\enum, 2,         0, %dm10FullMode%
+HKR, Ndi\params\DuplexMode\enum, 3,         0, %dm100HalfMode%
+HKR, Ndi\params\DuplexMode\enum, 4,         0, %dm100FullMode%
+
+;HKR, Ndi\params\FrameWakeUp,       ParamDesc,  0, %WakeUpFrameWakeUp%
+;HKR, Ndi\params\FrameWakeUp,       default,    0, "0"
+;HKR, Ndi\params\FrameWakeUp,       type,       0, "enum"
+;HKR, Ndi\params\FrameWakeUp\enum,  "0",        0, "Disable"
+;HKR, Ndi\params\FrameWakeUp\enum,  "1",        0, "Enable"
+
+;HKR, Ndi\params\LinkChangeWakeUp,       ParamDesc,  0, %LinkChangeWakeUp%
+;HKR, Ndi\params\LinkChangeWakeUp,       default,    0, "0"
+;HKR, Ndi\params\LinkChangeWakeUp,       type,       0, "enum"
+;HKR, Ndi\params\LinkChangeWakeUp\enum,  "0",        0, "Disable"
+;HKR, Ndi\params\LinkChangeWakeUp\enum,  "1",        0, "Enable"
+
+;HKR, Ndi\params\MagicPacketWakeUp,        ParamDesc,  0, %MagicPacketWakeUp%
+;HKR, Ndi\params\MagicPacketWakeUp,        default,    0, "0"
+;HKR, Ndi\params\MagicPacketWakeUp,        type,       0, "enum"
+;HKR, Ndi\params\MagicPacketWakeUp\enum,   "0",        0, "Disable"
+;HKR, Ndi\params\MagicPacketWakeUp\enum,   "1",        0, "Enable"
+
+HKR, Ndi\params\EarlyTransfer,        ParamDesc,  0, %EarlyTransfer%
+HKR, Ndi\params\EarlyTransfer,        default,    0, "1"
+HKR, Ndi\params\EarlyTransfer,        type,       0, "enum"
+HKR, Ndi\params\EarlyTransfer\enum,   "0",        0, "Disable"
+HKR, Ndi\params\EarlyTransfer\enum,   "1",        0, "Enable"
+
+[RTL8150.CopyFiles98]
+RTL8150.sys,,,2
+
+;*******************************************************************************
+; Windows 2000
+;*******************************************************************************
+[RTL8150.NT.Reg]
+HKR, Ndi\Interfaces,	UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces, LowerRange, 0, "ethernet"
+HKR, Ndi,            	Service,    0, "USB-100"
+
+[rtsnt.Service]
+DisplayName    = %RTL8150.DeviceDesc.DispName%
+ServiceType    = 1		; %SERVICE_KERNEL_DRIVER%
+StartType      = 3		; %SERRVICE_DEMAND_START%
+ErrorControl   = 1		; %SERRVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\RTL8150.SYS
+LoadOrderGroup = NDIS
+
+[RTL8150.EventLog]
+AddReg = RTL8150.AddEventLog.reg
+
+[RTL8150.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported  , 0x00010001, 7
+
+[RTL8150.CopyFiles]
+RTL8150.SYS,,,2
+
+;*******************************************************************************
+; Destination Directory
+;*******************************************************************************
+[DestinationDirs]
+RTL8150.CopyFiles98	= 11
+RTL8150.CopyFiles 		= 12
+DefaultDestDir		= 11	; LDID_SYS
+
+
+[SourceDisksNames]
+1=%DISKNAME%,,,
+
+[SourceDisksFiles]
+rtl8150.sys = 1
+
+
+
+;*******************************************************************************
+; Strings
+;*******************************************************************************
+[Strings]
+;Msft				=	"Microsoft"
+Realtek 			=	"Realtek"
+
+RTL8150.DeviceDesc 		=	"Realtek RTL8150 USB 10/100 Fast Ethernet Adapter"
+RTL8150.DeviceDesc.DispName  	=	"Realtek RTL8150 USB 10/100 Fast Ethernet Adapter"
+
+;; Source disk name
+DISKNAME			= 	"Realtek RTL8150 USB 10/100 Fast Ethernet Adapter Driver Disk"
+
+NetworkAddress           	=  	"Network Address"
+DuplexMode  		        =	"Link Speed/Duplex Mode"
+dmAutoMode                	=	"Auto Mode"
+dm10HalfMode              	=	"10 Half Mode"
+dm10FullMode              	=	"10 Full Mode"
+dm100HalfMode             	=	"100 Half Mode"
+dm100FullMode             	=	"100 Full Mode"
+LinkChangeWakeUp		=	"Link Change Wake Up"
+MagicPacketWakeUp		=	"Magic Packet Wake Up"
+WakeUpFrameWakeUp		=	"Wakeup Frame Wake Up"
+EarlyTransfer			= 	"Early Transfer"
+TestMode			=	"Test Mode"
+
+;

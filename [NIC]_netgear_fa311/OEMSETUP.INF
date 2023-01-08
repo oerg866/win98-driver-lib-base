@@ -1,0 +1,750 @@
+;
+; OEMSETUP.INF File For NETGEAR FA311/312 PCI adapters , v4.20
+; Last Modified 2001,04,17
+
+[Identification]
+    OptionType = NetAdapter
+[PlatformsSupported]
+    PCI
+[Options]
+    FA31x
+
+[NetworkChoicesFA31x]
+   Connect_0 = "AutoSense",             0
+   Connect_1 = "10BaseT",               1
+   Connect_2 = "10BaseT Full_Duplex", 2
+   Connect_3 = "100BaseTx",             3
+   Connect_4 = "100BaseTx Full_Duplex",  4
+   
+[ReceiveBufferChoicesFA31x]
+   RxBuff_0 = "16 Receive Buffers", 16
+   RxBuff_1 = "32 Receive Buffers", 32
+   RxBuff_2 = "48 Receive Buffers". 48
+   RxBuff_3 = "64 Receive Buffers", 64
+   RxBuff_4 = "80 Receive Buffers", 80
+   RxBuff_5 = "96 Receive Buffers", 96
+   RxBuff_6 = "112 Receive Buffers", 112
+   RxBuff_7 = "128 Receive Buffers", 128
+
+
+[FileConstants]
+UtilityInf      = "UTILITY.INF"
+subroutineinf   = "SUBROUTN.INF"
+SoftwareType    = "driver"
+Exit_Code       = 0
+NetEventDLL     = "%SystemRoot%\System32\netevent.dll"
+IoLogMsgDLL     = "%SystemRoot%\System32\IoLogMsg.dll"
+Manufacturer    = "NETGEAR Corp."
+ProductMajorVersion     = "4"
+ProductMinorVersion     = "0"
+ProductVersion  = $(ProductMajorVersion)"."$(ProductMinorVersion)
+
+VendorID = 4107  ;; 100B (FA31x)
+DeviceID = 32;
+
+ProductSoftwareName     = "FA31xND4"
+ProductSoftwareTitle    = "NETGEAR FA311/312 PCI Adapter Driver"
+ProductSoftwareImagePath = "\SystemRoot\System32\drivers\FA31xND4.sys"
+NetRuleSoftwareType     = "FA31xND4Sys ndisDriver FA31xND4Driver"
+NetRuleSoftwareUse        = $(SoftwareType)
+NetRuleSoftwareBindForm = """FA31xND4Sys"" yes no container"
+NetRuleSoftwareClass    = {"FA31xND4Driver basic"}
+NetRuleSoftwareSWBindable = {"FA31xND4Driver FA31xAdapter non exclusive 100"}
+
+OptionHelpFile = "FA31xND4.hlp"
+ProductHardwareName = "FA31xND4"
+
+
+
+ProductHardwareFA31xTitle = "NETGEAR FA311/312 PCI Adapter"
+NetRuleHardwareFA31xType  = "FA31x FA31xAdapter"
+NetRuleHardwareFA31xClass = {"FA31xAdapter basic"}
+AdapterFA31xType = 5   ;; PCI board
+HelpFA31xId = 30
+FA31xCFID = 2101259
+NetworkAddress = NULL
+
+
+
+
+NetRuleHardwareBindForm = " yes yes container"
+ProductKeyName  = $(!NTN_SoftwareBase)"\"$(Manufacturer)"\"$(ProductSoftwareName)"\CurrentVersion"
+ParamKeyName    = $(!NTN_ServiceBase)"\"$(ProductHardwareName)"\Parameters"
+
+[GeneralConstants]
+from        = ""
+to          = ""
+ExitCodeOk     = 0
+ExitCodeCancel = 1
+ExitCodeFatal  = 2
+KeyNull           = ""
+MAXIMUM_ALLOWED   = 33554432
+RegistryErrorIndex = NO_ERROR
+KeyProduct        = ""
+KeyParameters   = ""
+TRUE                = 1
+FALSE             = 0
+NoTitle                = 0
+ExitState   = "Active"
+OldVersionExisted = $(FALSE)
+DriverPath        = $(!STF_NTPATH)\drivers
+[date]
+    Now = {} ? $(!LIBHANDLE) GetSystemDate
+[Identify]
+    read-syms Identification
+    set Status     = STATUS_SUCCESSFUL
+    set Identifier = $(OptionType)
+    set Media        = #("Source Media Descriptions", 1, 1)
+    Return $(Status) $(Identifier) $(Media)
+[ReturnOptions]
+    set Status          = STATUS_FAILED
+    set OptionList     = {}
+    set OptionTextList = {}
+    set LanguageList = ^(LanguagesSupported, 1)
+    Ifcontains(i) $($0) in $(LanguageList)
+	ifstr(i) $($1) == ""
+	   goto returnoptions
+	endif
+	set PlatformList = ^(PlatformsSupported, 1)
+	Ifcontains(i) $($1) in $(PlatformList)
+	   goto returnoptions
+	else
+	   set Status = STATUS_NOTSUPPORTED
+	   goto finish_ReturnOptions
+	endif
+    else
+	set Status = STATUS_NOLANGUAGE
+	goto finish_ReturnOptions
+    endif
+returnoptions = +
+    set OptionList     = ^(Options, 1)
+    set OptionTextList = ^(OptionsText$($0), 1)
+    set Status           = STATUS_SUCCESSFUL
+finish_ReturnOptions = +
+    Return $(Status) $(OptionList) $(OptionTextList)
+[InstallOption]
+	set Option   = $($1)
+    set SrcDir   = $($2)
+    set AddCopy  = $($3)
+    set DoCopy   = $($4)
+    set DoConfig = $($5)
+    set LanguageList = ^(LanguagesSupported, 1)
+    Ifcontains(i) $($0) NOT-IN $(LanguageList)
+	Return STATUS_NOLANGUAGE
+    endif
+    set-subst LF = "\n"
+    read-syms GeneralConstants
+    read-syms FileConstants
+    set NetRuleSoftwareBindable = $($R1)
+    read-syms DialogConstants$(!STF_LANGUAGE)
+    ifstr(i) $(!NTN_Origination) == "NCPA"
+	set Continue = "OK"
+    endif
+    read-syms FileConstants$(!STF_LANGUAGE)
+    detect date
+    set-title  $(Function$(Option)Title)
+    set to   = Begin
+    set from = Begin
+    set CommonStatus = STATUS_SUCCESSFUL
+    EndWait
+Begin = +
+    Ifstr(i) $(!NTN_InstallMode) == deinstall
+	set StartLabel = removeadapter
+    else-Ifstr(i) $(!NTN_InstallMode) == Update
+	set StartLabel = UpgradeSoftware
+    else-Ifstr(i) $(!NTN_InstallMode) == bind
+	set StartLabel = bindingadapter
+    else-Ifstr(i) $(!NTN_InstallMode) == configure
+	Ifstr(i) $(ProductKeyName) == $(!NTN_RegBase)
+	    Shell $(UtilityInf),RegistryErrorString,CANNOT_CONFIGURE_SOFTWARE
+	    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	    endif
+	    set Error = $($R0)
+	    set from = end
+	    set to = end
+	    goto nonfatalinfo
+	else
+	    set StartLabel = configureadapter
+		endif
+    else
+	set StartLabel = installadapter
+	set OEM_ABANDON_OPTIONS = {}
+	set OEM_ABANDON_SOFTWARE = FALSE
+	set OEM_ABANDON_ON = TRUE
+    endif
+    set from = $(fatal)
+    set to = $(fatal)
+    goto $(StartLabel)
+installadapter = +
+    OpenRegKey $(!REG_H_LOCAL) "" $(ProductKeyName) $(MAXIMUM_ALLOWED) KeyProduct
+    Ifstr $(KeyProduct) != $(KeyNull)
+	CloseRegKey $(KeyProduct)
+	ifstr(i) !(NTN_RegBase) == $(ProductKeyName)
+			Shell $(UtilityInf), VerExistedDlg, $(ProductSoftwareTitle),+
+				$(ProductVersion)
+			ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+			endif
+			goto end
+	else
+			Shell $(UtilityInf), CardExistedDlg
+			ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+			endif
+			ifstr(i) $($R1) != "OK"
+		set CommonStatus = STATUS_USERCANCEL
+		goto end
+			endif
+			set OldVersionExisted = $(TRUE)
+	endif
+    Endif
+    ifstr(i) $(DoCopy) == "YES"
+	Shell $(UtilityInf), DoAskSource, $(!STF_CWDDIR), $(SrcDir) YES
+	Ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    Goto ShellCodeError
+	Else-Ifstr(i) $($R0) == STATUS_FAILED
+	    Shell $(UtilityInf) RegistryErrorString "ASK_SOURCE_FAIL"
+	    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	    endif
+	    set Error = $($R0)
+		Goto fatal
+	Else-Ifstr(i) $($R0) == STATUS_USERCANCEL
+	    Goto successful
+	Endif
+	Set SrcDir = $($R1)
+;        install "Install-Hlp"
+    endif
+    Goto installproduct
+configureadapter = +
+    Ifstr(i) $(KeyProduct) == $(KeyNull)
+	OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_RegBase) $(MAXIMUM_ALLOWED) KeyProduct
+	Ifstr $(KeyProduct) == $(KeyNull)
+	    Set RegistryErrorIndex = CANNOT_FIND_COMPONENT_SERVICE
+			Goto fatalregistry
+	Endif
+    Endif
+    Shell $(UtilityInf) FindService, $(KeyProduct)
+    Ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	Goto ShellCodeError
+    Endif
+    Ifstr(i) $($R0) != NO_ERROR
+	Goto fatalregistry
+    endif
+    set KeyParameters = $($R2)
+    CloseRegKey $($R1)
+    Ifstr $(KeyParameters) == $(KeyNull)
+	set RegistryErrorIndex = CANNOT_FIND_COMPONENT_SERVICE
+	goto fatalregistry
+    endif
+    set OldVersionExisted = $(TRUE)
+    set ValueName = ""
+    set ValueData = ""
+    set ValueStr  = ""
+    set ValueList = {}
+    EnumRegValue $(KeyParameters) ValueList
+    ForListDo $(ValueList)
+	set ValueItem = $($)
+	set ValueName = *($(ValueItem),1)
+	set ValueData = *($(ValueItem),4)
+	Ifstr(i) $(ValueName) == "NetworkMedia"
+			set NetworkIndex = $(ValueData)
+	else-ifstr(i) $(ValueName) == "RxBufferCount"
+	    set RxBufferIndex = $(ValueData)
+	endif
+    EndForListDo
+    set NetworkValue = *($(NetworkList), ~($(NetworkValues),$(NetworkIndex)))
+    ifstr(i) $(NetworkValue) == ""
+	set NetworkValue = *($(NetworkList), 2)
+    endif
+    set RxBufferValue = *($(RxBufferList), ~($(RxBufferValues),$(RxBufferIndex)))
+    ifstr(i) $(RxBufferValue) == ""
+	set RxBufferValue = *($(RxBufferList), 2)
+    endif
+adapteroptions = +
+    set from = adapteroptions
+    read-syms FileDependentDlg$(!STF_LANGUAGE)
+    SetHelpFile $(!STF_WINDOWSSYSPATH)"\"$(OptionHelpFile) $(MinHelpId) $(MaxHelpId) $(Help$(Option)Id)
+    ui start "InputDlg"
+    ifstr(i) $(DLGEVENT) == "CONTINUE"
+	    set NetworkIndex = $(Combo1Out)
+	    set RxBufferIndex = $(Combo2Out)
+	ui pop 1
+    else-ifstr(i) $(DLGEVENT) == "BACK"
+	set CommonStatus = STATUS_USERCANCEL
+	ui pop 1
+	goto end
+    else
+	set CommonStatus = STATUS_USERCANCEL
+	ui pop 1
+	goto end
+    endif
+    set NetworkValue = *($(NetworkValues), ~($(NetworkList),$(NetworkIndex)))
+    set RxBufferValue = *($(RxBufferValues), ~($(RxBufferList),$(RxBufferIndex)))
+    ifstr(i) $(!NTN_InstallMode) == configure
+	goto updateparameters
+    endif
+    
+installproduct =+
+    StartWait
+	set-div DeviceID = $($(Option)CFID) 65536
+	Shell $(UtilityInf), GetPCIInformation, $(VendorID) $(DeviceID)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+	endif
+	ifstr(i) $($R0) == {}
+	    set Error = $(CANNOT_FIND_ANY_CARD)
+	    set CommonStatus = USER_CANCEL
+	    set from = end
+	    goto nonfatal
+	endif
+	set AdapterList = $($R0)
+	ifint $(OldVersionExisted) == $(FALSE)
+	Ifstr(i) $(DoCopy) == "YES"
+			Shell $(UtilityInf), DoAskSource, $(!STF_CWDDIR), $(SrcDir) YES
+			Ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		Goto ShellCodeError
+			Else-Ifstr(i) $($R0) == STATUS_FAILED
+		Shell $(UtilityInf) RegistryErrorString "ASK_SOURCE_FAIL"
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+					goto ShellCodeError
+		endif
+		set Error = $($R0)
+		Goto fatal
+			Else-Ifstr(i) $($R0) == STATUS_USERCANCEL
+		Goto successful
+			Endif
+			Set SrcDir = $($R1)
+	Endif
+	install "Install-Option"
+	ifstr(i) $(STF_INSTALL_OUTCOME) != STF_SUCCESS
+			Shell $(UtilityInf) RegistryErrorString "UNABLE_COPY_FILE"
+			ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+			endif
+			set Error = $($R0)
+			goto fatal
+	endif
+	Shell $(UtilityInf), AddSoftwareComponent, $(Manufacturer), +
+	    $(ProductSoftwareName), +
+	    $(ProductSoftwareName), +
+	    $(ProductSoftwareTitle), $(STF_CONTEXTINFNAME), +
+	    $(ProductSoftwareImagePath), "kernel", "NDIS", {}, "",+
+	    $(NetEventDLL)
+	Set OEM_ABANDON_SOFTWARE = TRUE
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    goto ShellCodeError
+	endif
+	set RegistryErrorIndex = $($R0)
+	Ifstr(i) $(RegistryErrorIndex) != "NO_ERROR"
+	    EndWait
+	    CloseRegKey $($R1)
+	    CloseRegKey $($R2)
+	    CloseRegKey $($R3)
+	    CloseRegKey $($R4)
+	    CloseRegKey $($R5)
+	    goto fatalregistry
+	endif
+	Set SoftProductKey        = $($R1)
+	Set SoftNetRuleKey        = $($R2)
+	Set SoftServiceKey        = $($R3)
+	Set SoftParameterKey    = $($R4)
+	Set SoftLinkageKey        = $($R5)
+	set NewValueList = {{SoftwareType,$(NoTitle),$(!REG_VT_SZ),$(SoftwareType)},+
+			   {MajorVersion,$(NoTitle),$(!REG_VT_DWORD),$(ProductMajorVersion)},+
+			   {MinorVersion,$(NoTitle),$(!REG_VT_DWORD),$(ProductMinorVersion)},+
+			   {Title,$(NoTitle),$(!REG_VT_SZ),$(ProductSoftwareTitle)},+
+			   {Description,$(NoTitle),$(!REG_VT_SZ),$(ProductSoftwareDescription)},+
+			   {ServiceName,$(NoTitle),$(!REG_VT_SZ),$(ProductSoftwareName)},+
+			   {InstallDate,$(NoTitle),$(!REG_VT_DWORD),*($(Now),1)}}
+	Shell  $(UtilityInf), AddValueList, $(SoftProductKey), $(NewValueList)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    goto ShellCodeError
+	endif
+	set RegistryErrorIndex = $($R0)
+	Ifstr(i) $(RegistryErrorIndex) != "NO_ERROR"
+	    EndWait
+	    CloseRegKey $(SoftProductKey)
+	    CloseRegKey $(SoftNetRuleKey)
+	    CloseRegKey $(SoftServiceKey)
+	    CloseRegKey $(SoftParameterKey)
+	    CloseRegKey $(SoftLinkageKey)
+	    goto fatalregistry
+	endif
+	set NewValueList = {{type,$(NoTitle),$(!REG_VT_SZ),$(NetRuleSoftwareType)},+
+			    {use,$(NoTitle),$(!REG_VT_SZ),$(NetRuleSoftwareUse)}, +
+			    {bindform,$(NoTitle),$(!REG_VT_SZ),$(NetRuleSoftwareBindForm)}, +
+			    {class,$(NoTitle),$(!REG_VT_MULTI_SZ),$(NetRuleSoftwareClass)}, +
+			    {bindable,$(NoTitle),$(!REG_VT_MULTI_SZ),$(NetRuleSoftwareSWBindable)}, +
+			    {InfOption,$(NoTitle),$(!REG_VT_SZ),$(Option)}}
+	Shell  $(UtilityInf), AddValueList, $(SoftNetRuleKey), $(NewValueList)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    goto ShellCodeError
+	endif
+	set RegistryErrorIndex = $($R0)
+	CloseRegKey $(SoftProductKey)
+	CloseRegKey $(SoftNetRuleKey)
+	CloseRegKey $(SoftServiceKey)
+	CloseRegKey $(SoftParameterKey)
+	CloseRegKey $(SoftLinkageKey)
+	Ifstr(i) $(RegistryErrorIndex) != "NO_ERROR"
+	    EndWait
+	    goto fatalregistry
+	endif
+    endif
+
+    ForListDo $(AdapterList)
+	set BusNum = *($($),1)
+	set DeviceNum = *($($),2)
+	set FunctionNum = *($($),3)
+	Shell $(UtilityInf), IsNetCardAlreadyInstalled, $(BusNum), +
+	    $(DeviceNum), $(ProductHardware$(Option)Description), $(ProductHardwareName) "YES"
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    goto ShellCodeError
+	endif
+	ifstr $($R0) != "NO_ERROR"
+	    set Error = $($R0)
+	    goto fatal
+	endif
+	ifstr(i) $($R1) != "YES"
+	    read-syms FileDependentDlg$(!STF_LANGUAGE)
+	    SetHelpFile $(!STF_WINDOWSSYSPATH)"\"$(OptionHelpFile) $(MinHelpId) $(MaxHelpId) $(Help$(Option)Id)
+			ui start "InputDlg"
+	    ifstr(i) $(DLGEVENT) == "CONTINUE"
+		    set NetworkIndex = $(Combo1Out)
+			    set RxBufferIndex = $(Combo2Out)
+		ui pop 1
+	    else-ifstr(i) $(DLGEVENT) == "BACK"
+		set CommonStatus = STATUS_USERCANCEL
+		ui pop 1
+		goto end
+	    else
+		set CommonStatus = STATUS_USERCANCEL
+		ui pop 1
+		goto end
+	    endif
+	    set NetworkValue = *($(NetworkValues), ~($(NetworkList),$(NetworkIndex)))
+	    set RxBufferValue = *($(RxBufferValues), ~($(RxBufferList),$(RxBufferIndex)))
+
+	    Shell $(UtilityInf), AddHardwareComponent, $(ProductHardwareName),$(STF_CONTEXTINFNAME),$(ProductKeyName)
+	    ifint $($R4) != -1
+			Set OEM_ABANDON_OPTIONS = >($(OEM_ABANDON_OPTIONS), $(!NTN_SoftwareBase)"\Microsoft\Windows NT\CurrentVersion\NetworkCards\"$($R4))
+	    endif
+	    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	    endif
+	    set RegistryErrorIndex = $($R0)
+	    Ifstr(i) $(RegistryErrorIndex) != "NO_ERROR"
+		EndWait
+		CloseRegKey $($R1)
+		CloseRegKey $($R2)
+		CloseRegKey $($R3)
+		goto fatalregistry
+	    endif
+	    Set HardNetCardKey        = $($R1)
+	    Set HardNetRuleKey        = $($R2)
+	    Set HardParameterKey    = $($R3)
+	    set AdapterNumber = $($R4)
+	    set NewValueList = {{Manufacturer,$(NoTitle),$(!REG_VT_SZ),$(Manufacturer)},+
+				{Title,$(NoTitle),$(!REG_VT_SZ),"["$($R4)"] "$(ProductHardware$(Option)Title)},+
+				{Description,$(NoTitle),$(!REG_VT_SZ),$(ProductHardware$(Option)Description)},+
+				{ProductName,$(NoTitle),$(!REG_VT_SZ),$(ProductHardwareName)},+
+				{ServiceName,$(NoTitle),$(!REG_VT_SZ),$($R5)},+
+				{InstallDate,$(NoTitle),$(!REG_VT_DWORD),*($(Now),1)}}
+	    Shell  $(UtilityInf), AddValueList, $(HardNetCardKey), $(NewValueList)
+	    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	    endif
+	    set BusTypeNum = 5
+	    set NewValueList = {{AdapterType,$(NoTitle),$(!REG_VT_DWORD),$(Adapter$(Option)Type)},+
+				{MediaType,$(NoTitle),$(!REG_VT_DWORD),1},+
+				{NetworkMedia,$(NoTitle),$(!REG_VT_DWORD),1},+
+				{RxBufferCount,$(NoTitle),$(!REG_VT_DWORD),1},+
+				{BusType,$(NoTitle),$(!REG_VT_DWORD),$(BusTypeNum)},+
+				{NetworkAddress,$(NoTitle),$(!REG_VT_SZ),$(NetworkAddress)},+
+				{AdapterCFID,$(NoTitle),$(!REG_VT_DWORD),$($(Option)CFID)}}
+	    Shell  $(UtilityInf), AddValueList, $(HardParameterKey), $(NewValueList)
+	    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	    endif
+	    set NewValueList = {{NetworkMedia,$(NoTitle),$(!REG_VT_DWORD),$(NetworkValue)},+
+				{NetworkAddress,$(NoTitle),$(!REG_VT_SZ),$(NetworkAddress)},+
+				{RxBufferCount,$(NoTitle),$(!REG_VT_DWORD),$(RxBufferValue)}}
+		Shell  $(UtilityInf), AddValueList, $(HardParameterKey), $(NewValueList)
+	    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	    endif
+	    set TempProdName = """"$(ProductHardwareName)$(AdapterNumber)""""
+	    set TempBindForm = $(TempProdName)$(NetRuleHardwareBindForm)
+	    set NewValueList = {{type,$(NoTitle),$(!REG_VT_SZ),$(NetRuleHardware$(Option)Type)},+
+				{bindform,$(NoTitle),$(!REG_VT_SZ),$(TempBindForm)}, +
+				{class,$(NoTitle),$(!REG_VT_MULTI_SZ),$(NetRuleHardware$(Option)Class)}, +
+				{InfOption,$(NoTitle),$(!REG_VT_SZ),$(Option)}}
+	    Shell  $(UtilityInf), AddValueList, $(HardNetRuleKey), $(NewValueList)
+	    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	    endif
+	    CloseRegKey $(HardNetCardKey)
+	    CloseRegKey $(HardNetRuleKey)
+	    set NewValueList = {{BusNumber,$(NoTitle),$(!REG_VT_DWORD),$(BusNum)},+
+				{Slot,$(NoTitle),$(!REG_VT_DWORD),$(DeviceNum)},+
+				{FunctionNumber,$(NoTitle),$(!REG_VT_DWORD),$(FunctionNum)}}
+	    Shell  $(UtilityInf), AddValueList, $(HardParameterKey), $(NewValueList)
+	    CloseRegKey $(HardParameterKey)
+	endif
+    EndForListDo
+    EndWait
+    goto successful
+updateparameters =+
+    set HardParameterKey    = $($R3)
+    set NewValueList = {{NetworkMedia,$(NoTitle),$(!REG_VT_DWORD),$(NetworkValue)},+
+			{NetworkAddress,$(NoTitle),$(!REG_VT_SZ),$(NetworkAddress)},+
+			{RxBufferCount,$(NoTitle),$(!REG_VT_DWORD),$(RxBufferValue)}}
+    Shell  $(UtilityInf), AddValueList, $(KeyParameters), $(NewValueList)
+    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+    endif
+    CloseRegKey $(KeyParameters)
+    goto successful
+bindingadapter =+
+    set Error = "Binding: Sorry, not yet implemented."
+    goto fatal
+removeadapter = +
+    Ifstr(i) $(ProductKeyName) == $(!NTN_RegBase)
+	Shell $(UtilityInf), RemoveSoftwareComponent, $(Manufacturer), +
+	    $(ProductSoftwareName)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    goto ShellCodeError
+	endif
+	set RegistryErrorIndex = $($R0)
+	Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+	    goto fatalregistry
+	endif
+    else
+	Shell $(UtilityInf), RemoveHardwareComponent, $(Manufacturer), +
+	    $(ProductSoftwareName), $(!NTN_RegBase)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    goto ShellCodeError
+	endif
+	set RegistryErrorIndex = $($R0)
+	Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+	    goto fatalregistry
+	endif
+    endif
+    goto end
+UpgradeSoftware = +
+	OpenRegKey $(!REG_H_LOCAL) "" $(ProductKeyName) $(MAXIMUM_ALLOWED) KeyProduct
+    Ifstr $(KeyProduct) != $(KeyNull)
+	Shell $(UtilityInf), GetInfFileNameFromRegistry, $(KeyProduct)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    Debug-Output "ShellCode error"
+	    goto ShellCodeError
+		endif
+	set !UG_Filename = $($R0)
+	install "Install-Update"
+	ifstr(i) $(STF_INSTALL_OUTCOME) != STF_SUCCESS
+	    goto fatal
+	endif
+	SetRegValue $(KeyProduct) {MajorVersion,$(NoTitle),$(!REG_VT_SZ),$(ProductMajorVersion)}
+	SetRegValue $(KeyProduct) {MinorVersion,$(NoTitle),$(!REG_VT_SZ),$(ProductMinorVersion)}
+	CloseRegKey $(KeyProduct)
+	else
+	goto fatalregistry
+    endif
+    goto end
+successful = +
+    goto end
+abandon = +
+    ForListDo $(OEM_ABANDON_OPTIONS)
+	Shell $(UtilityInf), RemoveHardwareComponent, $(Manufacturer), +
+	    $(ProductSoftwareName), $($)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    goto ShellCodeError
+	endif
+	set RegistryErrorIndex = $($R0)
+	Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+	    goto fatalregistry
+	endif
+    EndForListDo
+    Ifstr(i) $(OEM_ABANDON_SOFTWARE) == TRUE
+	Shell $(UtilityInf), RemoveSoftwareComponent, $(Manufacturer), +
+	    $(ProductSoftwareName), FALSE
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    goto ShellCodeError
+	endif
+	set RegistryErrorIndex = $($R0)
+	Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+	    goto fatalregistry
+	endif
+    endif
+    goto end
+warning = +
+    Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), "WARNING", $(Error)
+    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+    endif
+    ifstr(i) $($R1) == "OK"
+	goto $(to)
+    else-ifstr(i) $($R1) == "CANCEL"
+	goto $(from)
+    else
+	goto "end"
+    endif
+nonfatalinfo = +
+    Set CommonStatus = STATUS_USERCANCEL
+    Set Severity = STATUS
+    goto nonfatalmsg
+nonfatal = +
+    Set Severity = NONFATAL
+    goto nonfatalmsg
+nonfatalmsg = +
+    ifstr(i) $(Error) == ""
+	Set Severity = NONFATAL
+	Shell $(UtilityInf) RegistryErrorString "SETUP_FAIL"
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    goto ShellCodeError
+	endif
+	set Error = $($R0)
+    endif
+    Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), $(Severity), $(Error)
+    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+    endif
+    ifstr(i) $($R1) == "OK"
+	goto $(from)
+    else
+	goto "end"
+    endif
+fatalregistry = +
+    Shell $(UtilityInf) RegistryErrorString $(RegistryErrorIndex)
+    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+    endif
+    set Error = $($R0)
+    goto fatal
+fatal = +
+    ifstr(i) $(Error) == ""
+	Shell $(UtilityInf) RegistryErrorString "SETUP_FAIL"
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	    goto ShellCodeError
+	endif
+	set Error = $($R0)
+    endif
+    Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), "FATAL", $(Error)
+    ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+    endif
+    goto setfailed
+ShellCodeError = +
+    set DlgType        = "MessageBox"
+    set STF_MB_TITLE = $(ShellCodeErrorTitle)
+    set STF_MB_TEXT  = $(ShellCodeErrorText)
+    set STF_MB_TYPE  = 1
+    set STF_MB_ICON  = 3
+    set STF_MB_DEF   = 1
+    ui start "Error Message"
+    goto setfailed
+setfailed = +
+    set CommonStatus = STATUS_FAILED
+    ifstr(i) $(OEM_ABANDON_ON) == TRUE
+	set OEM_ABANDON_ON = FALSE
+	goto abandon
+    endif
+    goto end
+end = +
+    goto term
+term = +
+    Return $(CommonStatus)
+[Install-Option]
+    set STF_VITAL = ""
+    ifstr(i) $(AddCopy) == "YES"
+	AddSectionFilesToCopyList Files-$(Option) $(SrcDir) $(!STF_WINDOWSSYSPATH)\drivers
+    endif
+    ifstr(i) $(DoCopy) == "YES"
+	 set !STF_NCPA_FLUSH_COPYLIST = TRUE
+	 CopyFilesInCopyList
+    endif
+    Exit
+[Install-Hlp]
+    set STF_VITAL = ""
+;    AddSectionFilesToCopyList Files-Hlp $(SrcDir) $(!STF_WINDOWSSYSPATH)
+    set !STF_NCPA_FLUSH_COPYLIST = TRUE
+    CopyFilesInCopyList
+    Exit
+[Install-Update]
+    set STF_VITAL          = ""
+    set STF_OVERWRITE    = "VERIFYSOURCEOLDER"
+  ;  AddSectionFilesToCopyList Files-Hlp $(SrcDir) $(!STF_WINDOWSSYSPATH)
+    AddSectionFilesToCopyList Files-Inf $(SrcDir) $(!STF_WINDOWSSYSPATH)
+    AddSectionFilesToCopyList Files-$(Option) $(SrcDir) $(!STF_WINDOWSSYSPATH)\drivers
+    set !STF_NCPA_FLUSH_COPYLIST = TRUE
+    CopyFilesInCopyList
+    exit
+[Source Media Descriptions]
+    1  = "NETGEAR FA311/312 NDIS 4.0 Driver"
+[ProductType]
+STF_PRODUCT  = Winnt
+STF_PLATFORM = I386
+[Files-Inf]
+2,oemsetup.inf,    SIZE=1000,     RENAME=$(!UG_Filename)
+[Files-FA31x]
+1,FA31xND4.SYS , SIZE=999
+[Files-Hlp]
+1,FA31xND4.HLP , SIZE=999
+[LanguagesSupported]
+    ENG
+[OptionsTextENG]
+    FA31x  = "NETGEAR FA311/312 PCI Adapter"
+[FileConstantsENG]
+ProCaption   = "Windows NT Setup"
+ProCancel    = "Cancel"
+ProCancelMsg = "Windows NT Networking is not correctly installed.  "+
+		 "Are you sure you want to cancel copying files?"
+ProCancelCap = "Network Setup Message"
+ProText1     = "Copying:"
+ProText2     = "To:"
+
+ProductSoftwareDescription = "NETGEAR FA311/312 PCI Adpater Driver"
+
+
+NetworkList  = ^(NetworkChoices$(Option), 1)
+NetworkValues = ^(NetworkChoices$(Option), 2)
+RxBufferList  = ^(ReceiveBufferChoices$(Option), 1)
+RxBufferValues = ^(ReceiveBufferChoices$(Option), 2)
+NoList  = ^(NoChoices, 2)
+NoValues = ^(NoChoices, 4)
+ShellCodeErrorTitle     = "Error: "$(Function$(Option)Title)
+ShellCodeErrorText        = "Shell Code Error."
+CANNOT_FIND_ANY_CARD    = "Network card is not present in the system"
+[DialogConstantsENG]
+Help          = "&Help"
+Exit          = "Cancel"
+OK            = "OK"
+HelpContext = ""
+Continue    = "Continue"
+Cancel        = "Cancel"
+
+[FileDependentDlgENG]
+DlgText = "Choose the proper cable type for the "+
+	  "network adapter. Select [Help] for a detailled "+
+	  "description of the available options of the list."
+DlgTemplate = "TWO_COMBO"
+DlgType = "Combination"
+Caption = "Configure Network Adapter"
+Combo1Label = "&NetworkMedia:"
+Combo1List = $(NetworkList)
+Combo1Out  = $(NetworkValue)
+Combo2Label = "&RxBuffer Count:"
+Combo2List = $(RxBufferList)
+Combo2Out  = $(RxBufferValue)
+
+ComboListItemsIn  = {Combo1List,Combo2List}
+ComboListItemsOut = {Combo1Out,Combo2Out}
+
+EditTextLim = ""
+CBOptionsGreyed = {}
+MinHelpId = 10
+MaxHelpId = 1140
+HelpContext = $(Help$(Option)Id)
+

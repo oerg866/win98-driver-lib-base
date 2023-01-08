@@ -1,0 +1,146 @@
+; FA31x.LDI
+;
+; Netgear FA311/312 PCi Adapters.
+;
+; VeRsIoN=1.32 Novell LAN Installation Information File for FA311/312.
+; CoPyRiGhT=(c)Copyright 1996, 1997, by Novell, Inc.  All rights reserved.
+
+VER: 1.32
+SYN: 1.00
+
+DR FA31x
+{
+     DES: $FA31x_NSC
+     HELP:     $FA31x_NSC_HELP
+     PAR: 2.00
+     FILE:     FA31x.LAN
+     PROD:   'PCI.100B.0020.*.*.*'
+;@#  Sprod: 'Novell ~ FA31x'
+;@# CLIENT: FA31x
+;@# ALIAS: FA31x.LAN
+
+     TIME:   15
+
+
+     PR SLOT REQ
+     {
+          VAL: 1-65535
+     }
+
+
+     PR NODE
+     {
+     }
+
+     FR FrameSelect
+     {
+          CH:  'Ethernet_802.2'
+          CH:  'Ethernet_SNAP'
+          CH:  'Ethernet_II'
+          CH:  'Ethernet_802.3'
+          DEF: 1,2,3,4
+     }
+
+     LI MediaSpeed OPT
+     {
+       DES:    $FA31x_11
+       Help:   $FA31x_12
+
+       CD:    $FA31x_13
+       CH:    '1'
+
+       CD:    $FA31x_14
+       CH:    '2'
+
+       CD:    $FA31x_15
+       CH:    '3'
+
+       DEF:   1
+
+       OUT:    "LineSpeed=%s"
+     }
+
+     PR RxDBC OPT
+     {
+       DES:    $FA31x_16
+       Help:   $FA31x_17
+
+       TYP: DEC(2)
+       VAL: 1-30
+       DEF: 15 
+       OUT: "RxBDC=%s"
+     }
+
+     PR TxDBC OPT
+     {
+       DES:    $FA31x_18
+       Help:   $FA31x_19
+
+       TYP: DEC(2)
+       VAL: 1-20
+       DEF: 10 
+       OUT: "TxBDC=%s"
+     }
+
+     PR SGC OPT
+     {
+       DES:    $FA31x_20
+       Help:   $FA31x_21
+
+       TYP: DEC(2)
+       VAL: 1-16
+       DEF: 8 
+       OUT: "SGC=%s"
+     }
+
+     LI FDUP OPT
+     {
+       DES:    $FA31x_22
+       Help:   $FA31x_23
+
+       CD:    $FA31x_24
+       CH:    '1'
+
+       CD:    $FA31x_25
+       CH:    '2'
+
+       DEF:   1
+
+       OUT:    "FDUP=%s"
+     }
+}
+
+DLANG:    4
+;English
+     $FA31x_NSC =
+                  "Netgear FA311/312 PCI Adapter"
+     $FA31x_NSC_HELP =
+                  "Netgear FA311/312 10/100 PCI Adapter"
+     $FA31x_11 = "Line Speed"
+     $FA31x_12 = "Allows optional setting of Adapter Line Speed.
+                   Auto-negotiation allows the adapter to set line speed 
+                   automatically depending on the line speed of the Ethernet
+                   LAN to which it is connected. Choosing a specific line
+                   speed sets the adapter at the choosen line speed. If no
+                   value is choosen, the adapter would use the default setting
+                   from the EEPROM."
+     $FA31x_13 = "Auto-negotiation"
+     $FA31x_14 = "Line Speed 10 Mbps"
+     $FA31x_15 = "Line Speed 100 Mbps"
+     $FA31x_16 = "Receive Buffer Descriptor Count"
+     $FA31x_17 = "Allows optional setting of count of Receive Buffer
+                   Descriptors allocated by the driver."
+     $FA31x_18 = "Transmit Buffer Descriptor Count"
+     $FA31x_19 = "Allows optional setting of count of Transmit Buffer
+                   Descriptors allocated by the driver."
+     $FA31x_20 = "Scatter Gather Count"
+     $FA31x_21 = "Allows optional setting of count of number of Scatter/Gather 
+                   elements for every packet being transmitted."
+     $FA31x_22 = "Full Duplex Option"
+     $FA31x_23 = "Allows option of setting the adapter in Full Duplex
+                   Mode. If no value is choosen, the adapter would use the
+                   default setting from the EEPROM."
+     $FA31x_24 = "Full Duplex On"
+     $FA31x_25 = "Full Duplex Off"
+
+

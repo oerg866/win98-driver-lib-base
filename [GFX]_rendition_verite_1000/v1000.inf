@@ -1,0 +1,122 @@
+/****************************************************************************
+*                                                                           *
+* Copyright (C) 1995-96  Rendition, Inc.  All Rights Reserved.              *
+*                                                                           *
+****************************************************************************/
+
+; INF file for Verite Win95 display driver
+
+[version]
+Class=DISPLAY
+signature="$CHICAGO$"
+Provider=%Mfg%
+
+[DestinationDirs]
+DefaultDestDir  = 11    ; LDID_SYS
+Driver.Copy = 11
+CplExt.Copy = 11
+RedLine.Copy = 11
+Util.Copy = 10
+
+[SourceDisksNames]
+1="Rendition Verite 1000 Windows 95 Driver Disk",,0
+
+[SourceDisksFiles]
+veritex.dll=1
+v1000.vxd=1
+verite.drv=1
+v10003d.uc=1
+v10002d.uc=1
+v100032.dll=1
+v1000.dll=1
+redline.dll=1
+verite.dll=1
+veritegl.dll=1
+v1000gl.uc=1
+
+[Manufacturer]
+%Mfg%=Mfg
+
+[Mfg]
+%PCI\VEN_1163&DEV_0001.DeviceDesc%=Driver.Install, PCI\VEN_1163&DEV_0001
+
+[Driver.Install]
+CopyFiles=CplExt.Copy,Driver.Copy,Util.Copy,RedLine.Copy
+DelReg=Prev.DelReg,CplExt.AddReg
+AddReg=Driver.AddReg,CplExt.AddReg
+
+[Driver.Copy]
+v1000.vxd
+verite.drv
+v10003d.uc
+v10002d.uc
+v100032.dll
+v1000.dll
+veritegl.dll
+v1000gl.uc
+
+[Util.Copy]
+
+
+[RedLine.Copy]
+verite.dll
+redline.dll
+
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,,EnumPropPages
+HKR,INFO
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+
+[Driver.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"16,640,480"
+HKR,DEFAULT,drv,,verite.drv
+HKR,DEFAULT,vdd,,"*vdd"
+HKR,DEFAULT,minivdd,,v1000.vxd
+HKR,DEFAULT,DDC,,1
+HKR,DEFAULT,RefreshRate,,-1
+HKR,DEFAULT,ExtModeSwitch,,1
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\8\640,480",,,"60,72,75,85,120"
+HKR,"MODES\8\800,600",,,"56,60,72,75,85"
+HKR,"MODES\8\1024,768",,,"60,70,72,75,85"
+HKR,"MODES\8\1152,864",,,"60,70,75,85"
+HKR,"MODES\8\1280,1024",,,"60,72,75"
+HKR,"MODES\8\640,480","RefreshRate",,"60"
+HKR,"MODES\8\800,600","RefreshRate",,"60"
+HKR,"MODES\8\1024,768","RefreshRate",,"60"
+HKR,"MODES\8\1152,864","RefreshRate",,"60"
+HKR,"MODES\8\1280,1024","RefreshRate",,"60"
+HKR,"MODES\16\640,480","RefreshRate",,"60"
+HKR,"MODES\16\800,600","RefreshRate",,"60"
+HKR,"MODES\16\1024,768","RefreshRate",,"60"
+HKR,"MODES\16\1152,864","RefreshRate",,"60"
+HKR,"MODES\16\1280,1024","RefreshRate",,"60"
+HKR,"MODES\32\640,480","RefreshRate",,"60"
+HKR,"MODES\32\800,600","RefreshRate",,"60"
+
+[CplExtUninstall]
+DelReg = CplExt.AddReg
+DelFiles = CplExt.Copy, v1000.inf
+
+[CplExt.Copy]
+veritex.dll
+
+[CplExt.AddReg]
+;HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\Verite,DisplayName,,"Verite"
+;HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\Verite,UninstallString,,"RunDll setupx.dll,InstallHinfSection CplExtUninstall 4 v1000.inf"
+HKLM,SOFTWARE\Classes\CLSID\{88554F40-BFB7-11cf-8C05-0000B46B7EC6},"",,"Verite Property Sheet Extension"
+HKLM,SOFTWARE\Classes\CLSID\{88554F40-BFB7-11cf-8C05-0000B46B7EC6}\InProcServer32,"",,"veritex.dll"
+HKLM,SOFTWARE\Classes\CLSID\{88554F40-BFB7-11cf-8C05-0000B46B7EC6}\InProcServer32,ThreadingModel,,"Apartment"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\"Controls Folder"\Display\shellex\PropertySheetHandlers\Verite,"",,"{88554F40-BFB7-11cf-8C05-0000B46B7EC6}"
+HKLM,SOFTWARE\RRedline\v1000,microcode,,"v10003d.uc"
+
+[Strings]
+Mfg="Rendition, Inc."
+PCI\VEN_1163&DEV_0001.DeviceDesc="Rendition Verite 1000 PCI"

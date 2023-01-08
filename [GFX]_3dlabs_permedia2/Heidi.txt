@@ -1,0 +1,33 @@
+HEIDI.TXT
+
+Version 1.62/5.62
+
+3D Studio MAX 1.x
+Locate the 3D Studio MAX 1.x directory on your hard drive. Enter the
+drivers sub-directory. Copy the wglint.hdi file from these drivers to 
+that directory. You may wish to rename the old driver first.
+You can now run 3DStudio Max, and the new driver will be used.
+
+3D Studio MAX 2.x
+Locate the 3D Studio MAX 2.x directory on your hard drive. Enter the
+drivers sub-directory. Copy the wglint5.hdi file from these drivers to
+that directory. You may wish to rename the old driver first.
+When you run next run 3D Studio MAX 2 go to the File \ Preferences \
+Viewports \ Choose Driver dialog box. Select Heidi - Custom Driver and
+ensure wglint5.hdi is selected in the drop box. Restart MAX.
+
+Please note that when using either GLINT Heidi driver under 
+Windows 95  the following software components must also be installed:
+
+	Direct X version 3 or later, and
+	The Microsoft OpenGL binaries, opengl32.dll and glu32.dll.
+
+If using PERMEDIA cards, the best performance can be achieved by running 
+in 32768 color mode.
+
+If using GLINT 500TX or MX based cards, the best performance can be
+achieved by running in TrueColor.
+
+Owners of GLINT GMX based boards should use OpenGL acceleration
+under 3D Studio MAX 2. Although the Heidi drivers will run you will 
+not obtain full acceleration.

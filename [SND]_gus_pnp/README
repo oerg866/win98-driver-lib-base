@@ -1,0 +1,171 @@
+		Advanced Gravis Computer Technology Ltd.
+
+	                       HEAD OFFICE:			
+	               3750 North Fraser Way, #101	
+	                   Burnaby, BC, Canada		
+	                         V5J 5E9				
+
+           Tech Support: Tel (604) 431-1807  Fax (604) 451-9358  
+	   WWW: http://www.gravis.com  Email: sound@gravis.com
+_______________________________________________________________________
+
+                                README
+
+				for the
+
+                          UltraSound Plug & Play
+                      Driver / Software Installation
+
+ 		         Version 2.2 software
+                         -September 10, l997-
+_______________________________________________________________________
+
+
+Thank you for choosing the UltraSound Plug & Play. Here is the last
+minute information for these drivers:
+
+
+Latest Drivers
+--------------
+
+The latest drivers for your UltraSound Plug & Play card are always
+available for free download from the Gravis Web site www.gravis.com.
+
+
+Plug & Play Problems
+--------------------
+
+The number 1 difficulty users have with installing the UltraSound
+are resource conflicts. Plug & Play is supposed to allocate resources
+without conflicts automatically. However many Plug & Play implementations
+can not do this properly, especially when there are many devices installed
+in the system. Your UltraSound effectively has the following 5 devices:
+
+Synthesizer/CODEC (Music/Digital Sound Support)
+Sound Blaster Emulation
+MPU-401 General MIDI Emulation
+ATAPI IDE CD-ROM Interface
+Joystick/Game Port
+
+Just disabling one of the above devices greatly reduces the chances
+of conflicts occurring. If you are having resource conflicts you
+should disable all devices you do not need. In particular most users
+have no need for the IDE interface since they already have 2 IDE
+interfaces in their system. You UltraSound may have even come with
+the CD-ROM interface disabled.
+
+To disable devices, run the supplied PNPCFG utility. To do this you must
+be in DOS (Windows 95 users must restart in MS-DOS mode), then place the
+driver disk in the drive and typing:
+
+A:\PNPCFG <ENTER>
+
+assuming the disk is in drive A:. From here on the program is fairly
+self explanatory.
+
+If you make any changes and are running Windows 95 we strongly recommend
+you re-run the UltraSound driver SETUP after Windows 95 starts up again
+as Windows 95 tends to become confused by these changes.
+
+DOS/Windows 3.x users: Any changes you make with this utility will not show
+up in the "Manual Setup" of the DOS/Windows 3.x Setup program. However if
+you use the "Automatic Setup" option any changes made with PnPCfg will
+take effect.
+
+
+Sounds Looping in Windows
+-------------------------
+
+If you try and play a wave file and you find that part of the sound
+plays over and over again, instead of playing the whole sound once,
+your UltraSound is in conflict with another hardware device. You will
+need to select a different IRQ.
+
+For DOS/Windows 3.x, exit Windows and run SETUP from your UltraSound
+directory. This will allow you to select a different IRQ for your
+UltraSound Synth/CODEC device.
+
+For Windows 95, start System Properties (Start->Settings->Control Panel,
+System), select the Device Manager tab. If necessary, double click on
+Sound, Video and Game Controllers to open it. You can then open the
+UltraSound Synth/CODEC device and manually change its properties/resources.
+
+
+More than one UltraSound Plug & Play in the Same Machine
+--------------------------------------------------------
+
+It is not possible to have more than one UltraSound Plug & Play card
+in the same machine. The Plug & Play BIOS/Windows 95 will not be able
+to separate the cards and the drivers are not designed to handle more
+than one card.
+
+
+IWSBOS (Sound Blaster Emulator) in a Windows 3.x/95 DOS BOX
+-----------------------------------------------------------
+
+IWSBOS works fine in a Windows DOS box, however you can not unload it from
+within the DOS box. To unload it you must close the DOS box.
+
+
+MIDI IN timing problems in Cakewalk
+-----------------------------------
+
+On some systems, recording from a MIDI keyboard, notes may become bunched
+up together or note lengths may be incorrect. This issue is still under
+investigation, however switching from a RAM based patch set to the ROM set
+may correct the problem.
+
+
+MIDI IN Crashing System
+-----------------------
+
+On a number of systems, if you have nothing plugged into the game/MIDI
+port and try and use the MIDI in port, the system may crash. You can
+overcome this problem by either plugging a joystick / gamepad / MIDI
+keyboard into the port or configuring your application to not use the MIDI
+IN port.
+
+
+Exporting .PAT files with Sound Forge
+-------------------------------------
+
+You can not export wave files from Sound Forge in the Gravis .PAT format,
+then run GIPC to convert them to the .FFF format. This is because you
+can not edit important paramters such as envelope, loop points etc. from
+within Sound Forge. You can load existing .PAT files which contain only a
+single waveform and save out any changes you make to that waveform, however
+this is of little use.
+
+
+Changes since Version 2.0
+-------------------------
+
+* The gameport will now stay enabled when restarting Windows 95 in MS-DOS
+  mode.
+
+* The Windows 3.x properties page now fits on a 640x480 screen and comes
+  up in the centre instead of partly off the screen.
+
+* In the Windows 3.x drivers section of the control panel the UltraSound
+  driver now has a proper description.
+
+* On some systems, the properties page would appear, then immediately
+  disappear. This has been corrected.
+
+* Games that use DirectX 5 are now supported.
+
+* Additions to this documentation.
+
+
+Special Credits
+---------------
+
+Jean-Paul Mikkers       for the Public Domain MOD player source code in which
+                        our PLAY.EXE and ETEKMOD.DRV are based upon.
+
+David Van Dromme	for his relentless BETA testing and support.
+
+Brian Swango            for his non-stop support for us and our products.
+
+
+[End of File]

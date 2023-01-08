@@ -1,0 +1,140 @@
+**
+**
+**  Windows Setup Program for Windows 95/95OSR2/98SE/ME/NT4/2000/XP/Server 2003 
+**  for x86 & Windows XP/Server 2003 for AMD64.
+**
+**  v3.16   Jul. 2005
+**
+**
+
+Introduction:
+=============
+
+  This document shows you how to use the Windows setup programs. These programs
+run under Windows 95/95OSR2/98SE/ME/NT4/2000/XP/Server 2003 for x86 & Windows 
+XP/Server 2003 for AMD64 respectively. You may use these programs to 
+install/update/remove network adapter driver.
+
+
+Structure of the directory:
+=============================
+
+    WINSETUP.TXT                   This file.
+    winsetup.exe                   The integrated setup program for Windows 
+                                   platform.
+    WinUinst.exe                   The integrated uninstall program for Windows 
+                                   platform.
+    VETUP16.DLL                    The 16-bit side thunk dll for Windows 
+                                   95/95OSR2/98SE/ME.
+    VETUP32.DLL                    The 32-bit side thunk dll for Windows 
+                                   95/95OSR2/98SE/ME.
+    VETUP64.DLL                    The 64-bit dll for 64-bit Windows OS on x64.
+    NTSETUP.INF                    The information file for Windows NT4 setup.
+    ntsim2.sys                     PCI bus detection service for 32-bit Windows NT/2K/XP.
+    ntsim2a.sys                    PCI bus detection service for 64-bit Windows OS on x64.
+
+
+Usage:
+======
+
+    The Windows setup program will search the information file automatically in 
+Windows 95/95OSR2/98SE/ME/2000/XP/Server 2003 ("OEMSETUP.INF" in Windows NT4), 
+and then automatically install/update driver according to the information file. 
+The information file search paths are current directory, upper directory and 
+root directory by order.
+
+Command line usage
+==================
+
+Usage:
+
+{INstall/Update/Remove}
+winsetup.exe [option]
+
+option:
+        -?                      This help.
+        -i                      Install/update driver (could be omitted).
+        -a                      Install/update driver before plugging 
+                                adapter(For windows ME/2000/XP/Server 2003 
+                                only). Equal to "-i" if adapter had plugged 
+                                already.
+        -p                      Disable progress bar while install/update 
+                                driver, useless while combined with "-r" option.
+        -f [INF file]           Specify INF filename.
+                                (If no INF file is specified, the setup program 
+                                will automatically search the correct inf file) 
+        -d [Source Dir]         Specify directory containing all driver files.
+                                (If no source directory is specified, the setup 
+                                program will automatically search the driver 
+                                from current directory, upper directory and 
+                                upper 2 layers directory)
+        -w [Windows source CD]  Specify path of Windows source CD path. 
+                                (For Windows 98SE later, and NT40 platform)
+                                (Notice! In NT40, please place "-w" as the last 
+                                parameter).
+        -r                      Remove device & inf file.
+        -k                      Do not delete inf file when device is removed
+                                (this parameter depends on "-r" option, and can't 
+                                be used alone).
+        -s                      Do not show Session Complete dialog.
+        -b                      Reboot the system without any prompt.
+        -v                      Show program version.
+
+
+{Remove}
+WinUinst.exe [option]
+
+option:
+        -d [Source Dir]         (NT4 only)Specify directory containing all driver files.
+                                (If no source directory is specified, the WinUinst 
+                                program will automatically search the driver 
+                                from current directory, upper directory and 
+                                upper 2 layers directory)
+
+
+Examples:
+
+    1.INSTALL or UPDATE
+
+      If you placed all driver files on C:\FETWIN\ and Windows 9X sources CD on 
+      C:\WIN9X\ directory, you may use following instruction to install network 
+      adapter driver on Windows 9X platfoms and reboot without any prompt.
+
+      A:\>winsetup -d C:\FETWIN\ -w C:\WIN9X\ -b
+
+    2.REMOVE
+
+      The following instruction will remove all recognized network adapter drivers.
+
+      A:\>WinUinst
+
+      If you placed the driver files on C:\FETWIN\, the following instruction will 
+      only remove network adapter driver specified in the driver inf file.
+
+      A:\>winsetup -r -d C:\FETWIN\
+
+Notice:
+
+    1.Please close all running applactions during the driver installation 
+      processing, especially the network applet in control panel and properties 
+      of network.
+
+     2.The program will not process long filename and directory, please convert
+      Windows long filenames to MSDOS filename.
+
+     3.In this program we support different kind of languages, list below is the     
+       language been supported.
+       -Danish
+       -Dutch
+       -French
+       -German
+       -Italian
+       -Japanese
+       -Korean
+       -Norwegian
+       -Portuguese
+       -English
+       -Simplied Chinese
+       -Spanish
+       -Tranditional Chinese
+

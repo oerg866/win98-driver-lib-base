@@ -1,0 +1,30 @@
+:Base ds1.hlp>main
+:Title วิธีการติดตั้งไดร์ฟเวอร์ยามาฮ่า DS-XG
+1 Synthesizer
+2 Synthesizer Effects=SYNTH_EFFECT
+2 สะท้อนเสียง =SYNTH_REVERB
+2 ประสานเสียง =SYNTH_CHORUS
+2 ปรับเปลี่ยนเสียง =SYNTH_VARIATION
+2 SONDIUS-XG=SYNTH_WAVEGUIDE
+1 ระบบเสียงก้องของไมโครโฟน
+2 ระบบเสียงก้องของไมโครโฟน =KARAOKE
+2 สามารถใช้ได้ =KARAOKE_CHECKBOX
+2 ระยะเวลาหน่วง =KARAOKE_DELAYTIME
+2 อัตราขยายป้อนกลับ =KARAOKE_FBLEVEL
+1 สัญญาณดิจิตอลขาออก
+2 สัญญาณดิจิตอลขาออก =DIGITAL
+2 ปิด =DIGITAL_OFF
+2 เปิด(เฉพาะแหล่งกำเนิดสัญญาณดิจิตอล) =DIGITAL_ON
+2 เปิด(ทุกแหล่งกำเนิด)/สัญญาณออกอนาล็อกจะถูกปิด =DIGITAL_ONALL
+1 ระบบเสียงสามมิติ
+2 ระบบเสียงสามมิติ =DS3DSOUND
+2 หูฟัง =DS3DSOUND_HEADPHONE
+2 ลำโพงสเตอริโอ =DS3DSOUND_SPEAKER
+2 การกำหนดค่าโปรแกรม =DS3DSOUND_APPLICATION
+1 ไดเร็กซาวด์
+
+2 ไดเร็กซาวด์ =DIRECTSOUND
+2 การแก้ไขปัญหาเกี่ยวกับเกม =DIRECTSOUND_GTSHOOTING
+2 ทำให้ใช้ได้ =DIRECTSOUND_ENABLE
+2 ทำให้ทั้งหมดใช้ไม่ได้ =DIRECTSOUND_DISABLE
+2 ทำให้ระบบสามมิติใช้ไม่ได้ =DIRECTSOUND_3D_DISABLE

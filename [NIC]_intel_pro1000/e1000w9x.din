@@ -1,0 +1,82 @@
+;*******************************************************************************
+;*                                                                            **
+;*                     I N T E L   P R O P R I E T A R Y                      **
+;*                                                                            **
+;*   COPYRIGHT (c) 1999-2002 BY INTEL CORPORATION. ALL RIGHTS RESERVED.  NO   **
+;*   PART  OF  THIS  PROGRAM OR PUBLICATION MAY BE REPRODUCED, TRANSMITTED,   **
+;*   TRANSCRIBED, STORED IN A RETRIEVAL  SYSTEM,  OR  TRANSLATED  INTO  ANY   **
+;*   LANGUAGE OR COMPUTER LANGUAGE IN ANY FORM OR BY ANY MEANS, ELECTRONIC,   **
+;*   MECHANICAL, MAGNETIC, OPTICAL, CHEMICAL, MANUAL, OR OTHERWISE, WITHOUT   **
+;*   THE PRIOR WRITTEN PERMISSION OF :                                        **
+;*                                                                            **
+;*                             INTEL CORPORATION                              **
+;*                                                                            **
+;*                          2200 MISSION COLLEGE BLVD                         **
+;*                                                                            **
+;*                     SANTA CLARA, CALIFORNIA 95052-8119                     **
+;*                                                                            **
+;*******************************************************************************
+;
+;*******************************************************************************
+; NET8254d.Din
+; $Revision: 1.1 $
+;
+; Intel(R) PRO/1000 Gigabit Adapter
+;
+[version]
+Signature   = "$Chicago$"
+SetupClass  = BASE
+Provider    = %Intel%
+
+[Manufacturer]
+%Intel%     = Intel
+
+[ControlFlags]
+
+[Intel]
+
+;-----------------------------------------------------------------------------
+; DestinationDirs
+;
+[DestinationDirs]
+DefaultDestDir          = 11
+e1000.DelFiles          = 11
+UnInstall.DelFiles      = 11
+8254d.Inf.DelFiles      = 17
+setupBD.DelFiles        = 10
+
+;----------------------------------------------------------------------------
+; Uninstall
+[8254x.Uninstall]
+DelFiles=e1000.DelFiles, UnInstall.DelFiles, 8254d.Inf.DelFiles, setupBD.DelFiles
+DelReg=8254x.DelReg
+
+[e1000.DelFiles]
+e1000w9x.sys,,,1
+
+[8254d.Inf.DelFiles]
+Other\INTELE~1.inf,,,1
+Other\INTELE~2.inf,,,1
+Other\INTELE~3.inf,,,1
+
+
+[UnInstall.DelFiles]
+8255xDel.exe,,,1
+e1000w9x.din,,,1
+
+[setupBD.DelFiles]
+OPTIONS\INSTALL\e1000w9x.sys,,,1
+OPTIONS\INSTALL\e1000w9x.inf,,,1
+OPTIONS\INSTALL\8255xDel.exe,,,1
+OPTIONS\INSTALL\e1000w9x.din,,,1
+OPTIONS\INSTALL\e1000w9x.cat,,,1
+
+[8254x.DelReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\PROSet
+HKLM,Software\Intel\Prounstl
+;-----------------------------------------------------------------------------
+; Localizable Strings
+;
+[Strings]
+Intel                    = "Intel"
+				 

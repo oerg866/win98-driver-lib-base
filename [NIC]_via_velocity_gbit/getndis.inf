@@ -1,0 +1,430 @@
+;
+;  Purpose:   Netcard setup information file for Windows 95(OSR2)/98(SE)/ME/2000/XP x86 Edition
+;
+;  Author:    Tevin Chen
+;
+;  Date:      Jun, 2005
+;
+;  Copyright: VIA Networking Technologies, Inc.
+;
+
+
+[Version]
+CatalogFile = getndis.cat
+Signature   = "$Chicago$"
+Compatible  = 1
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %Prov%
+DriverVer   = 06/14/2005, 1.44.0.102
+
+[Manufacturer]
+%Manuf%     = MANUF
+
+[MANUF]
+%VT3119.DeviceDesc% = VT3119.ndi, PCI\VEN_1106&DEV_3119
+
+;-------------------------------------------------------------------------------
+; ndi for 3119
+;-------------------------------------------------------------------------------
+[VT3119.ndi]
+DelReg          = GET.delreg, GET.SW.delreg
+AddReg          = VT3119.reg, GET.reg, GET.reg.win, Tagging.reg, VLAN.reg, Jumbo.reg, GET.SW.win
+CopyFiles       = GET.ndi.CopyFiles, GET.SW.CopyFiles
+
+[VT3119.ndi.NTx86]
+Characteristics = 0x84 ; NCF_PHYSICAL + NCF_HAS_UI
+BusType         = 5
+DelReg          = GET.delreg, GET.SW.delreg
+AddReg          = VT3119.reg, GET.reg, GET.reg.NT, Tagging.reg, VLAN.reg, Jumbo.reg, Wakeup.reg, GET.SW.NT
+CopyFiles       = GET.CopyFiles.NTx86, GET.SW.CopyFiles.NTx86
+
+[VT3119.ndi.NTx86.Services]
+AddService      = GETND5BV, 2, GET.Service, GET.EventLog
+
+;-------------------------------------------------------------------------------
+; VT3119 specific , AdapterCFID = 0x31191106 (HEX) = 823726342 (DEC)
+;
+[VT3119.reg]
+HKR, Ndi, DeviceID,    0, "PCI\VEN_1106&DEV_3119"
+HKR, ,    AdapterCFID, 0, "823726342"
+HKR, ,    AdapterType, 0, "5"
+HKR, ,    MediaType,   0, "1"
+
+;-------------------------------------------------------------------------------
+; Common driver parameters
+;
+[GET.reg]
+; UI for Connection Type
+HKR, ,                               ConnectionType, 0, "0"
+HKR, Ndi\params\ConnectionType,      ParamDesc,      0, %ConnectionType%
+HKR, Ndi\params\ConnectionType,      default,        0, "0"
+HKR, Ndi\params\ConnectionType,      type,           0, "enum"
+HKR, Ndi\params\ConnectionType\enum, 0,              0, %autoN%
+HKR, Ndi\params\ConnectionType\enum, 1,              0, %100HD%
+HKR, Ndi\params\ConnectionType\enum, 2,              0, %100FD%
+HKR, Ndi\params\ConnectionType\enum, 3,              0, %10HD%
+HKR, Ndi\params\ConnectionType\enum, 4,              0, %10FD%
+HKR, Ndi\params\ConnectionType,      flag,           1, "30","00","00","00"
+
+; UI for Flow control capability advertisement
+HKR, ,                         FlowCtrl,  0, "0"
+HKR, Ndi\params\FlowCtrl,      ParamDesc, 0, %FlowCtl%
+HKR, Ndi\params\FlowCtrl,      default,   0, "0"
+HKR, Ndi\params\FlowCtrl,      type,      0, "enum"
+HKR, Ndi\params\FlowCtrl\enum, 0,         0, %HwDefault%
+HKR, Ndi\params\FlowCtrl\enum, 1,         0, %EnableTx%
+HKR, Ndi\params\FlowCtrl\enum, 2,         0, %EnableRx%
+HKR, Ndi\params\FlowCtrl\enum, 3,         0, %EnableTxRx%
+HKR, Ndi\params\FlowCtrl\enum, 4,         0, %Disabled%
+HKR, Ndi\params\FlowCtrl,      flag,      1, "30","00","00","00"
+
+; Validate Rx SNAP/802.3 packet length
+HKR, , ValidatePacketLen,    0, "0"
+
+; Nway Forced Mode
+HKR, , NwayForce,            0, "1"
+
+; Power Management Capability
+HKR, , PMC,                  0, "0"
+
+HKR, , ReceiveBurstIndicate, 0, "64"
+HKR, , ReceiveThreshold,     0, "0"
+HKR, , BurstLength,          0, "7"
+HKR, , MapRegisters,         0, "128"
+HKR, , TxSupThr,             0, "31"
+HKR, , RxSupThr,             0, "31"
+HKR, , SyncTIC,              0, "1"
+HKR, , MRDPL,                0, "1"
+
+;-------------------------------------------------------------------------------
+; Win95/Win98/WinME only
+;
+[GET.reg.win]
+HKR, Ndi,            NdiInstaller, 0, "wndi.dll, NdiProc"
+HKR, Ndi\Install,    ndis3,        0, "GET.ndis5"
+
+HKR, NDIS,           MajorNdisVersion, 1, 03
+HKR, NDIS,           MinorNdisVersion, 1, 0A
+HKR, NDIS,           LogDriverName,    0, "GETND5AV"
+
+HKR, ,               DevLoader,  0, "*ndis"
+HKR, ,               DeviceVxDs, 0, "getnd5av.sys"
+
+HKR, NDIS\NDIS2,     DriverName, 0, "GETND2$"
+HKR, NDIS\NDIS2,     FileName,   0, "getnd2.dos"
+
+HKR, Ndi\Interfaces, DefLower,   0, "ethernet"
+HKR, Ndi\Interfaces, LowerRange, 0, "ethernet"
+HKR, Ndi\Interfaces, DefUpper,   0, "ndis3,ndis2"
+HKR, Ndi\Interfaces, UpperRange, 0, "ndis3"
+
+; Network Address, No UI
+HKR, ,                         NetworkAddress, 0, ""
+
+; UI for Wake On LAN Event
+HKR, ,                         WOLEvent,  0, "0"
+HKR, Ndi\params\WOLEvent,      ParamDesc, 0, %WOLEvent%
+HKR, Ndi\params\WOLEvent,      default,   0, "0"
+HKR, Ndi\params\WOLEvent,      type,      0, "enum"
+HKR, Ndi\params\WOLEvent\enum, 0,         0, %OSDefault%
+HKR, Ndi\params\WOLEvent\enum, 1,         0, %OSAndUnicast%
+HKR, Ndi\params\WOLEvent,      flag,      1, "20","00","00","00"
+
+; UI for TxBuffer Number
+HKR, ,                           TransmitBuffers, 0, "128"
+HKR, Ndi\params\TransmitBuffers, ParamDesc,       0, %TXBuffer%
+HKR, Ndi\params\TransmitBuffers, default,         0, "128"
+HKR, Ndi\params\TransmitBuffers, type,            0, "int"
+HKR, Ndi\params\TransmitBuffers, Min,             0, "64"
+HKR, Ndi\params\TransmitBuffers, Max,             0, "256"
+HKR, Ndi\params\TransmitBuffers, Step,            0, "1"
+HKR, Ndi\params\TransmitBuffers, Base,            0, "10"
+HKR, Ndi\params\TransmitBuffers, flag,            1, "20","00","00","00"
+
+; UI for RxBuffer Number
+HKR, ,                          ReceiveBuffers, 0, "160"
+HKR, Ndi\params\ReceiveBuffers, ParamDesc,      0, %RXBuffer%
+HKR, Ndi\params\ReceiveBuffers, default,        0, "160"
+HKR, Ndi\params\ReceiveBuffers, type,           0, "int"
+HKR, Ndi\params\ReceiveBuffers, Min,            0, "64"
+HKR, Ndi\params\ReceiveBuffers, Max,            0, "256"
+HKR, Ndi\params\ReceiveBuffers, Step,           0, "4"
+HKR, Ndi\params\ReceiveBuffers, Base,           0, "10"
+HKR, Ndi\params\ReceiveBuffers, flag,           1, "20","00","00","00"
+
+;-------------------------------------------------------------------------------
+; 16-bit UnInstaller
+[GET.SW.win]
+HKLM, Software\Microsoft\Windows\CurrentVersion\Uninstall\VN_VUIns_Velocity_VNT, DisplayName, 0, %VT3119.DeviceDesc%
+HKLM, Software\Microsoft\Windows\CurrentVersion\Uninstall\VN_VUIns_Velocity_VNT, UninstallString, 0, "Rundll.exe vuins16.dll,vuins16Ex $Velocity $VNT"
+HKLM, Software\VN_VUIns\Velocity\VNT\DeviceIdList, 3119, 0, "0"
+
+;-------------------------------------------------------------------------------
+; Windows 2000/XP/Server2003 only
+;
+[GET.reg.NT]
+HKR, Ndi\Interfaces, LowerRange, 0, "ethernet"
+HKR, Ndi\Interfaces, UpperRange, 0, "ndis5"
+HKR, Ndi,            Service,    0, "GETND5BV"
+
+; This parameter only for Win2000
+HKR, ,               2kScatterGather, 0, "1"
+
+; UI for TxBuffer Number
+HKR, ,                           TransmitBuffers, 0, "256"
+HKR, Ndi\params\TransmitBuffers, ParamDesc,       0, %TXBuffer%
+HKR, Ndi\params\TransmitBuffers, default,         0, "256"
+HKR, Ndi\params\TransmitBuffers, type,            0, "int"
+HKR, Ndi\params\TransmitBuffers, Min,             0, "64"
+HKR, Ndi\params\TransmitBuffers, Max,             0, "384"
+HKR, Ndi\params\TransmitBuffers, Step,            0, "1"
+HKR, Ndi\params\TransmitBuffers, Base,            0, "10"
+
+; UI for RxBuffer Number
+HKR, ,                          ReceiveBuffers, 0, "160"
+HKR, Ndi\params\ReceiveBuffers, ParamDesc,      0, %RXBuffer%
+HKR, Ndi\params\ReceiveBuffers, default,        0, "160"
+HKR, Ndi\params\ReceiveBuffers, type,           0, "int"
+HKR, Ndi\params\ReceiveBuffers, Min,            0, "64"
+HKR, Ndi\params\ReceiveBuffers, Max,            0, "256"
+HKR, Ndi\params\ReceiveBuffers, Step,           0, "4"
+HKR, Ndi\params\ReceiveBuffers, Base,           0, "10"
+
+; UI for user defined Network Address
+HKR, ,                          NetworkAddress, 0, ""
+HKR, Ndi\params\NetworkAddress, ParamDesc,      0, %NetAddress%
+HKR, Ndi\params\NetworkAddress, Default,        0, ""
+HKR, Ndi\params\NetworkAddress, type,           0, "edit"
+HKR, NDI\params\NetworkAddress, LimitText,      0, "12"
+HKR, NDI\params\NetworkAddress, UpperCase,      0, "1"
+HKR, NDI\params\NetworkAddress, optional,       0, "1"
+HKR, NDI\params\NetworkAddress, Base,           0, "16"
+
+; UI for Adaptive Interrupt Capability -> Optimized for performance by Interrupt
+HKR, ,                   AI,        0, "1"
+HKR, Ndi\params\AI,      ParamDesc, 0, %AI%
+HKR, Ndi\params\AI,      default,   0, "1"
+HKR, Ndi\params\AI,      type,      0, "enum"
+HKR, Ndi\params\AI\enum, 0,         0, %Disabled%
+HKR, Ndi\params\AI\enum, 1,         0, %Enabled%
+
+HKR, ,                   TqeTmr,    0, "89"
+HKR, ,                   RqeTmr,    0, "20"
+HKR, ,                   TxCntWak,  0, "8"
+
+; UI for Rx Checksum Offload Ability
+HKR, ,                           RxCksmOfld, 0, "1"
+HKR, Ndi\params\RxCksmOfld,      ParamDesc,  0, %RxCksmOfld%
+HKR, Ndi\params\RxCksmOfld,      default,    0, "1"
+HKR, Ndi\params\RxCksmOfld,      type,       0, "enum"
+HKR, Ndi\params\RxCksmOfld\enum, 0,          0, %Disabled%
+HKR, Ndi\params\RxCksmOfld\enum, 1,          0, %Enabled%
+
+; UI for Tx Task Offload Ability
+HKR, ,                           TxTaskOfld, 0, "2"
+HKR, Ndi\params\TxTaskOfld,      ParamDesc,  0, %TxTaskOfld%
+HKR, Ndi\params\TxTaskOfld,      default,    0, "2"
+HKR, Ndi\params\TxTaskOfld,      type,       0, "enum"
+HKR, Ndi\params\TxTaskOfld\enum, 0,          0, %Disabled%
+HKR, Ndi\params\TxTaskOfld\enum, 1,          0, %TxTaskOfldCksm%
+HKR, Ndi\params\TxTaskOfld\enum, 2,          0, %TxTaskOfldTcpLS%
+
+; TCPLS Max Segment count
+HKR, ,                           TCPLSSeg,   0, "8"
+
+;-------------------------------------------------------------------------------
+; 32-bit UnInstaller
+[GET.SW.NT]
+HKLM, Software\Microsoft\Windows\CurrentVersion\Uninstall\VN_VUIns_Velocity_VNT, DisplayName, 0, %VT3119.DeviceDesc%
+HKLM, Software\Microsoft\Windows\CurrentVersion\Uninstall\VN_VUIns_Velocity_VNT, UninstallString, 0, "Rundll32.exe vuins32.dll,vuins32Ex $Velocity $VNT"
+HKLM, Software\VN_VUIns\Velocity\VNT\DeviceIdList, 3119, 0, "0"
+
+;-------------------------------------------------------------------------------
+;
+[Tagging.reg]
+; number of Tx queue allocation
+HKR, ,                          TxQueueNum, 0, "4"
+; UI for 802.1p/Q Packet Tagging
+HKR, ,                          8021pqtag, 0, "0"
+HKR, Ndi\Params\8021pqtag,      ParamDesc, 0, %8021pq%
+HKR, Ndi\Params\8021pqtag,      Default,   0, "0"
+HKR, Ndi\Params\8021pqtag,      type,      0, "enum"
+HKR, Ndi\Params\8021pqtag\enum, "0",       0, %Disabled%
+HKR, Ndi\Params\8021pqtag\enum, "1",       0, %Enabled%
+HKR, Ndi\params\8021pqtag,      flag,      1, "20","00","00","00"
+
+;-------------------------------------------------------------------------------
+;
+[VLAN.reg]
+; UI for static single VLAN ID setting
+HKR, ,                  VLANID,    0, "0"
+HKR, Ndi\params\VLANID, ParamDesc, 0, %VLANID%
+HKR, Ndi\params\VLANID, default,   0, "0"
+HKR, Ndi\params\VLANID, type,      0, "int"
+HKR, Ndi\params\VLANID, Min,       0, "0"
+HKR, Ndi\params\VLANID, Max,       0, "4094"
+HKR, Ndi\params\VLANID, Step,      0, "1"
+HKR, Ndi\params\VLANID, Base,      0, "10"
+HKR, Ndi\params\VLANID, flag,      1, "20","00","00","00"
+
+;-------------------------------------------------------------------------------
+;
+[Jumbo.reg]
+HKR, ,                      Jumbo,     0, "0"
+HKR, Ndi\params\Jumbo,      ParamDesc, 0, %Jumbo%
+HKR, Ndi\params\Jumbo,      default,   0, "0"
+HKR, Ndi\params\Jumbo,      type,      0, "enum"
+HKR, Ndi\params\Jumbo\enum, 0,         0, %Disabled%
+HKR, Ndi\params\Jumbo\enum, 1,         0, %Enabled%
+HKR, Ndi\params\Jumbo,      flag,      1, "20","00","00","00"
+
+;-------------------------------------------------------------------------------
+;
+[Wakeup.reg]
+HKR, ,                       Wakeup,    0, "0"
+HKR, Ndi\params\Wakeup,      ParamDesc, 0, %Wakeup%
+HKR, Ndi\params\Wakeup,      default,   0, "0"
+HKR, Ndi\params\Wakeup,      type,      0, "enum"
+HKR, Ndi\params\Wakeup\enum, 0,         0, %OSControl%
+HKR, Ndi\params\Wakeup\enum, 1,         0, %Magic%
+HKR, Ndi\params\Wakeup\enum, 2,         0, %Pattern%
+HKR, Ndi\params\Wakeup\enum, 3,         0, %All%
+HKR, Ndi\params\Wakeup,      flag,      1, "20","00","00","00"
+
+;-------------------------------------------------------------------------------
+; Installation for NT (Windows 2000/XP/Server2003)
+;
+[GET.CopyFiles.NTx86]
+getnd5bv.sys,,,2
+[GET.SW.CopyFiles.NTx86]
+vuins32.dll,,,2
+
+[GET.Service]
+DisplayName    = %GET.Service.DispName%
+ServiceType    = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType      = 3 ;%SERVICE_DEMAND_START%
+ErrorControl   = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\getnd5bv.sys
+LoadOrderGroup = NDIS
+
+[GET.EventLog]
+AddReg = GET.AddEventLog.reg
+
+[GET.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+;-------------------------------------------------------------------------------
+; Installation for Windows 95/98/ME
+;
+[GET.ndis5]
+CopyFiles=GET.ndis5.CopyFiles
+
+[GET.ndis4]
+CopyFiles=GET.ndis4.CopyFiles
+
+[GET.ndis3]
+CopyFiles=GET.ndis3.CopyFiles
+
+[GET.ndis2]
+CopyFiles=GET.ndis2.CopyFiles
+
+;-------------------------------------------------------------------------------
+; CopyFiles sections for Windows 95/98/ME
+;
+[GET.ndi.CopyFiles]
+wndi.dll,,,2
+
+[GET.ndis5.CopyFiles]
+getnd5av.sys,,,2
+
+[GET.ndis4.CopyFiles]
+getnd4.sys,,,2
+
+[GET.ndis3.CopyFiles]
+getnd3.sys,,,2
+
+[GET.ndis2.CopyFiles]
+getnd2.dos
+
+[GET.SW.CopyFiles]
+vuins16.dll,,,2
+
+;-------------------------------------------------------------------------------
+; DestinationDirs
+;
+[DestinationDirs]
+DefaultDestDir               = 11
+GET.CopyFiles.NTx86          = 12
+GET.ndis2.CopyFiles          = 10
+GET.SW.CopyFiles.NTx86       = 11
+GET.SW.CopyFiles             = 11
+
+[SourceDisksFiles]
+getnd5av.sys = 1
+getnd5bv.sys = 1
+getnd4.sys   = 1
+getnd3.sys   = 1
+getndis.inf  = 1
+wndi.dll     = 1
+getnd2.dos   = 1
+vuins32.dll  = 1
+vuins16.dll  = 1
+
+[SourceDisksNames]
+1 = %DiskName%,,,
+
+;-------------------------------------------------------------------------------
+; Uninstall/DelFiles/DelReg
+;
+[GET.delreg]
+HKR, Ndi\Params
+[GET.SW.delreg]
+HKLM, Software\Microsoft\Windows\CurrentVersion\Uninstall\VUInstVelocity
+HKLM, Software\VNT\VUInst\Velocity
+HKLM, Software\Microsoft\Windows\CurrentVersion\Uninstall\VN_VUIns_Velocity_VNT
+HKLM, Software\VN_VUIns\Velocity\VNT
+
+;-------------------------------------------------------------------------------
+; Localizable Strings
+;
+[Strings]
+Prov                = "VNT"
+DiskName            = "VNT Gigabit Ethernet Adapter driver disk"
+ConnectionType      = "Connection Type"
+autoN               = "Auto-Negotiation"
+100HD               = "100BaseTx Half Duplex"
+100FD               = "100BaseTx Full Duplex"
+10HD                = "10BaseT   Half Duplex"
+10FD                = "10BaseT   Full Duplex"
+Disabled            = "Disabled"
+Enabled             = "Enabled"
+WOLEvent            = "Wake On LAN Event"
+OSDefault           = "OS Default Event"
+OSAndUnicast        = "OS Default & Unicast"
+TXBuffer            = "Transmit Buffers"
+RXBuffer            = "Receive Buffers"
+NetAddress          = "Network Address"
+FlowCtl             = "Flow Control"
+HwDefault           = "Hardware Default (Auto)"
+EnableTx            = "Enable Tx"
+EnableRx            = "Enable Rx"
+EnableTxRx          = "Enable Tx/Rx"
+8021pq              = "802.1p/Q Tagging"
+VLANID              = "VLAN ID"
+RxCksmOfld          = "Rx Checksum Offload"
+TxTaskOfld          = "Tx Task Offload"
+TxTaskOfldCksm      = "Checksum Offload"
+TxTaskOfldTcpLS     = "Checksum and TCP Large Send Offload"
+Jumbo               = "Jumbo Frames Support"
+AI                  = "High Performance Interrupt"
+Wakeup              = "Wake up Type"
+OSControl           = "OS Controlled"
+Magic               = "Magic Packet"
+Pattern             = "Pattern Match"
+All                 = "ALL"
+
+Manuf                = "VIA Networking Technologies, Inc."
+VT3119.DeviceDesc    = "VIA Networking Velocity-Family Giga-bit Ethernet Adapter"
+GET.Service.DispName = "VIA Networking Velocity-Family Giga-bit Ethernet Adapter Driver"

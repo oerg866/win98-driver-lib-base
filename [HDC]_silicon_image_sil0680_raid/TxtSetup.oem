@@ -1,0 +1,24 @@
+; This file installs the 680 Medley ATA RAID driver as part of text mode setup on
+; Windows NT, Windows 2000, and Windows XP.
+
+
+[Disks]
+disk1 = "Silicon Image Ultra-133 Medley ATA Raid Driver Installation Disk",\pnp680r.sys,\
+
+[Defaults]
+SCSI = PnP680r
+
+[SCSI]                  ; HwComponent section
+PnP680r = "Silicon Image Ultra-133 Medley ATA Raid Controller"
+
+
+[Files.SCSI.PnP680r]
+driver = disk1,pnp680r.sys, PnP680r
+inf = disk1,SII680r.inf
+;;catalog = disk1, PnP680r.cat
+
+[Config.PnP680r]
+value = ProblemDevices, "", REG_SZ, ""
+
+[HardwareIds.SCSI.PnP680r]
+id = "PCI\VEN_1095&DEV_0680&SUBSYS_36801095", "PnP680r"

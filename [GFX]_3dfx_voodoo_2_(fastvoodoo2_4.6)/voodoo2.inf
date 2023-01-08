@@ -1,0 +1,213 @@
+;------------------------------------------------------------------------------------------------
+; FastVoodoo2 4.6 Driver kit
+; INF file for Voodoo2 based 3D Accelerators (single and SLI) running under Windows 95/98/98SE/ME
+; (c) 1998-1999 - 3dfx Interactive, Inc.
+; Installs Control Panel, DirectX, OpenGL, and Glide drivers
+; Optimized and hosted by http://www.3dfxzone.it
+;------------------------------------------------------------------------------------------------
+
+[version]
+Class=MEDIA
+signature="$CHICAGO$"
+Provider=%Mfg%
+DriverVer=26/07/2004,6.12.0006.2004
+
+
+; Disk & Directory sections
+;----------------------------------------
+[DestinationDirs]
+DefaultDestDir        = 11    ; LDID_SYS
+Voodoo2.Copy          = 11
+Voodoo2.CopyWin       = 10
+Voodoo2.DelFiles      = 11
+Voodoo2.DelWinFiles   = 10
+Voodoo2.CopyRedist    = 11
+Voodoo2Ini.DelFiles   = 10
+WinHelp.Copy          = 18
+WinHelp.DelFiles      = 18
+Voodoo2Inf.Copy       = 17
+
+[SourceDisksNames]
+1="3dfxzone.it FastVoodoo2 4.6 Driver for Windows 9X/ME",,0
+
+[SourceDisksFiles]
+FXMEMMAP.VXD =1
+3dfxV2.DRV   =1
+3dfx16V2.DLL =1
+3dfx32V2.DLL =1
+MSVCRT.DLL   =1
+GLIDE2X.DLL  =1
+FXOEM2X.DLL  =1
+GLIDE2X.OVL  =1
+GLIDE3X.DLL  =1
+3dfxVGL.DLL  =1
+RICHED20.DLL =1
+3dfxV2PS.DLL =1
+3dfxV2PS.HLP =1
+CSH.DLL      =1
+VOODOO2.BMP  =1
+3dfxSpl2.dll =1
+3dfxSpl3.dll =1
+
+; Manufacturers
+;----------------------------------------
+[Manufacturer]
+%Mfg%=Mfg
+
+; Driver sections
+;----------------------------------------
+[Mfg]
+%PCI\VEN_121A&DEV_0002.DeviceDesc%=Voodoo, PCI\VEN_121A&DEV_0002
+
+; Install sections
+;----------------------------------------
+[Voodoo]
+DelFiles=Voodoo2.DelFiles,Voodoo2.DelWinFiles,WinHelp.DelFiles,Voodoo2Ini.DelFiles
+CopyFiles=Voodoo2.Copy,Voodoo2.CopyWin,Voodoo2.CopyRedist,WinHelp.Copy,Voodoo2Inf.Copy
+DelReg=Prev.DelReg
+AddReg=Voodoo2.AddReg,Voodoo2.AddControl
+Reboot
+
+; Uninstall section
+;----------------------------------------
+[DefaultUninstall]
+DelFiles=Voodoo2.Copy,Voodoo2.CopyWin,WinHelp.Copy,Voodoo2Inf.Copy
+DelReg=Voodoo2.AddReg,Voodoo2.AddControl,Voodoo2.DelReg,Voodoo2.Enum
+Reboot
+
+[WinHelp.Copy]
+3dfxV2PS.HLP,,,2
+
+[Voodoo2Inf.Copy]
+Voodoo2.Inf
+
+[WinHelp.DelFiles]
+3dfxV2PS.HLP,,,2
+
+[Voodoo2Ini.DelFiles]
+Voodoo2.Ini,,,2
+
+[Voodoo2.Copy]
+FXMEMMAP.VXD,,,2
+3dfxV2.DRV,,,2
+3dfx16V2.DLL,,,2
+3dfx32V2.DLL,,,2
+GLIDE2X.DLL,,,2
+FXOEM2X.DLL,,,2
+GLIDE3X.DLL,,,2
+3dfxVGL.DLL,,,2
+3dfxV2PS.DLL,,,2
+3dfxSpl2.dll,,,2
+3dfxSpl3.dll,,,2
+
+[Voodoo2.CopyRedist]
+MSVCRT.DLL,,,2
+RICHED20.DLL,,,2
+CSH.DLL,,,2
+
+[Voodoo2.CopyWin]
+GLIDE2X.OVL,,,2
+VOODOO2.BMP,,,2
+
+[Voodoo2.DelFiles]
+FXMEMMAP.VXD,,,2
+3dfxV2.DRV,,,2
+3dfx16V2.DLL,,,2
+3dfx32V2.DLL,,,2
+GLIDE2X.DLL,,,2
+FXOEM2X.DLL,,,2
+GLIDE3X.DLL,,,2
+3dfxVGL.DLL,,,2
+SST1INIT.DLL,,,2
+MM3dfx.DRV,,,2
+MM3dfx16.DLL,,,2
+MM3dfx32.DLL,,,2
+MM3dfx.VXD,,,2
+3dfxPS.DLL,,,2
+3dfxV2PS.DLL,,,2
+3dfxSpl2.dll,,,2
+3dfxSpl3.dll,,,2
+
+[Voodoo2.DelWinFiles]
+GLIDE2X.OVL,,,2
+VOODOO2.BMP,,,2
+
+[Prev.DelReg]
+HKLM,"SoftWare\Microsoft\Windows\CurrentVersion\Run","Voodoo2",,"rundll32.exe 3dfxv2ps.dll,UpdateRegSettings"
+HKLM,hardware\DirectDrawDrivers\3A0CFD01-9320-11cf-AC-A1-00-A0-24-13-C2-E2
+HKLM,hardware\DirectDrawDrivers\ABA52F41-F744-11cf-B4-52-00-00-1D-1B-41-26
+HKLM,hardware\DirectDrawDrivers\472BEA00-40DF-11D1-A9-DF-00-60-97-C2-ED-B2
+HKLM,SOFTWARE\Classes\CLSID\{E06BCB21-48BB-11d1-B221-0040052CE062}\InProcServer32
+HKLM,SOFTWARE\Classes\CLSID\{E06BCB21-48BB-11d1-B221-0040052CE062}
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\"Controls Folder"\Display\shellex\PropertySheetHandlers\"Voodoo2"
+HKLM,SOFTWARE\Classes\CLSID\{C3A545C1-1162-11d0-AAB8-00A024151DDC}\InProcServer32
+HKLM,SOFTWARE\Classes\CLSID\{C3A545C1-1162-11d0-AAB8-00A024151DDC}
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\"Controls Folder"\Display\shellex\PropertySheetHandlers\"Monster 3D Properties Sheet"
+HKLM,SOFTWARE\Classes\CLSID\{CDB5B301-2103-11d0-AAB8-00A024151DDC}\InProcServer32
+HKLM,SOFTWARE\Classes\CLSID\{CDB5B301-2103-11d0-AAB8-00A024151DDC}
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\"Controls Folder"\Display\shellex\PropertySheetHandlers\"Monster 3D Settings Properties Sheet"
+HKLM,SOFTWARE\Classes\CLSID\{640E3A20-C07E-11cf-8E8B-000079830F05}\InProcServer32
+HKLM,SOFTWARE\Classes\CLSID\{640E3A20-C07E-11cf-8E8B-000079830F05}
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\"Controls Folder"\Display\shellex\PropertySheetHandlers\Righteous3D
+HKCR,\CLSID\{DAA36500-E65E-11D0-98F5-0020AFD51322},"",,"3dfx Display Property Sheet"
+HKCR,\CLSID\{DAA36500-E65E-11D0-98F5-0020AFD51322}\InProcServer32,"",,"3dfxps.dll"
+HKCR,\CLSID\{DAA36500-E65E-11D0-98F5-0020AFD51322}\InProcServer32,ThreadingModel,,"Apartment"
+HKLM,"\SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\3dfx","",,"{DAA36500-E65E-11D0-98F5-0020AFD51322}"
+;--Remove any refrence to the old Voodoo2.dll
+HKCR,\CLSID\{E06BCB21-48BB-11d1-B221-0040052CE062},"",,"3dfx Voodoo Graphics 2 Display Property Sheet"
+HKCR,\CLSID\{E06BCB21-48BB-11d1-B221-0040052CE062}\InProcServer32,"",,"voodoo2.dll"
+HKCR,\CLSID\{E06BCB21-48BB-11d1-B221-0040052CE062}\InProcServer32,ThreadingModel,,"Apartment"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\3dfx Voodoo2"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\Voodoo2"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved\3dfx Voodoo Graphics 2 Display Property Sheet"
+
+[Voodoo2.AddReg]
+HKLM,hardware\DirectDrawDrivers\472BEA00-40DF-11D1-A9-DF-00-60-97-C2-ED-B2,"Description",,"3dfxzone.it FastVoodoo2 4.6"
+HKLM,hardware\DirectDrawDrivers\472BEA00-40DF-11D1-A9-DF-00-60-97-C2-ED-B2,"DriverName",,"3dfxV2"
+HKLM,SOFTWARE\"3dfx Interactive"\Voodoo2
+HKLM,SOFTWARE\"3dfx Interactive"\Voodoo2\D3D
+HKLM,"Software\3Dfx Interactive\Voodoo2\D3D","SSTV2_SWAPINTERVAL",,"0"
+HKLM,"Software\3Dfx Interactive\Voodoo2\D3D","SSTV2_FASTMEM",,"1"
+HKLM,"Software\3Dfx Interactive\Voodoo2\D3D","SSTV2_FASTPCIRD",,"1"
+HKLM,"Software\3Dfx Interactive\Voodoo2\D3D","FASTMEM_RAS_READS",,"1"
+HKLM,"Software\3Dfx Interactive\Voodoo2\D3D","SSTV2_GRXCLK",,"93"
+HKLM,"Software\3Dfx Interactive\Voodoo2\D3D","SSTV2_ANTIALIAS",,"0"
+HKLM,"Software\3Dfx Interactive\Voodoo2\D3D","SSTV2_SLIM_VIN_CLKDEL",,"0"
+HKLM,"Software\3Dfx Interactive\Voodoo2\D3D","SSTV2_SLIM_VOUT_CLKDEL",,"0"
+HKLM,"Software\3Dfx Interactive\Voodoo2\D3D","SSTV2_SLIS_VIN_CLKDEL",,"0"
+HKLM,"Software\3Dfx Interactive\Voodoo2\D3D","SSTV2_SLIS_VOUT_CLKDEL",,"0"
+HKLM,SOFTWARE\"3dfx Interactive"\Voodoo2\Glide
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","FX_GLIDE_SWAPINTERVAL",,"0"
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","SSTV2_FASTMEM",,"1"
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","SSTV2_FASTPCIRD",,"1"
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","FASTMEM_RAS_READS",,"1"
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","FX_GLIDE_LOD_BIAS",,"0"
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","SSTV2_GRXCLK",,"93"
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","FX_GLIDE_ANTIALIAS",,"0"
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","FX_GLIDE_TMU_MEMSIZE",,"2"
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","SSTV2_SLIM_VIN_CLKDEL",,"0"
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","SSTV2_SLIM_VOUT_CLKDEL",,"0"
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","SSTV2_SLIS_VIN_CLKDEL",,"0"
+HKLM,"Software\3Dfx Interactive\Voodoo2\Glide","SSTV2_SLIS_VOUT_CLKDEL",,"0"
+HKLM,"SoftWare\Microsoft\Windows\CurrentVersion\Uninstall\3dfx Interactive Voodoo2",,,
+HKLM,"SoftWare\Microsoft\Windows\CurrentVersion\Uninstall\3dfx Interactive Voodoo2","DisplayName",,"3dfxzone.it FastVoodoo2 4.6"
+HKLM,"SoftWare\Microsoft\Windows\CurrentVersion\Uninstall\3dfx Interactive Voodoo2","UninstallString",,"%10%\rundll.exe setupx.dll,InstallHinfSection DefaultUninstall 2 %17%\Voodoo2.inf"
+
+[Voodoo2.DelReg]
+HKLM,"SOFTWARE\3dfx Interactive\Voodoo2"
+
+[Voodoo2.Enum]
+HKLM,Enum\PCI\VEN_121A&DEV_0002
+
+[Voodoo2.AddControl]
+HKCR,\CLSID\{00BD7141-4A41-11d1-89EA-0020AFC43773},"",,"3dfx Voodoo2 Property Sheet"
+HKCR,\CLSID\{00BD7141-4A41-11d1-89EA-0020AFC43773}\InProcServer32,"",,"3dfxV2ps.dll"
+HKCR,\CLSID\{00BD7141-4A41-11d1-89EA-0020AFC43773}\InProcServer32,ThreadingModel,,"Apartment"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\Voodoo2",,,"{00BD7141-4A41-11d1-89EA-0020AFC43773}"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved","{00BD7141-4A41-11d1-89EA-0020AFC43773}",,"3dfx Voodoo2 Property Sheet"
+
+; User visible strings
+;----------------------------------------
+[Strings]
+Mfg="3dfxzone.it"
+PCI\VEN_121A&DEV_0002.DeviceDesc="3dfxzone.it FastVoodoo2 4.6"

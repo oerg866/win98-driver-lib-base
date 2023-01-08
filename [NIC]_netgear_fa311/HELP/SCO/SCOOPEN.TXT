@@ -1,0 +1,311 @@
+\HELP\SCO\SCOOPEN.TXT
+
+                        NETGEAR FA311/FA312 PCI Adapter
+                  ---------------------------------------------
+            MDI Driver Installation for SCO OpenServer version 5.0
+            ------------------------------------------------------
+
+  Installation Procedure
+  ----------------------
+  1. Login SCO OpenServer as root user. (On maintenance mode)
+
+  2. Using "custom" to install the driver
+
+     A. Prepare an image file
+
+       Copy "fa31xmdi" onto SCO OpenServer and rename it to "VOL.000.000"
+
+            # mkdir /usr/test
+            # doscp a:/<PATH>/fa31xmdi /usr/test/VOL.000.000
+
+              <PATH> is the driver directory.
+
+    B. Execute "custom"
+
+       /* A menu selection screen will be popped up */
+       Using [->] key to move cursor to "Software" menu item then
+       press [] key to get into pull down menu then move to
+       "Install New..." and press [ENTER] key
+
+
+          ษออออออออออ Begin Installation on scosysv ออออออออออป
+          บ                                                   บ
+          บ  What host (machine) do you want to install from? บ
+          บ                                                   บ
+          บ  ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ บ
+          บ  ณ<*> From scosysv                              ณ บ
+          บ  ณ< > From another host                         ณ บ
+          บ  ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู บ
+          บ                                                   บ
+          บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+          บ[ Continue ]        [ Cancel ]         [ Help]     บ
+          ศอออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+       Select From scoopen and use [TAB] key to move cursor to [Continue]
+       then press [ENTER] key and press [] key to get into pull down menu
+
+          ษออออออออออออออออออออออออ Select Media ออออออออออออออออออออออออป
+          บ                                                              บ
+          บ  Insert media, and select media device.                      บ
+          บ                                                              บ
+          บ               ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ บ
+          บ  Media Device:ณ|Floppy Disk Driver 0_____________________|vณ บ
+          บ               ภษออออออออออออออออออออออออปฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู บ
+          บ                บฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟบ                    บ
+          บ                บณ*Floppy Disk Driver 0 ณบ                    บ
+          บ                บณ Media Images         ณบ                    บ
+          บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤูบฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+          บ[ Continue ]    ศออออออออออออออออออออออออผ          [  Help  ]บ
+          ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+
+       -> Select "Media Images" and use [TAB] key to move cursor to
+          [ Continue ] then press [ENTER] key then press [ENTER] key
+          again
+
+  ษอออออออออออออออออออออออ Enter Image Directory ออออออออออออออออออออออออป
+  บ                                                                      บ
+  บ Enter the full path to the directory containing media images.        บ
+  บ                                                                      บ
+  บ Image Directory: |/usr/test________________________________________| บ
+  บ                                                                      บ
+  บ Note: media images must follow the naming convention VOL.000.000,etc.บ
+  บ                                                                      บ
+  บ                                                                      บ
+  บ                                                                      บ
+  บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+  บ[   OK   ]                     [ Cancel ]                   [  Help  ]บ
+  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+            -> Input the path name where VOL.000.000 is located as above
+               path name is /usr/test
+
+
+  ษอออออออออออออออออออออออ Enter Image Directory อออออออออออออออออออออออออป
+  บ                                                                       บ
+  บ Installing: NETGEAR FA311/FA312 PCI Adapter                           บ
+  บ                                                                       บ
+  บ Install the selected software or patches.                             บ
+  บ                                                                       บ
+  บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+  บ[ Install ]     [ More Option ]      [ Cancel  ]     [  Help  ]        บ
+  ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+        Using [TAB] key to move cursor to [ Install ] then press [ENTER] key
+
+        After the installation process the following message is displayed,
+
+
+                       ษอออออออออออ Question ออออออออออป
+                       บ     Installation complete     บ
+                       บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+                       บ            [ OK ]             บ
+                       ศอออออออออออออออออออออออออออออออผ
+
+        Press [Enter] key then you will find out that
+
+            NETGEAR FA311/FA312 PCI Adapter
+
+        is added to the package list
+
+        Using [<-] key to move cursor back to "Host" menu item then
+        press [] key to get into pull down menu then move to "Exit"
+        then press [ENTER] key
+
+        Now that the driver is installed in the system successfully.
+
+
+  5. Using "netconfig" to configure the driver
+
+   /* A menu selection screen will be popped up */
+   At "Hardware" menu item press [] key to get into pull down menu then
+   move to "Add new LAN adapter" then press [ENTER] key
+
+   If you got a PCI NIC inserted on your machine, it will list as following:
+
+
+ ษอออออออออออออออออออออออออ Add new LAN adapter อออออออออออออออออออออออออออป
+ บThe following adapters have been found:                                  บ
+ บฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟบ
+ บณ* NETGEAR FA311/FA312  Controller - PCI Bus                            ณบ
+ บณ                                                                       ณบ
+ บณ                                                                       ณบ
+ บณ                                                                       ณบ
+ บณ                                                                       ณบ
+ บภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤูบ
+ บ[ Configure hardware not listed above... ]                               บ
+ บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+ บ[ Continue ]                     [  Cancel  ]                  [  Help  ]บ
+ ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+       Using [TAB] key to move to "Configure hardware not listed above..."
+       then press [ENTER] key
+
+
+  ษอออออออออออออออออออออออออ Add new LAN adapter ออออออออออออออออออออออออออป
+  บSelect network adapter to be added:                                     บ
+  บฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟบ
+  บณ*   3Com EtherLink 16/16TP Adapter                                    ^บ
+  บณ                   .                                                  *บ
+  บณ                   .                                                  *บ
+  บณ                   .                                                  *บ
+  บณ                   .                                                  *บ
+  บณ                                                                      *บ
+  บณ    NETGEAR FA311/FA312 PCI Adapter                                   *บ
+  บณ                   .                                                  ณบ
+  บณ                   .                                                  ณบ
+  บณ                   .                                                  ณบ
+  บณ                   .                                                  vบ
+  บภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤูบ
+  บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+  บ[ Continue ]                   [  Cancel  ]                   [  Help  ]บ
+  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+  Using [] key to move to "NETGEAR FA311/FA312 PCI Adapter" then
+  press  [ENTER] key.
+
+   ษอออออออออออออออออออออ Network Driver Configuration ออออออออออออออออออป
+   บ                                                                     บ
+   บEnter the configuration of NETGEAR FA311/FA312 PCI adapter:          บ
+   บ                                                                     บ
+   บ                ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ                       บ
+   บ     PCI Bus#:  ณ| 0_______________________|vณ                       บ
+   บ                ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู                       บ
+   บ                ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ                       บ
+   บ  PCI Device#:  ณ| 0_______________________|vณ                       บ
+   บ                ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู                       บ
+   บ                                                                     บ
+   บ                                                                     บ
+   บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤ-บ
+   บ[   OK   ]                     [ Cancel ]                 [  Help  ] บ
+   ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+                                
+
+   The above screen let you fill the information of where your PCI adapter
+   is located by specifying PCI Bus#, and PCI Device#.
+
+   Note: If you are not sure about the PCI parameters or your PCI Device#
+          can not be found in the list, leave them as default values.
+          Continue with the following installation.  After the driver is
+          installed and the system re-linked, reboot the system.  The driver
+          will search for the FA311/FA312  card automatically.
+
+
+   ษออออออออออออออออออออออออออ Information ออออออออออออออออออออออออออออป
+   บ---  Please verify adapter is set to the configuration just enteredบ
+   บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+   บ                              [ OK ]                               บ
+   ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+   Press [ENTER] key.
+
+
+  ษอออออออออออออออออออออออออออออ Add Protocol อออออออออออออออออออออออออออออป
+  บSelect one networking product to be added to                            บ
+  บNETGEAR FA311/FA312 PCI Adapter:                                        บ
+  บฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟบ
+  บณ HW NETGEAR FA311/FA312 PCI Adapter                                   ณบ
+  บณ*   - SCO IPX/SPX                                                     ณบ
+  บณ    - SCO TCP/IP                                                      ณบ
+  บณ                                                                      ณบ
+  บณ                                                                      ณบ
+  บภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤูบ
+  บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+  บ[  Add   ]                     [ Cancel ]                     [  Help  ]บ
+  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+   Using [] key to move cursor to "SCO TCP/IP" then press [ENTER] key.
+
+   ษอออออออออออออออ SCO TCP/IP Configuration ออออออออออออออออป
+   บ                                                         บ
+   บ                                                         บ
+   บ                                                         บ
+   บ                                                         บ
+   บ  Local Host Name:  |scoopen_____________| [ Advanced   ]บ
+   บ       IP Address:  |192.9.200.1_________|   Options...  บ
+   บ          Netmask:  |255.255.255.0_______|               บ
+   บBroadcast Address:  |192.9.200.255_______|               บ
+   บ      Domain Name:  |scoopen.com_________|               บ
+   บ  TCP connections:  |256_________________|               บ
+   บ      Pseudo ttys:  |32__________________|               บ
+   บ                                                         บ
+   บ                                                         บ
+   บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+   บ                                                         บ
+   บ [   OK   ]             [ Cancel ]            [  Help   ]บ
+   บ                                                         บ
+   ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+  Input the required information then use [TAB] key to move cursor to "OK"
+  then press [ENTER] key.
+
+  ษอออออออออออออออออออออออออออออ Message อออออออออออออออออออออออออออออออออออป
+  บ                                                                         บ
+  บ                                                                         บ
+  บ The following products were successfully configured into the system     บ
+  บ SCO TCP/IP                                                              บ
+  บ NETGEAR FA311/FA312 PCI Adapter - PCI Bus#0,PCI Device#13,PCI           บ
+  บ                                                                         บ
+  บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤ บ
+  บ[ OK ]                                                          [ Help ] บ
+  ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+   Press [ENTER] key
+
+   At "Hardware" menu item press [] key to get into pull down menu then
+   move to "Exit" then press [ENTER] key
+
+  ษอออออออออออออออออออออออ Question ออออออออออออออออออออออออป
+  บ     The Unix Kernel must be re-linked before the changesบ
+  บ???  made here will have an effect.                      บ
+  บ     Do you want to re-link the kernel now?              บ
+  บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+  บ [  YES   ]                                      [ NO  ] บ
+  ศอออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+   Press [ENTER] key
+
+   Do you want this kernel to boot by default (y/n)    y
+
+   Do you want the kernel environment rebuilt (y/n)    y
+
+ 6. Reboot unix
+
+   # init 0
+
+
+  Another way to specify driver's PCI parameters  
+  ----------------------------------------------
+  Another way to modify PCI parameters is at booting
+  time, shown as below:
+  1. Specify PCI Bus#, PCI Device# and PCI Function#
+
+       Boot
+       : unix net.mdi=f3a(0) net.params=(pcb:0,pcd:14,pcf:0)
+
+  2. Auto-search PCI adapter card
+
+       Boot
+       : unix net.mdi=f3a(0)
+
+
+  Note:    The IRQ number must match with the value set in ROM-BIOS
+           before you specify this value, please check it.
+           The IRQ for PCI bus can be accessed by pressing [DEL] key when
+           system is power on and choose the proper select item to set
+           IRQ for PCI bus.
+
+           Example: ROM PCI/ISA BIOS (2A4X5C31)
+                    PCI/GREEN FUNCTION SETUP
+                    AWARD SOFTWARE, INC.
+
+           Press [DEL] key  -->  PCI/GREEN FUNCTION SETUP
+
+                                 Slot 3 Using INT# : A-PIRQ1
+                                           .
+                                           .
+                                           .
+                                 PIRQ1# Connect IRQ: 5 By Single
+                                                       ~
+
+

@@ -1,0 +1,1064 @@
+;; Realtek 10/100/1000 PCI-E NIC Family all in one NDIS Driver
+;;
+;; Copyright 2008, Realtek Semiconductor Corporation.
+;;
+;; This product is covered by one or more of the following patents:
+;; US5,307,459, US5,434,872, US5,732,094, US6,570,884, US6,115,776, 
+;; and US6,327,625.
+;;
+;; This release is primarily for motherboard OEM for WHQL test.
+
+[version]
+Signature      = "$Chicago$"
+Compatible     = 1
+Class          = Net
+ClassGUID      = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider       = %Realtek%                               
+CatalogFile.NT = netrtle.cat                        ;;for WHQL certified
+DriverVer      = 10/30/2008,5.708.1030.2008
+
+[Manufacturer]
+%Realtek%      = Realtek, NTx86.5.1, NTamd64
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Realtek]
+; DisplayName            Section            DeviceID
+; -----------            -------            --------
+;8101E
+%RTL8136.DeviceDesc%    = RTL8136.ndi,      PCI\VEN_10EC&DEV_8136&REV_01
+%RTL8136.DeviceDesc%    = RTL8136.ndi,      PCI\VEN_10EC&DEV_8136&SUBSYS_813610EC&REV_01
+
+;8101HP
+%RTL8136.DeviceDesc%    = RTL8136HP.ndi,    PCI\VEN_10EC&DEV_8136&SUBSYS_2A57103C ;HP
+%RTL8136.DeviceDesc%    = RTL8136HP.ndi,    PCI\VEN_10EC&DEV_8136&SUBSYS_2A78103C ;HP-CPC
+%RTL8136.DeviceDesc%    = RTL8136HP.ndi,    PCI\VEN_10EC&DEV_8136&SUBSYS_2A79103C ;HP-CPC
+%RTL8136.DeviceDesc%    = RTL8136HP.ndi,    PCI\VEN_10EC&DEV_8136&SUBSYS_FF101179&REV_01 ;Toshiba
+
+;RTL8131
+%RTL8131.DeviceDesc%    = RTL8131.ndi,      PCI\VEN_10EC&DEV_8131&REV_01
+%RTL8131.DeviceDesc%    = RTL8131.ndi,      PCI\VEN_10EC&DEV_8131&SUBSYS_813110EC&REV_01
+
+;8102E/8103E
+%RTL8102.DeviceDesc%    = RTL8102.ndi,      PCI\VEN_10EC&DEV_8136&REV_02
+%RTL8102.DeviceDesc%    = RTL8102.ndi,      PCI\VEN_10EC&DEV_8136&SUBSYS_813610EC&REV_02
+
+;8104E
+%RTL8104.DeviceDesc%    = RTL8104.ndi,     PCI\VEN_10EC&DEV_8137&REV_03
+%RTL8104.DeviceDesc%    = RTL8104.ndi,     PCI\VEN_10EC&DEV_8137&SUBSYS_813710EC&REV_03
+
+;8168B
+%RTL8168.DeviceDesc%    = RTL8168.ndi,      PCI\VEN_10EC&DEV_8168&REV_01
+%RTL8168.DeviceDesc%    = RTL8168.ndi,      PCI\VEN_10EC&DEV_8168&SUBSYS_816810EC&REV_01
+
+;8168C
+%RTL8168C.DeviceDesc%   = RTL8168C.ndi,     PCI\VEN_10EC&DEV_8168&REV_02
+%RTL8168C.DeviceDesc%   = RTL8168C.ndi,     PCI\VEN_10EC&DEV_8168&SUBSYS_816810EC&REV_02
+;8168CASUS
+%RTL8168C.DeviceDesc%   = RTL8168CASUS.ndi, PCI\VEN_10EC&DEV_8168&SUBSYS_82FF1043&REV_02 ;ASUS
+
+;8168D
+%RTL8168D.DeviceDesc%   = RTL8168D.ndi,     PCI\VEN_10EC&DEV_8168&REV_03
+%RTL8168D.DeviceDesc%   = RTL8168D.ndi,     PCI\VEN_10EC&DEV_8168&SUBSYS_816810EC&REV_03
+
+[Realtek.NTx86.5.1]; This section will only be installed by Windows XP
+;8101E
+%RTL8136.DeviceDesc%	= RTL8136x.ndi,	    PCI\VEN_10EC&DEV_8136&REV_01
+%RTL8136.DeviceDesc%	= RTL8136x.ndi,     PCI\VEN_10EC&DEV_8136&SUBSYS_813610EC&REV_01
+
+;8101HP
+%RTL8136.DeviceDesc%    = RTL8136HPx.ndi,   PCI\VEN_10EC&DEV_8136&SUBSYS_2A57103C ;HP
+%RTL8136.DeviceDesc%    = RTL8136HPx.ndi,   PCI\VEN_10EC&DEV_8136&SUBSYS_2A78103C ;HP-CPC
+%RTL8136.DeviceDesc%    = RTL8136HPx.ndi,   PCI\VEN_10EC&DEV_8136&SUBSYS_2A79103C ;HP-CPC
+%RTL8136.DeviceDesc%    = RTL8136HPx.ndi,   PCI\VEN_10EC&DEV_8136&SUBSYS_FF101179&REV_01 ;Toshiba
+
+;RTL8131
+%RTL8131.DeviceDesc%	= RTL8131x.ndi,	    PCI\VEN_10EC&DEV_8131&REV_01
+%RTL8131.DeviceDesc%	= RTL8131x.ndi,     PCI\VEN_10EC&DEV_8131&SUBSYS_813110EC&REV_01
+
+;8102E/8103E
+%RTL8102.DeviceDesc%	= RTL8102x.ndi,	    PCI\VEN_10EC&DEV_8136&REV_02
+%RTL8102.DeviceDesc%	= RTL8102x.ndi,     PCI\VEN_10EC&DEV_8136&SUBSYS_813610EC&REV_02
+
+;8104E
+%RTL8104.DeviceDesc%    = RTL8104x.ndi,     PCI\VEN_10EC&DEV_8137&REV_03
+%RTL8104.DeviceDesc%    = RTL8104x.ndi,     PCI\VEN_10EC&DEV_8137&SUBSYS_813710EC&REV_03
+
+;8168B
+%RTL8168.DeviceDesc%	= RTL8168x.ndi,	    PCI\VEN_10EC&DEV_8168&REV_01
+%RTL8168.DeviceDesc%    = RTL8168x.ndi,     PCI\VEN_10EC&DEV_8168&SUBSYS_816810EC&REV_01
+
+;8168C
+%RTL8168C.DeviceDesc%   = RTL8168Cx.ndi,    PCI\VEN_10EC&DEV_8168&REV_02
+%RTL8168C.DeviceDesc%   = RTL8168Cx.ndi,    PCI\VEN_10EC&DEV_8168&SUBSYS_816810EC&REV_02
+;8168CASUS
+%RTL8168C.DeviceDesc%   = RTL8168CASUSx.ndi,PCI\VEN_10EC&DEV_8168&SUBSYS_82FF1043&REV_02 ;ASUS
+
+;8168D
+%RTL8168D.DeviceDesc%   = RTL8168Dx.ndi,    PCI\VEN_10EC&DEV_8168&REV_03
+%RTL8168D.DeviceDesc%   = RTL8168Dx.ndi,    PCI\VEN_10EC&DEV_8168&SUBSYS_816810EC&REV_03
+
+[Realtek.NTamd64]; This section will only be installed by Windows XP 64-bit
+;8101E
+%RTL8136.DeviceDesc%	= RTL8136a.ndi,	    PCI\VEN_10EC&DEV_8136&REV_01
+%RTL8136.DeviceDesc%	= RTL8136a.ndi,     PCI\VEN_10EC&DEV_8136&SUBSYS_813610EC&REV_01
+
+;8101HP
+%RTL8136.DeviceDesc%    = RTL8136HPa.ndi,   PCI\VEN_10EC&DEV_8136&SUBSYS_2A57103C ;HP
+%RTL8136.DeviceDesc%    = RTL8136HPa.ndi,   PCI\VEN_10EC&DEV_8136&SUBSYS_2A78103C ;HP-CPC
+%RTL8136.DeviceDesc%    = RTL8136HPa.ndi,   PCI\VEN_10EC&DEV_8136&SUBSYS_2A79103C ;HP-CPC
+%RTL8136.DeviceDesc%    = RTL8136HPa.ndi,   PCI\VEN_10EC&DEV_8136&SUBSYS_30CB103C ;HP
+%RTL8136.DeviceDesc%    = RTL8136HPa.ndi,   PCI\VEN_10EC&DEV_8136&SUBSYS_FF101179&REV_01 ;Toshiba
+
+;RTL8131
+%RTL8131.DeviceDesc%	= RTL8131a.ndi,	    PCI\VEN_10EC&DEV_8131&REV_01
+%RTL8131.DeviceDesc%	= RTL8131a.ndi,     PCI\VEN_10EC&DEV_8131&SUBSYS_813110EC&REV_01
+
+;8102E/8103E
+%RTL8102.DeviceDesc%	= RTL8102a.ndi,	    PCI\VEN_10EC&DEV_8136&REV_02
+%RTL8102.DeviceDesc%	= RTL8102a.ndi,     PCI\VEN_10EC&DEV_8136&SUBSYS_813610EC&REV_02
+
+;8104E
+%RTL8104.DeviceDesc%    = RTL8104a.ndi,     PCI\VEN_10EC&DEV_8137&REV_03
+%RTL8104.DeviceDesc%    = RTL8104a.ndi,     PCI\VEN_10EC&DEV_8137&SUBSYS_813710EC&REV_03
+
+;8168B
+%RTL8168.DeviceDesc%  	= RTL8168a.ndi,	    PCI\VEN_10EC&DEV_8168&REV_01
+%RTL8168.DeviceDesc%	= RTL8168a.ndi,     PCI\VEN_10EC&DEV_8168&SUBSYS_816810EC&REV_01
+
+;8168C
+%RTL8168C.DeviceDesc%   = RTL8168Ca.ndi,    PCI\VEN_10EC&DEV_8168&REV_02
+%RTL8168C.DeviceDesc%   = RTL8168Ca.ndi,    PCI\VEN_10EC&DEV_8168&SUBSYS_816810EC&REV_02
+;8168CASUS
+%RTL8168C.DeviceDesc%   = RTL8168CASUSa.ndi,PCI\VEN_10EC&DEV_8168&SUBSYS_82FF1043&REV_02 ;ASUS
+
+;8168D
+%RTL8168D.DeviceDesc%   = RTL8168Da.ndi,    PCI\VEN_10EC&DEV_8168&REV_03
+%RTL8168D.DeviceDesc%   = RTL8168Da.ndi,    PCI\VEN_10EC&DEV_8168&SUBSYS_816810EC&REV_03
+
+;;****************************************************************************
+;; Windows 98/ME
+;;****************************************************************************
+;;RTL8168(98/ME)
+[RTL8168.ndi]
+DriverVer       = 10/30/2008,708
+AddReg          = rtl8168.id.reg, NetworkAddress.reg, Speed.reg, 68BJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = WolCap.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles9x
+
+;;****************************************************************************
+;;RTL8168C(98/ME)
+[RTL8168C.ndi]
+DriverVer       = 10/30/2008,708
+AddReg          = rtl8168.id.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = WolCap.reg, PowerDownPll.reg, ForceMode.reg, GreenEthernetDisabled.reg
+CopyFiles       = Rtlnic.CopyFiles9x
+
+;;****************************************************************************
+;;RTL8168C ASUS(98/ME)
+[RTL8168CASUS.ndi]
+DriverVer       = 10/30/2008,708
+AddReg          = rtl8168.id.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeedIntel.reg
+AddReg          = WolCap.reg, PowerDownPll.reg, ForceMode.reg, GreenEthernetDisabled.reg
+CopyFiles       = Rtlnic.CopyFiles9x
+
+;;****************************************************************************
+;;RTL8168D(98/ME)
+[RTL8168D.ndi]
+DriverVer       = 10/30/2008,708
+AddReg          = rtl8168.id.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = WolCap.reg, ForceMode.reg, GreenEthernetEnabled.reg
+CopyFiles       = Rtlnic.CopyFiles9x
+
+;;****************************************************************************
+;;RTL8136(98/ME)
+[RTL8136.ndi]
+DriverVer       = 10/30/2008,708
+AddReg          = rtl8136.id.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = WolCap.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles9x
+
+;;****************************************************************************
+;;RTL8136 HP(98/ME)
+[RTL8136HP.ndi]
+DriverVer       = 10/30/2008,708
+AddReg          = rtl8136.id.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = AutoCrossoverDet.reg, WolCap.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles9x
+
+;;****************************************************************************
+;;RTL8131(98/ME)
+[RTL8131.ndi]
+DriverVer       = 10/30/2008,708
+AddReg          = rtl8136.id.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = WolCap.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles9x
+
+;;****************************************************************************
+;;RTL8102E(98/ME)
+[RTL8102.ndi]
+DriverVer       = 10/30/2008,708
+AddReg          = rtl8136.id.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = WolCap.reg, PowerDownPll.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles9x
+
+;;****************************************************************************
+;;RTL8104E(98/ME)
+[RTL8104.ndi]
+DriverVer       = 10/30/2008,708
+AddReg          = rtl8136.id.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = WolCap.reg, PowerDownPll.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles9x
+
+[Rtlnic.CopyFiles9x]
+Rtenic.sys,,,2
+
+;;****************************************************************************
+;; Windows 2000
+;;****************************************************************************
+;;RTL8168(W2K)
+[RTL8168.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023.reg, NetworkAddress.reg, Speed.reg, 68BJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles, RTNicProp.CopyList2K
+
+[RTL8168.ndi.NT.Services]
+AddService      = RTLE8023, 2, rtsnt.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8168C(W2K)
+[RTL8168C.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, PowerDownPll.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg, GreenEthernetDisabled.reg
+CopyFiles       = Rtlnic.CopyFiles, RTNicProp.CopyList2K
+
+[RTL8168C.ndi.NT.Services]
+AddService      = RTLE8023, 2, rtsnt.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8168C ASUS(W2K)
+[RTL8168CASUS.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeedIntel.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, PowerDownPll.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg, GreenEthernetDisabled.reg
+CopyFiles       = Rtlnic.CopyFiles, RTNicProp.CopyList2K
+
+[RTL8168CASUS.ndi.NT.Services]
+AddService      = RTLE8023, 2, rtsnt.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8168D(W2K)
+[RTL8168D.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg, GreenEthernetEnabled.reg
+CopyFiles       = Rtlnic.CopyFiles, RTNicProp.CopyList2K
+
+[RTL8168D.ndi.NT.Services]
+AddService      = RTLE8023, 2, rtsnt.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8136(W2K)
+[RTL8136.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles, RTNicProp.CopyList2K
+
+[RTL8136.ndi.NT.Services]
+AddService      = RTLE8023, 2, rtsnt.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8136 HP(W2K)
+[RTL8136HP.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, AutoCrossoverDet.reg, WolCap.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles, RTNicProp.CopyList2K
+
+[RTL8136HP.ndi.NT.Services]
+AddService      = RTLE8023, 2, rtsnt.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8131(W2K)
+[RTL8131.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles, RTNicProp.CopyList2K
+
+[RTL8131.ndi.NT.Services]
+AddService      = RTLE8023, 2, rtsnt.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8102E(W2K)
+[RTL8102.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, PowerDownPll.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles, RTNicProp.CopyList2K
+
+[RTL8102.ndi.NT.Services]
+AddService      = RTLE8023, 2, rtsnt.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8104E(W2K)
+[RTL8104.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, PowerDownPll.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFiles, RTNicProp.CopyList2K
+
+[RTL8104.ndi.NT.Services]
+AddService      = RTLE8023, 2, rtsnt.Service, common.EventLog
+
+[Rtlnic.CopyFiles]
+Rtenic.sys,,,2
+
+[RTNicProp.CopyList2K]
+
+;;****************************************************************************
+;; Windows XP
+;;****************************************************************************
+;;RTL8168(XP)
+[RTL8168x.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023xp.reg, NetworkAddress.reg, Speed.reg, 68BJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesXP, RTNicProp.CopyListXP
+
+[RTL8168x.ndi.NT.Services]
+AddService      = RTLE8023xp, 2, rtsntxp.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8168C(XP)
+[RTL8168Cx.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023xp.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg, PowerDownPll.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg, GreenEthernetDisabled.reg
+CopyFiles       = Rtlnic.CopyFilesXP, RTNicProp.CopyListXP
+
+[RTL8168Cx.ndi.NT.Services]
+AddService = RTLE8023xp, 2, rtsntxp.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8168C ASUS(XP)
+[RTL8168CASUSx.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023xp.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeedIntel.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg, PowerDownPll.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg, GreenEthernetDisabled.reg
+CopyFiles       = Rtlnic.CopyFilesXP, RTNicProp.CopyListXP
+
+[RTL8168CASUSx.ndi.NT.Services]
+AddService = RTLE8023xp, 2, rtsntxp.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8168D(XP)
+[RTL8168Dx.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023xp.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg, GreenEthernetEnabled.reg
+CopyFiles       = Rtlnic.CopyFilesXP, RTNicProp.CopyListXP
+
+[RTL8168Dx.ndi.NT.Services]
+AddService = RTLE8023xp, 2, rtsntxp.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8136(XP)
+[RTL8136x.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023xp.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesXP, RTNicProp.CopyListXP
+
+[RTL8136x.ndi.NT.Services]
+AddService      = RTLE8023xp, 2, rtsntxp.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8136HP(XP)
+[RTL8136HPx.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023xp.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, AutoCrossoverDet.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesXP, RTNicProp.CopyListXP
+
+[RTL8136HPx.ndi.NT.Services]
+AddService      = RTLE8023xp, 2, rtsntxp.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8131(XP)
+[RTL8131x.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023xp.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesXP, RTNicProp.CopyListXP
+
+[RTL8131x.ndi.NT.Services]
+AddService      = RTLE8023xp, 2, rtsntxp.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8102E(XP)
+[RTL8102x.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023xp.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg, PowerDownPll.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesXP, RTNicProp.CopyListXP
+
+[RTL8102x.ndi.NT.Services]
+AddService      = RTLE8023xp, 2, rtsntxp.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8104E(XP)
+[RTL8104x.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023xp.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg, PowerDownPll.reg
+AddReg          = RtNicProp32.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesXP, RTNicProp.CopyListXP
+
+[RTL8104x.ndi.NT.Services]
+AddService      = RTLE8023xp, 2, rtsntxp.Service, common.EventLog
+
+[Rtlnic.CopyFilesXP]
+Rtenic.sys,,,2
+
+[RTNicProp.CopyListXP]
+
+;;****************************************************************************
+;; Windows XP 64-bit
+;;****************************************************************************
+;;RTL8168(XP64)
+[RTL8168a.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023x64.reg, NetworkAddress.reg, Speed.reg, 68BJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg
+AddReg          = RtNicProp64.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesX64, RTNicProp.CopyListX64
+
+[RTL8168a.ndi.NT.Services]
+AddService      = RTLE8023x64, 2, rtsntx64.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8168C(XP64)
+[RTL8168Ca.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023x64.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg, PowerDownPll.reg
+AddReg          = RtNicProp64.reg, ForceMode.reg, GreenEthernetDisabled.reg
+CopyFiles       = Rtlnic.CopyFilesX64, RTNicProp.CopyListX64
+
+[RTL8168Ca.ndi.NT.Services]
+AddService      = RTLE8023x64, 2, rtsntx64.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8168C ASUS(XP64)
+[RTL8168CASUSa.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023x64.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeedIntel.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg, PowerDownPll.reg
+AddReg          = RtNicProp64.reg, ForceMode.reg, GreenEthernetDisabled.reg
+CopyFiles       = Rtlnic.CopyFilesX64, RTNicProp.CopyListX64
+
+[RTL8168CASUSa.ndi.NT.Services]
+AddService      = RTLE8023x64, 2, rtsntx64.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8168D(XP64)
+[RTL8168Da.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023x64.reg, NetworkAddress.reg, Speed.reg, 68CJumboframe.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg
+AddReg          = RtNicProp64.reg, ForceMode.reg, GreenEthernetEnabled.reg
+CopyFiles       = Rtlnic.CopyFilesX64, RTNicProp.CopyListX64
+
+[RTL8168Da.ndi.NT.Services]
+AddService      = RTLE8023x64, 2, rtsntx64.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8136(XP64)
+[RTL8136a.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023x64.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg
+AddReg          = RtNicProp64.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesX64, RTNicProp.CopyListX64
+
+[RTL8136a.ndi.NT.Services]
+AddService      = RTLE8023x64, 2, rtsntx64.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8136 HP(XP64)
+[RTL8136HPa.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023x64.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, AutoCrossoverDet.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg
+AddReg          = RtNicProp64.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesX64, RTNicProp.CopyListX64
+
+[RTL8136HPa.ndi.NT.Services]
+AddService      = RTLE8023x64, 2, rtsntx64.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8131(XP64)
+[RTL8131a.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023x64.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg
+AddReg          = RtNicProp64.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesX64, RTNicProp.CopyListX64
+
+[RTL8131a.ndi.NT.Services]
+AddService      = RTLE8023x64, 2, rtsntx64.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8102E(XP64)
+[RTL8102a.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023x64.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg, PowerDownPll.reg
+AddReg          = RtNicProp64.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesX64, RTNicProp.CopyListX64
+
+[RTL8102a.ndi.NT.Services]
+AddService      = RTLE8023x64, 2, rtsntx64.Service, common.EventLog
+
+;;****************************************************************************
+;;RTL8104E(XP64)
+[RTL8104a.ndi.NT]
+DelReg          = TsPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTLE8023x64.reg, NetworkAddress.reg, Speed10_100.reg, Flowctrl.reg, S5Wol.reg, WolShutdownLinkSpeed.reg
+AddReg          = OffloadChksum.reg, OffloadLargesend.reg, VLanTagging.reg, WolCap.reg, powersavingautophy.reg, powersavingautopcie.reg, PowerDownPll.reg
+AddReg          = RtNicProp64.reg, ForceMode.reg
+CopyFiles       = Rtlnic.CopyFilesX64, RTNicProp.CopyListX64
+
+[RTL8104a.ndi.NT.Services]
+AddService      = RTLE8023x64, 2, rtsntx64.Service, common.EventLog
+
+[Rtlnic.CopyFilesX64]
+
+[RTNicProp.CopyListX64]
+
+;;***************************************************************************
+;; Windows 9x parameters
+;;***************************************************************************
+[rtl8168.id.reg]
+HKR,,               MediaType,        0, 1
+HKR,,               AdapterType,      0, 5
+HKR,,               BusType,          0, 5
+HKR,,               DevLoader,        0, "*ndis"
+HKR,,               DeviceVxDs,       0, "Rtenic.sys"
+HKR,,               EnumPropPages,    0, "netdi.dll,EnumPropPages"
+HKR,NDIS,           LogDriverName,    0, "RTLE8023"
+HKR,NDIS,           MajorNdisVersion, 1, 03
+HKR,NDIS,           MinorNdisVersion, 1, 0A
+HKR,Ndi,            DeviceID,         0, "PCI\VEN_10EC&DEV_8168"
+HKR,Ndi\Interfaces, DefUpper,         0, "ndis3"  
+HKR,Ndi\Interfaces, DefLower,         0, "ethernet"
+HKR,Ndi\Interfaces, UpperRange,       0, "ndis3"
+HKR,Ndi\Interfaces, LowerRange,       0, "ethernet"
+
+[rtl8136.id.reg]
+HKR,,               MediaType,        0, 1
+HKR,,               AdapterType,      0, 5
+HKR,,               BusType,          0, 5
+HKR,,               DevLoader,        0, "*ndis"
+HKR,,               DeviceVxDs,       0, "Rtenic.sys"
+HKR,,               EnumPropPages,    0, "netdi.dll,EnumPropPages"
+HKR,NDIS,           LogDriverName,    0, "RTLE8023"
+HKR,NDIS,           MajorNdisVersion, 1, 03
+HKR,NDIS,           MinorNdisVersion, 1, 0A
+HKR,Ndi,            DeviceID,         0, "PCI\VEN_10EC&DEV_8136"
+HKR,Ndi\Interfaces, DefUpper,         0, "ndis3"  
+HKR,Ndi\Interfaces, DefLower,         0, "ethernet"
+HKR,Ndi\Interfaces, UpperRange,       0, "ndis3"
+HKR,Ndi\Interfaces, LowerRange,       0, "ethernet"
+
+;;****************************************************************************
+;; Del parameters
+;;****************************************************************************
+[GigPreParams.DelReg]
+HKR,Ndi\Params\WakeUpFrame
+HKR,,WakeUpFrame
+HKR,Ndi\Params\NumTxDesc
+HKR,,NumTxDesc
+HKR,Ndi\Params\NumRxDesc
+HKR,,NumRxDesc
+HKR,Ndi\Params\NumTxDescHPQ
+HKR,,NumTxDescHPQ
+HKR,Ndi\Params\RegVlanid
+HKR,,RegVlanid
+HKR,Ndi\Params\WakeOnLanSpeed
+HKR,,WakeOnLanSpeed
+;HKR,Ndi\Params\S5WakeOnLan
+;HKR,,S5WakeOnLan
+HKR,,SuperSwitch
+HKR,,PowerDownPll
+
+[TsPreParams.DelReg]
+HKR,Ndi\Params\WakeUpFrame
+HKR,,WakeUpFrame
+HKR,Ndi\Params\NumTxDesc
+HKR,,NumTxDesc
+HKR,Ndi\Params\NumRxDesc
+HKR,,NumRxDesc
+HKR,Ndi\Params\NumTxDescHPQ
+HKR,,NumTxDescHPQ
+HKR,Ndi\Params\RegVlanid
+HKR,,RegVlanid
+HKR,Ndi\Params\WakeOnLanSpeed
+HKR,,WakeOnLanSpeed
+;HKR,Ndi\Params\S5WakeOnLan
+;HKR,,S5WakeOnLan
+
+;;****************************************************************************
+;; common parameters
+;;****************************************************************************
+
+[NetworkAddress.reg]
+HKR,Ndi\params\NetworkAddress,	ParamDesc,	0, %NetworkAddress%
+HKR,Ndi\params\NetworkAddress,	type,		0, "edit"
+HKR,Ndi\params\NetworkAddress,	default,	0, "000000000000"
+HKR,Ndi\params\NetworkAddress,	LimitText,	0, "12"
+HKR,Ndi\params\NetworkAddress,	UpperCase,	0, "1"
+HKR,Ndi\params\NetworkAddress,	Optional,	0, "1"
+
+[Speed.reg]
+HKR, Ndi\params\DuplexMode,       ParamDesc,  0, %SpeedDuplexMode%
+HKR, Ndi\params\DuplexMode,       type,       0, "enum"
+HKR, Ndi\params\DuplexMode,       default,    0, "1"
+HKR, Ndi\params\DuplexMode\enum,  1,          0, %auto_nego%
+HKR, Ndi\params\DuplexMode\enum,  2,          0, %sd10half%
+HKR, Ndi\params\DuplexMode\enum,  3,          0, %sd10full%
+HKR, Ndi\params\DuplexMode\enum,  4,          0, %sd100half%
+HKR, Ndi\params\DuplexMode\enum,  5,          0, %sd100full%
+HKR, Ndi\params\DuplexMode\enum,  6,          0, %sd1000full%
+HKR,,DuplexMode,0,"1"
+
+[Speed10_100.reg]
+HKR, Ndi\params\DuplexMode,       ParamDesc,  0, %SpeedDuplexMode%
+HKR, Ndi\params\DuplexMode,       type,       0, "enum"
+HKR, Ndi\params\DuplexMode,       default,    0, "1"
+HKR, Ndi\params\DuplexMode\enum,  1,          0, %auto_nego%
+HKR, Ndi\params\DuplexMode\enum,  2,          0, %sd10half%
+HKR, Ndi\params\DuplexMode\enum,  3,          0, %sd10full%
+HKR, Ndi\params\DuplexMode\enum,  4,          0, %sd100half%
+HKR, Ndi\params\DuplexMode\enum,  5,          0, %sd100full%
+HKR,,DuplexMode,0,"1"
+
+;[TxDescNumber.reg]
+;HKR,Ndi\Params\NumTxDesc,         ParamDesc,  0, %TxDescNumber%
+;HKR,Ndi\Params\NumTxDesc,         Type,       0, "int"
+;HKR,Ndi\Params\NumTxDesc,         Default,    0, "256"
+;HKR,Ndi\Params\NumTxDesc,         Min,        0, "64"
+;HKR,Ndi\Params\NumTxDesc,         Max,        0, "512"
+;HKR,Ndi\Params\NumTxDesc,         Step,       0, "1"
+;HKR,Ndi\Params\NumTxDesc,         Base,       0, "10"
+;HKR,,NumTxDesc,0,"256"
+
+;[RxDescNumber.reg]
+;HKR,Ndi\Params\NumRxDesc,         ParamDesc,  0, %RxDescNumber%
+;HKR,Ndi\Params\NumRxDesc,         Type,       0, "int"
+;HKR,Ndi\Params\NumRxDesc,         Default,    0, "256"
+;HKR,Ndi\Params\NumRxDesc,         Min,        0, "64"
+;HKR,Ndi\Params\NumRxDesc,         Max,        0, "512"
+;HKR,Ndi\Params\NumRxDesc,         Step,       0, "1"
+;HKR,Ndi\Params\NumRxDesc,         Base,       0, "10"
+;HKR,,NumRxDesc,0,"256"
+
+[68BJumboframe.reg]
+HKR,Ndi\params\Jumboframe,        ParamDesc,  0, %JumboFrame%
+HKR,Ndi\params\Jumboframe,        default,    0, "0"
+HKR,Ndi\params\Jumboframe,        type,       0, "enum"
+HKR,Ndi\params\Jumboframe\enum,   "0",        0, %Disabled%
+HKR,Ndi\params\Jumboframe\enum,   "1",        0, %2KBMTU%
+HKR,Ndi\params\Jumboframe\enum,   "2",        0, %3KBMTU%
+HKR,Ndi\params\Jumboframe\enum,   "3",        0, %4KBMTU%
+HKR,,Jumboframe,0,"0"
+
+[68CJumboframe.reg]
+HKR,Ndi\params\Jumboframe,        ParamDesc,  0, %JumboFrame%
+HKR,Ndi\params\Jumboframe,        default,    0, "0"
+HKR,Ndi\params\Jumboframe,        type,       0, "enum"
+HKR,Ndi\params\Jumboframe\enum,   "0",        0, %Disabled%
+HKR,Ndi\params\Jumboframe\enum,   "1",        0, %2KBMTU%
+HKR,Ndi\params\Jumboframe\enum,   "2",        0, %3KBMTU%
+HKR,Ndi\params\Jumboframe\enum,   "3",        0, %4KBMTU%
+HKR,Ndi\params\Jumboframe\enum,   "4",        0, %5KBMTU%
+HKR,Ndi\params\Jumboframe\enum,   "5",        0, %6KBMTU%
+HKR,Ndi\params\Jumboframe\enum,   "6",        0, %7KBMTU%
+HKR,Ndi\params\Jumboframe\enum,   "7",        0, %8KBMTU%
+HKR,Ndi\params\Jumboframe\enum,   "8",        0, %9KBMTU%
+HKR,,Jumboframe,0,"0"
+
+[Flowctrl.reg]
+HKR,Ndi\params\FlowControl,      ParamDesc,  0, %FlowControl%
+HKR,Ndi\params\FlowControl,      default,    0, "1"
+HKR,Ndi\params\FlowControl,      type,       0, "enum"
+HKR,Ndi\params\FlowControl\enum, "0",        0, %Disabled%
+HKR,Ndi\params\FlowControl\enum, "1",        0, %Enabled%
+HKR,,FlowControl,0,"1" 
+
+[S5Wol.reg]
+HKR,Ndi\params\S5WakeOnLan,      ParamDesc,  0, %S5WakeOnLan%
+HKR,Ndi\params\S5WakeOnLan,      default,    0, "1"
+HKR,Ndi\params\S5WakeOnLan,      type,       0, "enum"
+HKR,Ndi\params\S5WakeOnLan\enum, "0",        0, %Disabled%
+HKR,Ndi\params\S5WakeOnLan\enum, "1",        0, %Enabled%
+HKR,,S5WakeOnLan,0,"1"
+
+[powersavingautophy.reg]
+HKR,Ndi\params\AutoLinkDownPhyOff,       ParamDesc,  0, %AutoLinkDownPhyOff%
+HKR,Ndi\params\AutoLinkDownPhyOff,       default,    0, "0"
+HKR,Ndi\params\AutoLinkDownPhyOff,       type,       0, "enum"
+HKR,Ndi\params\AutoLinkDownPhyOff\enum,  "0",        0, %Disabled%
+HKR,Ndi\params\AutoLinkDownPhyOff\enum,  "1",        0, %Battery%
+HKR,Ndi\params\AutoLinkDownPhyOff\enum,  "2",        0, %AcBattery%
+HKR,,AutoLinkDownPhyOff,0,"0"
+
+[powersavingautopcie.reg]
+HKR,Ndi\params\AutoLinkDownPcieMacOff,       ParamDesc,  0, %AutoLinkDownPcieMacOff%
+HKR,Ndi\params\AutoLinkDownPcieMacOff,       default,    0, "0"
+HKR,Ndi\params\AutoLinkDownPcieMacOff,       type,       0, "enum"
+HKR,Ndi\params\AutoLinkDownPcieMacOff\enum,  "0",        0, %Disabled%
+HKR,Ndi\params\AutoLinkDownPcieMacOff\enum,  "1",        0, %Battery%
+HKR,Ndi\params\AutoLinkDownPcieMacOff\enum,  "2",        0, %AcBattery%
+HKR,,AutoLinkDownPcieMacOff,0,"0"
+
+[WolShutdownLinkSpeed.reg]
+HKR, Ndi\params\WolShutdownLinkSpeed,       ParamDesc,  0, %WolShutdownLinkSpeed%
+HKR, Ndi\params\WolShutdownLinkSpeed,       type,       0, "enum"
+HKR, Ndi\params\WolShutdownLinkSpeed,       default,    0, "0"
+HKR, Ndi\params\WolShutdownLinkSpeed\enum,  "0",        0, %10MbFirst%
+HKR, Ndi\params\WolShutdownLinkSpeed\enum,  "1",        0, %100MbFirst%
+HKR,,WolShutdownLinkSpeed,0,"0"
+
+[WolShutdownLinkSpeedIntel.reg]
+HKR, Ndi\params\WolShutdownLinkSpeed,       ParamDesc,  0, %WolShutdownLinkSpeed%
+HKR, Ndi\params\WolShutdownLinkSpeed,       type,       0, "enum"
+HKR, Ndi\params\WolShutdownLinkSpeed,       default,    0, "2"
+HKR, Ndi\params\WolShutdownLinkSpeed\enum,  "0",        0, %10MbFirst%
+HKR, Ndi\params\WolShutdownLinkSpeed\enum,  "1",        0, %100MbFirst%
+HKR, Ndi\params\WolShutdownLinkSpeed\enum,  "2",        0, %NotSpeedDown%
+HKR,,WolShutdownLinkSpeed,0,"2"
+
+[WolCap.reg]
+HKR, Ndi\params\WolCap,            ParamDesc,  0, %WolCap%
+HKR, Ndi\params\WolCap,            type,       0, "enum"
+HKR, Ndi\params\WolCap,            default,    0, "3"
+HKR, Ndi\params\WolCap\enum,       "0",        0, %None%
+HKR, Ndi\params\WolCap\enum,       "1",        0, %PatternMatch%
+HKR, Ndi\params\WolCap\enum,       "2",        0, %MagicPacket%
+HKR, Ndi\params\WolCap\enum,       "3",        0, %PatternAndMagic%
+HKR,,WolCap,0,"3"
+
+[GreenEthernetEnabled.reg]
+HKR,Ndi\params\GreenEthernet,      ParamDesc,  0, %GreenEthernet%
+HKR,Ndi\params\GreenEthernet,      default,    0, "1"
+HKR,Ndi\params\GreenEthernet,      type,       0, "enum"
+HKR,Ndi\params\GreenEthernet\enum, "0",        0, %Disabled%
+HKR,Ndi\params\GreenEthernet\enum, "1",        0, %Enabled%
+HKR,,GreenEthernet,0,"1"
+
+[GreenEthernetDisabled.reg]
+HKR,Ndi\params\GreenEthernet,      ParamDesc,  0, %GreenEthernet%
+HKR,Ndi\params\GreenEthernet,      default,    0, "0"
+HKR,Ndi\params\GreenEthernet,      type,       0, "enum"
+HKR,Ndi\params\GreenEthernet\enum, "0",        0, %Disabled%
+HKR,Ndi\params\GreenEthernet\enum, "1",        0, %Enabled%
+HKR,,GreenEthernet,0,"0"
+
+;[AutoSpeedDown.reg]
+;HKR,Ndi\params\AutoSpeedDown,         ParamDesc,  0, %AutoSpeedDown%
+;HKR,Ndi\params\AutoSpeedDown,         default,    0, "1"
+;HKR,Ndi\params\AutoSpeedDown,         type,       0, "enum"
+;HKR,Ndi\params\AutoSpeedDown\enum,    "0",        0, %Disabled%
+;HKR,Ndi\params\AutoSpeedDown\enum,    "1",        0, %Enabled%
+;HKR,,AutoSpeedDown,0,"1"
+
+;[SuperSwitch.reg]
+;HKR,,SuperSwitch,0,"0"
+
+[PowerDownPll.reg]
+HKR,,PowerDownPll,0,"0"
+
+[ForceMode.reg]
+HKR,,ForceMode,0,"0"
+
+[RtNicProp32.reg]
+HKR,,EnumPropPages32,,"rtnicprop32.dll,RTNicPropPageProvider"
+
+[RtNicProp64.reg]
+HKR,,EnumPropPages32,,"rtnicprop64.dll,RTNicPropPageProvider"
+
+;;****************************************************************************
+;; NT parameters
+;;****************************************************************************
+
+[OffloadChksum.reg]
+HKR,Ndi\params\CksOffload,        ParamDesc,  0, %ChecksumOffload%
+HKR,Ndi\params\CksOffload,        default,    0, "1"
+HKR,Ndi\params\CksOffload,        type,       0, "enum"
+HKR,Ndi\params\CksOffload\enum,   "0",        0, %Disabled%
+HKR,Ndi\params\CksOffload\enum,   "1",        0, %RxTxEnabled%
+HKR,Ndi\params\CksOffload\enum,   "3",        0, %RxEnabled%
+HKR,Ndi\params\CksOffload\enum,   "4",        0, %TxEnabled%
+HKR,,CksOffload,0,"1" 
+
+[OffloadLargesend.reg]
+HKR,Ndi\params\Largesend,         ParamDesc,  0, %LargesendOffload%
+HKR,Ndi\params\Largesend,         default,    0, "1"
+HKR,Ndi\params\Largesend,         type,       0, "enum"
+HKR,Ndi\params\Largesend\enum,    "0",        0, %Disabled%
+HKR,Ndi\params\Largesend\enum,    "1",        0, %Enabled%
+HKR,,Largesend,0,"1" 
+
+[VLanTagging.reg]
+HKR,Ndi\params\Support8021p,      ParamDesc,  0, %VLanTagging%
+HKR,Ndi\params\Support8021p,      default,    0, "0"
+HKR,Ndi\params\Support8021p,      type,       0, "enum"
+HKR,Ndi\params\Support8021p\enum, "0",        0, %Disabled%
+HKR,Ndi\params\Support8021p\enum, "1",        0, %Enabled%
+HKR,,Support8021p,0,"0" 
+
+;[VLanID.reg]
+;HKR,Ndi\Params\RegVlanid,   ParamDesc,  0, %VLanID%
+;HKR,Ndi\Params\RegVlanid,   Type,       0, "int"
+;HKR,Ndi\Params\RegVlanid,   Default,    0, "0"
+;HKR,Ndi\Params\RegVlanid,   Min,        0, "0"
+;HKR,Ndi\Params\RegVlanid,   Max,        0, "4094"
+;HKR,Ndi\Params\RegVlanid,   Step,       0, "1"
+;HKR,Ndi\Params\RegVlanid,   Base,       0, "10"
+;HKR,,RegVlanid,0,"0" 
+
+;[TxHPQDescNumber.reg]
+;HKR,Ndi\Params\NumTxDescHPQ,      ParamDesc,  0, %TxHPQDescNumber%
+;HKR,Ndi\Params\NumTxDescHPQ,      Type,       0, "int"
+;HKR,Ndi\Params\NumTxDescHPQ,      Default,    0, "256"
+;HKR,Ndi\Params\NumTxDescHPQ,      Min,        0, "64"
+;HKR,Ndi\Params\NumTxDescHPQ,      Max,        0, "512"
+;HKR,Ndi\Params\NumTxDescHPQ,      Step,       0, "1"
+;HKR,Ndi\Params\NumTxDescHPQ,      Base,       0, "10"
+;HKR,,NumTxDescHPQ,0,"256" 
+
+[AutoCrossoverDet.reg]
+HKR,Ndi\params\AutoCrossoverDet,	ParamDesc,  0, %AutoCrossoverDet%
+HKR,Ndi\params\AutoCrossoverDet,	default,    0, "0"
+HKR,Ndi\params\AutoCrossoverDet,	type,       0, "enum"
+HKR,Ndi\params\AutoCrossoverDet\enum,   "0",        0, %Disabled%
+HKR,Ndi\params\AutoCrossoverDet\enum,   "1",        0, %Enabled%
+HKR,,AutoCrossoverDet,0,"0"
+
+;;****************************************************************************
+;; NT 5.0 parameters
+;;****************************************************************************
+[RTLE8023.reg]
+HKR, Ndi\Interfaces,            UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,            LowerRange, 0, "ethernet"
+HKR, Ndi,                       Service,    0, "RTLE8023"
+
+[rtsnt.Service]
+DisplayName     = %Rtlnic.Service.DispName%
+ServiceType     = 1                             ; %SERVICE_KERNEL_DRIVER%
+StartType       = 3                             ; %SERVICE_DEMAND_START%
+ErrorControl    = 1                             ; %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\Rtenic.sys
+LoadOrderGroup  = NDIS
+
+[RTLE8023xp.reg]
+HKR, Ndi\Interfaces,            UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,            LowerRange, 0, "ethernet"
+HKR, Ndi,                       Service,    0, "RTLE8023xp"
+
+[rtsntxp.Service]
+DisplayName     = %Rtlnicxp.Service.DispName%
+ServiceType     = 1                             ; %SERVICE_KERNEL_DRIVER%
+StartType       = 3                             ; %SERVICE_DEMAND_START%
+ErrorControl    = 1                             ; %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\Rtenicxp.sys
+LoadOrderGroup  = NDIS
+
+[RTLE8023x64.reg]
+HKR, Ndi\Interfaces,            UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,            LowerRange, 0, "ethernet"
+HKR, Ndi,                       Service,    0, "RTLE8023x64"
+
+[rtsntx64.Service]
+DisplayName     = %Rtlnicx64.Service.DispName%
+ServiceType     = 1                             ; %SERVICE_KERNEL_DRIVER%
+StartType       = 3                             ; %SERVICE_DEMAND_START%
+ErrorControl    = 1                             ; %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\Rtenic64.sys
+LoadOrderGroup  = NDIS
+
+[common.EventLog]
+Addreg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+
+;;****************************************************************************
+;; Destination Directory
+;;****************************************************************************
+[DestinationDirs]
+Rtlnic.CopyFiles           = 12
+Rtlnic.CopyFilesXP         = 12
+Rtlnic.CopyFilesX64        = 12
+Rtlnic.CopyFiles9x         = 11
+RTNicProp.CopyList2k       = 11
+RTNicProp.CopyListXP       = 11
+RTNicProp.CopyListX64      = 11
+DefaultDestDir             = 11        ; LDID_SYS
+
+;;****************************************************************************
+;; Source Files
+;;****************************************************************************
+[SourceDisksNames]
+1=%DISKNAME%,,,
+
+[SourceDisksFiles]
+Rtenic.sys	= 1
+
+;;****************************************************************************
+;; Strings
+;;****************************************************************************
+[Strings]
+Realtek			= "Realtek Semiconductor Corp."
+VLanTagging		= "802.1Q/1p VLAN Tagging"
+;VLanID			= "802.1Q VLAN ID"
+ChecksumOffload		= "Checksum Offload"
+LargesendOffload	= "Large Send Offload"
+SpeedDuplexMode		= "Speed & Duplex"
+auto_nego		= "Auto Negotiation"
+sd10half		= "10 Mbps Half Duplex"
+sd10full		= "10 Mbps Full Duplex"
+sd100half		= "100 Mbps Half Duplex"
+sd100full		= "100 Mbps Full Duplex"
+sd1000full		= "1.0 Gbps Full Duplex"
+NetworkAddress		= "Network Address"
+JumboFrame		= "Jumbo Frame"
+;TxDescNumber		= "Number of Tx Descriptor"
+;RxDescNumber		= "Number of Rx Descriptor"
+;TxHPQDescNumber	= "Number of High Priority Tx Descriptor"
+FlowControl		= "Flow Control"
+;AutoSpeedDown		= "Auto Speed Down"
+S5WakeOnLan		= "Shutdown Wake-On-Lan"
+10MbFirst               = "10 Mbps First"
+100MbFirst              = "100 Mbps First"
+NotSpeedDown            = "Not Speed Down"
+WolShutdownLinkSpeed    = "WOL & Shutdown Link Speed"
+AutoCrossoverDet        = "Auto Crossover Detection"
+Disabled                = "Disabled"
+Enabled                 = "Enabled"
+TxEnabled               = "Tx Enabled"
+RxEnabled               = "Rx Enabled"
+RxTxEnabled             = "Rx & Tx Enabled"
+2KBMTU                  = "2KB MTU"
+3KBMTU                  = "3KB MTU"
+4KBMTU                  = "4KB MTU"
+5KBMTU                  = "5KB MTU"
+6KBMTU                  = "6KB MTU"
+7KBMTU                  = "7KB MTU"
+8KBMTU                  = "8KB MTU"
+9KBMTU                  = "9KB MTU"
+WolCap                  = "Wake-On-Lan Capabilities"
+None                    = "None"
+PatternMatch            = "Pattern Match"
+MagicPacket             = "Magic Packet"
+PatternAndMagic         = "Pattern Match & Magic Packet"
+AutoLinkDownPcieMacOff  = "Auto Disable PCIe (PowerSaving)"
+AutoLinkDownPhyOff      = "Auto Disable PHY (PowerSaving)"
+Battery                 = "Enabled, Battery"
+AcBattery               = "Enabled, Battery or AC"
+GreenEthernet           = "Green Ethernet"
+
+;;Source disk name
+DISKNAME = "Realtek 10/100/1000 NIC Family all in one NDIS Driver"
+
+RTL8168.DeviceDesc        = "Realtek RTL8168/8111 PCI-E Gigabit Ethernet NIC"
+RTL8168C.DeviceDesc       = "Realtek RTL8168C(P)/8111C(P) PCI-E Gigabit Ethernet NIC"
+RTL8168D.DeviceDesc       = "Realtek RTL8168D(P)/8111D(P) PCI-E Gigabit Ethernet NIC"
+RTL8136.DeviceDesc        = "Realtek RTL8139/810x Family Fast Ethernet NIC"
+RTL8131.DeviceDesc        = "Realtek RTL8131 Family PCI-E Fast Ethernet NIC"
+RTL8102.DeviceDesc        = "Realtek RTL8102E/RTL8103E Family PCI-E Fast Ethernet NIC"
+RTL8104.DeviceDesc        = "Realtek RTL8104E Family PCI-E Fast Ethernet NIC"
+
+;;NT service name
+Rtlnic.Service.DispName    = "Realtek 10/100/1000 PCI-E NIC Family NT Driver"
+Rtlnicxp.Service.DispName    = "Realtek 10/100/1000 PCI-E NIC Family NDIS XP Driver"
+Rtlnicx64.Service.DispName    = "Realtek 10/100/1000 PCI-E NIC Family NDIS XP(x64) Driver"

@@ -1,0 +1,390 @@
+[version]
+Class       = Net
+ClassGUID   = {4D36E972-E325-11CE-BFC1-08002BE10318}
+Signature   = "$Chicago$"
+Compatible  = 1
+CatalogFile = NVENET.CAT
+Provider    = %Nvidia%
+DriverVer = 01/29/2004, 4.1.6
+
+[Manufacturer]
+%Nvidia%    = Nvidia
+
+[ControlFlags]
+; Plug and play adapters must be excluded from the list. We are plug
+; and play, so we exclude ourselves from being presented to the user.
+ExcludeFromSelect = PCI\VEN_10DE&DEV_01C3
+
+[Nvidia]
+; DisplayName           Section       DeviceID
+%NVENET.DeviceDesc%  =  NVENET.NDI,   PCI\VEN_10DE&DEV_01C3
+%NVENET.DeviceDesc%  =  NVENET2.NDI,   PCI\VEN_10DE&DEV_0066
+%NVENET.DeviceDesc%  =  NVENET3.NDI,   PCI\VEN_10DE&DEV_00D6
+%NVENET.DeviceDesc%  =  NVENET4.NDI,   PCI\VEN_10DE&DEV_00E6
+%NVENET.DeviceDesc%  =  NVENET5.NDI,   PCI\VEN_10DE&DEV_0086
+%NVENET.DeviceDesc%  =  NVENET6.NDI,   PCI\VEN_10DE&DEV_008C
+%NVENET.DeviceDesc%  =  NVENET7.NDI,   PCI\VEN_10DE&DEV_00DF
+
+[NVENET.NDI]
+Characteristics = 0x84                  ; NCF_PHYSICAL | NCF_HAS_UI
+BusType         = 5                     ; PciBus
+AddReg     = NVENETID.REG, NVENET9X.REG, SpeedSetting.reg, Uninstall.AddReg
+DeviceID   = "PCI\VEN_10DE&DEV_01C3"
+CopyFiles  = NVENET9x.CopyFiles
+
+[NVENET2.NDI]
+Characteristics = 0x84                  ; NCF_PHYSICAL | NCF_HAS_UI
+BusType         = 5                     ; PciBus
+AddReg     = NVENETID2.REG, NVENET2_9X.REG, SpeedSetting.reg, Uninstall.AddReg
+DeviceID   = "PCI\VEN_10DE&DEV_0066"
+CopyFiles  = NVENET9x.CopyFiles
+
+[NVENET3.NDI]
+Characteristics = 0x84                  ; NCF_PHYSICAL | NCF_HAS_UI
+BusType         = 5                     ; PciBus
+AddReg     = NVENETID3.REG, NVENET3_9X.REG, SpeedSetting.reg, Uninstall.AddReg
+DeviceID   = "PCI\VEN_10DE&DEV_00D6"
+CopyFiles  = NVENET9x.CopyFiles
+
+[NVENET4.NDI]
+Characteristics = 0x84                  ; NCF_PHYSICAL | NCF_HAS_UI
+BusType         = 5                     ; PciBus
+AddReg     = NVENETID4.REG, NVENET4_9X.REG, SpeedSetting.reg, JumboFrameSize.reg, ChecksumOffload.reg, SegOffload.reg, Debug.reg, LowPowerStateLinkSpeed.reg, Uninstall.AddReg
+DeviceID   = "PCI\VEN_10DE&DEV_00E6"
+CopyFiles  = NVENET9x.CopyFiles
+
+[NVENET5.NDI]
+Characteristics = 0x84                  ; NCF_PHYSICAL | NCF_HAS_UI
+BusType         = 5                     ; PciBus
+AddReg     = NVENETID5.REG, NVENET5_9X.REG,  SpeedSetting.reg, JumboFrameSize.reg, ChecksumOffload.reg, SegOffload.reg, Debug.reg, LowPowerStateLinkSpeed.reg, Uninstall.AddReg
+DeviceID   = "PCI\VEN_10DE&DEV_0086"
+CopyFiles  = NVENET9x.CopyFiles
+
+[NVENET6.NDI]
+Characteristics = 0x84                  ; NCF_PHYSICAL | NCF_HAS_UI
+BusType         = 5                     ; PciBus
+AddReg     = NVENETID6.REG, NVENET6_9X.REG, SpeedSetting.reg, JumboFrameSize.reg, ChecksumOffload.reg, SegOffload.reg, Debug.reg, LowPowerStateLinkSpeed.reg, Uninstall.AddReg
+DeviceID   = "PCI\VEN_10DE&DEV_008C"
+CopyFiles  = NVENET9x.CopyFiles
+
+
+[NVENET7.NDI]
+Characteristics = 0x84                  ; NCF_PHYSICAL | NCF_HAS_UI
+BusType         = 5                     ; PciBus
+AddReg     = NVENETID7.REG, NVENET7_9X.REG, SpeedSetting.reg, JumboFrameSize.reg, ChecksumOffload.reg, SegOffload.reg, Debug.reg, LowPowerStateLinkSpeed.reg, Uninstall.AddReg
+DeviceID   = "PCI\VEN_10DE&DEV_00DF"
+CopyFiles  = NVENET9x.CopyFiles
+
+[NVENETID.REG]
+HKR, Ndi,           DeviceID,                   0, "PCI\VEN_10DE&DEV_01C3"
+
+[NVENETID2.REG]
+HKR, Ndi,           DeviceID,                   0, "PCI\VEN_10DE&DEV_0066"
+
+[NVENETID3.REG]
+HKR, Ndi,           DeviceID,                   0, "PCI\VEN_10DE&DEV_00D6"
+
+[NVENETID4.REG]
+HKR, Ndi,           DeviceID,                   0, "PCI\VEN_10DE&DEV_00E6"
+
+[NVENETID5.REG]
+HKR, Ndi,           DeviceID,                   0, "PCI\VEN_10DE&DEV_0086"
+
+[NVENETID6.REG]
+HKR, Ndi,           DeviceID,                   0, "PCI\VEN_10DE&DEV_008C"
+
+[NVENETID7.REG]
+HKR, Ndi,           DeviceID,                   0, "PCI\VEN_10DE&DEV_00DF"
+
+[NVENET9X.REG]
+HKR, ,              DevLoader,                  0, "*ndis"
+HKR, ,              DeviceVxDs,                 0, "nvenet.sys"
+HKR, ,              EnumPropPages,              0, "netdi.dll,EnumPropPages"
+HKR, ,				AdapterCFID,    			0, "01C310DE"
+HKR, , 		    AdapterType,       		 , 5
+HKR, , 		    BusType,                     , 5
+HKR,                Ndi\Interfaces,Lower,   	0, "ethernet"
+HKR,                Ndi\Interfaces,LowerRange, 	0, "ethernet"
+HKR,                Ndi\Interfaces,Upper,   	0, "ndis3"
+HKR,                Ndi\Interfaces,UpperRange, 	0, "ndis3"
+HKR, NDIS,          LogDriverName,              0, "NVENET"
+HKR, NDIS,          MajorNdisVersion,           1, 03
+HKR, NDIS,          MinorNdisVersion,           1, 0A
+HKR, Ndi\Install,   ndis3,                      0, "NVENET9x.INSTALL"
+HKR,                ,            DeviceCaps,    0, "01C310DE0000000100000000000000010000000000000000000005EA00000000"    
+
+
+[NVENET2_9X.REG]
+HKR, ,              DevLoader,                  0, "*ndis"
+HKR, ,              DeviceVxDs,                 0, "nvenet.sys"
+HKR, ,              EnumPropPages,              0, "netdi.dll,EnumPropPages"
+HKR, ,				AdapterCFID,    			0, "006610DE"
+HKR, , 		    AdapterType,       		 , 5
+HKR, , 		    BusType,                     , 5
+HKR,                Ndi\Interfaces,Lower,   	0, "ethernet"
+HKR,                Ndi\Interfaces,LowerRange, 	0, "ethernet"
+HKR,                Ndi\Interfaces,Upper,   	0, "ndis3"
+HKR,                Ndi\Interfaces,UpperRange, 	0, "ndis3"
+HKR, NDIS,          LogDriverName,              0, "NVENET"
+HKR, NDIS,          MajorNdisVersion,           1, 03
+HKR, NDIS,          MinorNdisVersion,           1, 0A
+HKR, Ndi\Install,   ndis3,                      0, "NVENET9x.INSTALL"
+HKR,                ,            DeviceCaps,    0, "006610DE0000000100000000000000010000000000000000000005EA00000000"    
+
+
+[NVENET3_9X.REG]
+HKR, ,              DevLoader,                  0, "*ndis"
+HKR, ,              DeviceVxDs,                 0, "nvenet.sys"
+HKR, ,              EnumPropPages,              0, "netdi.dll,EnumPropPages"
+HKR, ,				AdapterCFID,    			0, "00D610DE"
+HKR, , 		        AdapterType,       		     , 5
+HKR, , 		        BusType,                     , 5
+HKR,                Ndi\Interfaces,Lower,   	0, "ethernet"
+HKR,                Ndi\Interfaces,LowerRange, 	0, "ethernet"
+HKR,                Ndi\Interfaces,Upper,   	0, "ndis3"
+HKR,                Ndi\Interfaces,UpperRange, 	0, "ndis3"
+HKR, NDIS,          LogDriverName,              0, "NVENET"
+HKR, NDIS,          MajorNdisVersion,           1, 03
+HKR, NDIS,          MinorNdisVersion,           1, 0A
+HKR, Ndi\Install,   ndis3,                      0, "NVENET9x.INSTALL"
+HKR,                ,            DeviceCaps,    0, "00D610DE0000000100000000000000010000000000000000000005EA00000000"    
+
+
+[NVENET4_9X.REG]
+HKR, ,              DevLoader,                  0, "*ndis"
+HKR, ,              DeviceVxDs,                 0, "nvenet.sys"
+HKR, ,              EnumPropPages,              0, "netdi.dll,EnumPropPages"
+HKR, ,				AdapterCFID,    			0, "00E610DE"
+HKR, , 		        AdapterType,       		     , 5
+HKR, , 		        BusType,                     , 5
+HKR,                Ndi\Interfaces,Lower,   	0, "ethernet"
+HKR,                Ndi\Interfaces,LowerRange, 	0, "ethernet"
+HKR,                Ndi\Interfaces,Upper,   	0, "ndis3"
+HKR,                Ndi\Interfaces,UpperRange, 	0, "ndis3"
+HKR, NDIS,          LogDriverName,              0, "NVENET"
+HKR, NDIS,          MajorNdisVersion,           1, 03
+HKR, NDIS,          MinorNdisVersion,           1, 0A
+HKR, Ndi\Install,   ndis3,                      0, "NVENET9x.INSTALL"
+HKR,                ,            DeviceCaps,    0, "00E610DE00000002000000000001000200001F1F00FC00070024000100000000"    
+
+
+[NVENET5_9X.REG]
+HKR, ,              DevLoader,                  0, "*ndis"
+HKR, ,              DeviceVxDs,                 0, "nvenet.sys"
+HKR, ,              EnumPropPages,              0, "netdi.dll,EnumPropPages"
+HKR, ,				AdapterCFID,    			0, "008610DE"
+HKR, , 		        AdapterType,       		     , 5
+HKR, , 		        BusType,                     , 5
+HKR,                Ndi\Interfaces,Lower,   	0, "ethernet"
+HKR,                Ndi\Interfaces,LowerRange, 	0, "ethernet"
+HKR,                Ndi\Interfaces,Upper,   	0, "ndis3"
+HKR,                Ndi\Interfaces,UpperRange, 	0, "ndis3"
+HKR, NDIS,          LogDriverName,              0, "NVENET"
+HKR, NDIS,          MajorNdisVersion,           1, 03
+HKR, NDIS,          MinorNdisVersion,           1, 0A
+HKR, Ndi\Install,   ndis3,                      0, "NVENET9x.INSTALL"
+HKR,                ,            DeviceCaps,    0, "008610DE00000002000000000001000200001F1F00FC00070024000100000000"    
+
+[NVENET6_9X.REG]
+HKR, ,              DevLoader,                  0, "*ndis"
+HKR, ,              DeviceVxDs,                 0, "nvenet.sys"
+HKR, ,              EnumPropPages,              0, "netdi.dll,EnumPropPages"
+HKR, ,				AdapterCFID,    			0, "008C10DE"
+HKR, , 		        AdapterType,       		     , 5
+HKR, , 		        BusType,                     , 5
+HKR,                Ndi\Interfaces,Lower,   	0, "ethernet"
+HKR,                Ndi\Interfaces,LowerRange, 	0, "ethernet"
+HKR,                Ndi\Interfaces,Upper,   	0, "ndis3"
+HKR,                Ndi\Interfaces,UpperRange, 	0, "ndis3"
+HKR, NDIS,          LogDriverName,              0, "NVENET"
+HKR, NDIS,          MajorNdisVersion,           1, 03
+HKR, NDIS,          MinorNdisVersion,           1, 0A
+HKR, Ndi\Install,   ndis3,                      0, "NVENET9x.INSTALL"
+HKR,                ,            DeviceCaps,    0, "008C10DE00000002000000000001000200001F1F00FC00070024000100000000"    
+
+[NVENET7_9X.REG]
+HKR, ,              DevLoader,                  0, "*ndis"
+HKR, ,              DeviceVxDs,                 0, "nvenet.sys"
+HKR, ,              EnumPropPages,              0, "netdi.dll,EnumPropPages"
+HKR, ,				AdapterCFID,    			0, "00DF10DE"
+HKR, , 		        AdapterType,       		     , 5
+HKR, , 		        BusType,                     , 5
+HKR,                Ndi\Interfaces,Lower,   	0, "ethernet"
+HKR,                Ndi\Interfaces,LowerRange, 	0, "ethernet"
+HKR,                Ndi\Interfaces,Upper,   	0, "ndis3"
+HKR,                Ndi\Interfaces,UpperRange, 	0, "ndis3"
+HKR, NDIS,          LogDriverName,              0, "NVENET"
+HKR, NDIS,          MajorNdisVersion,           1, 03
+HKR, NDIS,          MinorNdisVersion,           1, 0A
+HKR, Ndi\Install,   ndis3,                      0, "NVENET9x.INSTALL"
+HKR,                ,            DeviceCaps,    0, "00DF10DE00000002000000000001000200001F1F00FC00070024000100000000"    
+
+;-----------------------------------------------------------------------------
+; common base for 10/100Mb Adapters
+;
+[SpeedSetting.reg]
+;
+; Wake on Lan from Power Off
+;
+HKR, Ndi\params\OemSetting1,      ParamDesc,  0, "%WakeOnLANFromPowerOff%"
+HKR, Ndi\params\OemSetting1,      default,    0, "1"
+HKR, Ndi\params\OemSetting1,       type,      0, "enum"
+HKR, Ndi\params\OemSetting1\enum,  "0",       0, "%Disable%"
+HKR, Ndi\params\OemSetting1\enum,  "1",       0, "%Enable%"
+
+HKR, Ndi\params\ForceSpeedDpx,       ParamDesc,  0, "%SpeedDuplexSettings%"
+HKR, Ndi\params\ForceSpeedDpx,       default,    0, "0"
+HKR, Ndi\params\ForceSpeedDpx,       type,       0, "enum"
+HKR, Ndi\params\ForceSpeedDpx\enum,  "0",        0, "%Automatic%"
+HKR, Ndi\params\ForceSpeedDpx\enum,  "1",        0, "%HD10MB%"
+HKR, Ndi\params\ForceSpeedDpx\enum,  "2",        0, "%FD10MB%"
+HKR, Ndi\params\ForceSpeedDpx\enum,  "3",        0, "%HD100MB%"
+HKR, Ndi\params\ForceSpeedDpx\enum,  "4",        0, "%FD100MB%"
+HKR, Ndi\params\ForceSpeedDpx\enum,  "5",        0, "%HD10MBA%"
+HKR, Ndi\params\ForceSpeedDpx\enum,  "6",        0, "%FD10MBA%"
+HKR, Ndi\params\ForceSpeedDpx\enum,  "7",        0, "%HD100MBA%"
+HKR, Ndi\params\ForceSpeedDpx\enum,  "8",        0, "%FD100MBA%"
+HKR, Ndi\params\ForceSpeedDpx\enum,  "9",        0, "%FD1000MBA%"
+
+HKR, Ndi\params\NetworkAddress,       ParamDesc,  0, "%NetworkAddress%"
+HKR, Ndi\params\NetworkAddress,       default,    0, " "
+HKR, Ndi\params\NetworkAddress,       type,       0, "edit"
+HKR, Ndi\params\NetworkAddress,       LimitText,  0, "12"
+HKR, Ndi\params\NetworkAddress,       UpperCase,  0, "1"
+HKR, Ndi\params\NetworkAddress,       optional,   0, "1"
+
+HKR, Ndi\params\PollIntervalInus,      ParamDesc,  0, "%OptimizeFor%"
+HKR, Ndi\params\PollIntervalInus,      default,    0, "425"
+HKR, Ndi\params\PollIntervalInus,      type,       0, "enum"
+HKR, Ndi\params\PollIntervalInus\enum, 0,          0, "%Throughput%"
+HKR, Ndi\params\PollIntervalInus\enum, 425,        0, "%CPU%"
+
+
+[JumboFrameSize.reg]
+HKR, Ndi\Params\JumboFrameSize,         ParamDesc, 0, "%JumboFrameSize%"
+HKR, Ndi\Params\JumboFrameSize,         default,   0, "0"
+HKR, Ndi\Params\JumboFrameSize,         type,      0, "enum"
+HKR, Ndi\Params\JumboFrameSize\enum,    "0",       0, "%JumboFrameSize_1500%"
+HKR, Ndi\Params\JumboFrameSize\enum,    "1",       0, "%JumboFrameSize_2500%"
+HKR, Ndi\Params\JumboFrameSize\enum,    "2",       0, "%JumboFrameSize_4500%"
+HKR, Ndi\Params\JumboFrameSize\enum,    "3",       0, "%JumboFrameSize_9000%"
+
+[ChecksumOffload.reg]
+HKR, Ndi\params\ChecksumOffload,       ParamDesc,  0, "%ChecksumOffload%" 
+HKR, Ndi\params\ChecksumOffload,       default,    0, "1"
+HKR, Ndi\params\ChecksumOffload,       type,       0, "enum"
+HKR, Ndi\params\ChecksumOffload\enum,  "0",        0, "%Disable%"
+HKR, Ndi\params\ChecksumOffload\enum,  "1",        0, "%Enable%"
+
+[SegOffload.reg]
+HKR, Ndi\params\SegOffload,       ParamDesc,  0, "%SegOffload%" 
+HKR, Ndi\params\SegOffload,       default,    0, "1"
+HKR, Ndi\params\SegOffload,       type,       0, "enum"
+HKR, Ndi\params\SegOffload\enum,  "0",        0, "%Disable%"
+HKR, Ndi\params\SegOffload\enum,  "1",        0, "%Enable%"
+
+[Debug.reg]
+HKR, Ndi\Params\_Dbg_WatermarkTFBW, ParamDesc, , "_Dbg_WatermarkTFBW"
+HKR, Ndi\Params\_Dbg_WatermarkTFBW, default,   , "1"
+HKR, Ndi\Params\_Dbg_WatermarkTFBW, type,      , "dword"
+HKR, Ndi\Params\_Dbg_WatermarkTFBW, min,       , "1"
+HKR, Ndi\Params\_Dbg_WatermarkTFBW, max,       , "7"
+HKR, Ndi\Params\_Dbg_WatermarkTFBW, step,      , "1"
+HKR, Ndi\Params\_Dbg_WatermarkTFBW, base,      , "10"
+
+
+HKR, Ndi\Params\_Dbg_BackoffRseed, ParamDesc, , "_Dbg_BackoffRseed"
+HKR, Ndi\Params\_Dbg_BackoffRseed, default,   , "8"
+HKR, Ndi\Params\_Dbg_BackoffRseed, type,      , "dword"
+HKR, Ndi\Params\_Dbg_BackoffRseed, min,       , "0"
+HKR, Ndi\Params\_Dbg_BackoffRseed, max,       , "255"
+HKR, Ndi\Params\_Dbg_BackoffRseed, step,      , "1"
+HKR, Ndi\Params\_Dbg_BackoffRseed, base,      , "10"
+
+HKR, Ndi\Params\_Dbg_BackoffSlotTime, ParamDesc, , "_Dbg_BackoffSlotTime"
+HKR, Ndi\Params\_Dbg_BackoffSlotTime, default,   , "127"
+HKR, Ndi\Params\_Dbg_BackoffSlotTime, type,      , "dword"
+HKR, Ndi\Params\_Dbg_BackoffSlotTime, min,       , "0"
+HKR, Ndi\Params\_Dbg_BackoffSlotTime, max,       , "1023"
+HKR, Ndi\Params\_Dbg_BackoffSlotTime, step,      , "1"
+HKR, Ndi\Params\_Dbg_BackoffSlotTime, base,      , "10"
+
+HKR, Ndi\Params\_Dbg_TxReadCompleteEnable, ParamDesc, , "_Dbg_TxReadCompleteEnable"
+HKR, Ndi\Params\_Dbg_TxReadCompleteEnable, default,   , "0"
+HKR, Ndi\Params\_Dbg_TxReadCompleteEnable, type,      , "dword"
+HKR, Ndi\Params\_Dbg_TxReadCompleteEnable, min,       , "0"
+HKR, Ndi\Params\_Dbg_TxReadCompleteEnable, max,       , "1"
+HKR, Ndi\Params\_Dbg_TxReadCompleteEnable, step,      , "1"
+HKR, Ndi\Params\_Dbg_TxReadCompleteEnable, base,      , "10"
+
+[LowPowerStateLinkSpeed.reg]
+HKR, Ndi\params\LowPowerStateLinkSpeed,       ParamDesc,  0, "%LowPowerStateLinkSpeed%" 
+HKR, Ndi\params\LowPowerStateLinkSpeed,       default,    0, "1"
+HKR, Ndi\params\LowPowerStateLinkSpeed,       type,       0, "enum"
+HKR, Ndi\params\LowPowerStateLinkSpeed\enum,  "0",        0, "%Disable%"
+HKR, Ndi\params\LowPowerStateLinkSpeed\enum,  "1",        0, "%Enable%"
+
+;-----------------------------------------------------------------------------------------
+
+
+[NVENET9x.INSTALL]
+CopyFiles = NVENET9x.CopyFiles
+
+[SourceDisksNames]
+; diskid = description[, [tagfile] [, <unused>, subdir]]
+1 = "NVIDIA nForce Networking Controller Driver Disk 1",,,
+
+[SourceDisksFiles]
+; filename_on_source = diskID[, [subdir][, size]]
+NVENET.sys = 1,,
+nvuenet.exe = 1,,
+nvenet.nvu = 1,,
+
+[DestinationDirs]
+NVENET9x.CopyFiles   = 11
+DefaultDestDirs      = 11
+
+[NVENET9x.CopyFiles]
+NVENET.sys,,,2
+nvuenet.exe,,,2
+nvenet.nvu,,,2
+
+[Uninstall.AddReg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\NVIDIA Ethernet Driver"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\NVIDIA Ethernet Driver",DisplayName,,"NVIDIA Ethernet Driver"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\NVIDIA Ethernet Driver",UninstallString,,"%11%\nvuenet.exe Uninstall %11%\Nvenet.nvu,NVIDIA Ethernet Driver"
+
+[Strings]
+Msft                     	= "Microsoft"
+Nvidia                   	= "Nvidia"
+NVENET.DeviceDesc        	= "NVIDIA nForce Networking Controller"
+NVENET.Service.DispName  	= "NVIDIA nForce Networking Controller Driver"
+Enable                       = "Enable"
+Disable                      = "Disable"
+WakeOnLANFromPowerOff        = "WakeOnLAN From PowerOff"
+Throughput                   = "Throughput"
+CPU                          = "CPU"
+NetworkAddress           	= "Network Address"
+OptimizeFor			= "Optimize For"
+SpeedDuplexSettings             = "Speed/duplex settings"
+SpeedDuplexSelectionMethod      = "Speed/duplex selection method"
+Automatic                	= "Full autonegotiation"
+HD10MB				= "Force 10 Half Duplex"
+FD10MB				= "Force 10 Full Duplex"
+HD100MB				= "Force 100 Half Duplex"
+FD100MB				= "Force 100 Full Duplex"
+
+HD10MBA				= "Autonegotiate for 10HD"
+FD10MBA				= "Autonegotiate for 10FD"
+HD100MBA			= "Autonegotiate for 100HD"
+FD100MBA			= "Autonegotiate for 100FD"
+FD1000MBA			= "Autonegotiate for 1000FD"
+JumboFrameSize	     = "Jumbo Frame Payload Size"
+JumboFrameSize_1500  = "1500 (Standard frame)"
+JumboFrameSize_2500  = "2500"
+JumboFrameSize_4500  = "4500"
+JumboFrameSize_9000  = "9000"
+ChecksumOffload                 = "Checksum Offload"
+SegOffload						= "Segmentation Offload"
+MediaIF							= "Media Interface"
+LowPowerStateLinkSpeed          = "Low Power State Link Speed"

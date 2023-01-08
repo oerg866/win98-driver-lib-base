@@ -1,0 +1,216 @@
+;; 9/29/95
+
+[Version]
+Signature="$Windows 95$"
+Class=OPTi924MEDIA
+provider=%OPTi%
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,"OPTi Sound System Installation"
+HKR,,Icon,,"0"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+"OPTi Inc."=OPTiMediaChips
+
+[ControlFlags]
+;ExcludeFromSelect=*OPT0924
+
+[OPTiMediaChips]
+"OPTi Plug-N-Play 924 Sound System: AUDIO (Sound\MPU401\Game)"=OPT0924_Device, *OPTF924
+"OPTi Plug-N-Play 924 Sound System: AUDIO plus IDE CD-ROM"=OPT1924_Device, *OPTF924
+"OPTi Plug-N-Play 924 Sound System: AUDIO plus MODEM"=OPT2924_Device, *OPTF924
+"OPTi Plug-N-Play 924 Sound System: AUDIO\MODEM\IDE CDROM"=OPT3924_Device, *OPTF924
+
+;---------------------------------------------------------------;
+
+[OPT0924_Device]
+DelReg=OPTF924.DelReg
+AddReg=OPT0924.AddReg
+DelFiles=OPT.DelList
+CopyFiles=OPT.CopyList, OPT.CopyINF, OPT.CopySND4DOS
+UpdateInis=OPT.UpdateInis
+LogConfig=OPTiF924.LC
+UpdateAutoBat=OPTF924.UpdateAutoexec
+
+[OPT1924_Device]
+DelReg=OPTF924.DelReg
+AddReg=OPT1924.AddReg
+DelFiles=OPT.DelList
+CopyFiles=OPT.CopyList, OPT.CopyINF, OPT.CopySND4DOS
+UpdateInis=OPT.UpdateInis
+LogConfig=OPTiF924.LC
+UpdateAutoBat=OPTF924.UpdateAutoexec
+
+[OPT2924_Device]
+DelReg=OPTF924.DelReg
+AddReg=OPT2924.AddReg
+DelFiles=OPT.DelList
+CopyFiles=OPT.CopyList, OPT.CopyINF, OPT.CopySND4DOS
+UpdateInis=OPT.UpdateInis
+LogConfig=OPTiF924.LC
+UpdateAutoBat=OPTF924.UpdateAutoexec
+
+[OPT3924_Device]
+DelReg=OPTF924.DelReg
+AddReg=OPT3924.AddReg
+DelFiles=OPT.DelList
+CopyFiles=OPT.CopyList, OPT.CopyINF, OPT.CopySND4DOS
+UpdateInis=OPT.UpdateInis
+LogConfig=OPTiF924.LC
+UpdateAutoBat=OPTF924.UpdateAutoexec
+
+;---------------------------------------------------------------;
+[OPTiF924.LC]
+ConfigPriority=HARDWIRED
+
+
+;---------------------------------------------------------------;
+[OPT0924.AddReg]
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0000\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0001\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0002\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0003\08000000,CSConfigFlags,1,07,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0004\08000000,CSConfigFlags,1,07,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0005\08000000,CSConfigFlags,1,00,00,00,00
+
+[OPT1924.AddReg]
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0000\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0001\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0002\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0003\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0004\08000000,CSConfigFlags,1,07,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0005\08000000,CSConfigFlags,1,00,00,00,00
+
+[OPT2924.AddReg]
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0000\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0001\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0002\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0003\08000000,CSConfigFlags,1,07,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0004\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0005\08000000,CSConfigFlags,1,00,00,00,00
+
+[OPT3924.AddReg]
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0000\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0001\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0002\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0003\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0004\08000000,CSConfigFlags,1,00,00,00,00
+HKLM,Config\0001\Enum\ISAPNP\OPT0924_DEV0005\08000000,CSConfigFlags,1,00,00,00,00
+
+[OPTF924.DelReg]
+HKLM,System\CurrentControlSet\control\MediaResources\aux
+HKLM,System\CurrentControlSet\control\MediaResources\mixer
+HKLM,System\CurrentControlSet\control\MediaResources\wave
+HKLM,System\CurrentControlSet\control\MediaResources\midi
+HKLM,System\CurrentControlSet\Services\Class\OPTi924Media
+
+HKLM,Enum\ISAPNP\OPT0924_DEV0000\08000000
+HKLM,Enum\ISAPNP\OPT0924_DEV0001\08000000
+HKLM,Enum\ISAPNP\OPT0924_DEV0002\08000000
+HKLM,Enum\ISAPNP\OPT0924_DEV0003\08000000
+HKLM,Enum\ISAPNP\OPT0924_DEV0004\08000000
+HKLM,Enum\ISAPNP\OPT0924_DEV0005\08000000
+
+HKLM,Enum\ROOT\OPTi930MEDIA
+HKLM,Enum\ROOT\OPTi931MEDIA
+HKLM,Enum\ROOT\OPTi929MEDIA
+HKLM,Enum\ROOT\OPTi928MEDIA
+HKLM,Enum\ROOT\OPTi925MEDIA
+
+HKLM,Enum\ROOT\*PNPB002 
+HKLM,Enum\ROOT\*PNPB02F
+HKLM,Enum\ROOT\*PNPB007
+HKLM,Enum\ROOT\*PNPB005
+HKLM,Enum\ROOT\*PNPB020
+HKLM,Enum\ROOT\*PNPB006
+
+
+;---------------------------------------------------------------;
+
+[OPT.UpdateInis]
+system.ini,386Enh,"device=vsndsys.386"
+system.ini,386Enh,"device=vsnd924.386"
+system.ini,386Enh,"device=vsnd16d.386"
+system.ini,386Enh,"device=vadlib.386"
+system.ini,386Enh,"device=vsbpd.386"
+
+system.ini,drivers,"wave*=snd16.drv",,1
+system.ini,drivers,"midi*=snd16.drv",,1
+system.ini,drivers,"aux*=snd16.drv",,1
+system.ini,drivers,"mixer*=snd16.drv",,1
+
+system.ini,drivers,"wave*=snd924.drv",,1
+system.ini,drivers,"midi*=snd924.drv",,1
+system.ini,drivers,"midi*=mpu401p.drv",,1
+system.ini,drivers,"aux*=snd924.drv",,1
+system.ini,drivers,"mixer*=snd924.drv",,1
+
+system.ini,drivers,"wave*=sndsys.drv",,1
+system.ini,drivers,"midi*=sndsys.drv",,1
+system.ini,drivers,"aux*=sndsys.drv",,1
+system.ini,drivers,"mixer*=sndsys.drv",,1
+
+system.ini,drivers,"midi*=mpu401.drv",,1
+system.ini,drivers,"midi*=mpu401p.drv",,1
+system.ini,drivers,"midi*=rdmpu401.drv",,1
+
+;---------------------------------------------------------------;
+
+[OPT.CopyList]
+snd924p.drv,,
+sndopl3p.drv,,
+snd924p.vxd,,
+sndm401p.drv,,
+sndm401p.vxd,,
+
+[OPTF924.UpdateAutoexec]
+CmdDelete=SND4DOS.EXE
+CmdAdd=SND4DOS.EXE
+
+[OPT.CopySND4DOS]
+snd4dos.exe,,
+
+[OPT.CopyINF]
+snd924p.inf,,
+optjoy.inf,,
+
+;---------------------------------------------------------------;
+
+[OPT.DelList]
+vsnd924.386,,,1
+snd924.drv,,,1
+vsndsys.386,,,1
+sndsys.drv,,,1
+vsbpd.386,,,1
+vadlib.386,,,1
+nullwave.drv,,,1
+mpu401.drv
+mpu401p.drv
+rdmpu401.drv
+
+[DestinationDirs]
+OPT.CopyList = 11	; LDID_SYS
+OPT.CopyINF = 17	; INF
+OPT.CopySND4DOS = 30    ; BOOT DRIVE ROOT
+
+[SourceDisksNames]
+1="OPTi 82C924 Plug-N-Play Multimedia Disk",,0001
+
+[SourceDisksFiles]
+snd924p.vxd=1
+snd924p.drv=1
+sndopl3p.drv=1
+sndm401p.drv=1
+sndm401p.vxd=1
+
+;---------------------------------------------------------------;
+;Localized strings
+OPTi="OPTi Inc."
+MfgName="OPTi Inc."
+DeviceDesc = "OPTi Plug-N-Play 924 Installation"
+OPTiMediaClassName="OPTi Plug-N-Play Sound System"
+

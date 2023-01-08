@@ -1,0 +1,327 @@
+;
+;  YAMAHA OPL3-SAx Audio Device Driver.
+;         Copyright 1996-1998 YAMAHA
+;   1998/09/21 Version 4.05.00.2342
+;
+[Version]
+Signature=$CHICAGO$
+Class=MEDIA
+Provider=%String0%
+LayoutFile=layout.inf
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[DestinationDirs]
+OPL3SAHelp.Copy=18
+DefaultDestDir=11
+
+[Manufacturer]
+%String1%=YAMAHA
+
+[YAMAHA]
+%String2%=OPL3SA_ConfigReg,*YMH0001
+%String3%=OPL3SA_SBPro,*YMH0002
+%String4%=OPL3SA_WSS,*YMH0003
+%String5%=OPL3SA_FMSynth,*YMH0004,*PNPB020
+%String6%=OPL3SA_MPU401,*YMH0005,*PNPB006
+%String7%=MSJSTICK,*YMH0006,*PNPB02F
+%String8%=OPL3SA_SndSys,*YMH0007
+%String9%=OPL3SA_Legacy,*YMH000F
+%String11%=OPL3SA2_SndSys,*YMH0021
+%String12%=MSJSTICK,*YMH0022,*PNPB02F
+
+[*YMH0001.Det]
+AddReg=PreCopySection
+
+[*YMH0002.Det]
+AddReg=PreCopySection
+
+[*YMH0003.Det]
+AddReg=PreCopySection
+
+[*YMH0004.Det]
+AddReg=PreCopySection
+
+[*YMH0005.Det]
+AddReg=PreCopySection
+
+[*YMH0006.Det]
+AddReg=PreCopySection
+
+[*YMH0007.Det]
+AddReg=PreCopySection
+
+[*YMH0021.Det]
+AddReg=PreCopySection
+
+[*YMH0022.Det]
+AddReg=PreCopySection
+
+[OPL3SA_ConfigReg]
+DelFiles =OPL3SA.DelList
+CopyFiles=ConfigReg.Copy
+AddReg=ConfigReg.AddReg
+
+[OPL3SA_SBPro]
+DelFiles =OPL3SA.DelList
+CopyFiles=OPL3SA.Copy
+AddReg=OPL3SA.AddReg,SBPro.AddReg
+
+[OPL3SA_WSS]
+DelFiles =OPL3SA.DelList
+CopyFiles=OPL3SA.Copy
+AddReg=OPL3SA.AddReg,WSS.AddReg
+
+[OPL3SA_FMSynth]
+DelFiles =OPL3SA.DelList
+CopyFiles=OPL3SA.Copy
+AddReg=OPL3SA.AddReg,FMSynth.AddReg
+
+[OPL3SA_MPU401]
+DelFiles =OPL3SA.DelList
+CopyFiles=OPL3SA.Copy
+AddReg=OPL3SA.AddReg,MPU401.AddReg
+
+[MSJSTICK]
+CopyFiles=MSJSTICK.CopyList
+AddReg=JOYSTICK.AddReg,MSJSTICK.AddReg
+LogConfig=BasicJoyStick.LC0
+UpdateInis=MSJSTICK.UpdateInis
+
+[OPL3SA_SndSys]
+DelFiles =OPL3SA.DelList
+CopyFiles=OPL3SA.Copy,OPL3SAHelp.Copy
+AddReg=OPL3SA.AddReg,SASndSys.AddReg
+
+[OPL3SA_Legacy]
+DelFiles =OPL3SA.DelList
+CopyFiles=OPL3SA.Copy,OPL3SAHelp.Copy
+AddReg=OPL3SA.AddReg,Legacy.AddReg
+LogConfig=Legacy.LogConfig
+
+[OPL3SA2_SndSys]
+DelFiles=OPL3SA.DelList
+CopyFiles=OPL3SA.Copy,OPL3SAHelp.Copy
+AddReg=OPL3SA.AddReg,SASndSys.AddReg
+
+[ConfigReg.Copy]
+vopl3sa.vxd
+opl3sa.drv
+vymixd.vxd
+vsgm.vxd
+
+[OPL3SA.Copy]
+Vopl3sa.vxd
+Opl3sa.drv
+cpl32apl.cpl
+vymixd.vxd
+vsgm.vxd
+
+[OPL3SACplx.Copy]
+opl3sacx.dll
+
+[OPL3SAHelp.Copy]
+opl3sacf.hlp
+
+[OPL3SA.DelList]
+opl3sa.drv,,,1
+vopl3sa.386,,,1
+vopl3sa.vxd,,,1
+vymixd.vxd,,,1
+vsgm.vxd,,,1
+cpl32apl.cpl,,,1
+
+[MSJSTICK.CopyList]
+vjoyd.vxd
+msjstick.drv
+
+[ConfigReg.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,0,vopl3sa.vxd
+
+[PreCopySection]
+HKR,,NoSetupUI,0,1
+
+[OPL3SA.AddReg]
+HKR,Drivers,MIGRATED,0,0
+HKLM,%KEY_IOC%\asm,,0,
+HKLM,%KEY_IOC%\Rec,,0,
+HKLM,%KEY_IOC%\MPlay,,0,
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+
+[SBPro.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,0,vopl3sa.vxd
+HKR,Drivers\midi\opl3sa.drv001,Driver,0,opl3sa.drv
+HKR,Drivers\midi\opl3sa.drv001,Description,0,%FMDesc%
+HKR,Drivers,SubClasses,0,midi
+
+[WSS.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,0,vopl3sa.vxd
+HKR,Drivers\wave\opl3sa.drv,Driver,0,opl3sa.drv
+HKR,Drivers\wave\opl3sa.drv,Description,0,%WSSDesc%
+HKR,Drivers\aux\opl3sa.drv,Driver,0,opl3sa.drv
+HKR,Drivers\aux\opl3sa.drv,Description,0,%WSSDesc%
+HKR,Drivers\mixer\opl3sa.drv,Driver,0,opl3sa.drv
+HKR,Drivers\mixer\opl3sa.drv,Description,0,%MIXDesc%
+HKR,Drivers\midi\opl3sa.drv002,Driver,0,opl3sa.drv
+HKR,Drivers\midi\opl3sa.drv002,Description,0,%WSSDesc2%
+HKR,Drivers,SubClasses,0,"wave,midi,aux,mixer"
+HKR,Drivers,SubClasses,0,"wave,aux,mixer"
+
+[FMSynth.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,0,vopl3sa.vxd
+HKR,Drivers\midi\opl3sa.drv,Driver,0,opl3sa.drv
+HKR,Drivers\midi\opl3sa.drv,Description,0,%FMDesc%
+HKR,Drivers,SubClasses,0,midi
+
+[MPU401.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,0,vopl3sa.vxd
+HKR,Drivers\midi\opl3sa.drv003,Driver,0,opl3sa.drv
+HKR,Drivers\midi\opl3sa.drv003,External,1,01,00,00,00
+HKR,Drivers\midi\opl3sa.drv003,Description,0,%MPUDesc%
+HKR,Drivers,SubClasses,0,midi
+
+[JOYSTICK.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,Drivers,MIGRATED,0,0
+HKR,Drivers\joystick,,0,
+
+[MSJSTICK.AddReg]
+HKR,,Driver,0,vjoyd.vxd
+HKR,Drivers\joystick\msjstick.drv,Description,0,%string10%
+HKR,Drivers\joystick\msjstick.drv,Driver,0,msjstick.drv
+HKR,Drivers,SubClasses,0,joystick
+
+[SASndSys.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,0,vopl3sa.vxd
+HKR,Drivers\wave\opl3sa.drv,Driver,0,opl3sa.drv
+HKR,Drivers\wave\opl3sa.drv,Description,0,%WSSDesc%
+HKR,Drivers\aux\opl3sa.drv,Driver,0,opl3sa.drv
+HKR,Drivers\aux\opl3sa.drv,Description,0,%WSSDesc%
+HKR,Drivers\mixer\opl3sa.drv,Driver,0,opl3sa.drv
+HKR,Drivers\mixer\opl3sa.drv,Description,0,%MIXDesc%
+HKR,Drivers\midi\opl3sa.drv001,Driver,0,opl3sa.drv
+HKR,Drivers\midi\opl3sa.drv001,Description,0,%FMDesc%
+HKR,Drivers\midi\opl3sa.drv001,NumPorts,1,03,00,00,00
+HKR,Drivers\midi\opl3sa.drv001,Port,1,00,00,00,00
+HKR,Drivers\midi\opl3sa.drv002,Driver,0,opl3sa.drv
+HKR,Drivers\midi\opl3sa.drv002,External,1,01,00,00,00
+HKR,Drivers\midi\opl3sa.drv002,Description,0,%MPUDesc%
+HKR,Drivers\midi\opl3sa.drv002,NumPorts,1,03,00,00,00
+HKR,Drivers\midi\opl3sa.drv002,Port,1,01,00,00,00
+HKR,Drivers\midi\opl3sa.drv003,Driver,0,opl3sa.drv
+HKR,Drivers\midi\opl3sa.drv003,Description,0,%WSSDesc2%
+HKR,Drivers\midi\opl3sa.drv003,NumPorts,1,03,00,00,00
+HKR,Drivers\midi\opl3sa.drv003,Port,1,02,00,00,00
+HKR,Drivers,SubClasses,0,"midi,aux,mixer,wave"
+
+[OPL3SACPLX.AddReg]
+HKCR,CLSID\%GUID%,,,%cplxname%
+HKCR,CLSID\%GUID%\InProcServer32,,,opl3sacx.dll
+HKCR,CLSID\%GUID%\InProcServer32,ThreadingModel,,Apartment
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\"Controls Folder"\Power\shellex\PropertySheetHandlers\%cplxname%,,,%GUID%
+
+[Legacy.AddReg]
+HKR,,DevLoader,0,*CONFIGMG
+HKR,,Enumerator,0,*CONFIGMG
+
+[Class.AddReg]
+HKR,,,0,%MediaClassName%
+HKR,,Icon,0,-1
+HKR,,Installer,0,mmci.dll
+
+[BasicJoyStick.LC0]
+ConfigPriority=HARDWIRED
+IOConfig=201-201(3ff::)
+
+[Legacy.LogConfig]
+ConfigPriority=NORMAL
+IOConfig=f86-f87(3ff::) ;0
+IOConfig=220-22f(3ff::),240-24f(3ff::)  ;1
+IOConfig=388-38f(3ff::) ;2
+IOConfig=530-537(3ff::),604-60b(3ff::),e80-e87(3ff::),f40-f47(3ff::)    ;3
+IOConfig=330-331(3ff::),300-301(3ff::),332-333(3ff::),334-335(3ff::)    ;4
+IOConfig=201-201(3ff::) ;5
+IRQConfig=7,9,10,11 ;6
+IRQConfig=5,7,9,10  ;7
+DMAConfig=0,1,3     ;8
+DMAConfig=0,1,3     ;9
+
+[MSJSTICK.UpdateInis]
+system.ini,drivers,joystick,,0
+
+[ControlFlags]
+ExcludeFromSelect=*YMH0002
+ExcludeFromSelect=*YMH0003
+ExcludeFromSelect=*YMH0004
+ExcludeFromSelect=*YMH0005
+
+[OPL3SA_Legacy.HW]
+AddReg=Legacy.AddRegHW
+
+[Legacy.AddRegHW]
+HKR,Child0000,HardwareID,,*YMH0001
+HKR,Child0000,ResourceMap,1,00
+HKR,Child0001,HardwareID,,*YMH0007
+HKR,Child0001,ResourceMap,1,03,01,02,06,07,08,04,09
+HKR,Child0002,HardwareID,,*YMH0006
+HKR,Child0002,ResourceMap,1,05
+
+[OPL3SA_Legacy.FactDef]
+ConfigPriority=NORMAL
+IOConfig=f86-f87(3ff::)
+IOConfig=220-22f(3ff::)
+IOConfig=388-38f(3ff::)
+IOConfig=530-537(3ff::)
+IOConfig=330-331(3ff::)
+IOConfig=201-201(3ff::)
+IRQConfig=10
+IRQConfig=5
+DMAConfig=0
+DMAConfig=1
+
+[SourceDisksNames]
+1="OPL3-SAx driver for Windows95 disk1",SA95DRV1,0000-0000
+2="OPL3-SAx driver for Windows95 disk2",SA95DRV2,0000-0000
+
+[SourceDisksFiles]
+Opl3sa.drv=1
+Vopl3sa.vxd=1
+vymixd.vxd=2
+vsgm.vxd=2
+
+[Strings]
+String0="YAMAHA"
+String1="YAMAHA"
+String2="YAMAHA OPL3-SA Sound Controller"
+String3="YAMAHA OPL3-SA Sound Blaster Playback System"
+String4="YAMAHA OPL3-SA Windows Sound System CODEC"
+String5="YAMAHA OPL3-SA FM Synthesizer"
+String6="YAMAHA OPL3-SA MPU401"
+String7="YAMAHA OPL3-SA GamePort"
+String8="YAMAHA OPL3-SA Sound System"
+String9="OPL3-SA Legacy Board"
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+KEY_Custom="SOFTWARE\YAMAHA\Driver\OPL3-SAx"
+FMDesc="YAMAHA OPL3-SA FM Synthesizer"
+WSSDesc="YAMAHA OPL3-SA Windows Sound System CODEC"
+MIXDesc="YAMAHA OPL3-SA Mixer"
+WSSDesc2="YAMAHA OPL3-SA SoftSynth"
+FMDesc="YAMAHA OPL3-SA FM Synthesizer"
+MPUDesc="YAMAHA OPL3-SA MPU401"
+string10="Gameport Joystick"
+string11="YAMAHA OPL3-SAx Sound System"
+string12="YAMAHA OPL3-SAx GamePort"
+string13="YAMAHA OPL3-SAx ComPort"
+string14="YAMAHA OPL3-SAx IDE"
+string15="YAMAHA OPL3-SAx Reserved"
+cplxname="OPL3-SAx Power Management Control Panel Extension"
+MediaClassName="Media Devices"
+GUID="{8BD84340-117B-11d0-8B84-00A024397543}"

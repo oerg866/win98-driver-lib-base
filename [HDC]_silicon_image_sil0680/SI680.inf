@@ -1,0 +1,142 @@
+; This INF file installs the 680 non-Raid ATA driver on Windows 98/ME,
+; Windows NT 4.0, Windows 2000, and Windows XP systems.
+
+[Version]
+Signature="$Chicago$"
+Class=SCSIAdapter
+ClassGuid={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%SI%
+CatalogFile=pnp680.cat
+DriverVer=03/15/2002, 1.0.0.12
+
+; Class Install
+[ClassInstall]
+Addreg=SCSIReg
+
+[SCSIReg]
+HKR,,,,%SCSIClassName%
+HKR,,EnumPropPages,,"iosclass.dll,SCSIEnumPropPages"
+HKR,,Icon,,-10
+
+[SourceDisksNames]
+1="Silicon Image ATA/133 Driver Installation Disk",pnp680.sys,,
+
+[SourceDisksFiles]
+pnp680.sys	= 1
+pnp680.mpd	= 1
+SiiSupp.vxd	= 1
+SilSupp.cpl	= 1
+
+[DestinationDirs]
+DefaultDestDir		= 12
+DriverFiles		= 12
+DriverFiles.NT		= 12
+DllFiles_680		= 11
+DllFiles_680.NTX86	= 11
+
+[DriverFiles_680]
+pnp680.mpd,,,0x20
+SiiSupp.vxd,,,0x20
+
+[DllFiles_680]
+SilSupp.cpl,,,0x20
+
+[DriverFiles_680.NTX86]
+pnp680.sys,,,0x20
+
+[DllFiles_680.NTX86]
+SilSupp.cpl,,,0x20
+
+[Manufacturer]
+%SI%=SI_HDC
+
+[SI_HDC]
+%PCI\VEN_1095&DEV_0680.DeviceDesc%=SI_680, PCI\VEN_1095&DEV_0680&SUBSYS_06801095
+
+
+[SI_680]
+DriverVer=03/15/2002, 1.0.0.12
+Copyfiles=DriverFiles_680, DllFiles_680
+AddReg = ios, win98_680.reg, Win98ProblemDeviceList_680, Win98Supported680SubSystemIds
+
+
+[SI_680.NTX86]
+Copyfiles=DriverFiles_680.NTX86
+
+[SI_680.NTX86.Services]
+AddService=Pnp680,0x00000003,SI_680_Service_Install, Miniport_EventLog_Inst
+
+[SI_680.NTX86.CoInstallers]
+CopyFiles = DllFiles_680.NTX86
+AddReg = SI_680.NTX86.CoInstall_AddReg
+
+[SI_680.NTX86.CoInstall_AddReg]
+HKR,,CoInstallers32,0x00010000,"SilSupp.cpl, CoInstHandler"
+
+[SI_680_Service_Install]
+DisplayName=%SI680IDE.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\pnp680.sys
+LoadOrderGroup=Scsi miniport
+AddReg=PnPSupport_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=Supported680SubSystemIds_AddReg
+
+
+; Mark device as supporting Plug & Play on the PCI(5) bus.
+[PnPSupport_AddReg]
+HKR,Parameters\PnPInterface,5,0x00010001,1
+
+; List of devices with known configuration issues.
+[ProblemDeviceList_AddReg]
+HKR,ProblemDevices
+
+
+; List of controller subsystem IDs to be supported by the PnP680.sys driver on
+; Win2K/XP systems.
+[Supported680SubSystemIds_AddReg]
+HKR,SupportedSubsystemIDs,%PCI\VEN_1095&DEV_0680.DeviceDesc%,0x00010001, 0x06801095
+
+
+[Win98ProblemDeviceList_680]
+HKLM,%Win98ProblemDeviceSubKey_680%
+
+; List of controller subsystem IDs to be supported by the PnP680.mpd driver on
+; Windows 98/ME systems.
+[Win98Supported680SubSystemIds]
+HKLM, %Win98SupportedControllersSubKey_680%,%PCI\VEN_1095&DEV_0680.DeviceDesc%,0x00010001, 0x06801095
+
+
+;*************************************************************
+;The NT EventLog entries are the same for all SCSI miniports.
+[Miniport_EventLog_Inst]
+AddReg = Miniport_EventLog_AddReg
+
+[Miniport_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,0x00010001,7
+
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+
+[WIN98_680.REG]
+HKR,,PortDriver,,pnp680.mpd
+
+
+[Strings]
+SI="Silicon Image"
+
+SCSIClassName="SCSI and RAID controllers"
+
+PCI\VEN_1095&DEV_0680.DeviceDesc="Silicon Image SiI 0680 ATA/133 Controller"
+
+SI680IDE.SvcDesc="SiI 680 ATA Controller"
+
+Win98ProblemDeviceSubKey_680 = "System\CurrentControlSet\Services\PnP680\ProblemDevices"
+Win98SupportedControllersSubKey_680 = "System\CurrentControlSet\Services\PnP680\SupportedSubsystemIDs"
+

@@ -1,0 +1,172 @@
+
+          D-Link DFE-530TX PCI Fast Ethernet Adapter Installation
+                                for Lantastic
+
+
+ Getting Started
+ ---------------
+    Lantastic 5.0 Install
+    ---------------------
+        Using NDIS driver
+        -----------------
+        - For NDIS driver support "DLKFET.DOS" driver for PCI
+          Family Adapter. User can use "DLKFET.DOS" driver to replace
+          AEXNDIS.DOS which is the NDIS driver offered by ARTISOFT.
+
+                *** CONFIG.SYS ****
+                DEVICE=C:\LANTASTI\PROTMAN.DOS /I:C:\LANTASTI
+                --------------------------------------------------------
+                DEVICE=C:\LANTASTI\AEXNDIS.DOS     -------> By Lantastic
+
+                * please replace to *
+
+                DEVICE=C:\LANTASTI\DLKFET.DOS     -------> By Vendor
+                --------------------------------------------------------
+
+
+                *** STARTNET.BAT ***
+                --------------------------------------------------------
+                C:\LANTASTI\AI-NDIS BIND_TO=AEXNDIS_NIF
+
+                * please replace to *
+
+                C:\LANTASTI\AI-NDIS BIND_TO=DLKFET_NIF
+                --------------------------------------------------------
+                C:\LANTASTI\AILANBIO
+                C:\LANTASTI\REDIR MachineName
+
+
+                *** PROTOCOL.INI ***
+                --------------------------------------------------------
+                [AEXNDIS_NIF]
+                   DRIVERNAME = AEXNDIS$
+
+                * please replace to *
+
+                [DLKFET_NIF]
+                   DRIVERNAME = DLKFET$
+                --------------------------------------------------------
+
+          Comments:
+             If you are using PROTMAN.DOS V1.x, you must use the
+             NO_BIND option on the AI-NDIS command line in the
+             STARTNET.BAT, and you must run NETBIND.EXE V1.x before
+             AILANBIO.EXE.
+
+
+    Lantastic 6.0 Install
+    ---------------------
+        Using NDIS driver
+        -----------------   
+        - To install NDIS driver "DLKFET.DOS", user can use Lantastic
+          6.0 install program, and select "NDIS support for network
+          adapters" then type path "C:\LANTASTI" (specify by install
+          program).
+          Install program will search "DLKFET.DOS" and "PROTOCOL.INI"
+          and copy these two files to target directory.
+
+        - If user already installed Lantastic 6.0 and want to install
+          PCI Fast Ethernet Adapter, just replace AEXNDIS.DOS with NDIS
+          driver "DLKFET.DOS" at CONFIG.SYS
+
+          NOTE: "DLKFET.DOS" is an NDIS driver supported by Vendor.
+                "AEXNDIS.DOS" is an NDIS driver supported by ARTISOFT
+
+                *** CONFIG.SYS ***
+                DEVICE=C:\LANTASTI\PROTMAN.DOS /I:C:\LANTASTI
+                --------------------------------------------------------
+                DEVICE=C:\LANTASTI\AEXNDIS.DOS  -------> By Lantastic
+
+                * please replace to *
+
+                DEVICE=C:\LANTASTI\DLKFET.DOS   -------> By Vendor
+                --------------------------------------------------------
+
+
+                *** STARTNET.BAT ***
+                @echo ===== Begin Lantastic configuration =====
+                SET LAN_CFG=C:\LANTASTI
+                PATH C:\LANTASTI;%PATH%
+                SET LAN_DIR=C:\LANTASTI.NET
+                rem Please obtain the NETBEUI.EXE program from Microsoft
+                NETBEUI
+                --------------------------------------------------------
+                AI-NDIS BIND_TO=AEXNDIS_NIF
+
+                * please replace to *
+
+                AI-NDIS BIND_TO=DLKFET_NIF
+                --------------------------------------------------------
+                AILANBIO @STARTNET.CFG
+                REDIR  LANTA @STARTNET.CFG
+                SERVER C:\LANTASTI.NET @STARTNET.CFG
+                NET LOGIN \\LANTA
+                @echo ===== End LANtastic configuration =====
+
+
+                *** Protocol.ini ***
+                [NETBEUI_XIF]
+                    DriverName = netbeui$
+                    Sessions = 6
+                    NCBS = 12
+                --------------------------------------------------------
+                    Bindings = AEXNDIS_NIF
+
+                * please replace to *
+
+                    Bindings = DLKFET_NIF
+                --------------------------------------------------------
+                    LANABASE = 1
+                --------------------------------------------------------
+                [AEXNDIS_NIF]
+                    DRIVERNAME = AEXNDIS$
+
+                    * please replace to *
+
+                [DLKFET_NIF]
+                    DRIVERNAME = DLKFET$
+                --------------------------------------------------------
+
+        Using ODI DOS driver
+        -------------------- 
+        - ODI for DOS driver, support "DLKFET.COM" driver for PCI
+          Family Adapter. User can use "DLKFET.COM" driver to replace
+          NRODI.COM which is the ODI for DOS driver offered by ARTISOFT.
+
+          Note: Because DLKFET.COM following HSM v4.0 spec, please save
+                LSL.COM, IPXODI.COM that original supported by Lantastic.
+                Copy both LSL.COM, IPXODI.COM from release driver diskette
+                to target directory C:\LANTASTI.
+
+                *** STARTNET.BAT ***
+                @echo ===== Begin Lantastic configuration =====
+                SET LAN_CFG=C:\LANTASTI
+                PATH C:\LANTASTI;%PATH%
+                SET LAN_DIR=C:\LANTASTI.NET
+                SET NWDBPATH=C:\Lantasti\NW
+                LSL     --> Please use new release driver
+                NRODI   --> please replace to DLKFET
+                ODINSUP
+                IPXODI  --> Please use new release driver
+                --------------------------------------------------------
+                AI-NDIS BIND_TO=NRODI
+
+                * please replace to *
+
+                AI-NDIS BIND_TO=DLKFET
+                --------------------------------------------------------
+                AILANBIO @STARTNET.CFG
+                REDIR  LANTA @STARTNET.CFG
+                SERVER C:\LANTASTI.NET @STARTNET.CFG
+                NET LOGIN \\LANTA
+                @echo ===== End LANtastic configuration =====
+
+
+                *** NET.CFG ***
+                Please add below string into NET.CFG file.
+
+                Link Driver DLKFET
+                    Frame Ethernet_802.3
+
+
+

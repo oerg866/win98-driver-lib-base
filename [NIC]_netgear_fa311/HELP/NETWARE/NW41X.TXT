@@ -1,0 +1,224 @@
+\HELP\NETWARE\NW41X.TXT
+
+                        NETGEAR FA311/FA312 PCI Adapter
+                  ----------------------------------------------
+         Driver Installation for Novell NetWare Server version 4.1X
+         ----------------------------------------------------------
+
+  Upgrading NetWare 4.10 Server software
+  --------------------------------------
+  The provided NetWare 4.10 server drivers for FA312 or FA311 follows
+  the Novell ODI Driver Specification version 3.3, and is capable of
+  supporting requests from legacy DOS client and the new clients
+  issuing client32 requests.  As a result, the version 4.10 NetWare
+  server software must be patched to work with this driver. The 
+  patching method is described below as part of the installation
+  procedure.
+
+  The Novell NetWare 4.11 server software is already capable of
+  supporting ODI Specification 3.3 driver.  No patching is necessary.
+
+  With either version 4.10 of 4.11 of Novell NetWare, you have a choice
+  of following the auto install procedure from Novell or manually
+  modifying the AUTOEXEC.NCF file to load the necessary NLM files and 
+  driver.
+
+  Installation Procedure
+  ----------------------
+  1.  If you have Novell NetWare ver 4.10, execute LSWAP in the 
+      32BITLAN directory at MS-DOS prompt to upgrade the NetWare 4.10
+      server software.  Skip this step if you have NetWare 4.11.
+
+      > LSWAP A:\NETWARE\SERVER\NW41X\LOADER.EXE  C:\NWSERVER\SERVER.EXE
+          
+        Usage: LSWAP [loaderFilePath [serverFilePath]]
+               Default loaderFilePath = C:\NWSERVER\LOADER.EXE
+               Default serverFilePath = C:\NWSERVER\SERVER.EXE
+
+  2.  From this point onward, you have a choice of running the
+      auto install program from Novell NetWare or manually modifying
+      the AUTOEXEC.NCF file.
+
+  Running Auto Install from Novell NetWare
+  ----------------------------------------
+  The following instructions use the FA312 as an example.  However, all
+  examples applying to FA312 can be extended the FA311.
+
+  1.  Boot up the Novell Server.
+
+  2.  After booting up, execute "LOAD INSTALL".  Type:
+
+        : load install
+
+  3.  Select "Driver Option" and then press Enter.
+
+  4.  Select "Configure network drivers" and then press Enter.
+
+  5.  Select "Load a driver" and then press Enter.
+
+  6.  Press the <Ins> key to install an unlisted driver.
+
+  7.  Press <F3> to specify a different path, provide the path where 
+      the FA31X.LAN driver resides and hit Enter.
+
+        eg. A:\NWSERVER\SERVER\NW41X
+
+  8.  Select "FA31x.LAN" to start the installation procedure.
+
+  9.  Select "Yes" when asked if you want to copy driver FA31x.LAN.
+
+  10. Select "No" when asked if you want to save existing ETHERTSM.NLM.
+
+  11. Select "No" when asked if you want to save existing NBI.NLM.
+
+  12. Select "No" when asked if you want to save existing MSM.NLM.
+
+  13. Choose the "Select/Modify driver parameters and protocols" selection
+      and move the cursor to the FA31x_1 parameters window to change the 
+      the slot number.
+      
+      A slot number must be entered before the installation can proceed.
+      You can make the slot number 1.  Even though the slot number may
+      not be correct, the FA31x.LAN driver automatically find the FA312 
+      card and load the proper slot number.
+
+      You do not have to enter any value for media and line speed or the 
+      Node address.  The driver can use the default value for these
+      parameters.
+
+  14. Choose "Save parameters and load driver" to start the driver loading
+      process.
+
+  15. Hit <Enter> when a Network number is provided to bind IPX to the 
+      FA31x_1 adapter card (frame Ethernet_802.2).
+  
+  16. Hit <Enter> when a Network number is provided to bind IPX to the 
+      FA31x_1 adapter card (frame Ethernet_SNAP).
+
+  17. Hit Enter when a Network number is provided to bind IPX to the 
+      FA31x_1 adapter card (frame Ethernet_II).
+
+  18. Hit Enter when a Network number is provided to bind IPX to the 
+      FA31x_1 adapter card (frame Ethernet_802.3).
+
+      All four supported Ethernet frames types are loaded.
+
+  19. Select No when asked if you want to select an additional Network
+      driver.
+
+  20. Select "Return to the previous menu" in the Additional Driver Actions
+      window.
+  
+  21. Hit <Esc> a number of times to exit to the Install main menu.  Select
+      "Yes" when asked if you want to exit INSTALL.
+
+  22. When existing to the main, the FA312 driver is already loaded for the
+      adapter card.
+
+  Manually modifying Software on an existing NetWare 4.1X Server
+  --------------------------------------------------------------
+  The following instructions use the FA312 as an example.  However, all
+  examples applying to FA312 can be extended the FA311.
+
+  1.  Copy the FA31x.LAN file into the subdirectory of your server.
+      For example:
+
+      > COPY A:\NETWARE\SERVER\NW41X\FA31x.LAN  C:\NWSERVER
+
+  2.  Copy the following NLM files into your server directory.
+
+      > COPY A:\NETWARE\SERVER\NW41X\NBI.NLM       C:\NWSERVER
+      > COPY A:\NETWARE\SERVER\NW41X\MSM.NLM       C:\NWSERVER
+      > COPY A:\NETWARE\SERVER\NW41X\ETHERTSM.NLM  C:\NWSERVER
+
+  3.  Run SERVER.EXE on the server.
+
+  4.  At the NetWare prompt, enter "Load Install" to edit the
+      AUTOEXEC.NCF file.
+
+      : load install
+        Select <System Option>
+        Select <Edit Autoexec.NCF file>
+
+  5.  Add the following lines to the AUTOEXEC.NCF file:
+
+        load C:\NWSERVER\NBI.NLM
+        load C:\NWSERVER\MSM.NLM
+        load C:\NWSERVER\ETHERTSM.NLM
+  
+        load C:\NWSERVER\FA31x.LAN frame=Ethernet_yyyy name=FA31x_1_zzz
+                                       ;zzz is a unique 3-digit number
+                                       ;    for every frame type loaded.
+                                       ;yyyy is the Ethernet frame type.
+        bind ipx FA31x_1_zzz net=xxxx  ;xxxx is the network number (eg. 33)
+
+  6.  Press the <Esc> key when done editing.  Select "Yes" to save.
+
+  7.  Select "Exit" to exit NetWare Configuration.
+       
+  8.  Reboot the server system.  The driver is now installed.
+
+  Parameters supported by the FA31x.LAN driver
+  ---------------------------------------------------------
+    SLOT       1  - Forces the driver to search for the specified board
+
+    LineSpeed    - Select connection type of the Fast Ethernet PCI
+                    adapter card.
+
+                    = 1   Auto-Negotiation
+                    = 2   Line speed = 10
+                    = 3   Line speed = 100
+
+    FDUP          - Select the duplex mode of the adapter card.  This
+                    parameter works only when LineSpeed is not set to Auto-
+                    Negotiation.
+
+                    = 1   Full duplex on
+                    = 2   Full duplex off
+
+    > LOAD C:\NWSERVER\FA31x.LAN LineSpeed=2 FDUP=1
+
+
+  Troubleshooting
+  ---------------
+    If you experience the "Command Line Parameter for FA312" warning
+    message when STARTNET.BAT is executed, provide the slot number
+    at the command line in STARTNET.BAT as illustrated below.
+
+    > LOAD C:\NOVELL\CLIENT32\FA31x.LAN FRAME=ETHERNET_802.3 SLOT=1
+
+    SLOT must be the correct value as found by the driver.
+
+  Sample AUTOEXEC.NCF file
+  ------------------------
+    #Load the NLM files on Netware 4.1X server
+    #-----------------------------------------
+    load c:\nwserver\nbi
+    load c:\nwserver\msm
+    load c:\nwserver\ethertsm
+   
+    #Working with FA312 driver (one PCI card)
+    #----------------------------------------
+    load c:\nwserver\FA31x frame=ethernet_ii    name=e1
+    load c:\nwserver\FA31x frame=ethernet_802.2 name=e2
+    load c:\nwserver\FA31x frame=ethernet_802.3 name=e3
+    bind ipx to e1 net=10
+    bind ipx to e2 net=20
+    bind ipx to e3 net=30
+
+    #Working with FA312 driver (multiple PCI cards)
+    #----------------------------------------------
+    #load c:\nwserver\FA31x frame=ethernet_ii    name=e5   slot=1 ; card #1
+    #load c:\nwserver\FA31x frame=ethernet_802.2 name=e6   slot=1 ; card #1
+    #load c:\nwserver\FA31x frame=ethernet_802.3 name=e7   slot=1 ; card #1
+    #bind ipx to e5 net=100
+    #bind ipx to e6 net=200
+    #bind ipx to e7 net=300
+
+    #load c:\nwserver\FA31x frame=ethernet_ii    name=e5   slot=2 ; card #2
+    #load c:\nwserver\FA31x frame=ethernet_802.2 name=e6   slot=2 ; card #2
+    #load c:\nwserver\FA31x frame=ethernet_802.3 name=e7   slot=2 ; card #2
+    #bind ipx to e5 net=50
+    #bind ipx to e6 net=60
+    #bind ipx to e7 net=70
+

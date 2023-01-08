@@ -1,0 +1,56 @@
+**
+**
+**  VIA Networking Velocity Family Gigabit Ethernet Adapter
+**
+**  NDIS Driver for Windows 95/95OSR2/98/98SE/ME/2000/XP, Server 2003 x86 Edition
+**
+**  v1.44   Jun, 2005
+**
+**
+
+Introduction:
+=============
+
+  This document shows you how to setup the driver in Windows operating system.
+
+Contents of the Subdirectory:
+=============================
+    
+    GETND5AV.SYS        The NDIS5 driver for Windows 98/98SE/ME.
+    GETND5BV.SYS        The NDIS5 driver for Windows 2000/XP, Server 2003.
+    GETND4.SYS          The NDIS4 driver for Windows 95OSR2.
+    GETND3.SYS          The NDIS3 driver for Windows 95.
+    GETNDIS.INF         The installation information file.
+    WNDI.DLL            The Co-installer for Windows.
+    VUINS16.DLL         The Un-installer for Windows.
+    VUINS32.DLL         The Un-installer for Windows NT.
+    WINX86.TXT          This file.
+
+Installation:
+=============
+
+  Before starting with the installation process, make sure that the adapter
+  is properly installed and configured.
+
+    1. Turn on the power of your PC on to boot from Windows operating system.
+       Windows will auto-detect your new adapter, and the "New Hardware Found"
+       dialogue box will appear. Select "Driver from disk provided by hardware
+       manufacturer" to install driver from the diskette that comes with your
+       LAN adapter.
+
+    2. Insert the driver diskette into your floppy drive, and specify the
+       path of the driver in the diskette(i.e. A:\) to copy the driver
+       files to your system.
+
+    3. When the driver installation is completed, restart Windows if needed.
+
+  Note:
+
+    1. On some machines, it is possible that some NICs fail to initialize.
+       This might be caused by insufficient memory. Users can try to decrease
+       Tx or Rx buffer number to solve this problem.
+
+    2. The Flow Control setting "Hardware Default (Auto)" means the flow control
+       ability depends on the auto-negotiation result with the link partner.
+       In other settings ("Enable Tx", "Enable Rx", "Enable Tx/Rx"), driver will
+       set the Tx or Rx flow control ability without auto-negotiation.

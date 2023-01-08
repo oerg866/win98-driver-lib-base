@@ -1,0 +1,307 @@
+; PCI168 Audio INF file
+;
+; Audio chipset : AZF3328
+; Standardise name to PCI168 instead of using PCI3328           
+; and use generic string names. 22/09/98 JC.
+; Corrected line-in display string.
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+provider=%AZT%
+LayoutFile=layout.inf
+Catalogfile= azt3328.cat
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[ControlFlags]
+ExcludeFromSelect=VIRTUAL\AZT3328-SBEMU
+ExcludeFromSelect=VIRTUAL\AZT3328-JOYSTICK
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"-1"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%MfgName%=Aztech
+
+[Aztech]
+%3328.DeviceDesc1%=3328_Device, PCI\VEN_122D&DEV_50DC&SUBSYS_1800122D
+%3328.DeviceDesc2%=3328_Device, PCI\VEN_122D&DEV_50DC&SUBSYS_1801122D
+%3328.DeviceDesc3%=3328_Device, PCI\VEN_122D&DEV_50DC&SUBSYS_8000122D
+%AZT3328-SBEMU.DeviceDesc%=AZT3328_SBVirt_Device, VIRTUAL\AZT3328-SBEMU
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+;---------------------------------------------------------------;
+[3328_Device]
+LogConfig=LC.3328
+DelFiles=DelList.3328
+CopyFiles=CopyList.3328,Info.Copy 
+AddReg=3328.AddReg,Audio.AddReg,Mixer.AddReg,OPL3.AddReg,MPU401.AddReg
+
+[AZT3328_SBVirt_Device]
+AddReg=AZT3328_SBVirt_Device.AddReg
+
+;---------------------------------------------------------------;
+
+[LC.3328]
+ConfigPriority=NORMAL
+
+[3328.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,1
+HKR,Drivers\wave,,,
+HKR,Drivers\mixer,,,
+HKR,Drivers\midi,,,
+HKR,Drivers\aux,,,    
+
+HKR,Drivers\aux\aud3328.drv,Description,,%Audio.DeviceDesc%
+HKR,Drivers\aux\aud3328.drv,Driver,,aud3328.drv
+
+HKLM,%KEY_IOC%\acm,,,
+HKLM,%KEY_IOC%\Rec,,,
+HKLM,%KEY_IOC%\MPlay,,,
+HKR,,Driver,,"Aud3328v.vxd opl3328v.vxd mpu3328v.vxd"
+HKR,Drivers,SubClasses,,"wave,mixer,midi,aux"
+
+;
+;	Destination Line Name
+;
+HKR,Drivers\string,IDSDEST_LINEOUT_NAME,,            "Volume Control"
+HKR,Drivers\string,IDSDEST_WAVEIN_NAME,,             "Recording Gain"
+;
+;	Source Line Name
+;
+HKR,Drivers\string,IDSDEST_MONOLINEOUT_NAME,,        "Modem Out"
+HKR,Drivers\string,IDSSRC_WAVEOUT_NAME,,             "Wave Output"
+HKR,Drivers\string,IDSSRC_FMSYNTH_NAME,,             "FM Synthesis"
+HKR,Drivers\string,IDSSRC_AUX_NAME,,                 "Auxiliary"
+HKR,Drivers\string,IDSSRC_CDAUDIO_NAME,,             "CD Audio"
+HKR,Drivers\string,IDSSRC_LINEIN_NAME,,              "Line-In"
+HKR,Drivers\string,IDSSRC_MICOUT_NAME,,              "Microphone"
+HKR,Drivers\string,IDSSRC_VIDEO_NAME,,               "Video"
+HKR,Drivers\string,IDSSRC_PHONE_NAME,,               "Modem In"
+HKR,Drivers\string,IDSSRC_PCBEEP_NAME,,              "PC Speaker"
+HKR,Drivers\string,IDSSRC_3D_NAME,,                  "3D Control"
+HKR,Drivers\string,IDSSRC_MIXER_STEREO_NAME,,        "Mix Stereo"
+HKR,Drivers\string,IDSSRC_MIXER_MONO_NAME,,          "Mix Mono"
+;
+;	Controls Name
+;
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_NAME,,         "Master Volume"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_BASS_NAME,,    "Bass"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_TREBLE_NAME,,  "Treble"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_WAVEOUT_NAME,, "Wave Out Vol"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_FMSYNTH_NAME,, "FM Synth Vol"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_AUX_NAME,,     "Aux Volume"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_CDAUDIO_NAME,, "CD Audio Volume"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_LINEIN_NAME,,  "Line-In Volume"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_MIC_NAME,,     "Mic Vol"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_VIDEO_NAME,,   "Video Volume"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_PHONE_NAME,,   "Modem In"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_PCBEEP_NAME,,  "PCBeep Volume"
+HKR,Drivers\string,IDSCTL_VOL_LINEOUT_3D_NAME,,      "3D Width"
+HKR,Drivers\string,IDSCTL_VOL_WAVEIN_MASTER_NAME,,   "Record Gain"
+HKR,Drivers\string,IDSCTL_VOL_WAVEIN_AUX_NAME,,      "Auxiliary Input"
+HKR,Drivers\string,IDSCTL_VOL_WAVEIN_CDAUDIO_NAME,,  "CD Audio Input"
+HKR,Drivers\string,IDSCTL_VOL_WAVEIN_LINEIN_NAME,,   "Line-In Input"
+HKR,Drivers\string,IDSCTL_VOL_WAVEIN_MIC1_NAME,,     "Microphone1 Input"
+HKR,Drivers\string,IDSCTL_VOL_WAVEIN_VIDEO_NAME,,    "Video Input"
+HKR,Drivers\string,IDSCTL_VOL_WAVEIN_PHONE_NAME,,    "Telephone Input"
+HKR,Drivers\string,IDSCTL_VOL_WAVEIN_MIXSTEREO_NAME,,"Mix Stereo Input"
+HKR,Drivers\string,IDSCTL_VOL_WAVEIN_MIXMONO_NAME,,  "Mix Mono Input"
+HKR,Drivers\string,IDSCTL_MUTE_LINEOUT_NAME,,        "Master Mute"
+HKR,Drivers\string,IDSCTL_MUTE_WAVEOUT_NAME,,        "Wave Output Mute"
+HKR,Drivers\string,IDSCTL_MUTE_FMSYNTH_NAME,,        "Synth Mute"
+HKR,Drivers\string,IDSCTL_MUTE_AUX_NAME,,            "Auxiliary Mute"
+HKR,Drivers\string,IDSCTL_MUTE_CDAUDIO_NAME,,        "CD Audio Mute"
+HKR,Drivers\string,IDSCTL_MUTE_LINEIN_NAME,,         "Line-In Mute"
+HKR,Drivers\string,IDSCTL_MUTE_MIC_NAME,,            "Microphone Mute"
+HKR,Drivers\string,IDSCTL_MUTE_VIDEO_NAME,,          "Video Mute"
+HKR,Drivers\string,IDSCTL_MUTE_PHONE_NAME,,          "Modem In Mute"
+HKR,Drivers\string,IDSCTL_MUTE_PCBEEP_NAME,,         "PC Speaker Mute"
+HKR,Drivers\string,IDSCTL_MUTE_WAVEIN_NAME,,         "Mute"
+HKR,Drivers\string,IDSCTL_ONOFF_WAVEOUT_PRE3D_NAME,, "Pre 3D"
+HKR,Drivers\string,IDSCTL_ONOFF_WAVEOUT_POST3D_NAME,,"Post 3D"
+HKR,Drivers\string,IDSCTL_ONOFF_3DENHANCEMENT_NAME,, "3D on off"
+HKR,Drivers\string,IDSCTL_ONOFF_3DSTANDARD_NAME,,    "3D Standard"
+HKR,Drivers\string,IDSCTL_ONOFF_3DHIFI_NAME,,        "3D HiFi"
+HKR,Drivers\string,IDSCTL_ONOFF_MIC20DBENHANCE_NAME,,"Mic 20dB "
+HKR,Drivers\string,IDSCTL_ONOFF_MONOSELECTMIC_NAME,, "Select Mic"
+HKR,Drivers\string,IDSCTL_ONOFF_MONOSELECTMIX_NAME,, "Select Mix"
+HKR,Drivers\string,IDSCTL_PEAK_WAVEOUT_NAME,,        "Wave Meter"
+HKR,Drivers\string,IDSCTL_ONOFF_POP_WAVEOUT_NAME,,   "3D Bypass"
+HKR,Drivers\string,IDSCTL_PEAK_WAVEINAUX_NAME,,      "Aux Meter"
+HKR,Drivers\string,IDSCTL_MUX_WAVEIN_MIXER_NAME,,    "Record Sources"
+HKR,Drivers\string,IDSCTL_PEAK_METER_NAME,,          "Peak Meter"
+;
+; other string
+;
+HKR,Drivers\string,SR_STR_DRIVERWAVEIN,,"Record (%X)"
+HKR,Drivers\string,SR_STR_DRIVERWAVEOUT,,"Playback(%X)"
+HKR,Drivers\string,SR_STR_DRIVERMIXER,,"MIXER  (%X)"
+
+[MIXER.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+HKR,MixerSettings,Vol_PlaybackMasterLeft,1,FF,9F,0,0
+HKR,MixerSettings,Vol_PlaybackMasterRight,1,FF,9F,0,0
+;HKR,MixerSettings,Vol_RecordingMasterLeft,1,FF,7F,0,0            
+;HKR,MixerSettings,Vol_RecordingMasterRight,1,FF,7F,0,0          
+HKR,MixerSettings,Vol_Bass,1,00,00,0,0           
+HKR,MixerSettings,Vol_Treble,1,FF,CF,0,0                 
+HKR,MixerSettings,Vol_WaveoutLeft,1,FF,7F,0,0		
+HKR,MixerSettings,Vol_WaveoutRight,1,FF,7F,0,0		
+HKR,MixerSettings,Vol_LineInLeft,1,FF,7F,0,0
+HKR,MixerSettings,Vol_LineInRight,1,FF,7F,0,0			
+HKR,MixerSettings,Vol_FMSynthLeft,1,FF,7F,0,0		
+HKR,MixerSettings,Vol_FMSynthRight,1,FF,7F,0,0
+HKR,MixerSettings,Vol_Mic,1,FF,7F,0,0
+HKR,MixerSettings,Vol_CDAudioLeft,1,FF,7F,0,0
+HKR,MixerSettings,Vol_CDAudioRight,1,FF,7F,0,0
+HKR,MixerSettings,Vol_PCBeep,1,FF,7F,0,0
+HKR,MixerSettings,Vol_VideoLeft,1,FF,7F,0,0
+HKR,MixerSettings,Vol_VideoRight,1,FF,7F,0,0
+HKR,MixerSettings,Vol_AuxLeft,1,FF,7F,0,0
+HKR,MixerSettings,Vol_AuxRight,1,FF,7F,0,0
+HKR,MixerSettings,Vol_ModemIn,1,FF,AF,0,0
+HKR,MixerSettings,Vol_ModemOut,1,FF,AF,0,0
+HKR,MixerSettings,Vol_RecordStereoMixLeft,1,FF,7F,0,0
+HKR,MixerSettings,Vol_RecordStereoMixRight,1,FF,7F,0,0
+HKR,MixerSettings,Vol_RecordMonoMix,1,FF,7F,0,0
+HKR,MixerSettings,Vol_RecordLineInLeft,1,FF,7F,0,0
+HKR,MixerSettings,Vol_RecordLineInRight,1,FF,7F,0,0
+HKR,MixerSettings,Vol_RecordMic,1,FF,7F,0,0
+HKR,MixerSettings,Vol_RecordCDAudioLeft,1,FF,7F,0,0
+HKR,MixerSettings,Vol_RecordCDAudioRight,1,FF,7F,0,0
+HKR,MixerSettings,Vol_RecordVideoLeft,1,FF,7F,0,0
+HKR,MixerSettings,Vol_RecordVideoRight,1,FF,7F,0,0			
+HKR,MixerSettings,Vol_RecordAuxLeft,1,FF,7F,0,0
+HKR,MixerSettings,Vol_RecordAuxRight,1,FF,7F,0,0
+HKR,MixerSettings,Vol_RecordPhone,1,FF,7F,0,0
+HKR,MixerSettings,Mute_ModemOut,1,0
+HKR,MixerSettings,Mute_PlaybackMaster,1,0
+;HKR,MixerSettings,Mute_RecordingMaster,1,0
+HKR,MixerSettings,Mute_Waveout,1,0
+HKR,MixerSettings,Mute_LineIn,1,0
+HKR,MixerSettings,Mute_FMSynth,1,0
+HKR,MixerSettings,Mute_Mic,1,1
+HKR,MixerSettings,Mute_CDAudio,1,0
+HKR,MixerSettings,Mute_PCBeep,1,0
+HKR,MixerSettings,Mute_Video,1,0
+HKR,MixerSettings,Mute_Aux,1,0
+HKR,MixerSettings,Mute_ModemIn,1,0
+HKR,MixerSettings,AdvCtl_MonoSelectSource,1,1
+HKR,MixerSettings,AdvCtl_Hifi_3D,1,1    ;1 is hifi mode ,0 is standard mode
+HKR,MixerSettings,AdvCtl_3DWidth,1,FF,CF,0,0
+HKR,MixerSettings,AdvCtl_3DEnhancement,1,0   ;1 means 3d mute,0 unmute.
+HKR,MixerSettings,AdvCtl_Waveout3DBypass,1,0
+HKR,MixerSettings,AdvCtl_WaveInSource,1,03
+HKR,MixerSettings,AdvCtl_MicGain,1,1
+HKR,MixerSettings,Flag_Display_3DBypass,1,0
+HKR,MixerSettings,Flag_Display_3DMode,1,0
+HKR,MixerSettings,Flag_Display_MicGain,1,1
+HKR,MixerSettings\VolumeTable,VolTable_PlaybackMaster,1,1f,1e,1d,1c,1b,1a,19,18,17,16,15,14,13,12,11,10,0f,0e,0d,0c,0b,0a,09,08,07,06,05,04,03,02,01,0     ;Volume Range from 0x1f(-46.5db) to 0(0db)
+HKR,MixerSettings\VolumeTable,VolTable_Waveout,1,1f,1b,18,14,12,10,0f,0e,0d,0c,0b,0a,09,08,07,06,05,04  ;Volume Range from 0x1f(-34.5db) to 0(+12db)
+HKR,MixerSettings\VolumeTable,VolTable_PCBeep,1,0f,8,4,0		  ;Volume Range from 0xf(-45.0db) to 0(0db)
+HKR,MixerSettings\VolumeTable,VolTable_ModemIn,1,1f,07,06,05,04,03,02,01,0        ;Volume Range from 0x1f(-34.5db) to 0(+12db)
+HKR,MixerSettings\VolumeTable,VolTable_ModemOut,1,1f,07,06,05,04,03,02,01,0 ;Volume Range from 0x1f(-46.5db) to 0(0db)
+HKR,MixerSettings\VolumeTable,VolTable_Mic,1,1f,13,12,11,10,0f,0e,0d,0c,0b,0a,09,08,07,06,05,04,03,02          ;Volume Range from 0x1f(-34.5db) to 0(+12db)
+HKR,MixerSettings\VolumeTable,VolTable_LineIn,1,1f,1b,18,14,12,10,0f,0e,0d,0c,0b,0a,09,08,07,06,05,04   ;Volume Range from 0x1f(-34.5db) to 0(+12db)
+HKR,MixerSettings\VolumeTable,VolTable_CDAudio,1,1f,1b,18,14,12,10,0f,0e,0d,0c,0b,0a,09,08,07,06,05,04  ;Volume Range from 0x1f(-34.5db) to 0(+12db)
+HKR,MixerSettings\VolumeTable,VolTable_Video,1,1f,1b,18,14,12,10,0f,0e,0d,0c,0b,0a,09,08,07,06,05,04    ;Volume Range from 0x1f(-34.5db) to 0(+12db)
+HKR,MixerSettings\VolumeTable,VolTable_Aux,1,1f,1b,18,14,12,10,0f,0e,0d,0c,0b,0a,09,08,07,06,05,04      ;Volume Range from 0x1f(-34.5db) to 0(+12db)
+HKR,MixerSettings\VolumeTable,VolTable_FMSynth,1,1f,1b,18,14,12,10,0f,0e,0d,0c,0b,0a,09,08,07,06,05,04  ;Volume Range from 0x1f(-34.5db) to 0(+12db)
+HKR,MixerSettings\VolumeTable,VolTable_3DWidth,1,0,1,2,3,3,4,4,5,5,6,6,7	  ;Width Percentage Range from 0(0%) to 7(100%)
+HKR,MixerSettings\VolumeTable,VolTable_Treble,1,0,1,2,3,4,5,6,7           ;Treble Range from 0(0db) to 7(10.5db)
+HKR,MixerSettings\VolumeTable,VolTable_Bass,1,0,1,2,3,4,5,6,7             ;Bass Range from 0(0db) to 7(10.5db)
+HKR,MixerSettings\VolumeTable,VolTable_Recording,1,0,1,2,3,4,5,6,7,8,9,a,b,c      ;Volume Range from 0(0db) to 0xf(22.5db)
+
+[Audio.AddReg]
+HKR,Drivers\wave\Aud3328.drv,Description,,%Audio.DeviceDesc%
+HKR,Drivers\wave\Aud3328.drv,Driver,,Aud3328.drv
+HKR,Drivers\mixer\Aud3328.drv,Description,,%Audio.DeviceDesc%
+HKR,Drivers\mixer\Aud3328.drv,Driver,,Aud3328.drv
+HKR,MixerSettings,Flag_Display_3DMode,1,1
+HKR,MixerSettings,Flag_Display_3DBypass,1,1
+HKR,MixerSettings,Flag_Display_MicGain,1,1
+HKR,Config,Flag_Enable_JoyStick,1,1
+HKR,Config,Flag_Enable_SB_DOS_Emulation,1,1
+
+[MPU401.AddReg]
+HKR,Drivers\midi\mpu3328.drv,Driver,,mpu3328.drv
+HKR,Drivers\midi\mpu3328.drv,Description,,%mpu401.DeviceDesc%
+
+[OPL3.AddReg]
+HKR,Drivers\midi\opl3328.drv,Driver,,opl3328.drv
+HKR,Drivers\midi\opl3328.drv,Description,,%opl3.DeviceDesc%
+
+[AZT3328_SBVirt_Device.AddReg]
+HKR,,DeviceDriver,,Aud3328v.vxd
+HKR,,DevLoader,,*CONFIGMG
+
+[DestinationDirs]
+DefaultDestDir = 11	; LDID_SYS
+Info.Copy=17
+
+[SourceDisksNames]
+1="PCI168 Installation Disk",,0001
+
+;---------------------------------------------------------------;
+
+[CopyList.3328]
+aud3328.drv,,
+mpu3328.drv,,
+opl3328.drv,,
+aud3328v.vxd,,
+mpu3328v.vxd,,
+opl3328v.vxd,,
+joy3328v.vxd,,
+
+
+[DelList.3328]
+aud3328.drv,,,1
+mpu3328.drv,,,1
+opl3328.drv,,,1
+aud3328v.vxd,,,1
+mpu3328v.vxd,,,1
+opl3328v.vxd,,,1
+joy3328V.VXD,,,1
+;vjoyd.vxd,,,1		
+
+[SourceDisksFiles]
+aud3328.drv=1
+mpu3328.drv=1
+opl3328.drv=1
+aud3328v.vxd=1
+mpu3328v.vxd=1
+opl3328v.vxd=1
+joy3328V.VXD=1
+joy3328.inf=1 
+azt3328.cat
+
+[Info.Copy] 
+joy3328.inf
+
+;[Det.DevINFs]
+;VIRTUAL\AZT3328-JOYSTICK=joy3328.inf
+
+[Strings]
+;Non-localized strings
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+
+;Localized strings
+AZT="Aztech"
+MfgName="Aztech"
+3328.DeviceDesc1="PCI168 A(W) Audio Device"
+3328.DeviceDesc2="PCI168 AP(W) Audio Device"
+3328.DeviceDesc3="PCI168 A/AP Audio Device"
+Audio.DeviceDesc="PCI168 Audio Device"
+opl3.DeviceDesc="PCI168 OPL3 Device"
+mpu401.DeviceDesc="PCI168 MPU401 Device"
+AZT3328-SBEMU.DeviceDesc="PCI168 SB DOS Emulation"
+MediaClassName="Sound, video and game controllers"

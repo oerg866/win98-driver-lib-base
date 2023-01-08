@@ -1,0 +1,146 @@
+
+        D-Link DFE-530TX PCI Fast Ethernet Adapter Installation
+                  for NetWare Server v3.12, v3.2
+
+ Contents
+ --------
+    - Compatibility List
+    - Getting Started
+
+
+ Compatibility List
+ ------------------
+      Because this driver follows Novell ODI Driver Specification
+      version 1.11(C Language), the NetWare version 3.12 NetWare 
+      server must be patched to work with this driver. The patching 
+      method is described as below:
+
+       1. Copy LOADER.EXE and LSWAP.EXE to the NetWare 3.12 server
+          directory.
+
+       2. Execute LSWAP.EXE at MS-DOS prompt from server directory.
+
+          Usage: LSWAP [loaderFilePath [serverFilePath]]
+                 Default loaderFilePath = C:\NWSERVER\LOADER.EXE
+                 Default serverFilePath = C:\NWSERVER\SERVER.EXE
+
+        PS. Both LSWAP.EXE and LOADER.EXE files provide by Novell.
+
+       ****************************************************************
+       Note: This ODI update is for English only.
+       ****************************************************************
+
+       Before installing, make sure the following items have been
+       completed.
+
+       312PTx.EXE (Where "x" is 8 or higher) must be installed on
+       NetWare v3.12 file servers prior to installing ODI driver.
+       Without this patch the following message may be displayed
+       when NBI.NLM loads.
+
+       "Warning: This version of NetWare does not support protected mode
+       BIOS accesses. Without a loader patch some PCI drivers may fail."
+
+
+ Getting Started
+ ---------------
+
+    Modifying an existing NetWare 3.12/3.2 Server
+    ---------------------------------------------
+       1. Make a sub-directory NLMS.OLD under <SRVPATH> directory which
+          include SERVER.EXE.
+
+          Ex. <SRVPATH> = NWSERVER
+              >MD \NWSERVER\NLMs.OLD
+
+       2. Save NBI31X.NLM, MSM31X.NLM and ETHERTSM.NLM to NLMS.OLD
+          sub-directory. (v3.12 server only)
+	  
+       3. Get following files from NOVELL website and put them in floppy disk.
+		
+		ETHERTSM.NLM        Patch file for Netware 3.12 Server (v3.80).
+    		MSM31X.NLM          Patch file for Netware 3.12 Server (v3.95).
+    		NBI31X.NLM          Patch file for Netware 3.12 Server (v.2.25).
+
+       4. Please insert release driver CD into CD-ROM drive.
+						
+       5. Copy all provided NLM and LAN files into your dos directory
+          which includes SERVER.EXE. (v3.12 server only)
+
+          Ex. >COPY <Floppy drive>:\NBI31X.NLM   C:\SERVER.312
+              >COPY <Floppy drive>:\MSM31X.NLM   C:\SERVER.312
+              >COPY <Floppy drive>:\ETHERTSM.NLM C:\SERVER.312
+              >COPY <CD drive>:\NETWARE\32BITLAN\DLKFET.LAN   C:\SERVER.312
+
+       6. Start the NetWare Server.
+
+          > CD \NWSERVER
+          > SERVER
+
+       7. From the Novell Server side, execute "LOAD INSTALL". Type:
+          :LOAD INSTALL
+           Select <System Option>
+           Select <Edit Autoexec.NCF file>
+
+       8. Add below item into the server's AUTOEXEC.NCF file.
+
+          LOAD C:\NWSERVER\NBI31X.NLM
+          LOAD C:\NWSERVER\MSM31X.NLM
+          LOAD C:\NWSERVER\ETHERTSM.NLM
+
+          LOAD C:\NWSERVER\DLKFET SLOT=1 FRAME=Ethernet_802.3
+               NAME=DLKFET_1_E83
+          BIND IPX DLKFET_1_E83 NET=xxxx
+
+          LOAD C:\NWSERVER\DLKFET SLOT=1 FRAME=Ethernet_802.2
+               NAME=DLKFET_1_E82
+          BIND IPX DLKFET_1_E82 NET=xxxx
+
+          LOAD C:\NWSERVER\DLKFET SLOT=1 FRAME=Ethernet_II
+               NAME=DLKFET_1_EII
+          BIND IPX DLKFET_1_EII NET=xxxx
+
+          LOAD C:\NWSERVER\DLKFET SLOT=1 FRAME=Ethernet_SNAP
+               NAME=DLKFET_1_ESP
+          BIND IPX DLKFET_1_ESP NET=xxxx
+
+       9. Restart the server again.
+
+
+       Parameters supported by the DLKFET.LAN driver
+
+        The following keywords are for driver v5.10 or later.
+        ----------------------------------------------------------------
+        CONNECTIONTYPE                  This keyword is used to specify media type.
+        
+            CONNECTIONTYPE=AutoSense
+            CONNECTIONTYPE=10BASET
+            CONNECTIONTYPE=10BASETFD
+            CONNECTIONTYPE=100BASETX
+            CONNECTIONTYPE=100BASETXFD
+            
+        FLOW_CONTROL                    This keyword is used to specify flow control
+                                        ability.(Not supported in force mode)
+            FLOW_CONTROL=DISABLE
+            FLOW_CONTROL=ENABLE
+            FLOW_CONTROL=HARDWARE_DEFAULT   (default)
+        
+
+	The following keywords are for driver v5.10 previously(v5.10 not included).
+        ------------------------------------------------------------------------	
+        SLOT     1      - Forces the driver to search for the specified board
+
+        AUTOSENSE       - This keyword configures the adapter to conduct
+                          NWay Auto-negotiation to determine the network
+                          speed and the duplex mode of the network connection.
+
+        10BASET         - Force driver to 10Mbps half duplex mode.
+
+        10BASETFD       - Force driver to 10Mbps full duplex mode.
+
+        100BASETX       - Force driver to 100Mbps half duplex mode.
+
+        100BASETXFD     - Force driver to 100Mbps full duplex mode.
+            
+
+

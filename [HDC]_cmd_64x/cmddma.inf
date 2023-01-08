@@ -1,0 +1,138 @@
+; CMD PCI-0649/0648/0646U2-402 Bus Master Ultra DMA PCI to IDE Controller 
+; INF file for miniport driver
+[version]
+signature="$WINDOWS 95$"
+Class=hdc
+Provider=%CMD%
+DriverVer=08/01/2000
+;CatalogFile = cmdw9x.cat
+
+
+;Class Install
+[ClassInstall]
+AddReg=SCSI_Class
+
+[SCSI_Class]
+HKR,,,,%SCSIClassName%
+HKR,,Icon,,-9
+
+[Manufacturer]
+%CMD%=CMD_HDC
+
+[CMD_HDC]
+%PCI\VEN_1095&DEV_0649.DeviceDesc%=DUAL_DMA_IDE, PCI\VEN_1095&DEV_0649
+%PCI\VEN_1095&DEV_0648.DeviceDesc%=DUAL_DMA_IDE, PCI\VEN_1095&DEV_0648
+%PCI\VEN_1095&DEV_0646U2.DeviceDesc%=DUAL_DMA_IDE, PCI\VEN_1095&DEV_0646&REV_05
+%PCI\VEN_1095&DEV_0646U2.DeviceDesc%=DUAL_DMA_IDE, PCI\VEN_1095&DEV_0646&REV_07
+%MF\DMAPRIMARY.DeviceDesc% = P_DMA_IDE, MF\DMAPRIMARY
+%MF\DMASECONDARY.DeviceDesc% = S_DMA_IDE, MF\DMASECONDARY
+
+[P_DMA_IDE]
+CopyFiles=DLLlib,@CSA64XX.MPD,@cmdide.vxd
+AddReg = DmaIde_AddReg
+
+[S_DMA_IDE]
+CopyFiles=DLLlib,@CSA64XX.MPD,@cmdide.vxd
+AddReg = DmaIde_AddReg
+
+[P_DMA_IDE.HW]
+AddReg=P_DmaIde_AddReg.RegHW
+
+[S_DMA_IDE.HW]
+AddReg=S_DmaIde_AddReg.RegHW
+
+[DUAL_DMA_IDE]
+CopyFiles=DLLlib,@CSA64XX.MPD,@cmdide.vxd
+AddReg=PCIMF.Reg,IDEProp.Reg,DriverInfoAddReg
+UpdateInis=Update_IOS_INI
+
+[Update_IOS_INI]
+IOS.INI,SafeList,"cmd646x.dck","cmd646x.dck",0
+
+[DUAL_DMA_IDE.HW]
+AddReg=DUAL_DMA_IDE.RegHW
+
+[DUAL_DMA_IDE.RegHW]
+HKR,Child0000,HardwareID,,MF\DMAPRIMARY
+HKR,Child0000,ResourceMap,1,00,01,02,06
+HKR,Child0000,MFFlags,1,0c,00,00,00
+HKR,Child0001,HardwareID,,MF\DMASECONDARY
+HKR,Child0001,ResourceMap,1,03,04,05,07
+HKR,Child0001,MFFlags,1,0c,00,00,00
+HKR,,PCIDualIDE,1,01
+
+[DmaIde_AddReg]
+HKR,,DriverDesc,,"CMD IDE Ultra DMA MiniPort Driver"
+HKR,,DevLoader,,*IOS
+HKR,,PortDriver,,CSA64XX.MPD
+HKR,,EnumPropPages,0,"CMDIDE.DLL,EnumPropPages"
+
+[P_DmaIde_AddReg.RegHW]
+HKR,,AdapterSettings,0,%PrimaryChannelSettings%
+
+[S_DmaIde_AddReg.RegHW]
+HKR,,AdapterSettings,0,%SecondaryChannelSettings%
+
+[PCIMF.Reg]
+HKR,,DevLoader,,*CONFIGMG
+HKR,,Enumerator,,*CONFIGMG
+HKR,,CMDrivFlags,1,03,00,00,00
+
+[DLLlib]
+CMDide.dll
+
+[IDEProp.Reg]
+HKR,,EnumPropPages,,"sysclass.dll,IDEEnumPropPages"
+
+[DontStopChild.RegHW]
+HKR,,ConfigFlags,1,80,00,00,00
+
+[DriverInfoAddReg]
+; This section is added to all INFs to add registry entries for Driver Info.
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,Description,,%DriverDescription%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,CurrentVer,,%DriverOEMVersion%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,Ver_%DriverOEMVersion%,,%DriverVersionID%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,BaseDriverFileName,,%BaseDriverFileName%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,BaseDriverFileVersion,,%BaseDriverFileVersion%
+
+
+[DestinationDirs]
+DLLlib = 11
+DefaultDestDir = 12
+
+[SourceDisksFiles]
+csa64xx.mpd=1
+cmdide.dll=1
+cmdide.vxd=1
+;cmdw9x.cat=0,,920
+
+[SourceDisksNames]
+1="CMD Installation Diskette",Disk1,0000-0000
+
+[Strings]
+SCSIClassName            = "Hard disk controllers"
+CMD="CMD Technology"
+PCI\VEN_1095&DEV_0649.DeviceDesc="CMD PCI-0649 Ultra DMA IDE Controller"
+PCI\VEN_1095&DEV_0648.DeviceDesc="CMD PCI-0648 Ultra DMA IDE Controller"
+PCI\VEN_1095&DEV_0646U2.DeviceDesc="CMD PCI-0646U2 Ultra DMA IDE Controller"
+MF\DMAPRIMARY.DeviceDesc= "Primary CMD Ultra DMA Bus Master IDE Controller"
+MF\DMASECONDARY.DeviceDesc= "Secondary CMD Ultra DMA Bus Master IDE Controller"
+PrimaryChannelSettings="11141000"
+SecondaryChannelSettings="11142000"
+
+;
+; Driver Information Entries
+;
+; These items will be set by IHV...
+DriverMfgr="CMD"				; IHV name
+DriverVersionID="3.1.6"				; The IHV driver version
+BaseDriverFileName="csa64xx.mpd"		; Key file for version checking
+BaseDriverFileVersion="3.1.6"			; Version of the key file
+;
+; These items will be set by OEM
+DriverOEM="CMD"					; name of the OEM
+DriverFamily="Storage"				; device family (NIC, Storage, Video...)
+DriverProduct="CSA-064x Driver"			; Specific Name of device (chipset, for example)
+DriverDescription="Bus Master IDE Driver"	; Description of device (product name, OS or system supported)
+DriverOEMVersion="3.1.6"			; OEM-specified version
+

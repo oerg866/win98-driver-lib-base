@@ -1,0 +1,396 @@
+;*******************************************************************************
+; Copyright 2002 Broadcom Corporation.
+;
+; INF for Windows 2000, Me, and 98SE
+;
+; History:
+;    06/14/02         Inception.
+;*******************************************************************************
+[version]
+Signature	= "$Chicago$"		; Combined Win9x/Win2k inf
+Class=Net
+ClassGUID	= {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider	= %V_BCM%
+Compatible	= 1
+CatalogFile=bcm4sbe5.cat
+DriverVer=09/11/2002, 3.48.0.0
+
+[Manufacturer]
+%V_BCM% = BROADCOM, NTx86.5.1
+
+[ControlFlags] 
+ExcludeFromSelect = *
+
+[BROADCOM]
+
+%BCM4401.DeviceDesc%         = BCM4401, PCI\VEN_14E4&DEV_4401
+
+[Broadcom.NTx86.5.1]
+; this is here to prevent an XP OS loading a W2K Driver; when both  bcm4sbe5.inf & bcm4sbxp.inf  and 
+; associated drivers are present in the same floppy (media).
+
+
+;-----------------------------------------------------------------
+; Win2k specific
+;
+; Broadcom Catch All
+[BCM4401.NT]
+Characteristics	= 0x84			; NCF_PHYSICAL | NCF_HAS_UI
+AddReg		= BCM4401AddRegisters, AdvancedTabReg, 8021pPriorityReg, DriverInfo
+CopyFiles	= BCM4401.CopyFileNT
+BusType		= 5			; PCI bus
+
+[BCM4401.NT.Services]
+AddService = bcm4sbe5, 2, BCM4401AddService, CommonEventLog
+
+[BCM4401AddService]
+DisplayName	= %BCM4401.Service.DispName%
+ServiceType	= 1			; %SERVICE_KERNEL_DRIVER%
+StartType	= 3
+ErrorControl	= 1			; %SERVICE_ERROR_NORMAL%
+ServiceBinary	= %12%\bcm4sbe5.sys
+LoadOrderGroup	= NDIS
+
+[BCM4401AddRegisters]
+HKR,	Ndi,	Service,		0,	"bcm4sbe5"
+HKR,	Ndi\Interfaces,	UpperRange,	,	"ndis5"
+HKR,	Ndi\Interfaces,	LowerRange,	,	"ethernet"
+HKR,	Ndi,	HelpText,		,	%BCM4401_HELP%
+
+
+
+; Broadcom NIC
+[BCM4401_broadcom.NT]
+Characteristics	= 0x84			; NCF_PHYSICAL | NCF_HAS_UI
+AddReg		= BCM4401_broadcomAddRegisters, AdvancedTabReg, 8021pPriorityReg, DriverInfo
+CopyFiles	= BCM4401.CopyFileNT
+BusType		= 5			; PCI bus
+
+[BCM4401_broadcom.NT.Services]
+AddService = bcm4sbe5, 2, BCM4401_broadcomAddService, CommonEventLog
+
+[BCM4401_broadcomAddService]
+DisplayName	= %BCM4401_broadcom.Service.DispName%
+ServiceType	= 1			; %SERVICE_KERNEL_DRIVER%
+StartType	= 3
+ErrorControl	= 1			; %SERVICE_ERROR_NORMAL%
+ServiceBinary	= %12%\bcm4sbe5.sys
+LoadOrderGroup	= NDIS
+
+[BCM4401_broadcomAddRegisters]
+HKR,	Ndi,	Service,		0,	"bcm4sbe5"
+HKR,	Ndi\Interfaces,	UpperRange,	,	"ndis5"
+HKR,	Ndi\Interfaces,	LowerRange,	,	"ethernet"
+HKR,	Ndi,	HelpText,		,	%BCM4401_HELP%
+
+
+
+
+; ASUSTeK
+[BCM4401_asustek.NT]
+Characteristics	= 0x84			; NCF_PHYSICAL | NCF_HAS_UI
+AddReg		= BCM4401_asustekAddRegisters, AdvancedTabReg, 8021pPriorityReg, DriverInfo
+CopyFiles	= BCM4401.CopyFileNT
+BusType		= 5			; PCI bus
+
+[BCM4401_asustek.NT.Services]
+AddService = bcm4sbe5, 2, BCM4401_asustekAddService, CommonEventLog
+
+[BCM4401_asustekAddService]
+DisplayName	= %BCM4401_asustek.Service.DispName%
+ServiceType	= 1			; %SERVICE_KERNEL_DRIVER%
+StartType	= 3
+ErrorControl	= 1			; %SERVICE_ERROR_NORMAL%
+ServiceBinary	= %12%\bcm4sbe5.sys
+LoadOrderGroup	= NDIS
+
+[BCM4401_asustekAddRegisters]
+HKR,	Ndi,	Service,		0,	"bcm4sbe5"
+HKR,	Ndi\Interfaces,	UpperRange,	,	"ndis5"
+HKR,	Ndi\Interfaces,	LowerRange,	,	"ethernet"
+HKR,	Ndi,	HelpText,		,	%BCM4401_HELP%
+
+
+
+; MSI one
+[BCM4401_msi_one.NT]
+Characteristics	= 0x84			; NCF_PHYSICAL | NCF_HAS_UI
+AddReg		= BCM4401_msi_oneAddRegisters, AdvancedTabReg, 8021pPriorityReg, DriverInfo
+CopyFiles	= BCM4401.CopyFileNT
+BusType		= 5			; PCI bus
+
+[BCM4401_msi_one.NT.Services]
+AddService = bcm4sbe5, 2, BCM4401_msi_oneAddService, CommonEventLog
+
+[BCM4401_msi_oneAddService]
+DisplayName	= %BCM4401_msi_one.Service.DispName%
+ServiceType	= 1			; %SERVICE_KERNEL_DRIVER%
+StartType	= 3
+ErrorControl	= 1			; %SERVICE_ERROR_NORMAL%
+ServiceBinary	= %12%\bcm4sbe5.sys
+LoadOrderGroup	= NDIS
+
+[BCM4401_msi_oneAddRegisters]
+HKR,	Ndi,	Service,		0,	"bcm4sbe5"
+HKR,	Ndi\Interfaces,	UpperRange,	,	"ndis5"
+HKR,	Ndi\Interfaces,	LowerRange,	,	"ethernet"
+HKR,	Ndi,	HelpText,		,	%BCM4401_HELP%
+
+
+
+; MSI two
+[BCM4401_msi_two.NT]
+Characteristics	= 0x84			; NCF_PHYSICAL | NCF_HAS_UI
+AddReg		= BCM4401_msi_twoAddRegisters, AdvancedTabReg, 8021pPriorityReg, DriverInfo
+CopyFiles	= BCM4401.CopyFileNT
+BusType		= 5			; PCI bus
+
+[BCM4401_msi_two.NT.Services]
+AddService = bcm4sbe5, 2, BCM4401_msi_twoAddService, CommonEventLog
+
+[BCM4401_msi_twoAddService]
+DisplayName	= %BCM4401_msi_two.Service.DispName%
+ServiceType	= 1			; %SERVICE_KERNEL_DRIVER%
+StartType	= 3
+ErrorControl	= 1			; %SERVICE_ERROR_NORMAL%
+ServiceBinary	= %12%\bcm4sbe5.sys
+LoadOrderGroup	= NDIS
+
+[BCM4401_msi_twoAddRegisters]
+HKR,	Ndi,	Service,		0,	"bcm4sbe5"
+HKR,	Ndi\Interfaces,	UpperRange,	,	"ndis5"
+HKR,	Ndi\Interfaces,	LowerRange,	,	"ethernet"
+HKR,	Ndi,	HelpText,		,	%BCM4401_HELP%
+
+
+
+
+;-----------------------------------------------------------------
+; Win9x specific
+;
+;  Broadcom  Catch All
+[BCM4401]
+AddReg		= BCM4401.Win9xAddReg, BCM4401.Win9xAddReg2, AdvancedTabReg, DriverInfo
+CopyFiles	= BCM4401.CopyFileW9x
+
+[BCM4401.Win9xAddReg]
+HKR,	Ndi,	DeviceID,	0,	"PCI\VEN_14E4&DEV_4401"
+HKR,	Ndi\Install, ndis3	,		,	"BCM4401"
+; Key for  Not Logging in W9x OSes
+HKR, , ItsWin9x, 0, "1"
+
+;  Broadcom  NIC
+[BCM4401_broadcom]
+AddReg		= BCM4401_broadcom.Win9xAddReg, BCM4401.Win9xAddReg2, AdvancedTabReg, DriverInfo
+CopyFiles	= BCM4401.CopyFileW9x
+
+[BCM4401_broadcom.Win9xAddReg]
+HKR,	Ndi,	DeviceID,	0,	"PCI\VEN_14E4&DEV_4401"
+HKR,	Ndi\Install, ndis3	,		,	"BCM4401"
+; Key for  Not Logging in W9x OSes
+HKR, , ItsWin9x, 0, "1"
+
+
+;  ASUSTeK
+[BCM4401_asustek]
+AddReg		= BCM4401_asustek.Win9xAddReg, BCM4401.Win9xAddReg2, AdvancedTabReg, DriverInfo
+CopyFiles	= BCM4401.CopyFileW9x
+
+[BCM4401_asustek.Win9xAddReg]
+HKR,	Ndi,	DeviceID,	0,	"PCI\VEN_14E4&DEV_4401"
+HKR,	Ndi\Install, ndis3	,		,	"BCM4401"
+; Key for  Not Logging in W9x OSes
+HKR, , ItsWin9x, 0, "1"
+
+
+;  MSI one
+[BCM4401_msi_one]
+AddReg		= BCM4401_msi_one.Win9xAddReg, BCM4401.Win9xAddReg2, AdvancedTabReg, DriverInfo
+CopyFiles	= BCM4401.CopyFileW9x
+
+[BCM4401_msi_one.Win9xAddReg]
+HKR,	Ndi,	DeviceID,	0,	"PCI\VEN_14E4&DEV_4401"
+HKR,	Ndi\Install, ndis3	,		,	"BCM4401"
+; Key for  Not Logging in W9x OSes
+HKR, , ItsWin9x, 0, "1"
+
+
+;  MSI two
+[BCM4401_msi_two]
+AddReg		= BCM4401_msi_two.Win9xAddReg, BCM4401.Win9xAddReg2, AdvancedTabReg, DriverInfo
+CopyFiles	= BCM4401.CopyFileW9x
+
+[BCM4401_msi_two.Win9xAddReg]
+HKR,	Ndi,	DeviceID,	0,	"PCI\VEN_14E4&DEV_4401"
+HKR,	Ndi\Install, ndis3	,		,	"BCM4401"
+; Key for  Not Logging in W9x OSes
+HKR, , ItsWin9x, 0, "1"
+
+
+
+
+
+; following common to all W9x specifics
+[BCM4401.Win9xAddReg2]
+; Interfaces
+HKR,	Ndi\Interfaces,	DefUpper,	0,	"ndis3"
+HKR,	Ndi\Interfaces,	DefLower,	0,	"ethernet"
+HKR,	Ndi\Interfaces,	UpperRange,	0,	"ndis3"
+HKR,	Ndi\Interfaces,	LowerRange,	0,	"ethernet"
+
+; HKR,,MediaType,,1
+HKR,	Ndi,	HelpText,		,	%BCM4401_HELP%
+
+HKR,	,		EnumPropPages,		0,	"netdi.dll,EnumPropPages"
+HKR,	NDIS,	MajorNdisVersion,	1,	03
+HKR,	NDIS,	MinorNdisVersion,	1,	0A
+HKR,	NDIS,	LogDriverName,	 0	,	"bcm4sbe5"
+HKR,	NDIS,	MajorDriverVersion,	1,	1
+HKR,	NDIS,	MinorDriverVersion,	1,	0
+
+HKR,	,	DevLoader,		0,	*ndis
+HKR,	,	DeviceVxDs,		0,	bcm4sbe5.sys
+HKR,    ,   NoEventLogging, 0, "1"
+
+;-----------------------------------------------------------------
+; Common Section for Both Win9x & Win2k
+;
+[CommonEventLog]
+AddReg = CommonAddEventLogReg
+
+[CommonAddEventLogReg]
+HKR,	,	EventMessageFile,	0x00020000,	"%%SystemRoot%%\System32\netevent.dll;%%SystemRoot%%\System32\drivers\bcm4sbe5.sys"
+HKR,	,	TypesSupported,		0x00010001,	7
+
+[8021pPriorityReg]
+HKR, Ndi\Params\8021pPriority,         ParamDesc,  0, %8021pPriority%
+HKR, Ndi\Params\8021pPriority,         default,    0, "0"
+HKR, Ndi\Params\8021pPriority\Enum,    "1",        0, %Enabled%
+HKR, Ndi\Params\8021pPriority\Enum,    "0",        0, %Disabled%
+HKR, Ndi\Params\8021pPriority,         type,       0, "enum"
+
+[AdvancedTabReg]
+HKR, Ndi\params\SpeedAndDuplex,       ParamDesc,  0, %SpeedAndDuplex%
+HKR, Ndi\params\SpeedAndDuplex,       default,    0, "0"
+HKR, Ndi\params\SpeedAndDuplex,       type,       0, "enum"
+HKR, Ndi\params\SpeedAndDuplex\enum,  "0",        0, %AutoDetect%
+HKR, Ndi\params\SpeedAndDuplex\enum,  "1",        0, %10MbHalfDuplex%
+HKR, Ndi\params\SpeedAndDuplex\enum,  "2",        0, %10MbFullDuplex%
+HKR, Ndi\params\SpeedAndDuplex\enum,  "3",        0, %100MbHalfDuplex%
+HKR, Ndi\params\SpeedAndDuplex\enum,  "4",        0, %100MbFullDuplex%
+
+HKR, Ndi\Params\WakeUpModeCap,       ParamDesc,   0 , %WakeUpMode%
+HKR, Ndi\Params\WakeUpModeCap,       default,  0  , "2"
+HKR, Ndi\Params\WakeUpModeCap,       type,      0  , "enum"
+HKR, Ndi\Params\WakeUpModeCap\enum,  "0",        0 , %WakeUpMode_None%
+HKR, Ndi\Params\WakeUpModeCap\enum,  "1",        0 , %WakeUpMode_Magic%
+HKR, Ndi\Params\WakeUpModeCap\enum,  "2",        0 , %WakeUpMode_Pattern%
+
+HKR, Ndi\Params\FlowControlCap,       ParamDesc,   0 , %FlowControlMode%
+HKR, Ndi\Params\FlowControlCap,       default,  0  , "2"
+HKR, Ndi\Params\FlowControlCap,       type,      0  , "enum"
+HKR, Ndi\Params\FlowControlCap\enum,  "0",        0 , %FlowControlMode_None%
+;   HKR, Ndi\Params\FlowControlCap\enum,  "1",        0 , %FlowControlMode_Rx%
+HKR, Ndi\Params\FlowControlCap\enum,  "2",        0 , %FlowControlMode_Tx%
+;  HKR, Ndi\Params\FlowControlCap\enum,  "3",        0 , %FlowControlMode_Both%
+
+
+
+[DriverInfo]
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,Description,,%DriverDescription%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,CurrentVer,,%DriverOEMVersion%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,Ver_%DriverOEMVersion%,,%DriverVersionID%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,BaseDriverFileName,,%BaseDriverFileName%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,BaseDriverFileVersion,,%BaseDriverFileVersion%
+
+
+[DestinationDirs]
+DefaultDestDir = 11		; system32 on Win2k and system on win9x
+BCM4401.CopyfileNT = 12
+BCM4401.CopyFileW9x = 11
+
+; common to all W2K above
+[BCM4401.CopyFileNT]
+bcm4sbe5.sys,,,1
+
+; common to all W9X above
+[BCM4401.CopyFileW9x]
+bcm4sbe5.sys,,,1
+
+[SourceDisksNames]
+1=%BCM4401.DiskName%,,
+
+[SourceDisksFiles]
+bcm4sbe5.sys=1
+
+;-----------------------------------------------------------------
+;
+[strings]
+; Provider
+V_BCM = "Broadcom"
+
+; PNP Devices
+BCM4401.DeviceDesc = "Broadcom 440x 10/100 Integrated Controller"
+
+BCM4401_asustek.DeviceDesc = "ASUSTeK/Broadcom 440x 10/100 Integrated Controller"
+
+BCM4401_msi_one.DeviceDesc = "MSI/Broadcom 440x 10/100 Integrated Controller"
+
+BCM4401_msi_two.DeviceDesc = "MSI/Broadcom 440x 10/100 Integrated Controller"
+
+
+BCM4401_HELP = "Broadcom 440x 10/100 Integrated Controller provides local area networking"
+
+
+BCM4401.Service.DispName = "Broadcom 440x 10/100 Integrated Controller Driver"
+
+BCM4401_broadcom.Service.DispName = "Broadcom 440x 10/100 Integrated Controller Driver"
+
+BCM4401_asustek.Service.DispName = "ASUSTeK/Broadcom 440x 10/100 Integrated Controller Driver"
+
+BCM4401_msi_one.Service.DispName = "MSI/Broadcom 440x 10/100 Integrated Controller Driver"
+
+BCM4401_msi_two.Service.DispName = "MSI/Broadcom 440x 10/100 Integrated Controller Driver"
+
+
+BCM4401.DiskName = "Broadcom 440x 10/100 Integrated Controller Install Disk"
+
+SpeedAndDuplex = "Speed & Duplex"
+AutoDetect = "Auto"
+10MbHalfDuplex = "10 Mb Half"
+10MbFullDuplex = "10 Mb Full"
+100MbHalfDuplex = "100 Mb Half"
+100MbFullDuplex = "100 Mb Full"
+
+8021pPriority = "802.1p QOS"
+Enabled = "Enable"
+Disabled = "Disable"
+
+WakeUpMode         = "Wake Up Capabilities"
+WakeUpMode_Magic   = "Magic Frame"
+WakeUpMode_Pattern = "Wake Up Frame"
+WakeUpMode_None    = "None"
+
+FlowControlMode         = "Flow Control"
+FlowControlMode_Both    = "Rx/Tx Pause"
+FlowControlMode_Rx   = "Rx Pause"
+;FlowControlMode_Tx   = "Tx Pause"
+FlowControlMode_Tx   = "Enable"
+FlowControlMode_None    = "Disable"
+
+
+; Driver Information Entries
+DriverMfgr="Broadcom"                                 ; IHV name
+DriverVersionID="3.48"                                ; The IHV driver version
+BaseDriverFileVersion="3.48"                          ; version of key file
+BaseDriverFileName="bcm4sbe5.sys"                       ; Key file for version
+
+; These items will be set by IHV and updated by OEM
+DriverOEM="Dell"                                      ; name of the OEM
+DriverFamily="NIC"                                    ; device family (NIC, Storage, Video...)
+DriverProduct="BCM440X"                               ; Specific Name of device (chipset, for example)
+DriverDescription="Broadcom 440x 10/100 Integrated Controller"  ; Description of device (product name, OS or system supported)
+DriverOEMVersion="A00"                                ; OEM-specified version
+
+
+

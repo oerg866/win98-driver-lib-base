@@ -1,0 +1,287 @@
+;--------------------------------------------------------------------
+;
+; ULTRAPNP.INF - Windows 95 OEMSETUP.INF File For UltraPnP Board
+; Copyright 1995 Advanced Micro Devices.  All Rights Reserved.
+;
+; This OEMSETUP.INF file is used to install the UltraSound Plug & Play
+; board under Windows 95.
+;
+;--------------------------------------------------------------------
+
+[Version]
+Signature = "$WINDOWS 95$"
+Class = MEDIA
+Provider=%GRAVIS%
+
+[ClassInstall]
+Addreg=MidiReg
+
+[MidiReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,1
+HKR,,Installer,,MMSys.Cpl
+
+[Manufacturer]
+%MfgName%=GRAVIS
+
+;--------------------------------------------------------------------
+; This section is the only section that Windows 95 uses to associate
+; the board (with the correct EEPROM values) to this
+; .INF file.  Note that the vendor ID listed below
+; (the GRV0001_ part) has absolutely NO relevance for the Windows 95
+; installer.  The Windows 95 installer strictly looks at the
+; *GRVxxxx *DEVICE ID* (not Vendor ID) to determine whether this
+; .INF file supports the specified Plug and Play card.  Windows 95
+; reads these device IDs from the Plug and Play serial EEPROM.
+;--------------------------------------------------------------------
+
+[GRAVIS]
+%*GRV0001_DEV0000.DeviceDesc%=UltraSound.Install, *GRV0000
+%*GRV0001_DEV0003.DeviceDesc%=IW_ADLIB,  *GRV0003
+%*GRV0001_DEV0004.DeviceDesc%=IW_MPU401, *GRV0004
+%*GRV0001_DEV0010.DeviceDesc%=IW_DUMMY,  *GRV0010
+%*GRV0001_DEV0011.DeviceDesc%=IW_DUMMY,  *GRV0011
+%*GRV0001_DEV0012.DeviceDesc%=IW_DUMMY,  *GRV0012
+%*GRV0001_DEV0013.DeviceDesc%=IW_DUMMY,  *GRV0013
+%*GRV0001_DEV0014.DeviceDesc%=IW_DUMMY,  *GRV0014
+
+;--------------------------------------------------------------------
+; Destination directories:
+;
+; 01 = Source directory
+; 10 = WINDOWS directory
+; 11 = WINDOWS\SYSTEM directory
+;--------------------------------------------------------------------
+
+[DestinationDirs]
+DefaultDestDir=11
+CopyUltraSoundWinSysDir=11
+CopyUltraSoundWinDir=10
+DelOldUltraSoundWinSysDir=11
+DelOldUltraSoundWinDir=10
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+;--------------------------------------------------------------------
+; Install Section
+;--------------------------------------------------------------------
+
+[UltraSound.Install]
+DelFiles        = DelOldUltraSoundWinSysDir,DelOldUltraSoundWinDir
+Addreg          = UltraSoundAddreg, MIXER.AddReg, WAVE.AddReg
+CopyFiles       = CopyUltraSoundWinDir,CopyUltraSoundWinSysDir
+UpdateCfgSys    = UltraSoundUpdateCfgSys
+UpdateAutoBat   = UltraSoundUpdateAutoBat
+UpdateInis      = UltraSoundUpdateInis
+;LogConfig       = *GRV0001_DEV0000.LogConfig1,*GRV0001_DEV0000.LogConfig2
+;Reboot
+
+;--------------------------------------------------------------------
+; Logical Configuration Sections
+;--------------------------------------------------------------------
+
+[*GRV0001_DEV0000.LogConfig1]
+ConfigPriority = DESIRED
+IOConfig       = 220-22F(3FF::)
+IOConfig       = 320-327(3FF::)
+IOConfig       = 32C-32F(3FF::)
+IRQConfig      = 15,12,11,10,9,7,5
+DMAConfig      = W:7,6,5,3
+DMAConfig      = W:7,6,5,4,3
+
+[*GRV0001_DEV0000.LogConfig2]
+ConfigPriority = NORMAL
+IOConfig       = 240-24F(3FF::)
+IOConfig       = 340-347(3FF::)
+IOConfig       = 34C-34F(3FF::)
+IRQConfig      = 15,12,11,10,9,7,5
+DMAConfig      = W:7,6,5,3
+DMAConfig      = W:7,6,5,4,3
+
+[*GRV0001_DEV0000.Det]
+LogConfig=*GRV0001_DEV0000.LogConfig
+AddReg=PreCopySection
+
+[UltraSoundAddreg]
+HKLM,SOFTWARE\AMD\Environment,INTERWAVE,,%11%\iw.ini
+HKLM,SOFTWARE\AMD\Environment,IWDIR,,%11%
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,,Driver,,viwd.vxd
+HKR,Drivers,,,
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\wave\interwav.drv,,,
+HKR,Drivers\wave\interwav.drv,Description,,"UltraSound Plug & Play Wave Driver"
+HKR,Drivers\wave\interwav.drv,Driver,,interwav.drv
+HKR,Drivers\aux\interwav.drv,,,
+HKR,Drivers\aux\interwav.drv,Driver,,interwav.drv
+HKR,Drivers\mixer\interwav.drv,,,
+HKR,Drivers\mixer\interwav.drv,Driver,,interwav.drv
+HKR,Drivers\midi,,,
+HKR,Drivers\midi\iwmidi1,,,
+HKR,Drivers\midi\iwmidi1,Description,,"UltraSound Plug & Play MIDI Synth Driver"
+HKR,Drivers\midi\iwmidi1,Driver,,interwav.drv
+HKR,Drivers\midi\iwmidi1,NumPorts,1,02,00,00,00
+HKR,Drivers\midi\iwmidi1,Port,1,00,00,00,00
+HKR,Drivers\midi\iwmidi2,,,
+HKR,Drivers\midi\iwmidi2,Description,,"UltraSound Plug & Play MIDI UART Driver"
+HKR,Drivers\midi\iwmidi2,Driver,,interwav.drv
+HKR,Drivers\midi\iwmidi2,External,1,01,00,00,00
+HKR,Drivers\midi\iwmidi2,NumPorts,1,02,00,00,00
+HKR,Drivers\midi\iwmidi2,Port,1,01,00,00,00
+HKR,Drivers\midi\iwmidi2\Instruments\Out\GeneralMidiInstrument:0,,,"General MIDI Instrument"
+HKR,Drivers\midi\iwmidi2\Instruments\Out\GeneralMidiInstrument:0\File,,,"%10%\config\general.idf"
+HKR,Drivers\midi\iwmidi2\Instruments\Out\GeneralMidiInstrument:0\Channels,,,"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16"
+HKR,Drivers\midi\iwmidi2\Instruments\Out\GeneralMidiInstrument:0\Port,,,0
+HKR,Drivers\midi\iwmidi2\Instruments\Out\GeneralMidiInstrument:0\Active,,,1
+HKLM,SYSTEM\CurrentControlSet\Control\MediaResources\mci\dmusic,Description,,%ModDesc%
+HKLM,SYSTEM\CurrentControlSet\Control\MediaResources\mci\dmusic,Driver,,etekmod.drv
+HKLM,SYSTEM\CurrentControlSet\Control\MediaResources\mci\dmusic,Disabled,,0
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Run,RunUltraPnPSetup,,"%10%\runsetup.exe %01%"
+
+[UltraSoundUpdateInis]
+system.ini,drivers,,"dmusic=interwav.drv"
+system.ini,drivers,"midi*=<viwd.vxd>interwav.drv",,1
+system.ini,drivers,"midi=interwav.drv",,1
+system.ini,drivers,"wave=interwav.drv",,1
+system.ini,drivers,"aux=interwav.drv",,1
+system.ini,drivers,"mixer=interwav.drv",,1
+system.ini,mci,,"dmusic=etekmod.drv"
+win.ini,"mci extensions",,"mod=dmusic"
+win.ini,"mci extensions",,"s3m=dmusic"
+win.ini,"mci extensions",,"ult=dmusic"
+win.ini,"mci extensions",,"mtm=dmusic"
+win.ini,"mci extensions",,"669=dmusic"
+%11%\IW.INI, languages,"english=", "english=English,%11%",0
+
+;--------------------------------------------------------------------
+; UpdateCfgSys and UpdateAutoBat Sections
+;--------------------------------------------------------------------
+
+[UltraSoundUpdateCfgSys]
+DevDelete=IwInit.Exe
+
+[UltraSoundUpdateAutoBat]
+CmdDelete=IwSbos.Bat
+CmdAdd=SET,"INTERWAVE=%11%\IW.INI"
+CmdAdd=SET,"IWDIR=%11%"
+
+;--------------------------------------------------------------------
+; DelFiles Section
+;--------------------------------------------------------------------
+
+[DelOldUltraSoundWinSysDir]
+iwcfgpnl.hlp
+iwcfgpnl.cpl
+InterWav.Drv
+Viwd.386
+Viwd.Vxd
+IwLoader.Exe
+iw.ini
+setultra.vxd
+etekmod.drv
+
+[DelOldUltraSoundWinDir]
+InterWav.Drv
+Viwd.386
+Viwd.Vxd
+IwLoader.Exe
+setultra.vxd
+etekmod.drv
+
+;--------------------------------------------------------------------
+; CopyFiles Sections
+;--------------------------------------------------------------------
+
+[CopyUltraSoundWinSysDir]
+iw.ini,,
+viwd.mls,,
+etekmod.drv,,
+interwav.drv,,
+viwd.vxd,,
+
+[CopyUltraSoundWinDir]
+runsetup.exe,runsetup.ex_,
+
+[IW_DUMMY]
+
+[IW_ADLIB]
+LogConfig = *GRV0001_DEV0003.LogConfig
+addreg = IW_ADLIB.addreg
+
+[*GRV0001_DEV0003.LogConfig]
+ConfigPriority = DESIRED
+IOConfig       = 388-389(3FF::)
+IRQConfig      = 7,5
+DMAConfig      = 1
+
+[*GRV0001_DEV0003.Det]
+LogConfig=*GRV0001_DEV0003.LogConfig
+AddReg=PreCopySection
+
+[IW_ADLIB.addreg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,,Driver,,viwd.vxd
+
+;---------------------------------------------------------------;
+
+[IW_MPU401]
+LogConfig = *GRV0001_DEV0004.LogConfig
+Addreg = IW_MPU401.addreg
+
+[*GRV0001_DEV0004.LogConfig]
+ConfigPriority = DESIRED
+IOConfig       = 330-331(3FF::),332-333(3FF::),334-335(3FF::),336-337(3FF::)
+IRQConfig      = 11,10,9,7,5,4,3
+
+[*GRV0001_DEV0004.Det]
+LogConfig=*GRV0001_DEV0004.LogConfig
+AddReg=PreCopySection
+
+[IW_MPU401.addreg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,,Driver,,viwd.vxd
+
+[WAVE.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+HKR,Drivers\wave,,,
+HKR,Drivers\mixer,,,
+HKR,Drivers\aux,,,
+HKLM,%KEY_IOC%\acm,,,
+HKLM,%KEY_IOC%\Rec,,,
+HKLM,%KEY_IOC%\MPlay,,,
+
+[MIXER.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+
+[ControlFlags]
+
+[SourceDisksNames]
+1=UltraSound Plug & Play Win 95 Disk,,0
+
+[SourceDisksFiles]
+interwav.drv=1
+viwd.vxd=1
+iw.ini=1
+viwd.mls=1
+runsetup.ex_=1
+etekmod.drv=1
+
+[Strings]
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+GRAVIS="Advanced Gravis"
+MfgName="Advanced Gravis"
+*GRV0001_DEV0000.DeviceDesc="UltraSound Plug & Play Synth/Codec"
+*GRV0001_DEV0003.DeviceDesc="UltraSound Plug & Play FM/SB Emulation"
+*GRV0001_DEV0004.DeviceDesc="UltraSound Plug & Play MPU-401 Emulation"
+*GRV0001_DEV0010.DeviceDesc="UltraSound Plug & Play Synth/Codec (DISABLED)"
+*GRV0001_DEV0011.DeviceDesc="UltraSound Plug & Play CD-ROM Interface (DISABLED)"
+*GRV0001_DEV0012.DeviceDesc="UltraSound Plug & Play Game Port (DISABLED)"
+*GRV0001_DEV0013.DeviceDesc="UltraSound Plug & Play FM/SB Emulation (DISABLED)"
+*GRV0001_DEV0014.DeviceDesc="UltraSound Plug & Play MPU-401 Emulation (DISABLED)"
+MediaClassName="Media Devices"
+V_CLSMIDI="MIDI"
+ModDesc="UltraSound Digital Music"

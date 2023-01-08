@@ -1,0 +1,177 @@
+
+[Version]
+Signature=$CHICAGO$
+Class=DISPLAY
+Provider=%String0%
+
+[DestinationDirs]
+InfFiles_CopyFiles=17
+DefaultDestDir=11
+
+[Manufacturer]
+%String0%=3Dlabs
+
+[3Dlabs]
+%String3%=Permedia,PCI\VEN_3D3D&DEV_0004
+%String3%=Permedia,PCI\VEN_104C&DEV_3D04
+%String3%=Permedia,PCI\VEN_3D3D&DEV_0005
+%String3%=Permedia,PCI\VEN_3D3D&DEV_0007
+%String1%=GlintVGA,PCI\VEN_3D3D&DEV_FFFF
+%String2%=RacerVGA,PCI\VEN_4005&DEV_2064
+
+[GlintVGA]
+CopyFiles=InfFiles_CopyFiles,Glint_CopyFiles
+AddReg=Glint_AddReg,ExtModeSwitch_AddReg
+DelReg=DEL_CURRENT_REG
+
+[RacerVGA]
+CopyFiles=InfFiles_CopyFiles,Glint_CopyFiles
+AddReg=Glint_AddReg,ExtModeSwitch_AddReg
+DelReg=DEL_CURRENT_REG
+
+[Permedia]
+CopyFiles=InfFiles_CopyFiles,Permedia_CopyFiles,Glint_CopyFiles
+AddReg=Glint_AddReg
+DelReg=DEL_CURRENT_REG
+
+[InfFiles_CopyFiles]
+3dlabs.inf,3dlabs.oem
+
+[Permedia_CopyFiles]
+vga.drv
+
+[Glint_CopyFiles]
+gldispx.dll
+gldvmx.dll
+gldd16.dll
+gldd32.dll
+glintmvd.vxd
+glint.drv
+3dexthlp.exe
+3dextdd.dll
+3dogldrv.dll
+
+[ExtModeSwitch_AddReg]
+HKR,DEFAULT,ExtModeSwitch,0,0
+
+[Glint_AddReg]
+HKR,,DevLoader,0,*vdd
+HKR,,Ver,0,"Please Reboot"
+HKR,,EnumPropPages,0,gldvmx.dll,EnumPropPages
+HKR,DEFAULT,Mode,0,"8,640,480"
+HKR,DEFAULT,drv,0,glint.drv
+HKR,DEFAULT,vdd,0,*vdd
+HKR,DEFAULT,minivdd,0,glintmvd.vxd
+HKR,DEFAULT,RefreshRate,,-1
+HKR,DEFAULT,DDC,,1
+HKR,DEFAULT,Configuration,,"SOFTWARE\3Dlabs"
+HKLM,SOFTWARE\3Dlabs\Display,DMABufferCount,3,02,00,00,00
+HKLM,SOFTWARE\3Dlabs\Display,DMABufferSize,3,40,00,00,00
+HKLM,SOFTWARE\3Dlabs\Display,DisableIRQ,3,00,00,00,00
+HKLM,SOFTWARE\3Dlabs\Display,FontCache,3,C8,00,00,00
+HKLM,SOFTWARE\3Dlabs\Display,PreferredRefreshRate,3,4b,00,00,00
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\OpenGLDrivers,glint,0,3dogldrv.dll
+HKLM,System\CurrentControlSet\Services\glint\Device0,Direct3DHAL.PatchMode,0,0
+HKLM,System\CurrentControlSet\Services\glint\Device0,Direct3DHAL.DisableDelta,0,0
+HKLM,System\CurrentControlSet\Services\glint\Device0,Direct3DHAL.Disable,0,0
+HKLM,System\CurrentControlSet\Services\glint\Device0,Direct3DHAL.Linear,0,0
+HKLM,System\CurrentControlSet\Services\glint\Device0,Direct3DHAL.DisableAlphaTextures,0,0
+HKLM,System\CurrentControlSet\Services\glint\Device0,Direct3DHAL.Enable8BitRGBTextures,0,0
+HKLM,System\CurrentControlSet\Services\glint\Device0,Direct3DHAL.ForceCopyMode,0,0
+HKLM,System\CurrentControlSet\Services\glint\Device0,Direct3DHAL.NoDMA,0,1
+HKLM,System\CurrentControlSet\Services\glint\Device0,Direct3DHAL.Initialised,0,0
+
+HKEY_CLASSES_ROOT,"CLSID\{75C735E0-9CE4-11cf-820B-00A0241B833F}\InProcServer32",,,gldispx.dll
+HKEY_CLASSES_ROOT,"CLSID\{75C735E0-9CE4-11cf-820B-00A0241B833F}\InProcServer32",ThreadingModel,,Apartment
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\DriverPages",,,"{75C735E0-9CE4-11cf-820B-00A0241B833F}"
+
+HKR,"DEFAULT\TIMINGS\320,200",   1,     1,46,46,32,00,01,06,03,01,c1,01,0c,02,23,01
+
+HKR,"DEFAULT\TIMINGS\320,240",   1,     1,3c,3c,32,00,01,06,03,00,0d,02,0c,01,20,00
+
+HKR,"DEFAULT\TIMINGS\512,384",   1,     1,46,46,52,00,04,06,08,01,a6,01,03,03,20,01
+
+HKR,"DEFAULT\TIMINGS\640,400",   1,     1,46,46,64,00,02,0c,06,01,c1,01,0c,02,23,01
+
+HKR,"DEFAULT\TIMINGS\640,480",   1,     1,55,64,68,00,07,07,0a,00,fd,01,01,03,19,00
+HKR,"DEFAULT\TIMINGS\640,480",   2,     1,3c,55,64,00,02,0c,06,00,0d,02,0c,01,20,00
+
+HKR,"DEFAULT\TIMINGS\800,600",   1,     1,55,64,83,00,04,08,13,01,77,02,01,03,1b,01
+HKR,"DEFAULT\TIMINGS\800,600",   2,     1,4b,55,84,00,02,0a,14,01,71,02,01,03,15,01
+HKR,"DEFAULT\TIMINGS\800,600",   3,     1,3c,4b,84,00,05,10,0b,01,74,02,01,04,17,01
+
+HKR,"DEFAULT\TIMINGS\1024,768",  1,     1,55,64,ac,00,06,0c,1a,01,28,03,01,03,24,01
+HKR,"DEFAULT\TIMINGS\1024,768",	 2,     1,4b,55,a4,00,02,0c,16,01,20,03,01,03,1c,01
+HKR,"DEFAULT\TIMINGS\1024,768",  3,     1,3c,4b,a8,00,03,11,14,01,26,03,04,06,1c,01
+
+HKR,"DEFAULT\TIMINGS\1152,870",	 1,     1,55,64,c5,00,08,10,1d,01,91,03,01,03,27,01
+HKR,"DEFAULT\TIMINGS\1152,870",	 2,     1,3c,55,c8,00,08,10,20,01,8a,03,01,03,20,01
+
+HKR,"DEFAULT\TIMINGS\1280,1024", 1,     1,55,64,d8,00,06,14,1e,01,30,04,01,03,2c,01
+HKR,"DEFAULT\TIMINGS\1280,1024", 2,     1,3c,55,d3,00,02,12,1f,01,2a,04,01,03,26,01
+HKR,"DEFAULT\TIMINGS\1280,1024", 3,     1,3a,3d,c6,00,04,0b,17,01,1e,04,01,03,1a,01
+
+HKR,"DEFAULT\TIMINGS\1600,1200", 1,     1,3c,64,0e,01,08,18,26,01,e2,04,01,03,2e,01
+
+HKR,"MODES\4\640,480",   drv,0,vga.drv
+HKR,"MODES\4\640,480",   vdd,0,*vdd
+HKR,"MODES\8\640,480",,,"60,70,75,85,100"
+HKR,"MODES\16\640,480"  
+HKR,"MODES\32\640,480"    
+HKR,"MODES\8\800,600",,,"60,70,75,85,100"
+HKR,"MODES\16\800,600",    
+HKR,"MODES\32\800,600",    
+HKR,"MODES\8\1024,768",,,"60,70,75,85,100"
+HKR,"MODES\16\1024,768",  
+HKR,"MODES\32\1024,768", 
+HKR,"MODES\8\1152,870",,,"60,70,75,85"
+HKR,"MODES\16\1152,870",  
+HKR,"MODES\32\1152,870",  
+HKR,"MODES\8\1280,1024",,,"60,70,75,85"
+HKR,"MODES\16\1280,1024",
+HKR,"MODES\32\1280,1024",
+HKR,"MODES\8\1600,1200",,,"60,65,70,75"
+HKR,"MODES\16\1600,1200",
+HKR,"MODES\32\1600,1200",
+
+[Sapphire_AddReg]
+HKR,DEFAULT,VTGSerialClock,1,05,00,00,00
+
+[3DDesigner_AddReg]
+HKR,DEFAULT,VTGSerialClock,1,01,00,00,00
+HKR,DEFAULT,BlockFillSize,1,00,00,00,00
+HKR,DEFAULT,HGateAdjust,1,01,00,00,00
+
+[Force3D_AddReg]
+HKR,DEFAULT,BlockFillSize,1,01,00,00,00
+
+[DEL_CURRENT_REG]
+HKR,,DevLoader,0,
+HKR,,Ver,0,
+HKR,,EnumPropPages,0,
+HKR,DEFAULT,ExtModeSwitch,0,
+HKR,DEFAULT\TIMINGS,,0,
+
+[ControlFlags]
+
+[SourceDisksNames]
+1="3Dlabs Driver Disk 1",,
+2="3Dlabs Driver Disk 2",,
+
+[SourceDisksFiles]
+vga.drv=1
+gldispx.dll=1
+gldvmx.dll=1
+gldd16.dll=1
+gldd32.dll=1
+glint.drv=1
+glintmvd.vxd=1
+3dexthlp.exe=2
+3dextdd.dll=2
+3dogldrv.dll=2
+
+[Strings]
+String0="3Dlabs Incorporated"
+String1="Glint Compatible VGA Driver"
+String2="Glint Racer 3D Accelerater"
+String3="Permedia 3D Accelerator"

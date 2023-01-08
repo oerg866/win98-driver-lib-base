@@ -1,0 +1,50 @@
+[DLKFET]
+Type = NDIS
+Title = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+Version = 4.10
+Drivername = DLKFET$
+Xports = NETBEUI LANDD
+
+[FILE]
+Name = DLKFET.DOS
+
+; Parameter start
+
+[NETWORKADDRESS]
+tag = NETWORKADDRESS
+display = "Network adapter address"
+type = Hexstring
+Strlength = 12
+optional = YES
+editable = YES
+help = "This parameter overrides the network address of the network
+ adapter card.  The value of this parameter is a hexadecimal string of
+ 12 digits, as in 020001020304.  The address
+ must be unique among all other network adapter addresses on the
+ network."
+
+[SLOT]
+tag = SLOT
+display = "Slot Number"
+type = decimal
+range = 1 - 16
+optional = YES
+editable = YES
+help = "This parameter specifies the slot number used for notifications."
+
+
+[CONNECTIONTYPE]
+tag = CONNECTIONTYPE
+display = "Connection Type"
+type = string
+Strlength = 14
+Set = AUTOSENSE, _10BASET, _10BASETFD, _100BASETX, _100BASETXFD
+default = AUTOSENSE
+optional = YES
+editable = YES
+help = "This parameter specifies the connector type configuration of
+ the  network adapter card.  The specification of this parameter depends
+ on the specific hardware configuration.  This parameter is used only
+ for the D-Link DFE-530TX PCI adapter for Personal Computer AT workstations.
+ The parameters are AUTOSENSE, _10BASET, _10BASETFD, _100BASETX,
+ and _100BASETXFD."

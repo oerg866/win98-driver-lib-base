@@ -1,0 +1,67 @@
+[Version]
+signature="$CHICAGO$"
+Class=SCSIAdapter
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%INITIO%
+DriverVer=07/08/2005, 4.05.05.0708
+LayoutFile=LAYOUT.INF
+
+[ClassInstall]
+Addreg=SCSIReg
+
+[SCSIReg]
+HKR,,,0,%SCSIClassName%
+HKR,,EnumPropPages,0,iosclass.dll
+HKR,,Icon,0,-10
+
+[Manufacturer]
+%INITIO%=INIC162x
+
+[INIC162x]
+%Initio.Device1622% = INITIO_Inst, PCI\VEN_1101&DEV_1622&SUBSYS_16221101
+%Initio.Device1623% = INITIO_Inst, PCI\VEN_1101&DEV_1622&SUBSYS_16231101&REV_02
+%Initio.Interface%= Initio_Null, SCSI\INITIO__RAID_INTERFACE__1
+
+[InitioSata]
+CopyFiles=MPDCopyFile
+AddReg=IOS,ADDREG_1622
+UpdateInis=Initio_Safe
+
+
+[ADDREG_1622]
+HKR,,PortDriver,0,inic162x.mpd
+
+[IOS]
+HKR,,DevLoader,0,*IOS
+HKR,,DontLoadIfConflict,0,Y
+
+[Initio_Safe]
+%10%\ios.ini,safelist,,mbrint13.sys,0
+
+[ControlFlags]
+CopyFilesOnly=PCI\VEN_1101&DEV_1622
+
+[DestinationDirs]
+MPDCopyFile=12		; IOSubsys directory
+
+[LoadDrv]
+ConfigPriority=HARDWIRED
+
+[SourceDisksNames]
+1 = %ID1%,\,,,
+
+[SourceDiskSFiles]
+MPDCopyFile=1
+
+[MPDCopyFile]
+inic162x.mpd,,,1
+
+[Initio_Null]
+
+[Strings]
+INITIO="Initio Corp."
+Initio.Interface  = "INITIO Raid Interface"
+Initio.Device1623 = "Initio INIC162X S-ATA Raid Controller"
+Initio.Device1622 = "Initio INIC162X S-ATA Adapter"
+ID1="INITIO Windows 98/ME Installation disk"
+SCSIClassName="SCSI Controllers"

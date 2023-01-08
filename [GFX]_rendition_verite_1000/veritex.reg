@@ -1,0 +1,18 @@
+REGEDIT4
+
+[HKEY_CLASSES_ROOT\CLSID\{88554F40-BFB7-11cf-8C05-0000B46B7EC6}]
+
+[HKEY_CLASSES_ROOT\CLSID\{88554F40-BFB7-11cf-8C05-0000B46B7EC6}\InProcServer32]
+@="veritex.dll"
+"ThreadingModel"="Apartment"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\Verite]
+@="{88554F40-BFB7-11cf-8C05-0000B46B7EC6}"

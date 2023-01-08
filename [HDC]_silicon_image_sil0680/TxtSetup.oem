@@ -1,0 +1,29 @@
+; This file installs the 680 non-RAID IDE driver as part of
+; text mode setup on Windows NT, Windows 2000, and Windows XP.
+
+
+[Disks]
+disk1 = "Silicon Image ATA/133 Driver Installation Disk",\pnp680.sys,\
+
+
+[Defaults]
+SCSI = PnP680
+
+
+[SCSI]                  ; HwComponent section
+PnP680 = "Silicon Image SiI 0680 ATA/133 Controller"
+
+
+[Files.SCSI.PnP680]
+driver = disk1,pnp680.sys, PnP680
+inf = disk1,SI680.inf
+dll = disk1,SilSupp.cpl
+;;catalog = disk1, PnP680.cat
+
+
+[HardwareIds.SCSI.PnP680]
+id = "PCI\VEN_1095&DEV_0680&SUBSYS_06801095", "PnP680"
+
+
+[Config.PnP680]
+value = ProblemDevices, "", REG_SZ, ""

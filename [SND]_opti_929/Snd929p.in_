@@ -1,0 +1,265 @@
+
+[Version]
+Signature="$Windows 95$"
+Class=OPT0929MEDIA
+provider=%OPTi%
+
+[ControlFlags]
+ExcludeFromSelect=MF\OPT0929_Dev0
+ExcludeFromSelect=MF\OPT0929_Dev1
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"0"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%MfgName%=OPTiMediaChips
+
+[OPTiMediaChips]
+%MF\OPT9290.DeviceDesc%=OPT9290_Device, MF\OPT0929_Dev0
+%MF\OPT9291.DeviceDesc%=OPT9291_Device, MF\OPT0929_Dev1
+
+;---------------------------------------------------------------;
+
+[Drivers.fields]
+system.ini,boot,drivers,msmixmgr.dll
+system.ini,boot,drivers,mmmixer.dll
+
+[OPT9290_Device]
+DelFiles=OPT9290.DelList
+LogConfig=OPTi9290.LC
+;DelReg=OPT9290.DelReg
+DelFiles=OPTi9290.DelList
+CopyFiles=OPT9290.CopyList
+AddReg=OPT9290.AddReg, CUSTOM.AddReg
+UpdateInis=OPTi9290.UpdateInis
+
+[OPT9291_Device]
+LogConfig=OPTi9291.LC
+;DelReg=OPT9291.DelReg
+DelFiles=OPTi9291.DelList
+CopyFiles=OPTi9291.CopyList
+AddReg=OPT9291.AddReg
+UpdateInis=OPTi9291.UpdateInis
+
+;---------------------------------------------------------------;
+
+[OPTi9290.UpdateInis]
+system.ini,386Enh,"device=vsndsys.386"
+system.ini,386Enh,"device=v930d.386"
+system.ini,386Enh,"device=vsnd16d.386"
+system.ini,386Enh,"device=vadlib.386"
+system.ini,386Enh,"device=vsbpd.386"
+
+system.ini,drivers,"wave*=snd16.drv",,1
+system.ini,drivers,"midi*=snd16.drv",,1
+system.ini,drivers,"aux*=snd16.drv",,1
+system.ini,drivers,"mixer*=snd16.drv",,1
+
+system.ini,drivers,"wave*=snd930.drv",,1
+system.ini,drivers,"midi*=snd930.drv",,1
+system.ini,drivers,"midi*=mpu401p.drv",,1
+system.ini,drivers,"aux*=snd930.drv",,1
+system.ini,drivers,"mixer*=snd930.drv",,1
+
+system.ini,drivers,"wave*=sndsys.drv",,1
+system.ini,drivers,"midi*=sndsys.drv",,1
+system.ini,drivers,"aux*=sndsys.drv",,1
+system.ini,drivers,"mixer*=sndsys.drv",,1
+
+[OPTi9291.UpdateInis]
+system.ini,drivers,"midi*=mpu401.drv",,1
+system.ini,drivers,"midi*=mpu401p.drv",,1
+system.ini,drivers,"midi*=rdmpu401.drv",,1
+
+;---------------------------------------------------------------;
+
+[OPTi9290.LC]
+ConfigPriority=NORMAL
+IOConfig=220-22F, 240-24F
+IOConfig=530-537, 604-60B, E80-E87, F40-F47
+IOConfig=388-38B
+IOConfig = F8E-F8F 
+IRQConfig=5, 11, 7, 9, 10
+
+DMAConfig=0, 1, 3
+DMAConfig=0, 1, 3
+
+
+[OPTi9291.LC]
+ConfigPriority=NORMAL
+IOConfig=300-301 , 310-311 , 320-321 , 330-331
+IRQConfig=5 , 7 , 9 , 10
+
+[CUSTOM.AddReg]
+; These are Manufacturer specific.
+HKR,Config,,,
+HKR,Config,ChipType,,"82C929"
+HKR,Config,ExtCODEC,,"No"
+HKR,Config,ExtSynth,,"O3"
+HKR,Config,ExtWaveTable,,"No"
+HKR,Config,VxDVersion,,"4.00"
+HKR,Config,KeyCode,1,1A
+HKR,Config,"Single Mode DMA",1,01
+
+; Start of customizeable Mixer driver section;
+; "Yes" means no customization; "No" means customize.
+HKR,Config,Default_Codec_Mapping,,"No"
+
+; TYPE 1 - CHANNEL NAME SECTION
+; Specify the customized names for the channels
+HKR,Config,AUX1_Src_Name,,"CD-Audio"
+HKR,Config,AUX2_Src_Name,,"Midi"
+HKR,Config,DAC_Src_Name,,"Wave"
+;HKR,Config,LINE_Src_Name,,"Line"
+;HKR,Config,MIC_Src_Name,,"Microphone"
+;HKR,Config,MIX_Src_Name,,"Post-Mix"
+
+; TYPE 2 - EXTRA CONTROLS Thru Internal H/W Resources
+; Specify if extra ON/OFF controls are desired and how many,
+; maximum is 3. These are controled thru internal pins.
+HKR,Config,Total_Internal_Controls,1,00
+
+; Control definitions
+HKR,Config,Internal_Control_1_Name,,"Internal1"
+HKR,Config,Internal_Control_1_By,,"XCTL0"
+HKR,Config,Internal_Control_1_OnVal,1,01
+HKR,Config,Internal_Control_2_Name,,""
+HKR,Config,Internal_Control_2_By,,""
+HKR,Config,Internal_Control_2_OnVal,1,01
+HKR,Config,Internal_Control_3_Name,,""
+HKR,Config,Internal_Control_3_By,,""
+HKR,Config,Internal_Control_3_OnVal,1,01
+
+; TYPE 3 - EXTRA CONTROLS Thru External H/W Resources
+; Specify if extra ON/OFF controls are desired and how many,
+; maximum is 3. These are controled thru external DLLs.
+HKR,Config,Total_External_Controls,1,00
+
+; Control definitions
+HKR,Config,External_Control_1_Name,,"External1"
+HKR,Config,External_Control_1_By,,"XCONTL_1.DLL"
+HKR,Config,External_Control_2_Name,,""
+HKR,Config,External_Control_2_By,,"XCONTL_2.DLL"
+HKR,Config,External_Control_3_Name,,""
+HKR,Config,External_Control_3_By,,"XCONTL_3.DLL"
+
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+;---------------------------------------------------------------;
+
+[OPT9290.CopyList]
+snd929p.drv,,
+sndopl3p.drv,,
+snd929p.vxd,,
+
+[OPTi9291.CopyList]
+sndm401p.vxd,,
+sndm401p.drv,,
+
+;---------------------------------------------------------------;
+
+[OPT9290.DelList]
+v930d.386,,,1
+vsnd16d.386,,,1
+snd930.drv,,,1
+vsndsys.386,,,1
+sndsys.drv,,,1
+vsbpd.386,,,1
+vadlib.386,,,1
+nullwave.drv,,,1
+
+[OPTi9291.DelList]
+mpu401.drv
+mpu401p.drv
+rdmpu401.drv
+
+;---------------------------------------------------------------;
+[OPT9290.DelReg]
+
+[OPT9291.DelReg]
+
+
+;---------------------------------------------------------------;
+
+[OPT9290.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+HKR,Drivers\wave,,,
+HKR,Drivers\mixer,,,
+HKR,Drivers\aux,,,
+
+HKR,,Driver,,snd929p.vxd
+HKR,Drivers\wave\snd929p.drv,Description ,,%MF\OPT9290.DeviceDesc%
+HKR,Drivers\wave\snd929p.drv,Driver,,snd929p.drv
+HKR,Drivers\mixer\snd929p.drv,Description,,%MF\OPT9290.DeviceDesc%
+HKR,Drivers\mixer\snd929p.drv,Driver,,snd929p.drv
+HKR,Drivers\aux\snd929p.drv,Description  ,,%MF\OPT9290.DeviceDesc%
+HKR,Drivers\aux\snd929p.drv,Driver,,snd929p.drv
+HKR,Drivers\midi\sndopl3p.drv,Description ,,%V_INTERNAL%
+HKR,Drivers\midi\sndopl3p.drv,Driver,,sndopl3p.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+
+[OPT9291.AddReg]
+HKR,,Devloader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+
+HKR,,Driver,,sndm401p.vxd
+HKR,Drivers\midi\sndm401p.drv,Driver,,sndm401p.drv
+HKR,Drivers\midi\sndm401p.drv,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+HKR,Drivers\midi\sndm401p.drv,Description,,%V_EXTERNAL%
+
+;---------------------------------------------------------------;
+
+[DestinationDirs]
+DefaultDestDir = 11	; LDID_SYS
+
+[SourceDisksNames]
+1="OPTi MediaChips Multimedia Disk",,0001
+
+[SourceDisksFiles]
+snd929p.vxd=1
+snd929p.drv=1
+sndopl3p.drv=1
+
+sndm401p.drv=1
+sndm401p.vxd=1
+
+;---------------------------------------------------------------;
+
+;---------------------------------------------------------------;
+
+[Strings]
+;Non-localized strings
+KEY_WARNVER="SYSTEM\CurrentControlSet\Control\SessionManager\WarnVerDLLs"
+KEY_CHKVER="SYSTEM\CurrentControlSet\Control\SessionManager\CheckVerDLLs"
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+
+;Localized strings
+OPTi="OPTi Inc."
+MfgName="OPTi Inc."
+MF\OPT9290.DeviceDesc="OPTi 929 Sound/OPL3 Device"
+MF\OPT9291.DeviceDesc="OPTi 929 MPU-401 Device"
+MediaClassName="OPTi 82C929 Sound System"
+V_CLSWAVEFORM="Audio"
+V_CLSMIDI="MIDI"
+V_CLSMIXER="Mixer"
+V_CLSAUX="Auxiliary"
+V_GENERAL="General MIDI Instrument"
+V_INTERNAL="OPTi 929 FM Synthesis"
+V_EXTERNAL="OPTi 929 MPU-401"

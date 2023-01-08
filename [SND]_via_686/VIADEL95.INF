@@ -1,0 +1,26 @@
+[version]
+signature="$CHICAGO$"
+Class=Unknown
+Provider=%VIA%
+
+;Class Install
+[ClassInstall]
+AddReg=Unknown_Reg
+
+[Unknown_Reg]
+HKR,,,,%UnknownClassName%
+HKR,,Icon,,-18
+
+[Manufacturer]
+%VIA_TECH%=VIA_TECH
+
+[VIA_TECH]
+%PCI\VEN_1106&DEV_3058.DeviceDesc%=NO_DRV, PCI\VEN_1106&DEV_3058
+
+[NO_DRV]
+
+[Strings]
+VIA                     = "VIA Technologies, Inc."
+VIATECH                 = "VIA Technologies, Inc."
+UnknownClassName	= "Other devices"
+PCI\VEN_1106&DEV_3058.DeviceDesc="VIA PCI Audio Controller (NO Driver)"

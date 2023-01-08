@@ -1,0 +1,128 @@
+[version]
+Signature="$CHICAGO$"
+Class=Ports
+provider=%OPTi%
+LayoutFile=layout.inf
+
+[DestinationDirs]
+DefaultDestDir = 11  	   ;LDID_SYS
+
+[SourceDisksNames]
+1="OPTi 82C933 Plug-N-Play Multimedia Disk",,0001
+
+; Install class "Ports"
+;----------------------------------------------------------
+[ClassInstall]
+AddReg=PortsClass.AddReg
+
+[PortsClass.AddReg]
+HKR,,,,%PortsClassName%
+
+[ControlFlags]
+ExcludeFromSelect=*OPT0006
+
+; Drivers
+;----------------------------------------------------------
+[Manufacturer]
+%MfgName%=OPTiMedia
+
+[OPTiMedia]
+%*PNP0500.DeviceDesc% = ComPort, *OPT0006, *PNP0500           ; Communications Port
+
+[Ports.AddReg]
+HKR,,NoSetupUI,,1
+
+; COM sections
+;----------------------------------------------------------
+[ComPort]
+CopyFiles=ComPort.Copy
+AddReg=ComPort.AddReg
+LogConfig=c14,c1a,c23,c2a,c34,c3a,c43,c4a,caa
+
+[ComPort.Copy]
+serial.vxd
+serialui.dll
+
+[ComPort.AddReg]
+HKR,,DevLoader,,*vcomm
+HKR,,Enumerator,,serenum.vxd
+HKR,,PortDriver,,serial.vxd
+HKR,,Contention,,*vcd
+HKR,,ConfigDialog,,serialui.dll
+HKR,,DCB,3,1C,00,00,00, 80,25,00,00, 11,33,00,00, 00,00, 0a,00, 0a,00, 08, 00, 00, 11, 13, 00, 00, 00
+HKR,,PortSubClass,1,01
+HKR,,EnumPropPages,,"serialui.dll,EnumPropPages"
+
+[*pnp0500.det]
+AddReg=Ports.AddReg,DevMap.AddReg
+
+; The following sections are COM port resource configs.
+; Section name format means:
+; Char 1 = c (COM port)
+; Char 2 = I/O config: 1 (3f8), 2 (2f8), 3 (3e8), 4 (2e8), a (any)
+; Char 3 = IRQ config: #, a (any)
+
+[c14]			; COM1,IRQ4
+ConfigPriority=HARDRECONFIG
+IOConfig=3f8-3ff(3ff::)
+IRQConfig=S:4
+
+[c1a]			; COM1, any IRQ
+ConfigPriority=HARDRECONFIG
+IOConfig=3f8-3ff(3ff::)
+IRQConfig=S:3,4,5,7,9,10,11,12,14,15
+
+[c23]			; COM2, IRQ3
+ConfigPriority=HARDRECONFIG
+IOConfig=2f8-2ff(3ff::)
+IRQConfig=S:3
+
+[c2a]			; COM2, any IRQ
+ConfigPriority=HARDRECONFIG
+IOConfig=2f8-2ff(3ff::)
+IRQConfig=S:3,4,5,7,9,10,11,12,14,15
+
+[c34]			; COM3, IRQ4
+ConfigPriority=HARDRECONFIG
+IOConfig=3e8-3ef(3ff::)
+IRQConfig=S:4
+
+[c3a]			; COM3, any IRQ
+ConfigPriority=HARDRECONFIG
+IOConfig=3e8-3ef(3ff::)
+IRQConfig=S:3,4,5,7,9,10,11,12,14,15
+
+[c43]			; COM4, IRQ3
+ConfigPriority=HARDRECONFIG
+IOConfig=2e8-2ef(3ff::)
+IRQConfig=S:3,5
+
+[c4a]			; COM4, any IRQ
+ConfigPriority=HARDRECONFIG
+IOConfig=2e8-2ef(3ff::)
+IRQConfig=S:3,4,5,7,9,10,11,12,14,15
+
+[caa]			; Any base, any IRQ
+ConfigPriority=HARDRECONFIG
+IOConfig=8@100-ffff%fff8(3ff::)
+IRQConfig=S:3,4,5,7,9,10,11,12,14,15
+
+; End COM port LogConfig sections
+
+[ComPort.PosDup]
+*OPT0006,*PNP0500,*PNP0501
+
+[DevMap.AddReg]
+HKLM,hardware\devicemap\serialcomm,COM5,,COM5
+
+
+; User readable strings
+;----------------------------------------------------------
+[Strings]
+OPTi="OPTi Inc."
+;Std = "(Standard port types)"
+MfgName="OPTi Inc"
+PortsClassName = "Ports (COM & LPT)"
+
+*PNP0500.DeviceDesc = "Communications Port"
+

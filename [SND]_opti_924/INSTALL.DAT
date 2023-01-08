@@ -1,0 +1,449 @@
+//
+//
+//      INSTALAR en l¡nea Archivo de Texto de Socorro
+//
+//      L¡nea de Gu¡a de Uniformaci¢n
+//
+//      0)      L¡neas de comentarios empiezan con t¡tulo"//"
+//      1)      Texto Mensaje Socorro empieza con #MESSAGE
+//      2)      Nunca cambiar el n£mero luego del #MESSAGE.  Eso es,
+//              ID del Message de b£squeda para el programa INSTALL
+//      3)      LINES define el n£mero de (l¡neas) x (car cteres) //permitidos.  Nunca excede //
+//        estos l¡mites al tipear el texto para el mensaje.
+//      4)      TITLE define el sub-t¡tulo de este mensaje
+//              (permitido a modificar para su uniformaci¢n)
+//      5)      Area de texto empieza y termina con un "$"
+//              (permitido a modificar para su uniformaci¢n)
+//      6)      El programa INSTALL no formar  su texto.  S¢lo demuestra cualquier texto Ud. //
+//        haya tipeado ac  l¡nea por l¡nea. De manera que Ud. tiene que realizar el formato //
+//        para mejor efecto y favor usar SPACE pero no TAB (Ud. no tiene que //           entrar
+// l¡neas de buscar SPACE.  En caso de existir un espacio dejado en el fondo //            del
+// mensaje HELP, el espacio se trata de falla)
+//      7)      De todos modos, trata y ver c¢mo resulta.
+//
+//      9)      Revista de formato (ejemplo)
+//
+//      #MESSAGE        1                       // empieza mensaje Socorro 1
+//      TITULO "Select CD ROM Type" // subt¡tulo del mensaje
+//      LINEAS 9X50                             // area de texto permitido:
+//                                                      // 9 pulgadas x 50 car cteres
+//      $                                               // empieza el area de texto
+//      LINEAS DE TEXTO
+//      TEXTO"""""                              // socorro texto
+//      """"
+//      $                                               // fin del area de texto
+//
+
+//
+//      INSTALLA Texto Socorro: Mensaje por Mensaje
+//
+
+#MESSAGE = 1
+TITLE= " BIENVENIDO "
+LINES 9 X 48
+$
+INSTALL se trata de una instalaci¢n completa
+y programa de prueba para la tarjeta de sonido 82C924
+Se recomienda usar un MOUSE.  Si Ud. no tiene MOUSE,
+usa las siguientes teclas:
+        [TAB]     Mover a Option
+        [ENTER]   Ejecutar Option
+        []      Seleccioinar Option
+        [F3]      Salir de la instalaci¢n
+        [ALT+key] Activar un bot¢n
+$
+
+#MESSAGE = 2
+TITLE= " OPCIONES DE INSTALACION "
+LINES 6 X 52
+$
+Esta instalaci¢n har  los siguientes:
+ Instalar Mandos y Utilidads para 82C924
+ Configurar y Probar Tarjeta de Sonido 82C924
+ Instala y programa mandos CD-ROM
+ Permitirle a Ud. revisar archivo de informaci¢n README.TXT
+ Instalar aplicaciones audio desde OPTi
+$
+
+#MESSAGE = 20
+TITLE= " OPCIONES DE PRUEBA & CONFIGURACION "
+LINES 6 X 52
+$
+El programa de Prueba y Configuraci¢n le permitir  los siguientes
+ Configurar y Probar Tarjeta de Sonido
+ Cambiar puestas CD-ROM y tener al d¡a los archivos de sistema
+ Llevar a cabo Pruebas de Sonido M£sica FM de 8 bits, 16 bits
+ Cambiar puestas de volumen
+ Revisar archivos de informaci¢n README.TXT
+$
+
+#MESSAGE = 3
+TITLE= " SELECCION DE DIRECTORIO DEL USUARIO "
+LINES 4 X 48
+$
+Seleccionar el mando y entrar el directorio
+donde Ud. instalar¡a su software en el espacio
+del disco requerido que est  disponible para
+completar la instalaci¢n como indicada a continuaci¢n.
+$
+
+#MESSAGE = 4
+TITLE= " SELECCION DE DIRECTORIO DE MS WINDOWS 3.1 "
+LINES 6 X 48
+$
+INSTALADOR necesita conocer d¢nde est  su
+Directorio del Microsoft Windows 3.1.  Si Ud. no
+tiene el Microsoft Windows 3.1 instalado o Ud.
+no quiere instalar los mandos de aparatos audio y
+aplicaciones para el Microsoft Windows 3.1, Ud.
+podr¡a elegir [NONE]
+$
+
+#MESSAGE = 5
+TITLE= " SELECCION CD ROM "
+LINES 4 X 44
+$
+La tarjeta de sonido Pro MAD16 se puede
+usar como una tabla de interface CD-ROM.  Elige su
+tipo de mando CD-ROM o [NONE] si Ud. no quiere
+conectar el mando CD-ROM a la tarjeta de sonido.
+$
+
+#MESSAGE = 6
+TITLE= " PUESTAS DE FALLA CD ROM "
+LINES 5 X 44
+$
+Selecciona [OK] si Ud. desea aceptar las
+puestas de falla para su CD-ROM.
+Selecciona [CUSTOMIZE]  si Ud. desea
+uniformar la direcci¢n I/O.  Interrumpe el
+canal DMA.
+$
+
+#MESSAGE = 7
+TITLE= " CONFIGURACION DEL HARDWARE CD-ROM "
+LINES 5 X 48
+$
+Selecciona [OK]  si Ud. acepta las puestas
+para su CD-ROM.
+Selecciona [DEFAULT] si Ud. desea poner el
+CD-ROM a las puestas de falla.
+$
+
+#MESSAGE = 8
+TITLE= " CONFIGURACION DE COPIA DE ARCHIVO "
+LINES 5 X 45
+$
+INSTALADOR empezar  a copiar archivos a su
+disco duro.  Selecciona [OK] para continuar
+si la siguiente informaci¢n est  correcta.
+
+Selecciona [CHANGE] si Ud. desea hacer cambios.
+$
+
+#MESSAGE = 11
+TITLE= " PRUEBA DE SONIDO "
+LINES 4 X 36
+$
+Selecciona una opci¢n de Prueba de
+cSonido dada a continuaci¢n.c
+Selecciona [DONE] al t‚rmino de la
+prueba y volver a la ventanilla anterior.
+$
+
+#MESSAGE = 12
+TITLE= " PRUEBA DE SONIDO "
+LINES 6 X 46
+$
+Prueba de sonido no se puede echar a andar ahora.
+La fuente del aparato audio no est  disponible
+o que haya sido cambiado.  La nueva configuraci¢n
+audio no har  efecto hasta que sea aceptado.
+Favor echar a andar la prueba de sonido despu‚s.
+$
+
+#MESSAGE = 13
+TITLE= " Seleccionar MSCDEX.EXE Para CD ROM "
+LINES 7 X 44
+$
+El siguiente es el MSCDEM(s) en su sistema.
+Favor seleccionar uno compatible con su
+versi¢n DOS.
+*       Para DOS/Windows 3.1, usa el que
+        fue proporcionado con DOS.
+*       Para Windows 95/DOS, usa el que
+        fue proporcionado con Windows   95.
+$
+
+#MESSAGE = 14
+TITLE= " No MSCDEX.EXE en su sistema "
+LINES 10 X 50
+$
+Para usar su Mando CD-ROM, Ud. necesitar  el
+programa MSCDEX.EXE del Microsoft.
+INSTALLA ha escandido su(s) disco(s) duro(s)
+y no encontr¢ ninguno.  Adem s, su versi¢n DOS
+est  vieja y no tenemos versi¢n buena de MSCDEX
+para Ud. INSTALLA insertado en una l¡nea de
+MSCDEX con la lectura de " REW " al AUTOEXEC.BAT
+de todos modos.  Si Ud. ubica un archivo MSCDEX despu‚s,
+favor copiarlo en el directorio MAD16 Pro y
+remover el REMark de la l¡nea MECDEX en AUTOEXEC.BAT.
+$
+
+#MESSAGE = 15
+TITLE= " AVANCE DE ARCHVOS SISTEMA "
+LINES 7 X 48
+$
+INSTALADOR avanzar  los archivos de su sistema
+CONFIG.SYS y AUTOEXEC.BAT.
+Selecciona [OK] si Ud. desea que el INSTALADOR
+haga los cambios AHORA o selecciona
+[BACKUP ONLY] si Ud. desea que el INSTALADOR
+s¢lo guardar los cambios para los archivos
+de repuesto CONFIG.MAD y AUTOEXEC.MAD.
+$
+
+#MESSAGE = 16
+TITLE= " AVANCE DE ARCHIVOS DEL MS WINDOWS 3.1 "
+LINES 7 X 46
+$
+El INSTALADOR avanzar  los archivos SUSTEM.INI y
+MIDIMAP.CFG de su WINDOWS 3.1.
+Selecciona [OK] si Ud. desea que el INSTALADOR
+haga los cambios AHORA o selecciona [BACKUP ONLY] si Ud.
+desea que el INSTALADOR s¢lo guarde los cambios
+para los archivos de repuesto SYSTEM.MAD y MIDIMAP.MAD.
+
+$
+
+#MESSAGE = 17
+TITLE= " INSTALACION DE APLICACION DE SONIDO DEL WINDOWS 3.1 "
+LINES 5 X 46
+$
+El INSTALADOR ha instalado tambi‚n las
+aplicaciones de sonido Windows 3.1 en su sistema.  El
+grupo de aplicaciones de sonido y los icones
+ser n exhibidos en su pantalla cuando Ud. echa a
+andar el Windows 3.1 la pr¢xima vez "
+$
+
+#MESSAGE = 18
+TITLE= " INSTALACION LISTA "
+LINES 11 X 46
+$
+El INSTALADOR ha completado de manera exitosa.
+Ud. debe promover su sistema para echar a
+andar las aplicaciones de sonido.  Selecciona
+[REBOOT] ahora para promover o seleccionar
+[EXIT] para continuar sin promover.
+Tipea "SNDINIT" en el prompt de DOS para probar
+y reconfigurar las puestas de tarjeta de sonido
+82C924 en caso necesario despu‚s.
+
+Gracias por su preferencia del Sistema de Sonido MAD16 Pro.
+$
+
+#MESSAGE = 19
+TITLE= " No Suficiente Memoria Convencional Detectada "
+LINES 10 X 56
+$
+Su sistema cuenta con MENOS DE 500Kbytes de
+memoria convencional recomendada.  Para echar
+a andar los juegos DOS, Ud. necesitar  por
+lo menos el tama¤o recomendado arriba.  Se le
+recomienda a Ud. tambi‚n que este volumen de
+memoria est‚ disponible para aumentar su memoria o para
+operar el programa de memoria que se ha proporcionado con
+su sistema de operaci¢n, o remover cualquier programas de memoria
+residente en la memoria del sistema.  ¨ Quiere Ud. SALIR
+de este programa y aumentar la  memoria ahora ?
+$
+
+#MESSAGE = 21
+TITLE= " Registro del MAD16 Pro "
+LINES 6 X 46
+$
+Ser  ahora el momento de registrar la tarjeta
+de sonido de 16 bits para recibir los £ltimos
+servicios y apoyar su manufacturero.  Ud. debe
+registrar primero para recibir el apoyo t‚cnico
+de su manufacturero.
+
+$
+
+#MESSAGE = 22
+TITLE= " B I E N V E N I D O "
+LINES 9 X 42
+$
+SNDINIT se trata del programa de prueba y
+configuraci¢n para la tarjeta de sonido 82C924.  Un
+mouse se recomienda.  Si Ud. no tiene mouse, Ud.
+usar  las siguientes teclas:
+        [TAB]   Mover a Option
+        [ENTER] Ejecutar Option
+        []    Seleccioinar Option
+        [F3]            Salir de la instalaci¢n
+        [ALT+key]       Activar un bot¢n
+$
+
+#MESSAGE = 23
+TITLE= " INSTALACION DE MANDO CD-ROM "
+LINES 6 X 48
+$
+El instalador do tiene el mando CD-ROM para su
+CD-ROM.  El instalador s¢lo promover las puestas
+del CD-ROM de la tarjeta de sonido en CONFIG.SYS.
+Favor echar a andar el programa de instalaci¢n de
+su manufacturero CD-ROM para instalar el mando
+CD-ROM y el programa MSCDEX.
+$
+
+#MESSAGE = 24
+TITLE= " SISTEMA DE AVANCE "
+LINES 5 X 49
+$
+Su CONFIG.SYS ha sido avanzado de acuerdo con las
+puestas nuevas para su CD-ROM.  ud. debe AVANZAR
+su computadora para que las nuevas puestas tomen
+efecto.  Selecciona [OK] para AVANZAR su computadora.
+Selecciona [EXIT] para continuar sin avanzar.
+$
+
+#MESSAGE = 25
+TITLE= " SISTEMA DE AVANCE "
+LINES 4 X 46
+$
+Su Ambiente Variable BLASTER se ha avanzado
+cen su archivo AUTOEXEC.BAT.  Augonos
+programas DOS tendr n de referencia a este
+variable para instalaci¢n.  ¨ Desea Ud. AVANZAR su  computadora ?
+$
+
+#MESSAGE = 26
+TITLE= " ­ Error ! "
+LINES 2 X 48
+$
+­ Error Hardware Detectado !  Favor configurar nuevamente
+la Porta I/O de su Tarjeta de Sonido,  IRQ, o puestas DMA.
+$
+
+#MESSAGE = 27
+TITLE= " ­ Error ! "
+LINES 4 X 45
+$
+Ud. ha seleccionado la misma puesta de Porta
+I/O entre su Audio, CD-ROM o MPU 401.  Esto
+causar  conflicto en su sistema.  Favor
+seleccionar nuevamente una porta I/O diferente.
+$
+
+#MESSAGE = 28
+TITLE= " ­ Error ! "
+LINES 4 X 47
+$
+Ud. ha seleccionado la misma puesta IRQ entre
+su Audio, CD-ROM, Modem o MPU 401.  Esto
+causar  conflicto en su sistema.  Favor seleccionar
+nuevamente una porta IRQ diferente.
+$
+
+#MESSAGE = 29
+TITLE= " ­ Error ! "
+LINES 4 X 47
+$
+Ud. ha seleccionado la misma puesta DMA entre
+su Audio y CD-ROM.  Esto causar  conflicto en
+su sistema.  Favor seleccionar nuevamente una
+porta DMA diferente.
+$
+
+#MESSAGE = 30
+TITLE= " ­ Advertencia ! "
+LINES 3 X 48
+$
+Ud. ha seleccionado el Sistema de Sonido Windows
+usando IRQ 5.  algunos juegos DOS que apoyan el
+Sistema de Sonido Windows no funcionar n con esta opci¢n.
+$
+
+#MESSAGE = 31
+TITLE= " ­ INSTALACION DEL MANDO CD-ROM "
+LINES 7 X 48
+$
+El CD-ROM Ud. ha seleccionado no puede ser instalar
+en este momento.  Las fuentes requeridas del aparato
+IDE CD-ROM, direcci¢n I/O 170, 376 y IRQ 15 no est 
+disponible en su sistema. Favor revisar si su sistema
+cuente con un conttrolador CD-ROM secundario u
+otro aparato que use fuente que pueda generar conflicto
+con el interface de tarjeta CD-ROM.
+$
+
+#MESSAGE = 32
+TITLE= " AVANCE DE FUENTE PNP "
+LINES 5 X 48
+$
+Su tarjeta de sonido de fuente PNP ha sido cambiado.
+Selecciona [OK] para avanzar la configuraci¢n del
+sistema PNP. Las nuevas puestas para su tarjeta
+de sonido no ser  efectivo hasta que el sistema
+haya sido avanzado.
+$
+
+#MESSAGE = 33
+TITLE= " AVANCE DE FUENTE PNP "
+LINES 6 X 47
+$
+Su CONFIG.SYS ha sido avanzado seg£n las puestas
+nuevas para su CD-ROM.  la fuente PNP de
+su tarjeta de sonido ha sido cambiado tambi‚n.
+Selecciona [OK] para avanzar la configuraci¢n del
+sistema PNP. Las puestas nuevas para su tarjeta
+de sonido no ser  efectiva hasta que el sistema sea avanzado.
+$
+
+#MESSAGE = 34
+TITLE= " INSTALACION EXITOSA "
+LINES 11 X 48
+$
+El instalador ha terminado exitosamente.  La
+fuente PNP de su tarjeta de sonido ha sido avanzado
+durante la instalaci¢n.  ud. debe avanzar su sistema
+para echar a andar aplicaciones de sonido.
+Selecciona [REBOOT] ahora para avanzar.
+Tipea "SNDINIT" en el prompt DOS para probar y
+configurar nuevamente las puestas de su tarjeta
+en caso necesario despu‚s.
+Gracias por su preferencia del sistema de sonido MAD16 Pro.
+$
+
+#MESSAGE = 35
+TITLE= " APARATO AUDIO NO ACTIVADO "
+LINES 6 X 48
+$
+No existen fuentes de audio apropiadas asignadas
+para su tarjeta de sonido.  Para juegos DOS o
+echar a andar aplicaciones AUDIO, las fuentes se
+deben asignar al aparato audio.  Favor revisar la
+configuraci¢n audio para ver si existe conflicto
+con los dem s aparatos de su sistema.
+$
+
+#MESSAGE = 36
+TITLE= " CONFIGURACION DE INTERFACE MODEM "
+LINES 3 X 48
+$
+Su tarjeta de sonido apoya uninterface de modem.
+Las puestas PNP del modem actual est n
+exhibidas a continuaci¢n.
+$
+
+#MESSAGE = 37
+TITLE= " CONFIGURACION DE INTERFACE MODEM "
+LINES 2 X 48
+$
+Su tarjeta de sonido apoya uninterface de modem.
+Las puestas modem actual est n exhibidas a continuaci¢n.
+$
+

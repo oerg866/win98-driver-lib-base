@@ -1,0 +1,348 @@
+[version]
+signature="$CHICAGO$"
+Class=MEDIA
+Provider=%FORTEMEDIA%
+LayoutFile=layout.inf
+
+[DestinationDirs]
+DefaultDestDir = 11	; LDID_SYS
+
+[ClassInstall]
+AddReg=FM801.AddReg
+
+[ClassInstall.CopyWin]
+fmedia.cpl,fmedia.cpl,,6
+
+[ClassInstall.CopyIni]
+soundcfg.ini,soundcfg.ini,,6
+
+[FM801.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,Hex,00,00
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%MfgName%=FM801
+
+[ControlFlags]
+ExcludeFromSelect=VIRTUAL\FM801-SBEmulation
+ExcludeFromSelect=VIRTUAL\FMedia-ISAGamePort
+
+[FM801]                      
+%FM801.DeviceDesc%=FM801DS_Device, PCI\VEN_1319&DEV_0801&SUBSYS_13191319
+%FM802.DeviceDesc%=FM801JS.device, PCI\VEN_1319&DEV_0802&SUBSYS_13191319
+%FM801.DeviceDesc%=FM801DS_Device, PCI\VEN_1319&DEV_1000&SUBSYS_13191319
+%FM802.DeviceDesc%=FM801JS.device, PCI\VEN_1319&DEV_1001&SUBSYS_13191319
+%FM801-SBEmulation.DeviceDesc%=FM801_SB_Device, VIRTUAL\FM801-SBEmulation
+%FM801-GamePortEmu.DeviceDesc%=FM801_JOY_Device, VIRTUAL\FMedia-ISAGamePort
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+[FM801_Device]
+
+[FM801DS_device]
+AddReg=wave.AddReg, descriptions.AddReg, FM8010.AddReg, A3D.AddReg, Mixer.AddReg
+
+[FM801_SB_Device]
+AddReg=FM801_SB.AddReg
+
+[FM801JS.device]
+AddReg=FM8011.AddReg
+
+[FM801_JOY_Device]
+CopyFiles=FM801_JOY.CopyList
+AddReg=JOYSTICK.AddReg, FM_JSTICK.AddReg
+
+[FM8010.CopyList]
+SND801.vxd,SND801.vxd,,6
+SND801.drv,SND801.drv,,6
+fmjoyd.vxd,fmjoyd.vxd,,6
+fmjoyp.vxd,fmjoyp.vxd,,6 
+A3d.dll,A3d.dll,,6
+fmctrl.exe,fmctrl.exe,,6
+fmctrl.hlp,fmctrl.hlp,,6
+Qa3d.dll,Qa3d.dll,,6
+Qa3dload.dll,Qa3dload.dll,,6
+Qhook.vxd,Qhook.vxd,,6
+
+[FM8011.CopyList]
+fmjoyd.vxd,fmjoyd.vxd,,6
+
+[FM801_JOY.CopyList]
+vjoyd.vxd,,
+msjstick.drv,,
+
+[wave.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,,,
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+HKR,Drivers\wave,,,
+HKR,Drivers\mixer,,,
+HKR,Drivers\aux,,,
+
+[descriptions.AddReg]
+HKR,Drivers\wave\SND801.drv,Description,,%FM801.WAVE%
+HKR,Drivers\mixer\SND801.drv,Description,,%FM801.WAVE%
+HKR,Drivers\aux\SND801.drv,Description,,%FM801.WAVE%
+HKR,Drivers\midi\FM801_SYNTH,Description,,%FM801.InternalMIDI%
+HKR,Drivers\midi\FM801_MPU401,Description,,%FM801.ExternalMIDI%
+
+[FM8010.AddReg]
+HKR,,Driver,,SND801.vxd
+HKR,Drivers\wave\SND801.drv,,,
+HKR,Drivers\wave\SND801.drv,Driver,,SND801.drv
+HKR,Drivers\mixer\SND801.drv,,,
+HKR,Drivers\mixer\SND801.drv,Driver,,SND801.drv
+HKR,Drivers\aux\SND801.drv,,,
+HKR,Drivers\aux\SND801.drv,Driver,,SND801.drv
+HKR,Drivers\midi\FM801_SYNTH,Driver,,SND801.drv
+HKR,Drivers\midi\FM801_SYNTH,External,1,00,00,00,00
+HKR,Drivers\midi\FM801_SYNTH,NumPorts,1,02,00,00,00
+HKR,Drivers\midi\FM801_SYNTH,Port,1,00,00,00,00
+HKR,Drivers\midi\FM801_MPU401,Driver,,SND801.drv
+HKR,Drivers\midi\FM801_MPU401,External,1,01,00,00,00
+HKR,Drivers\midi\FM801_MPU401,NumPorts,1,02,00,00,00
+HKR,Drivers\midi\FM801_MPU401,Port,1,01,00,00,00
+HKR,Drivers,SubClasses,,"wave,midi,mixer,aux"
+
+HKR,Config,"LeftMasterVol",	0x10001,ff,ff,00,00
+HKR,Config,"RightMasterVol",	0x10001,ff,ff,00,00
+HKR,Config,"LeftFMasterVol",	0x10001,ff,ff,00,00
+HKR,Config,"RighFLMasterVol",	0x10001,ff,ff,00,00
+HKR,Config,"LeftRMasterVol",	0x10001,ff,ff,00,00
+HKR,Config,"RightRMasterVol",	0x10001,ff,ff,00,00
+HKR,Config,"LeftLineInVol",	0x10001,ff,7f,00,00
+HKR,Config,"RightLineInVol",	0x10001,ff,7f,00,00
+HKR,Config,"LeftDACVol",	0x10001,ff,7f,00,00
+HKR,Config,"RightDACVol",	0x10001,ff,7f,00,00
+HKR,Config,"LeftCDVol",		0x10001,ff,7f,00,00
+HKR,Config,"RightCDVol",	0x10001,ff,7f,00,00
+HKR,Config,"MonoMICVol",	0x10001,ff,7f,00,00
+HKR,Config,"PhoneVol",		0x10001,ff,7f,00,00
+HKR,Config,"MonoVol",		0x10001,ff,7f,00,00
+HKR,Config,"LeftAuxVol",	0x10001,ff,7f,00,00
+HKR,Config,"RightAuxVol",	0x10001,ff,7f,00,00
+HKR,Config,"LeftVideoVol",	0x10001,ff,7f,00,00
+HKR,Config,"RightVideoVol",	0x10001,ff,7f,00,00
+HKR,Config,"LeftSynthVol",	0x10001,ff,7f,00,00
+HKR,Config,"RightSynthVol",	0x10001,ff,7f,00,00
+HKR,Config,"LeftI2SVol",	0x10001,ff,7f,00,00
+HKR,Config,"RightI2SVol",	0x10001,ff,7f,00,00
+HKR,Config,"LFEVol",		0x10001,ff,ff,00,00
+HKR,Config,"CNTVol",		0x10001,ff,ff,00,00
+
+HKR,Config,"LeftADCAuxVol",	0x10001,00,00,00,00
+HKR,Config,"RightADCAuxVol",	0x10001,00,00,00,00
+HKR,Config,"ADCMicVol",		0x10001,00,00,00,00
+HKR,Config,"ADCPhoneVol",       0x10001,00,00,00,00
+HKR,Config,"LeftADCLineVol",	0x10001,00,00,00,00
+HKR,Config,"RightADCLineVol",	0x10001,00,00,00,00
+HKR,Config,"LeftADCCDVol",	0x10001,00,00,00,00
+HKR,Config,"RightADCCDVol",	0x10001,00,00,00,00
+HKR,Config,"LeftADCMixVol",	0x10001,00,00,00,00
+HKR,Config,"RightADCMixVol",	0x10001,00,00,00,00
+HKR,Config,"LeftADCDIGWave",	0x10001,00,00,00,00
+HKR,Config,"RightADCDIGWave",	0x10001,00,00,00,00
+HKR,Config,"LeftADCDIGFM",	0x10001,00,00,00,00
+HKR,Config,"RightADCDIGFM",	0x10001,00,00,00,00
+HKR,Config,"LeftADCDIGI2S",	0x10001,00,00,00,00
+HKR,Config,"RightADCDIGI2S",	0x10001,00,00,00,00
+HKR,Config,"LeftADCVideoVol",	0x10001,00,00,00,00
+HKR,Config,"RightADCVideoVol",	0x10001,00,00,00,00
+HKR,Config,"ADCSource",		0x00000000,"MIC"
+
+HKR,Config,"MasterMute",	0x10001,00,00,00,00
+HKR,Config,"FMasterMute",	0x10001,00,00,00,00
+HKR,Config,"RMasterMute",	0x10001,00,00,00,00
+HKR,Config,"AuxMute",		0x10001,00,00,00,00
+HKR,Config,"FM-SynMute",	0x10001,00,00,00,00
+HKR,Config,"CDMute",		0x10001,00,00,00,00
+HKR,Config,"LineInMute",	0x10001,00,00,00,00
+HKR,Config,"VideoMute",		0x10001,00,00,00,00
+HKR,Config,"LineMute",		0x10001,00,00,00,00
+HKR,Config,"I2SMute",		0x10001,00,00,00,00
+HKR,Config,"PhoneMute",         0x10001,00,00,00,00
+HKR,Config,"MonoMute",          0x10001,00,00,00,00
+HKR,Config,"LFEMute",           0x10001,00,00,00,00
+HKR,Config,"CNTMute",           0x10001,00,00,00,00
+HKR,Config,"MicMute",		0x10001,01,00,00,00
+
+HKR,Config,"3DCenterVol",	0x10001,ff,7f,00,00
+HKR,Config,"3DDepthVol",	0x10001,ff,7f,00,00
+HKR,Config,"3DEnable",          0x10001,00,00,00,00
+HKR,Config,"MicBoost",		0x10001,01,00,00,00
+HKR,Config,"SPDIFEnable",	0x10001,00,00,00,00
+
+; RomePlus only, if enable this, then modify the I2S name to SPDIFIn
+HKR,Config,"SPDIF_IN_ENABLE",   0x00001,00
+HKR,Config,"I2S",		0,"I2S"
+HKR,Config,"I2S Mute",		0,"I2S Mute"
+HKR,Config,"I2S Level",		0,"I2S Level"
+HKR,Config,"VARIABLE_SAMPLERATE", 0x00001,00
+
+; Rome & RomePlus
+HKR,Config,"DOSMode",		0x00001,00
+HKR,Config,"MAX_VOL_GAIN",      0x00001,1c
+HKR,Config,"MAX_RECORD_GAIN",   0x00001,10
+HKR,Config,"MAX_RECORD_AUX",    0x00001,10
+HKR,Config,"MAX_RECORD_CD",     0x00001,10
+
+HKR,Config,"RWT_3D_ENABLE",     0x00001,00
+
+HKR,Config,"LEGACY_IO",         0x00001,00
+HKR,Config,"CODEC4_2DAC",	0x00001,00
+HKR,Config,"STEREOX2_ENABLE",	0x00001,00
+HKR,Config,"HIGH_PASS_RECORD",  0x00001,00
+HKR,Config,"DEFAULT_MONO_OUT",  0x00001,00
+HKR,Config,"SDAC_INVERT",	0x00001,01
+HKR,Config,"I2S_MODE_CONTROL",  0x00001,03
+HKR,Config,"SPDIF_AUTO_ENABLE", 0x00001,00
+HKR,Config,"SPDIF_MANUAL_ENABLE", 0x00001,00
+HKR,Config,"DOCKING_ENABLE",    0x00001,00
+HKR,Config,"DOCKING_CODEC_USED",0x00001,00
+HKR,Config,"SRC_HW_ASSIST",     0x00001,00
+HKR,Config,"SHOW_3D_CTRL",      0x00001,01
+HKR,Config,"VOL_MAP_METHOD",   	0x00001,01
+HKR,Config,"PUSHBUTTON",        0x00001,00
+HKR,Config,"PUSHBTN_INTERVAL",  0x00001,f4,01
+HKR,Config,"ManufactureID",     0x00001,e5,00
+
+HKR,Config,"ROME_PCM_VOL",      0x00001,08,08
+HKR,Config,"ROME_VOL_DIVISION", 0x00001,00
+
+HKR,Config,"PLAYBACK_CD_ENABLE",       0x00001,01
+HKR,Config,"PLAYBACK_AUX_ENABLE",      0x00001,01
+HKR,Config,"PLAYBACK_VIDEO_ENABLE",    0x00001,01
+HKR,Config,"PLAYBACK_I2S_ENABLE",      0x00001,01
+HKR,Config,"PLAYBACK_PHONE_ENABLE",    0x00001,01
+HKR,Config,"PLAYBACK_MONOOUT_ENABLE",  0x00001,01
+HKR,Config,"RECORD_CD_ENABLE",         0x00001,01
+HKR,Config,"RECORD_AUX_ENABLE",        0x00001,01
+HKR,Config,"RECORD_VIDEO_ENABLE",      0x00001,01
+HKR,Config,"RECORD_PHONE_ENABLE",      0x00001,01
+
+HKR,Config,"Master Volume",     0,"Master Volume"
+HKR,Config,"Record Control",    0,"Record Control"
+HKR,Config,"3D Enhancement",    0,"3D Enhancement"
+HKR,Config,"Aux",       	0,"Aux"
+HKR,Config,"Aux Mute",       	0,"Aux Mute"
+HKR,Config,"Aux Level",       	0,"Aux Level"
+HKR,Config,"Wave",      	0,"Wave/DS"
+HKR,Config,"Wave Mute",      	0,"Wave/DS Mute"
+HKR,Config,"Wave Level",      	0,"Wave/DS Level"
+HKR,Config,"Front Wave",        0,"Wave/DS"
+HKR,Config,"FM-Syn",		0,"FM-Syn"
+HKR,Config,"FM-Syn Mute", 	0,"FM-Syn Mute"
+HKR,Config,"FM-Syn Level", 	0,"FM-Syn Level"
+HKR,Config,"Mic",		0,"Mic"
+HKR,Config,"Mic Mute",		0,"Mic Mute"
+HKR,Config,"Mic Level",		0,"Mic Level"
+HKR,Config,"Phone",		0,"Phone"
+HKR,Config,"Phone Mute",	0,"Phone Mute"
+HKR,Config,"Phone Level",	0,"Phone Level"
+HKR,Config,"Mono Out",		0,"Mono Out"
+HKR,Config,"Mono Out Mute",	0,"Mono Out Mute"
+HKR,Config,"Mono Out Level",	0,"Mono Out Level"
+HKR,Config,"CD",		0,"CD"
+HKR,Config,"CD Mute",		0,"CD Mute"
+HKR,Config,"CD Level",		0,"CD Level"
+HKR,Config,"LineIn",		0,"LineIn"
+HKR,Config,"LineIn Mute",	0,"LineIn Mute"
+HKR,Config,"LineIn Level",	0,"LineIn Level"
+HKR,Config,"Video",		0,"Video"
+HKR,Config,"Video Mute",	0,"Video Mute"
+HKR,Config,"Video Level",	0,"Video Level"
+HKR,Config,"Mix",		0,"Mix"
+HKR,Config,"Mix Mute",		0,"Mix Mute"
+HKR,Config,"Mix Level",		0,"Mix Level"
+HKR,Config,"Master",		0,"Master"
+HKR,Config,"Master Mute",	0,"Master Mute"
+HKR,Config,"Master Level", 	0,"Master Level"
+HKR,Config,"Front Master",	0,"Front Master"
+HKR,Config,"Front Mute",	0,"Front Mute"
+HKR,Config,"Front Level",	0,"Front Level"
+HKR,Config,"Rear Master",	0,"Rear Master"
+HKR,Config,"Rear Mute",		0,"Rear Mute"
+HKR,Config,"Rear Level",	0,"Rear Level"
+HKR,Config,"LFE/6Chan",		0,"LFE/6Chan"
+HKR,Config,"LFE Mute",		0,"LFE Mute"
+HKR,Config,"LFE Level",		0,"LFE Level"
+HKR,Config,"Center/6Chan",	0,"Center/6Chan"
+HKR,Config,"CNT Mute",		0,"CNT Mute"
+HKR,Config,"CNT Level",		0,"CNT Level"
+HKR,Config,"3D Enable",		0,"3D Enable"
+HKR,Config,"3D Center",		0,"3D Center"
+HKR,Config,"3D Depth",		0,"3D Depth"
+HKR,Config,"Mic Boost",		0,"Mic Boost"
+HKR,Config,"SPDIF Enable",	0,"SPDIF Enable"
+
+HKLM,%Key_Msg%,SR_ALERT_MSG,,"FM801 System Driver Alert"
+HKLM,%Key_Msg%,NO_VXD_MSG,,"Snd801.vxd driver is not present or failed to load."
+HKLM,%Key_Msg%,WRONG_VXD_MSG,,"Snd801.vxd is out of date."
+HKLM,%Key_Msg%,DRIVERMPU_MSG,,"FM801 External Midi Port"
+HKLM,%Key_Msg%,DRIVERSYNTH_MSG,,"FM801 Internal FM"
+HKLM,%Key_Msg%,DRIVERWAVEIN_MSG,,"FM801 System Record"
+HKLM,%Key_Msg%,DRIVERWAVEOUT_MSG,,"FM801 System Playback"
+HKLM,%Key_Msg%,DRIVERAUX_MSG,,"FM801 System Aux"
+HKLM,%Key_Msg%,DRIVERMIXER_MSG,,"FM801 System Mixer"
+
+[Mixer.AddReg]
+HKR,Drivers,MIGRATED,,0
+HKLM,%KEY_IOC%\asm,,,
+HKLM,%KEY_IOC%\Rec,,,
+HKLM,%KEY_IOC%\MPlay,,,
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,0,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+HKLM,software\Microsoft\windows\CurrentVersion\Run,Q3dctlTray,,"Fmctrl.EXE"
+HKLM,software\Microsoft\windows\CurrentVersion\Run,WinChk,,"winchk.exe"
+
+[A3D.AddReg]
+HKCR,A3d, , 0, "A3d Object"
+HKCR,A3d\CLSID, , 0, "{d8f1eee0-f634-11cf-8700-00a0245d918b}"
+HKCR,CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b},,0,"A3d Object"
+HKCR,CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b}\InprocServer32,,0,"a3d.dll"
+HKCR,CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b}\InprocServer32,"ThreadingModel",0,"Apartment"
+  
+
+[FM801_SB.AddReg]
+HKR,,DeviceDriver,,SND801.vxd
+HKR,,DevLoader,,*CONFIGMG 
+
+[FM8011.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,,Driver,,fmjoyd.vxd
+HKLM,%Key_Joy%\%FM802.DeviceDesc%,,,
+HKLM,%Key_Joy%\%FM802.DeviceDesc%,OEMCallout,,fmjoyp.vxd
+HKLM,%Key_Joy%\%FM802.DeviceDesc%,OEMData,1,1,0,0,C,4,0,0,0
+HKLM,%Key_Joy%\%FM802.DeviceDesc%,OEMName,,%FM802.DeviceDesc%
+HKR,Config,"LEGACY_IO",         0x00001,00
+
+[JOYSTICK.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\joystick,,,
+
+[FM_JSTICK.AddReg]
+HKR,,Driver,,vjoyd.vxd
+HKR,Drivers\joystick\msjstick.drv,Description,,%FM801-GamePortEmu.DeviceDesc%
+HKR,Drivers\joystick\msjstick.drv,Driver,,msjstick.drv
+HKR,Drivers,SubClasses,,"joystick"
+
+[Strings]   
+FORTEMEDIA="ForteMedia, Inc."
+MfgName="ForteMedia, Inc."                      
+FM801-SBEmulation.DeviceDesc="FM801 Legacy Audio"
+FM801-GamePortEmu.DeviceDesc="FM801 Legacy Joystick"
+FM801.WAVE="FM801 Audio System"
+FM801.InternalMIDI="FM801 Internal FM"
+FM801.ExternalMIDI="FM801 External Midi Port"
+FM801.DeviceDesc="FM801 PCI Audio"
+FM802.DeviceDesc="FM801 PCI Joystick" 
+FM8010.DeviceDesc="FM801 PCI Audio"    
+MediaClassName="Sound, video and game controllers" 
+Key_Msg=Software\ForteMedia\Messages
+Key_Joy=System\CurrentControlSet\control\MediaProperties\PrivateProperties\Joystick\OEM
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+

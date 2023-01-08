@@ -1,0 +1,86 @@
+; M5289.INF for Windows 9x/ME
+; Copyright 2004 ALI Corporation.
+
+
+[version]
+signature="$CHICAGO$"
+Class=SCSIAdapter
+Provider=%ALI%
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+DriverVer=12/30/2004, 5.0.2.9
+;CatalogFile = m5289.cat
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+MoveMiniPort   = 12;
+aliinf = 17,"other";	INF directory
+
+[ControlFlags]
+
+[Manufacturer]
+%ALI%=ALI
+
+[ALI]
+%PCI\VEN_10B9&DEV_5289.DeviceDesc% = m5289, PCI\VEN_10B9&DEV_5289
+%PCI\VEN_10B9&DEV_5289&SUBSYS_528910B9.DeviceDesc% = m5289, PCI\VEN_10B9&DEV_5289&SUBSYS_528910B9
+
+[m5289]
+CopyFiles=MoveMiniPort
+AddReg=ios,IDENATPCI.reg,RaidReg
+Reboot
+
+[m5289.Uninstall]
+DelReg=RegUninstall.del
+DelFiles=aliinf,MoveMiniPort
+Reboot
+
+
+[RegUninstall.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\m5289
+
+[IDENATPCI.PosDup]
+*BUS0042
+
+[RaidReg]
+HKLM, SOFTWARE\ALi\m5289,,,
+
+[*BUS0042.Det]
+AddReg=ForceMPCopy
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[IDENATPCI.reg]
+HKR,,PortDriver,,m5289.mpd
+
+[ForceMPCopy]
+HKR,,NoSetupUI,,1
+
+[MoveMiniPort]
+m5289.mpd
+ulisatax.vxd
+
+[aliinf]
+%ALI%m5289.inf,,,
+
+[SourceDisksFiles]
+m5289.mpd = 1
+ulisatax.vxd = 1
+
+[SourceDisksNames]
+1 = %DISKNAME1%,,,,
+2 = %DISKNAME2%,,,,
+
+[strings]
+ALI="ALi Corporation"
+PCI\VEN_10B9&DEV_5289.DeviceDesc="ALi SATA/RAID Controller (M5289)"
+PCI\VEN_10B9&DEV_5289&SUBSYS_528910B9.DeviceDesc="ALi SATA/RAID Controller (M5289)"
+REG_EXPAND_SZ=0x00020000
+REG_DWORD=0x00010001
+IOLOGMSGDLL="\IoLogMsg.dll"
+DISKNAME1="ALi ATA SATA RAID Controller Driver Diskette"
+DISKNAME2="Windows system"
+RemoveOnly="(Remove Only)"
+
+

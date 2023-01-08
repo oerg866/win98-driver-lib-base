@@ -1,0 +1,22 @@
+[data]
+type=network
+version=3.11.250
+
+[disks]
+1= ..\ndis2\dos, "D-Link DFE-530TX PCI WfW Driver Disk", disk2.id
+;;;2= \wfw311   , "D-Link DFE-530TX PCI WfW Driver Disk", disk2.id
+
+[netcard]
+;NDIS2 only driver
+pci$DLK140="D-Link DFE-530TX PCI Fast Ethernet Adapter",0,ndis,ethernet,0x01,pci$DLK140,pci$DLK140_nif
+
+[pci$DLK140]
+ndis2=1:DLKFET.DOS
+;;;ndis3=2:DLKFET.386
+
+[pci$DLK140_nif]
+drivername=DLKFET$,0x10
+
+; NDIS2 driver parameters:
+param=CONNECTIONTYPE,"Conntion Type",text,"AUTOSENSE,_10BASET,_10BASETFD,_100BASETX,_100BASETXFD","AUTOSENSE",0x12
+

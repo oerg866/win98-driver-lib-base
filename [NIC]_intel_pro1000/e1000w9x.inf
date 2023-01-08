@@ -1,0 +1,602 @@
+;*******************************************************************************
+;*                                                                            **
+;*                     I N T E L   P R O P R I E T A R Y                      **
+;*                                                                            **
+;*   COPYRIGHT (c) 1999-2004 BY INTEL CORPORATION. ALL RIGHTS RESERVED.  NO   **
+;*   PART  OF  THIS  PROGRAM OR PUBLICATION MAY BE REPRODUCED, TRANSMITTED,   **
+;*   TRANSCRIBED, STORED IN A RETRIEVAL  SYSTEM,  OR  TRANSLATED  INTO  ANY   **
+;*   LANGUAGE OR COMPUTER LANGUAGE IN ANY FORM OR BY ANY MEANS, ELECTRONIC,   **
+;*   MECHANICAL, MAGNETIC, OPTICAL, CHEMICAL, MANUAL, OR OTHERWISE, WITHOUT   **
+;*   THE PRIOR WRITTEN PERMISSION OF :                                        **
+;*                                                                            **
+;*                             INTEL CORPORATION                              **
+;*                                                                            **
+;*                          2200 MISSION COLLEGE BLVD                         **
+;*                                                                            **
+;*                     SANTA CLARA, CALIFORNIA 95052-8119                     **
+;*                                                                            **
+;*******************************************************************************
+;
+;*******************************************************************************
+; e1000w9x.INF (Windows 98SE and Windows ME)
+; $Revision: 1.24.2.4 $
+;
+; Intel(R) PRO/1000 Gigabit Adapters
+;************************************
+;
+[version]
+Signature       = "$Chicago$"
+Class           = Net
+ClassGUID       = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider        = %Intel%
+DriverVer  	= 01/06/2006,8.6.17.0
+
+[Manufacturer]
+%Intel%     = Intel
+
+[ControlFlags]
+;ExcludeFromSelect = \
+    PCI\VEN_8086&DEV_100D&SUBSYS_891F107B,\
+    PCI\VEN_8086&DEV_100C&SUBSYS_21128086,\
+    PCI\VEN_8086&DEV_100E&SUBSYS_002E8086,\
+    PCI\VEN_8086&DEV_100E&SUBSYS_8920107B,\
+    PCI\VEN_8086&DEV_100E&SUBSYS_02651014,\
+    PCI\VEN_8086&DEV_100E&SUBSYS_02671014,\
+    PCI\VEN_8086&DEV_100E&SUBSYS_026A1014,\
+    PCI\VEN_8086&DEV_100E&SUBSYS_027E1014,\
+    PCI\VEN_8086&DEV_1016&SUBSYS_052C1014,\
+    PCI\VEN_8086&DEV_1018&SUBSYS_10188086,\
+    PCI\VEN_8086&DEV_101E&SUBSYS_05491014,\
+    PCI\VEN_8086&DEV_1075&SUBSYS_10758086,\
+    PCI\VEN_8086&DEV_1076&SUBSYS_10768086,\
+    PCI\VEN_8086&DEV_1077&SUBSYS_00011179,\
+    PCI\VEN_8086&DEV_107C&SUBSYS_13768086,\
+    PCI\VEN_8086&DEV_107C&SUBSYS_14768086
+
+
+
+[Intel]
+; DisplayName                   Section         DeviceID
+; -----------                   -------         --------
+%E100CGEN.DeviceDesc%           = E100C.ndi,         PCI\VEN_8086&DEV_100C
+%E100DGEN.DeviceDesc%           = E100C.ndi,         PCI\VEN_8086&DEV_100D
+%E100EGEN.DeviceDesc%           = E100E.ndi,         PCI\VEN_8086&DEV_100E
+%E1015.DeviceDesc%              = E100E.ndi,         PCI\VEN_8086&DEV_1015
+%E1016.DeviceDesc%              = E100E.ndi,         PCI\VEN_8086&DEV_1016
+%E101E.DeviceDesc%              = E101E.ndi,         PCI\VEN_8086&DEV_101E
+%E1013.DeviceDesc%             = E1013.ndi,         PCI\VEN_8086&DEV_1013
+%E1018MC.DeviceDesc%           = E1013.ndi,         PCI\VEN_8086&DEV_1018
+%E1019NC.DeviceDesc%           = E1019.ndi,         PCI\VEN_8086&DEV_1019
+%E1075NC.DeviceDesc%           = E1075.ndi,         PCI\VEN_8086&DEV_1075
+%E1076NC.DeviceDesc%           = E1076.ndi,         PCI\VEN_8086&DEV_1076
+%E1077MC.DeviceDesc%           = E1076.ndi,         PCI\VEN_8086&DEV_1077
+%E107CDA.DeviceDesc%           = E107C.ndi,         PCI\VEN_8086&DEV_107C
+
+;-------------------------------------------------------------------------------
+; Intel PRO\1000 T Desktop Adapter (Generic)
+;
+[E100C.ndi]
+DriverVer       = 01/06/2006,8.6.17.0
+DelReg          = Legacy.DelReg
+AddReg          = E1000.ndi.reg, Kodiak.reg, Kodiak2.reg, Copper.reg, Advanced.reg, Uninstall.reg, WakeOn.reg, WakeOnLink.reg
+CopyFiles       = e1000.CopyFiles, UninstallProg.CopyFiles
+
+;-------------------------------------------------------------------------------
+; Intel PRO\1000 T Desktop Adapter
+;
+[E100CCopper.ndi]
+DriverVer       = 01/06/2006,8.6.17.0
+DelReg          = Legacy.DelReg
+AddReg          = E1000.ndi.reg, Kodiak.reg, Kodiak2.reg, Copper.reg, Advanced.reg, Uninstall.reg, WakeOn.reg, WakeOnLink.reg
+CopyFiles       = e1000.CopyFiles, UninstallProg.CopyFiles
+
+;-------------------------------------------------------------------------------
+; Intel PRO\1000 MT Desktop Adapter (Generic)
+;
+[E100E.ndi]
+DriverVer       = 01/06/2006,8.6.17.0
+DelReg          = Legacy.DelReg
+AddReg          = E1000.ndi.reg, Kodiak.reg, Kodiak2.reg, Copper.reg, Advanced.reg, Uninstall.reg, 82540EM.reg, WakeOn.reg, WakeOnLink.reg
+CopyFiles       = e1000.CopyFiles, UninstallProg.CopyFiles
+
+;-------------------------------------------------------------------------------
+; Intel PRO\1000 MT Desktop Adapter
+;
+[E100ECopper.ndi]
+DriverVer       = 01/06/2006,8.6.17.0
+DelReg          = Legacy.DelReg
+AddReg          = E1000.ndi.reg, Kodiak.reg, Kodiak2.reg, Copper.reg, Advanced.reg, Uninstall.reg, 82540EM.reg, WakeOn.reg, WakeOnLink.reg
+CopyFiles       = e1000.CopyFiles, UninstallProg.CopyFiles
+
+;-------------------------------------------------------------------------------
+; Intel PRO\1000 MT Mobile Connection (K32M)
+;
+[E101E.ndi]
+DriverVer       = 01/06/2006,8.6.17.0
+DelReg          = Legacy.DelReg
+AddReg          = E1000.ndi.reg, Kodiak.reg, Kodiak2.reg, Copper.reg, Advanced.reg, Uninstall.reg, 82540EM.reg, WakeOn.reg, WakeOnLink.reg, PDoLL.reg
+CopyFiles       = e1000.CopyFiles, UninstallProg.CopyFiles
+
+;-------------------------------------------------------------------------------
+; Intel PRO\1000 MT Network Connection and Adapter 
+;
+[E1013.ndi]
+DriverVer       = 01/06/2006,8.6.17.0
+DelReg          = Legacy.DelReg
+AddReg          = E1000.ndi.reg, Kodiak.reg, Kodiak2.reg, Copper.reg, Advanced.reg, Uninstall.reg, 82540EM.reg, WakeOn.reg, WakeOnLink.reg, TnT.reg
+CopyFiles       = e1000.CopyFiles, UninstallProg.CopyFiles
+
+;-------------------------------------------------------------------------------
+; Intel PRO\1000 CT Mobile Connection
+;
+[E1019.ndi]
+DriverVer       = 01/06/2006,8.6.17.0
+DelReg          = Legacy.DelReg
+AddReg          = E1000.ndi.reg, Kodiak.reg, Kodiak2.reg, Copper.reg, Advanced.reg, Uninstall.reg, 82540EM.reg, WakeOn.reg, WakeOnLink.reg, TnT.reg
+CopyFiles       = e1000.CopyFiles, UninstallProg.CopyFiles
+
+;-------------------------------------------------------------------------------
+; Intel PRO\1000 CT Network Connection
+;
+[E1075.ndi]
+DriverVer       = 01/06/2006,8.6.17.0
+DelReg          = Legacy.DelReg
+AddReg          = E1000.ndi.reg, Kodiak.reg, Kodiak2.reg, Copper.reg, Advanced.reg, Uninstall.reg, 82540EM.reg, WakeOn.reg, WakeOnLink.reg, TnT.reg
+CopyFiles       = e1000.CopyFiles, UninstallProg.CopyFiles
+
+;-------------------------------------------------------------------------------
+; Intel PRO\1000 MT Network Connection and Adapter 
+;
+[E1076.ndi]
+DriverVer       = 01/06/2006,8.6.17.0
+DelReg          = Legacy.DelReg
+AddReg          = E1000.ndi.reg, Kodiak.reg, Kodiak2.reg, Copper.reg, Advanced.reg, Uninstall.reg, 82540EM.reg, WakeOn.reg, WakeOnLink.reg, TnT.reg
+CopyFiles       = e1000.CopyFiles, UninstallProg.CopyFiles
+
+;-------------------------------------------------------------------------------
+; Intel PRO/1000 GT Desktop Adapter
+;
+[E107C.ndi]
+DriverVer       = 01/06/2006,8.6.17.0
+DelReg          = Legacy.DelReg
+AddReg          = E1000.ndi.reg, Kodiak.reg, Kodiak2.reg, Copper.reg, Advanced.reg, Uninstall.reg, 82540EM.reg, WakeOn.reg, WakeOnLink.reg, TnT.reg
+CopyFiles       = e1000.CopyFiles, UninstallProg.CopyFiles
+
+
+;--- Win9x NDI object registration
+; 
+[E1000.ndi.reg]
+HKR,,               DevLoader,        0, "*ndis"
+HKR,,               DeviceVxDs,       0, "e1000w9x.sys"
+HKR,,               EnumPropPages,    0, "netdi.dll,EnumPropPages"
+HKR,,               Driver,           0, "e1000w9x.sys"
+HKR,NDIS,           LogDriverName,    0, "E1000"
+HKR,NDIS,           MajorNdisVersion, 1, 03
+HKR,NDIS,           MinorNdisVersion, 1, 0A
+HKR,Ndi,            DeviceID,         0, "PCI\VEN_8086&DEV_100C"
+HKR,Ndi\Interfaces, DefUpper,         0, "ndis3"  
+HKR,Ndi\Interfaces, DefLower,         0, "ethernet"
+HKR,Ndi\Interfaces, UpperRange,       0, "ndis3"
+HKR,Ndi\Interfaces, LowerRange,       0, "ethernet"
+
+;-----------------------------------------------------------------------------
+; Registry Settings (decimal) 
+;
+[Kodiak.reg]
+
+; FlowControl
+HKR, Ndi\Params\FlowControl,                   ParamDesc,          0, %FlowControl%
+HKR, PROSetNdi\NdiExt\Params\FlowControl,      MiniHelp,           0, %FlowControlMiniHelp%
+HKR, Ndi\Params\FlowControl,                   default,            0, "3"
+HKR, Ndi\Params\FlowControl\Enum,              "0",                0, %FlowControl_None%
+HKR, Ndi\Params\FlowControl\Enum,              "1",                0, %FlowControl_RxOnly%
+HKR, Ndi\Params\FlowControl\Enum,              "2",                0, %FlowControl_TxOnly%
+HKR, Ndi\Params\FlowControl\Enum,              "3",                0, %FlowControl_Full%
+HKR, Ndi\Params\FlowControl,                   type,               0, "enum"
+
+; NumTxDescriptors
+HKR, Ndi\params\NumTxDescriptors,              ParamDesc,          0, %NumTxDescriptors% 
+HKR, PROSetNdi\NdiExt\params\NumTxDescriptors, MiniHelp,           0, %NumTxDescriptorsMiniHelp% 
+HKR, Ndi\params\NumTxDescriptors,              default,            0, "256"
+HKR, Ndi\params\NumTxDescriptors,              min,                0, "80"
+HKR, Ndi\params\NumTxDescriptors,              max,                0, "768"
+HKR, Ndi\params\NumTxDescriptors,              step,               0, "8"
+HKR, Ndi\params\NumTxDescriptors,              Base,               0, "10"
+HKR, Ndi\params\NumTxDescriptors,              type,               0, "int"
+
+; NumRxDescriptors
+HKR, Ndi\params\NumRxDescriptors,              ParamDesc,          0, %NumRxDescriptors% 
+HKR, PROSetNdi\NdiExt\params\NumRxDescriptors, MiniHelp,           0, %NumRxDescriptorsMiniHelp% 
+HKR, Ndi\params\NumRxDescriptors,              default,            0, "256"
+HKR, Ndi\params\NumRxDescriptors,              min,                0, "80"
+HKR, Ndi\params\NumRxDescriptors,              max,                0, "768"
+HKR, Ndi\params\NumRxDescriptors,              step,               0, "8"
+HKR, Ndi\params\NumRxDescriptors,              Base,               0, "10"
+HKR, Ndi\params\NumRxDescriptors,              type,               0, "int"
+
+; NumCoalesceBuffers
+;HKR, Ndi\params\NumCoalesce,            ParamDesc,          0, %NumCoalesceBuffers% 
+;HKR, PROSetNdi\NdiExt\params\NumCoalesce,MiniHelp,           0, %NumCoalesceBuffersMiniHelp% 
+;HKR, Ndi\params\NumCoalesce,            default,            0, "128"
+;HKR, Ndi\params\NumCoalesce,            min,                0, "16"
+;HKR, Ndi\params\NumCoalesce,            max,                0, "768"
+;HKR, Ndi\params\NumCoalesce,            step,               0, "1"
+;HKR, Ndi\params\NumCoalesce,            Base,               0, "10"
+;HKR, Ndi\params\NumCoalesce,            type,               0, "int"
+
+; Network Address
+HKR, Ndi\params\NetworkAddress,                ParamDesc,          0, %LAA%
+HKR, PROSetNdi\NdiExt\params\NetworkAddress,   MiniHelp,           0, %LAAMiniHelp%
+HKR, Ndi\params\NetworkAddress,                Default,            0, "0"
+HKR, Ndi\params\NetworkAddress,                type,               0, "edit"
+HKR, NDI\params\NetworkAddress,                LimitText,          0, "12"
+HKR, NDI\params\NetworkAddress,                UpperCase,          0, "1"
+;HKR, NDI\params\NetworkAddress,                optional,           0, "1"
+
+; Hardwired defaults
+HKR,,                                          DmaFairness,        0, "0"
+HKR,,                                          FirstTime,          0, "1"
+HKR,,                                          PciScanMethod,      0, "3"
+HKR,,                                          TxIntDelay,         0, "28"
+HKR,,                                          MulticastFilterType,0, "0"
+HKR,,                                          MWIEnable,          0, "0"
+HKR,,                                          CustomMessages,     0, "1"
+HKR,,                                          VlanFiltering,      0, "1"
+HKR,,                                          QtagSwControlled,   0, "1"
+HKR,,                                          DeviceVxDsPrefix,   0, "e1000"
+HKR,,                                          WaitAutoNegComplete,0, "2"
+
+
+; Advanced Power Consumption Features
+HKR,,                                       ReduceSpeedOnPowerDown, 0, "1"
+HKR,,                                       AutoPowerSaveModeEnabled, 0, "0"
+HKR,,                                       SavePowerNowEnabled,      0, "1"
+
+[Kodiak2.reg]
+
+; NumTxDescriptors
+HKR, Ndi\params\NumTxDescriptors,              max,                0, "256"
+
+; NumRxDescriptors
+HKR, Ndi\params\NumRxDescriptors,              max,                0, "256"
+
+; Hardwired defaults
+HKR,,                                          QtagSwControlled,   0, "0"
+
+[Copper.reg]
+; AutoNegAdvertised
+HKR, PROSetNdi\Params\AutoNegAdvertised,       ParamDesc,          0, %AutoNegAdvertised%
+HKR, PROSetNdi\Params\AutoNegAdvertised,       MiniHelp,           0, %AutoNegAdvertisedMiniHelp%
+HKR, PROSetNdi\Params\AutoNegAdvertised,       default,            0, "47"
+HKR, PROSetNdi\Params\AutoNegAdvertised\Enum,  "1",                0, %Advertise_10_Half%
+HKR, PROSetNdi\Params\AutoNegAdvertised\Enum,  "2",                0, %Advertise_10_Full%
+HKR, PROSetNdi\Params\AutoNegAdvertised\Enum,  "4",                0, %Advertise_100_Half%
+HKR, PROSetNdi\Params\AutoNegAdvertised\Enum,  "8",                0, %Advertise_100_Full%
+HKR, PROSetNdi\Params\AutoNegAdvertised\Enum,  "32",               0, %Advertise_1000_Full%
+HKR, PROSetNdi\Params\AutoNegAdvertised\Enum,  "47",               0, %AutoNegAdvSpdDefault%
+HKR, PROSetNdi\Params\AutoNegAdvertised,       type,               0, "bitfield"
+HKR, PROSetNdi\Params\AutoNegAdvertised,       ExposeLevel,        0, "3"
+HKR,,                                          AutoNegAdvertised,  2, "47"
+
+; WaitAutoNegComplete
+HKR,,                                          WaitAutoNegComplete,0, "1"
+
+; SpeedDuplex 
+HKR, Ndi\Params\SpeedDuplex,                   ParamDesc,          0, %SpeedDuplex%
+HKR, Ndi\Params\SpeedDuplex,                   default,            0, "0"
+HKR, Ndi\Params\SpeedDuplex,                   type,               0, "enum"
+HKR, Ndi\Params\SpeedDuplex\Enum,              "0",                0, %AutoDetect%
+HKR, Ndi\Params\SpeedDuplex\Enum,              "1",                0, %10Mb-Half-Duplex%
+HKR, Ndi\Params\SpeedDuplex\Enum,              "2",                0, %10Mb-Full-Duplex%
+HKR, Ndi\Params\SpeedDuplex\Enum,              "3",                0, %100Mb-Half-Duplex%
+HKR, Ndi\Params\SpeedDuplex\Enum,              "4",                0, %100Mb-Full-Duplex%
+HKR, Ndi\params\SpeedDuplex\enum,             "5",                0, %1000Mb_Full_Duplex%
+HKR, PROSetNdi\NdiExt\Params\SpeedDuplex,      ExposeLevel,        0, "3"
+HKR, PROSetNdi\NdiExt\Params\SpeedDuplex,      MiniHelp,           0, %AutoNegMiniHelp%
+
+; Adaptive IFS
+HKR, Ndi\Params\AdaptiveIFS,                   ParamDesc,          0, %AdaptiveIFS%
+HKR, Ndi\Params\AdaptiveIFS,                   default,            0, "1"
+HKR, Ndi\Params\AdaptiveIFS,                   type,               0, "enum"
+HKR, Ndi\Params\AdaptiveIFS\Enum,              "0",                0, %Disabled%
+HKR, Ndi\Params\AdaptiveIFS\Enum,              "1",                0, %Enabled%
+HKR, PROSetNdi\NdiExt\Params\AdaptiveIFS,      ExposeLevel,        0, "2"
+HKR, PROSetNdi\NdiExt\Params\AdaptiveIFS,      MiniHelp,           0, %AdaptiveIFSMiniHelp%
+
+;----------------------------------------------------------------------------
+; Packet specifics
+; 
+[Advanced.reg]
+; 802.1p/802.1Q Tagging
+HKR, Ndi\Params\TaggingMode,                   ParamDesc,          0, %TaggingMode%
+HKR, Ndi\Params\TaggingMode,                   default,            0, "0"
+HKR, Ndi\Params\TaggingMode\Enum,              "0",                0, %Disabled%
+HKR, Ndi\Params\TaggingMode\Enum,              "1",                0, %Enabled%
+HKR, Ndi\Params\TaggingMode,                   type,               0, "enum"
+HKR,,                                          TaggingMode,        2, "0"
+HKR, PROSetNdi\NdiExt\Params\TaggingMode,      MiniHelp,           0, %TaggingModeMiniHelp%
+
+;; Jumbo Frames
+HKR, Ndi\Params\MaxFrameSize,            ParamDesc,          0, %JumboFrames%
+HKR, Ndi\Params\MaxFrameSize,            default,            0, "1514"
+HKR, Ndi\Params\MaxFrameSize\Enum,       "1514",             0, %Disabled%
+HKR, Ndi\Params\MaxFrameSize\Enum,       "4088",             0, %Bytes4088%
+HKR, Ndi\Params\MaxFrameSize\Enum,       "9014",             0, %Bytes9014%
+HKR, Ndi\Params\MaxFrameSize\Enum,       "16128",            0, %Bytes16128%
+HKR, Ndi\Params\MaxFrameSize,            type,               0, "enum"
+HKR, PROSetNdi\NdiExt\Params\MaxFrameSize,      MiniHelp,    0, %JumboFramesMiniHelp%
+
+;ALR feature
+HKR,Ndi\Params\LinkBasedLogin,              ParamDesc,  0, "Adaptive Link Response"
+HKR,Ndi\Params\LinkBasedLogin,              Type,       0, "enum"
+HKR,Ndi\Params\LinkBasedLogin,              Default,    0, "0"
+HKR,Ndi\Params\LinkBasedLogin\Enum,         "1",        0, "On"
+HKR,Ndi\Params\LinkBasedLogin\Enum,         "0",        0, "Off"
+HKR,PROSetNdi\NdiExt\Params\LinkBasedLogin, MiniHelp,   0, "Verifies link in startup for link based login."
+
+[82540EM.reg]
+;  Interrupt Throttle Rate
+HKR, Ndi\Params\ITR,                  ParamDesc,          0, %InterruptThrottleRate%
+HKR, PROSetNdi\NdiExt\Params\ITR,     MiniHelp,           0, %ITRMiniHelp%
+HKR, Ndi\Params\ITR,                  default,            0, "950"
+HKR, Ndi\Params\ITR\Enum,             "3600",             0, %Extreme%
+HKR, Ndi\Params\ITR\Enum,             "2000",             0, %High%
+HKR, Ndi\Params\ITR\Enum,             "950",              0, %Medium%
+HKR, Ndi\Params\ITR\Enum,             "400",              0, %Low%
+HKR, Ndi\Params\ITR\Enum,             "200",              0, %Minimal%
+HKR, Ndi\Params\ITR\Enum,             "0",                0, %Off%
+HKR, Ndi\Params\ITR,                  type,               0, "enum"
+HKR,,                                 ITR,                0, "950"
+
+[WakeOn.reg]
+; WakeOn
+HKR, Ndi\Params\WakeOn,       ParamDesc,      0, "Wake on Settings"
+HKR, Ndi\Params\WakeOn,       default,        0, "246"
+HKR, Ndi\Params\WakeOn\Enum,  "0",            0, "Disabled"
+HKR, Ndi\Params\WakeOn\Enum,  "6",            0, "Wake on Magic Packet"
+HKR, Ndi\Params\WakeOn\Enum,  "116",          0, "Wake on Directed Packets"
+HKR, Ndi\Params\WakeOn\Enum,  "118",          0, "Wake on Magic & Directed"
+HKR, Ndi\Params\WakeOn\Enum,  "246",          0, "OS Controlled"
+HKR, Ndi\Params\WakeOn,       type,           0, "enum"
+HKR, Ndi\Params\WakeOn,       ExposeLevel,    0, "2"
+HKR,,                         WakeOn,         2, "246"
+HKR,PROSetNdi\NdiExt\Params\WakeOn,        MiniHelp,       0, %WakeOnHelp%
+;Enable PME
+HKR,Ndi\Params\EnablePME,                     ParamDesc,          0, "Enable PME"
+HKR,Ndi\Params\EnablePME,                     Type,               0, "enum"
+HKR,Ndi\Params\EnablePME,                     Default,            0, "2"
+HKR,Ndi\Params\EnablePME\Enum,                "1",                0, "Enabled"
+HKR,Ndi\Params\EnablePME\Enum,                "0",                0, "Disabled"
+HKR,Ndi\Params\EnablePME\Enum,                "2",                0, "OS Controlled"
+HKR,PROSetNdi\NdiExt\Params\EnablePME,        MiniHelp,           0, %EnablePMEHelp%
+
+[WakeOnLink.reg]
+HKR, Ndi\Params\WakeOnLink,       ParamDesc,          0, %WakeOnLinkSettings%
+HKR, Ndi\Params\WakeOnLink\Enum,  "0",                0, %Disabled%
+HKR, Ndi\Params\WakeOnLink\Enum,  "2",                0, %Forced%
+HKR, Ndi\Params\WakeOnLink,       type,               0, "enum"
+HKR, Ndi\Params\WakeOnLink,       ExposeLevel,        0, "2"
+HKR, Ndi\Params\WakeOnLink,       Default,            0, "0"
+HKR,PROSetNdi\NdiExt\Params\WakeOnLink,       MiniHelp,           0, %WakeOnLinkHelp% 
+
+
+[PDoLL.reg]
+HKR,,                         K32MSPD,            0, "1"
+
+[TnT.reg]
+; Smart Power Down
+HKR,Ndi\Params\SPDEnabled,      ParamDesc,  0, %SmartPowerDown%
+HKR,Ndi\Params\SPDEnabled,      Type,       0, "enum"
+HKR,Ndi\Params\SPDEnabled,      Default,    0, "1"
+HKR,Ndi\Params\SPDEnabled\Enum, "2",        0, %Enabled%
+HKR,Ndi\Params\SPDEnabled\Enum, "1",        0, %HardwareDefault%
+HKR,Ndi\Params\SPDEnabled\Enum, "0",        0, %Disabled%
+HKR,PROSetNdi\NdiExt\Params\SPDEnabled, MiniHelp, 0, %SmartPowerDownMiniHelp%
+
+; Gigabit Master Slave Mode
+HKR,Ndi\Params\MasterSlave,      ParamDesc,  0, %MasterSlaveMode%
+HKR,Ndi\Params\MasterSlave,      Type,       0, "enum"
+HKR,Ndi\Params\MasterSlave,      Default,    0, "0"
+HKR,Ndi\Params\MasterSlave\Enum, "0",        0, %AutoDetect%
+HKR,Ndi\Params\MasterSlave\Enum, "1",        0, %GigabitMasterMode%
+HKR,Ndi\Params\MasterSlave\Enum, "2",        0, %GigabitSlaveMode%
+HKR,PROSetNdi\NdiExt\Params\MasterSlave, MiniHelp, 0, %MasterSlaveModeMiniHelp%
+
+HKR,,                          AdaptiveIFS,               0,"0"
+HKR,Ndi\Params\AdaptiveIFS,    default,                   0,"0"
+
+[Force10.reg]
+HKR, Ndi\params\SpeedDuplex,       default,    0, "2"
+HKR,,                              SpeedDuplex,   0, "2"
+
+[Legacy.DelReg]
+HKR,Ndi\Params
+HKR,PROSetNdi\NdiExt
+HKR,PROSetNdi\Params
+HKR,,AutoNeg
+HKR,,TransmitMode
+HKR,,ReportTxEarly
+HKR,,WakeOn
+HKR,,NumCoalesce
+
+;-----------------------------------------------------------------------------
+; Uninstallation
+[Uninstall.reg]
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 100C, 0, "82544 GC"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 100D, 0, "82544 GC"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 100E, 0, "82540 EM" 
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 1015, 0, "82540 EM"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 1016, 0, "82540 EP"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 101E, 0, "82540 EP"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 1013, 0, "82541 EI"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 1014, 0, "82541 ER"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 1018, 0, "82541 EI"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 1019, 0, "82547 EI"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 101A, 0, "82547 EI"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 1075, 0, "82547 GI"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 1076, 0, "82541 GI"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 1077, 0, "82541 GI"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 1078, 0, "82541 ER"
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 107C, 0, "82541 PI"
+
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\PROSet,DisplayName, 0, "Intel(R) PRO Network Connections Drivers"
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\PROSet,UninstallString, 0, "8255xDel.exe"
+HKLM,Software\Intel\Prounstl\Dins, e1000W9x.din, 0, "8254x.Uninstall"
+
+[E1000.ndis5]
+CopyFiles       = e1000.CopyFiles, UninstallProg.CopyFiles
+
+[e1000.CopyFiles]
+e1000w9x.sys,,,2
+
+[UninstallProg.CopyFiles]
+8255xDel.exe,,,2
+e1000w9x.din,,,2
+
+;-----------------------------------------------------------------------------
+; DestinationDirs
+;
+[DestinationDirs]
+DefaultDestDir   = 11
+
+[SourceDisksNames]
+1 = %DISKNAME%,,,
+
+[SourceDisksFiles]
+e1000w9x.din = 1
+e1000w9x.sys = 1
+8255xDel.exe = 1
+
+;-----------------------------------------------------------------------------
+; Localizable Strings
+;
+[Strings]
+Intel                    = "Intel"
+                 
+Advertise_10_Half        = "Advertise 10 Half"
+Advertise_10_Full        = "Advertise 10 Full"
+Advertise_100_Half       = "Advertise 100 Half"
+Advertise_100_Full       = "Advertise 100 Full"
+Advertise_1000_Full      = "Advertise 1000 Full"
+AutoNegAdvSpdDefault     = "Advertise Speed Default"
+AnsLoaded                = "ANS Loaded"
+AutoNeg                  = "Autonegotiation" 
+AutoNegAdvertised        = "Negotiable Speeds and Duplexes"
+
+1000Mb_Full_Duplex       = "Auto-negotiate 1000 Mbps"
+100Mb-Full-Duplex        = "100Mbps/Full Duplex"
+100Mb-Half-Duplex        = "100Mbps/Half Duplex"
+10Mb-Full-Duplex         = "10Mbps/Full Duplex"
+10Mb-Half-Duplex         = "10Mbps/Half Duplex"
+AutoDetect               = "Auto Detect"
+SpeedDuplex              = "Link Speed & Duplex"
+
+AdaptiveIFS              = "Adaptive Inter-frame Spacing"
+AdaptiveIFSMiniHelp      = "Compensates for excessive Ethernet packet collisions by controlling back-to-back timing."
+
+FlowControl              = "Flow Control"
+FlowControl_None         = "Off"
+FlowControl_RxOnly       = "Respond"
+FlowControl_TxOnly       = "Generate"
+FlowControl_Full         = "Generate & Respond"
+
+NumTxDescriptors         = "Transmit Descriptors"
+NumRxDescriptors         = "Receive Descriptors"
+NumCoalesceBuffers       = "Coalesce Buffers"
+TaggingMode              = "QoS Packet Tagging"
+VlanMode                 = "Vlan Mode"
+
+On                       = "On"
+Off                      = "Off"
+True                     = "True"
+False                    = "False"
+Enabled                  = "Enabled"
+Disabled                 = "Disabled"
+Bytes2048                = "2048 Bytes"
+Bytes4088                = "4088 Bytes"
+Bytes16128               = "16128 Bytes"
+Bytes9014                = "9014 Bytes"
+
+LAA                      = "Locally Administered Address"
+JumboFrames              = "Jumbo Frames"
+WakeOnLinkSettings       = "Wake On Link Settings"
+Forced                   = "Forced"
+Enable_PME               = "Enable PME"
+No_Action                = "No Action"
+LogLinkState             = "Log Link State Event"
+SmartPowerDown           = "Smart Power Down"
+HardwareDefault          = "Hardware Default"
+InterruptThrottleRate    = "Interrupt Moderation Rate"
+Extreme                  = "Extreme"
+Minimal                  = "Minimal"
+High                     = "High"
+Medium                   = "Medium"
+Low                      = "Low"
+AutoDetect               = "Auto Detect"
+GigabitMasterMode        = "Force Master Mode"
+GigabitSlaveMode         = "Force Slave Mode"
+MasterSlaveMode          = "Gigabit Master Slave Mode"
+
+
+; Minihelp
+FlowControlMiniHelp        = "Pauses packet transmission on receipt of full flow control frame and sends full flow control frame to notify the other side to stop transmission."
+AutoNegMiniHelp            = "The adapter can either negotiate with its link partner or force the speed and duplex. The link partner must match the setting chosen!"
+AutoNegAdvertisedMiniHelp  = "This can be used to restrict the speeds and duplexes advertised to a link partner during autonegotiation."
+NumCoalesceBuffersMiniHelp = "Sets number of buffers available for transmit acceleration. Should be 30-50 percent of Transmit Descriptors. See Help for more information."
+NumRxDescriptorsMiniHelp   = "Sets the number of buffers the driver uses when copying data to protocol memory. Increasing this value can enhance receive performance, but also consumes system memory. Use the default if performance is not an issue."
+NumTxDescriptorsMiniHelp   = "Sets the number of data segments that enable the adapter to track transmit packets. Increasing this value can improve transmit performance, but also consumes system memory. Use the default if performance is not an issue."
+JumboFramesMiniHelp        = "Enables sending larger Ethernet packets on gigabit networks."
+TaggingModeMiniHelp        = "Enables sending and receiving of IEEE Tagged frames (802.3ac/802.1p/802.1Q), which include priority and VLAN indicators."
+LAAMiniHelp                = "Allows you to configure a custom MAC address for the adapter."
+EnablePMEHelp              = "Enables/disables wake-up from Advanced Power Management (APM) sleep states."
+WakeOnHelp                 = "Determines how to wake the system."  
+WakeOnLinkHelp             = "Allows wake-up from APM power management when link is reconnected."
+LogLinkStateMiniHelp       = "Enables/disables recording of the link state message to the Event Viewer."
+SmartPowerDownMiniHelp     = "Minimizes power consumption by enabling the adapter to enter a deep sleep mode when it does not have a valid link or when the operating system is in Suspend mode."
+ITRMiniHelp                = "Determines rate at which the controller moderates interrupts. Default is optimized for common configurations. Changing this setting may improve performance for some configurations."
+MasterSlaveModeMiniHelp    = "Determines IEEE 802.3ab Master-Slave resolution during gigabit auto-negotiation. Default is recommended for most configurations. Forcing a setting can break link if partner is not configured correctly."
+
+E100C.DeviceDesc           = "Intel(R) PRO/1000 T Desktop Adapter"
+E100D.DeviceDesc           = "Intel(R) 82544GC Based Network Connection"
+E100E.DeviceDesc           = "Intel(R) PRO/1000 MT Desktop Adapter"
+E100ENC.DeviceDesc         = "Intel(R) PRO/1000 MT Network Connection"
+E1015.DeviceDesc           = "Intel(R) PRO/1000 MT Mobile Connection"
+E1016.DeviceDesc           = "Intel(R) PRO/1000 MT Mobile Connection"
+E101E.DeviceDesc           = "Intel(R) PRO/1000 MT Mobile Connection" 
+E1013DC.DeviceDesc         = "Intel(R) PRO/1000 MT Desktop Connection"
+E1013NC.DeviceDesc         = "Intel(R) PRO/1000 MT Network Connection"
+E1013NA.DeviceDesc         = "Intel(R) PRO/1000 MT Network Adapter"
+E1013DA.DeviceDesc         = "Intel(R) PRO/1000 MT Desktop Adapter"
+E1013.DeviceDesc           = "Intel(R) PRO/1000 MT Network Connection"
+E1014NC.DeviceDesc         = "Intel(R) PRO/1000 MT Network Connection"
+E1014DC.DeviceDesc         = "Intel(R) PRO/1000 MT Desktop Connection"
+E1014.DeviceDesc           = "Intel(R) PRO/1000 MT Network Connection"
+E1018MC.DeviceDesc         = "Intel(R) PRO/1000 MT Mobile Connection"
+E1019NC.DeviceDesc         = "Intel(R) PRO/1000 CT Network Connection"
+E1019DC.DeviceDesc         = "Intel(R) PRO/1000 CT Desktop Connection"
+E101AMC.DeviceDesc         = "Intel(R) PRO/1000 CT Mobile Connection"
+E1075NC.DeviceDesc         = "Intel(R) PRO/1000 CT Network Connection"
+E1076NC.DeviceDesc         = "Intel(R) PRO/1000 MT Network Connection"
+E1076DA.DeviceDesc         = "Intel(R) PRO/1000 MT Desktop Adapter"
+E1076NA.DeviceDesc         = "Intel(R) PRO/1000 MT Network Adapter"
+E1077MC.DeviceDesc         = "Intel(R) PRO/1000 MT Mobile Connection"
+E1078NC.DeviceDesc         = "Intel(R) PRO/1000 MT Network Connection"
+E107CDA.DeviceDesc         = "Intel(R) PRO/1000 GT Desktop Adapter"
+
+E1016IBM.DeviceDesc        = "Intel(R) PRO/1000 MT Mobile Connection"
+
+E100CGENERIC.DeviceDesc    = "Intel(R) 82544EI Based Network Connection"
+E100DGENERIC.DeviceDesc    = "Intel(R) 82544GC Based Network Connection"
+E100EGENERIC.DeviceDesc    = "Intel(R) 82540EM Based Network Connection"
+E100EIBM.DeviceDesc        = "Intel(R) PRO/1000 MT Network Connection"
+
+E100CGEN.DeviceDesc        = "Intel(R) PRO/1000 T Network Connection"
+E100DGEN.DeviceDesc        = "Intel(R) PRO/1000 XT Network Connection"
+E100EGEN.DeviceDesc        = "Intel(R) PRO/1000 MT Network Connection"
+
+
+E1000.Service.DispName     = "Intel(R) PRO/1000 Network Connection Driver"
+
+; Source disk name
+DISKNAME="Intel(R) PRO/1000 Driver Disk"
+

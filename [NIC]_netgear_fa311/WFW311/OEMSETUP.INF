@@ -1,0 +1,14 @@
+[disks]
+1=..,"NETGEAR FA311/312 Adapter WFW3.11 Driver Disk"
+
+[netcard]
+FA31x="NETGEAR FA311/312 PCI Adapter",0,ndis,ethernet,real,FA31x,FA31x_NIF
+
+[FA31x]
+devdir=1:FA31x.DOS
+device=FA31x.DOS,@devdir\FA31x.DOS
+
+[FA31x_NIF]
+drivername=FA31x$
+;param=DATA_RATE,"[NDIS2] Line Speed 10M/100M",text,"MB10,MB100","MB10",0x12
+;param=SIA_MODE,"[NDIS2] AutoSense/Half/Full Duplex",text,"AUTOSENSE,TP,TP_FULL_DUPLEX","AUTOSENSE",0x12

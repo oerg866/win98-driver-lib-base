@@ -1,0 +1,112 @@
+
+           D-Link DFE-530TX PCI Fast Ethernet Adapter Installation
+                     for the NetWare Server 5.0 Driver
+
+ Contents
+ --------
+    -Getting Started
+        -First time installation from the install menu
+        -The other time installation from the install menu
+        
+ Getting Started
+ ---------------
+
+    First time installation from the install menu
+    ----------------------------------------------------
+        - Start the NetWare Server.
+
+          > CD \NWSERVER
+          > SERVER
+
+        - Execute "NWCONFIG" after booting up.  Type,
+          : NWCONFIG
+
+        - Select "Driver Options", -> "Configure network drivers", and
+          -> "Select a driver".
+
+        - Press <Insert> key to install an unlisted driver.
+
+        -  Please insert released driver CD into CD-ROM drive.
+
+        - Press <Enter> key to continue install or press <F3> to specify
+          the directory which includes DLKFET.LDI, DLKFET.LAN.
+
+          Ex. <CD drive>:\NETWARE\32BITLAN
+
+        - Select "DLKFET.LAN ....".
+
+          Note: Please don't copy the NLM files to system, if disk's
+                NLM files version older than system.
+
+        - Specify "SLOT", "Node Address", "Media and Line Speed", and 
+	  "Flow control ability" if necessary.
+
+        - Select "Save parameters and load driver" after configuring
+          adapter setting.
+
+        - NetWare server will load/bind driver automatically.
+
+
+    The other time installation from the install menu
+    ----------------------------------------------------
+        - Start the NetWare Server.
+
+          > CD \NWSERVER
+          > SERVER
+
+        - Execute "NWCONFIG" after booting up.  Type,
+          : NWCONFIG
+
+        - Select "Driver Options", -> "Configure network drivers", and
+          -> "Select a driver".
+
+        - Select "DLKFET.LAN ...." in Select a driver windows.
+
+        - Specify "SLOT", "Media and Line Speed" and "Node Address"
+          if necessary.
+
+        - Select "Save parameters and load driver" after configuring adpter
+          setting.
+
+        - NetWare server will load/bind driver automatically.
+   
+       Parameters supported by the DLKFET.LAN driver
+
+        The following keywords are for driver v5.10 or later.
+        ----------------------------------------------------------------
+        CONNECTIONTYPE                  This keyword is used to specify media type.
+        
+            CONNECTIONTYPE=AutoSense
+            CONNECTIONTYPE=10BASET
+            CONNECTIONTYPE=10BASETFD
+            CONNECTIONTYPE=100BASETX
+            CONNECTIONTYPE=100BASETXFD
+            
+        FLOW_CONTROL                    This keyword is used to specify flow control
+                                        ability.(Not supported in force mode)
+            FLOW_CONTROL=DISABLE
+            FLOW_CONTROL=ENABLE
+            FLOW_CONTROL=HARDWARE_DEFAULT   (default)
+        
+
+	The following keywords are for driver v5.10 previously(v5.10 not included).
+        ------------------------------------------------------------------------	
+        SLOT     1      - Force the driver to search for the specified board
+
+        AUTOSENSE       - This keyword configures the adapter to conduct
+                          NWay Auto-negotiation to determine the network
+                          speed and the duplex mode of the network connection.
+
+        10BASET         - Force driver to 10Mbps half duplex mode.
+
+        10BASETFD       - Force driver to 10Mbps full duplex mode.
+
+        100BASETX       - Force driver to 100Mbps half duplex mode.
+
+        100BASETXFD     - Force driver to 100Mbps full duplex mode.
+            
+ 
+
+
+
+

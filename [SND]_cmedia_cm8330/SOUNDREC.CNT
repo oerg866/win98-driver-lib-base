@@ -1,0 +1,21 @@
+:Base soundrec.hlp>proc4
+:Title Sound Recorder Help
+:Index Sound Recorder Help =soundrec.hlp
+1 Recording and Playing Sounds
+2 Recording a sound=soundrec_create
+2 Playing a sound=SOUNDREC_PLAYING
+1 Modifying Sound Files
+2 Deleting part of a sound file=soundrec_delete_sound
+2 Changing the speed of a sound file=SOUNDREC_CHANGE_SPEED
+2 Changing the volume of a sound file=SOUNDREC_CHANGE_VOLUME
+2 Playing a sound file in reverse=SOUNDREC_REVERSE
+2 Adding an echo to a sound file=SOUNDREC_ADD_ECHO
+2 Undoing changes made to a sound file=soundrec_undo_changes
+2 Changing the quality of a sound file=SOUNDREC_CONVERT_FILE
+1 Adding Sound to Other Sound Files
+2 Recording a sound into a sound file=SOUNDREC_ADD_SOUND
+2 Inserting a sound file into another sound file=SOUNDREC_INSERT_SOUND
+2 Overlaying (mixing) sound files=SOUNDREC_OVERLAY_FILE
+1 Placing a Sound File in a Document
+2 Inserting a sound file into a document=WINDOWS_SOUNDREC_INSERT
+2 Linking a sound file between documents=WINDOWS_SOUNDREC_LINK

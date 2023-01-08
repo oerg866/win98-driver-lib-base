@@ -1,0 +1,431 @@
+; OPTi 931 Audio Device Driver Installation File
+; Version 4.00.06
+; 02/10/98
+
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+Provider=%OPTi%
+LayoutFile=layout.inf
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[DestinationDirs]
+DefaultDestDir = 11     ; LDID_SYS
+OPT.CopyINF = 17        ; LDID_INF
+OPT.CopyUninstall = 10  ; LDID_WIN
+
+[SourceDisksNames]
+1="OPTi Plug-N-Play 82C931 Multimedia Disk",,0001
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"0"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%MfgName%=OPTiMedia
+
+[ControlFlags]
+CopyFilesOnly=*OPTFFFF
+
+[OPTiMedia]
+%*OPT9310.DeviceDesc%=OPT9310_Device, *OPT9310
+%*OPT0001.DeviceDesc%=OPT0001_Device, *OPT0001  ; Game Port
+%*OPT0002.DeviceDesc%=OPT0002_Device, *OPT0002  ; MPU-401
+%*OPTFFFF.DeviceDesc%=OPTFFFF_Device, *OPTFFFF
+
+[OPT9310_Device]
+DelReg=OPT.DelReg
+DelFiles=OPT0000.DelList
+LogConfig=OPTi0000.LC
+AddReg=OPT0000.AddReg, CUSTOM.AddReg
+;CopyFiles=OPT9310.CopyList, OPT.CopySNDTUNE, OPT.CopyUninstall
+CopyFiles=OPT9310.CopyList, OPT.CopyUninstall
+UpdateInis=OPTi0000.UpdateInis
+;UpdateAutoBat=OPT0000.UpdateAutoexec    
+
+[OPT0002_Device]
+DelReg=OPT.DelReg
+DelReg=OPT0002.DelReg
+DelFiles=OPT0000.DelList
+LogConfig=OPTi0002.LC
+DelFiles=OPTi0002.DelList
+AddReg=OPT0002.AddReg
+CopyFiles=OPT0002.CopyList
+UpdateInis=OPTi0002.UpdateInis
+
+[OPTFFFF_Device]
+LogConfig=OPTiFFFF.LC
+CopyFiles=OPT.CopyINF
+
+[OPT0001_Device]
+LogConfig=BasicJoyStick.LC0, BasicJoystick.LC1
+CopyFiles=MSJSTICK.CopyList
+AddReg=JOYSTICK.AddReg, MSJSTICK.AddReg
+UpdateInis=MSJSTICK.UpdateInis
+
+;[OPT0000.UpdateAutoexec]
+;CmdAdd=sndtune.exe,""   
+
+[OPTi0000.UpdateInis]
+system.ini,386Enh,"device=vsndsys.386"
+system.ini,386Enh,"device=vsnd16d.386"
+system.ini,386Enh,"device=vsnd931.386"
+system.ini,386Enh,"device=vsnd925.386"
+system.ini,386Enh,"device=vsnd924.386"
+system.ini,386Enh,"device=vsnd931.386"
+system.ini,386Enh,"device=vsnd16d.386"
+system.ini,386Enh,"device=vadlib.386"
+system.ini,386Enh,"device=vsbpd.386"
+
+system.ini,drivers,"wave*=sndsys.drv",,1
+system.ini,drivers,"midi*=sndsys.drv",,1
+system.ini,drivers,"aux*=sndsys.drv",,1
+system.ini,drivers,"mixer*=sndsys.drv",,1
+
+system.ini,drivers,"wave*=snd16.drv",,1
+system.ini,drivers,"midi*=snd16.drv",,1
+system.ini,drivers,"aux*=snd16.drv",,1
+system.ini,drivers,"mixer*=snd16.drv",,1
+
+system.ini,drivers,"wave*=snd931.drv",,1
+system.ini,drivers,"midi*=snd931.drv",,1
+system.ini,drivers,"midi*=mpu401p.drv",,1
+system.ini,drivers,"aux*=snd931.drv",,1
+system.ini,drivers,"mixer*=snd931.drv",,1
+
+system.ini,drivers,"wave*=snd925.drv",,1
+system.ini,drivers,"midi*=snd925.drv",,1
+system.ini,drivers,"aux*=snd925.drv",,1
+system.ini,drivers,"mixer*=snd925.drv",,1
+
+system.ini,drivers,"wave*=snd924.drv",,1
+system.ini,drivers,"midi*=snd924.drv",,1
+system.ini,drivers,"aux*=snd924.drv",,1
+system.ini,drivers,"mixer*=snd924.drv",,1
+
+system.ini,drivers32,,"MSACM.imaadpcm=imaadp32.acm"
+system.ini,drivers32,,"MSACM.msadpcm=msadp32.acm"
+system.ini,drivers32,,"MSACM.msgsm610=msgsm32.acm"
+system.ini,drivers32,,"MSACM.trspch=tssoft32.acm"
+system.ini,drivers32,,"MSACM.msg711=msg711.acm"
+
+[OPTi0002.UpdateInis]
+system.ini,drivers,"midi*=mpu401.drv",,1
+system.ini,drivers,"midi*=mpu401p.drv",,1
+system.ini,drivers,"midi*=rdmpu401.drv",,1
+
+[OPTi0000.LC]
+ConfigPriority=NORMAL
+
+[OPTi0002.LC]
+ConfigPriority=NORMAL
+
+[OPTiFFFF.LC]
+ConfigPriority=DISABLED
+
+[BasicJoyStick.LC0]
+ConfigPriority=HARDWIRED
+IOConfig=201-201(3ff::)
+
+[BasicJoyStick.LC1]
+ConfigPriority=HARDWIRED
+IOConfig=200-207(3ff::)
+
+;---------------------------------------------------------------;
+;
+; The .Det sections are added to the devnode at detection time
+; only.  The PreCopySection is simply setting the NoSetupUI
+; flag so that the critical pieces (such as logical 
+; configurations) are in place at the time the device is started 
+; during first boot.
+;
+;---------------------------------------------------------------;
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+[*OPT9310.Det]
+AddReg=PreCopySection
+
+[*OPT0002.Det]
+AddReg=PreCopySection
+
+[*OPTFFFF.Det]
+AddReg=PreCopySection
+
+[*OPT0001.Det]
+AddReg=PreCopySection
+
+[OPT9310.CopyList]
+snd931p.drv,,
+snd931p.vxd,,
+sndopl3p.drv,,
+
+;[OPT.CopySNDTUNE]
+;sndtune.exe,,
+;adsrom.bin,,
+;mbsrom.bin,,
+
+[OPT.CopyUninstall]
+Rm93xDrv.exe,,
+Rm93xDrv.dat,,
+
+[OPT0002.CopyList]
+sndm401p.drv,,
+sndm401p.vxd,,
+
+[MSJSTICK.CopyList]
+vjoyd.vxd,,
+msjstick.drv,,
+
+[OPT.CopyINF]
+snd_aux.inf,,
+
+[OPT0000.DelList]
+vsnd931.386,,,1
+snd931.drv,,,1
+vsnd925.386,,,1
+snd925.drv,,,1
+vsnd924.386,,,1
+snd924.drv,,,1
+vsndsys.386,,,1
+sndsys.drv,,,1
+vsbpd.386,,,1
+vadlib.386,,,1
+nullwave.drv,,,1
+
+[OPTi0002.DelList]
+mpu401.drv
+mpu401p.drv
+rdmpu401.drv
+
+[OPT.DelReg]
+; Do not force this delete
+HKLM,Enum\Root\OPTi931MEDIA
+
+[OPT0000.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+HKR,Drivers\wave,,,
+HKR,Drivers\mixer,,,
+HKR,Drivers\aux,,,
+
+HKR,,Driver,,snd931p.vxd
+HKR,Drivers\wave\snd931p.drv,Description ,,%*OPT9310.DeviceDesc%
+HKR,Drivers\wave\snd931p.drv,Driver,,snd931p.drv
+HKR,Drivers\mixer\snd931p.drv,Description,,%*OPT9310.DeviceDesc%
+HKR,Drivers\mixer\snd931p.drv,Driver,,snd931p.drv
+HKR,Drivers\aux\snd931p.drv,Description  ,,%*OPT9310.DeviceDesc%
+HKR,Drivers\aux\snd931p.drv,Driver,,snd931p.drv
+HKR,Drivers\midi\sndopl3p.drv,Description ,,%V_INTERNAL%
+HKR,Drivers\midi\sndopl3p.drv,Driver,,sndopl3p.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+
+[OPT0002.AddReg]
+HKR,,Devloader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+
+HKR,,Driver,,sndm401p.vxd
+HKR,Drivers\midi\sndm401p.drv,Driver,,sndm401p.drv
+HKR,Drivers\midi\sndm401p.drv,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+HKR,Drivers\midi\sndm401p.drv,Description,,%V_EXTERNAL%
+
+[JOYSTICK.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\joystick,,,
+
+[MSJSTICK.AddReg]
+HKR,,Driver,,vjoyd.vxd
+HKR,Drivers\joystick\msjstick.drv,Description,,%*OPT0001.DeviceDesc%
+HKR,Drivers\joystick\msjstick.drv,Driver,,msjstick.drv
+HKR,Drivers,SubClasses,,"joystick"
+
+[CUSTOM.AddReg]
+; These are Manufacturer specific.
+HKR,Config,,,
+HKR,Config,ChipType,,"82C931"
+HKR,Config,ExtCODEC,,"No"
+HKR,Config,ExtSynth,,"O3"
+HKR,Config,ExtWaveTable,,"No"
+HKR,Config,VxDVersion,,"4.00"
+HKR,Config,KeyCode,1,1A
+HKR,Config,"Single Mode DMA",1,00
+
+; This section customize the control of FDAC
+HKR,Config,FDAC_Src,,"OPL3"
+HKR,Config,Synth_Sync,,"No"
+HKR,Config,Synth_Multiplier,,01
+
+; Start of customizeable Mixer driver section;
+; "Yes" means no customization; "No" means customize.
+HKR,Config,Default_Codec_Mapping,,"No"
+
+; To customize the mixer settings for 931:
+; Add the following lines to the Add Registry Section [Custom.AddReg]
+; of the 931 device information file SND931P.INF.
+; See the Windows 95 Device Driver Kit: Programmer's Guide for details.
+
+; Volume Control:
+; The "Volume Value" must be a 32-Bit number, in hexadecimal notation and Intel format,
+; from 0x00000000 to 0x0000ffff (0 to 65535).
+;
+; For instance:
+;
+;              Value Name                 Volume Value     ; Description
+;
+; HKR,Config,  LeftMasterVol,        1,   ff, ff, 00, 00   ; Master Volume (Left) at 100%
+; HKR,Config,  LeftMasterVol,        1,   ff, bf, 00, 00   ; Master Volume (Left) at 75%
+; HKR,Config,  LeftMasterVol,        1,   ff, 7f, 00, 00   ; Master Volume (Left) at 50%
+; HKR,Config,  LeftMasterVol,        1,   ff, 3f, 00, 00   ; Master Volume (Left) at 25%
+; HKR,Config,  LeftMasterVol,        1,   00, 00, 00, 00   ; Master Volume (Left) Off
+
+HKR,Config,    LeftMasterVol,        1,   ff, 7f, 00, 00   ; Master Volume (Left)
+HKR,Config,    RightMasterVol,       1,   ff, 7f, 00, 00   ; Master Volume (Right)
+HKR,Config,    LeftLineInVol,        1,   ff, 7f, 00, 00   ; Line Volume (Left)
+HKR,Config,    RightLineInVol,       1,   ff, 7f, 00, 00   ; Line Volume (Right)
+HKR,Config,    LeftDACVol,           1,   ff, 7f, 00, 00   ; Wave Volume (Left)
+HKR,Config,    RightDACVol,          1,   ff, 7f, 00, 00   ; Wave Volume (Right)
+HKR,Config,    LeftSynthVol,         1,   ff, 7f, 00, 00   ; Midi Volume (Left)
+HKR,Config,    RightSynthVol,        1,   ff, 7f, 00, 00   ; Midi Volume (Right)
+HKR,Config,    LeftAuxInVol,         1,   ff, 7f, 00, 00   ; CD Volume (Left)
+HKR,Config,    RightAuxInVol,        1,   ff, 7f, 00, 00   ; CD Volume (Right)
+HKR,Config,    LeftMicInVol,         1,   00, 00, 00, 00   ; Microphone Volume (Left)
+HKR,Config,    RightMicInVol,        1,   00, 00, 00, 00   ; Microphone Volume (Right)
+HKR,Config,    LeftAUX3Vol,          1,   ff, 7f, 00, 00   ; Wavetable Volume (Left)
+HKR,Config,    RightAUX3Vol,         1,   ff, 7f, 00, 00   ; Wavetable Volume (Right)
+
+; Mute Control:
+; The "Mute Value" must be a 32-Bit number, in hexadecimal notation and Intel format,
+; either 0x00000000 or 0x00000001 (0 or 1).
+;
+; For instance:
+;
+;              Value Name                 Mute Value       ; Description
+;
+; HKR,Config,  Muted,                1,   00, 00, 00, 00   ; Master Mute Off
+; HKR,Config,  Muted,                1,   01, 00, 00, 00   ; Master Mute On
+
+HKR,Config,    Muted,                1,   00, 00, 00, 00   ; Master Mute
+HKR,Config,    LineMute,             1,   00, 00, 00, 00   ; Line Mute
+HKR,Config,    WaveMute,             1,   00, 00, 00, 00   ; Wave Mute
+HKR,Config,    SynthMute,            1,   00, 00, 00, 00   ; Midi Mute
+HKR,Config,    AuxMute,              1,   00, 00, 00, 00   ; CD Mute
+HKR,Config,    MicMute,              1,   00, 00, 00, 00   ; Microphone Mute
+HKR,Config,    AUX3Mute,             1,   00, 00, 00, 00   ; Wavetable Mute
+
+; Wave-In Volume Control
+HKR,Config,    LeftWaveADCMixVol,    1,   ff, 7f, 00, 00   ; Wave-In Post-Mix Volume (L)
+HKR,Config,    RightWaveADCMixVol,   1,   ff, 7f, 00, 00   ; Wave-In Post-Mix Volume (R)
+HKR,Config,    LeftWaveADCMicVol,    1,   ff, 7f, 00, 00   ; Wave-In Microphone Volume (L)
+HKR,Config,    RightWaveADCMicVol,   1,   ff, 7f, 00, 00   ; Wave-In Microphone Volume (R)
+HKR,Config,    LeftWaveADCLineVol,   1,   ff, 7f, 00, 00   ; Wave-In Line Volume (L)
+HKR,Config,    RightWaveADCLineVol,  1,   ff, 7f, 00, 00   ; Wave-In Line Volume (R)
+HKR,Config,    LeftWaveADCAux1Vol,   1,   ff, 7f, 00, 00   ; Wave-In CD Volume (L)
+HKR,Config,    RightWaveADCAux1Vol,  1,   ff, 7f, 00, 00   ; Wave-In CD Volume (R)
+
+; Voice-In Volume Control
+HKR,Config,    LeftVoiceADCMicVol,   1,   ff, 7f, 00, 00   ; Voice-In Microphone Volume (L)
+HKR,Config,    RightVoiceADCMicVol,  1,   ff, 7f, 00, 00   ; Voice-In Microphone Volume (R)
+
+; 20 DB Control
+HKR,Config,    WaveIn20DB,           1,   00, 00, 00, 00   ; Wave-In 20 DB
+HKR,Config,    VoiceIn20DB,          1,   00, 00, 00, 00   ; Voice-In 20 DB
+
+; TYPE 1 - CHANNEL NAME SECTION
+; Specify the customized names for the channels
+HKR,Config,LINE_Src_Name,,"Line"
+HKR,Config,AUX1_Src_Name,,"CD"
+HKR,Config,AUX2_Src_Name,,"Midi"
+HKR,Config,AUX3_Src_Name,,"Aux"
+HKR,Config,DAC_Src_Name,,"Wave"
+
+; TYPE 2 - EXTRA CONTROLS Thru Internal H/W Resources
+; Specify if extra ON/OFF controls are desired and how many,
+; maximum is 3. These are controled thru internal pins.
+HKR,Config,Total_Internal_Controls,1,01
+
+; Control definitions
+HKR,Config,Internal_Control_1_Name,,"3D"
+HKR,Config,Internal_Control_1_By,,"GPIO1"
+HKR,Config,Internal_Control_1_OnVal,1,01
+HKR,Config,Internal_Control_2_Name,,""
+HKR,Config,Internal_Control_2_By,,""
+HKR,Config,Internal_Control_2_OnVal,1,01
+HKR,Config,Internal_Control_3_Name,,""
+HKR,Config,Internal_Control_3_By,,""
+HKR,Config,Internal_Control_3_OnVal,1,01
+
+; TYPE 3 - EXTRA CONTROLS Thru External H/W Resources
+; Specify if extra ON/OFF controls are desired and how many,
+; maximum is 3. These are controled thru external DLLs.
+HKR,Config,Total_External_Controls,1,00
+
+; Control definitions
+HKR,Config,External_Control_1_Name,,""
+HKR,Config,External_Control_1_By,,"XCONTL_1.DLL"
+HKR,Config,External_Control_2_Name,,""
+HKR,Config,External_Control_2_By,,"XCONTL_2.DLL"
+HKR,Config,External_Control_3_Name,,""
+HKR,Config,External_Control_3_By,,"XCONTL_3.DLL"
+
+;Allow close sampling rate
+HKR,Config,"Accept Close Sampling Rates",1,01
+
+;WAVE.AddReg -- install some Win95 apps related to audio
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Config,"Disable Warning",01,FF
+HKLM,%KEY_IOC%\acm,,,
+HKLM,%KEY_IOC%\Rec,,,
+HKLM,%KEY_IOC%\MPlay,,,
+
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\OPTi931,DisplayName,,"OPTi 931 Audio Drivers"
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\OPTi931,UninstallString,,"Rm93xDrv"
+
+[SourceDisksFiles]
+snd_aux.inf=1
+snd931p.vxd=1
+snd931p.drv=1
+sndopl3p.drv=1
+sndm401p.drv=1
+sndm401p.vxd=1
+;sndtune.exe=1
+;adsrom.bin=1
+;mbsrom.bin=1
+Rm93xDrv.exe=1
+Rm93xDrv.dat=1
+
+[Strings]
+;Non-localized strings
+KEY_WARNVER="SYSTEM\CurrentControlSet\Control\SessionManager\WarnVerDLLs"
+KEY_CHKVER="SYSTEM\CurrentControlSet\Control\SessionManager\CheckVerDLLs"
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+
+;Localized strings
+OPTi="OPTi Inc."
+MfgName="OPTi Inc."
+*OPT9310.DeviceDesc="OPTi Plug-N-Play Sound System"
+*OPT0002.DeviceDesc="OPTi Plug-N-Play MPU-401"
+*OPTFFFF.DeviceDesc="OPTi Plug-N-Play Device"
+*OPT0001.DeviceDesc="OPTi Plug-N-Play Joystick Controller"
+MediaClassName="Sound, video and game controllers"
+V_CLSWAVEFORM="Audio"
+V_CLSMIDI="MIDI"
+V_CLSMIXER="Mixer"
+V_CLSAUX="Auxiliary"
+V_GENERAL="General MIDI Instrument"
+V_INTERNAL="OPTi Plug-N-Play FM Synthesis"
+V_EXTERNAL="OPTi Plug-N-Play MPU-401"

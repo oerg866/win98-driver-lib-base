@@ -1,0 +1,71 @@
+
+         D-Link DFE-530TX PCI Fast Ethernet Adapter Packet Driver
+                         Installation for WinSock
+
+
+ Getting Started
+ ---------------
+    The First Step :
+
+    Loading driver via two methods :
+
+    METHOD 1:
+    ---------
+    - If the DLKFET.SYS program is used, the following statement must be
+      included in your CONFIG.SYS file:
+
+       DEVICE = DLKFET.SYS [-option] <packet_int_no>
+      
+    Note: Before the driver v4.10, the syntax is:
+       DEVICE = DLKFET.SYS [/option] <packet_int_no>
+	
+      See \PKTDRV\README.TXT for addition parameters
+
+      You can place this line anywhere in the CONFIG.SYS file.
+
+    METHOD 2:
+    ---------
+    - If the DLKFET.COM program is used, follow these steps:
+
+    - Execute DLKFET.COM by typing:
+
+          >DLKFET [-option] <packet_int_no>
+    
+    Note: Before the driver v4.10, the syntax is:
+           DLKFET [/option] <packet_int_no>
+
+      See \PKTDRV\README.TXT for addition parameters
+
+    The Secondry Step:
+
+    - In order to run winsock under Windows enhanced mode correctly,
+      you need to get "WINPKT.COM" program which can be getten from
+      Internet file server sites.
+
+      Execute "WINPKT.COM" as following:
+
+      >WINPKT <packet_int_no>
+
+      The "<packet_int_no>" is software interrupt number used by
+
+      packet driver.
+
+      This number must be the same as driver's parameters.
+
+
+    - After you run winsock under Windows environment ,
+      just set correct "Packet Vector" value.
+
+    - Winsock associated programs can be ready to used.
+
+      See also winsock distributions INSTALL.DOC file
+
+    Examples:
+
+      > DLKFET.COM 0x62
+
+      > WINPKT 0x62
+
+      Run Windows , winsock applications.
+
+

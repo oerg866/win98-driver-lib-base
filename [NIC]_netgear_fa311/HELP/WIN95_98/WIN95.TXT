@@ -1,0 +1,182 @@
+\HELP\WIN95_98\WIN95.TXT
+
+                       NETGEAR FA311/FA312 PCI Adapter
+                 ---------------------------------------------
+                  Driver Installation for Microsoft Windows 95
+                  --------------------------------------------
+
+  Getting Started
+  ---------------
+  Microsoft Windows 95 does not come bundled with the driver for the
+  NETGEAR FA311/FA312 adapter.  You must go through the following
+  procedure to install the device driver into the Windows 95 system
+  for the adapter to function properly.
+
+  The Windows 95 CD is needed to complete this installation.
+
+  The following example illustrates the installation of the FA312
+  Adapter.  However, the installation procedure also applies to the
+  FA311 adapter.
+
+  Windows 95/OSR2 Installation Procedure
+  --------------------------------------
+  It is recommended that you complete the Windows 95 installation prior to
+  installing the FA311/FA312 adapter card.
+
+  1.  Shut down the computer and install the FA312 adapter into the system.
+      
+  2.  Start your Windows 95 system normally.
+
+      Upon power up, the system will indicate to you that a new PCI
+      Ethernet Controller has been found.
+
+  3.  Insert the Driver and Diagnostics disk and click on Next.
+
+      The next window should indicate that the "NETGEAR FA311/FA312 
+      PCI Adapter" has been found.
+
+  4.  Click on Finish.
+
+  5.  Click on OK when asked to insert the disk labeled "NETGEAR FA311/FA312 
+      PCI Adapter Driver disk".
+
+      The driver disk should still be in the drive since we haven't removed
+      it.
+
+  6.  Enter "A:\" and click on OK when prompted for the location of the
+      "FA31xND3.SYS" file.
+
+      Windows 95 will search into the driver disk for the FA31xND3.SYS
+      file.
+
+  7.  Click on OK when asked to provide computer and workgroup names.
+
+  8.  Provide the computer and workgroup name and click on OK in the
+      Network window.
+
+  9.  Click on OK when asked to insert the disk labeled "Windows 95 CD-ROM".
+
+  10. Enter the directory location of the Windows CAP files and click on OK.
+
+      If your CD-ROM drive uses the driver letter D, you have to enter
+      "D:\WIN95".  Many systems already come with the Windows CAP files
+      on the hard disk driver.  Nomally the Windows CAP files reside on
+      the "C:\WINDOWS\OPTIONS\CAPS" directory.
+
+      The system starts copying files.
+
+  11. Click on OK when asked to insert the disk labeled "NETGEAR FA311/FA312 
+      PCI Adapter Driver disk".
+
+      The driver disk should still be in the drive since we haven't removed
+      it.
+
+  12. Enter "A:\" and click on OK when prompted for the location of the
+      "FA31x.DOS" file.
+
+      Windows 95 will search into the driver disk for the FA31x.DOS
+      file.
+
+  13. Click on Yes when asked if we want to restart the system.
+
+
+  14. Remove the driver disk and the Windows 95 CD-ROM when the system
+      reboots.
+ 
+  Advanced Setup
+  --------------
+  The FA312 driver configures the adapter card to operate in autosensing
+  mode by default.  In this mode, the card automatically selects the most
+  appropriate operating speed and duplex mode.  There might be instances
+  when you need to configure the adapter card to operate at a particular
+  speed and duplex mode.  The following procedure guides you into the
+  Windows 95 or Windows 98 system for this setting.
+
+  1.  In Control Panel, open "Network".
+
+  2.  Click on the "NETGEAR FA311/FA312 PCI Adapter" selection.  Then, click
+      on the "Properties" button.
+
+  3.  Click on the "Advanced" memu tab in the FA312 or FA311 adapter card
+      window.
+
+  4.  Click on the "NetworkMedia" property selection.
+
+  5.  The "NetworkMedia" windows will show the following possible selections:
+
+        AutoDetect
+        10Base-T                        (Ethernet)
+        10Base-T Full duplex
+        100Base-TX                      (Fast Ethernet)
+        100Base-TX Full duplex
+
+      Choose the appropriate setting as needed.
+
+
+  Troubleshooting
+  ---------------
+  1.  Symptom:  Even after the previously described procedure, Windows 95
+      still indentifies the FA312 or FA311 adapter card as some other
+      vendor's card.
+
+      Explanation:  When a device driver is installed into Windows 95, the
+      device driver's accompanying information file (INF file) is copied 
+      into the /WINDOWS/INF directory.  Upon start up, Windows 95 looks 
+      into the INF files in the /WINDOWS/INF directory for the PCI device ID
+      number that matches the one on the PCI adapter card.  The first one
+      that Windows 95 finds, it identifies the physical device as the one
+      described in the INF file.
+
+      However, there might be PCI adapter cards coming from different
+      manufacturers using the same controller chip.  There is only one vendor
+      ID and device ID for each controller chip.  The Sub_vendor ID is what
+      differentiates one hardware manufacturer's card from another.
+
+      Since Windows 95 operates on a first come first serve basis, the
+      FA31x INF file, NETFA31x.INF
+      should be placed on the top of the directory list for the adapter
+      card to be correctly recognized and for Windows 95 to load the proper
+      driver.
+
+      Solution:
+
+      a. In Windows 95, go to the C:\WINDOWS\INF directory.
+
+      b. Remove the old NETFA31x.INF file (if it exists).
+
+      c. Create a temporary directory and copy all the files from the
+         \WINDOWS\INF directory to this temporary directory.
+
+      d. Delete all the files (*.INF) in the \WINDOWS\INF directory.
+
+      e. Copy the new NETFA31x.INF from the driver disk into
+         \WINDOWS\INF directory.
+
+      f. Copy all the files from the temporary directory back to the
+         \WINDOWS\INF directory.  Remove the temporary directory.
+
+  2.  Symptom:  No error appears in Device Manager and the NETGEAR FA312
+      or FA311 driver is properly intalled.   But you still have dif-
+      ficulty browsing and locating other systems on the network. 
+
+      Solution:
+
+      a.  Check and make sure that you have unique computer names for each
+          computer in the whole network.  You can change your computer
+          name in:
+
+          "My Computer" -> "Control Panel" -> "Network" -> "Identification"
+
+      b.  Check and make sure that the adapter is properly connected to a 
+          network device (eg. HUB) and the "connection type" for this adapter
+          is set to "AutoSense" or the correct connection type.  You can 
+          check it in:
+
+          "My Computer" -> "Control Panel" -> "Network" -> "Properties"
+          Select the "Advanced" tab to modify the operating speed or duplex
+          mode.
+
+          Possible selections for "NetworkMedia" are:  Autosense, 10Base-T,
+          10Base-T full_duplex, 100Base-TX, 100Base-TX full_duplex.
+
+

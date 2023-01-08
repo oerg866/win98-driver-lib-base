@@ -1,0 +1,41 @@
+[Rm93xDrv]
+Device=931
+
+[MAIN]
+GroupName=OPTi 931 Applications
+snd931.drv=82c931 Audio Driver
+Directory=OPTi931\
+Diagnose=ON
+
+[MSG]
+MSG1=Creating Program Group and Icons....
+MSG2=Copying program files...
+MSG3=There is not enough space available on the disk
+MSG4=Decompression failed. Error Code
+MSG5=General file transfer error. Error Code
+MSG6=Unable to create a directory under 
+MSG7=Please select the following options:
+MSG8=Will CD ROM Drive be connected to the IDE interface of Sound card.
+MSG9=Yes, the default is I/O Port = 168 and IRQ = 10
+MSG10=No
+MSG11=Audio Mixer
+MSG12=Karaoke Control
+MSG13=Read Me File
+MSG14=931 Uninstall
+MSG15=Installation complete.
+MSG16=Do you want to view the README file now?
+MSG17=not updated...
+MSG19=Setup is complete.  System will restart.
+MSG20=Please remove any diskette in floppy drive.
+MSG21=Uninstall Audio Drivers
+MSG22=You are about to remove audio drivers from your system.
+MSG23=Do you wish to continue?
+MSG24=Error! Exit Windows with Error code
+MSG25=Yes<&Y>
+MSG26=No<&N>
+MSG27=You need to restart the system to finish the uninstallation.
+MSG28=Please remember to remove the sound card before you restart the system, 
+MSG29=otherwise Windows 95 will ask for the drivers of the sound card. 
+MSG30=Shut down the system?
+MSG31=OPTi 82C931 Testing & Configuration Program v2.03   
+

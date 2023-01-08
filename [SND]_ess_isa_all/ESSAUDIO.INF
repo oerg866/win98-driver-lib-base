@@ -1,0 +1,1320 @@
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+provider=%ESS%
+
+[ControlFlags]
+ExcludeFromSelect=VIRTUAL\ESS6881-DMAEmulation
+ExcludeFromSelect=VIRTUAL\ESS1681-DMAEmulation
+ExcludeFromSelect=VIRTUAL\ESS1781-DMAEmulation
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"-1"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%ESSMfgName%=ESS
+
+[ESS]
+%*ESS4881.DeviceDesc%=ESS4881_Device,*ESS4881
+%*ESS6881.DeviceDesc%=ESS6881_Device,*ESS6881
+%*ESS8881.DeviceDesc%=ESS8881_Device,*ESS8881
+%*ESS1481.DeviceDesc%=ESS1481_Device,*ESS1481
+%*ESS1681.DeviceDesc%=ESS1681_Device,*ESS1681
+%*ESS1781.DeviceDesc%=ESS1781_Device,*ESS1781
+%*ESS1881.DeviceDesc%=ESS1881_Device,*ESS1881
+%*ESS1882.DeviceDesc%=ESS1882_Device,*ESS1882
+%*ESS0100.DeviceDesc%=ESS0100_Device,*ESS0100
+%*ESS0108.DeviceDesc%=ESS0108_Device,*ESS0108
+%*ESS0102.DeviceDesc%=ESS0102_Device,*ESS0102
+%*ESS0102.DeviceDesc%=ESS0102_Device,*ESS0968
+%*ESS0104.DeviceDesc%=ESS0104_Device,*ESS0104
+%*ESS0000.DeviceDesc%=ESS0000_Device,*ESS0000
+%*ESS1868.DeviceDesc%=ESS1868_Device,*ESS1868
+%*ESS0004.DeviceDesc%=ESS0004_Device,*ESS0004
+%*ESS1878.DeviceDesc%=ESS1878_Device,*ESS1878
+%*ESS0106.DeviceDesc%=ESS0106_Device,*ESS0106
+%*ESS0107.DeviceDesc%=ESS0107_Device,*ESS0107
+%*ESS0102.DeviceDesc%=ESS0112_Device,*ESS0112
+%*ESS0104.DeviceDesc%=ESS0114_Device,*ESS0114
+%*ESS0106.DeviceDesc%=ESS0116_Device,*ESS0116
+%ESS6881-DMAEmulation.DeviceDesc%=ESS6881_DMA_Emul_Device,VIRTUAL\ESS6881-DMAEmulation
+%ESS1681-DMAEmulation.DeviceDesc%=ESS1681_DMA_Emul_Device,VIRTUAL\ESS1681-DMAEmulation
+%ESS1781-DMAEmulation.DeviceDesc%=ESS1781_DMA_Emul_Device,VIRTUAL\ESS1781-DMAEmulation
+;
+%*ESS0100.DeviceDesc%=ESS0100_Device,*CPQA0D5
+%*ESS0104.DeviceDesc%=ESS0104_Device,*CPQAE27
+%*ESS0106.DeviceDesc%=ESS0106_Device,*CPQAE3E
+%*ESS0100.DeviceDesc%=ESS0100_Device,*ESS0101
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+;---------------------------------------------------------------;
+
+[ESS4881_Device]
+LogConfig=ESS4881.LC1,ESS4881.LC2
+DelFiles=ESS.DelList
+CopyFiles=ESS4881.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS4881.AddReg,ESSCheck.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS4881_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=220-22F
+IOConfig=388-389
+IRQConfig=7
+DMAConfig=1
+
+[ESS6881_Device]
+LogConfig=ESS6881.LC1,ESS6881.LC2,ESS6881.LC3
+DelFiles=ESS.DelList
+CopyFiles=ESS6881.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS6881.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS6881_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=220-22F
+IOConfig=388-38B
+IRQConfig=7
+DMAConfig=1
+
+[ESS8881_Device]
+LogConfig=ESS8881.LC1,ESS8881.LC2,ESS8881.LC3,ESS8881.LC4,ESS8881.LC5,ESS8881.LC6
+DelFiles=ESS.DelList
+CopyFiles=ESS8881.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS8881.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS8881_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=220-22F
+IOConfig=388-38B
+IOConfig=330-331
+IRQConfig=7
+IRQConfig=11
+DMAConfig=1
+DMAConfig=0
+
+[ESS1481_Device]
+LogConfig=ESS1481.LC1,ESS1481.LC2
+DelFiles=ESS.DelList
+CopyFiles=ESS1481.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS1481.AddReg,ESSCheck.AddReg,GPO.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS1481_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=220-22F
+IOConfig=388-389
+IRQConfig=7
+DMAConfig=1
+
+[ESS1681_Device]
+LogConfig=ESS1681.LC1,ESS1681.LC2,ESS1681.LC3,ESS1681.LC4,ESS1681.LC5,ESS1681.LC6,ESS1681.LC7
+DelFiles=ESS.DelList,ESS.DelList1
+CopyFiles=ESS1681.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS1681.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS1681_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=220-22F
+IOConfig=388-38B
+IOConfig=330-331
+IRQConfig=7
+DMAConfig=1
+
+[ESS1781_Device]
+LogConfig=ESS1781.LC1,ESS1781.LC2,ESS1781.LC3,ESS1781.LC4,ESS1781.LC5,ESS1781.LC6,ESS1781.LC7
+DelFiles=ESS.DelList
+CopyFiles=ESS1781.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS1781.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS1781_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=220-22F
+IOConfig=388-38B
+IOConfig=330-331
+IRQConfig=7
+DMAConfig=1
+
+[ESS1881_Device]
+LogConfig=ESS1881.LC1,ESS1881.LC2,ESS1881.LC3,ESS1881.LC4,ESS1881.LC5,ESS1881.LC6
+DelFiles=ESS.DelList
+CopyFiles=ESS1881.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS1881.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS1881_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=220-22F
+IOConfig=388-38B
+IOConfig=330-331
+IRQConfig=7
+IRQConfig=11
+DMAConfig=1
+DMAConfig=0
+
+[ESS1882_Device]
+LogConfig=ESS1882.LC1,ESS1882.LC2,ESS1882.LC3,ESS1882.LC4
+DelFiles=ESS.DelList
+CopyFiles=ESS1881.CopyList,Joystick.CopyList
+DelReg=WAVE.DelReg,Joystick.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS1882.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg
+UpdateInis=ESS.UpdateInis,Joystick.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS1882_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=201-201
+IOConfig=220-22F
+IOConfig=388-38B
+IOConfig=330-331
+IRQConfig=7
+DMAConfig=1
+DMAConfig=0
+
+[ESS0100_Device]
+DelFiles=ESS.DelList
+CopyFiles=ESS6881.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS0100.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS0108_Device]
+DelFiles=ESS.DelList
+CopyFiles=ESS8881.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS0108.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS0102_Device]
+DelFiles=ESS.DelList,ESS.DelList1
+CopyFiles=ESS1681.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS0102.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS0104_Device]
+DelFiles=ESS.DelList
+CopyFiles=ESS1781.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS0104.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS0000_Device]
+CopyFiles=ESS0000.CopyList
+AddReg=ESS0000.AddReg
+
+[ESS1868_Device]
+DelFiles=ESS.DelList
+CopyFiles=ESS1868.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS1868.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS0004_Device]
+CopyFiles=ESS0004.CopyList
+AddReg=ESS0004.AddReg
+
+[ESS1878_Device]
+DelFiles=ESS.DelList
+CopyFiles=ESS1878.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS1878.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg,Power.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS0106_Device]
+DelFiles=ESS.DelList
+CopyFiles=ESS1881.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS0106.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS0107_Device]
+DelFiles=ESS.DelList
+CopyFiles=ESS1881.CopyList
+DelReg=WAVE.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS0107.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg
+UpdateInis=ESS.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS0112_Device]
+DelFiles=ESS.DelList,ESS.DelList1
+CopyFiles=ESS1681.CopyList,Joystick.CopyList
+DelReg=WAVE.DelReg,Joystick.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS0112.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg
+UpdateInis=ESS.UpdateInis,Joystick.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS0114_Device]
+DelFiles=ESS.DelList
+CopyFiles=ESS1781.CopyList,Joystick.CopyList
+DelReg=WAVE.DelReg,Joystick.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS0114.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg
+UpdateInis=ESS.UpdateInis,Joystick.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS0116_Device]
+DelFiles=ESS.DelList
+CopyFiles=ESS1881.CopyList,Joystick.CopyList
+DelReg=WAVE.DelReg,Joystick.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,ESS0116.AddReg,ESSCheck.AddReg,GPO.AddReg,ES938.AddReg,DMA.AddReg,Ext.AddReg
+UpdateInis=ESS.UpdateInis,Joystick.UpdateInis
+UpdateIniFields=Drivers.fields
+
+[ESS6881_DMA_Emul_Device]
+AddReg=ESS6881_DMA_Emul_Device.AddReg
+
+[ESS1681_DMA_Emul_Device]
+AddReg=ESS1681_DMA_Emul_Device.AddReg
+
+[ESS1781_DMA_Emul_Device]
+AddReg=ESS1781_DMA_Emul_Device.AddReg
+
+;---------------------------------------------------------------;
+
+[ESS.UpdateInis]
+system.ini,386Enh,"device=vaudrv.386"
+system.ini,386Enh,"device=es488win.386"
+system.ini,386Enh,"device=es688win.386"
+system.ini,386Enh,"device=es888win.386"
+system.ini,386Enh,"device=es1488wn.386"
+system.ini,386Enh,"device=es1688wn.386"
+system.ini,386Enh,"device=es1788wn.386"
+system.ini,386Enh,"device=es1868wn.386"
+system.ini,386Enh,"device=es1878wn.386"
+system.ini,386Enh,"device=es1888wn.386"
+system.ini,386Enh,"device=esx88win.386"
+system.ini,386Enh,"device=vsbpd.386"
+system.ini,386Enh,"device=vadlibd.386"
+system.ini,386Enh,"device=vadlib.386"
+system.ini,386Enh,"device=vsbd.386"
+system.ini,drivers,"wave*=auddrive.drv",,1
+system.ini,drivers,"midi*=auddrive.drv",,1
+system.ini,drivers,"aux*=auddrive.drv",,1
+system.ini,drivers,"mixer*=auddrive.drv",,1
+system.ini,drivers,"midi*=audmpu.drv",,1
+system.ini,drivers,"midi*=audmpio.drv",,1
+system.ini,drivers,"wave*=es488win.drv",,1
+system.ini,drivers,"midi*=es488win.drv",,1
+system.ini,drivers,"aux*=es488win.drv",,1
+system.ini,drivers,"mixer*=es488win.drv",,1
+system.ini,drivers,"wave*=es688win.drv",,1
+system.ini,drivers,"midi*=es688win.drv",,1
+system.ini,drivers,"aux*=es688win.drv",,1
+system.ini,drivers,"mixer*=es688win.drv",,1
+system.ini,drivers,"wave*=es888win.drv",,1
+system.ini,drivers,"midi*=es888win.drv",,1
+system.ini,drivers,"aux*=es888win.drv",,1
+system.ini,drivers,"mixer*=es888win.drv",,1
+system.ini,drivers,"wave*=es1488wn.drv",,1
+system.ini,drivers,"midi*=es1488wn.drv",,1
+system.ini,drivers,"aux*=es1488wn.drv",,1
+system.ini,drivers,"mixer*=es1488wn.drv",,1
+system.ini,drivers,"wave*=es1688wn.drv",,1
+system.ini,drivers,"midi*=es1688wn.drv",,1
+system.ini,drivers,"aux*=es1688wn.drv",,1
+system.ini,drivers,"mixer*=es1688wn.drv",,1
+system.ini,drivers,"wave*=es1788wn.drv",,1
+system.ini,drivers,"midi*=es1788wn.drv",,1
+system.ini,drivers,"aux*=es1788wn.drv",,1
+system.ini,drivers,"mixer*=es1788wn.drv",,1
+system.ini,drivers,"wave*=es1868wn.drv",,1
+system.ini,drivers,"midi*=es1868wn.drv",,1
+system.ini,drivers,"aux*=es1868wn.drv",,1
+system.ini,drivers,"mixer*=es1868wn.drv",,1
+system.ini,drivers,"wave*=es1878wn.drv",,1
+system.ini,drivers,"midi*=es1878wn.drv",,1
+system.ini,drivers,"aux*=es1878wn.drv",,1
+system.ini,drivers,"mixer*=es1878wn.drv",,1
+system.ini,drivers,"wave*=es1888wn.drv",,1
+system.ini,drivers,"midi*=es1888wn.drv",,1
+system.ini,drivers,"aux*=es1888wn.drv",,1
+system.ini,drivers,"mixer*=es1888wn.drv",,1
+win.ini,windows,load,essdaemn.exe,,
+
+[Joystick.UpdateInis]
+system.ini,drivers,"joystick="
+
+;---------------------------------------------------------------;
+
+[ESS4881.LC1]
+ConfigPriority=HARDRECONFIG
+IOConfig=220-22F,240-24F
+IOConfig=388-389
+IRQConfig=3,5,7,9
+DMAConfig=1,3
+
+[ESS4881.LC2]
+ConfigPriority=HARDRECONFIG
+IOConfig=220-22F,240-24F
+IRQConfig=3,5,7,9
+DMAConfig=1,3
+
+[ESS6881.LC1]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[ESS6881.LC2]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[ESS6881.LC3]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IRQConfig=5,7,9,10
+
+[ESS8881.LC1]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS8881.LC2]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS8881.LC3]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS8881.LC4]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS8881.LC5]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS8881.LC6]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS1481.LC1]
+ConfigPriority=HARDRECONFIG
+IOConfig=220-22F,240-24F
+IOConfig=388-389
+IRQConfig=3,5,7,9
+DMAConfig=1,3
+
+[ESS1481.LC2]
+ConfigPriority=HARDRECONFIG
+IOConfig=220-22F,240-24F
+IRQConfig=3,5,7,9
+DMAConfig=1,3
+
+[ESS1681.LC1]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[ESS1681.LC2]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+
+[ESS1681.LC3]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[ESS1681.LC4]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[ESS1681.LC5]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+
+[ESS1681.LC6]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[ESS1681.LC7]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+
+[ESS1781.LC1]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[ESS1781.LC2]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+
+[ESS1781.LC3]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[ESS1781.LC4]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[ESS1781.LC5]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+
+[ESS1781.LC6]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IRQConfig=5,7,9,10
+DMAConfig=0,1,3
+
+[ESS1781.LC7]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+
+[ESS1881.LC1]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS1881.LC2]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS1881.LC3]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS1881.LC4]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS1881.LC5]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS1881.LC6]
+ConfigPriority=NORMAL
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IRQConfig=5,7,9,10
+IRQConfig=11,12,15
+DMAConfig=0,1,3
+DMAConfig=0,5,6
+
+[ESS1882.LC1]
+ConfigPriority=NORMAL
+IOConfig=200-200,201-201,202-202,203-203
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B,398-39B,3A8-3AB,3B8-3BB
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+DMAConfig=0,1,3,5
+
+[ESS1882.LC2]
+ConfigPriority=NORMAL
+IOConfig=200-200,201-201,202-202,203-203
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=388-38B,398-39B,3A8-3AB,3B8-3BB
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+DMAConfig=0,1,3,5
+
+[ESS1882.LC3]
+ConfigPriority=NORMAL
+IOConfig=200-200,201-201,202-202,203-203
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IOConfig=300-301,310-311,320-321,330-331
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+DMAConfig=0,1,3,5
+
+[ESS1882.LC4]
+ConfigPriority=NORMAL
+IOConfig=200-200,201-201,202-202,203-203
+IOConfig=220-22F,230-23F,240-24F,250-25F
+IRQConfig=5,7,9,10,11
+DMAConfig=0,1,3
+DMAConfig=0,1,3,5
+
+;---------------------------------------------------------------;
+
+[*ESS4881.Det]
+AddReg=PreCopySection
+
+[*ESS6881.Det]
+AddReg=PreCopySection
+
+[*ESS8881.Det]
+AddReg=PreCopySection
+
+[*ESS1481.Det]
+AddReg=PreCopySection
+
+[*ESS1681.Det]
+AddReg=PreCopySection
+
+[*ESS1781.Det]
+AddReg=PreCopySection
+
+[*ESS1881.Det]
+AddReg=PreCopySection
+
+[*ESS1882.Det]
+AddReg=PreCopySection
+
+;---------------------------------------------------------------;
+
+[ESS4881.CopyList]
+es488.vxd,,
+es488.drv,,
+essfm.drv,,
+
+[ESS6881.CopyList]
+es688.vxd,,
+es688.drv,,
+essfm.drv,,
+essmport.drv,,
+
+[ESS8881.CopyList]
+es1888.vxd,,
+es1888.drv,,
+essfm.drv,,
+essmpu.drv,,
+
+[ESS1481.CopyList]
+es1488.vxd,,
+es1488.drv,,
+essfm.drv,,
+essmport.drv,,
+
+[ESS1681.CopyList]
+es1688.vxd,,
+es1688.drv,,
+esfm.drv,,
+essmpu.drv,,
+
+[ESS1781.CopyList]
+es1788.vxd,,
+es1788.drv,,
+esfm.drv,,
+essmpu.drv,,
+
+[ESS0000.CopyList]
+es1868.vxd,,
+
+[ESS1868.CopyList]
+es1868.vxd,,
+es1868.drv,,
+esfm.drv,,
+essmpu.drv,,
+
+[ESS0004.CopyList]
+es1878.vxd,,
+
+[ESS1878.CopyList]
+es1878.vxd,,
+es1878.drv,,
+esfm.drv,,
+essmpu.drv,,
+
+[ESS1881.CopyList]
+es1888.vxd,,
+es1888.drv,,
+esfm.drv,,
+essmpu.drv,,
+
+[Joystick.CopyList]
+vjoyd.vxd,,
+msjstick.drv,,
+
+;---------------------------------------------------------------;
+
+[ESS.DelList]
+vaudrv.386,,,1
+es488win.386,,,1
+es688win.386,,,1
+es888win.386,,,1
+es1488wn.386,,,1
+es1688wn.386,,,1
+es1788wn.386,,,1
+es1868wn.386,,,1
+es1878wn.386,,,1
+es1888wn.386,,,1
+auddrive.drv,,,1
+es488win.drv,,,1
+es688win.drv,,,1
+es888win.drv,,,1
+es1488wn.drv,,,1
+es1688wn.drv,,,1
+es1788wn.drv,,,1
+es1868wn.drv,,,1
+es1878wn.drv,,,1
+es1888wn.drv,,,1
+audmpio.drv,,,1
+audmpu.drv,,,1
+auddrive.hlp,,,1
+audmpu.hlp,,,1
+nullwave.drv,,,1
+
+[ESS.DelList1]
+essfm.drv,,,1
+
+;---------------------------------------------------------------;
+
+[ESSCheck.AddReg]
+HKLM,%KEY_FIL%\PostInstall,UpdateIniFields,,"UpdateIniFields=fl.UpdateIniFields"
+HKLM,%KEY_FIL%\fl.UpdateIniFields,,,"1"
+HKLM,%KEY_FIL%\fl.UpdateIniFields,msmixmgr,,"system.ini,boot,drivers,msmixmgr.dll"
+
+[Drivers.fields]
+system.ini,boot,drivers,msmixmgr.dll
+system.ini,boot,drivers,mmmixer.dll
+
+;---------------------------------------------------------------;
+
+[ESS4881.AddReg]
+HKR,,Driver,,es488.vxd
+HKR,Drivers\wave\es488.drv,Description,,%*ESS4881.DeviceDesc%
+HKR,Drivers\wave\es488.drv,Driver,,es488.drv
+HKR,Drivers\midi\essfm.drv,Description,,%V_INTERNAL%
+HKR,Drivers\midi\essfm.drv,Driver,,essfm.drv
+HKR,Drivers\mixer\es488.drv,Description,,%*ESS4881.DeviceDesc%
+HKR,Drivers\mixer\es488.drv,Driver,,es488.drv
+HKR,Drivers\aux\es488.drv,Description,,%*ESS4881.DeviceDesc%
+HKR,Drivers\aux\es488.drv,Driver,,es488.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+[ESS6881.AddReg]
+HKR,,Driver,,es688.vxd
+HKR,Drivers\wave\es688.drv,Description,,%*ESS6881.DeviceDesc%
+HKR,Drivers\wave\es688.drv,Driver,,es688.drv
+HKR,Drivers\midi\essfm.drv,Description,,%V_INTERNAL%
+HKR,Drivers\midi\essfm.drv,Driver,,essfm.drv
+HKR,Drivers\midi\essmport.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmport.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmport.drv,Driver,,essmport.drv
+HKR,Drivers\mixer\es688.drv,Description,,%*ESS6881.DeviceDesc%
+HKR,Drivers\mixer\es688.drv,Driver,,es688.drv
+HKR,Drivers\aux\es688.drv,Description,,%*ESS6881.DeviceDesc%
+HKR,Drivers\aux\es688.drv,Driver,,es688.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+HKR,"Config\IRQ Selections",Default,,"9,5,7,10"
+HKR,"Config\DMA Selections",Default,,"0,1,3"
+
+[ESS8881.AddReg]
+HKR,,Driver,,es1888.vxd
+HKR,Drivers\wave\es1888.drv,Description,,%*ESS8881.DeviceDesc%
+HKR,Drivers\wave\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\midi\essfm.drv,Description,,%V_INTERNAL%
+HKR,Drivers\midi\essfm.drv,Driver,,essfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1888.drv,Description,,%*ESS8881.DeviceDesc%
+HKR,Drivers\mixer\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\aux\es1888.drv,Description,,%*ESS8881.DeviceDesc%
+HKR,Drivers\aux\es1888.drv,Driver,,es1888.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+HKR,"Config\Port Selections",Default,,"220,230,240,250"
+HKR,"Config\IRQ Selections",Default,,"9,5,7,10"
+HKR,"Config\DMA Selections",Default,,"0,1,3"
+HKR,"Config\MPU401 Port Selections",Default,,"300,310,320,330"
+HKR,"Config\MPU401 IRQ Selections",Default,,"9,5,7,10,11"
+
+[ESS1481.AddReg]
+HKR,,Driver,,es1488.vxd
+HKR,Drivers\wave\es1488.drv,Description,,%*ESS1481.DeviceDesc%
+HKR,Drivers\wave\es1488.drv,Driver,,es1488.drv
+HKR,Drivers\midi\essfm.drv,Description,,%V_INTERNAL%
+HKR,Drivers\midi\essfm.drv,Driver,,essfm.drv
+HKR,Drivers\midi\essmport.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmport.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmport.drv,Driver,,essmport.drv
+HKR,Drivers\mixer\es1488.drv,Description,,%*ESS1481.DeviceDesc%
+HKR,Drivers\mixer\es1488.drv,Driver,,es1488.drv
+HKR,Drivers\aux\es1488.drv,Description,,%*ESS1481.DeviceDesc%
+HKR,Drivers\aux\es1488.drv,Driver,,es1488.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+[ESS1681.AddReg]
+HKR,,Driver,,es1688.vxd
+HKR,Drivers\wave\es1688.drv,Description,,%*ESS1681.DeviceDesc%
+HKR,Drivers\wave\es1688.drv,Driver,,es1688.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1688.drv,Description,,%*ESS1681.DeviceDesc%
+HKR,Drivers\mixer\es1688.drv,Driver,,es1688.drv
+HKR,Drivers\aux\es1688.drv,Description,,%*ESS1681.DeviceDesc%
+HKR,Drivers\aux\es1688.drv,Driver,,es1688.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+HKR,"Config\Port Selections",Default,,"220,230,240,250"
+HKR,"Config\IRQ Selections",Default,,"9,5,7,10"
+HKR,"Config\DMA Selections",Default,,"0,1,3"
+HKR,"Config\MPU401 Port Selections",Default,,"300,310,320,330"
+HKR,"Config\MPU401 IRQ Selections",Default,,"9,5,7,10,11"
+
+[ESS1781.AddReg]
+HKR,,Driver,,es1788.vxd
+HKR,Drivers\wave\es1788.drv,Description,,%*ESS1781.DeviceDesc%
+HKR,Drivers\wave\es1788.drv,Driver,,es1788.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1788.drv,Description,,%*ESS1781.DeviceDesc%
+HKR,Drivers\mixer\es1788.drv,Driver,,es1788.drv
+HKR,Drivers\aux\es1788.drv,Description,,%*ESS1781.DeviceDesc%
+HKR,Drivers\aux\es1788.drv,Driver,,es1788.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+HKR,"Config\Port Selections",Default,,"220,230,240,250"
+HKR,"Config\IRQ Selections",Default,,"9,5,7,10"
+HKR,"Config\DMA Selections",Default,,"0,1,3"
+HKR,"Config\MPU401 Port Selections",Default,,"300,310,320,330"
+HKR,"Config\MPU401 IRQ Selections",Default,,"9,5,7,10,11"
+
+[ESS1881.AddReg]
+HKR,,Driver,,es1888.vxd
+HKR,Drivers\wave\es1888.drv,Description,,%*ESS1881.DeviceDesc%
+HKR,Drivers\wave\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1888.drv,Description,,%*ESS1881.DeviceDesc%
+HKR,Drivers\mixer\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\aux\es1888.drv,Description,,%*ESS1881.DeviceDesc%
+HKR,Drivers\aux\es1888.drv,Driver,,es1888.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+HKR,"Config\Port Selections",Default,,"220,230,240,250"
+HKR,"Config\IRQ Selections",Default,,"9,5,7,10"
+HKR,"Config\DMA Selections",Default,,"0,1,3"
+HKR,"Config\MPU401 Port Selections",Default,,"300,310,320,330"
+HKR,"Config\MPU401 IRQ Selections",Default,,"9,5,7,10,11"
+
+[ESS1882.AddReg]
+HKR,,Driver,,"es1888.vxd vjoyd.vxd"
+HKR,Drivers\wave\es1888.drv,Description,,%*ESS1882.DeviceDesc%
+HKR,Drivers\wave\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1888.drv,Description,,%*ESS1882.DeviceDesc%
+HKR,Drivers\mixer\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\aux\es1888.drv,Description,,%*ESS1882.DeviceDesc%
+HKR,Drivers\aux\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\joystick\msjstick.drv,Description,,%Joystick.DeviceDesc%
+HKR,Drivers\joystick\msjstick.drv,Driver,,msjstick.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer,joystick"
+HKR,"Config\IRQ Selections",Default,,"9,5,7,10,11"
+HKR,"Config\DMA Selections",Default,,"0,1,3,5"
+HKR,Config,"ES1887 Device",01,01,00,00,00
+
+[ESS0100.AddReg]
+HKR,,Driver,,es688.vxd
+HKR,Drivers\wave\es688.drv,Description,,%*ESS0100.DeviceDesc%
+HKR,Drivers\wave\es688.drv,Driver,,es688.drv
+HKR,Drivers\midi\essfm.drv,Description,,%V_INTERNAL%
+HKR,Drivers\midi\essfm.drv,Driver,,essfm.drv
+HKR,Drivers\midi\essmport.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmport.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmport.drv,Driver,,essmport.drv
+HKR,Drivers\mixer\es688.drv,Description,,%*ESS0100.DeviceDesc%
+HKR,Drivers\mixer\es688.drv,Driver,,es688.drv
+HKR,Drivers\aux\es688.drv,Description,,%*ESS0100.DeviceDesc%
+HKR,Drivers\aux\es688.drv,Driver,,es688.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+[ESS0108.AddReg]
+HKR,,Driver,,es1888.vxd
+HKR,Drivers\wave\es1888.drv,Description,,%*ESS0108.DeviceDesc%
+HKR,Drivers\wave\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\midi\essfm.drv,Description,,%V_INTERNAL%
+HKR,Drivers\midi\essfm.drv,Driver,,essfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1888.drv,Description,,%*ESS0108.DeviceDesc%
+HKR,Drivers\mixer\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\aux\es1888.drv,Description,,%*ESS0108.DeviceDesc%
+HKR,Drivers\aux\es1888.drv,Driver,,es1888.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+[ESS0102.AddReg]
+HKR,,Driver,,es1688.vxd
+HKR,Drivers\wave\es1688.drv,Description,,%*ESS0102.DeviceDesc%
+HKR,Drivers\wave\es1688.drv,Driver,,es1688.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1688.drv,Description,,%*ESS0102.DeviceDesc%
+HKR,Drivers\mixer\es1688.drv,Driver,,es1688.drv
+HKR,Drivers\aux\es1688.drv,Description,,%*ESS0102.DeviceDesc%
+HKR,Drivers\aux\es1688.drv,Driver,,es1688.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+[ESS0104.AddReg]
+HKR,,Driver,,es1788.vxd
+HKR,Drivers\wave\es1788.drv,Description,,%*ESS0104.DeviceDesc%
+HKR,Drivers\wave\es1788.drv,Driver,,es1788.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1788.drv,Description,,%*ESS0104.DeviceDesc%
+HKR,Drivers\mixer\es1788.drv,Driver,,es1788.drv
+HKR,Drivers\aux\es1788.drv,Description,,%*ESS0104.DeviceDesc%
+HKR,Drivers\aux\es1788.drv,Driver,,es1788.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+[ESS0000.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,,Driver,,es1868.vxd
+
+[ESS1868.AddReg]
+HKR,,Driver,,es1868.vxd
+HKR,Drivers\wave\es1868.drv,Description,,%*ESS1868.DeviceDesc%
+HKR,Drivers\wave\es1868.drv,Driver,,es1868.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1868.drv,Description,,%*ESS1868.DeviceDesc%
+HKR,Drivers\mixer\es1868.drv,Driver,,es1868.drv
+HKR,Drivers\aux\es1868.drv,Description,,%*ESS1868.DeviceDesc%
+HKR,Drivers\aux\es1868.drv,Driver,,es1868.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+[ESS0004.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,,Driver,,es1878.vxd
+
+[ESS1878.AddReg]
+HKR,,Driver,,es1878.vxd
+HKR,Drivers\wave\es1878.drv,Description,,%*ESS1878.DeviceDesc%
+HKR,Drivers\wave\es1878.drv,Driver,,es1878.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1878.drv,Description,,%*ESS1878.DeviceDesc%
+HKR,Drivers\mixer\es1878.drv,Driver,,es1878.drv
+HKR,Drivers\aux\es1878.drv,Description,,%*ESS1878.DeviceDesc%
+HKR,Drivers\aux\es1878.drv,Driver,,es1878.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+;HKR,Config,"ES1878 IIS Volume Maps Synth",01,01,00,00,00
+;HKR,Config,"ES978 IIS Volume Maps Synth",01,01,00,00,00
+;HKR,Config,"Mappable Input",01,01,00,00,00
+;HKR,Config,"Mappable Input Source Label",,"X-Mic"
+;HKR,Config,"Mappable Input Source LongLabel",,"X-Microphone"
+;HKR,Config,"Mappable Input Volume Label",,"X-Mic Volume"
+;HKR,Config,"Mappable Input Volume LongLabel",,"X-Microphone Volume Level"
+;HKR,Config,"Mappable Input Mute Label",,"X-Mic Mute"
+;HKR,Config,"Mappable Input Mute LongLabel",,"X-Microphone Mute"
+; Note: Mappable inputs are:
+; 00 (None), 01 (Mic), 02 (Line-In), 03 (CD), 04 (AuxB) and 05 (IIS).
+; A long/short label may contain up to 63/15 characters, respectively.
+
+[ESS0106.AddReg]
+HKR,,Driver,,es1888.vxd
+HKR,Drivers\wave\es1888.drv,Description,,%*ESS0106.DeviceDesc%
+HKR,Drivers\wave\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1888.drv,Description,,%*ESS0106.DeviceDesc%
+HKR,Drivers\mixer\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\aux\es1888.drv,Description,,%*ESS0106.DeviceDesc%
+HKR,Drivers\aux\es1888.drv,Driver,,es1888.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+
+[ESS0107.AddReg]
+HKR,,Driver,,es1888.vxd
+HKR,Drivers\wave\es1888.drv,Description,,%*ESS0107.DeviceDesc%
+HKR,Drivers\wave\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1888.drv,Description,,%*ESS0107.DeviceDesc%
+HKR,Drivers\mixer\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\aux\es1888.drv,Description,,%*ESS0107.DeviceDesc%
+HKR,Drivers\aux\es1888.drv,Driver,,es1888.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+HKR,Config,"ES1887 Device",01,01,00,00,00
+
+[ESS0112.AddReg]
+HKR,,Driver,,"es1688.vxd vjoyd.vxd"
+HKR,Drivers\wave\es1688.drv,Description,,%*ESS0102.DeviceDesc%
+HKR,Drivers\wave\es1688.drv,Driver,,es1688.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1688.drv,Description,,%*ESS0102.DeviceDesc%
+HKR,Drivers\mixer\es1688.drv,Driver,,es1688.drv
+HKR,Drivers\aux\es1688.drv,Description,,%*ESS0102.DeviceDesc%
+HKR,Drivers\aux\es1688.drv,Driver,,es1688.drv
+HKR,Drivers\joystick\msjstick.drv,Description,,%Joystick.DeviceDesc%
+HKR,Drivers\joystick\msjstick.drv,Driver,,msjstick.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer,joystick"
+
+[ESS0114.AddReg]
+HKR,,Driver,,"es1788.vxd vjoyd.vxd"
+HKR,Drivers\wave\es1788.drv,Description,,%*ESS0104.DeviceDesc%
+HKR,Drivers\wave\es1788.drv,Driver,,es1788.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1788.drv,Description,,%*ESS0104.DeviceDesc%
+HKR,Drivers\mixer\es1788.drv,Driver,,es1788.drv
+HKR,Drivers\aux\es1788.drv,Description,,%*ESS0104.DeviceDesc%
+HKR,Drivers\aux\es1788.drv,Driver,,es1788.drv
+HKR,Drivers\joystick\msjstick.drv,Description,,%Joystick.DeviceDesc%
+HKR,Drivers\joystick\msjstick.drv,Driver,,msjstick.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer,joystick"
+
+[ESS0116.AddReg]
+HKR,,Driver,,"es1888.vxd vjoyd.vxd"
+HKR,Drivers\wave\es1888.drv,Description,,%*ESS0106.DeviceDesc%
+HKR,Drivers\wave\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\midi\esfm.drv,Description,,%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\es1888.drv,Description,,%*ESS0106.DeviceDesc%
+HKR,Drivers\mixer\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\aux\es1888.drv,Description,,%*ESS0106.DeviceDesc%
+HKR,Drivers\aux\es1888.drv,Driver,,es1888.drv
+HKR,Drivers\joystick\msjstick.drv,Description,,%Joystick.DeviceDesc%
+HKR,Drivers\joystick\msjstick.drv,Driver,,msjstick.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer,joystick"
+
+[ESS6881_DMA_Emul_Device.AddReg]
+HKR,,DeviceDriver,,es688.vxd
+HKR,,DevLoader,,*CONFIGMG
+
+[ESS1681_DMA_Emul_Device.AddReg]
+HKR,,DeviceDriver,,es1688.vxd
+HKR,,DevLoader,,*CONFIGMG
+
+[ESS1781_DMA_Emul_Device.AddReg]
+HKR,,DeviceDriver,,es1788.vxd
+HKR,,DevLoader,,*CONFIGMG
+
+[MIXER.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+
+[WAVE.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Config,"Disable Warning",01,FF
+HKR,Config,"Multiple FM Support",01,FF
+HKLM,%KEY_IOC%\acm,,,
+HKLM,%KEY_IOC%\Rec,,,
+HKLM,%KEY_IOC%\MPlay,,,
+
+[WAVE.DelReg]
+HKR,Drivers\midi
+HKR,Drivers\wave
+HKR,Drivers\mixer
+HKR,Drivers\aux
+
+[Joystick.DelReg]
+HKR,Drivers\joystick
+
+;---------------------------------------------------------------;
+
+[DisksNames]
+1=	"",	,
+
+[SourceDisksNames]
+1="Driver Disk",,
+
+[Files]
+[SourceDisksFiles]
+es488.drv=	1,	,
+es488.vxd=	1,	,
+es688.drv=	1,	,
+es688.vxd=	1,	,
+es1488.drv=	1,	,
+es1488.vxd=	1,	,
+es1688.drv=	1,	,
+es1688.vxd=	1,	,
+es1788.drv=	1,	,
+es1788.vxd=	1,	,
+es1868.drv=	1,	,
+es1868.vxd=	1,	,
+es1878.drv=	1,	,
+es1878.vxd=	1,	,
+es1888.drv=	1,	,
+es1888.vxd=	1,	,
+esfm.drv=	1,	,
+essfm.drv=	1,	,
+essmport.drv=	1,	,
+essmpu.drv=	1,	,
+
+[DestinationDirs]
+DefaultDestDir = 11
+
+;---------------------------------------------------------------;
+
+[Strings]
+;Non-localized strings
+KEY_WARNVER="SYSTEM\CurrentControlSet\Control\SessionManager\WarnVerDLLs"
+KEY_CHKVER="SYSTEM\CurrentControlSet\Control\SessionManager\CheckVerDLLs"
+KEY_FIL="SYSTEM\CurrentControlSet\Control\MediaResources\FilterList"
+KEY_UI="SYSTEM\CurrentControlSet\Control\MediaResources\FilterList\fl.UpdateInis"
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+
+;Localized strings
+ESS="ESS"
+ESSMfgName="ESS Technology, Inc."
+*ESS4881.DeviceDesc="ES488 AudioDrive"
+*ESS6881.DeviceDesc="ES688 AudioDrive"
+*ESS8881.DeviceDesc="ES888 AudioDrive"
+*ESS1481.DeviceDesc="ES1488 AudioDrive"
+*ESS1681.DeviceDesc="ES1688 AudioDrive"
+*ESS1781.DeviceDesc="ES1788 AudioDrive"
+*ESS1881.DeviceDesc="ES1888 AudioDrive"
+*ESS1882.DeviceDesc="ES1887 AudioDrive"
+*ESS0100.DeviceDesc="ES688 Plug and Play AudioDrive"
+*ESS0108.DeviceDesc="ES888 Plug and Play AudioDrive"
+*ESS0102.DeviceDesc="ES1688 Plug and Play AudioDrive"
+*ESS0104.DeviceDesc="ES1788 Plug and Play AudioDrive"
+*ESS0000.DeviceDesc="ES1868 Control Interface"
+*ESS1868.DeviceDesc="ES1868 Plug and Play AudioDrive"
+*ESS0004.DeviceDesc="ES1878 Control Interface"
+*ESS1878.DeviceDesc="ES1878 Plug and Play AudioDrive"
+*ESS0106.DeviceDesc="ES1888 Plug and Play AudioDrive"
+*ESS0107.DeviceDesc="ES1887 Plug and Play AudioDrive"
+ESS6881-DMAEmulation.DeviceDesc="ES688 AudioDrive DMA Emulation"
+ESS1681-DMAEmulation.DeviceDesc="ES1688 AudioDrive DMA Emulation"
+ESS1781-DMAEmulation.DeviceDesc="ES1788 AudioDrive DMA Emulation"
+Joystick.DeviceDesc="Gameport Joystick"
+MediaClassName="Sound, video and game controllers"
+V_INTERNAL="Internal OPL2/OPL3 FM Synthesis"
+V_EXTERNAL="External MIDI Port"
+V_ESFM="Internal ESFM Synthesis"
+
+;---------------------------------------------------------------;
+
+[GPO.AddReg]
+; Deleting the semicolon before a "HKR,..." line below "enables" that line.
+; Enabling "GPO0 Default" forces GPO0 pin high.
+; Enabling "GPO0 Show" makes mixer app control of GPO0 possible.
+; Enabling "GPO0 LongLabel" defines the GPO0 long label in the mixer app.
+; Enabling "GPO0 Label" defines the GPO0 short label in the mixer app.
+; Enabling "GPO1 Default" forces GPO1 pin low.
+; Enabling "GPO1 Show" makes mixer app control of GPO1 possible.
+; Enabling "GPO1 LongLabel" defines the GPO1 long label in the mixer app.
+; Enabling "GPO1 Label" defines the GPO1 short label in the mixer app.
+; Note: A long/short label may contain up to 63/15 characters, respectively.
+;
+;HKR,"Config\GPO Selections","GPO0 Default",01,01,00,00,00
+;HKR,"Config\GPO Selections","GPO0 Show",01,01,00,00,00
+;HKR,"Config\GPO Selections","GPO0 LongLabel",,"General Purpose Output 0"
+;HKR,"Config\GPO Selections","GPO0 Label",,"GPO0"
+;HKR,"Config\GPO Selections","GPO1 Default",01,00,00,00,00
+;HKR,"Config\GPO Selections","GPO1 Show",01,01,00,00,00
+;HKR,"Config\GPO Selections","GPO1 LongLabel",,"General Purpose Output 1"
+;HKR,"Config\GPO Selections","GPO1 Label",,"GPO1"
+
+[ES938.AddReg]
+; Deleting the semicolon before a "HKR,..." line below "enables" that line.
+; Enabling "Enable ES938" makes mixer app control of treble, bass and spatializer possible.
+; Enabling "Treble" forces the initial treble level to 0x7FFF.
+; Enabling "Bass" forces the initial bass level to 0x7FFF.
+; Enabling "SpatializerEnable" forces the spatializer to be enabled.
+; Enabling "SpatializerEffect" forces the spatializer level to 0xBFFF.
+; Note: Levels range from 0x0000 (min, represented as 00,00,00,00) to
+; 0xFFFF (max, represented as FF,FF,FF,FF).  The first two bytes in the
+; representation indicate the level and these two bytes are duplicated
+; into the last two bytes (e.g. level 0x1234 is 34,12,34,12).
+;
+;HKR,Config,"Enable ES938",01,01,00,00,00
+;HKR,Config,Treble,01,FF,7F,FF,7F
+;HKR,Config,Bass,01,FF,7F,FF,7F
+;HKR,Config,SpatializerEnable,01,FF,FF,00,00
+;HKR,Config,SpatializerEffect,01,FF,BF,FF,BF
+
+[DMA.AddReg]
+; Deleting the semicolon before a "HKR,..." line below "enables" that line.
+; Enabling "Single Mode DMA" forces the use of single transfer mode DMA.
+;
+;HKR,Config,"Single Mode DMA",01,01,00,00,00
+
+[Ext.AddReg]
+; Deleting the semicolon before a "HKR,..." line below "enables" that line.
+; Enabling "HwVolumeStep" forces double rate hardware volume button stepping.
+; Enabling "HwVolumeMap" forces hardware volume mapping to be as specified.
+; Note: Volume stepping ranges from single rate (min, represented as
+; 01,00,00,00) to quadruple rate (max, represented as 04,00,00,00).
+; The hardware volume map must contain 64 entries, and each entry can range
+; in value from 00 (min) to 3F (max).
+;
+;HKR,Config,"HwVolumeStep",01,02,00,00,00
+;HKR,Config,"HwVolumeMap",01, \
+; 00, 02, 04, 06, 08, 0C, 10, 14, \
+; 18, 1C, 20, 24, 28, 2C, 2E, 30, \
+; 32, 32, 33, 33, 34, 34, 35, 35, \
+; 36, 36, 36, 37, 37, 37, 38, 38, \
+; 38, 38, 39, 39, 39, 39, 3A, 3A, \
+; 3A, 3A, 3B, 3B, 3B, 3B, 3C, 3C, \
+; 3C, 3C, 3D, 3D, 3D, 3D, 3E, 3E, \
+; 3E, 3E, 3E, 3F, 3F, 3F, 3F, 3F
+
+[Power.AddReg]
+; Deleting the semicolon before a "HKR,..." line below "enables" that line.
+; Enabling "Want Local Powerdown" forces power down of idle devices.
+;
+;HKR,Config,"Want Local Powerdown",01,01,00,00,00

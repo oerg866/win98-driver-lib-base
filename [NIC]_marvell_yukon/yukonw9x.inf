@@ -1,0 +1,485 @@
+; yukonw9x.inf created 10-Mar-2005
+;
+; Marvell Yukon Ethernet Controller 
+;
+; (C)Copyright 2002-2005 Marvell(R).
+; 
+; All rights reserved.
+;
+; INF File for NDIS5 Miniport Driver for Windows ME and 98SE YUKONW9X.sys v7.42.1.3
+
+[Version]
+Signature	= "$Chicago$"
+Class		= Net
+ClassGUID	= {4D36E972-E325-11CE-BFC1-08002BE10318}
+Provider	= %Marvell%
+DriverVer=03/10/2005, 7.42.1.3
+
+[Manufacturer]
+%Marvell%	= Marvell
+
+
+
+
+
+[ControlFlags]
+
+ExcludeFromSelect	= *
+;-----------------------------------------------------------------------------
+;
+;       Windows 98SE and Windows ME
+;
+;-----------------------------------------------------------------------------
+
+[Marvell]
+%Yukon.DeviceDesc4320% = SLYukCopGig.ndi, PCI\VEN_11AB&DEV_4320
+%Yukon.DeviceDesc4350% = SLYuk2CopFast.ndi, PCI\VEN_11AB&DEV_4350
+%Yukon.DeviceDesc4351% = SLYuk2CopFast.ndi, PCI\VEN_11AB&DEV_4351
+%Yukon.DeviceDesc4360% = SLYuk2CopGig.ndi, PCI\VEN_11AB&DEV_4360
+%Yukon.DeviceDesc4361% = SLYuk2CopGig.ndi, PCI\VEN_11AB&DEV_4361
+%Yukon.DeviceDesc4362% = SLYuk2CopGig.ndi, PCI\VEN_11AB&DEV_4362
+
+;-------------------------------------------------------------------------------
+; Gigabit Ethernet Adapters <single link Version 2.0 Copper>
+
+[SLYukCopGig.ndi]
+
+DelReg= yukonw9x.delreg
+AddReg		= yukonw9x.reg, yukonw9x.params, yukonw9x.SingleLink.params, yukonw9x.SLMediaType.params, yukonw9x.TxRxBuff.params, yukonw9x.WoL.params, yukonw9x.GigFrSize.params
+Characteristics	= 0x84
+BusType		= 5
+CopyFiles	= yukonw9x.CopyFiles
+
+[SLYukCopGig.ndi.Services]
+AddService	= yukonw9x, 2, yukonw9x.Service, common.EventLog
+
+
+
+;-------------------------------------------------------------------------------
+; Gigabit Ethernet Adapters <single link Copper>
+
+[SLYuk2CopGig.ndi]
+DelReg= yukonw9x.delreg
+AddReg		= yukonw9x.reg, yukonw9x.params, yukonw9x.SingleLink.params, yukonw9x.SLMediaType.params, yukonw9x.TxRxLE.params, yukonw9x.WoL.params, yukonw9x.GigFrSize.params, yukonw9x.TcpSegm.params
+Characteristics	= 0x84
+BusType		= 5
+CopyFiles	= yukonw9x.CopyFiles
+
+[SLYuk2CopGig.ndi.Services]
+AddService	= yukonw9x, 2, yukonw9x.Service, common.EventLog
+
+
+;-------------------------------------------------------------------------------
+; 10/100 FastEthernet Adapters <single link Version>
+
+[SLYuk2CopFast.ndi]
+DelReg= yukonw9x.delreg
+AddReg		= yukonw9x.reg, yukonw9x.params, yukonw9x.SingleLink.params, yukonw9x.SLMediaType.params, yukonw9x.TxRxLE.params, yukonw9x.WoL.params,  yukonw9x.TcpSegm.params
+Characteristics	= 0x84
+BusType		= 5
+CopyFiles	= yukonw9x.CopyFiles
+
+[SLYuk2CopFast.ndi.Services]
+AddService	= yukonw9x, 2, yukonw9x.Service, common.EventLog
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;-----------------------------------------------------------------------------
+;
+; General Driver Parameters
+;
+;-----------------------------------------------------------------------------
+[yukonw9x.params]
+
+HKR, Ndi\Params\NetworkAddress,	Flag, 1,20,0,0,0
+HKR, Ndi\Params\MaxFrameSize,		Flag, 1,20,0,0,0
+HKR, Ndi\Params\Moderate,			Flag, 1,20,0,0,0
+HKR, Ndi\Params\FixedIntMod,		Flag, 1,20,0,0,0
+HKR, Ndi\Params\MaxReceives,		Flag, 1,20,0,0,0
+HKR, Ndi\Params\MaxTransmits,		Flag, 1,20,0,0,0
+
+HKR,, MessageLog,,           "4"
+
+
+HKR, Ndi\Params\NetworkAddress,	ParamDesc,	0, %NetAddress%
+HKR, Ndi\Params\NetworkAddress,	Type,		0, "edit"
+HKR, Ndi\Params\NetworkAddress,	LimitText,	0, "18"
+HKR, Ndi\Params\NetworkAddress,	UpperCase,	0, "1"
+HKR, Ndi\Params\NetworkAddress,	Default,		0, ""
+HKR, Ndi\Params\NetworkAddress,	Optional,		0, "1"
+
+HKR, Ndi\Params\Moderate,		ParamDesc,	0, %IntMod%
+HKR, Ndi\Params\Moderate,		Type,		0, "enum"
+HKR, Ndi\Params\Moderate\enum,	"1",			0, %On%
+HKR, Ndi\Params\Moderate\enum,	"0",			0, %Off%
+HKR, Ndi\Params\Moderate,		Default,		0, "1"
+
+HKR, Ndi\Params\FixedIntMod,	ParamDesc,	0, %MaxIrq%
+HKR, Ndi\Params\FixedIntMod,	Type,		0, "int"
+HKR, Ndi\Params\FixedIntMod,	Base,		0, "10"
+HKR, Ndi\Params\FixedIntMod,	Min,			0, "1000"
+HKR, Ndi\Params\FixedIntMod,	Max,			0, "30000"
+HKR, Ndi\Params\FixedIntMod,	Step,		0, "1"
+HKR, Ndi\Params\FixedIntMod,	Default,		0, "5000"
+
+
+;-----------------------------------------------------------------------------
+;
+; Additional driver parameters for TX/RX buffers (V1 and V2)
+;
+;-----------------------------------------------------------------------------
+[yukonw9x.TxRxBuff.params]
+
+HKR, Ndi\Params\MaxReceives,	ParamDesc,	0, %NumRcv%
+HKR, Ndi\Params\MaxReceives,	Type,		0, "int"
+HKR, Ndi\Params\MaxReceives,	Base,		0, "10"
+HKR, Ndi\Params\MaxReceives,	Min,			0, "3"
+HKR, Ndi\Params\MaxReceives,	Max,			0, "500"
+HKR, Ndi\Params\MaxReceives,	Step,		0, "1"
+HKR, Ndi\Params\MaxReceives,	Default,		0, "50"
+
+HKR, Ndi\Params\MaxTransmits,	ParamDesc,	0, %NumTx%
+HKR, Ndi\Params\MaxTransmits,	Type,		0, "int"
+HKR, Ndi\Params\MaxTransmits,	Base,		0, "10"
+HKR, Ndi\Params\MaxTransmits,	Min,			0, "4"
+HKR, Ndi\Params\MaxTransmits,	Max,			0, "200"
+HKR, Ndi\Params\MaxTransmits,	Step,		0, "1"
+HKR, Ndi\Params\MaxTransmits,	Default,		0, "50"
+
+;-----------------------------------------------------------------------------
+;
+; Additional driver parameters for TX/RX LE (Y2)
+;
+;-----------------------------------------------------------------------------
+[yukonw9x.TxRxLE.params]
+
+HKR, Ndi\Params\MaxReceives,	ParamDesc,	0, %NumRcv%
+HKR, Ndi\Params\MaxReceives,	Type,		0, "int"
+HKR, Ndi\Params\MaxReceives,	Base,		0, "10"
+HKR, Ndi\Params\MaxReceives,	Min,			0, "256"
+HKR, Ndi\Params\MaxReceives,	Max,			0, "512"
+HKR, Ndi\Params\MaxReceives,	Step,		0, "128"
+HKR, Ndi\Params\MaxReceives,	Default,		0, "256"
+
+HKR, Ndi\Params\MaxTransmits,	ParamDesc,	0, %NumTx%
+HKR, Ndi\Params\MaxTransmits,	Type,		0, "int"
+HKR, Ndi\Params\MaxTransmits,	Base,		0, "10"
+HKR, Ndi\Params\MaxTransmits,	Min,			0, "256"
+HKR, Ndi\Params\MaxTransmits,	Max,			0, "512"
+HKR, Ndi\Params\MaxTransmits,	Step,		0, "128"
+HKR, Ndi\Params\MaxTransmits,	Default,		0, "256"
+
+
+;-----------------------------------------------------------------------------
+;
+; Additional driver parameters for Maximum Frame Size (10/100/1000 chip)
+;
+;-----------------------------------------------------------------------------
+[yukonw9x.GigFrSize.params]
+
+HKR, Ndi\Params\MaxFrameSize,                  ParamDesc,          0, %MaxFrSize%
+HKR, Ndi\Params\MaxFrameSize,                  default,            0, "1514"
+HKR, Ndi\Params\MaxFrameSize\Enum,             "1514",             0, %Disabled%
+HKR, Ndi\Params\MaxFrameSize\Enum,             "4088",             0, %Bytes4088%
+HKR, Ndi\Params\MaxFrameSize\Enum,             "9014",             0, %Bytes9014%
+HKR, Ndi\Params\MaxFrameSize,                  type,               0, "enum"
+
+
+
+
+
+;-----------------------------------------------------------------------------
+;
+; Additional driver parameter to set the port speed and capabilities
+;
+;-----------------------------------------------------------------------------
+[yukonw9x.SLMediaType.params]
+
+HKR,Ndi\Params\ConnectionType_A,	Flag, 1,20,00,00,00
+HKR, Ndi\Params\FlowControl_A,		Flag, 1,20,00,00,00
+
+HKR,Ndi\Params\ConnectionType_A,      ParamDesc,  0, %MediaType%
+HKR,Ndi\Params\ConnectionType_A,      Type,       0, "enum"
+HKR,Ndi\Params\ConnectionType_A,      Default,    0, "0"
+HKR,Ndi\Params\ConnectionType_A\enum, "0",        0, %Autosense%
+HKR,Ndi\Params\ConnectionType_A\enum, "1",        0, %10MHD%
+HKR,Ndi\Params\ConnectionType_A\enum, "2",        0, %10MFD%
+HKR,Ndi\Params\ConnectionType_A\enum, "3",        0, %100MHD%
+HKR,Ndi\Params\ConnectionType_A\enum, "4",        0, %100MFD%
+
+
+HKR, Ndi\Params\FlowControl_A,		ParamDesc,	0, %FlowCtrl%
+HKR, Ndi\Params\FlowControl_A,		Type,		0, "enum"
+HKR, Ndi\Params\FlowControl_A\enum,	"3",			0, %On%
+HKR, Ndi\Params\FlowControl_A\enum,	"0",			0, %Off%
+HKR, Ndi\Params\FlowControl_A,		Default,		0, "3"
+
+
+
+
+;-----------------------------------------------------------------------------
+;
+; Additional Driver Parameters for WakeOnLan
+;
+;-----------------------------------------------------------------------------
+[yukonw9x.WoL.params]
+
+HKR, Ndi\Params\WakeUpModeCap_A,	Flag, 1,20,0,0,0
+HKR, Ndi\Params\WakeFromShutdown,	Flag, 1,20,0,0,0
+
+HKR, Ndi\Params\WakeUpModeCap_A,			ParamDesc,	0, %WakeUpCaps%
+HKR, Ndi\Params\WakeUpModeCap_A,			Type,		0, "enum"
+HKR, Ndi\Params\WakeUpModeCap_A\enum,	"0",			0, %Non%
+HKR, Ndi\Params\WakeUpModeCap_A\enum,	"25",			0, %Magic Packet%
+HKR, Ndi\Params\WakeUpModeCap_A\enum,	"26",			0, %Pattern Match%
+HKR, Ndi\Params\WakeUpModeCap_A\enum,	"27",			0, %Mag Pack Patt Match%
+HKR, Ndi\Params\WakeUpModeCap_A\enum,	"28",			0, %Link Change%
+HKR, Ndi\Params\WakeUpModeCap_A,			Default,		0, "27"
+
+HKR, Ndi\Params\WakeFromShutdown,			ParamDesc,	0, %WakeFromShut%
+HKR, Ndi\Params\WakeFromShutdown,			Type,		0, "enum"
+HKR, Ndi\Params\WakeFromShutdown\enum,	"1",			0, %On%
+HKR, Ndi\Params\WakeFromShutdown\enum,	"0",			0, %Off%
+HKR, Ndi\Params\WakeFromShutdown,			Default,		0, "0"
+
+
+;-----------------------------------------------------------------------------
+;
+; Additional driver parameters for TCP segmentation
+;
+;-----------------------------------------------------------------------------
+[yukonw9x.TcpSegm.params]
+
+HKR, Ndi\Params\TcpLargeSend,		ParamDesc,	0, %TcpSegmentation%
+HKR, Ndi\Params\TcpLargeSend,		Type,		0, "enum"
+HKR, Ndi\Params\TcpLargeSend\enum,	"1",			0, %Enabled%
+HKR, Ndi\Params\TcpLargeSend\enum,	"0",			0, %Disabled%
+HKR, Ndi\Params\TcpLargeSend,		Default,		0, "0"
+
+
+;-----------------------------------------------------------------------------
+;
+; Additional Driver Parameters for Single Link Adapters
+;
+;-----------------------------------------------------------------------------
+[yukonw9x.SingleLink.params]
+
+
+HKR,, MaxMulticast,,         "128"
+HKR,, WaitForRxResources,,   "1"
+HKR,, SGMapRegistersNeeded,, "64"
+
+
+
+
+
+
+;-----------------------------------------------------------------------------
+;
+; General Registry Entries
+;
+;-----------------------------------------------------------------------------
+[yukonw9x.reg]
+
+HKR, Ndi\Interfaces, DefUpper,, "ndis5,ndis4,ndis3"
+HKR, Ndi\Interfaces, UpperRange,, "ndis5,ndis4,ndis3"
+
+HKR, Ndi\Interfaces, LowerRange,, "ethernet"
+HKR, Ndi, Service,, "yukonw9x"
+
+HKR,Ndi,DeviceID,,"PCI\VEN_1148&DEV_4300"
+HKR,,DevLoader,,*ndis
+HKR,,DeviceVxDs,,yukonw9x.sys
+HKR, NDIS,LogDriverName,,"yukonw9x"
+HKR, NDIS,MajorNdisVersion,1,05
+HKR, NDIS,MinorNdisVersion,1,00
+
+;-----------------------------------------------------------------------------
+;
+; This section contain the keys which will be deleted. These are old keys 
+; which are not any more supported in newest INF or were modified.
+;
+;-----------------------------------------------------------------------------
+[yukonw9x.delreg]
+HKR, Ndi\Params\MaxFrameSize
+HKR, Ndi\Params\FlowControl_A
+HKR, Ndi\Params\FlowControl_B
+HKR, Ndi\Params\WakeUpModeCap_A\enum,15
+HKR, Ndi\Params\WakeUpModeCap_B\enum,15
+
+
+;-----------------------------------------------------------------------------
+;
+; Service
+;
+;-----------------------------------------------------------------------------
+[yukonw9x.Service]
+DisplayName	= %yukonw9x.DriverDesc%
+ServiceType	= 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary  = %12%\yukonw9x.sys
+LoadOrderGroup = NDIS
+
+
+;-----------------------------------------------------------------------------
+;
+;
+;
+;-----------------------------------------------------------------------------
+[common.EventLog]
+AddReg = common.AddEventLog.reg
+
+;-----------------------------------------------------------------------------
+;
+;
+;
+;-----------------------------------------------------------------------------
+[common.AddEventLog.reg]
+HKR,, EventMessageFile,	0x00020000, "%%SystemRoot%%\System32\Drivers\yukonw9x.sys"
+HKR,, TypesSupported,	0x00010001, 7
+
+
+;-----------------------------------------------------------------------------
+;
+; Source Files
+;
+;-----------------------------------------------------------------------------
+[SourceDisksNames]
+1 = %DriverDisk%,,,
+
+[SourceDisksFiles]
+yukonw9x.sys	= 1,,
+
+[yukonw9x.CopyFiles]
+yukonw9x.sys,,,2
+
+
+;-----------------------------------------------------------------------------
+;
+; Destination Directories
+;
+;-----------------------------------------------------------------------------
+[DestinationDirs]
+
+DefaultDestDir = 11
+yukonw9x.CopyFiles	= 11
+
+;-----------------------------------------------------------------------------
+;
+; Localizable Strings
+;
+;-----------------------------------------------------------------------------
+[Strings]
+Marvell = "Marvell"
+;---------------------------------------------------------------------------------------------------
+;; Translation from this point ON.
+;---------------------------------------------------------------------------------------------------
+
+NetAddress   = "Network Address"
+MaxFrSize    = "Jumbo Frames"
+HwCsum = "Hardware Checksumming"
+WakeUpCaps   = "Wake Up Capabilities"
+IntMod = "Interrupt Moderation"
+MaxIrq = "Max IRQ per Sec"
+LogMsg = "Log Status Messages"
+NumRcv = "Number of Receive Buffers"
+NumTx  = "Number of Transmit Buffers"
+RLMT  = "RLMT Mode"
+Link  = "CLS"   
+OtherPort    = "CLP" 
+Segment = "CLPSS" 
+Preferred    = "Preferred Port"
+On = "On"
+Off = "Off"
+Enabled = "Enabled"
+Disabled = "Disabled"
+Non = "None"
+Err = "Errors"
+Wrn = "Warnings"
+Sta = "Status Messages"
+All = "All Messages"
+A = "A"
+B = "B"
+Slave = "Slave"
+Master = "Master"
+Auto = "Auto"
+both = "Half and Full Duplex"
+full = "Full Duplex"
+half = "Half Duplex"
+bothFC = "Asymmetrical and Symmetrical Flow Control"
+sym = "Symmetrical Flow Control"
+asym = "Asymmetrical Flow Control"
+noFc = "No Flow Control"
+Autosense = "Auto-Sense"
+10MHD = "10Mbps Half Duplex"
+10MFD = "10Mbps Full Duplex"
+100MHD = "100Mbps Half Duplex"
+100MFD = "100Mbps Full Duplex"
+Magic Packet = "Magic Packet"
+Pattern Match = "Pattern Match"
+Mag Pack Patt Match = "Magic Packet and Pattern Match"
+Link Change = "Link Change"
+MediaType = "MediaType"
+MediaTypeA = "MediaType Port A"
+MediaTypeB = "MediaType Port B"
+FlowCtrl = "FlowControl"
+FlowCtrlA = "FlowControl Port A"
+FlowCtrlB = "FlowControl Port B"
+Speed = "LinkSpeed"
+SpeedA = "LinkSpeed Port A"
+SpeedB = "LinkSpeed Port B"
+DupCap = "DuplexCapabilities"
+DupCapA = "DuplexCapabilities Port A"
+DupCapB = "DuplexCapabilities Port B"
+Autoneg = "Autonegotiation"
+AutonegA = "Autonegotiation Port A"
+AutonegB = "Autonegotiation Port B"
+Role = "Role"
+RoleA = "Role Port A"
+RoleB = "Role Port B"
+QoSSup = "802.1p Support"
+QoSSupA = "802.1p Support Port A"
+QoSSupB = "802.1p Support Port B"
+WakeFromShut = "Wake From Shutdown"
+TcpSegmentation = "TCP Segmentation"
+BatSpeed = "BatterySpeedSettings"
+Fast = "SmartSpeedDown"
+Gig = "FullSpeed"
+BatLinkDet = "BatteryModeLinkDetection"
+NoPwrSave = "NoEnergySaving"
+MaxPwrSave = "MaximumEnergySaving"
+EnDetPwrSave = "EnergyDetect+"
+Bytes4088 = "4088 Bytes"
+Bytes9014 = "9014 Bytes"
+;-----------------------------------------------------------------------------
+DriverDisk = "Marvell Yukon Ethernet Controller Installation Disk"
+
+Yukon.DeviceDesc4320 = "Marvell Yukon 88E8001/8003/8010 PCI Gigabit Ethernet Controller"
+Yukon.DeviceDesc4350 = "Marvell Yukon 88E8035 PCI-E Fast Ethernet Controller"
+Yukon.DeviceDesc4351 = "Marvell Yukon 88E8036 PCI-E Fast Ethernet Controller"
+Yukon.DeviceDesc4360 = "Marvell Yukon 88E8052 PCI-E ASF Gigabit Ethernet Controller"
+Yukon.DeviceDesc4361 = "Marvell Yukon 88E8050 PCI-E ASF Gigabit Ethernet Controller"
+Yukon.DeviceDesc4362 = "Marvell Yukon 88E8053 PCI-E Gigabit Ethernet Controller"
+
+yukonw9x.DriverDesc	= "NDIS5 Miniport Driver for Marvell Yukon Ethernet Controller"
+
+
+;-----------------------------------------------------------------------------
+;------- No multi language support ------- 

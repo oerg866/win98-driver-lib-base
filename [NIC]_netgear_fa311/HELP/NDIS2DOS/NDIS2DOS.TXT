@@ -1,0 +1,24 @@
+\HELP\NDIS2DOS\NDIS2DOS.TXT
+
+                      NETGEAR FA311/FA312 PCI Adapter
+                 ---------------------------------------------
+                    NDIS Driver Installation Overview
+                    ---------------------------------
+
+  Introduction
+  ------------
+  The included NDIS driver complies with the Microsoft's NDIS v2.0.1
+  specification. The following text files describe the installation
+  procedure for some of the most popular operating systems
+  supporting NDIS drivers:
+
+    File            Description
+    ------------    ---------------------------------------------
+    LANTASTI.TXT    NDIS2 driver installation for LANtastic
+
+    The operating systems listed above is just one of the network
+    operating systems that support the NDIS driver.  In general, any
+    system that uses the NDIS 2.0.1 driver is functionally compatible
+    with the NDIS drivers included in the driver diskette.
+
+

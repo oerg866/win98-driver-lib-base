@@ -1,0 +1,170 @@
+;****************************************************************************
+;*                                                                          *
+;*  Copyright (C) 1995-98  Rendition, Inc.  All Rights Reserved.            *
+;*                                                                          *
+;*  INF file for Verite Win9x display driver                                *
+;****************************************************************************
+
+[version]
+Class=DISPLAY
+signature="$CHICAGO$"
+Provider=%IHV1%
+
+[DestinationDirs]
+DefaultDestDir  = 11    ; LDID_SYS
+Driver.Copy = 11
+CplExt.Copy = 11
+RedLine.Copy = 11
+Util.Copy = 10
+Inf.Copy = 17
+Driver.Delete.Old = 11
+
+[SourceDisksNames]
+1="Rendition Verite 2200 Windows 9x Driver Disk",,0
+
+[SourceDisksFiles]
+v2000vdd.vxd=1
+v2000.drv=1
+v20003d.uc=1
+v20003df.uc=1
+v20002d.uc=1
+v200032.dll=1
+verite.dll=1
+redline.dll=1
+v2kdrv.dll=1
+v2000gl.uc=1
+v2000.inf=1
+csthunk.dll=1
+csverite.dll=1
+vcentral.vxd=1
+features.dll=1
+pages.dll=1
+
+[Manufacturer]
+%IHV1%=Mfg.IHV
+
+[Mfg.IHV]
+%PCI\VEN_1163&DEV_2000.DeviceDesc%=Driver.Install,,PCI\VEN_1163&DEV_2000
+
+[Driver.Install]
+DelFiles=Driver.Delete.Old
+CopyFiles=CplExt.Copy,Driver.Copy,Util.Copy,RedLine.Copy,Inf.Copy
+DelReg=Prev.DelReg,CplExt.AddReg,CplExt.DelReg
+AddReg=Driver.AddReg,CplExt.AddReg
+UpdateInis=dev.ini
+
+[Driver.Copy]
+v2000.drv
+v2000vdd.vxd
+v200032.dll
+v20003df.uc
+v20002d.uc
+v2000gl.uc
+v2kdrv.dll
+csthunk.dll
+csverite.dll
+vcentral.vxd
+
+[Driver.Delete.Old]
+veritegl.dll,,,0x00000001
+r0ser.vxd,,,0x00000001
+v2000.dll,,,0x00000001
+v2000.vxd,,,0x00000001
+veritex.dll,,,0x00000001
+
+[Util.Copy]
+
+[RedLine.Copy]
+verite.dll
+redline.dll
+v20003d.uc
+
+[Inf.Copy]
+v2000.inf
+
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,,EnumPropPages
+HKR,INFO
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+HKR,PRIVATE
+
+[Driver.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"16,640,480"
+HKR,DEFAULT,drv,,v2000.drv
+HKR,DEFAULT,drv2,,v2000.drv
+HKR,DEFAULT,vdd,,"*vdd"
+HKR,DEFAULT,minivdd,,v2000vdd.vxd
+HKR,DEFAULT,minivdd2,,v2000vdd.vxd
+HKR,DEFAULT,DDC,,1
+HKR,DEFAULT,RefreshRate,,0
+HKR,DEFAULT,ExtModeSwitch,,1
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\8\640,480",,,"60,70,72,75,85,120"
+HKR,"MODES\8\800,600",,,"56,60,70,72,75,85"
+HKR,"MODES\8\1024,768",,,"60,70,72,75,85"
+HKR,"MODES\8\1152,864",,,"60,70,72,75,85"
+HKR,"MODES\8\1280,1024",,,"60,70,72,75,85"
+HKR,"MODES\8\1600,1200",,,"60,65,70,72,75,85"
+HKR,"MODES\8\1152,864","RefreshRate",,"60"
+HKR,"MODES\8\1280,1024","RefreshRate",,"60"
+HKR,"MODES\8\1600,1200","RefreshRate",,"60"
+HKR,"MODES\16\640,480",,,"60,70,72,75,85,120"
+HKR,"MODES\16\800,600",,,"56,60,70,72,75,85"
+HKR,"MODES\16\1024,768",,,"60,70,72,75,85"
+HKR,"MODES\16\1152,864",,,"60,70,72,75,85"
+HKR,"MODES\16\1280,1024",,,"60,70,72,75,85"
+;HKR,"MODES\16\1600,1200",,,"60"
+HKR,"MODES\16\1152,864","RefreshRate",,"60"
+HKR,"MODES\16\1280,1024","RefreshRate",,"60"
+;HKR,"MODES\16\1600,1200","RefreshRate",,"60"
+HKR,"MODES\32\640,480",,,"60,70,72,75,85,120"
+HKR,"MODES\32\800,600",,,"56,60,70,72,75,85"
+HKR,"MODES\32\1024,768",,,"60,70,72,75"
+;HKR,"MODES\32\1152,864",,,"60"
+;HKR,"MODES\32\1152,864","RefreshRate",,"60"
+;HKR,"MODES\32\1280,1024","RefreshRate",,"60"
+;HKR,"MODES\32\1600,1200","RefreshRate",,"60"
+HKR,"PRIVATE","AGPFlag",,"0"
+HKR,"PRIVATE","ReferenceID",,"0"
+HKR,"PRIVATE","MEMDiag",,"0"
+HKR,"PRIVATE","TVOut",,"0"
+HKR,"PRIVATE","PARAMS1",,"31"      ;55:117
+HKR,"PRIVATE","PARAMS2",,"2"
+HKR,"PRIVATE","PARAMS3",,"4"
+HKR,"PRIVATE","PARAMS4",,"2"
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\Verite,DisplayName,,"Verite"
+HKLM,SOFTWARE\RRedline\v2000,microcode,,"v20003d.uc"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\OpenGLDrivers","verite2k",,"v2kdrv.dll"
+
+[dev.ini]
+
+[CplExtUninstall]
+DelReg = CplExt.AddReg
+DelFiles = CplExt.Copy, Inf.Copy
+
+[CplExt.Copy]
+features.dll
+pages.dll
+
+[CplExt.DelReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\Verite
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\"Controls Folder"\Display\shellex\PropertySheetHandlers\Verite
+HKLM,SOFTWARE\Classes\CLSID\{0F918022-B37E-11d1-837C-00E0290EDF7C}
+
+
+[CplExt.AddReg]
+HKLM,SOFTWARE\Classes\CLSID\{0F918022-B37E-11d1-837C-00E0290EDF7C},"",,"Verite Property Sheet Extension"
+HKLM,SOFTWARE\Classes\CLSID\{0F918022-B37E-11d1-837C-00E0290EDF7C}\InProcServer32,"",,"pages.dll"
+HKLM,SOFTWARE\Classes\CLSID\{0F918022-B37E-11d1-837C-00E0290EDF7C}\InProcServer32,ThreadingModel,,"Apartment"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\"Controls Folder"\Display\shellex\PropertySheetHandlers\"Verite Pages","",,"{0F918022-B37E-11d1-837C-00E0290EDF7C}"
+
+[Strings]
+IHV1="Rendition, Inc."
+PCI\VEN_1163&DEV_2000.DeviceDesc="Rendition Verite 2200"

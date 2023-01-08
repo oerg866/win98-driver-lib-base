@@ -1,0 +1,355 @@
+//--------------------------------------------------------------------
+//
+// INSTALL on-line Help Text File
+//
+// Help Customization Guidelines:
+//
+// 0) Comment lines start with leading '//'.
+// 1) Help Message Text starts with #MESSAGE statement
+// 2) Never change the number after the #MESSAGE statement. That is
+//    the search Message ID for the INSTALL program.
+// 3) LINES statement defines how many (lines) x (characters) allowed.
+//    Never exceed this limits when you type the text for the message.
+// 4) TITLE statement defines the sub-Title of this message.
+//    (allow to modify for your customization)
+// 5) Text area starts and ends with a '$'.
+//    (allow to modify for your customization)
+// 6) the INSTALL program is not going to format your
+//    text. It just show whatever text you typed here
+//    line by line. So you have to do the formatting for
+//    better effect and please use SPACEs but not TABs.
+//    (you don't need to enter trailing SPACE lines. If there is space
+//     left at the bottom of a HELP message, white space is the default.)
+// 7) Anyway, give a try and see how it goes.
+//
+// 9) Format Overview (example)
+//
+//    #MESSAGE = 1			   // starts Help message 1
+//    TITLE="Selcet CD-ROM Type"        // sub-title of this message
+//    LINES=9x50			// allowed text area:
+//					// 9 lines x 50 characters
+//    $ 				// starts text area
+//    TEXT LINEs
+//    TEXT """"                         // help text
+//    " " "
+//    $ 				// end of text area
+//-----------------------------------------------------------------
+
+//
+// INSTALL Help Text: Message by Message
+//
+
+#MESSAGE = 1
+TITLE="Welcome to the Installer"
+LINES=9x42
+$
+INSTALL is a complete Installation
+and Test Program for your Sound Card.
+A mouse is recommended. If you do not
+have a mouse, use the following keys:
+  [TAB]       to move to option
+  [ENTER]     to execute option
+  []	      to select option
+  [F3]	      to exit the installation
+  [ALT+Key]   to activate a button
+$
+
+#MESSAGE = 2
+TITLE="Installation Options"
+LINES=6x52
+$
+This Installation will do the following:
+- Install Drivers and Utilities for DOS and Windows
+- Configure and Test your Sound Card
+- Install and Setup CD-ROM Software Drivers
+- Display Information file README.TXT
+- Install Audio Applications
+$
+
+#MESSAGE = 20
+TITLE="Test & Configuration Options"
+LINES=6x52
+$
+This Test and Configuration program will:
+- Configure and Test your Sound Card
+- Change CD-ROM settings and update system files
+- Perform 8 bit, 16 bit and FM Music Sound Tests
+- Allow you to change volume settings
+- Display Information file README.TXT
+$
+
+#MESSAGE = 3
+TITLE="User Directory Selection"
+LINES=4x48
+$
+Select the drive and enter the directory where
+you would like to install your software into.
+The required and available disk space for the
+complete installation is listed below.
+$
+
+#MESSAGE = 4
+TITLE="Microsoft Windows Directory Selection"
+LINES=5x48
+$
+INSTALLER needs to know where your Microsoft
+Windows directory is. If you do not have
+Microsoft Windows installed or you do not want
+to install the device drivers and applications
+for Microsoft Windows, select [NONE].
+$
+
+#MESSAGE = 5
+TITLE="CD-ROM Selection"
+LINES=4x44
+$
+MAD 16 Pro sound card can be used as a CD-ROM
+interface board.  Select your CD-ROM drive
+type or select [None] if you do not want to
+connect a CD-ROM drive to the sound card.
+$
+
+#MESSAGE = 6
+TITLE="CD-ROM Default Settings"
+LINES=4x44
+$
+Select [OK] if you want to accept the
+default settings for your CD-ROM.
+Select [CUSTOMIZE] if you want to customize
+the I/O address, Interrupt and DMA channel.
+$
+
+#MESSAGE = 7
+TITLE="CD-ROM Harware Configuration"
+LINES=3x48
+$
+Select [OK] if you want to accept the selected
+settings for your CD-ROM.  Select [DEFAULTS]
+if you want to reset to the default settings.
+$
+
+#MESSAGE = 8
+TITLE="File Copy Confirmation"
+LINES=4x45
+$
+INSTALLER is going to start copying files to
+your hard disk. Select [OK] to continue if
+the User and Windows Directory are correct.
+Select [CHANGE] if you want to make a change.
+$
+
+#MESSAGE = 11
+TITLE="SOUND TEST"
+LINES=3x36
+$
+Select a Sound Test option below.
+Select [DONE] when test is done and
+go back to the previous Window.
+$
+
+#MESSAGE = 13
+TITLE="Select MSCDEX.EXE"
+LINES=7x44
+$
+To use your CD-ROM drive, you need a CD-ROM
+utility 'MSCDEX.EXE' from Microsoft. After
+scanning your Disk, INSTALL found MSCDEX(s)
+and listed them below. MSCDEX is DOS version
+dependent. Please select the ONE which is
+compatible with your DOS version. The best
+choice is the ONE that came with your DOS.
+$
+
+#MESSAGE = 14
+TITLE="No MSCDEX.EXE in your System"
+LINES=10x50
+$
+To use your CD-ROM Drive, you need the program
+MSCDEX.EXE from Microsoft. INSTALL has scanned
+your hard disk(s) and did not find one. Besides,
+your DOS version is very old. We don't have a
+MSCDEX version good for you. INSTALL has inserted
+a MSCDEX line with leading 'REM' into your
+AUTOEXEC.BAT anyway. If you locate a MSCDEX file
+later, please copy it into the MAD 16 directory
+and remove the REMark from the MSCDEX line.
+$
+
+#MESSAGE = 15
+TITLE="System Files Update"
+LINES=6x48
+$
+INSTALLER is going to update your DOS
+system files CONFIG.SYS and AUTOEXEC.BAT.
+Select [OK] if you want INSTALLER to make the
+changes NOW or select [BACKUP ONLY] if you
+want INSTALLER only to save the changes to
+the backup files CONFIG.MAD and AUTOEXEC.MAD.
+$
+
+#MESSAGE = 16
+TITLE="Windows System Files Update"
+LINES=4x46
+$
+INSTALLER is going to update your WINDOWS
+system files SYSTEM.INI and MIDIMAP.CFG.
+Select [OK] if you want INSTALLER to make the
+changes NOW or select [BACKUP ONLY] if you
+want INSTALLER only to save the changes to
+the backup files SYSTEM.MAD and MIDIMAP.MAD.
+$
+
+#MESSAGE = 17
+TITLE="Windows Sound Application Installation"
+LINES=5x46
+$
+
+INSTALLER has also installed Windows Sound
+Applications into your system. The Sound
+Applications Group and its Applet Icons will
+show on your screen when you run Windows the
+very next time.
+$
+
+
+#MESSAGE = 18
+TITLE="Installation Successful"
+LINES=10x46
+$
+Installer has completed successfully. You
+must reboot your system in order to run
+sound applications. Select [REBOOT] now to
+reboot or select [EXIT TO DOS] to return to
+DOS. If selecting [REBOOT], please first
+remove any diskettes from your floppy drives.
+Type "SNDINIT" at the DOS prompt to test and
+reconfigure your Sound Card settings when
+necessary at a later time.
+Thank you for using MAD 16 sound system.
+$
+
+
+#MESSAGE = 19
+TITLE="Not Enough Conventional Memory Detected"
+LINES=10x56
+$
+Your system has LESS THAN 500 KBytes of recommended
+conventional memory. To run DOS games, you need at
+least the recommended size above. It is also
+recommended that this amount of memory be available
+in order to successfully run this program. You can
+increase your memory either by running a memory maker
+program that comes with your operating system; or
+remove any memory resident programs that resides in
+your system memory. Do you wish to Exit this program
+and increase your system memory now?
+$
+
+
+#MESSAGE = 21
+TITLE="MAD 16 Registration"
+LINES=6x46
+$
+Now is a good time to register your 16-bit
+Sound Card and receive the latest services
+and support from your manufacturer. You must
+register first in order to receive Technical
+Support from your manufacturer.
+
+$
+
+#MESSAGE = 22
+TITLE="Welcome to the SNDINIT Program"
+LINES=9x42
+$
+SNDINIT is a complete Testing and
+Configuration Program for your Sound Card.
+A mouse is recommended. If you do not
+have a mouse, use the following keys:
+  [TAB]       to move to option
+  [ENTER]     to execute option
+  []	      to select option
+  [F3]	      to exit the program
+  [ALT+Key]   to activate a button
+$
+
+#MESSAGE = 23
+TITLE="CD-ROM driver Installation"
+LINES=6x48
+$
+Installer does not have the CD-ROM driver for
+your CD-ROM. Installer will only update the
+the CD-ROM settings of the Sound Card in
+CONFIG.SYS. Please run the installation program
+from your CD-ROM manufacturer to install the
+CD-ROM driver and MSCDEX program.
+$
+
+#MESSAGE = 24
+TITLE="Reboot System"
+LINES=5x49
+$
+Your CONFIG.SYS has been updated according to
+the new settings for your CD-ROM. You must REBOOT
+your computer in order for the new settings to
+take effect. Select [OK] to REBOOT your computer.
+Select [EXIT] to return to DOS.
+$
+
+#MESSAGE = 25
+TITLE="Reboot System"
+LINES=4x46
+$
+Your BLASTER Environment Variable is updated
+in your AUTOEXEC.BAT file. Some DOS games may
+reference this variable for initialization
+purposes. Do you wish to REBOOT your computer?
+$
+
+#MESSAGE = 26
+TITLE="Error!"
+LINES=2x48
+$
+Hardware Error Detected! Please reconfigure your
+Sound Card's I/O Port, IRQ, or DMA settings.
+$
+
+#MESSAGE = 27
+TITLE="Error!"
+LINES=4x45
+$
+You have selected the same I/O Port setting
+between your Audio, CD-ROM, and MPU-401
+device. This will cause conflict on your
+system. Please reselect a different I/O Port.
+$
+
+#MESSAGE = 28
+TITLE="Error!"
+LINES=4x47
+$
+You have selected the same IRQ settings between
+your Audio, CD-ROM, and MPU-401 device. This
+will cause conflict on your system. Please
+reselect a different IRQ setting.
+$
+
+#MESSAGE = 29
+TITLE="Error!"
+LINES=4x47
+$
+You have selected the same DMA settings between
+your Audio, and CD-ROM device. This will cause
+conflict on your system. Please reselect a
+different DMA setting.
+$
+
+#MESSAGE = 30
+TITLE="Warning!"
+LINES=3x48
+$
+You have selected Windows Sound System using IRQ
+5.  Some DOS games that support Windows Sound
+System may not work with this option.
+$
+

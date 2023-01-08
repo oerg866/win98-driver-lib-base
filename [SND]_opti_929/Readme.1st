@@ -1,0 +1,112 @@
+====================================
+RE:   82C929 MAD16 Pro Release 2.20 
+====================================
+
+To: 	OPTi 82C929 Customers
+Date:	12/08/94
+==================================================================
+
+0) What's New in this version
+
+   This version has been enhanced from 2.12/2.13. Changes added are:
+
+   a) Support OTHER CD drives which not listed in our installer's CD
+      drive list. OTHER IDE, Sony compatible and Panasonic compatible
+      are those which we are not aware of at the time software release
+      but actually could be interfaced with our sound cards. What
+      the software does, when OTHER is selected, is to setup the
+      CD-ROM interface of the sound card. The CD driver installation
+      then has to be taken care by you after the audio software 
+      installation is done.
+
+   b) Maintain Green PC feature after IRQ re-selection
+
+   c) Reset FM MIDI device during INIT
+
+   NOTE:
+   This version does not include third party Windows Application. 
+   Therefore, DISK #2 should be ignored. Copy contents under \disk1 
+   to a single diskette and start installation.
+
+1) Introduction
+
+   This package contains the above version of Software release for 
+   OPTi 82C929 Audio Device. This software contains a full fledge 
+   INSTALLER plus Testing and Configuration program all contained 
+   within a Windows Look-a-Like GUI.
+
+   What the INSTALLER will do for you:
+   a) Gather installation info. from you as to which drive and directory
+      this software should be installed.
+   b) Check available memory and disk space (warns if not sufficient).
+   c) Gather and detect correct Windows directory.
+   d) Copies files to your hard disk.
+   e) Prompts you if you have a CD-ROM attached to your MAD16 Pro.
+      If Yes: - Asks you for the CD-ROM type you have.
+              - Assigns the correct CD-ROM driver for your drive.
+	      - Checks and installs correct MSCDEX.EXE to work with your
+	        drive depending on DOS version.
+   f) Shows Configuration and Test panel for you to setup and test your
+      Sound Card. You may perform 8-bit, 16-bit, and FM Synthesis test.
+      You may also change your volume settings.
+   g) After the above, INSTALLER will update your system files and give
+      you an option to reboot your system.
+
+   What the Testing and Configuration (SNDINIT.EXE) will do for you:
+   a) Allow you to test and/or configure/reconfigure your
+      - existing hardware settings;
+      - existing CD-ROM settings in which CONFIG.SYS and AUTOEXEC.BAT will
+        be updated and you will be prompted to reboot your system.
+      - and perform sound tests and volume changes.
+
+
+2) File List of the 929V220D.ZIP
+
+   For the general release diskette,
+
+   [Diskette # 1]
+     INSTALL.COM	;  the small INSTALL bring-up program
+     SNDINIT.EXE	;  main INSTALL and Device Config Program
+     PKUNZIP.EXE	;  03-15-90 version of UNZIP tool
+     INSTALL.DAT	;  on-line help text file
+     README.TXT		;  latest release information;
+     			;  customers MUST change this file themselves to
+			;  reflect their latest product info.
+     CDROM.CFG		;  the CD-ROM drive list file
+     LOGO.BMP		;  custom LOGO that appears on page 1
+     DISK1		;  the install instruction file
+     TOOLS.ZIP		;  DOS utilities to be installed into
+             		;  SOUND16 Home Dir
+     DRIVERS.ZIP	;  CD-ROM drivers and MSCDEXs: 5.0/6.0/6.2
+	 		;  to be installed into SOUND16 Home Dir
+     WINDRV.ZIP		;  SOUND16 Windows Drivers to be installed
+	 		;  into the 'WINDRV' sub Dir
+   [Diskette # 2]
+     WINAPP.ZIP		;  Windows Audio Applications to be installed
+	 		;  into 'WINAPP' sub Dir
+
+   For OPTi customers in-house use,
+       
+     README.1st		; this document
+     PKZIP.EXE		; version 03-15-90 PKZIP, to pack your WINAPP.ZIP
+     			; if you'd like to do that.
+
+
+3) How to create Install Diskettes from 929V220D.ZIP
+
+   . unZIP the 929V220D.ZIP file into a temp. dir in hard Drive
+   	use: pkunzip -d 929V220D.zip to unzip
+   . take out README.1st and PKZIP.exe
+   . copy all the files in subdir 'DISK1' and 'DISK2' into 2 
+     diskettes to mark as "1 of 2" and " 2 of 2"
+   . use them as INSTALL diskettes
+
+   To Run the INSTALLER
+   
+   . insert the #1 diskette into a: or b: drive
+   . type a:\INSTALL or b:\INSTALL
+
+
+				%% END %%
+
+

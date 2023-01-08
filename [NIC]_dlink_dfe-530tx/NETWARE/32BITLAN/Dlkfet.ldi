@@ -1,0 +1,1376 @@
+;DrIvEr DeScRiPtIoN
+;VeRsIoN = 3.00 Novell LAN Installation Information File for DLKFET  
+;CoPyRiGhT = (c) Copyright 2001 by D-Link. All rights reserved.
+
+VER: 3.02                                       ; This LDI version
+SYN: 1.00
+
+; ----------------------------------
+;           VT3053 
+; ----------------------------------
+DR DLKFET_3053
+{
+        DES:    $DLKFET_DES_3053
+        HELP:   $DLKFET_HELP
+        PAR:    2.00                            ; Hardware Instance Number Aware
+        PROD:   'PCI.1106.3053.*.*.*'           ; VT3053
+                
+        FILE:   DLKFET.LAN  
+        
+        ;@#	CLIENT:	DLKFET.LAN  
+        ;@#	ALIAS:	DLKFET.LAN  
+        ;@# SPROD:  'D-Link Technologies~ D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)'
+
+        PROMPT SLOT OPTIONAL
+        {
+                DES:    $DLKFET_SLOT_DES
+                HELP:   $DLKFET_SLOT_HLP
+
+                TYPE:   DECIMAL(3)
+                VAL:    1-100
+                DEF:    UNDEFINED
+                OUT:    'SLOT=%s'
+        }
+
+        PR NODE
+        {
+        }
+
+        FR FrameSelect
+        {
+                CH:     'Ethernet_802.3'
+                CH:     'Ethernet_802.2'
+                CH:     'Ethernet_SNAP'
+                CH:     'Ethernet_II'
+                DEF:    1,2                 ; Default flame type = 802.3, 802.2
+        }
+
+        ; ---------------------------------------------------------
+        ; LIST keywords [CONNECTIONTYPE]:
+        ;   AUTOSENSE, 10BASET, 10BASETFD, 100BASETX, 100BASETXFD     
+        ; ---------------------------------------------------------
+        LI CONNECTIONTYPE OPT
+        {
+                DES:    $DLKFET_CONTYPE_DES
+                HELP:   $DLKFET_CONTYPE_HLP
+
+                CD:     $DLKFET_CAUTO_CD
+                CH:     $DLKFET_CAUTO_CH
+                CD:     $DLKFET_C10H_CD
+                CH:     $DLKFET_C10H_CH
+                CD:     $DLKFET_C10F_CD
+                CH:     $DLKFET_C10F_CH
+                CD:     $DLKFET_C100H_CD
+                CH:     $DLKFET_C100H_CH
+                CD:     $DLKFET_C100F_CD
+                CH:     $DLKFET_C100F_CH
+                DEF:    1                       ; DEFAULT=AUTOSENSE
+                
+                OUT:    'CONNECTIONTYPE=%s'     ; if use this, driver need to 
+                                                ; support extra keyword routine for
+                                                ; 'CONNECTIONTYPE'
+        }
+        
+        ; ---------------------------------------------------------
+        ; keywords [VID]:
+        ;   0 ~ 4096
+        ; ---------------------------------------------------------
+        PROMPT VID OPTIONAL
+        {
+                DES:    $DLKFET_VID_DES
+                HELP:   $DLKFET_VID_HLP
+
+                TYPE:   DECIMAL(4)
+                VAL:    1-4094
+                DEF:    UNDEFINED
+                OUT:    'VID=%s'
+        }
+        
+        ; --------------------------------------------------
+        ; LIST keywords [FLOW_CONTROL]:
+        ;   Enable, Disable, Hardware_default(or HD)
+        ; --------------------------------------------------
+        LI FLOW_CONTROL OPT
+        {
+                DES:    $DLKFET_FLOWCTL_DES
+                HELP:   $DLKFET_FLOWCTL_HLP
+
+                CD:     $DLKFET_FHD_CD
+                CH:     $DLKFET_FHD_CH
+                CD:     $DLKFET_FENA_CD
+                CH:     $DLKFET_FENA_CH
+                CD:     $DLKFET_FDIS_CD
+                CH:     $DLKFET_FDIS_CH
+                DEF:    1                       ; DEFAULT=Hardware_Default (HD)
+                
+                OUT:    'FLOW_CONTROL=%s'       ; if use this, driver need to 
+                                                ; support extra keyword routine for
+                                                ; 'FLOW_CONTROL'
+        }
+        
+        ; --------------------------------------------------
+        ; LIST keywords [TAG]:
+        ;   Enable, Disable
+        ; --------------------------------------------------
+        LI TAG OPT
+        {
+                DES:    $DLKFET_TAG_DES
+                HELP:   $DLKFET_TAG_HLP
+
+                CD:     $DLKFET_TENA_CD
+                CH:     $DLKFET_TENA_CH
+                CD:     $DLKFET_TDIS_CD
+                CH:     $DLKFET_TDIS_CH
+                DEF:    2                       ; DEFAULT=Disable
+                OUT:    'TAG=%s'                ; if use this, driver need to 
+                                                ; support extra keyword routine for
+                                                ; 'TAG'
+                                                
+                ;DES:    $DLKFET_PRI_DES
+                ;HELP:   $DLKFET_PRI_HLP
+
+                ;CD:     $DLKFET_PENA_CD
+                ;CH:     $DLKFET_PENA_CH
+                ;CD:     $DLKFET_PDIS_CD
+                ;CH:     $DLKFET_PDIS_CH
+                ;DEF:    2                       ; DEFAULT=Disable
+                ;OUT:    'PRIORITY=%s'           ; if use this, driver need to 
+                                                ; support extra keyword routine for
+                                                ; 'PRIORITY'
+        }
+        
+        ; --------------------------------------------------
+        ; LIST keywords [HCHECKSUM]:
+        ;   Enable, Disable 
+        ; --------------------------------------------------
+        LI HCHECKSUM OPT
+        {
+                DES:    $DLKFET_HCS_DES
+                HELP:   $DLKFET_HCS_HLP
+
+                CD:     $DLKFET_HENA_CD
+                CH:     $DLKFET_HENA_CH
+                CD:     $DLKFET_HDIS_CD
+                CH:     $DLKFET_HDIS_CH
+                DEF:    1                       ; DEFAULT=Enable
+                
+                OUT:    'HCHECKSUM=%s'          ; if use this, driver need to 
+                                                ; support extra keyword routine for
+                                                ; 'HCHECKSUM'
+        }
+        
+}
+
+; ----------------------------------
+;           VT3106 
+; ----------------------------------
+DR DLKFET_3106
+{
+        DES:    $DLKFET_DES_3106
+        HELP:   $DLKFET_HELP
+        PAR:    2.00                            ; Hardware Instance Number Aware
+        PROD:   'PCI.1106.3106.*.*.*'           ; VT3106
+                
+        FILE:   DLKFET.LAN  
+        
+        ;@#	CLIENT:	DLKFET.LAN  
+        ;@#	ALIAS:	DLKFET.LAN  
+        ;@# SPROD:  'D-Link Technologies~ D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)'
+
+        PROMPT SLOT OPTIONAL
+        {
+                DES:    $DLKFET_SLOT_DES
+                HELP:   $DLKFET_SLOT_HLP
+
+                TYPE:   DECIMAL(3)
+                VAL:    1-100
+                DEF:    UNDEFINED
+                OUT:    'SLOT=%s'
+        }
+
+        PR NODE
+        {
+        }
+
+        FR FrameSelect
+        {
+                CH:     'Ethernet_802.3'
+                CH:     'Ethernet_802.2'
+                CH:     'Ethernet_SNAP'
+                CH:     'Ethernet_II'
+                DEF:    1,2                 ; Default flame type = 802.3, 802.2
+        }
+
+        ; ---------------------------------------------------------
+        ; LIST keywords [CONNECTIONTYPE]:
+        ;   AUTOSENSE, 10BASET, 10BASETFD, 100BASETX, 100BASETXFD     
+        ; ---------------------------------------------------------
+        LI CONNECTIONTYPE OPT
+        {
+                DES:    $DLKFET_CONTYPE_DES
+                HELP:   $DLKFET_CONTYPE_HLP
+
+                CD:     $DLKFET_CAUTO_CD
+                CH:     $DLKFET_CAUTO_CH
+                CD:     $DLKFET_C10H_CD
+                CH:     $DLKFET_C10H_CH
+                CD:     $DLKFET_C10F_CD
+                CH:     $DLKFET_C10F_CH
+                CD:     $DLKFET_C100H_CD
+                CH:     $DLKFET_C100H_CH
+                CD:     $DLKFET_C100F_CD
+                CH:     $DLKFET_C100F_CH
+                DEF:    1                       ; DEFAULT=AUTOSENSE
+                
+                OUT:    'CONNECTIONTYPE=%s'     ; if use this, driver need to 
+                                                ; support extra keyword routine for
+                                                ; 'CONNECTIONTYPE'
+        }
+        
+        ; --------------------------------------------------
+        ; LIST keywords [FLOW_CONTROL]:
+        ;   Enable, Disable, Hardware_default(or HD)
+        ; --------------------------------------------------
+        LI FLOW_CONTROL OPT
+        {
+                DES:    $DLKFET_FLOWCTL_DES
+                HELP:   $DLKFET_FLOWCTL_HLP
+
+                CD:     $DLKFET_FHD_CD
+                CH:     $DLKFET_FHD_CH
+                CD:     $DLKFET_FENA_CD
+                CH:     $DLKFET_FENA_CH
+                CD:     $DLKFET_FDIS_CD
+                CH:     $DLKFET_FDIS_CH
+                DEF:    1                       ; DEFAULT=Hardware_Default (HD)
+                
+                OUT:    'FLOW_CONTROL=%s'       ; if use this, driver need to 
+                                                ; support extra keyword routine for
+                                                ; 'FLOW_CONTROL'
+        }
+}
+
+; ----------------------------------
+;           VT3065 
+; ----------------------------------
+DR DLKFET_3065
+{
+        DES:    $DLKFET_DES_3065
+        HELP:   $DLKFET_HELP
+        PAR:    2.00                            ; Hardware Instance Number Aware
+        PROD:   'PCI.1106.3065.*.*.*'           ; VT3065
+                
+        FILE:   DLKFET.LAN  
+        
+        ;@#	CLIENT:	DLKFET.LAN  
+        ;@#	ALIAS:	DLKFET.LAN  
+        ;@# SPROD:  'D-Link Technologies~ D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)'
+
+        PROMPT SLOT OPTIONAL
+        {
+                DES:    $DLKFET_SLOT_DES
+                HELP:   $DLKFET_SLOT_HLP
+
+                TYPE:   DECIMAL(3)
+                VAL:    1-100
+                DEF:    UNDEFINED
+                OUT:    'SLOT=%s'
+        }
+
+        PR NODE
+        {
+        }
+
+        FR FrameSelect
+        {
+                CH:     'Ethernet_802.3'
+                CH:     'Ethernet_802.2'
+                CH:     'Ethernet_SNAP'
+                CH:     'Ethernet_II'
+                DEF:    1,2                 ; Default flame type = 802.3, 802.2
+        }
+
+        ; ---------------------------------------------------------
+        ; LIST keywords [CONNECTIONTYPE]:
+        ;   AUTOSENSE, 10BASET, 10BASETFD, 100BASETX, 100BASETXFD     
+        ; ---------------------------------------------------------
+        LI CONNECTIONTYPE OPT
+        {
+                DES:    $DLKFET_CONTYPE_DES
+                HELP:   $DLKFET_CONTYPE_HLP
+
+                CD:     $DLKFET_CAUTO_CD
+                CH:     $DLKFET_CAUTO_CH
+                CD:     $DLKFET_C10H_CD
+                CH:     $DLKFET_C10H_CH
+                CD:     $DLKFET_C10F_CD
+                CH:     $DLKFET_C10F_CH
+                CD:     $DLKFET_C100H_CD
+                CH:     $DLKFET_C100H_CH
+                CD:     $DLKFET_C100F_CD
+                CH:     $DLKFET_C100F_CH
+                DEF:    1                       ; DEFAULT=AUTOSENSE
+                
+                OUT:    'CONNECTIONTYPE=%s'     ; if use this, driver need to 
+                                                ; support extra keyword routine for
+                                                ; 'CONNECTIONTYPE'
+        }
+        
+        ; --------------------------------------------------
+        ; LIST keywords [FLOW_CONTROL]:
+        ;   Enable, Disable, Hardware_default(or HD)
+        ; --------------------------------------------------
+        LI FLOW_CONTROL OPT
+        {
+                DES:    $DLKFET_FLOWCTL_DES
+                HELP:   $DLKFET_FLOWCTL_HLP
+
+                CD:     $DLKFET_FHD_CD
+                CH:     $DLKFET_FHD_CH
+                CD:     $DLKFET_FENA_CD
+                CH:     $DLKFET_FENA_CH
+                CD:     $DLKFET_FDIS_CD
+                CH:     $DLKFET_FDIS_CH
+                DEF:    1                       ; DEFAULT=Hardware_Default (HD)
+                
+                OUT:    'FLOW_CONTROL=%s'       ; if use this, driver need to 
+                                                ; support extra keyword routine for
+                                                ; 'FLOW_CONTROL'
+        }
+}
+
+; ----------------------------------
+;           VT3043 
+; ----------------------------------
+DR DLKFET_3043
+{
+        DES:    $DLKFET_DES_3043
+        HELP:   $DLKFET_HELP
+        PAR:    2.00                            ; Hardware Instance Number Aware
+        PROD:   'PCI.1106.3043.*.*.*'           ; VT3043
+                
+        FILE:   DLKFET.LAN  
+        
+        ;@#	CLIENT:	DLKFET.LAN  
+        ;@#	ALIAS:	DLKFET.LAN  
+        ;@# SPROD:  'D-Link Technologies~ D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)'
+
+        PROMPT SLOT OPTIONAL
+        {
+                DES:    $DLKFET_SLOT_DES
+                HELP:   $DLKFET_SLOT_HLP
+
+                TYPE:   DECIMAL(3)
+                VAL:    1-100
+                DEF:    UNDEFINED
+                OUT:    'SLOT=%s'
+        }
+
+        PR NODE
+        {
+        }
+
+        FR FrameSelect
+        {
+                CH:     'Ethernet_802.3'
+                CH:     'Ethernet_802.2'
+                CH:     'Ethernet_SNAP'
+                CH:     'Ethernet_II'
+                DEF:    1,2                 ; Default flame type = 802.3, 802.2
+        }
+
+        ; ---------------------------------------------------------
+        ; LIST keywords [CONNECTIONTYPE]:
+        ;   AUTOSENSE, 10BASET, 10BASETFD, 100BASETX, 100BASETXFD     
+        ; ---------------------------------------------------------
+        LI CONNECTIONTYPE OPT
+        {
+                DES:    $DLKFET_CONTYPE_DES
+                HELP:   $DLKFET_CONTYPE_HLP
+
+                CD:     $DLKFET_CAUTO_CD
+                CH:     $DLKFET_CAUTO_CH
+                CD:     $DLKFET_C10H_CD
+                CH:     $DLKFET_C10H_CH
+                CD:     $DLKFET_C10F_CD
+                CH:     $DLKFET_C10F_CH
+                CD:     $DLKFET_C100H_CD
+                CH:     $DLKFET_C100H_CH
+                CD:     $DLKFET_C100F_CD
+                CH:     $DLKFET_C100F_CH
+                DEF:    1                       ; DEFAULT=AUTOSENSE
+                
+                OUT:    'CONNECTIONTYPE=%s'     ; if use this, driver need to 
+                                                ; support extra keyword routine for
+                                                ; 'CONNECTIONTYPE'
+        }
+}
+
+
+DLANG:  4
+;English
+        $DLKFET_DUPLEX_DES= "Full Duplex mode"
+        $DLKFET_DUPLEX_HLP= "Enable the Full Duplex Function."
+        
+        $DLKFET_AUTO_DES  = "AUTO mode"
+        $DLKFET_AUTO_HLP  = "Enable the AUTO Negotiation Function."
+        
+        $DLKFET_SPEED_DES = "SPEED selection"
+        $DLKFET_SPEED_HLP = "Select the SPEED between 10 and 100."
+        
+        $DLKFET_SLOT_DES  = "Slot"
+        $DLKFET_SLOT_HLP  = "Enter the PCI Slot number of your LAN card
+                               to enable PCI auto config function."
+
+        $DLKFET_CONTYPE_DES   = "Media and Line Speed"
+        $DLKFET_CONTYPE_HLP   = "Choose the connection/media type you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_PRI_DES   = "Priority Transmit Support"
+        $DLKFET_PRI_HLP   = "Choose the priority transmit function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+                                        
+        $DLKFET_TAG_DES   = "Tagging ability Support"
+        $DLKFET_TAG_HLP   = "Choose the tagging function you would like to use, 
+                                or NONE for preprogramed card's default"
+                                
+        $DLKFET_FLOWCTL_DES   = "Flow control ability"
+        $DLKFET_FLOWCTL_HLP   = "Choose the flow control ability you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_HCS_DES   = "Hardware Checksum Support"
+        $DLKFET_HCS_HLP   = "Choose the hardware checksum function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+        
+        $DLKFET_VID_DES   = "VID number support for VLAN"
+        $DLKFET_VID_HLP   = "Enter the VID number of your LAN card
+                                to support VLAN function."
+                                        
+        $DLKFET_CAUTO_CD  = "Auto-Sense media type"
+        $DLKFET_CAUTO_CH  = "Autosense"
+        $DLKFET_C10H_CD   = "Twisted Pair 10MBPS"
+        $DLKFET_C10H_CH   = "10BASET"
+        $DLKFET_C10F_CD   = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_C10F_CH   = "10BASETFD"
+        $DLKFET_C100H_CD  = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_C100H_CH  = "100BASETXFD"
+        $DLKFET_C100F_CD  = "Fast Ethernet 100MBPS"
+        $DLKFET_C100F_CH  = "100BASETX"
+        
+
+        $DLKFET_FHD_CD    = "Use Hardware Default"
+        $DLKFET_FHD_CH    = "Hardware_Default"
+        $DLKFET_FENA_CD   = "Enable Flow Control"
+        $DLKFET_FENA_CH   = "Enable"
+        $DLKFET_FDIS_CD   = "Disable Flow Control"
+        $DLKFET_FDIS_CH   = "Disable"
+        
+        $DLKFET_PENA_CD   = "Enable Priority Transmit"
+        $DLKFET_PENA_CH   = "Enable"
+        $DLKFET_PDIS_CD   = "Disable Priority Transmit"
+        $DLKFET_PDIS_CH   = "Disable"
+                                        
+        $DLKFET_TENA_CD   = "Enable Tagging"
+        $DLKFET_TENA_CH   = "Enable"
+        $DLKFET_TDIS_CD   = "Disable Tagging"
+        $DLKFET_TDIS_CH   = "Disable"
+        
+        $DLKFET_HENA_CD   = "Enable Hardware Checksum"
+        $DLKFET_HENA_CH   = "Enable"
+        $DLKFET_HDIS_CD   = "Disable Hardware Checksum"
+        $DLKFET_HDIS_CH   = "Disable"
+
+        $DLKFET_DES       = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+        $DLKFET_DES_3053  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)"
+        $DLKFET_DES_3106  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)"
+        $DLKFET_DES_3065  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)"
+        $DLKFET_DES_3043  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)"
+        $DLKFET_HELP      = "This driver (DLKFET.LAN  ) supports PCI Fast Ethernet
+                                network boards installed in PCI expansion slots in
+                                server. You can install up to four boards as
+                                long as their settings do not conflict."
+
+LANG:   6
+;French
+        $DLKFET_DUPLEX_DES= "Full Duplex mode"
+        $DLKFET_DUPLEX_HLP= "Enable the Full Duplex Function."
+        
+        $DLKFET_AUTO_DES  = "AUTO mode"
+        $DLKFET_AUTO_HLP  = "Enable the AUTO Negotiation Function."
+        
+        $DLKFET_SPEED_DES = "SPEED selection"
+        $DLKFET_SPEED_HLP = "Select the SPEED between 10 and 100."
+        
+        $DLKFET_SLOT_DES  = "Slot"
+        $DLKFET_SLOT_HLP  = "Enter the PCI Slot number of your LAN card
+                               to enable PCI auto config function."
+
+        $DLKFET_CONTYPE_DES   = "Media and Line Speed"
+        $DLKFET_CONTYPE_HLP   = "Choose the connection/media type you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_PRI_DES   = "Priority Transmit Support"
+        $DLKFET_PRI_HLP   = "Choose the priority transmit function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+                                        
+        $DLKFET_TAG_DES   = "Tagging ability Support"
+        $DLKFET_TAG_HLP   = "Choose the tagging function you would like to use, 
+                                or NONE for preprogramed card's default"
+                                
+        $DLKFET_FLOWCTL_DES   = "Flow control ability"
+        $DLKFET_FLOWCTL_HLP   = "Choose the flow control ability you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_HCS_DES   = "Hardware Checksum Support"
+        $DLKFET_HCS_HLP   = "Choose the hardware checksum function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+        
+        $DLKFET_VID_DES   = "VID number support for VLAN"
+        $DLKFET_VID_HLP   = "Enter the VID number of your LAN card
+                                to support VLAN function."
+                                        
+        $DLKFET_CAUTO_CD  = "Auto-Sense media type"
+        $DLKFET_CAUTO_CH  = "Autosense"
+        $DLKFET_C10H_CD   = "Twisted Pair 10MBPS"
+        $DLKFET_C10H_CH   = "10BASET"
+        $DLKFET_C10F_CD   = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_C10F_CH   = "10BASETFD"
+        $DLKFET_C100H_CD  = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_C100H_CH  = "100BASETXFD"
+        $DLKFET_C100F_CD  = "Fast Ethernet 100MBPS"
+        $DLKFET_C100F_CH  = "100BASETX"
+        
+
+        $DLKFET_FHD_CD    = "Use Hardware Default"
+        $DLKFET_FHD_CH    = "Hardware_Default"
+        $DLKFET_FENA_CD   = "Enable Flow Control"
+        $DLKFET_FENA_CH   = "Enable"
+        $DLKFET_FDIS_CD   = "Disable Flow Control"
+        $DLKFET_FDIS_CH   = "Disable"
+        
+        
+        $DLKFET_PENA_CD   = "Enable Priority Transmit"
+        $DLKFET_PENA_CH   = "Enable"
+        $DLKFET_PDIS_CD   = "Disable Priority Transmit"
+        $DLKFET_PDIS_CH   = "Disable"
+
+        $DLKFET_TENA_CD   = "Enable Tagging"
+        $DLKFET_TENA_CH   = "Enable"
+        $DLKFET_TDIS_CD   = "Disable Tagging"
+        $DLKFET_TDIS_CH   = "Disable"
+        
+        $DLKFET_HENA_CD   = "Enable Hardware Checksum"
+        $DLKFET_HENA_CH   = "Enable"
+        $DLKFET_HDIS_CD   = "Disable Hardware Checksum"
+        $DLKFET_HDIS_CH   = "Disable"
+
+        $DLKFET_DES       = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+        $DLKFET_DES_3053  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)"
+        $DLKFET_DES_3106  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)"
+        $DLKFET_DES_3065  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)"
+        $DLKFET_DES_3043  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)"
+        $DLKFET_HELP      = "This driver (DLKFET.LAN  ) supports PCI Fast Ethernet
+                                network boards installed in PCI expansion slots in
+                                server. You can install up to four boards as
+                                long as their settings do not conflict."
+LANG:   7
+;German
+        $DLKFET_DUPLEX_DES= "Full Duplex mode"
+        $DLKFET_DUPLEX_HLP= "Enable the Full Duplex Function."
+        
+        $DLKFET_AUTO_DES  = "AUTO mode"
+        $DLKFET_AUTO_HLP  = "Enable the AUTO Negotiation Function."
+        
+        $DLKFET_SPEED_DES = "SPEED selection"
+        $DLKFET_SPEED_HLP = "Select the SPEED between 10 and 100."
+        
+        $DLKFET_SLOT_DES  = "Slot"
+        $DLKFET_SLOT_HLP  = "Enter the PCI Slot number of your LAN card
+                               to enable PCI auto config function."
+
+        $DLKFET_CONTYPE_DES   = "Media and Line Speed"
+        $DLKFET_CONTYPE_HLP   = "Choose the connection/media type you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_PRI_DES   = "Priority Transmit Support"
+        $DLKFET_PRI_HLP   = "Choose the priority transmit function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+
+        $DLKFET_TAG_DES   = "Tagging ability Support"
+        $DLKFET_TAG_HLP   = "Choose the tagging function you would like to use, 
+                                or NONE for preprogramed card's default"
+                                        
+        $DLKFET_FLOWCTL_DES   = "Flow control ability"
+        $DLKFET_FLOWCTL_HLP   = "Choose the flow control ability you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_HCS_DES   = "Hardware Checksum Support"
+        $DLKFET_HCS_HLP   = "Choose the hardware checksum function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+        
+        $DLKFET_VID_DES   = "VID number support for VLAN"
+        $DLKFET_VID_HLP   = "Enter the VID number of your LAN card
+                                to support VLAN function."
+                                        
+        $DLKFET_CAUTO_CD  = "Auto-Sense media type"
+        $DLKFET_CAUTO_CH  = "Autosense"
+        $DLKFET_C10H_CD   = "Twisted Pair 10MBPS"
+        $DLKFET_C10H_CH   = "10BASET"
+        $DLKFET_C10F_CD   = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_C10F_CH   = "10BASETFD"
+        $DLKFET_C100H_CD  = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_C100H_CH  = "100BASETXFD"
+        $DLKFET_C100F_CD  = "Fast Ethernet 100MBPS"
+        $DLKFET_C100F_CH  = "100BASETX"
+        
+
+        $DLKFET_FHD_CD    = "Use Hardware Default"
+        $DLKFET_FHD_CH    = "Hardware_Default"
+        $DLKFET_FENA_CD   = "Enable Flow Control"
+        $DLKFET_FENA_CH   = "Enable"
+        $DLKFET_FDIS_CD   = "Disable Flow Control"
+        $DLKFET_FDIS_CH   = "Disable"
+        
+        
+        $DLKFET_PENA_CD   = "Enable Priority Transmit"
+        $DLKFET_PENA_CH   = "Enable"
+        $DLKFET_PDIS_CD   = "Disable Priority Transmit"
+        $DLKFET_PDIS_CH   = "Disable"
+                                        
+        $DLKFET_TENA_CD   = "Enable Tagging"
+        $DLKFET_TENA_CH   = "Enable"
+        $DLKFET_TDIS_CD   = "Disable Tagging"
+        $DLKFET_TDIS_CH   = "Disable"
+        
+        $DLKFET_HENA_CD   = "Enable Hardware Checksum"
+        $DLKFET_HENA_CH   = "Enable"
+        $DLKFET_HDIS_CD   = "Disable Hardware Checksum"
+        $DLKFET_HDIS_CH   = "Disable"
+
+        $DLKFET_DES       = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+        $DLKFET_DES_3053  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)"
+        $DLKFET_DES_3106  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)"
+        $DLKFET_DES_3065  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)"
+        $DLKFET_DES_3043  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)"
+        $DLKFET_HELP      = "This driver (DLKFET.LAN  ) supports PCI Fast Ethernet
+                                network boards installed in PCI expansion slots in
+                                server. You can install up to four boards as
+                                long as their settings do not conflict."
+
+LANG:   8
+;Italian
+        $DLKFET_DUPLEX_DES= "Full Duplex mode"
+        $DLKFET_DUPLEX_HLP= "Enable the Full Duplex Function."
+        
+        $DLKFET_AUTO_DES  = "AUTO mode"
+        $DLKFET_AUTO_HLP  = "Enable the AUTO Negotiation Function."
+        
+        $DLKFET_SPEED_DES = "SPEED selection"
+        $DLKFET_SPEED_HLP = "Select the SPEED between 10 and 100."
+        
+        $DLKFET_SLOT_DES  = "Slot"
+        $DLKFET_SLOT_HLP  = "Enter the PCI Slot number of your LAN card
+                               to enable PCI auto config function."
+
+        $DLKFET_CONTYPE_DES   = "Media and Line Speed"
+        $DLKFET_CONTYPE_HLP   = "Choose the connection/media type you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_PRI_DES   = "Priority Transmit Support"
+        $DLKFET_PRI_HLP   = "Choose the priority transmit function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+
+        $DLKFET_TAG_DES   = "Tagging ability Support"
+        $DLKFET_TAG_HLP   = "Choose the tagging function you would like to use, 
+                                or NONE for preprogramed card's default"
+                                        
+        $DLKFET_FLOWCTL_DES   = "Flow control ability"
+        $DLKFET_FLOWCTL_HLP   = "Choose the flow control ability you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_HCS_DES   = "Hardware Checksum Support"
+        $DLKFET_HCS_HLP   = "Choose the hardware checksum function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+        
+        $DLKFET_VID_DES   = "VID number support for VLAN"
+        $DLKFET_VID_HLP   = "Enter the VID number of your LAN card
+                                to support VLAN function."
+                                        
+        $DLKFET_CAUTO_CD  = "Auto-Sense media type"
+        $DLKFET_CAUTO_CH  = "Autosense"
+        $DLKFET_C10H_CD   = "Twisted Pair 10MBPS"
+        $DLKFET_C10H_CH   = "10BASET"
+        $DLKFET_C10F_CD   = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_C10F_CH   = "10BASETFD"
+        $DLKFET_C100H_CD  = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_C100H_CH  = "100BASETXFD"
+        $DLKFET_C100F_CD  = "Fast Ethernet 100MBPS"
+        $DLKFET_C100F_CH  = "100BASETX"
+        
+
+        $DLKFET_FHD_CD    = "Use Hardware Default"
+        $DLKFET_FHD_CH    = "Hardware_Default"
+        $DLKFET_FENA_CD   = "Enable Flow Control"
+        $DLKFET_FENA_CH   = "Enable"
+        $DLKFET_FDIS_CD   = "Disable Flow Control"
+        $DLKFET_FDIS_CH   = "Disable"
+        
+        
+        $DLKFET_PENA_CD   = "Enable Priority Transmit"
+        $DLKFET_PENA_CH   = "Enable"
+        $DLKFET_PDIS_CD   = "Disable Priority Transmit"
+        $DLKFET_PDIS_CH   = "Disable"
+                                        
+        $DLKFET_TENA_CD   = "Enable Tagging"
+        $DLKFET_TENA_CH   = "Enable"
+        $DLKFET_TDIS_CD   = "Disable Tagging"
+        $DLKFET_TDIS_CH   = "Disable"
+        
+        $DLKFET_HENA_CD   = "Enable Hardware Checksum"
+        $DLKFET_HENA_CH   = "Enable"
+        $DLKFET_HDIS_CD   = "Disable Hardware Checksum"
+        $DLKFET_HDIS_CH   = "Disable"
+
+        $DLKFET_DES       = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+        $DLKFET_DES_3053  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)"
+        $DLKFET_DES_3106  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)"
+        $DLKFET_DES_3065  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)"
+        $DLKFET_DES_3043  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)"
+        $DLKFET_HELP      = "This driver (DLKFET.LAN  ) supports PCI Fast Ethernet
+                                network boards installed in PCI expansion slots in
+                                server. You can install up to four boards as
+                                long as their settings do not conflict."
+
+LANG:   14
+;Spanish
+        $DLKFET_DUPLEX_DES= "Full Duplex mode"
+        $DLKFET_DUPLEX_HLP= "Enable the Full Duplex Function."
+        
+        $DLKFET_AUTO_DES  = "AUTO mode"
+        $DLKFET_AUTO_HLP  = "Enable the AUTO Negotiation Function."
+        
+        $DLKFET_SPEED_DES = "SPEED selection"
+        $DLKFET_SPEED_HLP = "Select the SPEED between 10 and 100."
+        
+        $DLKFET_SLOT_DES  = "Slot"
+        $DLKFET_SLOT_HLP  = "Enter the PCI Slot number of your LAN card
+                               to enable PCI auto config function."
+
+        $DLKFET_CONTYPE_DES   = "Media and Line Speed"
+        $DLKFET_CONTYPE_HLP   = "Choose the connection/media type you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_PRI_DES   = "Priority Transmit Support"
+        $DLKFET_PRI_HLP   = "Choose the priority transmit function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+
+        $DLKFET_TAG_DES   = "Tagging ability Support"
+        $DLKFET_TAG_HLP   = "Choose the tagging function you would like to use, 
+                                or NONE for preprogramed card's default"
+                                        
+        $DLKFET_FLOWCTL_DES   = "Flow control ability"
+        $DLKFET_FLOWCTL_HLP   = "Choose the flow control ability you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_HCS_DES   = "Hardware Checksum Support"
+        $DLKFET_HCS_HLP   = "Choose the hardware checksum function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+        
+        $DLKFET_VID_DES   = "VID number support for VLAN"
+        $DLKFET_VID_HLP   = "Enter the VID number of your LAN card
+                                to support VLAN function."
+                                        
+        $DLKFET_CAUTO_CD  = "Auto-Sense media type"
+        $DLKFET_CAUTO_CH  = "Autosense"
+        $DLKFET_C10H_CD   = "Twisted Pair 10MBPS"
+        $DLKFET_C10H_CH   = "10BASET"
+        $DLKFET_C10F_CD   = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_C10F_CH   = "10BASETFD"
+        $DLKFET_C100H_CD  = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_C100H_CH  = "100BASETXFD"
+        $DLKFET_C100F_CD  = "Fast Ethernet 100MBPS"
+        $DLKFET_C100F_CH  = "100BASETX"
+        
+
+        $DLKFET_FHD_CD    = "Use Hardware Default"
+        $DLKFET_FHD_CH    = "Hardware_Default"
+        $DLKFET_FENA_CD   = "Enable Flow Control"
+        $DLKFET_FENA_CH   = "Enable"
+        $DLKFET_FDIS_CD   = "Disable Flow Control"
+        $DLKFET_FDIS_CH   = "Disable"
+        
+        
+        $DLKFET_PENA_CD   = "Enable Priority Transmit"
+        $DLKFET_PENA_CH   = "Enable"
+        $DLKFET_PDIS_CD   = "Disable Priority Transmit"
+        $DLKFET_PDIS_CH   = "Disable"
+                                        
+        $DLKFET_TENA_CD   = "Enable Tagging"
+        $DLKFET_TENA_CH   = "Enable"
+        $DLKFET_TDIS_CD   = "Disable Tagging"
+        $DLKFET_TDIS_CH   = "Disable"
+        
+        $DLKFET_HENA_CD   = "Enable Hardware Checksum"
+        $DLKFET_HENA_CH   = "Enable"
+        $DLKFET_HDIS_CD   = "Disable Hardware Checksum"
+        $DLKFET_HDIS_CH   = "Disable"
+
+        $DLKFET_DES       = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+        $DLKFET_DES_3053  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)"
+        $DLKFET_DES_3106  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)"
+        $DLKFET_DES_3065  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)"
+        $DLKFET_DES_3043  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)"
+        $DLKFET_HELP      = "This driver (DLKFET.LAN  ) supports PCI Fast Ethernet
+                                network boards installed in PCI expansion slots in
+                                server. You can install up to four boards as
+                                long as their settings do not conflict."
+
+LANG:   9
+;Japanese
+        $DLKFET_DUPLEX_DES= "Full Duplex mode"
+        $DLKFET_DUPLEX_HLP= "Enable the Full Duplex Function."
+        
+        $DLKFET_AUTO_DES  = "AUTO mode"
+        $DLKFET_AUTO_HLP  = "Enable the AUTO Negotiation Function."
+        
+        $DLKFET_SPEED_DES = "SPEED selection"
+        $DLKFET_SPEED_HLP = "Select the SPEED between 10 and 100."
+        
+        $DLKFET_SLOT_DES  = "Slot"
+        $DLKFET_SLOT_HLP  = "Enter the PCI Slot number of your LAN card
+                               to enable PCI auto config function."
+
+        $DLKFET_CONTYPE_DES   = "Media and Line Speed"
+        $DLKFET_CONTYPE_HLP   = "Choose the connection/media type you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_PRI_DES   = "Priority Transmit Support"
+        $DLKFET_PRI_HLP   = "Choose the priority transmit function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+
+        $DLKFET_TAG_DES   = "Tagging ability Support"
+        $DLKFET_TAG_HLP   = "Choose the tagging function you would like to use, 
+                                or NONE for preprogramed card's default"
+                                        
+        $DLKFET_FLOWCTL_DES   = "Flow control ability"
+        $DLKFET_FLOWCTL_HLP   = "Choose the flow control ability you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_HCS_DES   = "Hardware Checksum Support"
+        $DLKFET_HCS_HLP   = "Choose the hardware checksum function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+        
+        $DLKFET_VID_DES   = "VID number support for VLAN"
+        $DLKFET_VID_HLP   = "Enter the VID number of your LAN card
+                                to support VLAN function."
+                                        
+        $DLKFET_CAUTO_CD  = "Auto-Sense media type"
+        $DLKFET_CAUTO_CH  = "Autosense"
+        $DLKFET_C10H_CD   = "Twisted Pair 10MBPS"
+        $DLKFET_C10H_CH   = "10BASET"
+        $DLKFET_C10F_CD   = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_C10F_CH   = "10BASETFD"
+        $DLKFET_C100H_CD  = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_C100H_CH  = "100BASETXFD"
+        $DLKFET_C100F_CD  = "Fast Ethernet 100MBPS"
+        $DLKFET_C100F_CH  = "100BASETX"
+        
+
+        $DLKFET_FHD_CD    = "Use Hardware Default"
+        $DLKFET_FHD_CH    = "Hardware_Default"
+        $DLKFET_FENA_CD   = "Enable Flow Control"
+        $DLKFET_FENA_CH   = "Enable"
+        $DLKFET_FDIS_CD   = "Disable Flow Control"
+        $DLKFET_FDIS_CH   = "Disable"
+        
+        
+        $DLKFET_PENA_CD   = "Enable Priority Transmit"
+        $DLKFET_PENA_CH   = "Enable"
+        $DLKFET_PDIS_CD   = "Disable Priority Transmit"
+        $DLKFET_PDIS_CH   = "Disable"
+                                        
+        $DLKFET_TENA_CD   = "Enable Tagging"
+        $DLKFET_TENA_CH   = "Enable"
+        $DLKFET_TDIS_CD   = "Disable Tagging"
+        $DLKFET_TDIS_CH   = "Disable"
+        
+        $DLKFET_HENA_CD   = "Enable Hardware Checksum"
+        $DLKFET_HENA_CH   = "Enable"
+        $DLKFET_HDIS_CD   = "Disable Hardware Checksum"
+        $DLKFET_HDIS_CH   = "Disable"
+
+        $DLKFET_DES       = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+        $DLKFET_DES_3053  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)"
+        $DLKFET_DES_3106  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)"
+        $DLKFET_DES_3065  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)"
+        $DLKFET_DES_3043  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)"
+        $DLKFET_HELP      = "This driver (DLKFET.LAN  ) supports PCI Fast Ethernet
+                                network boards installed in PCI expansion slots in
+                                server. You can install up to four boards as
+                                long as their settings do not conflict."
+
+LANG:   10
+;Korean
+        $DLKFET_DUPLEX_DES= "Full Duplex mode"
+        $DLKFET_DUPLEX_HLP= "Enable the Full Duplex Function."
+        
+        $DLKFET_AUTO_DES  = "AUTO mode"
+        $DLKFET_AUTO_HLP  = "Enable the AUTO Negotiation Function."
+        
+        $DLKFET_SPEED_DES = "SPEED selection"
+        $DLKFET_SPEED_HLP = "Select the SPEED between 10 and 100."
+        
+        $DLKFET_SLOT_DES  = "Slot"
+        $DLKFET_SLOT_HLP  = "Enter the PCI Slot number of your LAN card
+                               to enable PCI auto config function."
+
+        $DLKFET_CONTYPE_DES   = "Media and Line Speed"
+        $DLKFET_CONTYPE_HLP   = "Choose the connection/media type you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+
+        $DLKFET_PRI_DES   = "Priority Transmit Support"
+        $DLKFET_PRI_HLP   = "Choose the priority transmit function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+
+        $DLKFET_TAG_DES   = "Tagging ability Support"
+        $DLKFET_TAG_HLP   = "Choose the tagging function you would like to use, 
+                                or NONE for preprogramed card's default"
+                                       
+        $DLKFET_FLOWCTL_DES   = "Flow control ability"
+        $DLKFET_FLOWCTL_HLP   = "Choose the flow control ability you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_HCS_DES   = "Hardware Checksum Support"
+        $DLKFET_HCS_HLP   = "Choose the hardware checksum function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+        
+        $DLKFET_VID_DES   = "VID number support for VLAN"
+        $DLKFET_VID_HLP   = "Enter the VID number of your LAN card
+                                to support VLAN function."
+                                        
+        $DLKFET_CAUTO_CD  = "Auto-Sense media type"
+        $DLKFET_CAUTO_CH  = "Autosense"
+        $DLKFET_C10H_CD   = "Twisted Pair 10MBPS"
+        $DLKFET_C10H_CH   = "10BASET"
+        $DLKFET_C10F_CD   = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_C10F_CH   = "10BASETFD"
+        $DLKFET_C100H_CD  = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_C100H_CH  = "100BASETXFD"
+        $DLKFET_C100F_CD  = "Fast Ethernet 100MBPS"
+        $DLKFET_C100F_CH  = "100BASETX"
+        
+
+        $DLKFET_FHD_CD    = "Use Hardware Default"
+        $DLKFET_FHD_CH    = "Hardware_Default"
+        $DLKFET_FENA_CD   = "Enable Flow Control"
+        $DLKFET_FENA_CH   = "Enable"
+        $DLKFET_FDIS_CD   = "Disable Flow Control"
+        $DLKFET_FDIS_CH   = "Disable"
+        
+        
+        $DLKFET_PENA_CD   = "Enable Priority Transmit"
+        $DLKFET_PENA_CH   = "Enable"
+        $DLKFET_PDIS_CD   = "Disable Priority Transmit"
+        $DLKFET_PDIS_CH   = "Disable"
+                                        
+        $DLKFET_TENA_CD   = "Enable Tagging"
+        $DLKFET_TENA_CH   = "Enable"
+        $DLKFET_TDIS_CD   = "Disable Tagging"
+        $DLKFET_TDIS_CH   = "Disable"
+        
+        $DLKFET_HENA_CD   = "Enable Hardware Checksum"
+        $DLKFET_HENA_CH   = "Enable"
+        $DLKFET_HDIS_CD   = "Disable Hardware Checksum"
+        $DLKFET_HDIS_CH   = "Disable"
+
+        $DLKFET_DES       = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+        $DLKFET_DES_3053  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)"
+        $DLKFET_DES_3106  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)"
+        $DLKFET_DES_3065  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)"
+        $DLKFET_DES_3043  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)"
+        $DLKFET_HELP      = "This driver (DLKFET.LAN  ) supports PCI Fast Ethernet
+                                network boards installed in PCI expansion slots in
+                                server. You can install up to four boards as
+                                long as their settings do not conflict."
+
+LANG:   12
+;Portugese (Brazil)
+        $DLKFET_DUPLEX_DES= "Full Duplex mode"
+        $DLKFET_DUPLEX_HLP= "Enable the Full Duplex Function."
+        
+        $DLKFET_AUTO_DES  = "AUTO mode"
+        $DLKFET_AUTO_HLP  = "Enable the AUTO Negotiation Function."
+        
+        $DLKFET_SPEED_DES = "SPEED selection"
+        $DLKFET_SPEED_HLP = "Select the SPEED between 10 and 100."
+        
+        $DLKFET_SLOT_DES  = "Slot"
+        $DLKFET_SLOT_HLP  = "Enter the PCI Slot number of your LAN card
+                               to enable PCI auto config function."
+
+        $DLKFET_CONTYPE_DES   = "Media and Line Speed"
+        $DLKFET_CONTYPE_HLP   = "Choose the connection/media type you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_PRI_DES   = "Priority Transmit Support"
+        $DLKFET_PRI_HLP   = "Choose the priority transmit function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+
+        $DLKFET_TAG_DES   = "Tagging ability Support"
+        $DLKFET_TAG_HLP   = "Choose the tagging function you would like to use, 
+                                or NONE for preprogramed card's default"
+                                        
+        $DLKFET_FLOWCTL_DES   = "Flow control ability"
+        $DLKFET_FLOWCTL_HLP   = "Choose the flow control ability you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_HCS_DES   = "Hardware Checksum Support"
+        $DLKFET_HCS_HLP   = "Choose the hardware checksum function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+        
+        $DLKFET_VID_DES   = "VID number support for VLAN"
+        $DLKFET_VID_HLP   = "Enter the VID number of your LAN card
+                                to support VLAN function."
+                                        
+        $DLKFET_CAUTO_CD  = "Auto-Sense media type"
+        $DLKFET_CAUTO_CH  = "Autosense"
+        $DLKFET_C10H_CD   = "Twisted Pair 10MBPS"
+        $DLKFET_C10H_CH   = "10BASET"
+        $DLKFET_C10F_CD   = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_C10F_CH   = "10BASETFD"
+        $DLKFET_C100H_CD  = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_C100H_CH  = "100BASETXFD"
+        $DLKFET_C100F_CD  = "Fast Ethernet 100MBPS"
+        $DLKFET_C100F_CH  = "100BASETX"
+        
+
+        $DLKFET_FHD_CD    = "Use Hardware Default"
+        $DLKFET_FHD_CH    = "Hardware_Default"
+        $DLKFET_FENA_CD   = "Enable Flow Control"
+        $DLKFET_FENA_CH   = "Enable"
+        $DLKFET_FDIS_CD   = "Disable Flow Control"
+        $DLKFET_FDIS_CH   = "Disable"
+        
+        
+        $DLKFET_PENA_CD   = "Enable Priority Transmit"
+        $DLKFET_PENA_CH   = "Enable"
+        $DLKFET_PDIS_CD   = "Disable Priority Transmit"
+        $DLKFET_PDIS_CH   = "Disable"
+                                        
+        $DLKFET_TENA_CD   = "Enable Tagging"
+        $DLKFET_TENA_CH   = "Enable"
+        $DLKFET_TDIS_CD   = "Disable Tagging"
+        $DLKFET_TDIS_CH   = "Disable"
+        
+        $DLKFET_HENA_CD   = "Enable Hardware Checksum"
+        $DLKFET_HENA_CH   = "Enable"
+        $DLKFET_HDIS_CD   = "Disable Hardware Checksum"
+        $DLKFET_HDIS_CH   = "Disable"
+
+        $DLKFET_DES       = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+        $DLKFET_DES_3053  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)"
+        $DLKFET_DES_3106  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)"
+        $DLKFET_DES_3065  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)"
+        $DLKFET_DES_3043  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)"
+        $DLKFET_HELP      = "This driver (DLKFET.LAN  ) supports PCI Fast Ethernet
+                                network boards installed in PCI expansion slots in
+                                server. You can install up to four boards as
+                                long as their settings do not conflict."
+
+LANG:   13
+;Russian
+        $DLKFET_DUPLEX_DES= "Full Duplex mode"
+        $DLKFET_DUPLEX_HLP= "Enable the Full Duplex Function."
+        
+        $DLKFET_AUTO_DES  = "AUTO mode"
+        $DLKFET_AUTO_HLP  = "Enable the AUTO Negotiation Function."
+        
+        $DLKFET_SPEED_DES = "SPEED selection"
+        $DLKFET_SPEED_HLP = "Select the SPEED between 10 and 100."
+        
+        $DLKFET_SLOT_DES  = "Slot"
+        $DLKFET_SLOT_HLP  = "Enter the PCI Slot number of your LAN card
+                               to enable PCI auto config function."
+
+        $DLKFET_CONTYPE_DES   = "Media and Line Speed"
+        $DLKFET_CONTYPE_HLP   = "Choose the connection/media type you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_PRI_DES   = "Priority Transmit Support"
+        $DLKFET_PRI_HLP   = "Choose the priority transmit function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+
+        $DLKFET_TAG_DES   = "Tagging ability Support"
+        $DLKFET_TAG_HLP   = "Choose the tagging function you would like to use, 
+                                or NONE for preprogramed card's default"
+                                        
+        $DLKFET_FLOWCTL_DES   = "Flow control ability"
+        $DLKFET_FLOWCTL_HLP   = "Choose the flow control ability you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_HCS_DES   = "Hardware Checksum Support"
+        $DLKFET_HCS_HLP   = "Choose the hardware checksum function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+        
+        $DLKFET_VID_DES   = "VID number support for VLAN"
+        $DLKFET_VID_HLP   = "Enter the VID number of your LAN card
+                                to support VLAN function."
+                                        
+        $DLKFET_CAUTO_CD  = "Auto-Sense media type"
+        $DLKFET_CAUTO_CH  = "Autosense"
+        $DLKFET_C10H_CD   = "Twisted Pair 10MBPS"
+        $DLKFET_C10H_CH   = "10BASET"
+        $DLKFET_C10F_CD   = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_C10F_CH   = "10BASETFD"
+        $DLKFET_C100H_CD  = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_C100H_CH  = "100BASETXFD"
+        $DLKFET_C100F_CD  = "Fast Ethernet 100MBPS"
+        $DLKFET_C100F_CH  = "100BASETX"
+        
+
+        $DLKFET_FHD_CD    = "Use Hardware Default"
+        $DLKFET_FHD_CH    = "Hardware_Default"
+        $DLKFET_FENA_CD   = "Enable Flow Control"
+        $DLKFET_FENA_CH   = "Enable"
+        $DLKFET_FDIS_CD   = "Disable Flow Control"
+        $DLKFET_FDIS_CH   = "Disable"
+        
+        
+        $DLKFET_PENA_CD   = "Enable Priority Transmit"
+        $DLKFET_PENA_CH   = "Enable"
+        $DLKFET_PDIS_CD   = "Disable Priority Transmit"
+        $DLKFET_PDIS_CH   = "Disable"
+                                        
+        $DLKFET_TENA_CD   = "Enable Tagging"
+        $DLKFET_TENA_CH   = "Enable"
+        $DLKFET_TDIS_CD   = "Disable Tagging"
+        $DLKFET_TDIS_CH   = "Disable"
+        
+        $DLKFET_HENA_CD   = "Enable Hardware Checksum"
+        $DLKFET_HENA_CH   = "Enable"
+        $DLKFET_HDIS_CD   = "Disable Hardware Checksum"
+        $DLKFET_HDIS_CH   = "Disable"
+
+        $DLKFET_DES       = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+        $DLKFET_DES_3053  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)"
+        $DLKFET_DES_3106  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)"
+        $DLKFET_DES_3065  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)"
+        $DLKFET_DES_3043  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)"
+        $DLKFET_HELP      = "This driver (DLKFET.LAN  ) supports PCI Fast Ethernet
+                                network boards installed in PCI expansion slots in
+                                server. You can install up to four boards as
+                                long as their settings do not conflict."
+
+LANG:   16
+;Chinese (Traditional)
+        $DLKFET_DUPLEX_DES= "Full Duplex mode"
+        $DLKFET_DUPLEX_HLP= "Enable the Full Duplex Function."
+        
+        $DLKFET_AUTO_DES  = "AUTO mode"
+        $DLKFET_AUTO_HLP  = "Enable the AUTO Negotiation Function."
+        
+        $DLKFET_SPEED_DES = "SPEED selection"
+        $DLKFET_SPEED_HLP = "Select the SPEED between 10 and 100."
+        
+        $DLKFET_SLOT_DES  = "Slot"
+        $DLKFET_SLOT_HLP  = "Enter the PCI Slot number of your LAN card
+                               to enable PCI auto config function."
+
+        $DLKFET_CONTYPE_DES   = "Media and Line Speed"
+        $DLKFET_CONTYPE_HLP   = "Choose the connection/media type you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_PRI_DES   = "Priority Transmit Support"
+        $DLKFET_PRI_HLP   = "Choose the priority transmit function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+
+        $DLKFET_TAG_DES   = "Tagging ability Support"
+        $DLKFET_TAG_HLP   = "Choose the tagging function you would like to use, 
+                                or NONE for preprogramed card's default"
+                                        
+        $DLKFET_FLOWCTL_DES   = "Flow control ability"
+        $DLKFET_FLOWCTL_HLP   = "Choose the flow control ability you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_HCS_DES   = "Hardware Checksum Support"
+        $DLKFET_HCS_HLP   = "Choose the hardware checksum function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+        
+        $DLKFET_VID_DES   = "VID number support for VLAN"
+        $DLKFET_VID_HLP   = "Enter the VID number of your LAN card
+                                to support VLAN function."
+                                        
+        $DLKFET_CAUTO_CD  = "Auto-Sense media type"
+        $DLKFET_CAUTO_CH  = "Autosense"
+        $DLKFET_C10H_CD   = "Twisted Pair 10MBPS"
+        $DLKFET_C10H_CH   = "10BASET"
+        $DLKFET_C10F_CD   = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_C10F_CH   = "10BASETFD"
+        $DLKFET_C100H_CD  = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_C100H_CH  = "100BASETXFD"
+        $DLKFET_C100F_CD  = "Fast Ethernet 100MBPS"
+        $DLKFET_C100F_CH  = "100BASETX"
+        
+
+        $DLKFET_FHD_CD    = "Use Hardware Default"
+        $DLKFET_FHD_CH    = "Hardware_Default"
+        $DLKFET_FENA_CD   = "Enable Flow Control"
+        $DLKFET_FENA_CH   = "Enable"
+        $DLKFET_FDIS_CD   = "Disable Flow Control"
+        $DLKFET_FDIS_CH   = "Disable"
+        
+        
+        $DLKFET_PENA_CD   = "Enable Priority Transmit"
+        $DLKFET_PENA_CH   = "Enable"
+        $DLKFET_PDIS_CD   = "Disable Priority Transmit"
+        $DLKFET_PDIS_CH   = "Disable"
+                                        
+        $DLKFET_TENA_CD   = "Enable Tagging"
+        $DLKFET_TENA_CH   = "Enable"
+        $DLKFET_TDIS_CD   = "Disable Tagging"
+        $DLKFET_TDIS_CH   = "Disable"
+        
+        $DLKFET_HENA_CD   = "Enable Hardware Checksum"
+        $DLKFET_HENA_CH   = "Enable"
+        $DLKFET_HDIS_CD   = "Disable Hardware Checksum"
+        $DLKFET_HDIS_CH   = "Disable"
+
+        $DLKFET_DES       = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+        $DLKFET_DES_3053  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)"
+        $DLKFET_DES_3106  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)"
+        $DLKFET_DES_3065  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)"
+        $DLKFET_DES_3043  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)"
+        $DLKFET_HELP      = "This driver (DLKFET.LAN  ) supports PCI Fast Ethernet
+                                network boards installed in PCI expansion slots in
+                                server. You can install up to four boards as
+                                long as their settings do not conflict."
+
+LANG:   1
+;Chinese (Simplified)
+        $DLKFET_DUPLEX_DES= "Full Duplex mode"
+        $DLKFET_DUPLEX_HLP= "Enable the Full Duplex Function."
+        
+        $DLKFET_AUTO_DES  = "AUTO mode"
+        $DLKFET_AUTO_HLP  = "Enable the AUTO Negotiation Function."
+        
+        $DLKFET_SPEED_DES = "SPEED selection"
+        $DLKFET_SPEED_HLP = "Select the SPEED between 10 and 100."
+        
+        $DLKFET_SLOT_DES  = "Slot"
+        $DLKFET_SLOT_HLP  = "Enter the PCI Slot number of your LAN card
+                               to enable PCI auto config function."
+
+        $DLKFET_CONTYPE_DES   = "Media and Line Speed"
+        $DLKFET_CONTYPE_HLP   = "Choose the connection/media type you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_PRI_DES   = "Priority Transmit Support"
+        $DLKFET_PRI_HLP   = "Choose the priority transmit function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+
+        $DLKFET_TAG_DES   = "Tagging ability Support"
+        $DLKFET_TAG_HLP   = "Choose the tagging function you would like to use, 
+                                or NONE for preprogramed card's default"
+                                        
+        $DLKFET_FLOWCTL_DES   = "Flow control ability"
+        $DLKFET_FLOWCTL_HLP   = "Choose the flow control ability you would
+                                    like to use, or NONE for preprogramed card's
+                                    default."
+        
+        $DLKFET_HCS_DES   = "Hardware Checksum Support"
+        $DLKFET_HCS_HLP   = "Choose the hardware checksum function you would
+                                like to use, or NONE for preprogramed card's
+                                default"
+        
+        $DLKFET_VID_DES   = "VID number support for VLAN"
+        $DLKFET_VID_HLP   = "Enter the VID number of your LAN card
+                                to support VLAN function."
+                                        
+        $DLKFET_CAUTO_CD  = "Auto-Sense media type"
+        $DLKFET_CAUTO_CH  = "Autosense"
+        $DLKFET_C10H_CD   = "Twisted Pair 10MBPS"
+        $DLKFET_C10H_CH   = "10BASET"
+        $DLKFET_C10F_CD   = "Twisted pair - Full Duplex 10MBPS"
+        $DLKFET_C10F_CH   = "10BASETFD"
+        $DLKFET_C100H_CD  = "Twisted pair - Full Duplex 100MBPS"
+        $DLKFET_C100H_CH  = "100BASETXFD"
+        $DLKFET_C100F_CD  = "Fast Ethernet 100MBPS"
+        $DLKFET_C100F_CH  = "100BASETX"
+        
+
+        $DLKFET_FHD_CD    = "Use Hardware Default"
+        $DLKFET_FHD_CH    = "Hardware_Default"
+        $DLKFET_FENA_CD   = "Enable Flow Control"
+        $DLKFET_FENA_CH   = "Enable"
+        $DLKFET_FDIS_CD   = "Disable Flow Control"
+        $DLKFET_FDIS_CH   = "Disable"
+        
+        
+        $DLKFET_PENA_CD   = "Enable Priority Transmit"
+        $DLKFET_PENA_CH   = "Enable"
+        $DLKFET_PDIS_CD   = "Disable Priority Transmit"
+        $DLKFET_PDIS_CH   = "Disable"
+                                        
+        $DLKFET_TENA_CD   = "Enable Tagging"
+        $DLKFET_TENA_CH   = "Enable"
+        $DLKFET_TDIS_CD   = "Disable Tagging"
+        $DLKFET_TDIS_CH   = "Disable"
+        
+        $DLKFET_HENA_CD   = "Enable Hardware Checksum"
+        $DLKFET_HENA_CH   = "Enable"
+        $DLKFET_HDIS_CD   = "Disable Hardware Checksum"
+        $DLKFET_HDIS_CH   = "Disable"
+
+        $DLKFET_DES       = "D-Link DFE-530TX PCI Fast Ethernet Adapter"
+        $DLKFET_DES_3053  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.D)"
+        $DLKFET_DES_3106  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.C)"
+        $DLKFET_DES_3065  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.B)"
+        $DLKFET_DES_3043  = "D-Link DFE-530TX PCI Fast Ethernet Adapter (rev.A)"
+        $DLKFET_HELP      = "This driver (DLKFET.LAN  ) supports PCI Fast Ethernet
+                                network boards installed in PCI expansion slots in
+                                server. You can install up to four boards as
+                                long as their settings do not conflict."
+
+;DrIvEr DeScRiPtIoN EnD

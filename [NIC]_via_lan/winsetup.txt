@@ -1,0 +1,123 @@
+**
+**
+**  Windows Setup Program for Windows 95/95OSR2/98SE/ME/NT4/2000/XP/Server 2003
+**
+**  v2.28   Jul. 2004
+**
+**
+
+Introduction:
+=============
+
+  This document shows you how to use the Windows setup programs. These programs
+run under Windows 95/95OSR2/98SE/ME/NT4/2000/XP/Server 2003 respectively. You 
+may use these programs to install/update/remove network adapter driver.
+
+
+Structure of the directory:
+=============================
+
+    WINSETUP.TXT                   This file.
+    winsetup.exe                   The integrated setup program for Windows 
+                                   95/98/ME/NT4/2000/XP/Server 2003.
+    WinUinst.exe                   The integrated uninstall program for Windows 
+                                   95/98/ME/NT4/2000/XP/Server 2003.
+    winsetup/W9XSETUP.EXE          The setup program for Windows 95/98/ME.
+    winsetup/W2KSETUP.EXE          The setup program for Windows 2000/XP/Server 
+                                   2003.
+    winsetup/NTSETUP.EXE           The setup program for Windows NT4.
+    winsetup/NTSETUP.INF           The information file for Windows NT4 setup.
+    winsetup/ntsim.sys             PCI bus Dectection for Windows 
+                                   NT/2000/XP/Server 2003.
+
+Usage:
+======
+
+    The Windows setup program will search the information file automatically in 
+Windows 95/95OSR2/98SE/ME/2000/XP/Server 2003, ("OEMSETUP.INF" in Windows NT4), 
+and then automatically install/update driver according to the information file. 
+The information file search paths are current directory, upper directory and 
+root directory by order.
+
+Command line usage
+==================
+
+Usage:
+
+{INstall/Update/Remove}
+winsetup.exe [option]
+
+option:
+        -?                      This help.
+        -i                      Install/update driver (could be omitted).
+        -r                      Remove device & inf file.
+        -f [INF file]           Specify INF filename.
+                                (If no INF file is specified, the setup program 
+                                will 
+                                automatically search the correct inf file) 
+        -d [Source Dir]         Specify directory containing all driver files.
+                                (If no source directory is specified, the setup 
+                                program will automatically search the driver 
+                                from current directory, 
+                                upper directory and upper 2 layers directory)
+        -b                      Reboot without prompt user.
+        -w [Windows source CD]  Specify path of Windows source CD path. 
+                                (For Windows 98SE later, and NT40 platform only)
+                                (Notice! In NT40, please place "-w" as the last 
+                                parameter).
+        -v                      Show version of this program.
+        -s                      Prevent to show Session Complete dialog.
+        -k                      Prevent "-r" option to delete inf file
+                                automatically (this parameter depends on "-r",     
+                                and can't be used alone).
+        -p                      Disable progress bar while install/update 
+                                driver, useless while combined with "-r" 
+                                option(For Windows 
+                                95/95OSR2/98SE/ME/2000/XP/Server 2003 only)
+
+{Remove}
+WinUinst.exe
+
+Examples:
+
+    1.INSTALL or UPDATE
+
+      If you placed all driver files on C:\FETWIN\ and Windows 9X sources CD on 
+      C:\WIN9X\ directory, you may use following instructions to install network 
+      adapter driver on Windows 9X platfoms and reboot without any prompts.
+
+      A:\>winsetup -d C:\FETWIN\ -w C:\WIN9X\ -b
+
+    2.REMOVE
+
+      The following instructions try to remove all adapters under all Windows 
+      platforms.
+
+      (a).A:\>winsetup -r
+      (b).A:\>WinUinst.exe
+
+Notice:
+
+    1.Please close all running applactions during the driver installation 
+      processing, especially the network applet in control panel and properties 
+      of network.
+
+     2.The program will not process long filename and directory, please convert
+      Windows long filenames to MSDOS filename.
+
+     3.In this program we support different kind of languages, list below is the     
+       language been supported.
+       -Danish
+       -Dutch
+       -French
+       -German
+       -Italian
+       -Japanese
+       -Korean
+       -Norwegian
+       -Portuguese
+       -English
+       -Simplied Chinese
+       -Spanish
+       -Tranditional Chinese
+

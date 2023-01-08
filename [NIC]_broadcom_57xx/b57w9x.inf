@@ -1,0 +1,1033 @@
+; Copyright 2001-2005 Broadcom Corporation.
+; INF for Windows Me, and 98SE
+
+; InfVersion   10.24.0.0.D
+
+[Version]
+Signature   = "$Chicago$"
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Compatible  = 1
+Provider    = %BRCM%
+DriverVer   = 12/15/2006,10.24.0.0
+
+[Manufacturer]
+%BRCM% = Broadcom
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Broadcom]
+%BCM5700%   = BCM5700.Inst,   PCI\VEN_14e4&DEV_1644
+%BCM5701%   = BCM5701.Inst,   PCI\VEN_14e4&DEV_1645
+%BCM5702%   = BCM5702.Inst,   PCI\VEN_14e4&DEV_1646
+%BCM5702%   = BCM5702.Inst,   PCI\VEN_14e4&DEV_16A6
+%BCM5702%   = BCM5702A3.Inst, PCI\VEN_14e4&DEV_16C6
+%BCM5703%   = BCM5703.Inst,   PCI\VEN_14e4&DEV_1647
+%BCM5703%   = BCM5703.Inst,   PCI\VEN_14e4&DEV_16A7
+%BCM5703%   = BCM5703A3.Inst, PCI\VEN_14e4&DEV_16C7
+%BCM5704%   = BCM5704.Inst,   PCI\VEN_14e4&DEV_1648
+%BCM5705%   = BCM5705.Inst,   PCI\VEN_14e4&DEV_1653
+%BCM5705M%  = BCM5705M.Inst,  PCI\VEN_14e4&DEV_165D
+%BCM5705%   = BCM5705A2.Inst, PCI\VEN_14e4&DEV_1654
+%BCM5705M%  = BCM5705MA2.Inst,PCI\VEN_14e4&DEV_165e
+%BCM5705F%  = BCM5705F.Inst,  PCI\VEN_14e4&DEV_166e
+
+%BCM5750A1%   = BCM5750A1.Inst,     PCI\VEN_14e4&DEV_1658
+%BCM5750A1%   = BCM5750A1.Inst,     PCI\VEN_14e4&DEV_1659
+%BCM5750A1%   = BCM5750A1M.Inst,   PCI\VEN_14e4&DEV_1672
+%BCM5750A1%   = BCM5750A1M.Inst,   PCI\VEN_14e4&DEV_1673
+%BCM5750A1%   = BCM5750A1.Inst,     PCI\VEN_14e4&DEV_1676
+%BCM5750A1%   = BCM5750A1.Inst,     PCI\VEN_14e4&DEV_1677
+%BCM5750A1%   = BCM5750A1.Inst,     PCI\VEN_14e4&DEV_167A
+%BCM5750A1%   = BCM5750A1.Inst,     PCI\VEN_14e4&DEV_167B
+%BCM5750A1%   = BCM5750A1.Inst,     PCI\VEN_14e4&DEV_167C
+%BCM5750A1%   = BCM5750A1M.Inst,   PCI\VEN_14e4&DEV_167D
+%BCM5750A1F%  = BCM5750A1F.Inst,   PCI\VEN_14e4&DEV_167F
+%BCM5750A1%   = BCM5750A1M.Inst,   PCI\VEN_14e4&DEV_1693
+%BCM5786%       = BCM5750A1.Inst,     PCI\VEN_14e4&DEV_169A
+%BCM5786%       = BCM5750A1F3.Inst,     PCI\VEN_14e4&DEV_169A&SUBSYS_13ee10cf
+%BCM5750A1%   = BCM5750A1.Inst,     PCI\VEN_14e4&DEV_169B
+%BCM5750A1%   = BCM5750A1M.Inst,   PCI\VEN_14e4&DEV_16FF
+
+
+%BCM5901%   = BCM5901.Inst,   PCI\VEN_14e4&DEV_170D
+%BCM5901%   = BCM5901.Inst,   PCI\VEN_14e4&DEV_170e
+%BCM5906%   = BCM5750A1.Inst,     PCI\VEN_14e4&DEV_1712
+%BCM5906%   = BCM5750A1M.Inst,   PCI\VEN_14e4&DEV_1713
+
+%BCM5782%   = BCM5782.Inst,   PCI\VEN_14e4&DEV_1696
+%BCM5788%   = BCM5788.Inst,   PCI\VEN_14e4&DEV_169c
+%BCM5789%   = BCM5789.Inst,   PCI\VEN_14e4&DEV_169d
+
+%BCM5704S%  = BCM5704S.Inst,  PCI\VEN_14e4&DEV_16A8
+
+;12x12
+%BCM5750A1%   = BCM5750A1.Inst,    PCI\VEN_14e4&DEV_16F7
+%BCM5750A1%   = BCM5750A1M.Inst,  PCI\VEN_14e4&DEV_16FD
+%BCM5788%        = BCM5781.Inst,   PCI\VEN_14e4&DEV_16DD
+
+; hamil
+%BCM5714%    = BCM5714.Inst,     PCI\VEN_14e4&DEV_1668
+%BCM5714%    = BCM5714.Inst,     PCI\VEN_14e4&DEV_1678
+%BCM5714%    = BCM5780.Inst,     PCI\VEN_14e4&DEV_166A
+%BCM5714S%   = BCM5714S.Inst,    PCI\VEN_14e4&DEV_166B
+
+
+%BCM5750A1%   = BCM5750A1.Inst,    PCI\VEN_14e4&DEV_1600
+
+
+;..............................................................................................................................
+
+; Win 9x Install sections.
+[BCM5700.Inst]
+DelReg    = DelReg.WolS
+AddReg    = BCM5700.W9xAddReg, W9xAddReg2, BCM5700.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsC, ParamsWOLNS
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5700.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1644"
+HKR, Ndi\Install,   ndis3,  , "BCM5700.Inst"
+
+[BCM5701.Inst]
+AddReg    = BCM5701.W9xAddReg, W9xAddReg2, BCM5701.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsC, ParamsWOL, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5701.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1645"
+HKR, Ndi\Install,   ndis3,  , "BCM5701.Inst"
+
+[BCM5702.Inst]
+AddReg    = BCM5702.W9xAddReg, W9xAddReg2, BCM5702.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsC, ParamsWOL, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5702.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_16a6"
+HKR, Ndi\Install,   ndis3,  , "BCM5702.Inst"
+
+[BCM5702A3.Inst]
+AddReg    = BCM5702A3.W9xAddReg, W9xAddReg2, BCM5702.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsC, ParamsWOL, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5702A3.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_16C6"
+HKR, Ndi\Install,   ndis3,  , "BCM5702A3.Inst"
+
+[BCM5703.Inst]
+AddReg    = BCM5703.W9xAddReg, W9xAddReg2, BCM5703.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsC, ParamsWOL, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5703.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_16a7"
+HKR, Ndi\Install,   ndis3,  , "BCM5703.Inst"
+
+[BCM5703A3.Inst]
+AddReg    = BCM5703A3.W9xAddReg, W9xAddReg2, BCM5703.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsC, ParamsWOL, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5703A3.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_16C7"
+HKR, Ndi\Install,   ndis3,  , "BCM5703A3.Inst"
+
+[BCM5704.Inst]
+DelReg    = DelReg.WolS
+AddReg    = BCM5704.W9xAddReg, W9xAddReg2, BCM5704.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsC, ParamsWOLNS, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5704.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1648"
+HKR, Ndi\Install,   ndis3,  , "BCM5704.Inst"
+
+[BCM5705.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5705.W9xAddReg, W9xAddReg2, BCM5705.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5705.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1653"
+HKR, Ndi\Install,   ndis3,  , "BCM5705.Inst"
+
+[BCM5705A2.Inst]
+DelReg    = DelReg.Jumbo, DelReg.WireSpeed
+AddReg    = BCM5705A2.W9xAddReg, W9xAddReg2, BCM5705A2.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5705A2.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1654"
+HKR, Ndi\Install,   ndis3,  , "BCM5705A2.Inst"
+
+[BCM5705M.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5705M.W9xAddReg, W9xAddReg2, BCM5705M.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5705M.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_165d"
+HKR, Ndi\Install,   ndis3,  , "BCM5705M.Inst"
+
+[BCM5705MA2.Inst]
+DelReg    = DelReg.Jumbo, DelReg.WireSpeed
+AddReg    = BCM5705MA2.W9xAddReg, W9xAddReg2, BCM5705MA2.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5705MA2.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_165e"
+HKR, Ndi\Install,   ndis3,  , "BCM5705MA2.Inst"
+
+[BCM5705MA2F2.Inst]
+DelReg    = DelReg.Jumbo, DelReg.WireSpeed
+AddReg    = BCM5705MA2F2.W9xAddReg, W9xAddReg2, BCM5705MA2.Params, ParamsW9x, ParamsNtW9xFJ, ParamsC, ParamsWOL, ParamsLogOptions
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5705MA2F2.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_165e"
+HKR, Ndi\Install,   ndis3,  , "BCM5705MA2.Inst"
+
+[BCM5901.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5901.W9xAddReg, W9xAddReg2, BCM5901.Params, ParamsW9x, ParamsNtW9x, ParamsC100, ParamsWOL
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5901.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_170D"
+HKR, Ndi\Install,   ndis3,  , "BCM5901.Inst"
+
+[BCM5705F.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5705F.W9xAddReg, W9xAddReg2, BCM5705F.Params, ParamsW9x, ParamsNtW9x, ParamsC100, ParamsWOL
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5705F.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_166e"
+HKR, Ndi\Install,   ndis3,  , "BCM5705F.Inst"
+
+[BCM5782.Inst]
+DelReg    = DelReg.Jumbo, DelReg.WireSpeed
+AddReg    = BCM5782.W9xAddReg, W9xAddReg2, BCM5782.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5782.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1696"
+HKR, Ndi\Install,   ndis3,  , "BCM5782.Inst"
+
+[BCM5788.Inst]
+DelReg    = DelReg.Jumbo, DelReg.WireSpeed
+AddReg    = BCM5788.W9xAddReg, W9xAddReg2, BCM5788.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5788.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_169c"
+HKR, Ndi\Install,   ndis3,  , "BCM5788.Inst"
+
+
+[BCM5789.Inst]
+DelReg    = DelReg.Jumbo, DelReg.WireSpeed
+AddReg    = BCM5788.W9xAddReg, W9xAddReg2, BCM5788.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5789.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_169d"
+HKR, Ndi\Install,   ndis3,  , "BCM5788.Inst"
+
+
+[BCM5781.Inst]
+DelReg    = DelReg.Jumbo, DelReg.WireSpeed
+AddReg    = BCM5781.W9xAddReg, W9xAddReg2, BCM5788.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5781.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_16dd"
+HKR, Ndi\Install,   ndis3,  , "BCM5781.Inst"
+
+
+[BCM5788F1.Inst]
+DelReg    = DelReg.Jumbo, DelReg.WireSpeed
+AddReg    = BCM5788.W9xAddReg, W9xAddReg2, BCM5788.Params, ParamsW9x, ParamsNtW9xFJ, ParamsC, ParamsWOL, ParamsLogOptions
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5788F1.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_169c"
+HKR, Ndi\Install,   ndis3,  , "BCM5788F1.Inst"
+
+[BCM5700FB.Inst]
+DelReg    = DelReg.RequestedMediaType, DelReg.Wol, DelReg.WireSpeed
+AddReg    = BCM5700FB.W9xAddReg, W9xAddReg2, BCM5700.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5700FB.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1644"
+HKR, Ndi\Install,   ndis3,  , "BCM5700FB.Inst"
+
+[BCM5700FA.Inst]
+DelReg    = DelReg.RequestedMediaType, DelReg.Wol, DelReg.WireSpeed
+AddReg    = BCM5700FA.W9xAddReg, W9xAddReg2, BCM5700.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5700FA.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1644"
+HKR, Ndi\Install,   ndis3,  , "BCM5700FA.Inst"
+
+[BCM5701FA.Inst]
+DelReg    = DelReg.RequestedMediaType, DelReg.Wol, DelReg.WireSpeed
+AddReg    = BCM5701FA.W9xAddReg, W9xAddReg2, BCM5701.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5701FA.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1645"
+HKR, Ndi\Install,   ndis3,  , "BCM5701FA.Inst"
+
+[BCM5703S.Inst]
+DelReg    = DelReg.RequestedMediaType, DelReg.Wol, DelReg.WireSpeed
+AddReg    = BCM5703S.W9xAddReg, W9xAddReg2, BCM5703.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5703S.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_16a7"
+HKR, Ndi\Install,   ndis3,  , "BCM5703S.Inst"
+
+[BCM5703SA3.Inst]
+DelReg    = DelReg.RequestedMediaType, DelReg.Wol, DelReg.WireSpeed
+AddReg    = BCM5703SA3.W9xAddReg, W9xAddReg2, BCM5703.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5703SA3.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_16C7"
+HKR, Ndi\Install,   ndis3,  , "BCM5703SA3.Inst"
+
+[BCM5703SW.Inst]
+DelReg    = DelReg.RequestedMediaType, DelReg.Wol, DelReg.WireSpeed
+AddReg    = BCM5703SW.W9xAddReg, W9xAddReg2, BCM5703.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsWOLTbi
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5703SW.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_16a7"
+HKR, Ndi\Install,   ndis3,  , "BCM5703SW.Inst"
+
+[BCM5704S.Inst]
+DelReg    = DelReg.RequestedMediaType, DelReg.Wol, DelReg.WireSpeed
+AddReg    = BCM5704S.W9xAddReg, W9xAddReg2, BCM5704.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5704S.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_16a8"
+HKR, Ndi\Install,   ndis3,  , "BCM5704S.Inst"
+
+[BCM5704SW.Inst]
+DelReg    = DelReg.RequestedMediaType, DelReg.Wol, DelReg.WireSpeed
+AddReg    = BCM5704SW.W9xAddReg, W9xAddReg2, BCM5704.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsWOLTbi
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5704SW.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_16a8"
+HKR, Ndi\Install,   ndis3,  , "BCM5704SW.Inst"
+
+[OEM1_DEV1.Inst]
+DelReg    = DelReg.WolS
+AddReg    = OEM1_DEV1.W9xAddReg, W9xAddReg2, BCM5700.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsC, ParamsWOLNS
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[OEM1_DEV1.W9xAddReg]
+HKR, Ndi, DeviceID,         0, "PCI\VEN_14e4&DEV_1644"
+HKR, Ndi\Install,    ndis3,  , "OEM1_DEV1.Inst"
+
+[OEM1_DEV2.Inst]
+DelReg    = DelReg.WolS
+AddReg    = OEM1_DEV2.W9xAddReg, W9xAddReg2, BCM5700.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsC, ParamsWOLNS
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[OEM1_DEV2.W9xAddReg]
+HKR, Ndi, DeviceID,         0, "PCI\VEN_14e4&DEV_1644"
+HKR, Ndi\Install,    ndis3,  , "OEM1_DEV2.Inst"
+
+[OEM1_DEV3.Inst]
+DelReg    = DelReg.WolS
+AddReg    = OEM1_DEV3.W9xAddReg, W9xAddReg2, BCM5700.Params, ParamsW9x, ParamsNtW9x, ParamsJumbo, ParamsC, ParamsWOLNS
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[OEM1_DEV3.W9xAddReg]
+HKR, Ndi, DeviceID,         0, "PCI\VEN_14e4&DEV_1644"
+HKR, Ndi\Install,    ndis3,  , "OEM1_DEV3.Inst"
+
+[OEM1_DEV4.Inst]
+AddReg    = OEM1_DEV4.W9xAddReg, W9xAddReg2, BCM5702.Params, OEM1_DEV4.Params, ParamsW9x, ParamsC, ParamsWOLNS, ParamsFlow
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[OEM1_DEV4.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_16a6"
+HKR, Ndi\Install,   ndis3,  , "OEM1_DEV4.Inst"
+
+[OEM1_DEV5.Inst]
+AddReg    = OEM1_DEV5.W9xAddReg, W9xAddReg2, BCM5705M.Params, OEM1_DEV5.Params, ParamsW9x, ParamsC, ParamsWOLNS, ParamsFlow
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[OEM1_DEV5.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_165d"
+HKR, Ndi\Install,   ndis3,  , "OEM1_DEV5.Inst"
+
+[OEM1_DEV6.Inst]
+AddReg    = OEM1_DEV6.W9xAddReg, W9xAddReg2, BCM5705.Params, OEM1_DEV6.Params, ParamsW9x, ParamsC, ParamsWOLNS, ParamsFlow
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[OEM1_DEV6.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1653"
+HKR, Ndi\Install,   ndis3,  , "OEM1_DEV6.Inst"
+
+[OEM1_DEV7.Inst]
+AddReg    = OEM1_DEV7.W9xAddReg, W9xAddReg2, BCM5705.Params, OEM1_DEV7.Params, ParamsW9x, ParamsC, ParamsWOLNS, ParamsFlow
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[OEM1_DEV7.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_165e"
+HKR, Ndi\Install,   ndis3,  , "OEM1_DEV7.Inst"
+
+[BCM5750.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5750.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOLMagic, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5750.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1676"
+HKR, Ndi\Install,   ndis3,  , "BCM5750.Inst"
+
+[BCM5750A1.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5750A1.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5750A1.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1677"
+HKR, Ndi\Install,   ndis3,  , "BCM5750A1.Inst"
+
+[BCM5754.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5754.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5754.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_167a"
+HKR, Ndi\Install,   ndis3,  , "BCM5754.Inst"
+
+
+[BCM5714.Inst]
+DelReg    = DelReg.Jumbo, DelReg.Wol
+AddReg    = BCM5714.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL, ParamsWireSpeed, ParamsJumbo
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5714.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1668"
+HKR, Ndi\Install,   ndis3,  , "BCM5714.Inst"
+
+[BCM5780.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5780.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL, ParamsWireSpeed, ParamsJumbo
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5780.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_166A"
+HKR, Ndi\Install,   ndis3,  , "BCM5780.Inst"
+
+
+[BCM5714S.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5714.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9x, ParamsWOL, ParamsWireSpeed, ParamsJumbo
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5714S.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1669"
+HKR, Ndi\Install,   ndis3,  , "BCM5714S.Inst"
+
+
+
+[BCM5750A1M.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5750A1.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL, ParamsWireSpeed, ParamsM
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5750A1M.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1677"
+HKR, Ndi\Install,   ndis3,  , "BCM5750A1M.Inst"
+
+[BCM5750A1F.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5750A1F.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9x, ParamsC100, ParamsWOL, ParamsWireSpeed
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5750A1F.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_167e"
+HKR, Ndi\Install,   ndis3,  , "BCM5750A1F.Inst"
+
+
+[BCM5750B0M.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5750B0M.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9x, ParamsC, ParamsWOL, ParamsWireSpeed, ParamsM, ParamsWOLLink
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5750B0M.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1677"
+HKR, Ndi\Install,   ndis3,  , "BCM5750B0M.Inst"
+
+[BCM5750B0MF.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5750B0MF.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9x, ParamsC100, ParamsWOL, ParamsWireSpeed, ParamsM, ParamsWOLLink
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5750B0MF.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_167e"
+HKR, Ndi\Install,   ndis3,  , "BCM5750B0MF.Inst"
+
+
+
+
+[BCM5750A1DMOBILE.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5750A1DMOBILE.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9xMOBILE, ParamsC, ParamsWOLNS, DMobile.Params
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5750A1DMOBILE.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1677"
+HKR, Ndi\Install,   ndis3,  , "BCM5750A1DMOBILE.Inst"
+
+[BCM5750A1F3.Inst]
+DelReg    = DelReg.Jumbo
+AddReg    = BCM5750A1F3.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9xFJ, ParamsC, ParamsWOL, ParamsWireSpeed, ParamsLogOptions
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5750A1F3.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_1676"
+HKR, Ndi\Install,   ndis3,  , "BCM5750A1.Inst"
+
+
+[BCM5750A1F3M.Inst]
+DelReg    = DelReg.Jumbo
+DelReg    = DelReg.ClockControl
+AddReg    = BCM5750A1F3M.W9xAddReg, W9xAddReg2, BCM5750.Params, ParamsW9x, ParamsNtW9xFJ, ParamsC, ParamsWOL, ParamsWireSpeed, ParamsLogOptions, ParamsM
+CopyFiles = CopyFile.W9xSys
+BusType   = 5
+
+[BCM5750A1F3M.W9xAddReg]
+HKR, Ndi, DeviceID,        0, "PCI\VEN_14e4&DEV_167D"
+HKR, Ndi\Install,   ndis3,  , "BCM5750A1.Inst"
+
+
+; Win9x common sections.
+[W9xAddReg2]
+HKR, , DevLoader,  0, *ndis
+HKR, , DeviceVxDs, 0, b57w2k.sys
+
+;Windows 95 does not support Ndis5 upper range.
+HKR, Ndi\Interfaces, DefUpper,   0, "ndis3"
+HKR, Ndi\Interfaces, DefLower,   0, "ethernet"
+HKR, Ndi\Interfaces, UpperRange, 0, "ndis3"
+HKR, Ndi\Interfaces, LowerRange, 0, "ethernet"
+
+HKR, NDIS, LogDriverName,    0, "b57w2k"
+HKR, NDIS, MajorNdisVersion, 1, 04
+HKR, NDIS, MinorNdisVersion, 1, 00
+
+; Registry parameters.
+[BCM5700.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "360"
+HKR, , TxCoalescingTicks,        0, "360"
+HKR, , RxMaxCoalescedFrames,     0, "15"
+HKR, , TxMaxCoalescedFrames,     0, "75"
+
+[BCM5701.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5702.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5703.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5704.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5705.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5705A2.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5782.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5788.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5705M.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5705MA2.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5901.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5705F.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+
+[BCM5750.Params]
+HKR, , TxPacketDescCnt,          0, "200"
+HKR, , RxStdDescCnt,             0, "200"
+HKR, , RxCoalescingTicks,        0, "10"
+HKR, , TxCoalescingTicks,        0, "30"
+HKR, , RxMaxCoalescedFrames,     0, "5"
+HKR, , TxMaxCoalescedFrames,     0, "200"
+        
+[OEM1_DEV4.Params]
+HKR, , TaskOffloadCap,           0, "21"
+HKR, , RxMtu,                    0, "1500"
+HKR, , WolSpeed,                 0, "0"
+HKR, , WireSpeed,                0, "1"
+
+[OEM1_DEV5.Params]
+HKR, , TaskOffloadCap,           0, "21"
+HKR, , RxMtu,                    0, "1500"
+HKR, , WolSpeed,                 0, "0"
+HKR, , WireSpeed,                0, "1"
+
+[OEM1_DEV6.Params]
+HKR, , TaskOffloadCap,           0, "21"
+HKR, , RxMtu,                    0, "1500"
+HKR, , WolSpeed,                 0, "0"
+HKR, , WireSpeed,                0, "1"
+
+[OEM1_DEV7.Params]
+HKR, , TaskOffloadCap,           0, "21"
+HKR, , RxMtu,                    0, "1500"
+HKR, , WolSpeed,                 0, "0"
+HKR, , WireSpeed,                0, "1"
+
+[DMobile.Params]
+HKR, , TaskOffloadCap,           0, "21"
+HKR, , RxMtu,                    0, "1500"
+HKR, , WireSpeed,                0, "1"
+
+[ParamsNt]
+HKR, Ndi\Params\TaskOffloadCap,      ParamDesc, , %TaskOffload%
+HKR, Ndi\Params\TaskOffloadCap,      default,   , "63"
+HKR, Ndi\Params\TaskOffloadCap,      type,      , "enum"
+HKR, Ndi\Params\TaskOffloadCap\enum, 0,         , %TaskOffload_None%
+HKR, Ndi\Params\TaskOffloadCap\enum, 42,        , %TaskOffload_Rx_Chksum%
+HKR, Ndi\Params\TaskOffloadCap\enum, 21,        , %TaskOffload_Tx_Chksum%
+HKR, Ndi\Params\TaskOffloadCap\enum, 63,        , %TaskOffload_Rx_Tx_Chksum%
+
+[ParamsNt8021p]
+HKR, Ndi\Params\Enable8021p,      ParamDesc, , %QOS_8021p%
+HKR, Ndi\Params\Enable8021p,      default,   , "0"
+HKR, Ndi\Params\Enable8021p,      type,      , "enum"
+HKR, Ndi\Params\Enable8021p\enum, 0,         , %QOS_8021p_Disable%
+HKR, Ndi\Params\Enable8021p\enum, 1,         , %QOS_8021p_Enable%
+
+[ParamsW9x]
+HKR, , IsWin9x, 0, "1"
+
+[ParamsNtW9x]
+HKR, Ndi\Params\FlowControlCap,      ParamDesc,  , %FlowControl%
+HKR, Ndi\Params\FlowControlCap,      default,    , "2147483648"
+HKR, Ndi\Params\FlowControlCap,      type,       , "enum"
+HKR, Ndi\Params\FlowControlCap\enum, 0,          , %FlowControl_Disable%
+HKR, Ndi\Params\FlowControlCap\enum, 1,          , %FlowControl_Rx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 2,          , %FlowControl_Tx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 3,          , %FlowControl_Rx_Tx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 2147483648, , %FlowControl_Auto%
+
+HKR, Ndi\params\NetworkAddress,        ParamDesc,  0, %NetworkAddress%
+HKR, Ndi\params\NetworkAddress,        Default,    0, ""
+HKR, Ndi\params\NetworkAddress,        type,       0, "edit"
+HKR, NDI\params\NetworkAddress,        LimitText,  0, "12"
+HKR, NDI\params\NetworkAddress,        UpperCase,  0, "1"
+HKR, NDI\params\NetworkAddress,        optional,   0, "1"
+
+
+[ParamsNtW9xFJ]
+HKR, Ndi\Params\FlowControlCap,      ParamDesc,  , %FlowControl%
+HKR, Ndi\Params\FlowControlCap,      default,    , "0"
+HKR, Ndi\Params\FlowControlCap,      type,       , "enum"
+HKR, Ndi\Params\FlowControlCap\enum, 0,          , %FlowControl_Disable%
+HKR, Ndi\Params\FlowControlCap\enum, 1,          , %FlowControl_Rx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 2,          , %FlowControl_Tx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 3,          , %FlowControl_Rx_Tx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 2147483648, , %FlowControl_Auto%
+
+HKR, Ndi\params\NetworkAddress,        ParamDesc,  0, %NetworkAddress%
+HKR, Ndi\params\NetworkAddress,        Default,    0, ""
+HKR, Ndi\params\NetworkAddress,        type,       0, "edit"
+HKR, NDI\params\NetworkAddress,        LimitText,  0, "12"
+HKR, NDI\params\NetworkAddress,        UpperCase,  0, "1"
+HKR, NDI\params\NetworkAddress,        optional,   0, "1"
+
+
+[ParamsNtW9xMOBILE]
+HKR, Ndi\Params\FlowControlCap,      ParamDesc,  , %FlowControl%
+HKR, Ndi\Params\FlowControlCap,      default,    , "2147483648"
+HKR, Ndi\Params\FlowControlCap,      type,       , "enum"
+HKR, Ndi\Params\FlowControlCap\enum, 0,          , %FlowControl_Disable%
+HKR, Ndi\Params\FlowControlCap\enum, 1,          , %FlowControl_Rx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 2,          , %FlowControl_Tx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 3,          , %FlowControl_Rx_Tx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 2147483648, , %FlowControl_Auto%
+
+[ParamsJumbo]
+HKR, Ndi\Params\RxMtu, ParamDesc, , %JumboMtu%
+HKR, Ndi\Params\RxMtu, default,   , "1500"
+HKR, Ndi\Params\RxMtu, type,      , "dword"
+HKR, Ndi\Params\RxMtu, min,       , "1500"
+HKR, Ndi\Params\RxMtu, max,       , "9000"
+HKR, Ndi\Params\RxMtu, step,      , "500"
+HKR, Ndi\Params\RxMtu, base,      , "10"
+
+[ParamsWireSpeed]
+HKR, Ndi\Params\WireSpeed,        ParamDesc, , %WireSpeed%
+HKR, Ndi\Params\WireSpeed,        default,   , "1"
+HKR, Ndi\Params\WireSpeed,        type,      , "enum"
+HKR, Ndi\Params\WireSpeed\enum,   0,         , %WireSpeed_Disable%
+HKR, Ndi\Params\WireSpeed\enum,   1,         , %WireSpeed_Enable%
+
+[ParamsLogOptions]
+HKR, Ndi\Params\LogLevelInfo,        ParamDesc, , %LogLevelInfo%
+HKR, Ndi\Params\LogLevelInfo,        default,   , "0"
+HKR, Ndi\Params\LogLevelInfo,        type,      , "enum"
+HKR, Ndi\Params\LogLevelInfo\enum,   0,         , %LogLevelInfo_Disable%
+HKR, Ndi\Params\LogLevelInfo\enum,   1,         , %LogLevelInfo_Enable%
+HKR, Ndi\Params\LogLevelWarn,        ParamDesc, , %LogLevelWarn%
+HKR, Ndi\Params\LogLevelWarn,        default,   , "0"
+HKR, Ndi\Params\LogLevelWarn,        type,      , "enum"
+HKR, Ndi\Params\LogLevelWarn\enum,   0,         , %LogLevelWarn_Disable%
+HKR, Ndi\Params\LogLevelWarn\enum,   1,         , %LogLevelWarn_Enable%
+
+[ParamsC]
+HKR, Ndi\Params\RequestedMediaType,      ParamDesc, , %Speed_Duplex%
+HKR, Ndi\Params\RequestedMediaType,      default,   , "0"
+HKR, Ndi\Params\RequestedMediaType,      type,      , "enum"
+HKR, Ndi\Params\RequestedMediaType\enum, 0,         , %Speed_Duplex_Auto%
+HKR, Ndi\Params\RequestedMediaType\enum, 3,         , %Speed_Duplex_10Mb_Hd%
+HKR, Ndi\Params\RequestedMediaType\enum, 4,         , %Speed_Duplex_10Mb_Fd%
+HKR, Ndi\Params\RequestedMediaType\enum, 5,         , %Speed_Duplex_100Mb_Hd%
+HKR, Ndi\Params\RequestedMediaType\enum, 6,         , %Speed_Duplex_100Mb_Fd%
+
+[ParamsC100]
+HKR, Ndi\Params\RequestedMediaType,      ParamDesc, , %Speed_Duplex%
+HKR, Ndi\Params\RequestedMediaType,      default,   , "0"
+HKR, Ndi\Params\RequestedMediaType,      type,      , "enum"
+HKR, Ndi\Params\RequestedMediaType\enum, 0,         , %Speed_Duplex_Auto%
+HKR, Ndi\Params\RequestedMediaType\enum, 3,         , %Speed_Duplex_10Mb_Hd%
+HKR, Ndi\Params\RequestedMediaType\enum, 4,         , %Speed_Duplex_10Mb_Fd%
+HKR, Ndi\Params\RequestedMediaType\enum, 5,         , %Speed_Duplex_100Mb_Hd%
+HKR, Ndi\Params\RequestedMediaType\enum, 6,         , %Speed_Duplex_100Mb_Fd%
+
+[ParamsWOL]
+HKR, Ndi\Params\WakeUpModeCap,       ParamDesc, , %WakeUpMode%
+HKR, Ndi\Params\WakeUpModeCap,       default,   , "3"
+HKR, Ndi\Params\WakeUpModeCap,       type,      , "enum"
+HKR, Ndi\Params\WakeUpModeCap\enum,  0,         , %WakeUpMode_None%
+HKR, Ndi\Params\WakeUpModeCap\enum,  1,         , %WakeUpMode_Magic%
+HKR, Ndi\Params\WakeUpModeCap\enum,  2,         , %WakeUpMode_Pattern%
+HKR, Ndi\Params\WakeUpModeCap\enum,  3,         , %WakeUpMode_Both%
+
+HKR, Ndi\Params\WolSpeed,       ParamDesc, , %WolSpeed%
+HKR, Ndi\Params\WolSpeed,       default,   , "0"
+HKR, Ndi\Params\WolSpeed,       type,      , "enum"
+HKR, Ndi\Params\WolSpeed\enum,  0,         , %WolSpeed_Auto%
+HKR, Ndi\Params\WolSpeed\enum,  1,         , %WolSpeed_10mb%
+HKR, Ndi\Params\WolSpeed\enum,  2,         , %WolSpeed_100mb%
+
+
+[ParamsWOLTbi]
+HKR, Ndi\Params\WakeUpModeCap,       ParamDesc, , %WakeUpMode%
+HKR, Ndi\Params\WakeUpModeCap,       default,   , "1"
+HKR, Ndi\Params\WakeUpModeCap,       type,      , "enum"
+HKR, Ndi\Params\WakeUpModeCap\enum,  0,         , %WakeUpMode_None%
+HKR, Ndi\Params\WakeUpModeCap\enum,  1,         , %WakeUpMode_Magic%
+HKR, , TbiWol,                   0, "1"
+
+[ParamsWOLNS]
+HKR, Ndi\Params\WakeUpModeCap,       ParamDesc, , %WakeUpMode%
+HKR, Ndi\Params\WakeUpModeCap,       default,   , "3"
+HKR, Ndi\Params\WakeUpModeCap,       type,      , "enum"
+HKR, Ndi\Params\WakeUpModeCap\enum,  0,         , %WakeUpMode_None%
+HKR, Ndi\Params\WakeUpModeCap\enum,  1,         , %WakeUpMode_Magic%
+HKR, Ndi\Params\WakeUpModeCap\enum,  2,         , %WakeUpMode_Pattern%
+HKR, Ndi\Params\WakeUpModeCap\enum,  3,         , %WakeUpMode_Both%
+
+[ParamsFlow]
+HKR, Ndi\Params\FlowControlCap,      ParamDesc,  , %FlowControl%
+HKR, Ndi\Params\FlowControlCap,      default,    , "2147483648"
+HKR, Ndi\Params\FlowControlCap,      type,       , "enum"
+HKR, Ndi\Params\FlowControlCap\enum, 0,          , %FlowControl_Disable%
+HKR, Ndi\Params\FlowControlCap\enum, 1,          , %FlowControl_Rx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 2,          , %FlowControl_Tx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 3,          , %FlowControl_Rx_Tx_Pause%
+HKR, Ndi\Params\FlowControlCap\enum, 2147483648, , %FlowControl_Auto%
+
+[ParamsM]
+HKR, , ClockControl,          0, "1"
+
+[ParamsWOLLink]
+HKR, Ndi\Params\WakeOnLink,        ParamDesc, , %WakeOnLink%
+HKR, Ndi\Params\WakeOnLink,        default,   , "1"
+HKR, Ndi\Params\WakeOnLink,        type,      , "enum"
+HKR, Ndi\Params\WakeOnLink\enum,   0,         , %WakeOnLink_Disable%
+HKR, Ndi\Params\WakeOnLink\enum,   1,         , %WakeOnLink_Enable%
+
+[ParamsWOLMagic]
+HKR, Ndi\Params\WakeUpModeCap,       ParamDesc, , %WakeUpMode%
+HKR, Ndi\Params\WakeUpModeCap,       default,   , "1"
+HKR, Ndi\Params\WakeUpModeCap,       type,      , "enum"
+HKR, Ndi\Params\WakeUpModeCap\enum,  0,         , %WakeUpMode_None%
+HKR, Ndi\Params\WakeUpModeCap\enum,  1,         , %WakeUpMode_Magic%
+
+HKR, Ndi\Params\WolSpeed,       ParamDesc, , %WolSpeed%
+HKR, Ndi\Params\WolSpeed,       default,   , "0"
+HKR, Ndi\Params\WolSpeed,       type,      , "enum"
+HKR, Ndi\Params\WolSpeed\enum,  0,         , %WolSpeed_Auto%
+HKR, Ndi\Params\WolSpeed\enum,  1,         , %WolSpeed_10mb%
+HKR, Ndi\Params\WolSpeed\enum,  2,         , %WolSpeed_100mb%
+
+
+; Keys to remove.
+[DelReg.RequestedMediaType]
+HKR, Ndi\Params\RequestedMediaType
+
+[DelReg.Wol]
+HKR, Ndi\Params\WakeUpModeCap
+HKR, Ndi\Params\WolSpeed
+
+[DelReg.WolS]
+HKR, Ndi\Params\WolSpeed
+
+[DelReg.Jumbo]
+HKR, Ndi\Params\RxMtu
+
+[DelReg.WireSpeed]
+HKR, Ndi\Params\WireSpeed
+
+[DelReg.ClockControl]
+HKR, Ndi\Params\ClockControl
+
+; Destination directories
+[DestinationDirs]
+DefaultDestDir  = 11
+CopyFile.NtSys  = 12
+CopyFile.W9xSys = 11
+
+[SourceDisksNames]
+1 = %DISK_DESC%,,,
+
+[SourceDisksFiles]
+b57w2k.sys = 1
+
+[CopyFile.NtSys]
+b57w2k.sys,,,1
+
+[CopyFile.W9xSys]
+b57w2k.sys,,,1
+
+; Localizable strings
+[Strings]
+BRCM                = "Broadcom"
+DISK_DESC           = "Broadcom NetXtreme Installation Media"
+BCM5700             = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5701             = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5702             = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5703             = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5704             = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5705             = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5705M            = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5705F            = "Broadcom 570x 10/100 Integrated Controller"
+BCM5750             = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5750A1           = "Broadcom NetLink (TM) Gigabit Ethernet"
+BCM5750A1F          = "Broadcom NetXtreme Fast Ethernet"
+BCM5750B0           = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5750B0F          = "Broadcom NetXtreme Fast Ethernet"
+BCM5754             = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5755           = "Broadcom NetXtreme Gigabit Ethernet"
+
+BCM5901             = "Broadcom NetXtreme Fast Ethernet"
+BCM5906             = "Broadcom NetLink (TM) Fast Ethernet"
+BCM5782             = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5786             = "Broadcom NetLink (TM) Gigabit Ethernet"
+BCM5788             = "Broadcom NetLink (TM) Gigabit Ethernet"
+BCM5789             = "Broadcom NetLink (TM) Gigabit Ethernet"
+BCM5700FB           = "Broadcom NetXtreme Gigabit Fiber"
+BCM5700FA           = "Broadcom NetXtreme Gigabit Fiber"
+BCM5701FA           = "Broadcom NetXtreme Gigabit Fiber"
+BCM5703S            = "Broadcom NetXtreme Gigabit Fiber"
+BCM5703SW           = "Broadcom NetXtreme Gigabit Fiber WOL"
+BCM5704S            = "Broadcom NetXtreme Gigabit Fiber"
+BCM5704SW           = "Broadcom NetXtreme Gigabit Fiber WOL"
+OEM1_DEV1           = "Broadcom NetXtreme Gigabit Ethernet"
+OEM1_DEV2           = "Broadcom NetXtreme Gigabit Ethernet"
+OEM1_DEV3           = "Broadcom NetXtreme Gigabit Ethernet"
+OEM1_DEV4           = "Broadcom 570x Gigabit Integrated Controller"
+OEM1_DEV5           = "Broadcom 570x Gigabit Integrated Controller"
+OEM1_DEV6           = "Broadcom NetXtreme Gigabit Ethernet"
+OEM1_DEV7           = "Broadcom 570x Gigabit Integrated Controller"
+OEM2_DEV1           = "Broadcom NetXtreme Gigabit Ethernet"
+OEM2_DEV3           = "Broadcom NetXtreme Gigabit Ethernet"
+OEM3_DEV1           = "Broadcom NetXtreme Gigabit Ethernet"
+OEM3_DEV2           = "Broadcom NetXtreme Gigabit Ethernet"
+OEM3_DEV3           = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5750A1DSF      = "Broadcom NetXtreme 5751 Gigabit Controller"
+BCM5750A1DSSF    = "Broadcom NetXtreme 5721 Gigabit Controller"
+BCM5750A1DDT      = "Broadcom NetXtreme 57xx Gigabit Controller"
+BCM5750A1DMOBILE =  "Broadcom NetXtreme 57xx Gigabit Controller"
+BCM5714               = "Broadcom NetXtreme Gigabit Ethernet"
+BCM5714S            = "Broadcom NetXtreme Gigabit Fiber"
+
+
+JumboMtu = "Jumbo Mtu"
+FlowControl             = "Flow Control"
+FlowControl_Disable     = "Disable"
+FlowControl_Rx_Pause    = "Rx PAUSE"
+FlowControl_Tx_Pause    = "Tx PAUSE"
+FlowControl_Rx_Tx_Pause = "Rx/Tx PAUSE"
+FlowControl_Auto        = "Auto"
+Speed_Duplex          = "Speed & Duplex"
+Speed_Duplex_Auto     = "Auto"
+Speed_Duplex_10Mb_Hd  = "10 Mb Half"
+Speed_Duplex_10Mb_Fd  = "10 Mb Full"
+Speed_Duplex_100Mb_Hd = "100 Mb Half"
+Speed_Duplex_100Mb_Fd = "100 Mb Full"
+Speed_Duplex_1000Mb_Fd = "1000 Mb Full"
+QOS_8021p         = "802.1p QOS"
+QOS_8021p_Disable = "Disable"
+QOS_8021p_Enable  = "Enable"
+WireSpeed         = "Ethernet@WireSpeed"
+WireSpeed_Disable = "Disable"
+WireSpeed_Enable  = "Enable"
+TaskOffload              = "Checksum Offload"
+TaskOffload_None         = "None"
+TaskOffload_Rx_Chksum    = "Rx TCP/IP Checksum"
+TaskOffload_Tx_Chksum    = "Tx TCP/IP Checksum"
+TaskOffload_Rx_Tx_Chksum = "Tx/Rx TCP/IP Checksum"
+WakeUpMode         = "Wake Up Capabilities"
+WakeUpMode_None    = "None"
+WakeUpMode_Magic   = "Magic Packet"
+WakeUpMode_Pattern = "Wake Up Frame"
+WakeUpMode_Both    = "Both"
+WolSpeed       = "WOL Speed"
+WolSpeed_Auto  = "Auto"
+WolSpeed_10mb  = "10 Mb"
+WolSpeed_100mb = "100 Mb"
+WolSpeed_1000mb = "1000 Mb"
+NetworkAddress           = "Locally Administered Address"
+LogLevelInfo    = "Log Information Messages"
+LogLevelWarn  = "Log Warning Messages"
+LogLevelInfo_Disable  =  "Disable"
+LogLevelInfo_Enable  =  "Enable"
+LogLevelWarn_Disable  =  "Disable"
+LogLevelWarn_Enable  =  "Enable"
+WakeOnLink         = "Wake On Link"
+WakeOnLink_Disable = "Disable"
+WakeOnLink_Enable  = "Enable"
+

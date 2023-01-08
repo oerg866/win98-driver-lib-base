@@ -1,0 +1,315 @@
+; Windows95/98 INF file for SiS PCI Audio Device VxD driver
+;-----------------------------------------------------------
+
+[Version]
+Signature=$CHICAGO$
+Class=MEDIA
+Provider=%String1%
+DriverVer=05/23/2001,4.11.01.3110
+CatalogFile=sndsys.cat
+LayoutFile=layout.inf
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[DestinationDirs]
+DefaultDestDir=11
+GameCard.CopyList=11
+Inf.CopyList=17
+Uninstall.CopyList=24,Progra~1\SiS7018\Uninst
+
+[Manufacturer]
+%String1%=SiSSound
+
+[SiSSound]
+%String2%=SiSSound.Install,PCI\VEN_1039&DEV_7018
+%String3%=SiS_Legacy.Install,SiS_Legacy
+
+[SiSSound.Install]
+CopyFiles=SiSsnd.CopyFiles,Inf.CopyList,Uninstall.CopyList
+AddReg=SiS.AddReg,AR3D.AddReg,Mixer.AddReg,Uninstall.AddReg
+UpdateAutoBat=Soundbat
+DelReg=SiS.DelReg
+
+[AR3D.AddReg]
+HKCR,A3d,,,"A3d Object"
+HKCR,A3d\CLSID,,,{d8f1eee0-f634-11cf-8700-00a0245d918b}
+HKCR,CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b},,,"A3d Object"
+HKCR,CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b}\InprocServer32,,,a3d.dll
+HKCR,CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b}\InprocServer32,"ThreadingModel",,"Apartment"
+
+[Mixer.AddReg]
+HKR,Config,T2Format,1,01
+HKR,Config,T2Reverb,1,00
+HKR,Config,T2Chorus,1,00
+HKR,Config,T2ReverbVolume,1,32
+HKR,Config,T2ChorusVolume,1,32
+HKR,Config,MonoMICVolMute,1,01,00,00,00
+HKR,Config,MicPlusGain,1,01,00,00,00
+HKR,Config,Mic2Select,1,00,00,00,00
+HKR,Config,LineoutVolMute,1,00,00,00,00
+HKR,Config,HeadphoneVolMute,1,00,00,00,00
+HKR,Config,MonooutVolMute,1,00,00,00,00
+HKR,Config,LineInVolMute,1,00,00,00,00
+HKR,Config,MidiVolMute,1,00,00,00,00
+HKR,Config,CDVolMute,1,00,00,00,00
+HKR,Config,WaveVolMute,1,00,00,00,00
+HKR,Config,AUXVolMute,1,00,00,00,00
+HKR,Config,VideoVolMute,1,00,00,00,00
+HKR,Config,PhoneVolMute,1,00,00,00,00
+HKR,Config,PCBEEPVolMute,1,00,00,00,00
+HKR,Config,LeftWaveInMute,1,00,00,00,00
+HKR,Config,LeftWaveInMicMute,1,00,00,00,00
+HKR,Config,FrontVolMute,1,00,00,00,00
+HKR,Config,SurroundVolMute,1,00,00,00,00
+HKR,Config,CenterLFEMute,1,00,00,00,00
+HKR,Config,PCMoutVol,1,08,08
+HKR,Config,LeftLineoutVol,1,ff,e7,00,00
+HKR,Config,RightLineoutVol,1,ff,e7,00,00
+HKR,Config,LeftHeadphoneVol,1,ff,7f,00,00
+HKR,Config,RightHeadphoneVol,1,ff,7f,00,00
+HKR,Config,MonooutVol,1,ff,7f,00,00
+HKR,Config,LeftLineInVol,1,ff,bf,00,00
+HKR,Config,RightLineInVol,1,ff,bf,00,00
+HKR,Config,LeftMidiVol,1,ff,bf,00,00
+HKR,Config,RightMidiVol,1,ff,bf,00,00
+HKR,Config,LeftCDVol,1,ff,bf,00,00
+HKR,Config,RightCDVol,1,ff,bf,00,00
+HKR,Config,MonoMICVol,1,cc,cc,00,00
+HKR,Config,LeftWaveVol,1,ff,ff,00,00
+HKR,Config,RightWaveVol,1,ff,ff,00,00
+HKR,Config,LeftAUXVol,1,ff,bf,00,00
+HKR,Config,RightAUXVol,1,ff,bf,00,00
+HKR,Config,LeftVideoVol,1,ff,bf,00,00
+HKR,Config,RightVideoVol,1,ff,bf,00,00
+HKR,Config,MonoPhoneVol,1,ff,7f,00,00
+HKR,Config,PCBEEPVol,1,ff,7f,00,00
+HKR,Config,LeftWaveInGain,1,cc,cc,00,00
+HKR,Config,RightWaveInGain,1,cc,cc,00,00
+HKR,Config,WaveInMicGain,1,ff,7f,00,00
+HKR,Config,LeftWaveInLineInVol,1,ff,7f,00,00
+HKR,Config,RightWaveInLineInVol,1,ff,7f,00,00
+HKR,Config,LeftWaveInCDVol,1,ff,7f,00,00
+HKR,Config,RightWaveInCDVol,1,ff,7f,00,00
+HKR,Config,WaveInMicVol,1,cc,cc,00,00
+HKR,Config,LeftWaveInAUXVol,1,ff,7f,00,00
+HKR,Config,RightWaveInAUXVol,1,ff,7f,00,00
+HKR,Config,WaveInPhone,1,ff,7f,00,00
+HKR,Config,LeftWaveInStereoMix,1,ff,7f,00,00
+HKR,Config,RightWaveInStereoMix,1,ff,7f,00,00
+HKR,Config,LeftWaveInI2S,1,ff,7f,00,00
+HKR,Config,RightWaveInI2S,1,ff,7f,00,00
+HKR,Config,LeftWaveInVideoVol,1,ff,7f,00,00
+HKR,Config,RightWaveInVideoVol,1,ff,7f,00,00
+HKR,Config,RightFrontVol,1,ff,ff,00,00
+HKR,Config,LeftFrontVol,1,ff,ff,00,00
+HKR,Config,RightSurroundVol,1,ff,ff,00,00
+HKR,Config,LeftSurroundVol,1,ff,ff,00,00
+HKR,Config,CenterVol,1,ff,ff,00,00
+HKR,Config,LFEVol,1,ff,ff,00,00
+HKR,Config,ToneBass,1,ff,7f,00,00
+HKR,Config,ToneTreble,1,ff,7f,00,00
+HKR,Config,3DCenter,1,ff,7f,00,00
+HKR,Config,3DDepth,1,ff,7f,00,00
+HKR,Config,3DEnable,1,00,00,00,00
+HKR,Config,GeneralPP,1,00,00,00,00
+HKR,Config,T2SampleSet,1,01
+HKLM,%KEY_IOC%\Vol,,,
+
+[SiS_Legacy.Install]
+AddReg=SiS_Legacy.AddReg
+
+[SiS_Legacy.AddReg]
+HKR,,DriverDate,," 05-23-2001"
+HKR,,ProviderName,,"Silicon Integrated Systems Corp."
+HKR,,Devloader,,"*CONFIGMG"
+HKR,Drivers,MIGRATED,,0
+HKR,,EnumPropPages,,"EnumPropPages"
+
+[SiSsnd.CopyFiles]
+sndmid.vxd
+sndsys.drv
+gm10mb.sam
+;gm40mb.sam
+;gm80mb.sam
+;gm.dls
+a3d.dll
+;fm20.dll
+;fm20enu.dll
+;led.ocx
+;percent.ocx
+;t2sound.exe
+
+[Inf.CopyList]
+sndsys.inf
+
+[SiS.AddReg]
+HKR,,DriverDate,,"01-21-2000"
+HKR,,ProviderName,,"Silicon Integrated Systems Corp."
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,,"sndmid.vxd"
+HKR,Drivers,,0,
+HKR,Drivers,MIGRATED,0,0
+HKR,Drivers\wave,,0,
+HKR,Drivers\mixer,,0,
+HKR,Drivers\midi,,0,
+HKR,Drivers\aux,,0,
+HKR,Drivers\wave\sndsys.drv,Driver,0,sndsys.drv
+HKR,Drivers\mixer\sndsys.drv,Driver,0,sndsys.drv
+HKR,Drivers\aux\sndsys.drv,Driver,0,sndsys.drv
+HKR,Drivers\midi\SiSWaveTable,Description,0,%Midi.WaveTable%
+HKR,Drivers\midi\SiSWaveTable,Driver,0,sndsys.drv
+HKR,Drivers\midi\SiSWaveTable,External,1,00,00,00,00
+HKR,Drivers\midi\SiSWaveTable,NumPorts,1,01,00,00,00
+HKR,Drivers\midi\SiSWaveTable,Port,1,00,00,00,00
+HKR,Drivers,SubClasses,0,"wave, mixer, midi, aux"
+HKR,Config,T2SampleSet,1,1
+HKR,Config,FirstTime,1,1
+HKR,Config,T2SRCMode,1,30
+HKR,Config,RECCODECSRC,1,00
+HKR,Config,LegacyIRQ,1,01
+HKR,Config,SPDIFVisible,1,00
+HKR,Config,SPDIFEnable,1,00
+HKR,Config,FAKE6SPEAKER,1,00
+HKR,,EnumPropPages,0,"sndsys.drv,DrvEnumPropPages"
+HKLM,%KEY_RUN%,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\acm,,,
+HKLM,%KEY_IOC%\Rec,,,
+HKLM,%KEY_IOC%\MPlay,,,
+;HKLM,%KEY_RUN%,SoundControlPanel,,%11%\t2sound.exe"
+
+[Class.AddReg]
+HKR,,,0,%MediaClassName%
+HKR,,Icon,0,-1
+HKR,,Installer,0,mmci.dll
+HKR,,,,%MediaClassName%
+HKR,,Icon,,1
+HKR,,Installer,,MMSys.Cpl
+
+[SiS.DelReg]
+HKLM,%KEY_RUN%,SiSControlPanel
+HKLM,%KEY_RUN%,SoundControlPanel
+
+[Soundbat]
+;UnSet=Blaster
+;CmdDelete=SndTsr
+;CmdDelete=SndInit
+;CmdAdd=Set, "Blaster=A220 I5 D1 T4 P330"
+;CmdAdd=SndInit, "/I"
+;CmdAdd=SndTsr
+
+[ControlFlags]
+
+[SiSSound.FactDef]
+
+[SourceDisksNames]
+1="SiS PCI Audio Driver Disk",,0
+2="DirectX 5.0 Drivers Redist","DirectX5.0", 0
+
+[SourceDisksFiles]
+sndmid.vxd=1
+sndsys.drv=1
+a3d.dll=1
+gm10mb.sam=1
+;gm40mb.sam,..\sam\gm40mb.sam
+;gm80mb.sam,..\sam\gm80mb.sam
+;gm.dls,..\sam\gm.dls
+uninst.exe=1
+7018Dos.exe=1
+
+[Strings]
+String1="Silicon Integrated Systems Corp."
+String2="SiS PCI Audio Accelerator"
+String3="SiS Audio Legacy Emulator"
+Midi.WaveTable="SiS PCI Audio WaveTable MIDI"
+MediaClassName="Sound, video and game controllers"
+KEY_RUN="Software\Microsoft\Windows\CurrentVersion\Run"
+KEY_UNINSTALL="Software\Microsoft\Windows\CurrentVersion\Uninstall\SiS7018"
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+
+[Uninstall.CopyList]
+uninst.exe
+7018Dos.exe
+
+[Uninstall.AddReg]
+HKLM,%KEY_UNINSTALL%,DisplayName,0,"SiS Audio Driver"
+HKLM,%KEY_UNINSTALL%,UninstallString,0,"%24%\Progra~1\sis7018\uninst\uninst.exe"
+
+;----------------------------------------------------------------------------
+;Change Log:
+;
+;v.1.11.00
+; - add SUBSYS_75211071, 0069A0A0, 05601019, 05421019, 085016CD, 085116CD, 085216CD
+;   085316CD, 20051631
+;
+;
+;v.1.10.00
+; - add SUBSYS_A164270F, A183270F, 09951019, 09991019, 0A011019, 0A081019, 0A141019
+;   0A371019, 0A381019, 0A391019, 0A401019, 0A411019, 0A421019, 0A431019, 0A441019
+;   0A451019, 0A461019  
+;
+;v.1.09.00
+; - add SUBSYS_80321043, 80E21043, 50061584, 50071584
+;
+;v.1.08.00
+; - add SUBSYS_A0001458, 02011014
+; - add 730 SUBSYS_21C714CD, 213414A4, A561270F 
+;
+;v.1.07.03
+; - add SUBSYS_80E2104D, 7141109F
+;
+;v.1.07.01
+; - add SUBSYS_05281019, 01661019
+;
+;v.1.07
+; - add FAKE6SPEAKER
+; - add SUBSYS_80351043, 80E11043, 22021558, 7018107D
+;
+;v.1.06.01
+; - add SUBSYS_10F91014, 50031584, 50041584, 50051584, 630E1098, 630E3411
+;
+;v.1.06.00
+; - add FrontVolMute, SurroundVolMute and CenterLFEMute
+; - add RightFrontVol, LeftFrontVol, RightSurroundVol, LeftSurroundVol,
+;   CenterVol and LFEVol
+; - add SUBSYS_60001558, 18001558, B500156D, 000115c5   
+;
+;v.1.05.04
+; - add SUBSYS_213614A4, 213714A4, A161270F, A181270F
+;
+;v.1.05.01
+; - add new subsystem IDs
+;
+;v.1.04.03
+; - add new subsystem IDs
+; - change RECCODECSRC to 0
+; ;- add another mixer setting for new subsystem IDs
+;
+;v.1.04.00
+; - add new subsystem IDs
+; - add LegacyIRQ
+; - add PCBEEPVolMute and PCBEEPVol
+;
+;v.1.03.00
+; -add new subsystem IDs
+; -copy myself(sndsys.inf) to Windows; this fix Win95 installation restart
+;  requirment for legacy device
+; -add IOC(InstallOptionalComponents) to force installing mixer panel during
+;  driver installation
+; -Catalog file do not appear in the [CopyFiles] and [SourceDisksfiles] sections
+;
+;v.1.02.07
+; -copy sam and uninstall files from current(Win95_98) directory
+;
+;v.1.02.06 02-24-2000
+; -fix install/uninstall failures in Win95OSR2
+; -fix INF Checker(v.2.00.0029) errors (merge legacy.inf into sndsys.inf)
+;
+;v.1.02.05 02-03-2000
+; -fix INF Checker(v.2.00.0022) errors
+; -add RECCODECSRC and [Mixer.AddReg]
+; -add SUBSYS_219314CD and SUBSYS_01B81014
+; -add Systray
+; -copy gm10mb.sam only
+; -add uninstall registry key
+;-----------------------------------------------------------------------------

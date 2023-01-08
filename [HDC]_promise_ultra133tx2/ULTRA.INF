@@ -1,0 +1,327 @@
+[Version]
+CatalogFile=Ultra.cat
+signature="$CHICAGO$"
+Class=SCSIAdapter
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%PROMISE%
+DriverVer=05/16/2003, 2.0.0.43
+
+; Class Install
+[ClassInstall32.NT]
+Addreg=SCSIReg
+
+[SCSIReg]
+HKR,,,,%SCSIClassName%
+HKR,,Installer32,,"SysSetup.Dll,ScsiClassInstaller"
+HKR,,Icon,,"-10"
+HKR,,LegacyInfOption,,"SCSI"
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+System32Dir    = 11 ; System32
+MoveMiniPort   = 12;
+MoveMiniPort.NT = 12;
+promiseinf = 17,"other";	INF directory
+RenMiniport.back = 12
+RenMiniport = 12
+PTISETUP=11;
+;ADVPACK=11;
+
+[ControlFlags]
+;
+; Exclude the following devices from Select Device list.
+; These represent 'combination' driver nodes, for which there are separate items to be
+; presented to the user.  These combination nodes are only used when figuring out what
+; driver node to associate with a pre-existing service.
+;
+; CopyFilesOnly=PCI\VEN_105A&DEV_4D30&SUBSYS_4D33105A&REV_02
+
+[Manufacturer]
+%Promise%=Promise
+
+[Promise]
+%PCI\VEN_105A&DEV_4D69.DeviceDesc%=ultra133TX2,PCI\VEN_105A&DEV_4D69
+%PCI\VEN_105A&DEV_4D68.DeviceDesc%=ultra100TX2,PCI\VEN_105A&DEV_4D68
+%PCI\VEN_105A&DEV_4D30&SUBSYS_4D33105A.DeviceDesc%=ultra100PCI,PCI\VEN_105A&DEV_4D30&SUBSYS_4D33105A
+%PCI\VEN_105A&DEV_0D30&SUBSYS_4D33105A.DeviceDesc%=ultra100PCI_2,PCI\VEN_105A&DEV_0D30&SUBSYS_4D33105A
+%PCI\VEN_105A&DEV_4D38&SUBSYS_4D33105A.DeviceDesc%=ultra66PCI ,PCI\VEN_105A&DEV_4D38&SUBSYS_4D33105A
+%PCI\VEN_105A&DEV_4D33.DeviceDesc%                =ultra33PCI ,PCI\VEN_105A&DEV_4D33
+
+;************** U133 **************
+[ultra133TX2]
+CopyFiles=MoveMiniPort,PTISETUP,ADVPACK
+AddReg=ios,ultraPCI.reg,RegUninstall133TX2
+;RenFiles=RenMiniport
+Reboot
+
+[Ultra133TX2.Uninstall]
+DelReg=RegUninstall.del,UltraPCI.Del.Reg
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+;RenFiles=RenMiniport.back
+Reboot
+
+;************** U100 **************
+[ultra100TX2]
+CopyFiles=MoveMiniPort,PTISETUP,ADVPACK
+AddReg=ios,ultraPCI.reg,RegUninstall100TX2
+;RenFiles=RenMiniport
+Reboot
+
+[Ultra100TX2.Uninstall]
+DelReg=RegUninstall.del,UltraPCI.Del.Reg
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+;RenFiles=RenMiniport.back
+Reboot
+
+[Ultra100TX2.Uninstall.NT]
+;DelReg=RegUninstall.del
+;DelFiles=MoveMiniPort.NT
+;Reboot
+
+[ultra100TX2.NT]
+;CopyFiles=MoveMiniPort.NT
+;Reboot
+
+[ultra100TX2.NT.Services]
+;AddService = Ultra, 2, ultraPCI_Service_Inst, Miniport_EventLog_Inst
+
+[ultra100PCI]
+CopyFiles=MoveMiniPort,PTISETUP,ADVPACK
+AddReg=ios,ultraPCI.reg,RegUninstall100
+;RenFiles=RenMiniport
+Reboot
+
+[Ultra100PCI.Uninstall]
+DelReg=RegUninstall.del,UltraPCI.Del.Reg
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+;RenFiles=RenMiniport.back
+Reboot
+
+[Ultra100PCI.Uninstall.NT]
+;DelReg=RegUninstall.del
+;DelFiles=MoveMiniPort.NT
+;Reboot
+
+[ultra100PCI.NT]
+;CopyFiles=MoveMiniPort.NT
+;Reboot
+
+[ultra100PCI.NT.Services]
+;AddService = Ultra, 2, ultraPCI_Service_Inst, Miniport_EventLog_Inst
+
+[ultra100PCI_2]
+CopyFiles=MoveMiniPort,PTISETUP,ADVPACK
+AddReg=ios,ultraPCI.reg,RegUninstall100_2
+;RenFiles=RenMiniport
+Reboot
+
+[Ultra100PCI_2.Uninstall]
+DelReg=RegUninstall.del,UltraPCI.Del.Reg
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+;RenFiles=RenMiniport.back
+Reboot
+
+[Ultra100PCI_2.Uninstall.NT]
+;DelReg=RegUninstall.del
+;DelFiles=MoveMiniPort.NT
+;Reboot
+
+[ultra100PCI_2.NT]
+;CopyFiles=MoveMiniPort.NT
+;Reboot
+
+[ultra100PCI_2.NT.Services]
+;AddService = Ultra, 2, ultraPCI_Service_Inst, Miniport_EventLog_Inst
+
+;************** U66 ***************
+[ultra66PCI]
+CopyFiles=MoveMiniPort,PTISETUP,ADVPACK
+AddReg=ios,ultraPCI.reg,RegUninstall66
+;RenFiles=RenMiniport
+Reboot
+
+[Ultra66PCI.Uninstall]
+DelReg=RegUninstall.del,UltraPCI.Del.Reg
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+;RenFiles=RenMiniport.back
+Reboot
+
+[Ultra66PCI.Uninstall.NT]
+;DelReg=RegUninstall.del
+;DelFiles=MoveMiniPort.NT
+;Reboot
+
+[ultra66PCI.NT]
+;CopyFiles=MoveMiniPort.NT
+;Reboot
+
+[ultra66PCI.NT.Services]
+;AddService = Ultra, 2, ultraPCI_Service_Inst, Miniport_EventLog_Inst
+
+;************* U33 ******************
+[ultra33PCI]
+CopyFiles=MoveMiniPort,PTISETUP,ADVPACK
+AddReg=ios,ultraPCI.reg,RegUninstall33
+;RenFiles=RenMiniport
+Reboot
+
+[Ultra33PCI.Uninstall]
+DelReg=RegUninstall.del,UltraPCI.Del.Reg
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+;RenFiles=RenMiniport.back
+Reboot
+
+[Ultra33PCI.Uninstall.NT]
+;DelReg=RegUninstall.del
+;DelFiles=MoveMiniPort.NT
+;Reboot
+
+[ultra33PCI.NT]
+;CopyFiles=MoveMiniPort.NT
+;Reboot
+
+[ultra33PCI.NT.Services]
+;AddService = Ultra, 2, ultraPCI_Service_Inst, Miniport_EventLog_Inst
+
+;***************************************
+
+[ultraPCI_Service_Inst]
+ServiceType    = 1      ; SERVICE_KERNEL_DRIVER
+StartType      = 0      ; SERVICE_BOOT_START
+ErrorControl   = 1      ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\ultra.sys
+LoadOrderGroup = SCSI Miniport
+AddReg         = pnpsafe_pci_addreg
+
+;*************************************************************
+;These addreg sections should be used when installins services to indicate
+;which interface types are safe for PNP and which aren't.  INTERFACE_TYPE
+;is defined in NTDDK.H
+
+[pnpsafe_pci_addreg]
+HKR, "Parameters\PnpInterface", "5", 0x00010001, 0x00000001
+
+[pnpsafe_isa_addreg]
+HKR, "Parameters\PnpInterface", "1", 0x00010001, 0x00000001
+
+[pnpsafe_eisa_addreg]
+HKR, "Parameters\PnpInterface", "2", 0x00010001, 0x00000001
+
+[pnpsafe_mca_addreg]
+HKR, "Parameters\PnpInterface", "3", 0x00010001, 0x00000001
+
+[cardbus_interface_type]
+HKR, "ScsiPort", "LegacyInterfaceType", 0x00010001, 0x00000005
+
+;*************************************************************
+;The EventLog entries are the same for all SCSI miniports.
+[Miniport_EventLog_Inst]
+AddReg = Miniport_EventLog_AddReg
+
+[Miniport_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,%REG_DWORD%,7
+
+;**************** Uninstall for U133
+[RegUninstall133TX2]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"DisplayName",,%PCI\VEN_105A&DEV_4D69.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%Ultra.inf;Ultra133TX2.Uninstall;VEN_105A&DEV_4D69"
+
+;**************** Uninstall for U100
+[RegUninstall100TX2]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"DisplayName",,%PCI\VEN_105A&DEV_4D68.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%Ultra.inf;Ultra100TX2.Uninstall;VEN_105A&DEV_4D68"
+
+[RegUninstall100]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"DisplayName",,%PCI\VEN_105A&DEV_4D30&SUBSYS_4D33105A.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%Ultra.inf;Ultra100PCI.Uninstall;VEN_105A&DEV_4D30&SUBSYS_4D33105A"
+
+[RegUninstall100_2]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"DisplayName",,%PCI\VEN_105A&DEV_0D30&SUBSYS_4D33105A.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%Ultra.inf;Ultra100PCI_2.Uninstall;VEN_105A&DEV_0D30&SUBSYS_4D33105A"
+
+;**************** Uninstall for U66
+[RegUninstall66]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"DisplayName",,%PCI\VEN_105A&DEV_4D38&SUBSYS_4D33105A.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%Ultra.inf;Ultra66PCI.Uninstall;VEN_105A&DEV_4D38&SUBSYS_4D33105A"
+
+;**************** Unistall for U33
+[RegUninstall33]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"DisplayName",,%PCI\VEN_105A&DEV_4D33.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%Ultra.inf;Ultra33PCI.Uninstall;VEN_105A&DEV_4D33"
+
+[RegUninstall.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Ultra
+
+[UltraPCI.Del.Reg]
+HKLM,Enum\PCI\VEN_105A&DEV_4D69
+HKLM,Enum\PCI\VEN_105A&DEV_4D68
+HKLM,Enum\PCI\VEN_105A&DEV_4D30&SUBSYS_4D33105A
+HKLM,Enum\PCI\VEN_105A&DEV_0D30&SUBSYS_4D33105A
+HKLM,Enum\PCI\VEN_105A&DEV_4D30
+HKLM,Enum\PCI\VEN_105A&DEV_4D38&SUBSYS_4D33105A
+HKLM,Enum\PCI\VEN_105A&DEV_4D38
+HKLM,Enum\PCI\VEN_105A&DEV_4D33&SUBSYS_00000000
+HKLM,Enum\PCI\VEN_105A&DEV_4D33
+
+
+[ultraPCI.PosDup]
+*BUS0042
+
+[*BUS0042.Det]
+AddReg=ForceMPCopy
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[ultraPCI.reg]
+HKR,,PortDriver,,Ultra.mpd
+
+[ForceMPCopy]
+HKR,,NoSetupUI,,1
+
+[SourceDisksFiles]
+Ultra.mpd = 1
+;Ultra.sys = 1
+pu66vsd.VXD = 1
+PTISTP.dll = 1
+;advpack.dll = 1
+SMARTVSD.VXD = 1
+Ultra.inf = 1
+
+[MoveMiniPort]
+Ultra.mpd
+pu66vsd.VXD
+smartvsd.vxd
+
+[RenMiniport]
+SMARTVSD.VXX,SMARTVSD.VXD
+
+[RenMiniport.back]
+SMARTVSD.VXD,SMARTVSD.VXX
+
+[PTISETUP]
+PTISTP.dll
+
+[ADVPACK]
+;advpack.dll,,,0X00000020
+
+[promiseinf]
+%Promise%Ultra.inf
+
+[MoveMiniPort.NT]
+;Ultra.sys
+
+[SourceDisksNames]
+1 = "Promise Ultra Series Driver Diskette",,,,
+2 = "Windows system",,,,
+
+[strings]
+Promise="Promise Technology"
+PCI\VEN_105A&DEV_4D69.DeviceDesc="Win9x-ME Promise Ultra133 TX2 (tm) IDE Controller"
+PCI\VEN_105A&DEV_4D68.DeviceDesc="Win9x-ME Promise Ultra100 TX2 (tm) IDE Controller"
+PCI\VEN_105A&DEV_4D30&SUBSYS_4D33105A.DeviceDesc="Win9x-ME Promise Ultra100 (tm) IDE Controller"
+PCI\VEN_105A&DEV_0D30&SUBSYS_4D33105A.DeviceDesc="Win9x-ME Promise Ultra100 (tm) IDE Controller (PDC20265)"
+PCI\VEN_105A&DEV_4D38&SUBSYS_4D33105A.DeviceDesc="Win9x-ME Promise Ultra66 (tm) IDE Controller"
+PCI\VEN_105A&DEV_4D33.DeviceDesc=                "Win9x-ME Promise Ultra33 (tm) IDE Controller"

@@ -1,0 +1,228 @@
+; Copyright (c) 1999-2000, Silicon Integrated Systems Corp.
+;
+; INF file for Windows 9X
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[Version]
+Signature           = "$Chicago$"
+Class               = Net
+ClassGUID           = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider            = %SiS%
+CatalogFile         = oemnic.cat
+DriverVer           = 08/02/2002,1.16.01.00
+
+[Manufacturer]
+%SiS%               = SiS
+%IBM%               = IBM
+%SONY%              = SONY
+
+[ControlFlags]
+ExcludeFromSelect   = PCI\VEN_1039&DEV_0900&SUBSYS_FFFF1039, \
+                      PCI\VEN_1039&DEV_0900&SUBSYS_FFFF1014, \
+                      PCI\VEN_1039&DEV_0900&SUBSYS_FFFF104D, \
+		      PCI\VEN_1039&DEV_0900
+
+;----------------------------------------------------------------------------
+; Device section
+;
+[SiS]
+%GEN.DeviceDesc%    = sis900.ndi, PCI\VEN_1039&DEV_0900
+
+[IBM]
+%sisibm.DeviceDesc% = sisibm.ndi, PCI\VEN_1039&DEV_0900&SUBSYS_01B21014
+%sisibm.DeviceDesc% = sisibm.ndi, PCI\VEN_1039&DEV_0900&SUBSYS_01BA1014
+%sisibm.DeviceDesc% = sisibm.ndi, PCI\VEN_1039&DEV_0900&SUBSYS_01BB1014
+%sisibm.DeviceDesc% = sisibm.ndi, PCI\VEN_1039&DEV_0900&SUBSYS_01FB1014
+%sisibm.DeviceDesc% = sisibm.ndi, PCI\VEN_1039&DEV_0900&SUBSYS_02011014
+%sisibm.DeviceDesc% = sisibm.ndi, PCI\VEN_1039&DEV_0900&SUBSYS_FFFF1014
+
+[SONY]
+%sissony.DeviceDesc%= sissony.ndi,PCI\VEN_1039&DEV_0900&SUBSYS_80D5104D
+%sissony.DeviceDesc%= sissony.ndi,PCI\VEN_1039&DEV_0900&SUBSYS_FFFF104D
+
+;----------------------------------------------------------------------------
+; Install sections
+;
+; Windows 9x specific
+[sis900.ndi]
+CopyFiles           = sisnic.CopyFiles, uninst.CopyFiles
+AddReg              = sis900.id.reg, sis900.reg, win.reg
+
+[sisibm.ndi]
+CopyFiles           = sisnic.CopyFiles, uninst.CopyFiles
+AddReg              = sis900.id.reg, sisibm.reg, win.reg
+
+[sissony.ndi]
+CopyFiles           = sisnic.CopyFiles
+AddReg              = sis900.id.reg, sissony.reg, win.reg
+
+[sis900.id.reg]
+HKR, Ndi, DeviceID,0,"PCI\VEN_1039&DEV_0900"
+
+;----------------------------------------------------------------------------
+; Common driver parameters
+;
+[sis900.reg]
+HKR, Ndi\params\NetworkAddress,         ParamDesc,          0, %SiSNetworkAddress%
+HKR, NDI\params\NetworkAddress,         default,            0, ""
+HKR, Ndi\params\NetworkAddress,         optional,           0, "1"
+HKR, NDI\params\NetworkAddress,         type,               0, "edit"
+HKR, NDI\params\NetworkAddress,         LimitText,          0, "12"
+HKR, NDI\params\NetworkAddress,         UpperCase,          0, "1"
+
+HKR, Ndi\params\MediaType,              ParamDesc,          0, %SiSMediaType%
+HKR, Ndi\params\MediaType,              default,            0, "000"
+HKR, Ndi\params\MediaType,              type,               0, "enum"
+HKR, Ndi\params\MediaType\enum,         "000",              0, %SiSMediaAuto%
+HKR, Ndi\params\MediaType\enum,         "008",              0, %SiSMedia10BaseTHalf%
+HKR, Ndi\params\MediaType\enum,         "010",              0, %SiSMedia10BaseTFull%
+HKR, Ndi\params\MediaType\enum,         "020",              0, %SiSMedia100BaseTXHalf%
+HKR, Ndi\params\MediaType\enum,         "040",              0, %SiSMedia100BaseTxFull%
+
+HKR, Ndi\params\DelayTime,              ParamDesc,          0, %SiSDelayTime%
+HKR, Ndi\params\DelayTime,              default,            0, "000"
+HKR, Ndi\params\DelayTime,              type,               0, "enum"
+HKR, Ndi\params\DelayTime\enum,         "000",              0, %SiSDelayZero%
+HKR, Ndi\params\DelayTime\enum,         "010",              0, %SiSDelay10%
+HKR, Ndi\params\DelayTime\enum,         "020",              0, %SiSDelay20%
+HKR, Ndi\params\DelayTime\enum,         "030",              0, %SiSDelay30%
+HKR, Ndi\params\DelayTime\enum,         "040",              0, %SiSDelay40%
+HKR, Ndi\params\DelayTime\enum,         "050",              0, %SiSDelay50%
+HKR, Ndi\params\DelayTime\enum,         "060",              0, %SiSDelay60%
+HKR, Ndi\params\DelayTime\enum,         "070",              0, %SiSDelay70%
+HKR, Ndi\params\DelayTime\enum,         "080",              0, %SiSDelay80%
+HKR, Ndi\params\DelayTime\enum,         "090",              0, %SiSDelay90%
+HKR, Ndi\params\DelayTime\enum,         "100",              0, %SiSDelay100%
+HKR, Ndi\params\DelayTime\enum,         "110",              0, %SiSDelay110%
+HKR, Ndi\params\DelayTime\enum,         "120",              0, %SiSDelay120%
+HKR, Ndi\params\DelayTime\enum,         "130",              0, %SiSDelay130%
+HKR, Ndi\params\DelayTime\enum,         "140",              0, %SiSDelay140%
+HKR, Ndi\params\DelayTime\enum,         "150",              0, %SiSDelay150%
+HKR, Ndi\params\DelayTime\enum,         "160",              0, %SiSDelay160%
+
+HKLM,%SiSLanUninst%,                    %SiSUnDisplayName%, 0, %SiSUnDisplayNameStr%
+HKLM,%SiSLanUninst%,                    %SiSUnUninstString%,0, %24%\Progra~1\SiSLan\Uninst.exe
+
+
+[sisibm.reg]
+HKR, Ndi\params\NetworkAddress,         ParamDesc,          0, %SiSNetworkAddress%
+HKR, NDI\params\NetworkAddress,         default,            0, ""
+HKR, Ndi\params\NetworkAddress,         optional,           0, "1"
+HKR, NDI\params\NetworkAddress,         type,               0, "edit"
+HKR, NDI\params\NetworkAddress,         LimitText,          0, "12"
+HKR, NDI\params\NetworkAddress,         UpperCase,          0, "1"
+
+HKR, Ndi\params\MediaType,              ParamDesc,          0, %SiSMediaType%
+HKR, Ndi\params\MediaType,              default,            0, "000"
+HKR, Ndi\params\MediaType,              type,               0, "enum"
+HKR, Ndi\params\MediaType\enum,         "000",              0, %SiSMediaAuto%
+HKR, Ndi\params\MediaType\enum,         "008",              0, %SiSMedia10BaseTHalf%
+HKR, Ndi\params\MediaType\enum,         "010",              0, %SiSMedia10BaseTFull%
+HKR, Ndi\params\MediaType\enum,         "020",              0, %SiSMedia100BaseTXHalf%
+HKR, Ndi\params\MediaType\enum,         "040",              0, %SiSMedia100BaseTxFull%
+
+HKLM,%SiSLanUninst%,                    %SiSUnDisplayName%, 0, %SiSIBMUnDisplayNameStr%
+HKLM,%SiSLanUninst%,                    %SiSUnUninstString%,0, %24%\Progra~1\SiSLan\Uninst.exe
+
+[sissony.reg]
+HKR, Ndi\params\NetworkAddress,         ParamDesc,          0, %SiSNetworkAddress%
+HKR, NDI\params\NetworkAddress,         default,            0, ""
+HKR, Ndi\params\NetworkAddress,         optional,           0, "1"
+HKR, NDI\params\NetworkAddress,         type,               0, "edit"
+HKR, NDI\params\NetworkAddress,         LimitText,          0, "12"
+HKR, NDI\params\NetworkAddress,         UpperCase,          0, "1"
+
+HKR, Ndi\params\MediaType,              ParamDesc,          0, %SiSMediaType%
+HKR, Ndi\params\MediaType,              default,            0, "000"
+HKR, Ndi\params\MediaType,              type,               0, "enum"
+HKR, Ndi\params\MediaType\enum,         "000",              0, %SiSMediaAuto%
+HKR, Ndi\params\MediaType\enum,         "008",              0, %SiSMedia10BaseTHalf%
+HKR, Ndi\params\MediaType\enum,         "010",              0, %SiSMedia10BaseTFull%
+HKR, Ndi\params\MediaType\enum,         "020",              0, %SiSMedia100BaseTXHalf%
+HKR, Ndi\params\MediaType\enum,         "040",              0, %SiSMedia100BaseTxFull%
+
+;-----------------------------------------------------------------------------
+; Ndi object registration
+;
+; Windows 9x specific
+[win.reg]
+HKR,,                                   DevLoader,          0, "*ndis"
+HKR,,                                   DeviceVxDs,         0, "sisnic.sys"
+HKR,,                                   EnumPropPages,      0, "netdi.dll,EnumPropPages"
+HKR, NDIS,                              LogDriverName,      0, "SISNIC"
+HKR, NDIS,                              MajorNdisVersion,   1, 03
+HKR, NDIS,                              MinorNdisVersion,   1, 0A
+HKR, Ndi\Interfaces,                    DefUpper,           0, "ndis3"
+HKR, Ndi\Interfaces,                    DefLower,           0, "ethernet"
+HKR, Ndi\Interfaces,                    UpperRange,         0, "ndis3"
+HKR, Ndi\Interfaces,                    LowerRange,         0, "ethernet"
+HKR, Ndi\Install,                       ndis3,              0, "ndis3.install"
+HKR,,                                   IOBaseAddress,      1, 02,00,00,00
+HKR,,                                   InterruptNumber,    1, 04,00,00,00
+
+;----------------------------------------------------------------------------
+; Copy files
+;
+[DestinationDirs]
+DefaultDestDir      = 11
+sisnic.CopyFiles    = 11
+uninst.CopyFiles    = 24,Progra~1\SiSLan
+
+[SourceDisksNames]
+1                   = %SiSSourceDiskName%,,,""
+
+[SourceDisksFiles]
+sisnic.sys          = 1
+uninst.exe          = 1
+
+[sisnic.CopyFiles]
+sisnic.sys
+
+[uninst.CopyFiles]
+uninst.exe
+
+;----------------------------------------------------------------------------
+; Localizable Strings
+;
+[Strings]
+SiS                           = "SiS"
+IBM                           = "IBM"
+SONY                          = "SONY"
+GEN.DeviceDesc                = "SiS 900-Based PCI Fast Ethernet Adapter"
+sis900.DeviceDesc             = "SiS 900 PCI Fast Ethernet Adapter"
+sisibm.DeviceDesc             = "Integrated 10/100 Ethernet Controller"
+sissony.DeviceDesc            = "SiS 900 PCI Fast Ethernet Adapter"
+sisnic.Service.DispName       = "SiS PCI Fast Ethernet Adapter Driver"
+sisibm.Service.DispName       = "Integrated 10/100 Ethernet Controller Driver"
+sissony.Service.DispName      = "SiS PCI Fast Ethernet Adapter Driver"
+SiSSourceDiskName             = "SiS PCI Fast Ethernet Adapter Drivers Disk"
+SiSMediaAuto                  = "Auto_Config"
+SiSMedia10BaseTHalf           = "10BaseT"
+SiSMedia10BaseTFull           = "10BaseT Full_Duplex"
+SiSMedia100BaseTXHalf         = "100BaseTX"
+SiSMedia100BaseTxFull         = "100BaseTX Full_Duplex"
+SiSMediaType                  = "MediaType"
+SiSDelayZero		      = "0"
+SiSDelay10		      = "10"
+SiSDelay20		      = "20"
+SiSDelay30		      = "30"
+SiSDelay40		      = "40"
+SiSDelay50		      = "50"
+SiSDelay60		      = "60"
+SiSDelay70		      = "70"
+SiSDelay80		      = "80"
+SiSDelay90		      = "90"
+SiSDelay100		      = "100"
+SiSDelay110		      = "110"
+SiSDelay120		      = "120"
+SiSDelay130		      = "130"
+SiSDelay140		      = "140"
+SiSDelay150		      = "150"
+SiSDelay160		      = "160"
+SiSDelayTime		      = "DelayTime"
+SiSNetworkAddress             = "NetworkAddress"
+SiSLanUninst                  = "Software\Microsoft\Windows\CurrentVersion\Uninstall\SiSLan"
+SiSUnDisplayName              = "DisplayName"
+SiSUnDisplayNameStr           = "SiS 900 PCI Fast Ethernet Adapter Driver"
+SiSIBMUnDisplayNameStr        = "Integrated 10/100 Ethernet Controller Driver"
+SiSUnUninstString             = "UninstallString"

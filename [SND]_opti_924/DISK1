@@ -1,0 +1,53 @@
+;       
+;     Installation Instruction File of OPTi Mario Installer
+; !!! WARNNING: Please DO NOT CHANGE or may DESTROY your System Settings !!!
+;
+
+[DISK]                  ; Diskette Sequence Number 
+1/1
+
+[TITLE]                 ; Title Bar of Installer  (only in 1st Diskette)
+"  OPTi 82C924 Pro Sound Device Installation v1.03f   "
+
+[SIZE]                  ; Disk size requirement (only in 1st Diskette)
+1166826
+
+[CUSTOM]                ; Customized installation options
+HOME=C:\OPTI924         ; default installation Directory
+SET_HOME=SOUND16        ; environment varaible for HOME  DIR & config filename
+WINDRV=SND924.DRV        ; Windows Base Driver Name    
+VxD=VSND924D.386         ; Windows Virtual Driver Name for "SYSTEM.INI" update
+
+COMPANY=OPTi            ; Company Name
+PRODUCT=MARIO           ; Product Name
+WIN31=NO                ; don't install Windows 3.1 drivers    
+WINAPP=NO               ; Choice to install Windows Application?
+CDROM=YES               ; YES: A version with CD selection
+                        ; NO: A version with no CD selection
+MODEM=NO                ; YES: A version with Modem support
+                        ; NO: A version with no Modem support
+BACKUP=MAD              ; File name extention for system files backup
+
+[AUTOEXEC]              ; add commands into AUTOEXEC.BAT 
+                        ; with leading HOME Dir: +command
++sndinit /b             ; or without HOME Dir: command
+
+[CONFIG.SYS]            ; add commands into CONFIG.SYS
+                        ; with leading HOME Dir: +command
+                        ; or without HOME Dir: command
+
+[WINDOWS]               ; specify files to copy into Windows Directory
+
+[CONTROL.INI]           ; specify Windows driver names and descriptions
+snd924.drv="OPTi 82C924 Audio Device Driver"
+
+[FILES]                 ; Zip files copy section
+
+;filename,   Description,            subDir,      Percentage
+
+SNDINIT.ZIP,  "SNDINIT Programs",    -,           30   
+TOOLS.ZIP,    "DOS Tools",           -,           45
+DRIVERS.ZIP,  "CDROM Drivers",       -,           25
+
+
+

@@ -1,0 +1,67 @@
+; PCI168 Joystick INF file.
+;
+[Version]
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%AZT%
+LayoutFile=layout.inf
+CatalogFile = joy3328.cat
+
+[ClassInstall]
+Addreg=Class.AddReg
+
+[Class.AddReg]
+;HKR,,,,%MediaClassName%
+HKR,,Icon,,"0"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%MfgName%=Aztech
+
+[DestinationDirs]
+DefaultDestDir=11
+Mixer.Copy=10
+
+[Aztech]
+%Aztech_GamePort.DeviceDesc%=AZTECHJSTICK, VIRTUAL\AZT3328-JOYSTICK
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+[AZTECHJSTICK]
+CopyFiles=AZTECHJSTICK.CopyList, Mixer.Copy
+AddReg=JOYSTICK.AddReg, AZTECHJSTICK.AddReg
+UpdateInis=AZTECHJSTICK.UpdateInis
+
+;---------------------------------------------------------------;
+
+[AZTECHJSTICK.CopyList]
+vjoyd.vxd,,
+msjstick.drv,,
+
+[Mixer.Copy]
+sndvol32.exe,,
+
+[JOYSTICK.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\joystick,,,
+
+[AZTECHJSTICK.AddReg]
+HKR,,Driver,,"joy3328v.vxd vjoyd.vxd"
+HKR,Drivers\joystick\msjstick.drv,Description,,%Aztech_GamePort.DeviceDesc%
+HKR,Drivers\joystick\msjstick.drv,Driver,,msjstick.drv
+HKR,Drivers,SubClasses,,"joystick"
+
+[AZTECHJSTICK.UpdateInis]
+system.ini,drivers,"joystick="
+
+;---------------------------------------------------------------;
+[Strings]
+AZT="Aztech"
+MfgName="Aztech"
+Aztech_GamePort.DeviceDesc="PCI168 Joystick Device"
+
+[SourceDisksFiles]
+joy3328.cat

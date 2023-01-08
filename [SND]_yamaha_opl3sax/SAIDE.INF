@@ -1,0 +1,52 @@
+[Version]
+Signature=$CHICAGO$
+Class=hdc
+Provider=%String0%
+LayoutFile=layout.inf
+
+[ClassInstall]
+AddReg=HDC_Class
+
+[HDC_Class]
+HKR,,,,%HDCClassName%
+HKR,,Icon,,-9
+
+[DestinationDirs]
+DefaultDestDir=11
+
+[Manufacturer]
+%String1%=YAMAHA
+
+[YAMAHA]
+%String2%=SA_IDE,*YMH0024,*PNP0600
+
+[SA_IDE]
+LogConfig=esdilc1,esdilc2
+AddReg = ESDI_AddReg
+
+[SA_IDE.PosDup]
+*PNP0600
+
+[esdilc1]
+ConfigPriority=HARDWIRED
+IOConfig=1f0-1f7(3ff::)
+IOConfig=3f6-3f6(3ff::)
+IRQConfig=S:14
+
+[esdilc2]
+ConfigPriority=HARDWIRED
+IOConfig=170-177(3ff::)
+IOConfig=376-376(3ff::)
+IRQConfig=S:15
+
+[ESDI_AddReg]
+HKR,,DriverDesc,,"ESDI Port Driver"
+HKR,,DevLoader,,*IOS
+HKR,,PortDriver,,ESDI_506.pdr
+
+[Strings]
+String0="YAMAHA"
+String1="YAMAHA"
+string2="YAMAHA OPL3-SAx IDE"
+*PNP0600.DeviceDesc     = "Standard IDE/ESDI Hard Disk Controller"
+HDCClassName            = "Hard disk controllers"
