@@ -1,0 +1,138 @@
+;; FEAND3.INF
+;;
+;; 100/10M Ethernet PCI Adapter
+;;
+;; Copyright 2000
+
+[Version]
+LayoutFile=layout.inf
+Signature="$CHICAGO$"
+Class=Net
+ClassGUID={4d36e972-e325-11ce-bfc1-08002be10318}
+Provider=%V_MS%
+
+[Manufacturer]
+%V_FET%=FET
+
+[FET]
+%mtd803.DeviceDesc%=mtd803.ndi,PCI\VEN_1516&DEV_0803
+
+
+[mtd803.ndi]
+AddReg=mtd80x.ndi.reg,oncbs803.ndi.reg,pci80x.ndi.reg,pci80x.pci.reg
+CopyFiles=mtd80x.inf.CopyFiles,mtd80x.ndis3.CopyFiles
+RenFiles=netpci.inf.Renamefiles
+
+
+[mtd80x.ndi.reg]
+
+HKR,NDI\Params\FD,flag,1,30,00,00,00
+HKR,Ndi\params\FD,ParamDesc,0,"FullDuplex Mode"
+HKR,Ndi\params\FD,type,0,enum
+HKR,Ndi\params\FD,default,0,0
+HKR,Ndi\params\FD\enum,0,0,"Auto Detect"
+HKR,Ndi\params\FD\enum,1,0,"Disable"
+HKR,Ndi\params\FD\enum,2,0,"Enable"
+
+HKR,NDI\Params\PortSpeed,flag,1,30,00,00,00
+HKR,Ndi\params\PortSpeed,ParamDesc,0,"Port Speed"
+HKR,Ndi\params\PortSpeed,type,0,enum
+HKR,Ndi\params\PortSpeed,default,0,0
+HKR,Ndi\params\PortSpeed\enum,0,0,"Auto Detect"
+HKR,Ndi\params\PortSpeed\enum,1,0,"10  Mb/sec"
+HKR,Ndi\params\PortSpeed\enum,2,0,"100 Mb/sec"
+
+
+[oncbs803.ndi.reg]
+HKR,Ndi,DeviceID,0,"PCI\VEN_1516&DEV_0803"
+HKR,,ChipOnCardbus,,0
+
+
+[pci80x.ndi.reg]
+; key,subkey,valuname,type,value
+HKR,,DriverDesc,,"100/10M Ethernet PCI Adapter"
+HKR,,DevLoader,,*ndis
+HKR,,DeviceVxDs,,feand3.sys
+HKR,,EnumPropPages,,netdi.dll,EnumPropPages
+
+; NDIS Info
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0a
+HKR,NDIS,LogDriverName,,"FEAND3"
+
+
+; Interfaces
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+HKR,Ndi\Interfaces,DefUpper,,"ndis3"
+HKR,Ndi\Interfaces,UpperRange,,"ndis3"
+
+HKR,,MediaType,,1
+
+; Install sections
+;;****************************************************************************
+;; PCI common parameters
+;;****************************************************************************
+
+[pci80x.pci.reg]
+;;params
+HKR,,AdapterType,,5
+HKR,,BusType,,5
+
+;; Resources
+HKR,,InterruptNumber,1,04,00,00,00
+HKR,,IOBaseAddress,1,02,00,00,00
+HKR,NDI\params\InterruptNumber,resc,1,04,00,00,00
+HKR,Ndi\params\interruptNumber,ParamDesc,0,"Interrupt Level"
+HKR,NDI\params\InterruptNumber,flag,1,20,00,00,00
+HKR,NDI\params\IOBaseAddress,resc,1,02,00,00,00
+HKR,NDI\params\IOBaseAddress,ParamDesc,0,"I/O Base Address"
+HKR,NDI\params\IOBaseAddress,flag,1,20,00,00,00
+
+
+;;****************************************************************************
+;; Drivers
+;;****************************************************************************
+
+;; Install NDIS3
+[mtd80x.ndis3.CopyFiles]
+feand3.sys
+
+[mtd80x.inf.CopyFiles]
+feand3.inf
+
+[mtd80x.inf.Renamefiles]
+feand3.inf
+
+
+[mtd80x.DelFiles]
+drvidx.bin,,,1
+drvdata.bin,,,1
+
+;;****************************************************************************
+;; Destination Directories
+;;****************************************************************************
+[DestinationDirs]
+DefaultDestDir              =11 ; LDID_SYS
+mtd80x.ndis3.CopyFiles      =11
+mtd80x.inf.CopyFiles        =17 ; INF
+mtd80x.DelFiles             =17
+netpci.inf.RenameFiles      =17
+
+[SourceDisksNames]
+52="100/10M Ethernet PCI Adapter Driver Disk","",0
+
+[SourceDisksFiles]
+feand3.sys     =52,,12345
+
+;;****************************************************************************
+;; Localizable Strings
+;;****************************************************************************
+[strings]
+;;Provider
+V_MS="Microsoft"
+
+;;Manufacturers
+V_FET="  "
+
+mtd803.DeviceDesc="100/10M Ethernet PCI Adapter"
