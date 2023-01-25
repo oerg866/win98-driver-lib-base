@@ -1,0 +1,55 @@
+; 
+; ITEATAPI.INF
+; 
+; INF file of IT8211 ATA/ATAPI controller for Windows 98/ME
+; Copyright (c) 2003 Integrated Technology Express, Inc. All rights reserved
+;
+
+[Version]
+Signature="$CHICAGO$"
+Class=SCSIAdapter
+Provider=%ITE%
+DriverVer=03/04/2005
+catalogfile=iteatapi.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+MoveMiniPort = 12
+VXDFileSection = 12
+
+[Manufacturer]
+%ITE%=ITE.MFG
+
+[ITE.MFG]
+%ITE.DeviceDesc0% = iteatapi, PCI\VEN_17F3&DEV_1010&SUBSYS_101017F3	; 8212/CX
+
+[iteatapi]
+Copyfiles=MoveMiniPort, VXDFileSection
+AddReg=StdIos.reg, iteatapi.reg
+Reboot
+
+[MoveMiniPort]
+iteatapi.mpd
+
+[VXDFileSection]
+itepm.vxd
+
+[StdIos.reg]
+HKR,,DevLoader,0,*IOS
+
+[iteatapi.reg]
+HKR,,Miniport,0,iteatapi.mpd
+HKR,,PortDriver,,iteatapi.mpd
+
+[ControlFlags]
+
+[SourceDisksNames]
+1=ITE IT8211 ATA/ATAPI Windows 98/ME Installation disk,Instd1,0000-0000
+
+[SourceDiskSFiles]
+iteatapi.mpd=1
+itepm.vxd=1
+
+[Strings]
+ITE.DeviceDesc0 = "RDC D1010 ATA/ATAPI Controller"
+ITE = "RDC, Inc."

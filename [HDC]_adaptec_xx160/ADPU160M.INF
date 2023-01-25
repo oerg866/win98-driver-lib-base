@@ -1,0 +1,112 @@
+;
+; adpu160m.inf -- This file contains descriptions of all the Adaptec SCSI
+;                adapters supported by the Ultra160/m Family Manager Set
+;
+; Copyright (c) 1993-2000 Adaptec, Inc.
+;
+
+
+;**********************************************************
+;
+; Version data
+;
+[Version]
+signature="$Windows 95$"
+Class=SCSIAdapter
+Provider=%ADP%
+CatalogFile=ADPU160M.cat
+DriverVer=10/01/1999,3.3
+
+
+;**********************************************************
+;
+; Class install
+;
+[ClassInstall]
+Addreg=SCSIReg
+
+;**********************************************************
+;
+; SCSIReg data
+;
+[SCSIReg]
+HKR,,,,%SCSIClassName%
+HKR,,EnumPropPages,,"iosclass.dll,SCSIEnumPropPages"
+HKR,,Icon,,-10
+
+
+;**********************************************************
+;
+; Manufacturer list
+;
+[Manufacturer]
+%ADP%=ADAPTEC
+
+;**********************************************************
+;
+; List of device supported by adpu160m.mpd
+;
+[ADAPTEC]
+;trident
+%PCI\VEN_9005&DEV_00CF.DeviceDesc%= ADPU160M,PCI\VEN_9005&DEV_00CF
+%PCI\VEN_9005&DEV_00C0.DeviceDesc%= ADPU160M,PCI\VEN_9005&DEV_00C0
+%PCI\VEN_9005&DEV_008F.DeviceDesc%= ADPU160M,PCI\VEN_9005&DEV_008F
+%PCI\VEN_9005&DEV_0080.DeviceDesc%= ADPU160M,PCI\VEN_9005&DEV_0080
+%PCI\VEN_9005&DEV_0081.DeviceDesc%= ADPU160M,PCI\VEN_9005&DEV_0081
+
+
+; adpu160m miniport installation section
+;
+[adpu160m]
+CopyFiles=@ADPU160M.MPD
+AddReg=IOS,ADPU160M.Reg
+UpdateInis=ASPI8u2Update
+DelFiles=ASPIDEV
+Reboot
+
+[ADPU160M.Reg]
+HKR,,PortDriver,,ADPU160M.MPD
+
+[ASPI8u2Update]
+%10%\ios.ini,SafeList,,"aspi8u2.sys     ; Adaptec Ultra2 ASPI driver PMD exists"
+
+[ControlFlags]
+;trident
+CopyFilesOnly=PCI\VEN_9005&DEV_00CF
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[ASPIDEV]
+VASPID.VXD
+
+[DestinationDirs]
+ASPIDEV = 11
+DefaultDestDir = 12             
+
+[SourceDisksFiles]
+adpu160m.mpd =1
+adpu160m.cat= 1
+
+
+[SourceDisksNames]
+1 = %FLOPPY_DESCRIPTION%,,
+
+;**********************************************************
+;
+; Display strings section
+;
+[Strings]
+Msft="Microsoft"
+SCSIClassName="SCSI controllers"
+ADP="Adaptec"
+FLOPPY_DESCRIPTION="Ultra160 Family Manager Set v1.12"
+;trident
+PCI\VEN_9005&DEV_00CF.DeviceDesc="Adaptec AIC-7899 Ultra160 PCI SCSI Controller"
+PCI\VEN_9005&DEV_00C0.DeviceDesc="39160, AHA-3960D Ultra160 PCI SCSI Controller"
+PCI\VEN_9005&DEV_008F.DeviceDesc="Adaptec AIC-7892 Ultra160 PCI SCSI Controller"
+;sektor2
+PCI\VEN_9005&DEV_0080.DeviceDesc="29160, 29160N Ultra160 PCI SCSI Controller"
+PCI\VEN_9005&DEV_0081.DeviceDesc="19160 Ultra160 PCI SCSI Controller"
+

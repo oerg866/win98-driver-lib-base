@@ -1,0 +1,85 @@
+*******************************************************************
+*                  ACCTON TECHNOLOGY CORPORATION                  *
+*       EN1207F/EN2242/EN3207 SERIES FAST ETHERNET ADAPTER        *
+*               NDIS3 MINIPORT DRIVER INSTALLATION                *
+*                                                                 *
+*         Copyright (C) 2002 Accton Technology Corporation        *
+*                      All rights reserved.                       *
+*******************************************************************
+
+The driver (EN5251N3.SYS) contained in the root is for the following 
+Accton Ethernet adapter:
+
+        Accton EN1207F Series PCI Fast Ethernet Adapter
+        Accton EN2220A Fast Ethernet Cardbus PC Bus
+        Accton EN2242 Series MiniPCI Fast Ethernet Adapter
+        Accton Cheetahpower Enhanced 10/100 Adapter AC-EN3207
+
+The driver (EN5251N3.SYS) conforms to the Network Driver Interface
+Specification NDIS/3, and is used with Microsoft Windows 95.
+
+***In the following description, we use the Accton EN1207F Fast 
+Ethernet Adapter as an example. For Cheetahpower EN3207 and EN2242 
+adapter, the procedure is similar.
+
+  Contents:
+  ---------
+   (A) Installing NDIS3 Miniport driver in Microsoft Windows 95
+   (B) Configuring NDIS3 Miniport driver in Microsoft Windows 95
+   
+(A) Installing NDIS3 Miniport driver in Microsoft Windows 95
+=================================================================
+    1. Plug Accton's EN1207F series adapter into one of the Master PCI
+       slots of your PCI platform.
+    2. Turn the power ON, then boot from Windows 95.
+    3. When Windows 95 prompts with "PCI Ethernet Controller" in
+       "New Hardware Found" dialog box, click the "Next" button.
+    4. Select "Search for the best driver for your device (Recommended)"
+       form the "Add New Hardware Wizard" dialog box, then click the
+       "Next" button.
+    5. Insert the Accton Driver Diskette or CD-ROM.
+    6. Select "Specify a location" and type Path "X:\WIN95" in the "Add New
+       Hardware Wizard" dialog box, then click the "Next" button.
+
+      Notice: X: means the drive (Floppy or CD-ROM) containing the drivers,
+      such as: A:, or D: etc.
+
+    7. Click the "Next" button in the "Add New Hardware Wizard" dialog box.
+    8. Windows 95 will prompt with "Accton EN1207F Series PCI Fast
+       Ethernet Adapter" in the "Add New Hardware Wizard" dialog box.
+    9. Click the "Next" button in the "Add New Hardware Wizard" dialog 
+       box, then Windows 95 will copy the driver from X:\ to the 
+       C:\WINDOWS\SYSTEM directory and the NETACC51.INF file from A:\ to
+       the C:\WINDOWS\INF directory.
+   10. When Windows prompts with "Accton EN1207F Series PCI Fast 
+       Ethernet Adapter" in the "Add New Hardware Wizard" dialog box, 
+       click the "Finsh" button.
+   11. Remove the Accton Driver Diskette or CD-ROM . 
+   12. Restart your computer to initialize the network function.
+
+       NOTICE!! C:\WINDOWS is the directory where your Windows 95
+                O.S. is located.
+
+
+(B) Configuring the NDIS3 Miniport driver on Microsoft Windows 95
+====================================================================
+
+    1. Click the "My Computer" icon in the Main Program Group.
+    2. Click the "Control Panel" icon in the My Computer window.
+    3. Click the "Network" icon in the Control Panel window.
+    4. Select the "Accton EN1207F Series PCI Fast Ethernet Adapter"
+       item from the "Network" dialog box, then click the "Properties"
+       button.
+    5. Click the "Advanced" button in the "Accton EN1207F Series PCI
+       Fast Ethernet Adapter Properties" dialog box.
+    6. Configure the parameter settings, then click the OK button in the
+       "Accton EN1207F Series PCI Fast Ethernet Adapter Properties" 
+       dialog box.
+    7. Click the OK button in the "Network" dialog box.
+    8. Restart your computer to implement the new configuration.
+
+
+Trademarks:
+Microsoft Windows 95 is a trademark of Microsoft Corporation.
+
+

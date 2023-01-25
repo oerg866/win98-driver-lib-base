@@ -1,0 +1,190 @@
+;Oak Mozart Registry information file
+;
+;File version 3.51   (Olivetti, w/o tone control)
+
+[Version]
+Signature="$WINDOWS 95$"
+Class=MEDIA
+provider=%OAK%
+
+[ControlFlags]
+ExcludeFromSelect=VIRTUAL\MozartSBEmulation
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"-1"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%MfgName%=OakTechnology
+
+[OakTechnology]
+%*PNPB075.DeviceDesc%=PNPB075_Device, *PNPB075
+%*PNPB076.DeviceDesc%=PNPB076_Device, *PNPB076
+%MozartSBEmulation.DeviceDesc%=MozartSB_Device, VIRTUAL\MozartSBEmulation
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+;---------------------------------------------------------------;
+
+[MozartSB_Device]
+AddReg=MozartSB_Device.AddReg
+
+[PNPB075_Device]
+LogConfig=MZT.LC1
+CopyFiles=MZT.CopyList 
+AddReg=WAVE.AddReg, PNPB075.AddReg, MZT.AddReg
+UpdateInis=MZT.UpdateInis         
+
+[PNPB076_Device]
+LogConfig=MZTMID.LC1
+CopyFiles=MZTMID.CopyList 
+AddReg=MIDI.AddReg, PNPB076.AddReg, MZTMID.AddReg
+
+[PNPB075_Device.FactDef]                        ; Modified LC1
+ConfigPriority=NORMAL
+IOConfig=220-223
+IOConfig=226-22F
+IOConfig=604-60B,F40-F47     ;WSS I/O
+IOConfig=388-38B                                                ;OPL3 I/O
+IRQConfig=7,11                                                  ;WSS & SB common IRQ
+DMAConfig=1, 3                                  ;WSS & SB common DMA playback/capture
+
+[MZT.LC1]                                       ;WSS & SB use same IRQ, DMA
+ConfigPriority=NORMAL
+IOConfig=220-223                               ;SB I/O
+;mixer use by all dos envirenmont              224 and 225
+IOConfig=226-22f                               ;SB I/O
+IOConfig=604-60B, F40-F47     ;WSS I/O
+IOConfig=388-38B                                                ;OPL3 I/O
+IRQConfig=7, 11                                  ;WSS & SB IRQ
+DMAConfig=1, 3                                                  ;WSS & SB DMA
+
+
+[PNPB076_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=240-24F
+IRQConfig=5,7,11
+
+[MZTMID.LC1]
+ConfigPriority=NORMAL
+IOConfig=240-24F
+IRQConfig=5, 7, 11
+
+;---------------------------------------------------------------;
+
+[MZT.UpdateInis]
+system.ini,386Enh,"device=mztoak.386"
+system.ini,drivers,"wave*=mztss.drv",,1
+system.ini,drivers,"midi*=mztss.drv",,1
+system.ini,drivers,"aux*=mztss.drv",,1
+system.ini,drivers,"mixer*=mztss.drv",,1
+
+;---------------------------------------------------------------;
+
+[MZT.CopyList]
+vmztss.vxd,,
+mztss.drv,,
+mztopl.drv,,
+
+[MZTMID.CopyList]
+vmztMID.vxd,,
+mztMID.drv,,
+
+;---------------------------------------------------------------;
+
+[PNPB075.AddReg]
+HKR,Drivers\wave\mztss.drv,Description,,%*PNPB075.DeviceDesc%
+HKR,Drivers\mixer\mztss.drv,Description,,%*PNPB075.DeviceDesc%
+HKR,Drivers\aux\mztss.drv,Description,,%*PNPB075.DeviceDesc%
+HKR,Drivers\midi\mztopl.drv,Description,,%V_MZTOPL%
+
+; Mozart configuration control - the last digit: 0 - disable, 1 - enable
+
+HKR,Config,%GAMEPORT%,1,1               ; Enable/disable gameport
+HKR,Config,%CBTONECONTROL%,1,0  ; Enable/disable(gray) Tone Control checkbox
+HKR,Config,%TONECONTROL%,1,0    ; Enable/disable Tone Controls
+HKR,Config,%DONTMODIFY%,1,0     ; Enable/disable CONFIG.SYS/AUTOEXEC.BAT update
+
+[PNPB076.AddReg]
+HKR,Drivers\midi\mztmid.drv,Description,,%*PNPB076.DeviceDesc%
+
+[MZT.AddReg]
+HKR,,Driver,,vmztss.vxd
+HKR,Drivers\wave\mztss.drv,Driver,,mztss.drv
+HKR,Drivers\mixer\mztss.drv,Driver,,mztss.drv
+HKR,Drivers\aux\mztss.drv,Driver,,mztss.drv
+HKR,Drivers\midi\mztopl.drv,Driver,,mztopl.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+HKR,,EnumPropPages,,"mztss.drv,DrvEnumPropPages"
+HKR,Drivers\midi\mztopl.drv\Instruments\Out\GeneralMidiInstrument:0,,,%V_GENERAL%
+HKR,Drivers\midi\mztopl.drv\Instruments\Out\GeneralMidiInstrument:0\File,,,%10%\general.idf
+HKR,Drivers\midi\mztopl.drv\Instruments\Out\GeneralMidiInstrument:0\Channels,,,"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16"
+HKR,Drivers\midi\mztopl.drv\Instruments\Out\GeneralMidiInstrument:0\Port,,,0
+HKR,Drivers\midi\mztopl.drv\Instruments\Out\GeneralMidiInstrument:0\Active,,,1
+
+[MZTmid.AddReg]
+HKR,,Driver,,vmztmid.vxd
+HKR,Drivers\midi\mztmid.drv,,,
+HKR,Drivers\midi\mztmid.drv,Driver,,mztmid.drv
+; HKR,Drivers\midi\msmpumid.drv,External,1,01,00,00,00
+; ;HKR,Drivers\midi\msmpumid.drv,Port,1,00
+; ;HKR,Drivers\midi\msmpumid.drv,Definition,,"%10%\config\general.idf"
+; HKR,Drivers,SubClasses,,"midi"
+
+[WAVE.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,,,
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+HKR,Drivers\wave,,,
+HKR,Drivers\mixer,,,
+HKR,Drivers\aux,,,
+
+[MIDI.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+
+[MozartSB_Device.AddReg]
+HKR,,DeviceDriver,,vmztss.vxd
+HKR,,DevLoader,,*CONFIGMG
+
+;---------------------------------------------------------------;
+
+[DestinationDirs]
+DefaultDestDir = 11     ; LDID_SYS
+MZTINIT.CopyList = 10   ; LDID_WIN
+
+[SourceDisksNames]
+1="Mozart Sound System Disk",, 0001
+
+[SourceDisksFiles]
+mztopl.drv=1,,
+vmztss.vxd=1,,
+mztss.drv=1,,
+vmztmid.vxd=1,,
+mztmid.drv=1,,
+mztinit.sys=1,,
+
+;---------------------------------------------------------------;
+
+[Strings]
+OAK="Oak Technology"
+MfgName="Oak Technology"
+*PNPB075.DeviceDesc="Mozart  Sound System"
+*PNPB076.DeviceDesc="Mozart Midi Port Device"
+MozartSBEmulation.DeviceDesc="Software Sound Blaster"
+MediaClassName="Sound, video and game controllers"
+V_GENERAL="General MIDI Instrument"
+V_MZTOPL="Mozart Internal Synthesizer"
+GAMEPORT="Mozart Game Port"
+CBTONECONTROL="Enable Tone Control Checkbox"
+TONECONTROL="Mozart Tone Control"
+DONTMODIFY="Don't Modify User Startup Files"
+
+
