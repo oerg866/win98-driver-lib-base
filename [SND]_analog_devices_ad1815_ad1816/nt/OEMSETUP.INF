@@ -1,0 +1,12 @@
+[Source Media Descriptions]
+    1  = "ADI SoundComm Driver"  , TAGFILE = disk1
+
+[Installable.Drivers]
+ADISound = 1:ADISound.dll, "wave,MIDI,aux,mixer", "Analog Devices SoundComm Driver",,,
+
+[ADISound]
+1:ADISND.sys
+1:ADISound.INI
+
+
+

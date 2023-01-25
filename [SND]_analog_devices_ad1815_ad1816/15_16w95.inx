@@ -1,0 +1,414 @@
+;
+; Analog Devices Red/Yellow Coral (1815/1816) device information file.
+;
+; Copyright (c) 1996-1997 Willow Pond Corporation.
+;
+[Version]
+Signature="$Chicago$"
+Class=MEDIA
+provider=%ADI%
+LayoutFile=layout.inf
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"-1"
+HKR,,Installer,,mmci.dll
+
+[DestinationDirs]
+DefaultDestDir=11
+MixerIni.CopyList=10
+CopyFiles_Apps=30,Audio
+
+[Manufacturer]
+%MfgName%=Analog
+
+[ControlFlags]
+ExcludeFromSelect=*ADS7151
+ExcludeFromSelect=*ADS7152
+ExcludeFromSelect=*ADS7181
+ExcludeFromSelect=*ADS7182
+
+[Analog]
+%*ADS7150.DeviceDesc%=ADS7150_Device, *ADS7150
+%*ADS7151.DeviceDesc%=ADS7151_Device, *ADS7151, *PNPB006
+%*ADS7152.DeviceDesc%=ADS7152_Device, *ADS7152, *PNPB02F
+%*ADS7180.DeviceDesc%=ADS7180_Device, *ADS7180
+%*ADS7181.DeviceDesc%=ADS7181_Device, *ADS7181, *PNPB006
+%*ADS7182.DeviceDesc%=ADS7182_Device, *ADS7182, *PNPB02F
+
+[PreCopySection]
+HKR,,NoSetupUI,0,1
+
+;---------------------------------------------------------------;
+
+[ADS7150_Device]
+CopyFiles=Coral.CopyList, MixerIni.CopyList, CopyFiles_Apps
+AddReg=Mixer.AddReg, Coral.AddReg, ADS7150.AddReg
+DelReg=ADI.DelReg
+LogConfig=Coral.LC
+
+[ADS7180_Device]
+CopyFiles=Coral.CopyList, MixerIni.CopyList, CopyFiles_Apps
+AddReg=Mixer.AddReg, Coral.AddReg, ADS7180.AddReg
+DelReg=ADI.DelReg
+LogConfig=Coral.LC
+
+;---------------------------------------------------------------;
+
+[Mixer.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; REGISTRY SETTINGS
+;
+; Uncomment any or all of the following lines to force the mixer or 
+; configuration settings to a particular default value after (re)installation.
+;
+; The fields of each line are divided as follows:
+; <root key>, <sub key>, <value name>, <flags>, <data byte> [, <data byte>]
+;
+; The <root key> field should always be "HKR", and the <sub key> will always
+; be "Config".  The <value name> fields are determined by the driver.
+;
+; The <flag> field defines both the type of the value field and how the
+; registry entry will be replaced if already present.  Since the driver uses
+; only binary (numeric) settings, this field must be either 1 or 3.  A value
+; of 1 indicates that the value should be overwritten when reinstalled.  A
+; value of 3 indicates that the value should not be overwritten on a reinstall.
+;
+; The value field is a string of hexidecimal bytes.  Because of Intel byte
+; ordering, the least-significant byte is listed first.  For volume and gain
+; controls, the maximum value is 65535 and would be represented as ff,ff,00,00.
+; The default value in the driver is always 32767, or ff,7f,00,00.  Mute 
+; controls should be set to zero (00,00,00,00) to leave the line enabled (un-
+; muted), or one (01,00,00,00) to leave the line muted by default.
+;
+; On/Off controls should be set to one or zero to represent the on or off 
+; states, respectively.
+;
+; The configuration settings (as opposed to the mixer settings) are all
+; represented by a single byte.  The mixer settings are all represented by
+; a double-word (4 byte) value.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; CONFIGURATION SETTINGS 
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;HKR, Config, "Single Mode DMA",1,00        ; Single Mode DMA (normally off (00))
+;HKR, Config, "Digital CD Input",1,00       ; Digital CD Input (digital CD on
+					    ;  I2S0 routed to CD in when AD181x
+					    ;  is in SoundBlaster mode)
+;HKR, Config, "I2S0 Format",1,01            ; 00 Off, 01 Right, 02 I2S, 03 Left
+;HKR, Config, "I2S1 Format",1,01            ; 00 Off, 01 Right, 02 I2S, 03 Left
+;HKR, Config, "Enable Digital 3D",1,01          ; Enable 3D on wave output
+;HKR, Config, "XC Tone Circuit",1,00            ; Tone chip on XC0/XC1
+;HKR, Config, "Joystick Volume Control",1,00; Joystick used for volume (00 = no)
+;HKR, Config, "Capture != Playback",1,01    ; Capture not locked to playback
+					    ;  (00 = capture and playback must
+					    ;  be at the same rate for
+					    ;  simultaneous playback and record)
+;HKR, Config, "Clock Output Frequency Multiplier",1,0f
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; OUTPUT MIXER
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;HKR, Config, "MasterVolL", 1, ff,7f,00,00      ; Master Volume Left
+;HKR, Config, "MasterVolR", 1, ff,7f,00,00      ; Master Volume Right
+;HKR, Config, "Muted", 1, 00,00,00,00       ; Master Mute (00,00,00,00 = unmute,
+					    ;  01,00,00,00 = mute)
+;HKR, Config, "LineInVolL", 1, ff,7f,00,00      ; LineIn Output Left
+;HKR, Config, "LineInVolR", 1, ff,7f,00,00      ; LineIn Output Right
+;HKR, Config, "LineInMute", 1, 00,00,00,00      ; LineIn Output Mute
+;HKR, Config, "WaveVolL", 1, ff,7f,00,00        ; Wave Output Left
+;HKR, Config, "WaveVolR", 1, ff,7f,00,00        ; Wave Output Right
+;HKR, Config, "WaveMute", 1, 00,00,00,00        ; Wave Mute
+HKR, Config, "Aux1VolL", 1, ff,7f,00,00        ; CD Output Left
+HKR, Config, "Aux1VolR", 1, ff,7f,00,00        ; CD Output Right
+HKR, Config, "Aux1Mute", 1, 00,00,00,00        ; CD Output Mute
+HKR, Config, "Aux2VolL", 1, ff,7f,00,00        ; Wavetable Output Left
+HKR, Config, "Aux2VolR", 1, ff,7f,00,00        ; Wavetable Output Right
+HKR, Config, "Aux2Mute", 1, 00,00,00,00        ; Wavetable Output Mute
+;HKR, Config, "Aux3VolL", 1, ff,7f,00,00        ; Video Output Left
+;HKR, Config, "Aux3VolR", 1, ff,7f,00,00        ; Video Output Right
+;HKR, Config, "Aux3Mute", 1, 00,00,00,00        ; Video Output Mute
+;HKR, Config, "Microphone Volume", 1, ff,7f,00,00       ; Mic Output Level
+;HKR, Config, "MicMute", 1, 01,00,00,00         ; Mic Output Mute
+;HKR, Config, "SynthVolL", 1, ff,7f,00,00       ; FM Synth Volume Left
+;HKR, Config, "SynthVolR", 1, ff,7f,00,00       ; FM Synth Volume Right
+;HKR, Config, "SynthMute", 1, 00,00,00,00       ; FM Synth Mute
+;HKR, Config, "Treble Level", 1, ff,7f,00,00; Treble (w/external chip)
+;HKR, Config, "Bass Level", 1, ff,7f,00,00      ; Bass (w/external chip)
+;HKR, Config, "MonoInVol", 1, ff,7f,00,00       ; Mono Input Volume
+;HKR, Config, "MonoInMute", 1, 01,00,00,00      ; Mono Input Mute
+;HKR, Config, "MonoOutVol", 1, ff,7f,00,00      ; Mono Output Volume
+;HKR, Config, "MonoOutMute", 1, 01,00,00,00     ; Mono Output Mute
+;HKR, Config, "I2S0 Vol Left", 1, ff,7f,00,00   ; I2S 0 Output Volume Left
+;HKR, Config, "I2S0 Vol Right", 1, ff,7f,00,00  ; I2S 0 Output Volume Right
+;HKR, Config, "I2S0 Mute", 1, 01,00,00,00       ; I2S 0 Output Mute
+;HKR, Config, "I2S1 Vol Left", 1, ff,7f,00,00   ; I2S 1 Output Volume Left
+;HKR, Config, "I2S1 Vol Right", 1, ff,7f,00,00  ; I2S 1 Output Volume Right
+;HKR, Config, "I2S1 Mute", 1, 01,00,00,00       ; I2S 1 Output Mute
+;HKR, Config, "Mic 20dB Gain", 1, 00,00,00,00   ; Microphone Gain On/Off
+;HKR, Config, "XCTL0", 1, 00,00,00,00           ; External Control 0 On/Off
+;HKR, Config, "XCTL1", 1, 00,00,00,00           ; External Control 1 On/Off
+;HKR, Config, "3DLevel", 1, ff,7f,00,00         ; Phat Stereo Level
+;HKR, Config, "3DOn", 1, 01,00,00,00        ; Phat Stereo On/Off
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; RECORDING MIXER
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;HKR, Config, "WaveInMicVol", 1, ff,7f,00,00    ; Microphone Input Gain
+;HKR, Config, "WaveIn Mic AGC", 1, 00,00,00,00  ; Microphone AGC On/Off
+;HKR, Config, "WaveInModemVol", 1, ff,7f,00,00  ; Modem Input Gain
+;HKR, Config, "WaveInLineVolL", 1, ff,7f,00,00  ; Line Input Gain Left
+;HKR, Config, "WaveInLineVolR", 1, ff,7f,00,00  ; Line Input Gain Right
+;HKR, Config, "WaveInAux1VolL", 1, ff,7f,00,00  ; CD Input Gain Left
+;HKR, Config, "WaveInAux1VolR", 1, ff,7f,00,00  ; CD Input Gain Right
+;HKR, Config, "WaveInAux2VolL", 1, ff,7f,00,00  ; Wavetable Input Gain Left
+;HKR, Config, "WaveInAux2VolR", 1, ff,7f,00,00  ; Wavetable Input Gain Right
+;HKR, Config, "WaveInAux3VolL", 1, ff,7f,00,00  ; Video Input Gain Left
+;HKR, Config, "WaveInAux3VolR", 1, ff,7f,00,00  ; Video Input Gain Right
+;HKR, Config, "WaveInLoopVolL", 1, ff,7f,00,00  ; Loopback Input Gain Left
+;HKR, Config, "WaveInLoopVolR", 1, ff,7f,00,00  ; Loopback Input Gain Right
+;HKR, Config, "WaveInSource", 1, 00,00,00,00    ; Input Source Selection
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; VOICE MIXER (Low-priority input, for voice recognition e.g.)
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;HKR, Config, "VoiceInMicVol", 1, ff,7f,00,00   ; Microphone Input Gain
+;HKR, Config, "VoiceIn Mic AGC", 1, 00,00,00,00 ; Microphone AGC On/Off
+;HKR, Config, "VoiceInModemVol", 1, ff,7f,00,00 ; Modem Input Gain
+;HKR, Config, "VoiceInLineVolL", 1, ff,7f,00,00 ; Line Input Gain Left
+;HKR, Config, "VoiceInLineVolR", 1, ff,7f,00,00 ; Line Input Gain Right
+;HKR, Config, "VoiceInAux1VolL", 1, ff,7f,00,00 ; CD Input Gain Left
+;HKR, Config, "VoiceInAux1VolR", 1, ff,7f,00,00 ; CD Input Gain Right
+;HKR, Config, "VoiceInAux2VolL", 1, ff,7f,00,00 ; Wavetable Input Gain Left
+;HKR, Config, "VoiceInAux2VolR", 1, ff,7f,00,00 ; Wavetable Input Gain Right
+;HKR, Config, "VoiceInAux3VolL", 1, ff,7f,00,00 ; Video Input Gain Left
+;HKR, Config, "VoiceInAux3VolR", 1, ff,7f,00,00 ; Video Input Gain Right
+;HKR, Config, "VoiceInLoopVolL", 1, ff,7f,00,00 ; Loopback Input Gain Left
+;HKR, Config, "VoiceInLoopVolR", 1, ff,7f,00,00 ; Loopback Input Gain Right
+;HKR, Config, "VoiceInSource", 1, 00,00,00,00   ; Input Source Selection
+
+[Coral.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,0,15_16w95.vxd
+HKR,,EnumPropPages,,"15_16w95.drv,DrvEnumPropPages"
+HKR,Drivers,MIGRATED,0,0
+HKR,Drivers,SubClasses,,"wave,mixer,aux,midi"
+HKR,Drivers\wave,,0,
+HKR,Drivers\wave\15_16w95.drv,Driver,,15_16w95.drv
+HKR,Drivers\midi,,0,
+HKR,Drivers\midi\msopl.drv,Driver,,msopl.drv
+HKR,Drivers\mixer,,0,
+HKR,Drivers\mixer\15_16w95.drv,Driver,,15_16w95.drv
+HKR,Drivers\aux,,0,
+HKR,Drivers\aux\15_16w95.drv,Driver,,15_16w95.drv
+HKLM,%KEY_IOC%\acm,,,
+HKLM,%KEY_IOC%\Rec,,,
+HKLM,%KEY_IOC%\MPlay,,,
+HKLM,%KEY_FIL%\fl.UpdateInis,device.vsndsys,,"system.ini,386Enh,""device=vsndsys.386"",,"
+HKLM,%KEY_FIL%\fl.UpdateInis,device.vaudiod,,"system.ini,386Enh,""device=vaudiod.386"",,"
+HKLM,%KEY_UNINST%,DisplayName,0,"AD1815/6 UnInstall"
+HKLM,%KEY_UNINST%,UninstallString,0,c:\Audio\remove.exe
+
+[ADS7150.AddReg]
+HKR,Drivers\wave\15_16w95.drv,Description,,%*ADS7150.DeviceDesc%
+HKR,Drivers\midi\msopl.drv,Description,,%MSOPL5.DeviceDesc%
+HKR,Drivers\mixer\15_16w95.drv,Description,,%*ADS7150.DeviceDesc%
+HKR,Drivers\aux\15_16w95.drv,Description,,%*ADS7150.DeviceDesc%
+
+[ADS7180.AddReg]
+HKR,Drivers\wave\15_16w95.drv,Description,,%*ADS7180.DeviceDesc%
+HKR,Drivers\midi\msopl.drv,Description,,%MSOPL6.DeviceDesc%
+HKR,Drivers\mixer\15_16w95.drv,Description,,%*ADS7180.DeviceDesc%
+HKR,Drivers\aux\15_16w95.drv,Description,,%*ADS7180.DeviceDesc%
+HKR,Config,"XC Tone Control",1,01
+
+[Coral.LC]
+ConfigPriority=NORMAL
+
+[Coral.CopyList]
+15_16w95.vxd,,
+15_16w95.drv,,
+msopl.drv,,
+
+[MixerIni.CopyList]
+wpunimix.ini
+
+[CopyFiles_Apps]
+Remove.exe,Remove.exe
+
+;---------------------------------------------------------------------------;
+; MPU-401 installation
+;
+[ADS7151_Device]
+LogConfig=ADSMPU.LogConfig
+CopyFiles=ADSMPU.CopyList
+DelFiles=ADSMPU.DelList
+AddReg=MIDI.AddReg, ADSMPU.AddReg, ADS7151.AddRegDeviceDesc
+UpdateInis=ADSMPU.UpdateInis
+
+[ADS7181_Device]
+LogConfig=ADSMPU.LogConfig
+CopyFiles=ADSMPU.CopyList
+DelFiles=ADSMPU.DelList
+AddReg=MIDI.AddReg, ADSMPU.AddReg, ADS7181.AddRegDeviceDesc
+UpdateInis=ADSMPU.UpdateInis
+
+[ADSMPU.LogConfig]
+ConfigPriority=NORMAL
+
+[ADSMPU.CopyList]
+msmpu401.drv,,
+msmpu401.vxd,,
+
+[ADSMPU.UpdateInis]
+system.ini,drivers,"midi*=mpu401.drv",,1
+system.ini,drivers,"midi*=rdmpu401.drv",,1
+system.ini,drivers,"midi*=mm16n.drv",,1
+system.ini,drivers,"midi*=mm16c.drv",,1
+system.ini,drivers,"midi*=mm16w.drv",,1
+
+[MIDI.AddReg]
+HKR,,Devloader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+
+[ADSMPU.DelList]
+mpu401.drv,,,1
+rdmpu401.drv,,,1
+
+[ADSMPU.AddReg]
+HKR,,Driver,,msmpu401.vxd
+HKR,Drivers\midi\msmpu401.drv,Driver,,msmpu401.drv
+HKR,Drivers\midi\msmpu401.drv,External,1,01,00,00,00
+HKR,Drivers,SubClasses,,"midi"
+
+[ADS7151.AddRegDeviceDesc]
+HKR,Drivers\midi\msmpu401.drv,Description,,%*ADS7151.DeviceDesc%
+
+[ADS7181.AddRegDeviceDesc]
+HKR,Drivers\midi\msmpu401.drv,Description,,%*ADS7181.DeviceDesc%
+
+;--------------------------------------------------------------------------;
+; Joystick device
+;
+[ADS7152_Device]
+LogConfig=ADSJSTK.LC
+CopyFiles=ADSJSTK.CopyList
+AddReg=Joystick.AddReg, ADSJSTK.AddReg, ADS7152.AddReg
+UpdateInis=ADSJSTK.UpdateInis
+
+[ADS7182_Device]
+LogConfig=ADSJSTK.LC
+CopyFiles=ADSJSTK.CopyList
+AddReg=Joystick.AddReg, ADSJSTK.AddReg, ADS7182.AddReg
+UpdateInis=ADSJSTK.UpdateInis
+
+[ADSJSTK.LC]
+ConfigPriority=NORMAL
+
+[ADSJSTK.CopyList]
+vjoyd.vxd,,
+msjstick.drv,,
+
+[Joystick.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\joystick,,,
+
+[ADSJSTK.AddReg]
+HKR,,Driver,,vjoyd.vxd
+HKR,Drivers\joystick\msjstick.drv,Driver,,msjstick.drv
+HKR,Drivers,SubClasses,,"joystick"
+
+[ADS7152.AddReg]
+HKR,Drivers\joystick\msjstick.drv,Description,,%*ADS7152.DeviceDesc%
+
+[ADS7182.AddReg]
+HKR,Drivers\joystick\msjstick.drv,Description,,%*ADS7182.DeviceDesc%
+
+[ADSJSTK.UpdateInis]
+system.ini,drivers,"joystick="
+
+;---------------------------------------------------------------;
+
+[Drivers.fields]
+system.ini,boot,drivers,msmixmgr.dll
+system.ini,boot,drivers,mmmixer.dll
+
+[ADI.DelReg]
+HKLM,Enum\Root\MEDIA,,0,
+
+[wave.SafeDrivers]
+*.drv
+mmsystem.dll
+cpqaudio.drv                    ; Compaq Business Audio (WSS)
+sbwave.drv
+tbwave.drv
+tlwave.drv
+sndblst.drv
+sndblst2.drv
+sb15snd.drv
+sb20snd.drv
+sb16snd.drv
+sbpsnd.drv
+sbmcvsnd.drv
+spmcvsnd.drv
+sndsys.drv
+wsssb16.drv                     ; SB16 driver from WSS 2.0
+speaker.drv                     ; Speaker driver
+spmme.drv                       ; Speaker driver
+ad_mpt.drv                      ; After Dark
+antexwav.drv                    ; Antex
+tahiti.drv                      ; Turtle Beach Tahiti
+multisnd.drv                    ; Turtle Beach Multisound
+dspwav.drv                      ; Intel ProShare
+tamaudio.drv                    ; Compaq Presario's Voice Modem
+nullwave.drv                    ; AST NULL output wave driver
+mvspeakr.drv                    ; from Icon Hear-It
+
+;---------------------------------------------------------------;
+
+[SourceDisksNames]
+1=%InstallDisk%,,0001
+
+[SourceDisksFiles]
+15_16w95.vxd=1
+15_16w95.drv=1
+Remove.exe=1
+
+[Strings]
+;
+; Non-localized strings
+;
+KEY_WARNVER="SYSTEM\CurrentControlSet\Control\SessionManager\WarnVerDLLs"
+KEY_CHKVER="SYSTEM\CurrentControlSet\Control\SessionManager\CheckVerDLLs"
+KEY_FIL="SYSTEM\CurrentControlSet\Control\MediaResources\FilterList"
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+KEY_UNINST="Software\Microsoft\Windows\CurrentVersion\Uninstall\AD1815/6"
+;
+; *** Localized/customizable strings ***
+;
+ADI="Analog Devices / Willow Pond"
+MfgName="Analog Devices / Willow Pond"
+InstallDisk="AD1815/6 Driver Diskette"
+*ADS7150.DeviceDesc="Analog Devices AD1815 Sound Controller"
+*ADS7151.DeviceDesc="Analog Devices AD1815 MPU-401 Compatible"
+*ADS7152.DeviceDesc="Analog Devices AD1815 Gameport Joystick"
+*ADS7180.DeviceDesc="Analog Devices AD1816 Sound Controller"
+*ADS7181.DeviceDesc="Analog Devices AD1816 MPU-401 Compatible"
+*ADS7182.DeviceDesc="Analog Devices AD1816 Gameport Joystick"
+MSOPL5.DeviceDesc="Analog Devices AD1815 FM Synthesis"
+MSOPL6.DeviceDesc="Analog Devices AD1816 FM Synthesis"
+MediaClassName="Sound, video and game controllers"
+

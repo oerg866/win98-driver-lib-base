@@ -1,0 +1,212 @@
+;--------------------------------------------------------------------
+;This Setup script is copyright (C) 1993-1996 Willow Pond Corp.
+;It is only to be modified by Willow Pond Corporation.
+;--------------------------------------------------------------------
+[setup]
+;General parameters, including which subdirectories to create,
+;  the appearance of the initial (splash) screen,
+;  whether to chain to a separate hardware setup application, etc.
+
+;The default destination directory on the PC's boot volume.
+;  Can be overwritten by the user at the beginning of the install.
+defdest=\willpond
+
+;Whether to show a message advising the user not to use
+;  earphones until an appropriate volume level is set.
+;  1=yes, 2=no
+disclaim=1
+
+;The background color for the opening (splash) screen, in RGB format.
+;  Red=[255 0 0]; Green=[0 255 0]; Blue=[0 0 255]
+SplashColor=0 0 255
+
+;Whether the splash screen color is to be solid or in a gradient pattern:
+;  1=solid, 0=color gradient
+SplashSolid=0
+
+;The bitmap file that appears at top left of splash screen.
+;  The file should be in .BMZ format (use the GZIP utility to compress).
+;SplashBitmap=oem_eval.bmz
+
+;Whether the splash bitmap is shown on top of the background (SplashOpaque=1)
+;  or Exclusive Or'd with the background (SplashOpaque=0).
+;SplashOpaque=1
+
+;Which Windows Setup program to chain to after this one completes.
+;  This can be a third party application installer, e.g.
+;  The name of the disk to insert is specified later in the [disks] section.
+;chain=3:SETUP.EXE
+
+;Whether to restart the PC, Windows, or neither after Setup completes.
+; =1 to restart the PC, =2 to restart Windows.
+{ < 3.95}  restart=2
+
+;--------------------------------------------------------------------
+[disks]
+;The disk names that Setup uses to prompt the user to insert the next disk.
+;  For example, "Please Insert Disk 2".
+;  The number at the left is the disk number; the text string at the right
+;  is the name of that disk.
+1=Audio Disk #1
+
+;--------------------------------------------------------------------
+[dirs]
+;The directories the Setup program will create.
+
+;Media Rack.
+rack
+
+;--------------------------------------------------------------------
+[files]
+;The files to copy.  The number at the left is the number of the disk
+;  on which the file can be found.  The text to the right of the equals
+;  sign is displayed by the progress indicator ("Now copying [file name]").
+;  The path\filename is both the SOURCE and DESTINATION of the file, except:
+;    A ",$W" after the text copies the file into the Windows directory.
+;    A ",$S" after the text copies the file into Windows\System directory.
+
+;The Microsoft Audio Compression Manager (ACM) system files
+;  used by Wave Shaper and Media Rack's Wave Player component.
+;Do not install under Windows 95; install only for Windows 3.1.
+{ < 3.95}  1:msacm.dll=,$S
+{ < 3.95}  1:msacm.drv=,$S
+{ < 3.95}  1:*.acm=,$S
+
+;The Windows MCI CD audio driver, to be copied into the System directory.
+;Do not install under Windows 95; install only for Windows 3.1.
+{ < 3.95}  1:mcicda.drv=,$S
+
+;The Windows mixer DLL, used by Media Rack and other volume controls.
+;Do not install under Windows 95; install only for Windows 3.1.
+{ < 3.95}  1:msmixmgr.dll=,$S
+
+;Miscellaneous system files required by Willow Pond applications.
+1:ctl3d*.dll=,$S
+1:willowpd.hlp=,$W
+1:wpctrl.dll=,$S
+
+;Media Rack files
+1:rack\cdplyr.exe=Media Rack
+1:rack\cdplyr.hlp=Media Rack
+1:rack\mediarck.exe=Media Rack
+1:rack\mediarck.hlp=Media Rack
+1:rack\midiplyr.exe=Media Rack
+1:rack\midiplyr.hlp=Media Rack
+1:rack\sysmixer.exe=Media Rack
+1:rack\sysmixer.hlp=Media Rack
+1:rack\mrclock.exe=Media Rack
+1:rack\mrclock.hlp=Media Rack
+1:rack\waveplyr.exe=Media Rack
+1:rack\waveplyr.hlp=Media Rack
+
+;--------------------------------------------------------------------
+[ini.upd]
+;The .INI file edits to make.
+;  The first field holds the .INI file name.
+;  The second field holds the section name in the file (e.g., [Paths]).
+;  The third field holds the variable name (left side of equals sign).
+;  The fourth field holds the variable value (right side of equals sign).
+
+;To enable the mixer application to work
+;Do not install under Windows 95; install only for Windows 3.1.
+{ < 3.95}  system, boot, drivers, + msmixmgr.dll
+
+;To install Windows MCI audio drivers
+;Do not install under Windows 95; install only for Windows 3.1.
+{ < 3.95}  system, mci, CDAudio, mcicda.drv
+{ < 3.95}  control, drivers.desc, mcicda.drv, "[MCI] CD Audio"
+{ < 3.95}  control, userinstallable.drivers, CDAudio, mcicda.drv
+
+;For Media Rack default settings
+;To make Media Rack launch in full size (expanded) mode
+mediarck, Media Rack,  FullSize, 1
+;To turn on or off long file name support under Windows 95
+mrclock, Alarm Clock, LongNames, 1
+;To turn off Auto Audition in file open dialog box
+midiplyr, MIDI Player, AutoAudition, 0
+;To set default MIDI device to MIDI Mapper
+midiplyr, MIDI Player, Output, 0
+;To make an Edit button appear and point to Presto Arranger
+;midiplyr, MIDI Player, Editor, $D\presto\presto.exe
+;To add a Volume Controls item to the stand-alone MIDI Player's menu
+midiplyr, MIDI Player, MixerFile, $D\rack\sysmixer.exe
+;To set the default file open directory
+{ < 3.95} midiplyr, MIDI Player, MidiDir, $W
+{ > 3.11} midiplyr, MIDI Player, MidiDir, $W\media
+;To turn on or off long file name support under Windows 95
+midiplyr, MIDI Player, LongNames, 1
+;To turn of Auto Audition in file open dialog box
+waveplyr, Wave Player, AutoAudition, 0
+;To make an Edit button appear and point to Wave Shaper
+;waveplyr, Wave Player, Editor, $D\wavshape\wavshape.exe
+;To add a Volume Controls item to the stand-alone Wave Player's menu
+waveplyr, Wave Player, MixerFile, $D\rack\sysmixer.exe
+;To set the default file open directory
+{ < 3.95} waveplyr, Wave Player, WaveDir, $W
+{ > 3.11} waveplyr, Wave Player, WaveDir, $W\media
+;To turn on or off long file name support under Windows 95
+waveplyr, Wave Player, LongNames, 1
+;To add a Volume Controls item to the stand-alone CD Player's menu
+cdplyr, CD Player, MixerFile, $D\rack\sysmixer.exe
+;To have the AutoPlay menu item appear for CD Player under Windows 95
+{ > 3.11} cdplyr, CD Player, ModifyRegistry, 1
+;To turn on or off long file name support under Windows 95
+cdplyr, CD Player, LongNames, 1
+;To not display the mixer preset buttons, making more room for sliders
+sysmixer, System Mixer, ShowPresets, 0
+
+;--------------------------------------------------------------------
+[installable.drivers]
+;To install ACM (compression) modules. 
+{ < 3.95}  msacm=1:msacm.drv, "wavemapper", "Microsoft Audio Compression Manager 2.01", ,
+{ < 3.95}  imaadpcm=1:imaadpcm.acm, "msacm.imaadpcm", "Microsoft IMA-ADPCM Host CODEC", ,
+{ < 3.95}  msadpcm=1:msadpcm.acm, "msacm.msadpcm", "Microsoft MS-ADPCM Host CODEC", ,
+
+;--------------------------------------------------------------------
+;[dos.drivers]
+
+;--------------------------------------------------------------------
+;[vxds.to.remove]
+
+;--------------------------------------------------------------------
+[keys]
+;Windows Registration Database edits to make.
+;Usually used to associate file extensions with applications
+;  and to enable OLE servers.
+.mid=MIDIPlayer
+.mpl=MIDIPlayer
+.rmi=MIDIPlayer
+.wpl=WavePlayer
+MIDIPlayer=MIDI Player Playlist
+MIDIPlayer\shell\open\command=$D\RACK\MIDIPLYR.EXE %1
+WavePlayer=Wave Player Playlist
+WavePlayer\shell\open\command=$D\RACK\WAVEPLYR.EXE %1
+
+;--------------------------------------------------------------------
+[groups]
+;Program Groups to create.
+
+;This Program Group name normally is the name of the OEM company or product.
+Willow Pond Applications=f335.grp
+
+;--------------------------------------------------------------------
+[Willow Pond Applications]
+;The icons to include in this Program Group (created in the section above).
+;The item to the left of the equals sign is the file name, optionally
+;  followed by command line parameters for that program.
+;The text to the right of the equals sign is the label under the program icon.
+
+;willowpd.hlp=Software Overview,,,,,$D
+mediarck.exe=Media Rack,,,,,$D\rack
+
+;--------------------------------------------------------------------
+[backup.copy]
+;Create backup files for these files copied in.
+;The ",Q" option means don't display a message telling the user that
+;  the file has been replaced.
+
+[backup.modify]
+;Create backup files for these files to be edited.
+system.ini,Q
+;
+;Great Concepts

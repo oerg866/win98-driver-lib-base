@@ -1,0 +1,58 @@
+/************************ START OF SPECIFICATIONS ****************************/
+/*                                                                           */
+/* SOURCE FILE NAME:  AUDFILES.SCR                                           */
+/*                                                                           */
+/* DESCRIPTIVE NAME:  Filelist control file for Generic Audio Install sample */
+/*                                                                           */
+/* COPYRIGHT:                                                                */
+/*              Copyright (c) IBM Corporation  1993                          */
+/*                        All Rights Reserved                                */
+/*                                                                           */
+/* STATUS:  DDK #3 1993                                                      */
+/*                                                                           */
+/* DESCRIPTION:                                                              */
+/* This file lists all the files that should be copied by Minstall in order  */
+/* to install an audio adapter.                                              */
+/*                                                                           */
+/* The subdirectories used are listed below.  If you need other              */
+/* subdirectories, you must define them in the CONTROL.SCR file.             */
+/*                                                                           */
+/*   sourcedir= "\\"                                       = 0               */
+/*                                                                           */
+/*   destindir= "\\MMOS2\\"                                = 0               */
+/*   destindir= "\\MMOS2\\DLL\\"                           = 2               */
+/*   destindir= "\\MMOS2\\HELP\\"                          = 7               */
+/*                                                                           */
+/*************************** END OF SPECIFICATIONS ***************************/
+
+/*  Total Number of Files to copy                                            */
+/*  Change this number to match the number of files you are copying          */
+    18
+
+/* Disk# Group# Dest# Source# Filename         Comment                       */
+
+    0      0     4      0    "audplay.ico"    /* Audio Icon     */
+    0      0     4      0    "midiplay.ico"   /* Midi Icon      */
+    0      0     4      0    "joystk.ico"    /* Icon NECESSARY for install  */
+    0      0     4      0    "joystk.ch"     /* File for CONFIG changes     */
+
+    0      1     2      0    "cardinfo.dll"  /* You must copy this file     */
+    0      1     7      0    "ad1816.hlp"    /* You must copy this file     */
+    0      1     0      0    "ad1816dd.sys"  
+    0      1     0      0    "ad1816dd.sym"  
+
+    0      2     7      0    "opl3.hlp"      /* You must copy this file     */
+    0      2     2      0    "opl3res.dll"      /* You must copy this file     */
+    0      2     0      0    "opl3.sys"  
+    0      2     0      0    "timer0.sys"  
+
+    0      2     8      0    "clock01.sys"  
+    0      2     8      0    "clock02.sys"  
+
+
+    0      3     0      0    "gamedd.sys"    /* PDD                         */
+    0      3     0      0    "gamevdd.sys"   /* VDD                         */
+
+    0      4     2      0    "mpures.dll"    /* PDD                         */
+    0      4     0      0    "mpu401.sys"   /* VDD                         */
+

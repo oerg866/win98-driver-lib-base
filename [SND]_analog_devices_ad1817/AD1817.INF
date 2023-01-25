@@ -34,12 +34,6 @@ ExcludeFromSelect=*ADS7191
 ExcludeFromSelect=*ADS7192
 
 [Analog]
-%*ADS7150.DeviceDesc%=ADS7150_Device, *ADS7150
-%*ADS7151.DeviceDesc%=ADS7151_Device, *ADS7151, *PNPB006
-%*ADS7152.DeviceDesc%=ADS7152_Device, *ADS7152, *PNPB02F
-%*ADS7180.DeviceDesc%=ADS7180_Device, *ADS7180
-%*ADS7181.DeviceDesc%=ADS7181_Device, *ADS7181, *PNPB006
-%*ADS7182.DeviceDesc%=ADS7182_Device, *ADS7182, *PNPB02F
 %*ADS7190.DeviceDesc%=ADS7190_Device, *ADS7198
 %*ADS7191.DeviceDesc%=ADS7191_Device, *ADS7191, *PNPB006
 %*ADS7192.DeviceDesc%=ADS7192_Device, *ADS7192, *PNPB02F
@@ -48,18 +42,6 @@ ExcludeFromSelect=*ADS7192
 HKR,,NoSetupUI,0,1
 
 ;---------------------------------------------------------------;
-
-[ADS7150_Device]
-CopyFiles=Coral.CopyList, MixerIni.CopyList, CopyFiles_Apps
-AddReg=Mixer.AddReg, Coral.AddReg, ADS7150.AddReg
-DelReg=ADI.DelReg
-LogConfig=Coral.LC
-
-[ADS7180_Device]
-CopyFiles=Coral.CopyList, MixerIni.CopyList, CopyFiles_Apps
-AddReg=Mixer.AddReg, Coral.AddReg, ADS7180.AddReg
-DelReg=ADI.DelReg
-LogConfig=Coral.LC
 
 [ADS7190_Device]
 CopyFiles=Coral.CopyList, MixerIni.CopyList, CopyFiles_Apps
@@ -234,18 +216,6 @@ HKLM,%KEY_FIL%\fl.UpdateInis,device.vaudiod,,"system.ini,386Enh,""device=vaudiod
 HKLM,%KEY_UNINST%,DisplayName,0,"AD18xx UnInstall"
 HKLM,%KEY_UNINST%,UninstallString,0,c:\Audio\remove.exe
 
-[ADS7150.AddReg]
-HKR,Drivers\wave\15_16w95.drv,Description,,%*ADS7150.DeviceDesc%
-HKR,Drivers\midi\msopl.drv,Description,,%MSOPL5.DeviceDesc%
-HKR,Drivers\mixer\15_16w95.drv,Description,,%*ADS7150.DeviceDesc%
-HKR,Drivers\aux\15_16w95.drv,Description,,%*ADS7150.DeviceDesc%
-
-[ADS7180.AddReg]
-HKR,Drivers\wave\15_16w95.drv,Description,,%*ADS7180.DeviceDesc%
-HKR,Drivers\midi\msopl.drv,Description,,%MSOPL6.DeviceDesc%
-HKR,Drivers\mixer\15_16w95.drv,Description,,%*ADS7180.DeviceDesc%
-HKR,Drivers\aux\15_16w95.drv,Description,,%*ADS7180.DeviceDesc%
-
 [ADS7190.AddReg]
 HKR,Drivers\wave\15_16w95.drv,Description,,%*ADS7190.DeviceDesc%
 HKR,Drivers\midi\msopl.drv,Description,,%MSOPL7.DeviceDesc%
@@ -270,20 +240,6 @@ Remove.exe,Remove.exe
 ;---------------------------------------------------------------------------;
 ; MPU-401 installation
 ;
-[ADS7151_Device]
-LogConfig=ADSMPU.LogConfig
-CopyFiles=ADSMPU.CopyList
-DelFiles=ADSMPU.DelList
-AddReg=MIDI.AddReg, ADSMPU.AddReg, ADS7151.AddRegDeviceDesc
-UpdateInis=ADSMPU.UpdateInis
-
-[ADS7181_Device]
-LogConfig=ADSMPU.LogConfig
-CopyFiles=ADSMPU.CopyList
-DelFiles=ADSMPU.DelList
-AddReg=MIDI.AddReg, ADSMPU.AddReg, ADS7181.AddRegDeviceDesc
-UpdateInis=ADSMPU.UpdateInis
-
 [ADS7191_Device]
 LogConfig=ADSMPU.LogConfig
 CopyFiles=ADSMPU.CopyList
@@ -320,29 +276,12 @@ HKR,Drivers\midi\msmpu401.drv,Driver,,msmpu401.drv
 HKR,Drivers\midi\msmpu401.drv,External,1,01,00,00,00
 HKR,Drivers,SubClasses,,"midi"
 
-[ADS7151.AddRegDeviceDesc]
-HKR,Drivers\midi\msmpu401.drv,Description,,%*ADS7151.DeviceDesc%
-
-[ADS7181.AddRegDeviceDesc]
-HKR,Drivers\midi\msmpu401.drv,Description,,%*ADS7181.DeviceDesc%
-
 [ADS7191.AddRegDeviceDesc]
 HKR,Drivers\midi\msmpu401.drv,Description,,%*ADS7191.DeviceDesc%
 
 ;--------------------------------------------------------------------------;
 ; Joystick device
 ;
-[ADS7152_Device]
-LogConfig=ADSJSTK.LC
-CopyFiles=ADSJSTK.CopyList
-AddReg=Joystick.AddReg, ADSJSTK.AddReg, ADS7152.AddReg
-UpdateInis=ADSJSTK.UpdateInis
-
-[ADS7182_Device]
-LogConfig=ADSJSTK.LC
-CopyFiles=ADSJSTK.CopyList
-AddReg=Joystick.AddReg, ADSJSTK.AddReg, ADS7182.AddReg
-UpdateInis=ADSJSTK.UpdateInis
 
 [ADS7192_Device]
 LogConfig=ADSJSTK.LC
@@ -366,12 +305,6 @@ HKR,Drivers\joystick,,,
 HKR,,Driver,,vjoyd.vxd
 HKR,Drivers\joystick\msjstick.drv,Driver,,msjstick.drv
 HKR,Drivers,SubClasses,,"joystick"
-
-[ADS7152.AddReg]
-HKR,Drivers\joystick\msjstick.drv,Description,,%*ADS7152.DeviceDesc%
-
-[ADS7182.AddReg]
-HKR,Drivers\joystick\msjstick.drv,Description,,%*ADS7182.DeviceDesc%
 
 [ADS7192.AddReg]
 HKR,Drivers\joystick\msjstick.drv,Description,,%*ADS7192.DeviceDesc%
@@ -442,17 +375,9 @@ KEY_UNINST="Software\Microsoft\Windows\CurrentVersion\Uninstall\ADUNINST"
 ;
 ADI="Analog Devices / Willow Pond"
 MfgName="Analog Devices / Willow Pond"
-InstallDisk="AD1815/6 Driver Diskette"
-*ADS7150.DeviceDesc="Analog Devices AD1815 Sound Controller"
-*ADS7151.DeviceDesc="Analog Devices AD1815 MPU-401 Compatible"
-*ADS7152.DeviceDesc="Analog Devices AD1815 Gameport Joystick"
-*ADS7180.DeviceDesc="Analog Devices AD1816 Sound Controller"
-*ADS7181.DeviceDesc="Analog Devices AD1816 MPU-401 Compatible"
-*ADS7182.DeviceDesc="Analog Devices AD1816 Gameport Joystick"
+InstallDisk="AD1817 Driver Diskette"
 *ADS7190.DeviceDesc="Analog Devices AD1817 Sound Controller"
 *ADS7191.DeviceDesc="Analog Devices AD1817 MPU-401 Compatible"
 *ADS7192.DeviceDesc="Analog Devices AD1817 Gameport Joystick"
-MSOPL5.DeviceDesc="Analog Devices AD1815 FM Synthesis"
-MSOPL6.DeviceDesc="Analog Devices AD1816 FM Synthesis"
 MSOPL7.DeviceDesc="Analog Devices AD1817 FM Synthesis"
 MediaClassName="Sound, video and game controllers"

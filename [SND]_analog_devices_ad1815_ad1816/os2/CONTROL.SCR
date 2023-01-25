@@ -1,0 +1,105 @@
+/************************ START OF SPECIFICATIONS ***************************/
+/*                                                                          */
+/* SOURCE FILE NAME:  CONTROL.SCR                                           */
+/*                                                                          */
+/* DESCRIPTIVE NAME:  Master control file                                   */
+/*                                                                          */
+/* COPYRIGHT:                                                               */
+/*              Copyright (c) IBM Corporation 1994                          */
+/*                        All Rights Reserved                               */
+/*                                                                          */
+/* DESCRIPTION:                                                             */
+/* This is the master control file used by Minstall to install the          */
+/* adapter using the Generic Install program.                               */
+/*                                                                          */
+/* NLS: Please translate only the strings that have a comment that they     */
+/*      should be translated (search for "NLS:")                            */
+/*                                                                          */
+/*************************** END OF SPECIFICATIONS **************************/
+
+/* NLS: Please translate the following line and codepage */
+package="AD1816 Soundport Controller"
+codepage=437
+
+filelist="ad1816.scr"
+groupcount=4
+munitcount=1
+
+/* NLS: Please translate the following line */
+medianame="AD1816 Soundport AUDIO"
+
+sourcedir="\\"= 0
+sourcedir="\\MMOS2\\INSTALL\\" = 1
+
+destindir="\\MMOS2\\DLL\\"     = 2
+destindir="\\MMOS2\\HELP\\"    = 7
+destindir="\\MMOS2\\"          = 0
+destindir="\\MMOS2\\INSTALL\\" = 4
+destindir="\\MMOS2\\SOUNDS\\"  = 9
+destindir="\\OS2\\BOOT\\"      = 8
+
+/*  Base file to be run after Audio Adapter Installed.                 */
+/*  This will update the user's Multimedia Folder with new information */
+/*  Installing mmbase should not be necessary for installation of an   */
+/*  audio adapter driver.  Indeed, it isn't, but the Multimedia folder */
+/*  will only be updated if the below entries for mmbase exist.        */
+/*  With version checking, the generic install program quits if the    */
+/*  mmbase version to install is less current than presently installed.*/
+/*  OS/2 2.1 MR1 is version 1.1.2 - if built this install based on the */
+/*  MMPM/2 CSD for OS/2 2.1, then the install doesn't work (ver 1.1.1) */
+/*  Using version 1.1.3 as below makes this install work for MR1 and   */
+/*  earier version plus one version beyond MR1 - it will fail eventually */
+
+/* Installation of Base MMPM */
+ssgroup=0                   /* Installing base MMPM should not be */
+ssname="mmbase"             /* necessary, but it is or you won't get */
+ssversion="1.1.4"           /* folder creations for wepm and other apps */
+sstermdll="ITERM.DLL"       /* For updating desktop */
+sstermdllentry="ITermEntry" /* Adds ICONs for new device */
+
+/* Installation for AD1816 Soundport Audio */
+ssgroup=1
+/* NLS: Please translate the following line */
+ssname="Analog Devices AD1816 WAVE Audio"
+ssversion="1.0.1"
+sssize=345
+ssicon="audplay.ico"
+ssdll="genin.DLL"
+ssdllentry="InitGenin"
+ssdllinputparms="27"
+ssselect="YES"
+
+/* Installation for OPTI OPL3 Midi */
+ssgroup=2
+/* NLS: Please translate the following line */
+ssname="IBM FM Synthesis (OPL3)"
+ssversion="1.0.0"
+sssize=300
+ssicon="midiplay.ico"
+ssdll="genin.DLL"
+ssdllentry="InitGenin"
+ssdllinputparms="26"
+ssselect="YES"
+
+/*    Joystick    */
+ssgroup=3
+/* NLS: Please translate the following line */
+ssname="IBM Joystick"
+ssicon="joystk.ico"
+ssversion="1.0.0"
+sssize=35
+ssselect="YES"
+ssconfigch="joystk.ch"
+
+
+ssgroup=4
+/* NLS: Please translate the following line */
+ssname="IBM MPU-401"
+ssicon="midiplay.ico"
+ssversion="1.0.1"
+sssize=12
+ssdll="genin.dll"
+ssdllentry="InitGenin"
+ssdllinputparms="28"
+ssselect="VERSION"
+
