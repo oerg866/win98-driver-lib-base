@@ -1,0 +1,38 @@
+
+	       *** DC-390U/W/F/U2 Windows 98 Driver Installation ***
+	       ===================================================
+
+ Windows 98 now will detect Tekram DC-390U/F(old version before 3.0)
+ PCI SCSi Cards, and prompt you the message "Need update driver from Tekram"
+ during installation the Windows 98 system.
+ But the Windows 98 will not install DC-390U/F device driver for you.
+
+ So, you need to install the DC-390U/F device driver manually.
+
+ To install the Tekram DC-390U/F driver follow these steps:
+
+ 1) First, you need to install Windows 98.
+
+ 2) Run the patch file to fix and install dc-390 U/F device driver.
+    (a:\win95_98\win98patch.exe)
+
+ 3) Reboot the system.
+
+
+ Notes:
+   DC-390U/F: (old PCB version: before version 3.0)
+
+   1. Win98Patch.exe is only for DC-390U/F under Windows 98.
+   2. For windows 95 and windows 95 OSR2, you don't need to run win98patch.exe
+      to fix PCI.VXD.
+
+   DC-390U/F: (new PCB version 3.0 and after)
+   DC-390U2:
+
+   1. You don't need to run win98patch.exe, just do the normal procedures to
+      to install windows 95 or windows 98.
+   2. Windows 98 will automatically detect these cards as SYMBIOS scsi cards,
+      and install symbios device driver for you.
+   3. After completely installed the Windows 98 system, you need to update
+      Tekram device driver manually.
+

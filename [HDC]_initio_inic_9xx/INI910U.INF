@@ -1,0 +1,83 @@
+;-------------------------------------------------------------------------
+;INI910U.INF  -- This file contains descriptions of INITIO INI-9100U/9100UW
+;               SCSI Host adapters supported in Windows 95
+;-------------------------------------------------------------------------
+[Version]
+signature="$CHICAGO$"
+Provider=%INI%
+Class=SCSIAdapter
+
+[ClassInstall]
+Addreg=SCSIClassReg
+
+[SCSIClassReg]
+HKR,,,,%SCSIClassName%
+
+[Manufacturer]
+%INI%=INITIO
+
+[INITIO]
+%PCI\VEN_1101&DEV_9500.DeviceDesc%= INI910U,PCI\VEN_1101&DEV_9500
+;NEW
+%PCI\VEN_1101&DEV_9400.DeviceDesc%= INI910U,PCI\VEN_1101&DEV_9400
+%PCI\VEN_1101&DEV_9401.DeviceDesc%= INI910U,PCI\VEN_1101&DEV_9401
+;END
+; ---- INI910U Installation Section  -----
+[INI910U]
+Copyfiles=@INI910U.MPD
+AddReg=IOS,INI910U.REG
+UpdateInis=UpdateINIfile
+UpdateCfgSys=UpdateCFGfile
+Reboot
+
+[INI910U.REG]
+HKR,,PortDriver,,INI910U.MPD
+
+[UpdateINIfile]
+%10%\ios.ini,safelist,,"aspi910u.sys    ; Initio PM driver exists"
+%10%\ios.ini,safelist,,"inicd.sys       ; Initio PM driver exists"
+%10%\ios.ini,safelist,,"inidisk.sys     ; Initio PM driver exists"
+
+[UpdateCFGfile]
+LastDrive=Z
+
+; ---- IOS common section ----
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+;[IOSMCA]
+;HKR,,ConfigFlags,1,00,02,00,00
+
+;[Poll]
+;HKR,,polling,,1
+
+;[ForceMPCopy]
+;HKR,,NoSetupUI,,1
+
+;[FixInitID]
+;HKR,,AdapterSettings,,"/H7"
+
+[ControlFlags]
+CopyFilesOnly=PCI\VEN_1101&DEV_9500,PCI\VEN_1101&DEV_9400,PCI\VEN_1101&DEV_9401
+
+;----------------------------
+[DestinationDirs]
+ISPIDEV = 11                    ;delete from SYSTEM dir if exists
+DefaultDestDir = 12             ;IOSubsys directory
+
+[SourceDisksFiles]
+INI910U.mpd = 1
+
+[SourceDisksNames]
+1 = %ID1%, Instd1, 0000-0000
+
+[Strings]
+SCSIClassName="SCSI Controllers"
+INI="Initio Corp."
+PCI\VEN_1101&DEV_9500.DeviceDesc="Initio INI-9XXXU/UW PCI SCSI Host Adapter"
+;NEW
+PCI\VEN_1101&DEV_9400.DeviceDesc="Initio INIC-940 PCI SCSI Host Adapter"
+PCI\VEN_1101&DEV_9401.DeviceDesc="Initio INIC-941 PCI SCSI Host Adapter"
+;END
+ID1="INI-9XXXU/UW or INIC-9XX Driver Disk"

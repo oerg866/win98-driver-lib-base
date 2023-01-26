@@ -1,0 +1,132 @@
+
+; FileName: trm390w.inf
+; version: 3.22
+
+[Version]
+; Version Section
+;   Signature="$WINDOWS 95$"
+;   Class=class-name
+;   Provider=INF-Creator
+;   LayoutFile=filename.inf
+;
+;%PCI\VEN_1000&DEV_000F&SUBSYS_39041DE1.DeviceDesc%=DC390W.drv,PCI\VEN_1000&DEV_000F&SUBSYS_00000000
+Signature="$WINDOWS 95$"
+Class=SCSIAdapter
+Provider=%Msft%
+
+[ClassInstall]
+AddReg=SCSIReg
+
+[ScsiReg]
+HKR,,,,%SCSIClassName%
+HKR,,EnumPropPages,,"iosclass.dll,EnumPropPages"
+HKR,,Icon,,-10
+
+[Manufacturer]
+; Manufacturer Section
+;   manufacture-name | %string-key%=manufacturer-name-section
+%TRM%=Tekram
+
+[Tekram]
+; Manufacturer Name Section
+;   device-description=install-section-name,device-id,[,compatible-device-id]
+%PCI\VEN_1000&DEV_0001.DeviceDesc%=DC390W.drv,PCI\VEN_1000&DEV_0001
+%PCI\VEN_1000&DEV_0003.DeviceDesc%=DC390W.drv,PCI\VEN_1000&DEV_0003
+%PCI\VEN_1000&DEV_0006.DeviceDesc%=DC390W.drv,PCI\VEN_1000&DEV_0006
+%PCI\VEN_1000&DEV_000C&SUBSYS_39071DE1.DeviceDesc%=DC390W.drv,PCI\VEN_1000&DEV_000C
+%PCI\VEN_1000&DEV_000F&SUBSYS_39041DE1.DeviceDesc%=DC390W.drv,PCI\TEKRAM
+%PCI\VEN_1000&DEV_000F&SUBSYS_00000000.DeviceDesc%=DC390W.drv,PCI\VEN_1000&DEV_000F
+%PCI\VEN_1000&DEV_000F.DeviceDesc%=DC390W.drv,PCI\VEN_1000&DEV_000F
+
+
+
+[DC390W.drv]
+; Install Section
+;   LogConfig=log-config-section-name[,log-config-section-name]...
+;   Copyfiles=file-list-section[,<file-list-section>]...
+;   Renfiles=file-list-section[,<file-list-section>]...
+;   Delfiles=file-list-section[,<file-list-section>]...
+;   UpdateInis=update-ini-section[,update-ini-section]...
+;   UpdateIniFields=update-inifields-section[,update-inifields-section]...
+;   AddReg=add-registry-section[,add-registry-section]...
+;   DelReg=del-registry-section[,del-registry-section]...
+;   Ini2Reg=ini-to-registry-section[,ini-to-registry-section]...
+;   UpdateCfgSys=update-config-section
+;   UpdateAutoBat=update-config-section
+;   Reboot | Restart
+LogConfig=DC390W.Log
+CopyFiles = @trm390w.mpd
+AddReg = IOS,DC390WReg
+UpdateInis=DC390W.IOSINI
+UpDateCfgSys=DC390W.UpdateConfigSys
+Reboot
+
+[DC390W.IOSINI]
+%10%\IOS.INI, SafeList ,, "aspiuwf.sys     ; DC-390W/U/F PM Drivers Exists"
+%31%\msdos.sys,Options,,"DoubleBuffer=1"
+
+
+[DC390W.UpdateConfigSys]
+DevDelete=aspiuwf.sys
+
+[DC390W.Log]
+;ConfigPriority=Reboot
+MemConfig=8000@C800-DFFFF%FFFF8000
+IOConfig=80@0000-FFFF
+IRQConfig=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+
+[IOS]
+; Add Registry Section
+;   reg-root-string,[subkey],[value-name],[flag],[value]
+;	reg-root-string:
+;	    HKCR    Same as HKEY_CLASSES_ROOT
+;	    HKCU    Same as HKEY_CURRENT_USER
+;	    HKLM    Same as HKEY_LOCAL_MACHINE
+;	    HKU     Same as HKEY_USERS
+;	    HKR     Means relative from the KEY passed into GenInstallEx
+;	subkey:
+;	    Optional, Identifies the subkey to set. Has the form Key1\Key2\Key3
+;	value-name:
+;	    Optional, Identofies the vale name for the subkey. For string type,
+;	    if the value is left empty, the subkey or value-name is set to a
+;	    NULL string
+;	flag:
+;	    Optional, Determines both the value type and whether the registry
+;	    key is replaced if it already exists. Flag is a bit map where:
+;		Bit    ValueMeaning
+;		0	0   (Default) Value is an ANSI string
+;		0	1   Value is a hexadecimal number
+;		1	0   (Default) Replace key if it exists
+;		1	1   Do not replace key if it exists.
+;	value:
+;	    Optional
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[DC390WReg]
+HKR,,PortDriver,,trm390w.mpd
+
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourcesDisksFiles]
+trm390w.mpd = 1
+trm390w.inf=1
+
+[SourceDisksNames]
+1 = ,,,,
+
+[Strings]
+TRM= "Tekram Technology Co., Ltd."
+Msft = "Tekram Technology Co., Ltd."
+PCI\VEN_1000&DEV_0001.DeviceDesc="Tekram DC-310 PCI SCSI Adapter"
+PCI\VEN_1000&DEV_0003.DeviceDesc="Tekram DC-390W PCI SCSI Adapter"
+PCI\VEN_1000&DEV_0006.DeviceDesc="Tekram DC-310U PCI SCSI Adapter"
+PCI\VEN_1000&DEV_000F&SUBSYS_39041DE1.DeviceDesc="Tekram DC-390F/U PCI SCSI Adapter"
+PCI\VEN_1000&DEV_000F&SUBSYS_00000000.DeviceDesc="Tekram DC-390F/U PCI SCSI Adapter"
+PCI\VEN_1000&DEV_000F.DeviceDesc="Tekram DC-390F/U (PCB Ver 3.x) PCI SCSI Adapter"
+PCI\VEN_1000&DEV_000C&SUBSYS_39061DE1.DeviceDesc="Tekram DC-390U2B PCI SCSI Adapter"
+PCI\VEN_1000&DEV_000C&SUBSYS_39071DE1.DeviceDesc="Tekram DC-390U2W PCI SCSI Adapter"
+SCSIClassName="SCSI Controllers"
+
