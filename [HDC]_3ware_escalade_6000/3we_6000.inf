@@ -1,0 +1,52 @@
+; Copyright (c) 3ware, Inc.
+; INF file for the 3ware Escalade 6000 Storage Switch
+; SCSI Miniport Driver for Windows 98 and Windows Me
+
+[Version]
+Signature   ="$Chicago$"
+Class       = SCSIAdapter
+ClassGUID   = {4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider    = %COMPANY_NAME%
+DriverVer   = 12/21/2001,1.11.00.001
+
+; DiskId = DiskDescriptionString, DiskLabel, DiskSerialNumber
+[SourceDisksNames]
+1 = %DISK_DESCRIPTION%,,
+
+; Filename = DiskId
+[SourceDisksFiles]
+3waregsm.mpd = 1
+3warevsd.vxd = 1
+
+; Win9x DestinationDirectory = \windows\system\iosubsys
+[DestinationDirs]
+DefaultDestDir = 12
+
+[Manufacturer]
+%COMPANY_NAME% = 3ware
+
+[3ware]
+%DEVICE_DESCRIPTION% = 3ware_Install, PCI\VEN_13C1&DEV_1000
+
+[3ware_Install]
+CopyFiles = @3waregsm.mpd,@3warevsd.vxd
+AddReg = IOS,3wareCtrl.Reg
+
+[3wareCtrl.Reg]
+HKR,,PortDriver,,3waregsm.mpd
+
+[ClassInstall]
+Addreg = SCSIReg
+
+[SCSIReg]
+HKR,,,,%SCSIClassName%
+HKR,,Icon,,-10
+
+[IOS]
+HKR,,DevLoader,,*IOS
+
+[Strings]
+COMPANY_NAME            = "3ware, Inc."
+DISK_DESCRIPTION        = "3ware Escalade Driver Installation Disk"
+DEVICE_DESCRIPTION      = "3ware Escalade 6000 Storage Switch"
+SCSIClassName           = "SCSI Controllers"

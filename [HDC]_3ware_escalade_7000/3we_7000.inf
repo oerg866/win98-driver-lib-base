@@ -1,0 +1,53 @@
+; Copyright (c) 2002 3ware, Inc.
+; INF file for the 3ware Escalade 7000 Series ATA RAID Controller
+; SCSI Miniport Driver for Windows 98 and Windows Me
+
+[Version]
+Signature   ="$Chicago$"
+Class       = SCSIAdapter
+ClassGUID   = {4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider    = %COMPANY_NAME%
+CatalogFile = 3waregsm.cat
+DriverVer   = 07/18/2002,1.12.00.008
+
+; DiskId = DiskDescriptionString, DiskLabel, DiskSerialNumber
+[SourceDisksNames]
+1 = %DISK_DESCRIPTION%,,
+
+; Filename = DiskId
+[SourceDisksFiles]
+3wDrv100.mpd = 1
+3warevsd.vxd = 1
+
+; Win9x DestinationDirectory = \windows\system\iosubsys
+[DestinationDirs]
+DefaultDestDir = 12
+
+[Manufacturer]
+%COMPANY_NAME% = 3ware
+
+[3ware]
+%DEVICE_DESCRIPTION% = 3ware_Install, PCI\VEN_13C1&DEV_1001
+
+[3ware_Install]
+CopyFiles = @3wDrv100.mpd,@3warevsd.vxd
+AddReg = IOS,3wareCtrl.Reg
+
+[3wareCtrl.Reg]
+HKR,,PortDriver,,3wDrv100.mpd
+
+[ClassInstall]
+Addreg = SCSIReg
+
+[SCSIReg]
+HKR,,,,%SCSIClassName%
+HKR,,Icon,,-10
+
+[IOS]
+HKR,,DevLoader,,*IOS
+
+[Strings]
+COMPANY_NAME            = "3ware, Inc."
+DISK_DESCRIPTION        = "3ware Escalade Driver Installation Disk"
+DEVICE_DESCRIPTION      = "3ware Escalade 7000 Series ATA RAID Controller"
+SCSIClassName           = "SCSI Controllers"
