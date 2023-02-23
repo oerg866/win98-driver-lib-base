@@ -1,0 +1,278 @@
+;
+; NETIPG.INF for Windows 98Sec/ME
+; version : 2.0.0
+; Build   : 040621
+;
+; IC Plus IP1000 Gigabit Ethernet Adapter
+;
+; Copyright 2004 IC Plus Corp.
+;
+[Version]
+Signature   = "$Chicago$"
+Compatible  = 1
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %V_ICPLUS%
+;CatalogFile = netipg.cat
+DriverVer   = 08/11/2004,3.19.40811.0
+
+[Manufacturer]
+%V_ICPLUS% = ICPlus, NT.5.1
+
+[ICPlus]
+; DisplayName             Section       DeviceID
+;------------             -------       --------
+%IP1000A.DeviceDesc%    = ip1000A.ndi, PCI\VEN_13F0&DEV_1023
+
+[ICPlus.NT.5.1]
+; DisplayName             Section       DeviceID
+;------------             -------       --------
+%IP1000A.DeviceDesc%    = ip1000Axp.ndi, PCI\VEN_13F0&DEV_1023
+
+;-----------------------------------------------------------------------------
+; Windows 98/ME
+;-----------------------------------------------------------------------------
+[ip1000A.ndi]
+DriverVer       = 06/16/2004,3.0.18
+AddReg          = win9x.ndi.reg, common.reg, ip1000A.reg
+CopyFiles       = ipg.win9x.copyfiles
+
+;-----------------------------------------------------------------------------
+; Windows 2000
+;-----------------------------------------------------------------------------
+[ip1000A.ndi.NT]
+Characteristics = 0x84  ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5     ; PCI
+AddReg          = winnt.ndi.reg, common.reg, ip1000A.reg
+CopyFiles       = ipg.nt5.copyfiles
+
+[ip1000A.ndi.NT.Services]
+AddService = ipg, 2, ipg.Service, common.EventLog
+
+;-----------------------------------------------------------------------------
+; Windows XP
+;-----------------------------------------------------------------------------
+[ip1000Axp.ndi.NT]
+Characteristics = 0x84  ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5     ; PCI
+AddReg          = winnt.ndi.reg, common.reg, ip1000A.reg
+CopyFiles       = ipg.nt51.copyfiles
+
+[ip1000Axp.ndi.NT.Services]
+AddService = ipg, 2, ipgxp.Service, common.EventLog
+
+;-----------------------------------------------------------------------------
+; copyfiles
+;-----------------------------------------------------------------------------
+[ipg.win9x.copyfiles]
+ipgnd4.sys,,,2
+
+[ipg.nt5.copyfiles]
+ipgnd5.sys,,,2
+
+[ipg.nt51.copyfiles]
+ipgnd51.sys,,,2
+
+;-----------------------------------------------------------------------------
+; Win 9x registration parameters
+;-----------------------------------------------------------------------------
+[win9x.ndi.reg]
+HKR,,                           MediaType,          0, 1
+HKR,, 				            AdapterType,  	    0, 5
+HKR,,                           BusType,            0, 5
+HKR,,                           DevLoader,          0, "*ndis"
+HKR,,                           DeviceVxDs,         0, "ipgnd4.sys"
+HKR,,                 		    EnumPropPages,      0, "netdi.dll,EnumPropPages"
+HKR,NDIS,                       LogDrivername,      0, "ipg"
+HKR,NDIS,                       MajorNdisVersion,   1, 03
+HKR,NDIS,                       MinorNdisVersion,   1, 0A
+HKR,Ndi,                        DeviceID,           0, "PCI\VEN_13F0&DEV_1023"
+HKR,Ndi\Interfaces,             DefUpper,           0, "ndis3"
+HKR,Ndi\Interfaces,             DefLower,           0, "ethernet"
+HKR,Ndi\Interfaces,             UpperRange,         0, "ndis3"
+HKR,Ndi\Interfaces,             LowerRange,         0, "ethernet"
+
+;-----------------------------------------------------------------------------
+; Common parameters
+;-----------------------------------------------------------------------------
+[common.reg]
+HKR,, 				AdapterType,  	    0, 5	; for XP
+; Receive Buffers
+HKR, Ndi\params\RxBuffer, ParamDesc, , %RxBuffer%
+HKR, Ndi\params\RxBuffer, Default,   , "128"
+HKR, Ndi\params\RxBuffer, Type,      , "dword"
+HKR, Ndi\params\RxBuffer, Min,       , "16"
+HKR, Ndi\params\RxBuffer, Max,       , "256"
+HKR, Ndi\params\RxBuffer, Step,      , "8"
+
+; Transmit Buffers
+HKR, Ndi\params\TxBuffer, ParamDesc, , %TxBuffer%
+HKR, Ndi\params\TxBuffer, Default,   , "128"
+HKR, Ndi\params\TxBuffer, Type,      , "dword"
+HKR, Ndi\params\TxBuffer, Min,       , "16"
+HKR, Ndi\params\TxBuffer, Max,       , "256"
+HKR, Ndi\params\TxBuffer, Step,      , "8"
+
+;Enable FlowControl
+HKR, Ndi\params\FlowControl,      ParamDesc, 0, %FlowControl%
+HKR, Ndi\params\FlowControl,      Type,      0, "enum"
+HKR, Ndi\params\FlowControl,      Default,   0, "1"
+HKR, Ndi\params\FlowControl\enum, "0",       0, %Disabled%
+HKR, Ndi\params\FlowControl\enum, "1",       0, %Enabled%
+
+; Enable TCP/IP Jumbo Frame
+HKR, Ndi\params\JumboFrame,       ParamDesc,  , %JumboFrame%
+HKR, Ndi\params\JumboFrame,       Default,    , "0"
+HKR, Ndi\params\JumboFrame,       Type,       , "enum"
+HKR, Ndi\params\JumboFrame\enum,  "0",        , %Disabled%
+HKR, Ndi\params\JumboFrame\enum,  "1",        , %Enabled(4K)%
+
+; Network Address
+HKR, Ndi\params\NetworkAddress, ParamDesc, , %NetworkAddress%
+HKR, Ndi\params\NetworkAddress, Type,      , "edit"
+HKR, Ndi\params\NetworkAddress, LimitText, , "12"
+HKR, Ndi\params\NetworkAddress, UpperCase, , "1"
+HKR, Ndi\params\NetworkAddress, Default,   , ""
+HKR, Ndi\params\NetworkAddress, Optional,  , "1"
+
+; Connection Type
+HKR, Ndi\params\ConnectionType,      ParamDesc, , %ConnectionType%
+HKR, Ndi\params\ConnectionType,      Default,   , "0"
+HKR, Ndi\params\ConnectionType,      Type,      , "enum"
+HKR, Ndi\params\ConnectionType\enum, "0",       , %Autosensetp%
+;HKR, Ndi\params\ConnectionType\enum, "11",      , %10MBPS_F%
+;HKR, Ndi\params\ConnectionType\enum, "12",      , %10MBPSFD_F%
+;HKR, Ndi\params\ConnectionType\enum, "13",      , %100MBPS_F%
+;HKR, Ndi\params\ConnectionType\enum, "14",      , %100MBPSFD_F%
+HKR, Ndi\params\ConnectionType\enum, "21",      , %10MBPS_AUTO%
+HKR, Ndi\params\ConnectionType\enum, "22",      , %10MBPSFD_AUTO%
+HKR, Ndi\params\ConnectionType\enum, "23",      , %100MBPS_AUTO%
+HKR, Ndi\params\ConnectionType\enum, "24",      , %100MBPSFD_AUTO%
+HKR, Ndi\params\ConnectionType\enum, "26",      , %1GBPSFD_AUTO%
+
+; VLAN tagging
+HKR, Ndi\params\EnableTagging,      ParamDesc, 0, %EnableTagging%
+HKR, Ndi\params\EnableTagging,      Default,   0, "0"
+HKR, Ndi\params\EnableTagging,      Type,      0, "enum"
+HKR, Ndi\params\EnableTagging\enum, "0",       0, %Disabled%
+HKR, Ndi\params\EnableTagging\enum, "1",       0, %Enabled%
+
+; Default VLAN ID
+HKR, Ndi\params\VLANID, ParamDesc,  0,   %VLANID%
+HKR, Ndi\params\VLANID, Type,       0,   "dword"               ;;"edit"
+;;HKR, Ndi\params\VLANID, LimitText,0, "4"
+HKR, Ndi\params\VLANID, Default,    0,   "2"
+HKR, Ndi\params\VLANID, Min,        0,   "0"
+HKR, Ndi\params\VLANID, Max,        0,   "4094"
+HKR, Ndi\params\VLANID, Step,       0,   "1"
+;;HKR, Ndi\params\VLANID, optional,  , "1"
+
+;Wake on LAN
+HKR, Ndi\params\WakeOnLAN,                   ParamDesc,  0, %WakeOnLAN%
+HKR, Ndi\params\WakeOnLAN,                   Type,       0, "enum"
+HKR, Ndi\params\WakeOnLAN,                   Default,    0, "1"
+HKR, Ndi\params\WakeOnLAN\enum,              "0",        0, %Disabled%
+HKR, Ndi\params\WakeOnLAN\enum,              "1",        0, %Enabled%
+
+; Enable TCP/IP Checksum or Segmentation Offload
+HKR,Ndi\params\TaskOffload,     	ParamDesc,  0, %TaskOffload%
+HKR,Ndi\params\TaskOffload,     	Type,       0, "enum"
+HKR,Ndi\params\TaskOffload,     	Default,    0, "1"
+HKR,Ndi\params\TaskOffload\enum,	"0",        0, %Disabled%
+HKR,Ndi\params\TaskOffload\enum,	"1",        0, %ChecksumOffload%
+
+;Wake On LAN Speed
+HKR,Ndi\params\WakeOnLANSpeed,     		ParamDesc,  0, %WakeOnLANSpeed%
+HKR,Ndi\params\WakeOnLANSpeed,     		Type,       0, "enum"
+HKR,Ndi\params\WakeOnLANSpeed,		    Default,    0, "0"
+HKR,Ndi\params\WakeOnLANSpeed\enum,		"0",        0, %10MFD%
+HKR,Ndi\params\WakeOnLANSpeed\enum,		"1",        0, %100MFD%
+
+[ip1000A.reg]
+HKR, , AdapterCFID, 0, "102313F0"
+
+;-----------------------------------------------------------------------------
+; NT NDI object registration
+;-----------------------------------------------------------------------------
+[winnt.ndi.reg]
+HKR,Ndi\Interfaces,             UpperRange,         0, "ndis5"
+HKR,Ndi\Interfaces,             LowerRange,         0, "ethernet"
+HKR,Ndi,                        Service,            0, "ipg"
+
+[ipg.Service]
+DisplayName     = %ipg.Service.DispName%
+ServiceType     = 1 ; %SERVICE_KERNEL_DRIVER%
+StartType       = 3 ; %SERVICE_DEMAND_START%
+ErrorControl    = 1 ; %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\ipgnd5.sys
+LoadOrderGroup  = NDIS
+
+[ipgxp.Service]
+DisplayName     = %ipg.Service.DispName%
+ServiceType     = 1 ; %SERVICE_KERNEL_DRIVER%
+StartType       = 3 ; %SERVICE_DEMAND_START%
+ErrorControl    = 1 ; %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\ipgnd51.sys
+LoadOrderGroup  = NDIS
+
+[common.EventLog]
+AddReg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR,,EventMessageFile,  0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR,,TypesSupported,    0x00010001, 7
+
+;-----------------------------------------------------------------------------
+; Destination Directory
+;-----------------------------------------------------------------------------
+[DestinationDirs]
+ipg.nt5.copyfiles          = 12    ; LDID_IOS  Windows Iosubsys dir.
+ipg.win9x.copyfiles        = 11    ; LDID_SYS  Windows System Dir.
+DefaultDestDir             = 11    ; LDID_SYS  Windows System Dir.
+ipg.nt51.copyfiles         = 12    ; LDID_IOS  Windows Iosubsys dir.
+
+[SourceDisksNames]
+1 = %DriverDisketteName%,,,
+
+[SourceDisksFiles]
+ipgnd4.sys  = 1
+ipgnd51.sys = 1
+
+;-----------------------------------------------------------------------------
+; Localization string
+;-----------------------------------------------------------------------------
+[Strings]
+V_ICPLUS      = "IC Plus Corp."
+
+RxBuffer        = "Receive Buffers"
+TxBuffer        = "Transmit Buffers"
+FlowControl     = "Flow Control"
+JumboFrame      = "TCP/IP Jumbo Frame"
+NetworkAddress  = "Network Address"
+ConnectionType  = "Connection Type"
+EnableTagging   = "802.1Q/1P VLAN tagging"
+VLANID          = "VLAN ID"
+WakeOnLAN    	= "Wake on LAN"
+TaskOffload     = "Task Offloading"
+ChecksumOffload   =  "Checksum Offloading"
+WakeOnLANSpeed  = "Wake On LAN LinkSpeed"
+Disabled        = "Disabled"
+Enabled         = "Enabled"
+Enabled(4K)     = "Enabled(4K)"
+Autosensetp     = "Auto-Negotiation"
+Autosensefb     = "1Gbps Full (Nway)"
+10MBPS_F     = "10Mbps Half (Force)"
+10MBPSFD_F   = "10Mbps Full (Force)"
+100MBPS_F    = "100Mbps Half (Force)"
+100MBPSFD_F  = "100Mbps Full (Force)"
+10MBPS_AUTO     = "10Mbps Half (Nway)"
+10MBPSFD_AUTO   = "10Mbps Full (Nway)"
+100MBPS_AUTO    = "100Mbps Half (Nway)"
+100MBPSFD_AUTO  = "100Mbps Full (Nway)"
+1GBPSFD_AUTO    = "1Gbps Full (Nway)"
+1GMBPSFD        = "1Gbps Full"
+
+IP1000A.DeviceDesc = "IC Plus IP1000 Gigabit Ethernet Adapter"
+
+ipg.Service.DispName  = "IC Plus IP1000 Gigabit Ethernet Adapter Driver"
+DriverDisketteName    = "IC Plus IP1000 Gigabit Ethernet Adapter Driver Diskette"

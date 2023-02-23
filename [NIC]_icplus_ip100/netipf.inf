@@ -1,0 +1,154 @@
+;(c) Copyright 2004 IC Plus Corp. All rights reserved.                         
+
+[version]
+Signature   = "$Windows 95$"
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %ICPlus%
+DriverVer   = 02/02/2005,4.5.50202
+
+[Manufacturer]
+%ICPlus%  = ICPlus
+
+;[ControlFlags]
+;ExcludeFromSelect = PCI\VEN_13f0&DEV_0200
+
+[ICPlus]
+%IP100.DeviceDesc%      = ip100.ndi, PCI\VEN_13f0&DEV_0200
+
+;-----------------------------------------------------------------------------
+;   W i n d o w s   9 x
+;-----------------------------------------------------------------------------
+[ip100.ndi]
+DriverVer   = 02/02/2005
+AddReg      = ip100.win9x.reg, ip100.common.reg
+CopyFiles   = ip100.win9x.CopyFiles
+
+
+[ip100.win9x.CopyFiles]
+Ipfnd4.sys,,,2
+;-----------------------------------------------------------------------------
+[ip100.win9x.reg]
+HKR, ,                              MediaType,          0,  1
+HKR, ,                              AdapterType,        0,  5
+HKR, ,                              BusType,            0,  5
+HKR, ,                              DevLoader,          0,  "*ndis"
+HKR, ,                              DeviceVxDs,         0,  "Ipfnd4.sys"
+HKR, ,				    EnumPropPages,      0,  "netdi.dll,	EnumPropPages"
+HKR, NDIS,                          MajorNdisVersion,   1,  03
+HKR, NDIS,                          MinorNdisVersion,   1,  0A
+HKR, NDIS,                          LogDriverName,      0,  "IP100"
+HKR, Ndi,                           DeviceID,           0,  "PCI\VEN_13f0&DEV_0200"  
+HKR, Ndi\Install,                   ndis3,              0,  "IP100.ndis5"
+HKR, Ndi\Interfaces,                DefLower,           ,   "ethernet"
+HKR, Ndi\Interfaces,                LowerRange,         ,   "ethernet"
+HKR, Ndi\Interfaces,                DefUpper,           ,   "ndis3"
+HKR, Ndi\Interfaces,                UpperRange,         ,   "ndis3"
+
+
+;-----------------------------------------------------------------------------
+;Both Windows 2000 & 9x
+;-----------------------------------------------------------------------------
+[ip100.common.reg]
+HKR, ,                              AdapterCFID,        0,  "020013f0"
+; Connection Type
+HKR, Ndi\params\ConnectionType,             ParamDesc,  ,   %ConnectionType%
+HKR, Ndi\params\ConnectionType,             default,    ,   "0"
+HKR, Ndi\params\ConnectionType,             type,       ,   "enum"
+HKR, Ndi\params\ConnectionType\enum,        0,          ,   %Autosense%
+;HKR, Ndi\params\ConnectionType\enum,        1,          ,   %10BaseT%
+;HKR, Ndi\params\ConnectionType\enum,        2,          ,   %10BaseTFD%
+;HKR, Ndi\params\ConnectionType\enum,        3,          ,   %100BaseTx%
+;HKR, Ndi\params\ConnectionType\enum,        4,          ,   %100BaseTxFD%
+HKR, Ndi\params\ConnectionType\enum,        6,          ,   %N10BaseT%
+HKR, Ndi\params\ConnectionType\enum,        7,          ,   %N10BaseTFD%
+HKR, Ndi\params\ConnectionType\enum,        8,          ,   %N100BaseTx%
+HKR, Ndi\params\ConnectionType\enum,        9,          ,   %N100BaseTxFD%
+
+; Receive Buffers
+HKR, Ndi\params\RxBuffer,                   ParamDesc,  ,   %RxBuffer%
+HKR, Ndi\params\RxBuffer,                   default,    ,   "96"
+HKR, Ndi\params\RxBuffer,                   type,       ,   "enum"
+HKR, Ndi\params\RxBuffer\enum,              16,         ,   "16"
+HKR, Ndi\params\RxBuffer\enum,              32,         ,   "32"
+HKR, Ndi\params\RxBuffer\enum,              48,         ,   "48"
+HKR, Ndi\params\RxBuffer\enum,              64,         ,   "64"
+HKR, Ndi\params\RxBuffer\enum,              80,         ,   "80"
+HKR, Ndi\params\RxBuffer\enum,              96,         ,   "96"
+HKR, Ndi\params\RxBuffer\enum,              112,         ,   "112"
+HKR, Ndi\params\RxBuffer\enum,              128,         ,   "128"
+
+; Transmit Buffers
+HKR, Ndi\params\TxBuffer,                   ParamDesc,  ,   %TxBuffer%
+HKR, Ndi\params\TxBuffer,                   default,    ,   "96"
+HKR, Ndi\params\TxBuffer,                   type,       ,   "enum"
+HKR, Ndi\params\TxBuffer\enum,              16,         ,   "16"
+HKR, Ndi\params\TxBuffer\enum,              32,         ,   "32"
+HKR, Ndi\params\TxBuffer\enum,              48,         ,   "48"
+HKR, Ndi\params\TxBuffer\enum,              64,         ,   "64"
+HKR, Ndi\params\TxBuffer\enum,              80,         ,   "80"
+HKR, Ndi\params\TxBuffer\enum,              96,         ,   "96"
+HKR, Ndi\params\TxBuffer\enum,              112,         ,   "112"
+HKR, Ndi\params\TxBuffer\enum,              128,         ,   "128"
+
+; No Cable Indication
+HKR, Ndi\params\NoCableIndication,          ParamDesc,  ,   %NoCableIndication%
+HKR, Ndi\params\NoCableIndication,          default,    ,   "0"
+HKR, Ndi\params\NoCableIndication,          type,       ,   "enum"
+HKR, Ndi\params\NoCableIndication\enum,     0,          ,   %Disabled%
+HKR, Ndi\params\NoCableIndication\enum,     1,          ,   %Enabled%
+
+; Network Address
+HKR, Ndi\params\NetworkAddress,             ParamDesc,  ,   %NetworkAddress%
+HKR, Ndi\params\NetworkAddress,             type,       ,   "edit"
+HKR, Ndi\params\NetworkAddress,             LimitText,  ,   "12"
+HKR, Ndi\params\NetworkAddress,             UpperCase,  ,   "1"
+HKR, Ndi\params\NetworkAddress,             default,    ,   ""
+HKR, Ndi\params\NetworkAddress,             optional,   ,   "1"
+
+;-----------------------------------------------------------------------------
+; DestinationDirs
+;
+[DestinationDirs]
+ip100.win9x.CopyFiles         = 11
+DefaultDestDir             = 11        ; LDID_SYS
+;-----------------------------------------------------------------------------
+; Source Disk layout
+;
+[SourceDisksNames]
+1=%DISKNAME%,,,		
+
+[SourceDisksFiles]
+Ipfnd4.sys = 1
+
+
+
+
+;-----------------------------------------------------------------------------
+; Localizable Strings
+;
+[Strings]
+ICPlus              = "IC Plus Corp."
+
+RxBuffer            = "Receive Buffers"
+TxBuffer            = "Transmit Buffers"
+NoCableIndication   = "No Cable Indication"
+NetworkAddress      = "Network Address"
+ConnectionType      = "Connection Type"
+Disabled            = "Disabled"
+Enabled             = "Enabled"
+Autosense           = "AutoSense"
+10BaseT             = "10Half (Force)"
+10BaseTFD           = "10Full (Force)"
+100BaseTx           = "100Half(Force)"
+100BaseTxFD         = "100Full(Force)"
+N10BaseT             = "10Half (Nway)"
+N10BaseTFD           = "10Full (Nway)"
+N100BaseTx           = "100Half(Nway)"
+N100BaseTxFD         = "100Full(Nway)"
+IP100.DeviceDesc	 = "IC Plus IP100 10/100 Fast Ethernet Adapter"
+IP100.Service.DispName   = "IC Plus IP100 10/100 Fast Ethernet Adapter NT Driver"
+IP100xp.DeviceDesc	 = "IC Plus IP100 10/100 Fast Ethernet Adapter"
+IP100xp.Service.DispName   = "IC Plus IP100 10/100 Fast Ethernet Adapter NT Driver"
+
+DISKNAME	 = "IC Plus IP100 10/100 Fast Ethernet Adapter Driver Diskette"
