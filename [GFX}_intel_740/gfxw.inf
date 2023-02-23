@@ -1,0 +1,199 @@
+;
+;Copyright (c) Intel Corporation (1997).
+;
+; INTEL MAKES NO WARRANTY OF ANY KIND REGARDING THE CODE.  THIS CODE IS LICENSED
+; ON AN "AS IS" BASIS AND INTEL WILL NOT PROVIDE ANY SUPPORT, ASSISTANCE,
+; INSTALLATION, TRAINING OR OTHER SERVICES.  INTEL DOES NOT PROVIDE ANY UPDATES,
+; ENHANCEMENTS OR EXTENSIONS.  INTEL SPECIFICALLY DISCLAIMS ANY WARRANTY OF
+; MERCHANTABILITY, NONINFRINGEMENT, FITNESS FOR ANY PARTICULAR PURPOSE, OR ANY
+; OTHER WARRANTY.  Intel disclaims all liability, including liability for
+; infringement of any proprietary rights, relating to use of the code. No license,
+; express or implied, by estoppel or otherwise, to any intellectual property rights
+; is granted herein.
+;--------------------------------------------------------------------
+;/*
+; * **************************  INTEL PROPRIETARY  ****************************
+; *
+; *       --------------------  DO NOT REPRODUCE  ----------------------
+; *
+; *   Copyright (C) 1996, 1997 by Intel Corporation.
+; *   All rights reserved. No part of this program or publication may be
+; *   reproduced, transmitted, transcribed, stored in a retrieval system, or
+; *   translated into any language or computer language, in any form or by any
+; *   means, electronic, mechanical, magnetic, optical,  chemical,  manual, or
+; *   otherwise,  without the prior written permission of  Intel Corporation,
+; *   2200 Mission College Boulevard,  Santa Clara,  California 95051.
+; *
+; * ***************************************************************************
+;*/
+;
+[version]
+Class=DISPLAY
+signature="$CHICAGO$"
+Provider=%Mfg%
+;Uncomment the next line for WHQL
+;CatalogFile=I740_30W.cat
+
+[DestinationDirs]
+DefaultDestDir  = 11    ; LDID_SYS
+Driver.Copy = 11
+VGARTD.Copy = 11
+TvOut.Copy = 11
+I2C.Copy = 11
+Config.Copy = 11
+Help.Copy = 18		; Windows Help directory.
+OpenGL.Copy = 11
+
+[SourceDisksNames]
+1="Intel740 Win9x PC3.2W 3.1.2407-981207 Driver Disk",,0
+
+[SourceDisksFiles]
+vgartd.vxd=1
+gfxdrv.drv=1
+gfx.vxd=1
+gfxdd16.dll=1
+gfxdd32.dll=1
+i740i2c.vxd=1
+gfxi2c.vxd=1
+gfxtvout.dll=1
+gfxCfg.dll=1
+gfxConfg.hlp=1
+enuConfg.lrc=1
+i740.ico=1
+TVWatch.exe=1
+gfxhelp.exe=1
+gfxgldev.dll=1
+gfxglicd.dll=1
+gfxMulti.dll=1
+;Uncomment the next line for WHQL
+;I740_30W.cat=1
+
+[Manufacturer]
+%Mfg%=Mfg
+
+[Mfg]
+%PCI\VEN_8086&DEV_7800.DeviceDesc%=IntelAcc, PCI\VEN_8086&DEV_7800  
+%PCI\VEN_8086&DEV_7800.DeviceDesc%=IntelAcc, PCI\VEN_8086&DEV_7800&SUBSYS_01008086 ;Accelerator
+
+[IntelAcc]
+CopyFiles=Driver.Copy,VGARTD.Copy,I2C.Copy,TvOut.Copy,Config.Copy,Help.Copy, OpenGL.Copy, Multi.Copy
+DelReg=Prev.DelReg
+AddReg=Driver.AddReg,VGARTD.AddReg,TVOut.AddReg,Config.AddReg, OpenGL.AddReg
+
+[Driver.Copy]
+gfxdrv.drv
+gfx.vxd
+gfxdd16.dll
+gfxdd32.dll
+
+[VGARTD.Copy]
+vgartd.vxd
+
+[I2C.Copy]
+gfxi2c.vxd
+
+[TvOut.Copy]
+gfxtvout.dll
+TVWatch.exe
+
+[Config.Copy]
+gfxCfg.dll
+enuConfg.lrc
+i740.ico
+
+[Help.Copy]
+gfxConfg.hlp
+
+[OpenGL.Copy]
+gfxhelp.exe
+gfxgldev.dll
+gfxglicd.dll
+
+[Multi.Copy]
+gfxMulti.dll
+
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+HKCR,TVOut.TVOut.1
+HKCR,TVOut.TVOut
+HKCR,CLSID\{34E9A7B2-6D59-11D1-938D-00A0C95FE004}
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\GFXCFG"
+HKLM,"Software\INTEL\Intel740\CfgApplet"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Run",TVWatch
+
+[Driver.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,gfxdrv.drv
+HKR,DEFAULT,drv2,,gfxdrv.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,gfx.vxd
+HKR,DEFAULT,minivdd2,,gfx.vxd
+HKR,DEFAULT,RefreshRate,,-1
+HKR,DEFAULT,DDC,,1
+HKR,DEFAULT,ExtModeSwitch,,0
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vxd,,*vdd
+HKR,"MODES\8\640,480",,,"60,75,85"
+HKR,"MODES\8\720,480",,,"75,85"
+HKR,"MODES\8\720,576",,,"75,85"
+HKR,"MODES\8\800,600",,,"56,60,75,85"
+HKR,"MODES\8\1024,768",,,"60,75,85"
+HKR,"MODES\8\1152,864",,,"60,75,85"
+HKR,"MODES\8\1280,1024",,,"60,75,85"
+HKR,"MODES\8\1600,1200",,,"60,75"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\720,480"
+HKR,"MODES\16\720,576"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\16\1152,864"
+HKR,"MODES\16\1280,1024"
+HKR,"MODES\24\640,480"
+HKR,"MODES\24\720,480"
+HKR,"MODES\24\720,576"
+HKR,"MODES\24\800,600"
+HKR,"MODES\24\1024,768"
+HKLM,"Software\Intel\Intel740",GammaEnabled,0x1,1
+HKLM,"Software\Intel\Intel740",DisplayFps,0x10001,1,0,0,0
+HKLM,"Software\Intel\Intel740",PeakFrameRate,0x10001,0
+HKLM,"Software\Intel\Intel740",Avg.FrameRate,0x10001,0
+HKLM,"Software\Intel\Intel740","Language DLL Thunk",,""
+HKLM,"Software\Intel\Intel740","VDisplaySetting",,"-1"
+HKLM,"Software\Intel\Intel740","HDisplaySetting",,"-1"
+HKLM,"Software\Intel\Intel740","MultiMonKey",,%PCI\VEN_8086&DEV_7800.DeviceDesc%
+HKLM,"System\CurrentControlSet\Services\VxD\PCI",78008086,1,0,0,0,0x20
+
+[VGARTD.AddReg]
+HKLM,"System\CurrentControlSet\Services\VXD\VGARTD","StaticVxD",,"VgartD.VxD"
+
+[Config.AddReg]
+HKCR,"CLSID\{990D3D00-E55B-11cf-ABAD-00AA00C0D812}",,,"Control Panel Display Shell Extension"
+HKCR,"CLSID\{990D3D00-E55B-11cf-ABAD-00AA00C0D812}\InProcServer32",,,"%11%\gfxCfg.dll"
+HKCR,"CLSID\{990D3D00-E55B-11cf-ABAD-00AA00C0D812}\InProcServer32","ThreadingModel",,"Apartment"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\GfxCfg",,,"{990D3D00-E55B-11cf-ABAD-00AA00C0D812}"
+
+[TVOut.AddReg]
+HKCR,TVOut.TVOut,,,"TVOut Class"
+HKCR,TVOut.TVOut\CurVer,,,"TVOut.TVOut.1"
+HKCR,TVOut.TVOut.1,,,"TVOut Class"
+HKCR,TVOut.TVOut.1\CLSID,,,"{34E9A7B2-6D59-11D1-938D-00A0C95FE004}"
+HKCR,CLSID\{34E9A7B2-6D59-11D1-938D-00A0C95FE004},,,"TVOut Class"
+HKCR,CLSID\{34E9A7B2-6D59-11D1-938D-00A0C95FE004}\ProgID,,,"TVOut.TVOut.1"
+HKCR,CLSID\{34E9A7B2-6D59-11D1-938D-00A0C95FE004}\VersionIndependentProgID,,,"TVOut.TVOut"
+HKCR,CLSID\{34E9A7B2-6D59-11D1-938D-00A0C95FE004}\InprocServer32,,,"%11%\gfxTVOut.dll"
+HKCR,CLSID\{34E9A7B2-6D59-11D1-938D-00A0C95FE004}\InprocServer32,ThreadingModel,,"Apartment"
+HKLM, Software\Microsoft\Windows\CurrentVersion\RunServices,TVWatch,,"%11%\TVWatch.exe"
+
+[OpenGL.AddReg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\OpenGLDrivers","gfxdrv",,"gfxglicd"
+
+[Strings]
+Mfg="Intel Corporation"
+PCI\VEN_8086&DEV_7800.DeviceDesc = "Intel740 Win9x PC3.2W 3.1.2407-981207"
+CURRENT="SOFTWARE\Microsoft\Windows\CurrentVersion"
