@@ -1,0 +1,121 @@
+This file describes normal display driver installation procedures for
+Windows 98.  The first section indicates procedures when installing 
+device drivers on a display device not previously installed in the system.
+The second procedure is for upgrading or replacing the display drivers
+currently in use.  Use these procedures when installing the display drivers
+provided in this directory.
+
+DRIVER INSTALLATION PROCEDURE.  
+
+Use this procedure for installing your device drivers on an adapter not 
+previously installed on your system:
+
+      After you have installed your Display Adapter, turn your system back on.
+      Once Windows detects your newly added display adapter, the "Add New Hardware
+      Wizard" will appear.
+
+      Please note:  Choosing cancel at any point during this installation
+      could result in an inability to change the display adapter driver.
+      If this happens, reboot the system and go to safe mode.  Follow the
+      instructions in the Troubleshooter to reinstall you device driver.
+
+      Read Message and then click the "Next" button.
+
+      Under "What do you want Windows to do?" choose the option that says
+      "Search for the best driver for your device." (will be the option 
+      selected by default).
+      Then click the "Next" button.
+
+      Place a check in the Check-box beside "Specify a location:" and remove
+      check-marks from all other check-boxes.
+
+      Specify the path to the new driver and then click the "Next" button.
+      
+          Example 1: Insert the drivers disk in the A: floppy drive,
+                     and enter A:\.
+
+          Example 2: Type in the name of the directory where you copied
+                     the drivers, either on your local hard drive or
+                     on a network share.
+
+          Example 3: If you're not sure exactly where the drivers are,
+                     choose the "Browse..." button are find them.
+
+      The "Add New Hardware Wizard" will reappear with the name of the Display
+      Adapter that you have installed in your machine. 
+      Read message and then click the "Next" button.
+
+      Windows 98 will copy the display drivers to the proper directories
+      on your system.
+
+      When Windows 98 has finished copying the drivers, click the "Finish"
+      button.
+      
+      Windows98 will prompt you to now restart your system to make the new drivers
+      active.
+
+      After the system has restarted, you can go back into the Display
+      applet and select alternate screen resolutions and color depths.
+
+
+DRIVER UPGRADE PROCEDURE.
+
+Use this procedure for upgrading or replacing the existing display driver
+in your system:
+     
+      Please note:  Choosing cancel at any point during this installation
+      could result in an inability to change the display adapter driver.
+      If this happens, reboot the system and go to safe mode.  Follow the
+      instructions in the Troubleshooter to reinstall you device driver.
+
+      Click Start, then Settings, then Control Panel.
+
+      Start the "Display" applet program. 
+
+      Select the "Settings" page, push the "Advanced..." button.
+	
+      Select the "Adapter" page.	
+
+      Push the "Change..." button.
+
+      The "Update Device Driver Wizard" will appear.
+
+      Read message and then click the "Next" button.
+
+      Under "What do you want Windows to do?" choose the option that says
+      "Search for the best driver for your device." (will be the option 
+      selected by default).
+      Then click the "Next" button.
+
+      Place a check in the Check-box beside "Specify a location:" and remove
+      check-marks from all other check-boxes.
+
+      Specify the path to the new driver and then click the "Next" button.
+      
+          Example 1: Insert the drivers disk in the A: floppy drive,
+                     and enter A:\.
+
+          Example 2: Type in the name of the directory where you copied
+                     the drivers, either on your local hard drive or
+                     on a network share.
+
+          Example 3: If you're not sure exactly where the drivers are,
+                     choose the "Browse..." button are find them.
+
+      The "Update Device Driver Wizard" will reappear with the name of the Display
+      Adapter that you have installed in your machine. 
+      Read message and then click the "Next" button.
+
+      Windows 98 will copy the display drivers to the proper directories
+      on your system.
+
+      When Windows 98 has finished copying the drivers, click the "Finish"
+      button.
+
+      Windows98 will prompt you to now restart your system to make the new drivers
+      active.
+
+      After the system has restarted, you can go back into the Display
+      applet and select alternate screen resolutions and color depths.
+
+      

@@ -1,0 +1,127 @@
+;   TRIDENT.INF file for Trident Windows 95 display drivers
+;   Copyright 1995-1996, Trident Microsystems, Inc. All rights reserved.
+
+[Version]
+Signature=$CHICAGO$
+Class=DISPLAY
+Provider=%Mfg%
+
+[DestinationDirs]
+DefaultDestDir=11
+
+[Manufacturer]
+%Mfg%=Mfg
+
+[Mfg]
+;%String1%=Trident.Install,*PNP0903
+%String2%=Trident.Install,PCI\VEN_1023&DEV_9750
+;%String3%=Trident.Install,PCI\VEN_1023&DEV_9850
+;%String4%=Trident.Install,PCI\VEN_1023&DEV_9397
+
+[Trident.Install]
+CopyFiles=Driver.Copy,Utility.Copy
+AddReg=Driver.AddReg,Utility.AddReg
+DelReg=Driver.DelReg,Utility.DelReg
+LogConfig=VGA.LogConfig
+
+[Trident.Install.PosDup]
+*PNP0903
+
+[Driver.Copy]
+sgiul95.drv
+trid975.vxd
+t3ddd32.dll
+
+[Utility.Copy]
+tdisplus.dll
+thkeyspy.exe
+tdisplus.hlp
+
+[Driver.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,sgiul95.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,trid975.vxd
+HKR,DEFAULT,RefreshRate,,-1
+HKR,DEFAULT,DDC,,1
+HKR,"tConfig",TvPageEnable,,1
+HKR,"tConfig",DVPageEnable,,1
+HKR,"tConfig",RFPageEnable,,2
+HKR,"tConfig",DualOverlayWindows,,0
+HKR,"tConfig",DualWinSelectable,,0
+HKR,"tConfig",3DPageEnable,,0
+HKR,"tConfig",PCIBurstEnabled,,0
+HKR,"MODES\8\640,480"
+HKR,"MODES\8\720,480"
+HKR,"MODES\8\864,480"
+HKR,"MODES\8\800,600"
+HKR,"MODES\8\1024,600"
+HKR,"MODES\8\1024,768"
+HKR,"MODES\8\1280,1024"
+HKR,"MODES\8\1600,1200"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\720,480"
+HKR,"MODES\16\864,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\16\1280,1024"
+HKR,"MODES\16\1600,1200"
+HKR,"MODES\32\640,480"
+HKR,"MODES\32\720,480"
+HKR,"MODES\32\864,480"
+HKR,"MODES\32\800,600"
+HKR,"MODES\32\1024,600"
+HKR,"MODES\32\1024,768"
+HKLM, "SOFTWARE\Trident Microsystems\D3DPerformance",D3DPerf,0,3
+HKLM, "SOFTWARE\Trident Microsystems\D3DPerformance",CkBiLinearOn,0,1
+HKLM, "SOFTWARE\Trident Microsystems\D3DPerformance",AlphaBlendOff,0,0
+HKLM, "SOFTWARE\Trident Microsystems\D3DPerformance",32BitOff,0,0
+HKLM, "SOFTWARE\Trident Microsystems\D3DPerformance",SpecularOff,0,0
+HKLM, "SOFTWARE\Trident Microsystems\D3DPerformance",DualOverlay,0,0
+
+
+[Utility.AddReg]
+HKCR,"CLSID\{dc3e5640-f745-11ce-9850-0040c721629a}\InProcServer32",,,"TDisPlus.dll"
+HKCR,"CLSID\{dc3e5640-f745-11ce-9850-0040c721629a}\InProcServer32",ThreadingModel,,"Apartment"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\Refresh Rate Control",,,"{dc3e5640-f745-11ce-9850-0040c721629a}"
+
+[Driver.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+HKLM,SOFTWARE\Trident Microsystems\D3DPerformance,
+
+[Utility.DelReg]
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\DriverPages"
+HKLM,"System\CurrentControlSet\Services\VxD\Trident"
+
+[VGA.LogConfig]
+ConfigPriority=HARDWIRED
+IOConfig=3B0-3BB
+IOConfig=3C0-3DF
+MemConfig=A0000-AFFFF
+MemConfig=C0000-C7FFF
+MemConfig=B8000-BFFFF
+
+[SourceDisksNames]
+1="Trident Windows 95 Display Pro-Driver and Utility Disk",,0
+
+[SourceDisksFiles]
+sgiul95.drv=1
+trid975.vxd=1
+t3ddd32.dll=1
+tdisplus.dll=1
+tdisplus.hlp=1
+thkeyspy.exe=1
+
+[Strings]
+Mfg="Trident Microsystems"
+;String1="Trident Accelerrator for ISA/VL (v6.20.6543h)"
+String2="Trident 3DImage 9750  Linear Accelerated for PCI/AGP (v6.20.6543h)"
+;String3="Trident 3DImage 985  Linear Accelerated for PCI (v6.20.6543h)"
+;String4="Trident Cyber 9397 Linear Accelerated for PCI (v6.20.6543h)"
