@@ -1,0 +1,36 @@
+[L1C]
+ Type = NDIS
+ Title = "Atheros AR8131/AR8132 PCI-E Ethernet Adapter"
+ Version = 3.01
+ DriverName = ATL1C$
+ XPORTS = NETBEUI LANDD
+[File]
+ Name = ATL1C.DOS
+ Path = IBMCOM\MACS
+
+[NETADDRESS]
+tag = NETADDRESS
+display = "Network adapter address"
+type = string
+Strlength = 13
+optional = YES
+editable = YES
+help = "This parameter overrides the network address of the network
+ adapter card.  The value of this parameter is a hexadecimal string of
+ 13 digits, as in @52544C333333.  The address must be unique among
+  all other network adapter addresses on the network."
+
+[ETHERID]
+tag = ETHERID
+display = "Node address"
+type = string
+Strlength = 13
+optional = YES
+editable = YES
+help = "This parameter using multiple network adapter card.
+  The value of this parameter is a hexadecimal string of
+ 13 digits, as in @52544C333333.  The address must be unique among
+  all other network adapter addresses on the network."
+
+
+
