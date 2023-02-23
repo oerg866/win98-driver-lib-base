@@ -1,0 +1,80 @@
+; 
+; hpt374.INF
+; 
+; INF file of HighPoint ATA RAID HPT374 Controller for Windows 9x
+; Copyright (c) HighPoint Technologies, Inc. All rights reserved
+;
+[Version]
+signature="$Windows 95$"
+Class=SCSIAdapter
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%HIGHPOINT%
+;CatalogFile= hpt374.CAT
+DriverVer=05/08/2004, 3.0.4
+
+[ClassInstall]
+Addreg=SCSIReg
+
+[SCSIReg]
+HKR,,,,%SCSIClassName%
+HKR,,Icon,,"-10"
+
+[Manufacturer]
+%HighPoint%=HighPoint
+
+[DestinationDirs]
+DefaultDestDir  = 12 ; DIRID_DRIVERS
+HighPointInf    = 17,"other";	INF directory
+
+[ControlFlags]
+ExcludeFromSelect = SCSI\HPT_____RCM_DEVICE_______
+;ExcludeFromSelect = *
+
+[HighPoint]
+%PCI\VEN_1103&DEV_0008.DeviceDesc%=hpt374PCI,PCI\VEN_1103&DEV_0008
+%SCSI\HPT_____RCM_DEVICE_______.DeviceDesc% = NODRV, SCSI\HPT_____RCM_DEVICE_______
+
+[NODRV]
+AddReg=NODRV_AddReg
+
+[NODRV.Services]
+AddService = , %SPSVCINST_ASSOCSERVICE%   ; null service install
+
+[NODRV_AddReg]
+;Dummy AddReg section 
+
+[hpt374PCI]
+CopyFiles= MoveMiniPortDrv
+AddReg= IOS,hpt374PCI.reg
+Reboot
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[hpt374PCI.reg]
+HKR,,PortDriver,,hpt374.mpd
+
+[SourceDisksNames]
+1 =%InstallDisk%,,,,
+
+[SourceDisksFiles]
+;;hpt374.inf = 1
+hpt374.mpd = 1
+pwr374.vxd= 1
+wrap374.vxd= 1
+
+
+[MoveMiniPortDrv]
+hpt374.mpd
+pwr374.vxd
+wrap374.vxd
+
+[HighPointInf]
+hpt374.inf
+
+[strings]
+HighPoint="HighPoint "
+PCI\VEN_1103&DEV_0008.DeviceDesc="HPT374 UDMA/ATA133 RAID Controller"
+SCSI\HPT_____RCM_DEVICE_______.DeviceDesc = "HighPoint RCM Device"
+InstallDisk = "HPT374 UDMA/ATA133 RAID Controller Driver Diskette"
