@@ -1,0 +1,420 @@
+"ESS Solo-1 AudioDrive V4.12.01.1165"
+[Version]
+LayoutFile=Layout.inf
+Signature="$CHICAGO$"
+Class=MEDIA
+provider=%ESS%
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"-1"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%ESSMfgName%=ESS
+
+[SourceDisksFiles]
+
+[ESS]
+%SoloA.DeviceDesc%=SoloA_Device,PCI\VEN_125D&DEV_1969
+%SoloD.DeviceDesc%=SoloD_Device,Solo\DOS
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+[SoloA_Device]
+DelFiles=SoloA.CopyList
+CopyFiles=SoloA.CopyList,SoloD.CopyList,ESSSWT.CopyList
+DelReg=SoloA.DelReg,WAVE.DelReg,ESSSWT.DelReg
+AddReg=WAVE.AddReg,MIXER.AddReg,SoloA.AddReg,ESSSWT.AddReg,ESSCheck.AddReg,ES938.AddReg,Ext.AddReg,VolumeMap.AddReg
+
+[SoloD_Device]
+AddReg=SoloD.AddReg
+
+[ESS.UpdateInis]
+
+[Joystick.UpdateInis]
+system.ini,drivers,"joystick="
+
+[SoloA.CopyList]
+essolo.vxd,,
+essolo.drv,,
+esfm.drv,,
+essmpu.drv,,
+essdm.vxd,,
+essswt.vxd,,
+essswt.drv,,
+
+[SoloD.CopyList]
+essolo.com,,
+essolo.sys,,
+
+[Joystick.CopyList]
+vjoyd.vxd,,
+msjstick.drv,,
+
+[ESSSWT.CopyList]
+ESSSWT.DAT
+ESSSWT1M.DLS           ; 1MB Software WaveTable
+
+[ESS.DelList]
+
+[ESSCheck.AddReg]
+HKLM,%KEY_FIL%\PostInstall,UpdateIniFields,,"UpdateIniFields=fl.UpdateIniFields"
+HKLM,%KEY_FIL%\fl.UpdateIniFields,,,"1"
+HKLM,%KEY_FIL%\fl.UpdateIniFields,msmixmgr,,"system.ini,boot,drivers,msmixmgr.dll"
+
+[Drivers.fields]
+system.ini,boot,drivers,msmixmgr.dll
+system.ini,boot,drivers,mmmixer.dll
+
+[SoloA.AddReg]
+HKR,,Driver,,essolo.vxd
+HKR,Drivers\wave\essolo.drv,Description,,%SoloA.DeviceDesc%
+HKR,Drivers\wave\essolo.drv,Driver,,essolo.drv
+HKR,Drivers\midi\esfm.drv,Description,,%Solo.Name%" "%V_ESFM%
+HKR,Drivers\midi\esfm.drv,Driver,,esfm.drv
+HKR,Drivers\midi\essmpu.drv,Description,,%Solo.Name%" "%V_EXTERNAL%"
+HKR,Drivers\midi\essmpu.drv,External,1,01,00,00,00
+HKR,Drivers\midi\essmpu.drv,Driver,,essmpu.drv
+HKR,Drivers\mixer\essolo.drv,Description,,%SoloA.DeviceDesc%
+HKR,Drivers\mixer\essolo.drv,Driver,,essolo.drv
+HKR,Drivers\aux\essolo.drv,Description,,%SoloA.DeviceDesc%
+HKR,Drivers\aux\essolo.drv,Driver,,essolo.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+HKR,Config,"Disable Mic Preamp",01,00,00,00,00
+HKR,Config,"MonoInPhoneMute",01,01,00,00,00
+HKR,Config,"Reverse Channel Control",01,00
+HKR,Config,"DCdrift",01,00,00,00,00
+HKR,Config,"AGC",01,00,00,00,00
+HKR,Config,"Enable Line-In",01,01
+HKR,Config,"Enable AuxB",01,01
+HKR,Config,"Enable PC Speaker",01,01
+HKR,Config,"PCspeakerVol",01,7f,7f,00,00
+HKR,Config,"MonitorWave",01,00,00,00,00 ;01,01,00,00,00: Monitor ON
+HKR,Config,"Add Game Port",01,00	;01,01=True, 01,00=False
+HKR,Config,"Disable MPU-401",01,00	;01,01=True, 01,00=False
+
+;;;; Write parameter to ESSOLO.SYS /s:xxxxxxxx
+HKR,Config,"AddParaToESSOLO",01,ff
+HKR,Config,"Add ESSOLO.COM To Autoexec.bat",01,FF
+HKR,Config,"Add DEVICE=ESSOLO.SYS",01,FF
+
+;;;;ES1946 to enable IIS change 01,00 to 01,01
+HKR,Config,"Enable IIS",01,00
+
+[SoloD.AddReg]
+HKR,,DeviceDriver,,essolo.vxd
+HKR,,DevLoader,,*CONFIGMG
+HKR,,Driver,,essolo.vxd
+
+;;;; LX/BX/EX Chip set legacy DMA mode
+;;;; DDMA Mode: 01,00
+;;;; TDMA Mode: 01,01(WBDMA1)
+;;;; PCPCI Mode: 01,02
+HKR,Config,"Legacy DMA Mode",01,01
+HKR,Config,"DDMA Base",01,00,38
+
+[JOYSTICK.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\joystick,,,
+
+[MIXER.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+HKR,Config,Source0Long,,   "Line-In"      ; Line-in long name
+HKR,Config,Source0Short,,  "Line"         ; Line-in short name
+HKR,Config,Source1Long,,   "Wave"         ; Wave long name
+HKR,Config,Source1Short,,  "Wave"         ; Wave short name
+HKR,Config,Source2Long,,   "Microphone"   ; Mic long name
+HKR,Config,Source2Short,,  "Mic"          ; Mic short Name
+HKR,Config,Source3Long,,   "CD Audio"     ; CD Audio long name
+HKR,Config,Source3Short,,  "CD"           ; CD audio short name
+HKR,Config,Source4Long,,   "Synthesizer"  ; Synthsizer long name
+HKR,Config,Source4Short,,  "Synth"        ; Synthesizer short name
+HKR,Config,Source5Long,,   "PC Speaker"   ; PC Speaker long name
+HKR,Config,Source5Short,,  "PCspk"        ; PC Speaker short name
+HKR,Config,Source6Long,,   "AuxB"         ; AuxB long name
+HKR,Config,Source6Short,,  "AuxB"         ; AuxB short name
+HKR,Config,Source7Long,,   "IIS"          ; IIS long name
+HKR,Config,Source7Short,,  "IIS"          ; IIS short name
+HKR,Config,Source8Long,,   "Mic"          ; Mic long name
+HKR,Config,Source8Short,,  "Mic"          ; Mic short name
+HKR,Config,Source9Long,,   "Phone"        ; Phone long name
+HKR,Config,Source9Short,,  "Phone"        ; Phone short name
+HKR,Config,Source10Long,,  "Chorus"       ; Chorus long name
+HKR,Config,Source10Short,, "Chorus"       ; Chorus short name
+HKR,Config,Source11Long,,  "Reverb"       ; Reverb long name
+HKR,Config,Source11Short,, "Reverb"       ; Reverb short name
+
+HKR,Config,Dest0Long,,  "Volume Control"     ; Playback Volume long name
+HKR,Config,Dest0Short,, "Vol"                ; Playback Volume short name
+HKR,Config,Dest1Long,,  "Recording Control"  ; Recording Volume long name
+HKR,Config,Dest1Short,, "Rec"                ; Recording Volume short name
+HKR,Config,Dest2Long,,  "Voice Commands"     ; Voice Command long name
+HKR,Config,Dest2Short,, "Voice"              ; Voice Command short name
+HKR,Config,Dest3Long,,  "Phone"              ; Mono-in phone long name
+HKR,Config,Dest3Short,, "Phone"              ; Mono-in phone short name
+HKR,Config,Dest4Long,,  "Music Effects"      ; Music effects long name
+HKR,Config,Dest4Short,, "Effects"            ; Music effects short name
+
+HKR,Config,Ctrl0Long,,   "Master Output Sources"
+HKR,Config,Ctrl0Short,,  "Output Sources"
+HKR,Config,Ctrl1Long,,   "Recording Input Sources"
+HKR,Config,Ctrl1Short,,  "Record Sources"
+HKR,Config,Ctrl2Long,,   "Voice Input Sources"
+HKR,Config,Ctrl2Short,,  "Voice Sources"
+HKR,Config,Ctrl3Long,,   "Line-In Volume Level"
+HKR,Config,Ctrl3Short,,  "Line Volume"
+HKR,Config,Ctrl4Long,,   "Wave Output Volume Level"
+HKR,Config,Ctrl4Short,,  "Wave Volume"
+HKR,Config,Ctrl5Long,,   "Microphone Volume Level"
+HKR,Config,Ctrl5Short,,  "Mic Volume"
+HKR,Config,Ctrl6Long,,   "CD Audio Volume Level"
+HKR,Config,Ctrl6Short,,  "CD Volume"
+HKR,Config,Ctrl7Long,,   "FM Synthesis Volume Level"
+HKR,Config,Ctrl7Short,,  "Synth Volume"
+HKR,Config,Ctrl8Long,,   "PC Speaker Volume Level"
+HKR,Config,Ctrl8Short,,  "PCspk Volume"
+HKR,Config,Ctrl9Long,,   "AuxB Volume Level"
+HKR,Config,Ctrl9Short,,  "AuxB Volume"
+HKR,Config,Ctrl10Long,,  "IIS Volume Level"
+HKR,Config,Ctrl10Short,, "IIS Volume"
+HKR,Config,Ctrl11Long,,  "Master Volume Level"
+HKR,Config,Ctrl11Short,, "Master Volume"
+HKR,Config,Ctrl12Long,,  "Line-In Input Level"
+HKR,Config,Ctrl12Short,, "Line Input"
+HKR,Config,Ctrl13Long,,  "Microphone Input Level"
+HKR,Config,Ctrl13Short,, "Mic Input"
+HKR,Config,Ctrl14Long,,  "CD Audio Input Level"
+HKR,Config,Ctrl14Short,, "CD Input"
+HKR,Config,Ctrl15Long,,  "FM Synthesis Input Level"
+HKR,Config,Ctrl15Short,, "Synth Input"
+HKR,Config,Ctrl16Long,,  "Wave Input Level"
+HKR,Config,Ctrl16Short,, "Wave Input"
+HKR,Config,Ctrl17Long,,  "AuxB Input Level"
+HKR,Config,Ctrl17Short,, "AuxB Input"
+HKR,Config,Ctrl18Long,,  "Mixer Input Level"
+HKR,Config,Ctrl18Short,, "Mixer Input"
+HKR,Config,Ctrl19Long,,  "Line-In Input Level"
+HKR,Config,Ctrl19Short,, "Line Input"
+HKR,Config,Ctrl20Long,,  "Microphone Input Level"
+HKR,Config,Ctrl20Short,, "Mic Input"
+HKR,Config,Ctrl21Long,,  "CD Audio Input Level"
+HKR,Config,Ctrl21Short,, "CD Input"
+HKR,Config,Ctrl22Long,,  "Wave Input Level"
+HKR,Config,Ctrl22Short,, "Wave Input"
+HKR,Config,Ctrl23Long,,  "AuxB Input Level"
+HKR,Config,Ctrl23Short,, "AuxB Input"
+HKR,Config,Ctrl24Long,,  "Mixer Input Level"
+HKR,Config,Ctrl24Short,, "Mixer Input"
+HKR,Config,Ctrl25Long,,  "Line-In Mute"
+HKR,Config,Ctrl25Short,, "Line Mute"
+HKR,Config,Ctrl26Long,,  "Wave Output Mute"
+HKR,Config,Ctrl26Short,, "Wave Mute"
+HKR,Config,Ctrl27Long,,  "Microphone Mute"
+HKR,Config,Ctrl27Short,, "Mic Mute"
+HKR,Config,Ctrl28Long,,  "CD Audio Mute"
+HKR,Config,Ctrl28Short,, "CD Mute"
+HKR,Config,Ctrl29Long,,  "FM Synthesis Mute"
+HKR,Config,Ctrl29Short,, "Synth Mute"
+HKR,Config,Ctrl30Long,,  "PC Speaker Mute"
+HKR,Config,Ctrl30Short,, "PCspk Mute"
+HKR,Config,Ctrl31Long,,  "AuxB Mute"
+HKR,Config,Ctrl31Short,, "AuxB Mute"
+HKR,Config,Ctrl32Long,,  "IIS Mute"
+HKR,Config,Ctrl32Short,, "IIS Mute"
+HKR,Config,Ctrl33Long,,  "Master Mute"
+HKR,Config,Ctrl33Short,, "Master Mute"
+HKR,Config,Ctrl34Long,,  "Recording Input Meter"
+HKR,Config,Ctrl34Short,, "Record Meter"
+HKR,Config,Ctrl35Long,,  "Voice Input Meter"
+HKR,Config,Ctrl35Short,, "Voice Meter"
+HKR,Config,Ctrl36Long,,  "Wave Output Meter"
+HKR,Config,Ctrl36Short,, "Wave Meter"
+HKR,Config,Ctrl37Long,,  "Recording Input Monitor"
+HKR,Config,Ctrl37Short,, "Record Monitor"
+HKR,Config,Ctrl38Long,,  "Voice Input Monitor"
+HKR,Config,Ctrl38Short,, "Voice Monitor"
+HKR,Config,Ctrl39Long,,  "General Purpose Output 0"
+HKR,Config,Ctrl39Short,, "GPO0"
+HKR,Config,Ctrl40Long,,  "General Purpose Output 1"
+HKR,Config,Ctrl40Short,, "GPO1"
+HKR,Config,Ctrl41Long,,  "3D Effect Enable"
+HKR,Config,Ctrl41Short,, "3D Enable"
+HKR,Config,Ctrl42Long,,  "3D Effect"
+HKR,Config,Ctrl42Short,, "3D Effect"
+HKR,Config,Ctrl43Long,,  "Treble"
+HKR,Config,Ctrl43Short,, "Treble"
+HKR,Config,Ctrl44Long,,  "Bass"
+HKR,Config,Ctrl44Short,, "Bass"
+
+HKR,Config,Ctrl45Long,,  "Mic Select"
+HKR,Config,Ctrl45Short,, "Select"
+HKR,Config,Ctrl46Long,,  "Phone Select"
+HKR,Config,Ctrl46Short,, "Select"
+
+HKR,Config,Ctrl47Long,,  "Mic Vol"
+HKR,Config,Ctrl47Short,, "Mic Vol"
+HKR,Config,Ctrl48Long,,  "Phone Vol"
+HKR,Config,Ctrl48Short,, "Phone Vol"
+
+HKR,Config,Ctrl49Long,,  "Chorus Disable"
+HKR,Config,Ctrl49Short,, "Chorus Mute"
+HKR,Config,Ctrl50Long,,  "Reverb Disable"
+HKR,Config,Ctrl50Short,, "Reverb Mute"
+
+HKR,Config,CaptionString,,   "Wavetable"               ; Caption
+HKR,Config,GroupNameString,, "ESS Software Wavetable"  ; Group name
+HKR,Config,EnableString,,    "Enable"                  ; Enable
+HKR,Config,DLSLibrary,,      "DLS Library"             ; Library
+HKR,Config,1MString,,        "1 Megabyte GM set"       ; 1 M
+HKR,Config,NoticeString,,    "Please stop all audio and music playing/recording before changing the configuration."
+
+[WAVE.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Config,"Disable Warning",01,FF
+HKR,Config,"Multiple FM Support",01,FF
+HKLM,%KEY_IOC%\acm,,,
+HKLM,%KEY_IOC%\Rec,,,
+HKLM,%KEY_IOC%\MPlay,,,
+
+[ESSSWT.AddReg]
+HKLM,Software\ESS\ESSSWT,Path,,%10%
+HKLM,Software\ESS\ESSSWT,"Enable MMX",01,01
+HKLM,Software\ESS\ESSSWT,"Enable Software Wavetable",01,00
+HKLM,Software\ESS\ESSSWT,"Memory Pages",01,80,00,00,00
+HKLM,Software\ESS\ESSSWT,"File",,"ESSSWT1M.DLS"
+HKLM,Software\ESS\ESSSWT,"Library",01,00
+HKLM,Software\ESS\ESSSWT,"Library 1 File",,"ESSSWT1M.DLS"
+HKLM,Software\ESS\ESSSWT,"Library 1 Memory",01,80,00,00,00
+HKR,Drivers\midi\essswt.drv,Description,,%V_ESSSWT%
+HKR,Drivers\midi\essswt.drv,Driver,,essswt.drv
+
+[WAVE.DelReg]
+HKR,Drivers\midi
+HKR,Drivers\wave
+HKR,Drivers\mixer
+HKR,Drivers\aux
+
+[Joystick.DelReg]
+HKR,Drivers\joystick
+
+[ESSSWT.DelReg]
+HKLM,Software\ESS\ESSSWT
+
+[SoloA.DelReg]
+HKLM,Enum\Solo
+HKCU,"Software\Microsoft\windows\CurrentVersion\Applets\Volume Control\ESS AudioDrive Mixer"
+
+
+[DisksNames]
+1=      "",     ,
+
+[SourceDisksNames]
+1="Driver Disk",,
+
+[Files]
+[SourceDisksFiles]
+essolo.drv=     1,      ,
+essolo.vxd=     1,      ,
+esfm.drv=       1,      ,
+essmpu.drv=     1,      ,
+essswt1m.dls=1
+
+[DestinationDirs]
+DefaultDestDir = 11
+ESSSWT.CopyList = 10
+SoloD.CopyList = 30
+
+[Strings]
+;Non-localized strings
+KEY_WARNVER="SYSTEM\CurrentControlSet\Control\SessionManager\WarnVerDLLs"
+KEY_CHKVER="SYSTEM\CurrentControlSet\Control\SessionManager\CheckVerDLLs"
+KEY_FIL="SYSTEM\CurrentControlSet\Control\MediaResources\FilterList"
+KEY_UI="SYSTEM\CurrentControlSet\Control\MediaResources\FilterList\fl.UpdateInis"
+KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
+
+;Localized strings
+ESS="ESS"
+ESSMfgName="ESS Technology, Inc."
+SoloA.DeviceDesc="ESS SOLO-1 PCI AudioDrive"
+SoloJ.DeviceDesc="ESS SOLO-1 Gameport Joystick"
+SoloD.DeviceDesc="ESS SOLO-1 DOS Emulation"
+Joystick.DeviceDesc="Gameport Joystick"
+MediaClassName="Sound, video and game controllers"
+V_INTERNAL="Internal OPL2/OPL3 FM Synthesis"
+V_EXTERNAL="External MIDI Port"
+V_ESFM="Internal ESFM Synthesis"
+V_ESSSWT="Internal ESS Software Wavetable"
+Solo.Name="ESS Solo-1"
+
+[ES938.AddReg]
+HKR,Config,"Enable ES938",01,01,00,00,00
+HKR,Config,"3D Effect Enable",01,00,00,00,00
+HKR,Config,"3D Effect",01,CC,CC,CC,CC
+
+[VolumeMap.AddReg]
+HKR,Config,"MainRecordVolumeMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"WaveVolumeInMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"LineInVolumeInMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"MicVolumeInMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"CDAudioVolumeInMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"SynthVolumeInMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"AuxBVolumeInMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"IISVolumeInMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+
+HKR,Config,"LineInVolumeOutMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"WaveVolumeOutMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"MicVolumeOutMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"CDAudioVolumeOutMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"SynthVolumeOutMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"AuxBVolumeOutMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+HKR,Config,"IISVolumeOutMap",01, \
+ 00, 01, 02, 03, 04, 05, 06, 07, 08, \
+ 09, 0a, 0b, 0c, 0d, 0e, 0f
+
+[Ext.AddReg]
+;HKR,Config,"HwVolumeMap",01, \
+; 00, 02, 04, 06, 08, 0C, 10, 14, \
+; 18, 1C, 20, 24, 28, 2C, 2E, 30, \
+; 32, 32, 33, 33, 34, 34, 35, 35, \
+; 36, 36, 36, 37, 37, 37, 38, 38, \
+; 38, 38, 39, 39, 39, 39, 3A, 3A, \
+; 3A, 3A, 3B, 3B, 3B, 3B, 3C, 3C, \
+; 3C, 3C, 3D, 3D, 3D, 3D, 3E, 3E, \
+; 3E, 3E, 3E, 3F, 3F, 3F, 3F, 3F
+
