@@ -1,0 +1,105 @@
+;   TRIDENT.INF file for Trident Windows 95 display drivers
+;   Copyright 1995-1997, Trident Microsystems, Inc. All rights reserved.
+
+[Version]
+Signature=$CHICAGO$
+Class=DISPLAY
+Provider=%Mfg%
+
+[DestinationDirs]
+DefaultDestDir=11
+
+[Manufacturer]
+%Mfg%=Mfg
+
+[Mfg]
+
+%PCI\VEN_1023&DEV_9385-1.DeviceDesc%=Trident9660.Install,PCI\VEN_1023&DEV_9660
+%PCI\VEN_1023&DEV_9382.DeviceDesc%=Trident9660.Install,PCI\VEN_1023&DEV_9660
+%PCI\VEN_1023&DEV_9385.DeviceDesc%=Trident9660.Install,PCI\VEN_1023&DEV_9660
+
+[Trident9660.Install]
+CopyFiles=Driver.Copy,Utility.Copy
+AddReg=Driver.AddReg,Utility.AddReg
+DelReg=Driver.DelReg,Utility.DelReg
+
+
+[Trident.Install.PosDup]
+*PNP0903
+
+[Driver.Copy]
+trident.drv
+trident.vxd
+trident.dll
+tvbios16.dll
+
+[Utility.Copy]
+tdisplus.dll
+tdisplus.hlp
+
+[Driver.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,trident.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,trident.vxd
+HKR,DEFAULT,RefreshRate,,-1
+HKR,DEFAULT,DDC,,1
+HKR,DEFAULT,ExtModeSwitch,,0
+HKR,"MODES\8\640,480"
+HKR,"MODES\8\720,480"
+HKR,"MODES\8\864,480"
+HKR,"MODES\8\800,600"
+HKR,"MODES\8\1024,600"
+HKR,"MODES\8\1024,768"
+HKR,"MODES\8\1280,1024"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\720,480"
+HKR,"MODES\16\864,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\16\1280,1024"
+HKR,"MODES\24\640,480"
+HKR,"MODES\24\720,480"
+HKR,"MODES\24\864,480"
+HKR,"MODES\24\800,600"
+HKR,"MODES\24\1024,600"
+HKR,"MODES\24\1024,768"
+HKR,"MODES\32\640,480"
+HKR,"MODES\32\800,600"
+HKR,"MODES\32\1024,768"
+
+[Utility.AddReg]
+HKCR,"CLSID\{dc3e5640-f745-11ce-9850-0040c721629a}\InProcServer32",,,"TDisPlus.dll"
+HKCR,"CLSID\{dc3e5640-f745-11ce-9850-0040c721629a}\InProcServer32",ThreadingModel,,"Apartment"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\Refresh Rate Control",,,"{dc3e5640-f745-11ce-9850-0040c721629a}"
+
+[Driver.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+
+[Utility.DelReg]
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\DriverPages"
+
+
+[SourceDisksNames]
+1="Trident Windows 95 Display Driver and Utility Disk",,0
+
+[SourceDisksFiles]
+trident.drv=1
+trident.vxd=1
+trident.dll=1
+tvbios16.dll=1
+tdisplus.dll=1
+tdisplus.hlp=1
+
+[Strings]
+Mfg="Trident Microsystems"
+PCI\VEN_1023&DEV_9385-1.DeviceDesc="Trident 9385-1 Reference Design (v6.00.23)"
+PCI\VEN_1023&DEV_9382.DeviceDesc="Trident 9382 Reference Design (v6.00.23)"
+PCI\VEN_1023&DEV_9385.DeviceDesc="Trident 9385 Reference Design (v6.00.23)"

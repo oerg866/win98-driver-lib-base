@@ -1,0 +1,40 @@
+This file describes normal display driver installation procedures for
+Windows 95.  Use these procedures when installing the display drivers
+provided in this directory.
+
+DRIVER INSTALLATION PROCEDURE
+     
+      Click Start, then Settings, then Control Panel.
+
+      Start the "Display" applet program. 
+
+      Select the "Settings" page, push the "Change Display Type" button.
+
+      Push the "Change" button in the "Adapter Type" area.
+
+      Push the "Have Disk" button and press "OK".
+
+      Specify the path to the new driver and press the <ENTER>
+      key:
+
+          Example 1: Insert the drivers disk in the A: floppy drive,
+                     and enter A:\.
+
+          Example 2: Type in the name of the directory where you copied
+                     the drivers, either on your local hard drive or
+                     on a network share.
+
+          Example 3: If you're not sure exactly where the drivers are,
+                     choose the "Browse..." button are find them.
+
+      The "Select Device" dialog box will appear. Select the adapter that
+      corresponds to the one you installed in your machine and click OK.
+
+      Windows 95 will copy the display drivers to the proper directories
+      on your system.
+
+      Continue choosing Close until asked to restart your machine from the
+      "Systems Settings Change" dialog box.
+
+      After the system has restarted, you can go back into the Display
+      applet and select alternate screen resolutions and color depths.
