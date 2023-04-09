@@ -1,0 +1,501 @@
+; INF file for S3 display driver.
+; Copyright 1999, S3 Inc.
+
+[Version]
+Class=Display
+Signature="$CHICAGO$"
+Provider=%Mfg%
+DriverVer = 01/19/2000, 4.12.01.8233
+CatalogFile=S3_8.CAT
+
+[DestinationDirs]
+DefaultDestDir=11
+S3UninstCopy.sys=11
+GAMMAcopy.sys=11
+GAMMAcopy.hlp=18
+GAMMAcopy.win=10
+S3switch2copy.sys=11
+S3switch2copy.hlp=18
+COLORcopy.sys=11
+COLORcopy.hlp=18
+REFcopy.sys=11
+REFcopy.win=10
+S3UninstCopy.sys=11
+
+[SourceDisksNames]
+51="Windows 95/98 S3 Driver Disk",,1
+
+[SourceDisksFiles]
+s3_8.drv=51
+s3_8.dll=51
+s3vdd8.vxd=51
+s3micd.dll=51
+metal.dll=51
+dvideo.dll=51
+S3Gamma.dll=51
+S3Gamma.cfg=51
+S3gamENU.hlp=51
+S3gamCHT.hlp=51
+S3gamCHS.hlp=51
+S3gamNLD.hlp=51
+S3gamFRA.hlp=51
+S3gamDEU.hlp=51
+S3gamITA.hlp=51
+S3gamJPN.hlp=51
+S3gamKOR.hlp=51
+S3gamPTB.hlp=51
+S3gamESP.hlp=51
+S3gamSVE.hlp=51
+S3gamDAN.hlp=51
+S3gamFIN.hlp=51
+S3gamNOR.hlp=51
+S3gamTHA.hlp=51
+S3swtch2.dll=51
+S3swtch2.vxd=51
+S3sw2enu.hlp=51
+s3sw2jpn.hlp=51
+s3sw2fra.hlp=51
+s3sw2deu.hlp=51
+s3sw2ita.hlp=51
+s3sw2esp.hlp=51
+s3sw2dan.hlp=51
+s3sw2nld.hlp=51
+s3sw2fin.hlp=51
+s3sw2kor.hlp=51
+s3sw2nor.hlp=51
+s3sw2ptb.hlp=51
+s3sw2chs.hlp=51
+s3sw2sve.hlp=51
+s3sw2cht.hlp=51
+s3sw2tha.hlp=51
+s3swtch2.cfg=51
+s3sw2ext.cfg=51
+S3COLOR.cpl=51
+S3COLOR.cfg=51
+S3ClrENU.hlp=51
+S3ClrNLD.hlp=51
+S3ClrFRA.hlp=51
+S3ClrDEU.hlp=51
+S3ClrITA.hlp=51
+S3ClrJPN.hlp=51
+S3ClrKOR.hlp=51
+S3ClrPTB.hlp=51
+S3ClrCHS.hlp=51
+S3ClrESP.hlp=51
+S3ClrSVE.hlp=51
+S3ClrCHT.hlp=51
+S3ClrFIN.hlp=51
+S3ClrDAN.hlp=51
+S3ClrNOR.hlp=51
+S3ClrTHA.hlp=51
+S3_Refre.dll=51
+S3Refre.cfg=51
+S3refre.vxd=51
+S3Uninst.exe=51
+
+;----------------------------------------
+; Manufacturers 
+
+[Manufacturer]
+"%Mfg%"=Mfg
+
+;----------------------------------------
+; Driver sections
+
+[Mfg]
+%S3395a.DeviceDesc%= S3_7, PCI\VEN_5333&DEV_8A22
+
+;----------------------------------------
+; Install sections
+;------------------------------Savage4
+[S3_7]
+DelReg=DEL_CURRENT_REG, S3Gamma.AddReg, S3_Savage4_AddReg, S3switch2.AddReg, S3COLOR.AddReg, S3Ref.AddReg
+DelFiles =S3_3_CopyFiles, S3UninstCopy.sys, GAMMAcopy.hlp, GAMMAcopy.sys, GAMMAcopy.win, S3switch2copy.hlp, S3switch2copy.sys, COLORcopy.hlp, COLORcopy.sys, REFcopy.win, REFcopy.sys
+AddReg=S3_7_AddReg, S3Gamma.AddReg, S3_Savage4_AddReg, S3switch2.AddReg, S3COLOR.AddReg, S3Ref.AddReg
+CopyFiles=S3_3_CopyFiles, S3UninstCopy.sys, GAMMAcopy.hlp, GAMMAcopy.sys, GAMMAcopy.win, S3switch2copy.hlp, S3switch2copy.sys, COLORcopy.hlp, COLORcopy.sys, REFcopy.win, REFcopy.sys, S3UninstCopy.sys
+UpdateInis=DV_Ini
+
+[DV_Ini]
+system.ini, drivers32,,"Vids.draw=dvideo.dll",0
+system.ini,386Enh,,"EMMEXCLUDE=C000-CFFF"
+
+;Add this to delete legacy settings
+[S3TVOUT3.DelReg]
+HKLM,SOFTWARE\S3\S3TVOUT3
+
+[S3_Savage4_AddReg]
+HKLM,Config\0001\Display\Settings,ICDMode,,"1"
+HKLM,Config\0001\Display\Settings,MCS3USETIMER,,"ON"
+HKLM,Config\0001\Display\Settings,DDSW,,"YES"
+HKLM,Software\S3\BusmasterDevices\Timer\AVTV98.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\BITCAST.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\VCOM32.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\PPCVIEW.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\VIDEOWAV.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\RAPNAVI.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\RAPVIDEO.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\BCTVCTL.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\GVCAP.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\VMAGIC.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\PWCINEEX.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\CAPX98.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\TVX98.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\AMCAP.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\VIDCAP32.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\VCAPTURE.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\VIDEOWAVE.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\PREMIERE.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\ADAMSCTL.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\MOJICTL.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\GRAPHEDT.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\JTT02.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\VCAP.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\CAPLE.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\MWTV.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\POWERVCR.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\VKANOID.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\VSTUDIO.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\VIDWIZ.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\IPE20.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\IRIS.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\MAXVIEW.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\VWORK32.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\CONF.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\HOME.EXE
+HKLM,Software\S3\BusmasterDevices\Timer\MELCAPT.EXE
+
+;----------------------------------------
+; Common AddReg sections
+
+[DEL_CURRENT_REG]
+HKR,,DevLoader,0,
+HKR,,Ver,0,
+HKR,DEFAULT,,0,
+HKR,MODES,,0,
+HKR,CURRENT,,0,
+HKLM,Config\0001\Display\Settings,AT,,
+HKLM,Config\0001\Display\Settings,AC,,
+HKLM,Config\0001\Display\Settings,WV,,
+HKLM,Config\0001\Display\Settings,ML,,
+HKLM,Config\0001\Display\Settings,AGPSize,,
+HKLM,Config\0001\Display\Settings,VPESupport,,
+HKLM,Config\0001\Display\Settings,DMACB,,
+HKLM,System\CurrentControlSet\Services\VxD\VGARTD,,,
+HKLM,Software\Microsoft\Windows\CurrentVersion\OpenGLdrivers,savage4,,
+HKLM,SOFTWARE\S3\S3GL,,,
+
+[S3Ref_remove]
+DelReg = S3Ref.AddReg
+DelFiles=REFcopy.win, REFcopy.sys
+
+[S3Ref.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\S3_REF,DisplayName,,"%ShortDesc3%"
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\S3_REF,UninstallString,,"s3uninst.exe -reg 5 'HKLM\Software\S3\S3Uninst\S3_REF'"
+;----------------------------------------------------------------------------
+HKLM,SOFTWARE\S3\Refresh,,,
+HKLM,SOFTWARE\S3\Refresh,ref_title,,"S3 Refresh"
+HKLM,SOFTWARE\S3\Refresh,UtilityName,,"S3 Refresh"
+HKLM,SOFTWARE\S3\Refresh,FileName,,"s3_refre.dll"
+HKLM,SOFTWARE\S3\Refresh,Installed,,"1"
+;HKLM,SOFTWARE\S3\Refresh,LoadAlways,,"ON"
+HKLM,SOFTWARE\S3\Refresh,WriteAllBpp,,""
+HKLM,SOFTWARE\S3\Refresh,ref_640x480,1,ff,55,4b,48,3c,0
+HKLM,SOFTWARE\S3\Refresh,ref_800x600,1,ff,55,4b,48,3c,38,0
+HKLM,SOFTWARE\S3\Refresh,ref_1024x768,1,ff,55,4b,46,3c,38,2b,0
+HKLM,SOFTWARE\S3\Refresh,ref_1280x1024,1,ff,55,4b,48,3c,38,2b,0
+HKLM,SOFTWARE\S3\Refresh,ref_1600x1200,1,ff,4b,3c,2b,0
+HKLM,SOFTWARE\S3\Refresh,custom,1,ff,ff,ff,ff,ff
+HKLM,SOFTWARE\S3\Refresh,ref_dest_path,,"System\CurrentControlSet\Services\Class\Display"
+;-----------these 3 lines below are for  Windows98 & windows9X---------------------------
+HKCR,CLSID\{87b9bd00-c65c-11cd-a259-00dd010e8c28},"",,"S3 Property Sheet Extension for refresh rates"
+HKCR,CLSID\{87b9bd00-c65c-11cd-a259-00dd010e8c28}\InProcServer32,"",,"s3_refre.dll"
+HKCR,CLSID\{87b9bd00-c65c-11cd-a259-00dd010e8c28}\InProcServer32,ThreadingModel,,"Apartment"
+;-------------------this old below line is for win95----------------------
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\%1%\Display\shellex\PropertySheetHandlers\S3_REF,"",,"{87b9bd00-c65c-11cd-a259-00dd010e8c28}"
+
+;; ---------- Following lines are uninstall information ------------
+HKLM,"Software\S3\S3Uninst\S3_REF","10.DelKey",,"HKLM\Software\S3\Refresh"
+HKLM,"Software\S3\S3Uninst\S3_REF","11.DelKey",,"HKCR\CLSID\{87b9bd00-c65c-11cd-a259-00dd010e8c28}"
+HKLM,"Software\S3\S3Uninst\S3_REF","12.DelKey",,"HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall\S3_REF"
+HKLM,"Software\S3\S3Uninst\S3_REF","13.DelKey",,"HKLM\Software\Microsoft\Windows\CurrentVersion\%1%\Display\shellex\PropertySheetHandlers\S3_REF"
+HKLM,"Software\S3\S3Uninst\S3_REF","20.DelFiles",,"%11%\S3_Refre.dll"
+HKLM,"Software\S3\S3Uninst\S3_REF","21.DelFiles",,"%11%\S3Refre.vxd"
+HKLM,"Software\S3\S3Uninst\S3_REF","22.DelFiles",,"%10%\S3Refre.cfg"
+HKLM,"Software\S3\S3Uninst\S3_REF","23.DelFiles",,"%17%\S3_Refre.?nf"
+
+;-------------------this below line is added for win98----------------------
+HKR,shellex\PropertySheetHandlers\S3_REF,"",,"{87b9bd00-c65c-11cd-a259-00dd010e8c28}"
+
+[S3COLORRemove]
+DelFiles = COLORcopy.hlp, COLORcopy.sys
+DelReg = S3COLOR.DelReg
+
+[S3COLOR.AddReg]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\S3COLOR,DisplayName,,%S3CLRDSC%
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\S3COLOR,UninstallString,,"S3Uninst.exe -reg 5 HKLM\SOFTWARE\S3\S3Uninst\S3Color"
+
+HKLM,%S3CLRKEY%,,,
+HKLM,%S3CLRKEY%,Installed,0,1
+HKLM,%S3CLRKEY%,SPNumber,1,00,00,00,00
+HKLM,%S3CLRKEY%,S3ColorAlwaysOnTop,,"OFF"
+HKLM,%S3CLRKEY%,Scheme,,"Default"
+HKLM,%S3CLRKEY%,Scheme2,,"Default"
+;----------- Following lines are uninstall information ------------
+HKLM,%S3UNIKEY%\S3Color,10.DelKey,,HKLM\%S3CLRKEY%
+HKLM,%S3UNIKEY%\S3Color,11.DelKey,,HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\S3Color
+HKLM,%S3UNIKEY%\S3Color,20.DelFiles,,%11%\S3COLOR.cpl
+HKLM,%S3UNIKEY%\S3Color,21.DelFiles,,%18%\S3Clr*.hlp
+HKLM,%S3UNIKEY%\S3Color,22.DelFiles,,%11%\S3COLOR.cfg
+HKLM,%S3UNIKEY%\S3Color,23.DelFiles,,%17%\S3COLOR.?nf
+
+[S3COLOR.DelReg]
+HKLM,%S3CLRKEY%
+
+[GammaUninstall]
+DelFiles = GAMMAcopy.sys, GAMMAcopy.hlp, GAMMAcopy.win
+DelReg = S3Gamma.DelReg
+
+[S3Gamma.DelReg]
+HKLM,"%CURVER%\Uninstall\S3 Gamma"
+HKCR,"CLSID\%GAMMACLSID%",,,"S3 Gamma Property Sheet"
+;; ---------- Next line to remove possible duplicate shellext ------------
+HKLM,"%CURVER%\%1%\Display\shellex\PropertySheetHandlers\S3Gamma"
+HKLM,"%CURVER%\%1%\Display\shellex\PropertySheetHandlers\S3 Gamma","",,"%GAMMACLSID%"
+HKLM,"%S3GKEY%\%SCHEMES%",,,
+HKLM,"%S3GKEY%",,,
+HKR,"shellex\PropertySheetHandlers\S3 Gamma","",,"%GAMMACLSID%"
+
+[S3Gamma.AddReg]
+HKLM,"%CURVER%\Uninstall\S3 Gamma",DisplayName,,"%ShortDesc%"
+HKLM,"%CURVER%\Uninstall\S3 Gamma","UninstallString",,"s3uninst.exe -reg 5 'HKLM\Software\S3\S3Uninst\S3 Gamma'"
+HKCR,"CLSID\%GAMMACLSID%",,,"S3 Gamma Property Sheet"
+HKCR,"CLSID\%GAMMACLSID%\InProcServer32",,,"S3Gamma.dll"
+HKCR,"CLSID\%GAMMACLSID%\InProcServer32",ThreadingModel,,"Apartment"
+;; ---------- Next line to remove possible duplicate shellext ------------
+HKLM,"%CURVER%\%1%\Display\shellex\PropertySheetHandlers\S3 Gamma","",,"%GAMMACLSID%"
+HKLM,"%S3GKEY%","Installed",,"1"
+HKLM,"%S3GKEY%","Filename",,"S3Gamma.dll"
+HKLM,"%S3GKEY%","UtilityName",,"%GAMMANAME%"
+
+;; ---------- Following lines are uninstall information ------------
+HKLM,"Software\S3\S3Uninst\S3 Gamma","10.DelKey",,"HKLM\%S3GKEY%"
+HKLM,"Software\S3\S3Uninst\S3 Gamma","11.DelKey",,"HKCR\CLSID\%GAMMACLSID%"
+HKLM,"Software\S3\S3Uninst\S3 Gamma","12.DelKey",,"HKLM\%CURVER%\Uninstall\S3 Gamma"
+HKLM,"Software\S3\S3Uninst\S3 Gamma","13.DelKey",,"HKLM\%CURVER%\%1%\Display\shellex\PropertySheetHandlers\S3 Gamma"
+HKLM,"Software\S3\S3Uninst\S3 Gamma","20.DelFiles",,"%11%\S3Gamma.dll"
+HKLM,"Software\S3\S3Uninst\S3 Gamma","21.DelFiles",,"%18%\S3Gam*.hlp"
+HKLM,"Software\S3\S3Uninst\S3 Gamma","22.DelFiles",,"%10%\S3Gamma.cfg"
+HKLM,"Software\S3\S3Uninst\S3 Gamma","23.DelFiles",,"%17%\S3Gamma.?nf"
+
+;; ------------------ The following lines are for Win98 ------------------
+HKR,"shellex\PropertySheetHandlers\S3 Gamma","",,"%GAMMACLSID%"
+
+[S3switch2Remove]
+DelReg = S3switch2.AddReg
+DelFiles = S3switch2copy.prog, S3switch2copy.hlp, S3switch2copy.win, S3switch2copy.sys, S3switch2copy.inf, S3UninstCopy.sys
+
+[S3switch2.DelReg]
+HKLM,%S3SW2KEY%
+
+[S3switch2.AddReg]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\S3switch2,DisplayName,,%S3SW2DSC%
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\S3switch2,UninstallString,,"S3Uninst.exe -reg 5 HKLM\SOFTWARE\S3\S3Uninst\S3Switch2"
+
+HKCR,CLSID\%S3SW2CLS%,"",,"Property Sheet Extension for S3 Display Configuration Utility"
+HKCR,CLSID\%S3SW2CLS%\InProcServer32,"",,"S3swtch2.dll"
+HKCR,CLSID\%S3SW2CLS%\InProcServer32,ThreadingModel,,"Apartment"
+
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\%1%\Display\shellex\PropertySheetHandlers\S3switch2,"",,%S3SW2CLS%
+
+HKLM,%S3SW2KEY%,,,
+HKLM,%S3SW2KEY%,FileName,,"S3swtch2.DLL"
+HKLM,%S3SW2KEY%,UtilityName,,"S3switch2 Utility"
+HKLM,%S3SW2KEY%,AlwaysSupportPanelDevice,,"OFF"
+HKLM,%S3SW2KEY%,AlwaysSupportTVDevice,,"OFF"
+HKLM,%S3SW2KEY%,AlwaysEnablePanelDevice,,"OFF"
+HKLM,%S3SW2KEY%,AlwaysEnableTVDevice,,"OFF"
+HKLM,%S3SW2KEY%,AllowSimultaneous,,"ON"
+HKLM,%S3SW2KEY%,AllowForceTVOn,,"OFF"
+HKLM,%S3SW2KEY%,ExpandedTVFmtList,,"OFF"
+HKLM,%S3SW2KEY%,RemoveInfoPage,,"OFF"
+
+;----------- Following lines are uninstall information ------------
+HKLM,%S3UNIKEY%\S3Switch2,10.DelKey,,HKLM\%S3SW2KEY%
+HKLM,%S3UNIKEY%\S3Switch2,11.DelKey,,HKCR\CLSID\%S3SW2CLS%
+HKLM,%S3UNIKEY%\S3Switch2,12.DelKey,,HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall\S3Switch2
+HKLM,%S3UNIKEY%\S3Switch2,13.DelKey,,HKLM\Software\Microsoft\Windows\CurrentVersion\%1%\Display\shellex\PropertySheetHandlers\S3Switch2
+HKLM,%S3UNIKEY%\S3Switch2,20.DelFiles,,%11%\S3Swtch2.dll
+HKLM,%S3UNIKEY%\S3Switch2,21.DelFiles,,%11%\S3Swtch2.vxd
+HKLM,%S3UNIKEY%\S3Switch2,22.DelFiles,,%18%\S3Sw2*.hlp
+HKLM,%S3UNIKEY%\S3Switch2,23.DelFiles,,%11%\S3Swtch2.cfg
+HKLM,%S3UNIKEY%\S3Switch2,24.DelFiles,,%11%\S3Sw2ext.cfg
+HKLM,%S3UNIKEY%\S3Switch2,25.DelFiles,,%17%\S3Swtch2.?nf
+
+;---------------- Add new line below for win98 --------------------
+HKR,shellex\PropertySheetHandlers\S3switch2,"",,%S3SW2CLS%
+
+;----------------------------------------
+; Model AddReg sections
+;
+[S3_7_AddReg]
+;----------------------------------------Savage4
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"16,640,480"
+HKR,DEFAULT,drv,,s3_8.drv
+HKR,DEFAULT,drv2,,s3_8.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,s3vdd8.vxd
+HKR,DEFAULT,minivdd2,,s3vdd8.vxd
+HKR,DEFAULT,RefreshRate,,"-1"
+HKR,DEFAULT,DDC,,"1"
+HKR,DEFAULT,REPOST,,"1"
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\4\800,600",drv,,supervga.drv
+HKR,"MODES\4\800,600",vdd,,*vdd
+HKR,"MODES\8\640,480"   ,,,"60,72,75,85,160"
+HKR,"MODES\8\800,600"   ,,,"56,60,72,75,85,160"
+HKR,"MODES\8\1024,768"  ,,,"60,70,75,85,130"
+HKR,"MODES\8\1152,864"  ,,,"60,70,75,85,100"
+HKR,"MODES\8\1280,1024" ,,,"60,75,85,100"
+HKR,"MODES\8\1600,1200" ,,,"60,75,85"
+HKR,"MODES\8\1920,1440" ,,,"60"
+HKR,"MODES\16\640,480"  ,,,"60,72,75,85,160"
+HKR,"MODES\16\800,600"  ,,,"56,60,72,75,85,160"
+HKR,"MODES\16\1024,768" ,,,"60,70,75,85,130"
+HKR,"MODES\16\1152,864"  ,,,"60,70,75,85,100"
+HKR,"MODES\16\1280,1024",,,"60,75,85,100"
+HKR,"MODES\16\1600,1200" ,,,"60,75,85"
+HKR,"MODES\16\1920,1440" ,,,"60"
+HKR,"MODES\32\640,480"  ,,,"60,72,75,85,160"
+HKR,"MODES\32\800,600"  ,,,"56,60,72,75,85,160"
+HKR,"MODES\32\1024,768" ,,,"60,70,75,85,130"
+HKR,"MODES\32\1152,864"  ,,,"60,70,75,85,100"
+HKR,"MODES\32\1280,1024" ,,,"60,75,85"
+HKR,"MODES\32\1600,1200" ,,,"60"
+HKLM,Software\Microsoft\Windows\CurrentVersion\OpenGLdrivers,Savage4,,s3micd.dll
+
+;----------------------------------------
+; CopyFiles sections
+
+[S3_3_CopyFiles]
+s3_8.drv
+s3_8.dll
+s3vdd8.vxd
+s3micd.dll
+metal.dll
+dvideo.dll
+
+[S3UninstCopy.sys]
+S3Uninst.exe
+
+[GAMMAcopy.sys]
+S3Gamma.dll
+
+[GAMMAcopy.win]
+S3Gamma.cfg
+
+[GAMMAcopy.hlp]
+S3gamENU.hlp
+S3gamCHT.hlp
+S3gamCHS.hlp
+S3gamDAN.hlp
+S3gamNLD.hlp
+S3gamFIN.hlp
+S3gamFRA.hlp
+S3gamDEU.hlp
+S3gamITA.hlp
+S3gamJPN.hlp
+S3gamKOR.hlp
+S3gamNOR.hlp
+S3gamPTB.hlp
+S3gamESP.hlp
+S3gamSVE.hlp
+S3gamTHA.hlp
+
+[S3switch2copy.sys]
+S3swtch2.dll
+S3swtch2.vxd
+s3swtch2.cfg
+s3sw2ext.cfg
+
+[S3switch2copy.hlp]
+S3sw2enu.hlp
+s3sw2jpn.hlp
+s3sw2fra.hlp
+s3sw2deu.hlp
+s3sw2ita.hlp
+s3sw2esp.hlp
+s3sw2dan.hlp
+s3sw2nld.hlp
+s3sw2fin.hlp
+s3sw2kor.hlp
+s3sw2nor.hlp
+s3sw2ptb.hlp
+s3sw2chs.hlp
+s3sw2sve.hlp
+s3sw2cht.hlp
+s3sw2tha.hlp
+
+[COLORcopy.sys]
+S3COLOR.cpl,,,1
+S3COLOR.cfg
+
+[COLORcopy.hlp]
+S3ClrENU.hlp
+S3ClrNLD.hlp
+S3ClrFRA.hlp
+S3ClrDEU.hlp
+S3ClrITA.hlp
+S3ClrJPN.hlp
+S3ClrKOR.hlp
+S3ClrPTB.hlp
+S3ClrCHS.hlp
+S3ClrESP.hlp
+S3ClrSVE.hlp
+S3ClrCHT.hlp
+S3ClrFIN.hlp
+S3ClrDAN.hlp
+S3ClrNOR.hlp
+S3ClrNOR.hlp
+
+[REFcopy.win]
+s3refre.cfg
+
+[REFcopy.sys]
+s3_refre.dll
+S3refre.vxd
+
+[S3UninstCopy.sys]
+S3Uninst.exe
+
+;----------------------------------------
+; User visible strings
+
+[Strings]
+ClassName="Display"
+Mfg="S3"
+1           = "Controls Folder"
+S3          = "S3 Incorporated"
+S3SW2DSC    = "S3 Savage4 Family Display Switch2 Utility"
+S3SW2KEY    = "SOFTWARE\S3\S3Switch2"
+S3UNIKEY    = "SOFTWARE\S3\S3Uninst"
+S3SW2CLS    = "{79cd01c2-912d-11d2-88a9-00600837776e}"
+ShortDesc3  = "S3 Refresh"
+LongDesc3   = "Installs the S3 Refresh display property sheet page"
+ShortDesc   = "S3 Gamma"
+LongDesc    = "Installs the S3 Gamma Display Property page"
+S3          = "S3 Incorporated"
+CURVER      = "Software\Microsoft\Windows\CurrentVersion"
+GAMMACLSID  = "{C4FACD43-6676-11d1-AF9C-00AA00C67CA8}"
+GAMMANAME   = "S3 Gamma"
+SCHEMES     = "Schemes"
+S3GKEY      = "SOFTWARE\S3\S3 Gamma"
+S3CLRDSC    = "S3 Video Color Control Panel Applet"
+S3CLRKEY    = "SOFTWARE\S3\S3COLOR"
+S3UNIKEY    = "SOFTWARE\S3\S3Uninst"
+
+S3395a.DeviceDesc= "S3 Inc. Savage4  (Engineering BitFlip)"
+
+
