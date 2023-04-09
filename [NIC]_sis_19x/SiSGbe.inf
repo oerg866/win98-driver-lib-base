@@ -41,17 +41,8 @@ ExcludeFromSelect   = PCI\VEN_1039&DEV_0191&SUBSYS_01911039&REV_02
 ;
 [SiS]
 %sis191.DeviceDesc1% = sis191.ndi, PCI\VEN_1039&DEV_0191				; SiS191 1000/100/10 Ethernet Device (SiS 191)
-%sis191.DeviceDesc1% = sis191e.ndi, PCI\VEN_1039&DEV_0191&SUBSYS_01911039&REV_00	; SiS191 1000/100/10 Ethernet Device (SiS 191)
-%sis191.DeviceDesc1% = sis191e.ndi, PCI\VEN_1039&DEV_0191&SUBSYS_1B821019&REV_00	; SiS191 1000/100/10 Ethernet Device (ECS)
 %sis190.DeviceDesc%  = sis190.ndi, PCI\VEN_1039&DEV_0190				; SiS190 100/10 Ethernet Device (SiS 190)
-%sis190.DeviceDesc%  = sis190.ndi, PCI\VEN_1039&DEV_0190&SUBSYS_01901039		; SiS190 100/10 Ethernet Device (SiS 190)
-%sis191.DeviceDesc2% = sis190.ndi, PCI\VEN_1039&DEV_0191&SUBSYS_81391043		; SiS191 100/10 Ethernet Device (ASUS)
-%sis191.DeviceDesc2% = sis190.ndi, PCI\VEN_1039&DEV_0191&SUBSYS_1B181019		; SiS191 100/10 Ethernet Device (ECS)
-%sis191.DeviceDesc2% = sis190.ndi, PCI\VEN_1039&DEV_0191&SUBSYS_1B9B1019		; SiS191 100/10 Ethernet Device (ECS)
-%sis191.DeviceDesc3% = sis190.ndi, PCI\VEN_1039&DEV_0191&SUBSYS_E0001458		; SiS191 Ethernet Device (Gigabyte)
-%sis191.DeviceDesc3% = sis190.ndi, PCI\VEN_1039&DEV_0191&SUBSYS_50041458		; SiS191 Ethernet Device (Gigabyte)
 %sis191.DeviceDesc%  = sis191.ndi, PCI\VEN_1039&DEV_0191&REV_02				; SiS191 Ethernet Controller (968)
-%sis191.DeviceDesc%  = sis191.ndi, PCI\VEN_1039&DEV_0191&SUBSYS_01911039&REV_02		; SiS191 Ethernet Controller (968)
 
 ;----------------------------------------------------------------------------
 ; Install sections

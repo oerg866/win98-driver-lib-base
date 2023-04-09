@@ -72,8 +72,7 @@ gfxMulti.dll=1
 %Mfg%=Mfg
 
 [Mfg]
-%PCI\VEN_8086&DEV_7800.DeviceDesc%=IntelAcc, PCI\VEN_8086&DEV_7800  
-%PCI\VEN_8086&DEV_7800.DeviceDesc%=IntelAcc, PCI\VEN_8086&DEV_7800&SUBSYS_01008086 ;Accelerator
+%PCI\VEN_8086&DEV_7800.DeviceDesc%=IntelAcc, PCI\VEN_8086&DEV_7800
 
 [IntelAcc]
 CopyFiles=Driver.Copy,VGARTD.Copy,I2C.Copy,TvOut.Copy,Config.Copy,Help.Copy, OpenGL.Copy, Multi.Copy

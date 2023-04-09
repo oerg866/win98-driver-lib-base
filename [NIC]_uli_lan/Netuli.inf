@@ -32,10 +32,6 @@ ExcludeFromSelect = PCI\VEN_10B9&DEV_5261&SUBSYS_52611849
 ; -----------           -------       --------
 %ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5261
 %ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5263
-%ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5261&SUBSYS_526110B9
-%ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5263&SUBSYS_526310B9
-%ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5261&SUBSYS_016817FF
-%ULI5261.DeviceDesc%   = ULI5261.ndi,    PCI\VEN_10B9&DEV_5261&SUBSYS_52611849
 
 ;=============================================================================
 ;
