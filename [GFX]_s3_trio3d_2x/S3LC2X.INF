@@ -1,0 +1,289 @@
+; INF file for S3 display driver.
+; Copyright 1999, S3 Inc.
+
+[Version]
+Class=Display
+Signature="$CHICAGO$"
+Provider=%Mfg%
+DriverVer = 04/26/1999, 4.11.01.5001
+
+[DestinationDirs]
+DefaultDestDir=11
+S3-Sync.Copy=11
+REFini.Copy=10
+S3_INF.copy=17
+GAMMAcopy.sys=11
+GAMMAcopy.hlp=18
+GAMMAcopy.inf=17
+GAMMAcopy.win=10
+REFcopy.sys=11
+REFcopy.win=10
+
+[SourceDisksNames]
+51="Windows 95/98 S3 Driver Disk",,1
+
+[SourceDisksFiles]
+s3lc2x.drv=51
+s3lc2x.vxd=51
+s3lc2x.dll=51
+s3dtkw.dll=51
+s3hal95.dll=51
+s3kernel.vxd=51
+s3lc2x.INF=51
+vgartd.vxd=51
+S3Gamma.dll=51
+S3Gamma.cfg=51
+S3Gamma.inf=51
+S3gamENU.hlp=51
+S3gamCHT.hlp=51
+S3gamCHS.hlp=51
+S3gamNLD.hlp=51
+S3gamFRA.hlp=51
+S3gamDEU.hlp=51
+S3gamITA.hlp=51
+S3gamJPN.hlp=51
+S3gamKOR.hlp=51
+S3gamPTB.hlp=51
+S3gamESP.hlp=51
+S3gamSVE.hlp=51
+S3gamTHA.hlp=51
+S3gamDAN.hlp=51
+S3gamFIN.hlp=51
+S3gamNOR.hlp=51
+S3uninst.exe=51
+S3_Refre.dll=51
+S3_Refre.inf=51
+S3Refre.cfg=51
+S3refre.vxd=51
+
+;----------------------------------------
+; Manufacturers
+
+[Manufacturer]
+"%Mfg%"=Mfg
+
+;----------------------------------------
+; Driver sections
+
+[Mfg]
+%S3Trio3D2X.DeviceDesc%=    S3_10, PCI\VEN_5333&DEV_8A13&SUBSYS8A135333
+%S3Trio3D2X.DeviceDesc%=    S3_10, PCI\VEN_5333&DEV_8A13
+;----------------------------------------
+
+[GammaUninstall]
+DelFiles = GAMMAcopy.sys, GAMMAcopy.hlp, GAMMAcopy.win, GAMMAcopy.inf, GAMMAold.hlp
+DelReg = S3Gamma.DelReg
+
+[S3GammaNT.DelReg]
+HKLM,"%CURVER%\Uninstall\S3 Gamma",,,
+HKCR,"CLSID\%GAMMACLSID%",,,"S3 Gamma Property Sheet"
+;; ---------- Next line to remove possible duplicate shellext ------------
+HKLM,"%CURVER%\%1%\Display\shellex\PropertySheetHandlers\S3Gamma",,,
+HKLM,"%CURVER%\%1%\Display\shellex\PropertySheetHandlers\S3 Gamma","",,"%GAMMACLSID%"
+HKLM,"%S3GKEY%\%SCHEMES%",,,
+HKLM,"%S3GKEY%",,,
+HKLM,"SYSTEM\CurrentControlSet\Services\S3Inc\Device0","GammaSupportEnabled",,
+
+[S3Gamma.DelReg]
+HKLM,"%CURVER%\Uninstall\S3 Gamma",,,
+HKCR,"CLSID\%GAMMACLSID%",,,"S3 Gamma Property Sheet"
+;; ---------- Next line to remove possible duplicate shellext ------------
+HKLM,"%CURVER%\%1%\Display\shellex\PropertySheetHandlers\S3Gamma",,,
+HKLM,"%CURVER%\%1%\Display\shellex\PropertySheetHandlers\S3 Gamma","",,"%GAMMACLSID%"
+HKLM,"%S3GKEY%\%SCHEMES%",,,
+HKLM,"%S3GKEY%",,,
+HKR,"shellex\PropertySheetHandlers\S3 Gamma","",,"%GAMMACLSID%"
+
+[S3Gamma.AddReg]
+HKLM,"%CURVER%\Uninstall\S3 Gamma",DisplayName,,"%ShortDesc%"
+HKLM,"%CURVER%\Uninstall\S3 Gamma","UninstallString",,"s3uninst.exe GammaUninstall 5 s3lc2x.inf"
+HKCR,"CLSID\%GAMMACLSID%",,,"S3 Gamma Property Sheet"
+HKCR,"CLSID\%GAMMACLSID%\InProcServer32",,,"S3Gamma.dll"
+HKCR,"CLSID\%GAMMACLSID%\InProcServer32",ThreadingModel,,"Apartment"
+;; ---------- Next line to remove possible duplicate shellext ------------
+HKLM,"%CURVER%\%1%\Display\shellex\PropertySheetHandlers\S3Gamma",,,
+HKLM,"%CURVER%\%1%\Display\shellex\PropertySheetHandlers\S3 Gamma","",,"%GAMMACLSID%"
+HKLM,"%S3GKEY%","Installed",,"1"
+HKLM,"%S3GKEY%","Filename",,"S3Gamma.dll"
+HKLM,"%S3GKEY%","UtilityName",,"%GAMMANAME%"
+;; ------------------ The following lines are for Win98 ------------------
+HKR,"shellex\PropertySheetHandlers\S3Gamma","",,
+HKR,"shellex\PropertySheetHandlers\S3 Gamma","",,"%GAMMACLSID%"
+
+[S3Ref_remove]
+DelReg = S3Ref.AddReg
+DelFiles=REFcopy.prog, REFcopy.hlp, REFcopy.win, REFcopy.sys, REFcopy.inf
+
+[S3Ref.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\S3_REF,DisplayName,,"%ShortDesc1%"
+;HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\S3_REF,UninstallString,,"RunDll setupx.dll,InstallHinfSection S3Ref_remove 4 S3lc2x.inf"
+;HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\S3_REF,UninstallString,,"RunDll32 advpack.dll,LaunchINFSection %17%\S3lc2x.inf,DefaultUninstall,5"
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\S3_REF,UninstallString,,"S3uninst.exe S3Ref_remove 5 S3lc2x.inf"
+;----------------------------------------------------------------------------
+HKLM,SOFTWARE\S3\Refresh,,,
+HKLM,SOFTWARE\S3\Refresh,ref_title,,"S3 Refresh"
+HKLM,SOFTWARE\S3\Refresh,UtilityName,,"S3 Refresh"
+HKLM,SOFTWARE\S3\Refresh,FileName,,"s3_refre.dll"
+HKLM,SOFTWARE\S3\Refresh,Installed,,"1"
+HKLM,SOFTWARE\S3\Refresh,LoadAlways,,"ON"
+HKLM,SOFTWARE\S3\Refresh,WriteAllBpp,,""
+HKLM,SOFTWARE\S3\Refresh,ref_640x480,1,ff,55,4b,48,3c,0
+HKLM,SOFTWARE\S3\Refresh,ref_800x600,1,ff,55,4b,48,3c,38,0
+HKLM,SOFTWARE\S3\Refresh,ref_1024x768,1,ff,55,4b,46,3c,38,2b,0
+HKLM,SOFTWARE\S3\Refresh,ref_1280x1024,1,ff,55,4b,48,3c,38,2b,0
+HKLM,SOFTWARE\S3\Refresh,ref_1600x1200,1,ff,4b,3c,2b,0
+HKLM,SOFTWARE\S3\Refresh,custom,1,ff,ff,ff,ff,ff
+HKLM,SOFTWARE\S3\Refresh,ref_dest_path,,"System\CurrentControlSet\Services\Class\Display"
+;-----------these 3 lines below are moved to HKCR,CLSID for Windows98---------------------------
+;HKLM,SOFTWARE\Classes\CLSID\{87b9bd00-c65c-11cd-a259-00dd010e8c28},"",,"S3 Property Sheet Extension for refresh rates"
+;HKLM,SOFTWARE\Classes\CLSID\{87b9bd00-c65c-11cd-a259-00dd010e8c28}\InProcServer32,"",,"s3_refre.dll"
+;HKLM,SOFTWARE\Classes\CLSID\{87b9bd00-c65c-11cd-a259-00dd010e8c28}\InProcServer32,ThreadingModel,,"Apartment"
+;-----------these 3 lines below are for  Windows98 & windows9X---------------------------
+HKCR,CLSID\{87b9bd00-c65c-11cd-a259-00dd010e8c28},"",,"S3 Property Sheet Extension for refresh rates"
+HKCR,CLSID\{87b9bd00-c65c-11cd-a259-00dd010e8c28}\InProcServer32,"",,"s3_refre.dll"
+HKCR,CLSID\{87b9bd00-c65c-11cd-a259-00dd010e8c28}\InProcServer32,ThreadingModel,,"Apartment"
+;-------------------this old below line is for win95----------------------
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\%1%\Display\shellex\PropertySheetHandlers\S3_REF,"",,"{87b9bd00-c65c-11cd-a259-00dd010e8c28}"
+;-------------------this below line is added for win98----------------------
+HKR,shellex\PropertySheetHandlers\S3_REF,"",,"{87b9bd00-c65c-11cd-a259-00dd010e8c28}"
+
+
+; Install sections
+
+[S3_10]
+DelReg = S3SWITCH.AddReg,DEL_CURRENT_REG, S3Gamma.DelReg, S3Ref.AddReg
+DelFiles =REFini.Copy, GAMMAcopy.sys, GAMMAcopy.hlp, GAMMAcopy.win, REFcopy.win, REFcopy.sys
+CopyFiles=S3_4_CopyFiles, S3-Sync.Copy, S3_INF.copy, GAMMAcopy.sys, GAMMAcopy.hlp, GAMMAcopy.win, REFcopy.win, REFcopy.sys
+AddReg=S3_10_AddReg, S3_Trio3D2X_AddReg, S3Gamma.AddReg, S3Ref.AddReg
+
+;----------------------------------------
+; Common AddReg sections
+
+[DEL_CURRENT_REG]
+HKR,,DevLoader,0,
+HKR,,Ver,0,
+HKR,DEFAULT,,0,
+HKR,MODES,,0,
+HKR,CURRENT,,0,
+HKLM,Config\0001\Display\Settings,DuoView_In_8Bpp,,"ON"
+HKLM,SOFTWARE\S3\SWITCH,M3_M5,,"0"
+HKLM,Config\0001\Display\Settings,CommandDMA,,
+HKLM,Config\0001\Display\Settings,NewAlphaBlend,,
+HKLM,Config\0001\Display\Settings,AGPEnabled,,
+
+
+;----------------------------------------
+; Model AddReg sections
+
+;----------------------------------------
+[S3_Trio3D2X_AddReg]
+;HKLM,Config\0001\Display\Settings,DuoView_In_8Bpp,,"ON"
+HKLM,Config\0001\Display\Settings,CommandDMA,,"ON"
+HKLM,Config\0001\Display\Settings,DuoView_Flip,,"ON"
+HKLM,Config\0001\Display\Settings,Mode720Flg,,"ON"
+HKLM,Config\0001\Display\Settings,CheckUV,,"OFF"
+HKLM,System\CurrentControlSet\Services\VxD\VGARTD,StaticVxD,,"vgartd.vxd"
+
+[S3_10_AddReg]
+;----------------------------------------Trio3D/2X
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,s3lc2x.drv
+HKR,DEFAULT,drv2,,s3lc2x.drv
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,s3lc2x.vxd
+HKR,DEFAULT,RefreshRate,,"-1"
+HKR,DEFAULT,DDC,,"1"
+HKR,DEFAULT,REPOST,,"1"
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\4\800,600",drv,,supervga.drv
+HKR,"MODES\4\800,600",vdd,,*vdd
+HKR,"MODES\8\640,480"   ,,,"60,72,75,85"
+HKR,"MODES\8\800,600"   ,,,"56,60,72,75,85"
+HKR,"MODES\8\1024,768"  ,,,"43,60,70,75,85"
+HKR,"MODES\8\1152,864"  ,,,"60,70,75,85"
+HKR,"MODES\8\1280,1024" ,,,"43,60,75,85"
+HKR,"MODES\8\1600,1200" ,,,"48,60,75,85"
+HKR,"MODES\16\640,480"  ,,,"60,72,75,85"
+HKR,"MODES\16\800,600"  ,,,"56,60,72,75,85"
+HKR,"MODES\16\1024,768" ,,,"43,60,70,75,85"
+HKR,"MODES\16\1152,864"  ,,,"60,70,75,85"
+HKR,"MODES\16\1280,1024",,,"43,60,75,85"
+HKR,"MODES\16\1600,1200",,,"48,60,75,85"
+HKR,"MODES\24\640,480",,,"60,72,75,85"
+HKR,"MODES\24\800,600",,,"56,60,72,75,85"
+HKR,"MODES\24\1024,768",,,"43,60,70,75,85"
+HKR,"MODES\24\1152,864"  ,,,"60,70,75,85"
+HKR,"MODES\24\1280,1024",,,"43,60,75,85"
+
+[S3_4_CopyFiles]
+s3lc2x.dll
+s3lc2x.vxd
+s3lc2x.drv
+
+[S3-Sync.Copy]
+s3dtkw.dll
+s3kernel.vxd
+s3hal95.dll
+vgartd.vxd
+
+[S3_INF.copy]
+s3lc2x.INF
+
+[GAMMAcopy.sys]
+S3Gamma.dll
+S3uninst.exe
+
+[GAMMAcopy.win]
+S3Gamma.cfg
+
+[GAMMAold.hlp]
+S3Gamma.hlp
+
+[GAMMAcopy.hlp]
+S3gamENU.hlp
+S3gamCHT.hlp
+S3gamCHS.hlp
+S3gamDAN.hlp
+S3gamNLD.hlp
+S3gamFIN.hlp
+S3gamFRA.hlp
+S3gamDEU.hlp
+S3gamITA.hlp
+S3gamJPN.hlp
+S3gamKOR.hlp
+S3gamNOR.hlp
+S3gamPTB.hlp
+S3gamESP.hlp
+S3gamSVE.hlp
+S3gamTHA.hlp
+
+[REFcopy.win]
+s3refre.cfg
+
+[REFcopy.sys]
+s3_refre.dll
+S3refre.vxd
+
+;----------------------------------------
+; User visible strings
+
+[Strings]
+ClassName="Display"
+Mfg="S3"
+1           = "Controls Folder"
+ShortDesc1  = "S3 Refresh"
+LongDesc1   = "Installs the S3 Refresh display property sheet page"
+ShortDesc   = "S3 Gamma"
+LongDesc    = "Installs the S3 Gamma Display Property page"
+S3          = "S3 Incorporated"
+CURVER      = "Software\Microsoft\Windows\CurrentVersion"
+GAMMACLSID  = "{C4FACD43-6676-11d1-AF9C-00AA00C67CA8}"
+GAMMANAME   = "S3 Gamma"
+SCHEMES     = "Schemes"
+S3GKEY      = "SOFTWARE\S3\S3 Gamma"
+
+S3Trio3D2X.DeviceDesc=  "S3 Inc. Trio3D/2X (1.00.31)"
+;----------------------------------------------
