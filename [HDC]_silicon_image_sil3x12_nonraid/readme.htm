@@ -1,0 +1,1134 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 11 (filtered)">
+<title>Silicon Image SiI 3x12 SATALink Controller Driver Installation</title>
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+h1
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:16.0pt;
+	font-family:Arial;}
+h2
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{margin-top:.25in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:Arial;
+	text-transform:uppercase;
+	font-weight:bold;}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p.MsoToc3, li.MsoToc3, div.MsoToc3
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:12.0pt;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc4, li.MsoToc4, div.MsoToc4
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:24.0pt;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc5, li.MsoToc5, div.MsoToc5
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc6, li.MsoToc6, div.MsoToc6
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:48.0pt;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc7, li.MsoToc7, div.MsoToc7
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:60.0pt;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc8, li.MsoToc8, div.MsoToc8
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:1.0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+p.MsoToc9, li.MsoToc9, div.MsoToc9
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:84.0pt;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Courier New";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 65.95pt 1.0in 65.95pt;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple>
+
+<div class=Section1>
+
+<p class=MsoPlainText><a name="_top"></a><b><span style='font-size:18.0pt;
+font-family:Arial'>&nbsp;</span></b></p>
+
+<p class=MsoPlainText><b><span style='font-size:18.0pt;font-family:Arial'>&nbsp;</span></b></p>
+
+<p class=MsoPlainText align=center style='text-align:center'><b><span
+style='font-size:18.0pt;font-family:Arial'>Silicon Image SiI 3x12 SATALink
+Controller Driver Installation</span></b></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText><span style='font-size:14.0pt;font-family:Arial'>Table of
+Contents</span></p>
+
+<p class=MsoToc1 style='margin-left:24.0pt;text-indent:-24.0pt'><span class=MsoHyperlink><a href="#_Toc93460673">1.<span style='font-family:"Times New Roman";
+color:windowtext;text-transform:none;font-weight:normal;text-decoration:none'>     </span>Windows
+NT 4.0, Windows 2000/XP or Windows Server 2003 Fresh Installation</a></span></p>
+
+<p class=MsoToc1 style='margin-left:24.0pt;text-indent:-24.0pt'><span
+class=MsoHyperlink><a href="#_Toc93460674">2.<span style='font-family:"Times New Roman";
+color:windowtext;text-transform:none;font-weight:normal;text-decoration:none'>     </span>Adding
+the SiI 3x12 controller to an existing Windows NT installation</a></span></p>
+
+<p class=MsoToc1 style='margin-left:24.0pt;text-indent:-24.0pt'><span
+class=MsoHyperlink><a href="#_Toc93460675">3.<span style='font-family:"Times New Roman";
+color:windowtext;text-transform:none;font-weight:normal;text-decoration:none'>     </span>Adding
+the SiI 3x12 controller to an existing Windows 2000/XP or Windows Server 2003
+installation</a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc93460676">4.<span
+style='font-family:"Times New Roman";color:windowtext;text-transform:none;
+font-weight:normal;text-decoration:none'>     </span>Update SiI 3x12 driver on
+Windows NT 4.0</a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc93460677">5.<span
+style='font-family:"Times New Roman";color:windowtext;text-transform:none;
+font-weight:normal;text-decoration:none'>     </span>Update SiI 3x12 driver on
+Windows 2000</a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc93460678">6.<span
+style='font-family:"Times New Roman";color:windowtext;text-transform:none;
+font-weight:normal;text-decoration:none'>     </span>Update SiI 3x12 driver on
+Windows XP or Windows Server 2003</a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc93460679">7.<span
+style='font-family:"Times New Roman";color:windowtext;text-transform:none;
+font-weight:normal;text-decoration:none'>     </span>Windows 98SE and Windows
+ME Fresh Installation Instructions</a></span></p>
+
+<p class=MsoToc1 style='margin-left:24.0pt;text-indent:-24.0pt'><span
+class=MsoHyperlink><a href="#_Toc93460680">8.<span style='font-family:"Times New Roman";
+color:windowtext;text-transform:none;font-weight:normal;text-decoration:none'>     </span>Adding
+the SiI 3x12 controller to an existing Windows 98SE/ME installation</a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc93460681">9.<span
+style='font-family:"Times New Roman";color:windowtext;text-transform:none;
+font-weight:normal;text-decoration:none'>     </span>Update SiI 3x12 driver on
+Windows 98SE/ME</a></span></p>
+
+<p class=MsoToc1><span class=MsoHyperlink><a href="#_Toc93460682">10.<span
+style='font-family:"Times New Roman";color:windowtext;text-transform:none;
+font-weight:normal;text-decoration:none'>       </span>Verifying controller
+installation</a></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<h1 style='margin-left:.3in;text-indent:-.3in'><a name="_Toc93460673"><span
+style='font-weight:normal'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Windows NT 4.0, Windows 2000/XP or Windows Server 2003 Fresh
+Installation</a></h1>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-size:12.0pt;font-family:Arial'>Follow the instructions in this
+section if you are performing a new installation of Windows NT 4.0, Windows
+2000/XP or Windows Server 2003, and you wish to boot from a device attached to
+the SiI 3x12 SATALink controller.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-family:Arial'>NOTE: If installing Windows 2000, you must first edit
+the txtsetup.oem file on the driver installation disk and delete the line from
+the [Config.Si3112] section that reads:</span></p>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText align=center style='text-align:center'><span
+style='font-family:Arial'>value = Parameters\PnpInterface, &quot;5&quot;,
+REG_DWORD, 1</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Power off the system.  Insert the
+SiI 3x12 SATALink controller into an available PCI slot.  Connect serial ATA
+cable(s) between the SiI 3x12 controller and the serial ATA device(s).  Power
+up the system.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Put your Windows NT/2000/XP or
+Windows Server 2003 CD into the CD/DVD-ROM drive, or the NT/2000 boot diskette
+#1 in the floppy drive if your system cannot boot from the CD.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Press F6 for third party SCSI or
+driver installation at the beginning of text mode installation.  Press 's' when
+setup asks if you want to specify an additional device, and insert the diskette
+labeled 'Silicon Image SiI 3x12 SATALink Driver Installation Disk' then press 'Enter'. 
+From the menu presented next, select the controller installation process that
+corresponds to the version of Windows being installed and press 'Enter'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Press 'Enter' again when prompted to
+continue on with text mode setup.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Follow the setup instructions to
+select your choice for partition and file system.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>After setup examines your disks, it
+will copy files from the CD to the hard drive selected above and restart the
+system.  After restart the setup process will resume to finish the
+installation.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>7.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Once the operating system
+installation has completed you can follow the instructions in <a
+href="#_Verifying_controller_installation">Verifying Controller Installation</a>
+to verify controller was installed correctly.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'><a href="#_top">Back to top</a></span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<h1 style='margin-left:.3in;text-indent:-.3in'><a name="_Toc93460674"><span
+style='font-weight:normal'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Adding the SiI 3x12 controller to an existing Windows NT installation</a></h1>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-size:12.0pt;font-family:Arial'>Follow the instructions in this
+section to install the Silicon Image SiI 3x12 SATALink controller into a system
+already running Windows NT 4.0.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Power off the system.  Insert the
+SiI 3x12 SATALink controller into an available PCI slot.  Connect serial ATA
+cable(s) between the SiI 3x12 controller and the serial ATA device(s).  Power
+up the system.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>After OS boots up, Click 'Start' </span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Under 'Settings', click 'Control
+Panel'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Select 'SCSI Adapters' from the
+Control Panel.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Select the 'Drivers' tab and click
+'Add'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Click 'Have Disk'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>7.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Insert the diskette labeled 'Silicon
+Image SiI 3x12 SATALink Driver Installation Disk' into A: and press 'Enter'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>8.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Choose either 'Silicon Image SiI
+3112 SATALink Controller' or 'Silicon Image SiI 3512 SATALink Controller' as
+appropriate and click 'OK'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>9.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>After the driver installation has
+completed you can follow the instructions in <a
+href="#_Verifying_controller_installation">Verifying Controller Installation</a>
+to verify the controller was installed correctly.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'><a href="#_top">Back to top</a></span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<h1 style='margin-left:.3in;text-indent:-.3in'><a name="_Toc93460675"><span
+style='font-weight:normal'>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Adding the SiI 3x12 controller to an existing Windows 2000/XP or Windows
+Server 2003 installation</a></h1>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-size:12.0pt;font-family:Arial'>Follow the instructions in this
+section to install the Silicon Image SiI 3x12 SATALink controller into a system
+already running Windows/XP or Windows Server 2003.</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-indent:-.2in'><span
+style='font-size:12.0pt;font-family:Arial'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:Arial'>Power off the
+system.  Insert the SiI 3x12 SATALink controller into an available PCI slot. 
+Connect serial ATA cable(s) between the SiI 3x12 controller and the serial ATA
+device(s).  Power up the system.</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-indent:-.2in'><span
+style='font-size:12.0pt;font-family:Arial'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:Arial'>During OS boot
+up, Windows will display the 'Found New Hardware Wizard'.  Click 'Next'.</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-indent:-.2in'><span
+style='font-size:12.0pt;font-family:Arial'>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:Arial'>Select 'Search
+for a suitable driver for my device (Recommended)' and Click 'Next'.</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-indent:-.2in'><span
+style='font-size:12.0pt;font-family:Arial'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:Arial'>Under 'Optional
+search locations' insure that 'Floppy disk drives' is checked.</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-indent:-.2in'><span
+style='font-size:12.0pt;font-family:Arial'>5.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:Arial'>Insert the
+diskette labeled 'Silicon Image SiI 3112 SATALink Driver Installation Disk'
+into A: and click 'Next'.</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-indent:-.2in'><span
+style='font-size:12.0pt;font-family:Arial'>6.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:Arial'>When the wizard
+indicates that it found a driver for the device click 'Next'.</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-indent:-.2in'><span
+style='font-size:12.0pt;font-family:Arial'>7.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:Arial'>If the 'Digital
+Signature Not Found' dialog appears, click 'Yes' to continue installing the
+driver.</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-indent:-.2in'><span
+style='font-size:12.0pt;font-family:Arial'>8.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:Arial'>The wizard will
+now copy the required files to the system and start the driver.  After starting
+the driver the wizard will display a completion dialog, click 'Finish' to exit
+the wizard.</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-indent:-.2in'><span
+style='font-size:12.0pt;font-family:Arial'>9.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;font-family:Arial'>See instructions
+in <a href="#_Verifying_controller_installation">Verifying Controller
+Installation</a> to verify controller was installed correctly.</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'><a href="#_top">Back to top</a></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<h1 style='margin-left:.3in;text-indent:-.3in'><a name="_Toc93460676"><span
+style='font-weight:normal'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Update SiI 3x12 driver on Windows NT 4.0</a></h1>
+
+<p class=MsoNormal style='margin-left:.3in;text-align:justify'><span
+style='font-family:Arial'>Follow the instructions in this section to update the
+driver for the SiI 3x12 SATALink controller on systems running Windows NT 4.0.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>After OS boots up, Click 'Start' </span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Under 'Settings', click 'Control
+Panel'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Select 'SCSI Adapters' from the
+Control Panel.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Select the 'Drivers' tab and click
+'Add'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Click 'Have Disk'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Insert the diskette labeled 'Silicon
+Image SiI 3x12 SATALink Driver Installation Disk' into A: and press 'Enter'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>7.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Choose either 'Silicon Image SiI
+3112 SATALink Controller' or 'Silicon Image SiI 3512 SATALink Controller' as
+appropriate and click 'OK'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>8.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Refer to the instructions in <a
+href="#_Verifying_controller_installation">Verifying Controller Installation</a>
+to verify controller was installed correctly.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'><a href="#_top">Back to top</a></span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<h1 style='margin-left:.3in;text-indent:-.3in'><a name="_Toc93460677"><span
+style='font-weight:normal'>5.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Update SiI 3x12 driver on Windows 2000</a></h1>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-size:12.0pt;font-family:Arial'>Follow the instructions in this
+section to update the driver for the SiI 3x12 SATALink controller on systems
+running Windows 2000.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Right click on 'My Computer' and
+select 'Properties'. Under the 'System Properties' section, click on 'Hardware'
+tab, and then on 'Device Manager' click 'SCSI and RAID Controllers' and right
+click 'Silicon Image SiI 3x12 SATALink Controller' then select 'Properties'
+from the context menu.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Click 'Update Driver' button on the
+'Driver' tab and select 'Display a list of the known drivers for this device so
+that I can choose a specific driver'.  Insert the diskette labeled 'Silicon
+Image SiI 3x12 SATALink Driver Installation Disk' into the floppy drive. Click
+'Next'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Click 'Have Disk'.  On the 'Install
+from Disk' dialog ensure that the correct floppy drive is specified and click
+'OK'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Click 'Next' until the installation
+process begins.  If presented with a dialog warning about an unsigned driver
+click 'Yes' to accept it.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>If at the end of the installation
+process you are prompted to reboot the system click 'Yes'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>See instructions in <a
+href="#_Verifying_controller_installation">Verifying Controller Installation</a>
+to verify controller was installed correctly.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'><a href="#_top">Back to top</a></span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<h1 style='margin-left:.3in;text-indent:-.3in'><a name="_Toc93460678"><span
+style='font-weight:normal'>6.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Update SiI 3x12 driver on Windows XP or Windows Server 2003</a></h1>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-size:12.0pt;font-family:Arial'>Follow the instructions in this
+section to update the driver for the SiI 3x12 SATALink controller on systems
+running Windows XP or Windows Server 2003.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Right click on 'My Computer' and
+select 'Properties'. Under the 'System Properties' section, click on 'Hardware'
+tab, and then on 'Device Manager' click 'SCSI and RAID Controllers' and right
+click 'Silicon Image SiI 3x12 SATALink Controller' then select 'Properties'
+from the context menu.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Select the 'Driver' tab, and then
+click the 'Update Driver' button.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Select 'Install from a list or
+specific location (Advanced)' and click 'Next',</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Make sure 'Search for the best
+driver in these locations' and 'Search removable media (floppy, CD-ROM...)' are
+both selected and then click 'Next'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>As the installation process begins
+you may be presented with a dialog warning about a non-logo'd driver, click
+'Continue Anyway' to continue the installation.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>If at the end of the installation
+process you are prompted to reboot the system click 'Yes'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>7.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>See instructions in <a
+href="#_Verifying_controller_installation">Verifying Controller Installation</a>
+to verify controller was installed correctly.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'><a href="#_top">Back to top</a></span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<h1 style='margin-left:.3in;text-indent:-.3in'><a name="_Toc93460679"><span
+style='font-weight:normal'>7.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Windows 98SE and Windows ME Fresh Installation Instructions</a></h1>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-size:12.0pt;font-family:Arial'>Follow the instructions in this
+section if you are performing a new installation of Windows 98SE/ME and you
+wish to boot from a device attached to the SiI 3x12 SATALink controller.</span></p>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-family:Arial'>NOTE: You may start up the Windows 98SE/ME
+installation from CD. If either your Windows 98SE/ME CD or CD-ROM drive is not
+bootable, your can start up with floppy diskettes.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Power off the system.  Insert the
+SiI 3x12 SATALink controller into an available PCI slot.  Connect serial ATA
+cable(s) between the SiI 3x12 controller and the serial ATA device(s).  Power
+up the system.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Put your Windows 98SE/ME CD into the
+CD/DVD-ROM drive, or the Windows 98SE/ME boot diskette in the floppy drive if
+your system cannot boot from the CD.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Follow the normal Windows 98SE/ME
+setup instructions to select your choice for partition and file system.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Wait until Windows 98SE/ME finishes
+installing devices, regional settings, networking settings, components, and
+final set of tasks, and reboots the system.  </span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>After the system reboots, right
+click on 'My Computer' and select 'Properties'.  From 'System Properties',
+select 'Device Manager', right click on the '?PCI Mass Storage controller' and
+select 'Properties' from the context menu.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Click 'Driver', 'Update Driver' and
+select 'Automatic search for a better driver [Recommended]'. Insert the
+diskette labeled 'Silicon Image SiI 3x12 SATALink Driver Installation Disk'
+into floppy drive.  Click 'Next' and complete the driver installation.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>7.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>System will go through the
+enumeration process and install the driver.  At the end of the process, click
+'Yes' to reboot your system.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>8.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>See instructions in <a
+href="#_Verifying_controller_installation">Verifying Controller Installation</a>
+to verify controller was installed correctly.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'><a href="#_top">Back to top</a></span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<h1 style='margin-left:.3in;text-indent:-.3in'><a name="_Toc93460680"><span
+style='font-weight:normal'>8.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Adding the SiI 3x12 controller to an existing Windows 98SE/ME
+installation</a></h1>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-size:12.0pt;font-family:Arial'>Follow the instructions in this
+section to install the Silicon Image SiI 3x12 SATALink controller into a system
+already running Windows 98SE/ME.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Power off the system.  Insert the
+SiI 3x12 SATALink controller into an available PCI slot.  Connect serial ATA
+cable(s) between the SiI 3x12 controller and the serial ATA device(s).  Power
+up the system.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>During the system boot up, the
+Hardware Wizard will display that it found a 'PCI Mass Storage Controller',
+click 'Next'. Select 'Search for the best driver for your device [Recommended]'
+and click 'Next' .  </span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Make sure the 'Floppy disk drives'
+checkbox is checked and insert the diskette labeled 'Silicon Image SiI 3x12
+SATALink Driver Installation Disk' into the floppy drive.  Click 'Next'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>System will go through the
+enumeration process and install the driver.  At the end of the process, Click '
+Finish' to complete the installation.  Reboot the system if your Windows
+98SE/ME drive is connected on the SiI 3x12 Controller. </span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>See instructions in <a
+href="#_Verifying_controller_installation">Verifying Controller Installation</a>
+to verify controller was installed correctly.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'><a href="#_top">Back to top</a></span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<h1 style='margin-left:.3in;text-indent:-.3in'><a name="_Toc93460681"><span
+style='font-weight:normal'>9.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Update SiI 3x12 driver on Windows 98SE/ME</a></h1>
+
+<p class=MsoNormal style='margin-left:.3in;text-align:justify'><span
+style='font-family:Arial'>Follow the instructions in this section to update the
+driver for the SiI 3x12 SATALink controller on systems running Windows 98SE/ME.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Right click on 'My Computer' and
+select 'Properties'. Under 'System Properties', click 'SCSI and RAID
+Controllers' then right click 'Silicon Image SiI 3x12 SATALink  Controller' and
+select 'Properties' from the context menu.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Click 'Driver', 'Update Driver' and
+select 'Automatic search for a better driver [Recommended]'. Insert the
+diskette labeled 'Silicon Image SiI 3x12 SATALink Driver Installation Disk'
+into the floppy drive.  Click 'Next' and complete the driver installation.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>System will go through the
+enumeration process and install the driver.  At the end of the process, click
+'Yes' to reboot your system.  </span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>See instructions in <a
+href="#_Verifying_controller_installation">Verifying Controller Installation</a>
+to verify controller was installed correctly.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'><a href="#_top">Back to top</a></span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<h1 style='margin-left:.3in;text-indent:-.3in'><a name="_Toc93460682"></a><a
+name="_Verifying_controller_installation"></a><span style='font-weight:normal'>10.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Verifying controller installation</h1>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><span
+style='font-size:12.0pt;font-family:Arial'>Follow the instructions in this
+section to verify that the controller was installed correctly.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><b><span
+style='font-size:12.0pt;font-family:Arial'>For Windows 2000/XP and Windows
+Server 2003</span></b></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Right click on 'My Computer' icon,
+select 'Properties', left click on 'Hardware' tab, and then on 'Device Manager'
+button.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Double click on 'SCSI and RAID
+Controllers', If there is no yellow '!' or '?' in front of 'Silicon Image SiI
+3x12 SATALink Controller' the driver has started correctly.  </span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>To view information about the
+devices attached to the controller, right click the 'Silicon Image SiI 3x12
+SATALink Controller' and select Properties from the context menu, then select
+the tab labeled 'Device Info'.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><b><span
+style='font-size:12.0pt;font-family:Arial'>For Windows NT 4.0</span></b></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Double click on 'My Computer' icon,
+select 'Control Panel', click on the 'SCSI Adapters' icon, either 'Silicon
+Image SiI 3112 SATALink Controller' or 'Silicon Image SiI 3512 SATALink
+Controller' should be displayed under 'Device' and 'Driver' tab.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>To view information about the
+devices attached to the controller, double click on the 'Silicon Image SATA Controllers'
+control panel applet.  Select a controller from the list at the top of the
+dialog.  Then select a device from the 'Device Location' drop down list to view
+its information.</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoPlainText><span style='font-size:12.0pt'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.3in;text-align:justify'><b><span
+style='font-size:12.0pt;font-family:Arial'>For Windows 98SE/ME</span></b></p>
+
+<p class=MsoPlainText style='text-align:justify'><b><span style='font-size:
+12.0pt;font-family:Arial'>&nbsp;</span></b></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Right click on 'My Computer' icon,
+select 'Properties'. Click on 'Device Manager' tab.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>Double click on 'SCSI and RAID
+Controllers', If there is no yellow '!' or '?' in front of 'Silicon Image SiI
+3x12 SATALink Controller', the driver has started correctly.  </span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='margin-left:.5in;text-align:justify;text-indent:
+-.2in'><span style='font-size:12.0pt;font-family:Arial'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></span><span
+style='font-size:12.0pt;font-family:Arial'>To view information about the
+devices attached to the controller, double click on the 'Silicon Image SATA
+Controllers' control panel applet under 'Control Panel'.  Select a controller
+from the list at the top of the dialog.  Then select a device from the 'Device
+Location' drop down list to view its information.</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'>&nbsp;</span></p>
+
+<p class=MsoPlainText style='text-align:justify'><span style='font-size:12.0pt;
+font-family:Arial'><a href="#_top">Back to top</a></span></p>
+
+<p class=MsoPlainText>&nbsp;</p>
+
+<p class=MsoPlainText>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

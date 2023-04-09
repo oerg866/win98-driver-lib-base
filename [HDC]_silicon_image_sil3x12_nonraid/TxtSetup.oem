@@ -1,0 +1,104 @@
+; This file installs the SiI 3112 non-RAID serial ATA driver as part
+; of text mode setup on Windows NT, Windows 2000, Windows XP,
+; Windows Server 2003, and Windows Vista.
+;
+; Copyright (C) 2002-2006 by Silicon Image, Inc.
+; All rights reserved
+
+
+[Disks]
+disk1 = "Silicon Image SiI 3x12 SATALink Driver Installation Disk",\si3112.sys,\
+
+
+[Defaults]
+SCSI = Si3112_XP
+
+
+[SCSI]                  ; HwComponent section
+Si3112_XP = "Silicon Image SiI 3x12 SATALink Controller for Windows XP/Server 2003"
+Si3112_NT = "Silicon Image SiI 3x12 SATALink Controller for Windows NT 4.0 and 2000"
+
+
+[Files.SCSI.Si3112_XP]
+driver = disk1,si3112.sys, Si3112
+driver = disk1,SiWinAcc.sys, SiFilter
+driver = disk1,SiRemFil.sys, SiRemFil
+inf = disk1,SI3112.inf
+dll = disk1,SilSupp.cpl
+catalog = disk1, Si3112.cat
+
+
+[Files.SCSI.Si3112_NT]
+driver = disk1,si3112.sys, Si3112
+inf = disk1,SI3112.inf
+dll = disk1,SilSupp.cpl
+catalog = disk1, Si3112.cat
+
+
+[HardwareIds.SCSI.Si3112_XP]
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_31121095", "Si3112"
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_34238086", "Si3112"
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_311215D9", "Si3112"
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_B0021458", "Si3112"
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_01661028", "Si3112"
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_81E8104D", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_35121095", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_01661028", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_35121014", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_02B71014", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_B0021458", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_81E8104D", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_820B104D", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_145A1462", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_001F6409", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_9003104D", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_35121A5F", "Si3112"
+id = "PCI\VEN_1002&DEV_436E&SUBSYS_436E1002", "Si3112"
+id = "PCI\VEN_1002&DEV_4379&SUBSYS_43791002", "Si3112"
+id = "PCI\VEN_1002&DEV_437A&SUBSYS_437A1002", "Si3112"
+
+
+[HardwareIds.SCSI.Si3112_NT]
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_31121095", "Si3112"
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_34238086", "Si3112"
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_311215D9", "Si3112"
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_B0021458", "Si3112"
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_01661028", "Si3112"
+id = "PCI\VEN_1095&DEV_3112&SUBSYS_81E8104D", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_35121095", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_01661028", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_35121014", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_02B71014", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_B0021458", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_81E8104D", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_820B104D", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_145A1462", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_001F6409", "Si3112"
+id = "PCI\VEN_1095&DEV_3512&SUBSYS_35121A5F", "Si3112"
+id = "PCI\VEN_1002&DEV_436E&SUBSYS_436E1002", "Si3112"
+id = "PCI\VEN_1002&DEV_4379&SUBSYS_43791002", "Si3112"
+id = "PCI\VEN_1002&DEV_437A&SUBSYS_437A1002", "Si3112"
+
+
+; NOTE:	In order to install Windows 2000 onto a drive that is attached
+;	to this controller you must delete the line that reads:
+;
+;	value = Parameters\PnpInterface, "5", REG_DWORD, 1
+;
+;	from the [Config.Si3112] section below.
+
+[Config.Si3112]
+value = Parameters\PnpInterface, "5", REG_DWORD, 1
+value = ProblemDevices, "", REG_SZ, ""
+value = ProblemDevices, "Maxtor 4D060H3                          DAK05GK0", REG_SZ, "MaxMode = UDMA-5"
+value = ProblemDevices, "ST320012AS", REG_SZ, "Mod15Write"
+value = ProblemDevices, "ST330013AS", REG_SZ, "Mod15Write"
+value = ProblemDevices, "ST340017AS", REG_SZ, "Mod15Write"
+value = ProblemDevices, "ST360015AS", REG_SZ, "Mod15Write"
+value = ProblemDevices, "ST380023AS", REG_SZ, "Mod15Write"
+value = ProblemDevices, "ST3120023AS", REG_SZ, "Mod15Write"
+value = ProblemDevices, "ST340014ASL", REG_SZ, "Mod15Write"
+value = ProblemDevices, "ST360014ASL", REG_SZ, "Mod15Write"
+value = ProblemDevices, "ST380011ASL", REG_SZ, "Mod15Write"
+value = ProblemDevices, "ST3120022ASL", REG_SZ, "Mod15Write"
+value = ProblemDevices, "ST3160021ASL", REG_SZ, "Mod15Write"

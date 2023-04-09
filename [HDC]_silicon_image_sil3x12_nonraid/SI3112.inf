@@ -1,0 +1,566 @@
+; This INF file installs the Silicon Image Serial ATA non-Raid driver for the
+; SiI 3x12 controllers on systems running Windows 98/ME, Windows NT 4.0,
+; Windows 2000, Windows XP, Windows Server 2003 and Windows Vista.
+;
+; Copyright (C) 2002-2006 by Silicon Image, Inc.
+; All rights reserved
+
+[Version]
+Signature="$Chicago$"
+Class=SCSIAdapter
+ClassGuid={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%SI%
+CatalogFile=SI3112.cat
+DriverVer=08/23/2006, 1.3.65.2
+
+
+[SourceDisksNames]
+1="Silicon Image SiI 3x12 SATALink Driver Installation Disk",SI3112.sys,,
+
+[SourceDisksFiles]
+SI3112.sys	= 1
+SiiSupp.vxd	= 1
+SilSupp.cpl	= 1
+SiWinAcc.sys	= 1
+SiRemFil.sys	= 1
+
+[DestinationDirs]
+DefaultDestDir	= 12
+DllFiles		= 11
+
+[DriverFiles_9X]
+SI3112.mpd,SI3112.sys,,0x20
+SiiSupp.vxd,,,0x20
+
+[DriverFiles_NT_2K]
+SI3112.sys,,,0x20
+
+[DriverFiles_XP]
+SI3112.sys,,,0x20
+SiWinAcc.sys,,,0x20
+SiRemFil.sys,,,0x20
+
+[ATI_DriverFiles_XP]
+SI3112.sys,,,0x20
+SiWinAcc.sys,,,0x20
+
+[DllFiles]
+SilSupp.cpl,,,0x20
+
+
+[Manufacturer]
+%SI%=SI_HDC,NTx86.5.1
+%ATI%=ATI_HDC,NTx86.5.1
+
+[SI_HDC]
+%PCI\VEN_1095&DEV_3112.DeviceDesc%=SI_3112, PCI\VEN_1095&DEV_3112
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512, PCI\VEN_1095&DEV_3512
+
+[SI_HDC.NTx86.5.1]
+%PCI\VEN_1095&DEV_3112.DeviceDesc%=SI_3112_XP, PCI\VEN_1095&DEV_3112&SUBSYS_31121095
+%PCI\VEN_1095&DEV_3112.DeviceDesc%=SI_3112_XP, PCI\VEN_1095&DEV_3112&SUBSYS_34238086
+%PCI\VEN_1095&DEV_3112.DeviceDesc%=SI_3112_XP, PCI\VEN_1095&DEV_3112&SUBSYS_311215D9
+%PCI\VEN_1095&DEV_3112.DeviceDesc%=SI_3112_XP, PCI\VEN_1095&DEV_3112&SUBSYS_B0021458
+%PCI\VEN_1095&DEV_3112.DeviceDesc%=SI_3112_XP, PCI\VEN_1095&DEV_3112&SUBSYS_01661028
+%PCI\VEN_1095&DEV_3112.DeviceDesc%=SI_3112_XP, PCI\VEN_1095&DEV_3512&SUBSYS_81E8104D
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512&SUBSYS_35121095
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512&SUBSYS_01661028
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512&SUBSYS_35121014
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512&SUBSYS_02B71014
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512&SUBSYS_B0021458
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512&SUBSYS_81E8104D
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512&SUBSYS_820B104D
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512&SUBSYS_145A1462
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512&SUBSYS_001F6409
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512&SUBSYS_9003104D
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512_XP, PCI\VEN_1095&DEV_3512&SUBSYS_35121A5F
+
+[ATI_HDC]
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E, PCI\VEN_1002&DEV_436E
+%PCI\VEN_1002&DEV_4379.DeviceDesc%=ATI_4379, PCI\VEN_1002&DEV_4379
+%PCI\VEN_1002&DEV_437A.DeviceDesc%=ATI_437A, PCI\VEN_1002&DEV_437A
+
+[ATI_HDC.NTx86.5.1]
+%PCI\VEN_1002&DEV_436E.DeviceDesc%=ATI_436E_XP, PCI\VEN_1002&DEV_436E&SUBSYS_436E1002
+%PCI\VEN_1002&DEV_4379.DeviceDesc%=ATI_4379_XP, PCI\VEN_1002&DEV_4379&SUBSYS_43791002
+%PCI\VEN_1002&DEV_437A.DeviceDesc%=ATI_437A_XP, PCI\VEN_1002&DEV_437A&SUBSYS_437A1002
+
+
+;; Win9x install sections
+;;
+[SI_3112]
+Copyfiles=DriverFiles_9X, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedSubSystemIds
+
+[SI_3512]
+Copyfiles=DriverFiles_9X, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedSubSystemIds
+
+[ATI_436E]
+Copyfiles=DriverFiles_9X, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedSubSystemIds
+
+[ATI_4379]
+Copyfiles=DriverFiles_9X, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedSubSystemIds
+
+[ATI_437A]
+Copyfiles=DriverFiles_9X, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedSubSystemIds
+
+
+;; Windows NT4.0 and Windows 2000 install sections
+;;
+[SI_3112.NTX86]
+Copyfiles=DriverFiles_NT_2K, DllFiles
+
+[SI_3112.NTX86.Services]
+AddService=SI3112,0x00000002,SI_3112_Service_Install, Miniport_EventLog_Inst
+
+[SI_3112.NTX86.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3X12_CoInstall_AddReg
+
+
+[SI_3512.NTX86]
+Copyfiles=DriverFiles_NT_2K, DllFiles
+
+[SI_3512.NTX86.Services]
+AddService=SI3112,0x00000002,SI_3512_Service_Install, Miniport_EventLog_Inst
+
+[SI_3512.NTX86.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3X12_CoInstall_AddReg
+
+
+[ATI_436E.NTX86]
+Copyfiles=DriverFiles_NT_2K, DllFiles
+
+[ATI_436E.NTX86.Services]
+AddService=SI3112,0x00000002,ATI_436E_Service_Install, Miniport_EventLog_Inst
+
+[ATI_436E.NTX86.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3X12_CoInstall_AddReg
+
+
+[ATI_4379.NTX86]
+Copyfiles=DriverFiles_NT_2K, DllFiles
+
+[ATI_4379.NTX86.Services]
+AddService=SI3112,0x00000002,ATI_4379_Service_Install, Miniport_EventLog_Inst
+
+[ATI_4379.NTX86.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3X12_CoInstall_AddReg
+
+
+[ATI_437A.NTX86]
+Copyfiles=DriverFiles_NT_2K, DllFiles
+
+[ATI_437A.NTX86.Services]
+AddService=SI3112,0x00000002,ATI_437A_Service_Install, Miniport_EventLog_Inst
+
+[ATI_437A.NTX86.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3X12_CoInstall_AddReg
+
+
+
+;; Windows XP install sections
+;;
+[SI_3112_XP]
+Copyfiles=DriverFiles_XP, DllFiles
+
+[SI_3112_XP.Services]
+AddService=SI3112,0x00000002,SI_3112_Service_Install, Miniport_EventLog_Inst
+AddService=SiFilter,0,FilterService_Install
+AddService=SiRemFil,0,RemovableDevFilter_Install
+
+
+[SI_3112_XP.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3X12_CoInstall_AddReg
+
+
+[SI_3512_XP]
+Copyfiles=DriverFiles_XP, DllFiles
+
+[SI_3512_XP.Services]
+AddService=SI3112,0x00000002,SI_3512_Service_Install, Miniport_EventLog_Inst
+AddService=SiFilter,0,FilterService_Install
+AddService=SiRemFil,0,RemovableDevFilter_Install
+
+[SI_3512_XP.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3X12_CoInstall_AddReg
+
+
+[ATI_436E_XP]
+Copyfiles=ATI_DriverFiles_XP, DllFiles
+
+[ATI_436E_XP.Services]
+AddService=SI3112,0x00000002,ATI_436E_Service_Install, Miniport_EventLog_Inst
+AddService=SiFilter,0,FilterService_Install
+
+[ATI_436E_XP.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3X12_CoInstall_AddReg
+
+
+[ATI_4379_XP]
+Copyfiles=ATI_DriverFiles_XP, DllFiles
+
+[ATI_4379_XP.Services]
+AddService=SI3112,0x00000002,ATI_4379_Service_Install, Miniport_EventLog_Inst
+AddService=SiFilter,0,FilterService_Install
+
+[ATI_4379_XP.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3X12_CoInstall_AddReg
+
+
+[ATI_437A_XP]
+Copyfiles=ATI_DriverFiles_XP, DllFiles
+
+[ATI_437A_XP.Services]
+AddService=SI3112,0x00000002,ATI_437A_Service_Install, Miniport_EventLog_Inst
+AddService=SiFilter,0,FilterService_Install
+
+[ATI_437A_XP.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3X12_CoInstall_AddReg
+
+
+
+[SI_3X12_CoInstall_AddReg]
+HKR,,CoInstallers32,0x00010000,"SilSupp.cpl, CoInstHandler"
+
+[SI_3112_Service_Install]
+DisplayName=%SI3112.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SI3112.sys
+LoadOrderGroup=Scsi miniport
+DelReg=NT4WorkAround_DelReg
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=PortConfigure_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=ChanConfigOverrides_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+
+
+[SI_3512_Service_Install]
+DisplayName=%SI3512.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SI3112.sys
+LoadOrderGroup=Scsi miniport
+DelReg=NT4WorkAround_DelReg
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=PortConfigure_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=ChanConfigOverrides_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+
+
+[ATI_436E_Service_Install]
+DisplayName=%ATI436E.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SI3112.sys
+LoadOrderGroup=Scsi miniport
+DelReg=NT4WorkAround_DelReg
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=PortConfigure_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+
+
+[ATI_4379_Service_Install]
+DisplayName=%ATI4379.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SI3112.sys
+LoadOrderGroup=Scsi miniport
+DelReg=NT4WorkAround_DelReg
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=PortConfigure_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+
+
+[ATI_437A_Service_Install]
+DisplayName=%ATI437A.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SI3112.sys
+LoadOrderGroup=Scsi miniport
+DelReg=NT4WorkAround_DelReg
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=PortConfigure_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+
+
+[FilterService_Install]
+DisplayName=SATALink driver accelerator
+ServiceType=1
+StartType=0
+ErrorControl=0
+ServiceBinary=%12%\SiWinAcc.sys
+LoadOrderGroup=Filter
+
+[RemovableDevFilter_Install]
+DisplayName=SATALink External Device Filter
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SiRemFil.sys
+LoadOrderGroup="PnP Filter"
+AddReg=RemovableDevFilter_AddReg
+
+
+; Enable removable device filter to attach to disk and cd-rom class devices.
+[RemovableDevFilter_AddReg]
+HKLM, System\CurrentControlSet\Control\Class\{4d36e967-e325-11ce-bfc1-08002be10318}, UpperFilters, 0x00010008, SiRemFil
+HKLM, System\CurrentControlSet\Control\Class\{4d36e965-e325-11ce-bfc1-08002be10318}, UpperFilters, 0x00010008, SiRemFil
+
+
+; Mark device as supporting Plug & Play on the PCI(5) bus.
+[PnPSupport_AddReg]
+HKR,Parameters\PnPInterface,5,0x00010001,1
+
+
+[PortConfigure_AddReg]
+HKR,Parameters\Device,NumberOfRequests,0x00010001, 64
+HKR,Parameters\Device,MaximumSGList,0x00010001, 33
+HKR, Parameters\Device, CreateInitiatorLU, 0x00010001, 1
+
+
+; Remove dummy registry value that may have been created during text mode
+; setup of Windows NT4.0.  This value is created to work around the inability
+; text mode setup to create multiple subkeys at a time.
+[NT4WorkAround_DelReg]
+HKR, Parameters, NT40WorkAround
+
+
+; List of possible obsolete problem device list entries that should be
+; removed prior to the addition of the replacement problem device list
+; entries.
+[ProblemDeviceList_DelReg]
+HKR,ProblemDevices, %ObsProblemDev1Name%
+HKR,ProblemDevices, %ObsProblemDev2Name%
+
+
+; List of devices with known configuration issues.
+[ProblemDeviceList_AddReg]
+HKR,ProblemDevices
+HKR,ProblemDevices, %ProblemDev1Name%, 0, %ProblemDev1Value%
+HKR,ProblemDevices, %ProblemDev2Name%, 0, %ProblemDev2Value%
+HKR,ProblemDevices, %ProblemDev3Name%, 0, %ProblemDev3Value%
+HKR,ProblemDevices, %ProblemDev4Name%, 0, %ProblemDev4Value%
+HKR,ProblemDevices, %ProblemDev5Name%, 0, %ProblemDev5Value%
+HKR,ProblemDevices, %ProblemDev6Name%, 0, %ProblemDev6Value%
+HKR,ProblemDevices, %ProblemDev7Name%, 0, %ProblemDev7Value%
+HKR,ProblemDevices, %ProblemDev8Name%, 0, %ProblemDev8Value%
+HKR,ProblemDevices, %ProblemDev9Name%, 0, %ProblemDev9Value%
+HKR,ProblemDevices, %ProblemDev10Name%, 0, %ProblemDev10Value%
+HKR,ProblemDevices, %ProblemDev11Name%, 0, %ProblemDev11Value%
+HKR,ProblemDevices, %ProblemDev12Name%, 0, %ProblemDev12Value%
+
+
+; List of controller subsystem IDs to be supported by the SI3112.sys driver on
+; NT/Win2K/XP/Server 2003 systems.
+[SupportedSubSystemIds_AddReg]
+HKR,SupportedSubsystemIDs, %PCI\VEN_1095&DEV_3112.DeviceDesc%, 0x00010001, 0x31121095
+HKR,SupportedSubsystemIDs, %SI3112_SUB_ID_DESC_INTEL%, 0x00010001, 0x34238086
+HKR,SupportedSubsystemIDs, %SI3112_SUB_ID_DESC_SUPER_MICRO%, 0x00010001, 0x311215D9
+HKR,SupportedSubsystemIDs, %SI3112_SUB_ID_DESC_GIGABYTE%, 0x00010001, 0xB0021458
+HKR,SupportedSubsystemIDs, %SI3112_SUB_ID_DESC_DELL%, 0x00010001, 0x01661028
+HKR,SupportedSubsystemIDs, %SI3112_SUB_ID_DESC_SONY%, 0x00010001, 0x81E8104D
+HKR,SupportedSubsystemIDs, %PCI\VEN_1095&DEV_3512.DeviceDesc%, 0x00010001, 0x35121095
+HKR,SupportedSubsystemIDs, %SI3512_SUB_ID_DESC_DELL%, 0x00010001, 0x01661028
+HKR,SupportedSubsystemIDs, %SI3512_SUB_ID_DESC_SONY%, 0x00010001, 0x81E8104D
+HKR,SupportedSubsystemIDs, %SI3512_SUB_ID_DESC_IBM%, 0x00010001, 0x35121014
+HKR,SupportedSubsystemIDs, %SI3512_SUB_ID_DESC_IBM2%, 0x00010001, 0x02B71014
+HKR,SupportedSubsystemIDs, %SI3512_SUB_ID_DESC_GIGABYTE%, 0x00010001, 0xB0021458
+HKR,SupportedSubsystemIDs, %SI3512_SUB_ID_DESC_SONY2%, 0x00010001, 0x820B104D
+HKR,SupportedSubsystemIDs, %SI3512_SUB_ID_DESC_MSI%, 0x00010001, 0x145A1462
+HKR,SupportedSubsystemIDs, %SI3512_SUB_ID_DESC_LOGITECH%, 0x00010001, 0x001F6409
+HKR,SupportedSubsystemIDs, %SI3512_SUB_ID_DESC_SONY3%, 0x00010001, 0x9003104D
+HKR,SupportedSubsystemIDs, %SI3512_SUB_ID_DESC_SYSTEM_TALKS%, 0x00010001, 0x35121A5F
+HKR,SupportedSubsystemIDs, %PCI\VEN_1002&DEV_436E.DeviceDesc%, 0x00010001, 0x436E1002
+HKR,SupportedSubsystemIDs, %PCI\VEN_1002&DEV_4379.DeviceDesc%, 0x00010001, 0x43791002
+HKR,SupportedSubsystemIDs, %PCI\VEN_1002&DEV_437A.DeviceDesc% ,0x00010001, 0x437A1002
+
+
+[ChanConfigOverrides_AddReg]
+HKR, ChannelConfigurations, %SI3112_SUB_ID_DESC_SONY%, 0x00010001, 0x00000031
+HKR, ChannelConfigurations, %SI3512_SUB_ID_DESC_SONY%, 0x00010001, 0x00000031
+HKR, ChannelConfigurations, %SI3512_SUB_ID_DESC_SONY2%, 0x00010001, 0x00000031
+HKR, ChannelConfigurations, %SI3512_SUB_ID_DESC_SYSTEM_TALKS%, 0x00010001, 0x00000011
+
+
+[Win98ProblemDeviceList_DelReg]
+HKLM,%Win98ProblemDeviceSubKey%, %ObsProblemDev1Name%
+HKLM,%Win98ProblemDeviceSubKey%, %ObsProblemDev2Name%
+
+
+[Win98ProblemDeviceList]
+HKLM,%Win98ProblemDeviceSubKey%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev1Name%, 0, %ProblemDev1Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev2Name%, 0, %ProblemDev2Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev3Name%, 0, %ProblemDev3Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev4Name%, 0, %ProblemDev4Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev5Name%, 0, %ProblemDev5Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev6Name%, 0, %ProblemDev6Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev7Name%, 0, %ProblemDev7Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev8Name%, 0, %ProblemDev8Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev9Name%, 0, %ProblemDev9Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev10Name%, 0, %ProblemDev10Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev11Name%, 0, %ProblemDev11Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev12Name%, 0, %ProblemDev12Value%
+
+
+; List of controller subsystem IDs to be supported by the SI3112.mpd driver on
+; Windows 98/ME systems.
+; NOTE: Because of a bug in the INF file handling on Win98, hex dword values that use letters A - F must be
+;          specified as bytes, least significant byte first.
+[Win98SupportedSubSystemIds]
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1095&DEV_3112.DeviceDesc%,0x00010001, 0x31121095
+HKLM, %Win98SupportedControllersSubKey%,%SI3112_SUB_ID_DESC_INTEL%,0x00010001, 0x34238086
+HKLM, %Win98SupportedControllersSubKey%,%SI3112_SUB_ID_DESC_SUPER_MICRO%,0x00010001, 0xD9, 0x15,0x12, 0x31
+HKLM, %Win98SupportedControllersSubKey%,%SI3112_SUB_ID_DESC_GIGABYTE%,0x00010001, 0x58, 0x14, 0x02, 0xB0
+HKLM, %Win98SupportedControllersSubKey%,%SI3112_SUB_ID_DESC_DELL%,0x00010001, 0x01661028
+HKLM, %Win98SupportedControllersSubKey%,%SI3112_SUB_ID_DESC_SONY%,0x00010001, 0x4D, 0x10, 0xE8, 0x81
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1095&DEV_3512.DeviceDesc%,0x00010001, 0x35121095
+HKLM, %Win98SupportedControllersSubKey%,%SI3512_SUB_ID_DESC_DELL%,0x00010001, 0x01661028
+HKLM, %Win98SupportedControllersSubKey%,%SI3512_SUB_ID_DESC_SONY%,0x00010001, 0x4D, 0x10, 0xE8, 0x81
+HKLM, %Win98SupportedControllersSubKey%,%SI3512_SUB_ID_DESC_IBM%,0x00010001, 0x35121014
+HKLM, %Win98SupportedControllersSubKey%,%SI3512_SUB_ID_DESC_IBM2%,0x00010001, 0x14, 0x10, 0xB7, 0x02
+HKLM, %Win98SupportedControllersSubKey%,%SI3512_SUB_ID_DESC_GIGABYTE%,0x00010001, 0x58, 0x14, 0x02, 0xB0
+HKLM, %Win98SupportedControllersSubKey%,%SI3512_SUB_ID_DESC_SONY2%, 0x00010001, 0x4D, 0x10, 0x0B, 0x82
+HKLM, %Win98SupportedControllersSubKey%,%SI3512_SUB_ID_DESC_MSI%, 0x00010001, 0x62, 0x14, 0x5A, 0x14
+HKLM, %Win98SupportedControllersSubKey%,%SI3512_SUB_ID_DESC_LOGITECH%, 0x00010001, 0x09, 0x64, 0x1F, 0x00
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1002&DEV_436E.DeviceDesc%,0x00010001, 0x02, 0x10, 0x6E, 0x43
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1002&DEV_4379.DeviceDesc%,0x00010001, 0x43791002
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1002&DEV_437A.DeviceDesc%,0x00010001, 0x02, 0x10, 0x7A, 0x43
+
+
+;*************************************************************
+;The NT EventLog entries are the same for all SCSI miniports.
+[Miniport_EventLog_Inst]
+AddReg = Miniport_EventLog_AddReg
+
+[Miniport_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,0x00010001,7
+
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+
+[WIN98.REG]
+HKR,,PortDriver,,SI3112.mpd
+
+
+[Strings]
+SI="Silicon Image"
+ATI="ATI"
+
+PCI\VEN_1095&DEV_3112.DeviceDesc="Silicon Image SiI 3112 SATALink Controller"
+SI3112.SvcDesc="SiI-3112 SATALink Controller"
+
+PCI\VEN_1095&DEV_3512.DeviceDesc="Silicon Image SiI 3512 SATALink Controller"
+SI3512.SvcDesc="SiI-3512 SATALink Controller"
+
+PCI\VEN_1002&DEV_436E.DeviceDesc="ATI 436E Serial ATA Controller"
+ATI436E.SvcDesc="ATI-436E Serial ATA Controller"
+
+PCI\VEN_1002&DEV_4379.DeviceDesc="ATI 4379 Serial ATA Controller"
+ATI4379.SvcDesc="ATI-4379 Serial ATA Controller"
+
+PCI\VEN_1002&DEV_437A.DeviceDesc="ATI 437A Serial ATA Controller"
+ATI437A.SvcDesc="ATI-437A Serial ATA Controller"
+
+
+
+; Registry value names to use for PCI subsystem ID values assigned by third parties
+; using the 3x12 controller.
+SI3112_SUB_ID_DESC_INTEL="Silicon Image SiI 3112 SATALink Controller (Intel)"
+SI3112_SUB_ID_DESC_SUPER_MICRO="Silicon Image SiI 3112 SATALink Controller (Super Micro)"
+SI3112_SUB_ID_DESC_GIGABYTE="Silicon Image SiI 3112 SATALink Controller (Gigabyte)"
+SI3112_SUB_ID_DESC_DELL="Silicon Image SiI 3112 SATALink Controller (Dell)"
+SI3112_SUB_ID_DESC_SONY="Silicon Image SiI 3112 SATALink Controller (Sony)"
+SI3512_SUB_ID_DESC_DELL="Silicon Image SiI 3512 SATALink Controller (Dell)"
+SI3512_SUB_ID_DESC_SONY="Silicon Image SiI 3512 SATALink Controller (Sony)"
+SI3512_SUB_ID_DESC_IBM="Silicon Image SiI 3512 SATALink Controller (IBM)"
+SI3512_SUB_ID_DESC_IBM2="Silicon Image SiI 3512 SATALink Controller (IBM2)"
+SI3512_SUB_ID_DESC_GIGABYTE="Silicon Image SiI 3512 SATALink Controller (Gigabyte)"
+SI3512_SUB_ID_DESC_SONY2="Silicon Image SiI 3512 SATALink Controller (Sony2)"
+SI3512_SUB_ID_DESC_MSI="Silicon Image SiI 3512 SATALink Controller (MSI)"
+SI3512_SUB_ID_DESC_LOGITECH="Silicon Image SiI 3512 SATALink Controller (LOGITECH)"
+SI3512_SUB_ID_DESC_SONY3="Silicon Image SiI 3512 SATALink Controller (Sony3)"
+SI3512_SUB_ID_DESC_SYSTEM_TALKS="Silicon Image SiI 3512 SATALink Controller (System Talks)"
+
+Win98ProblemDeviceSubKey = "System\CurrentControlSet\Services\SI3112\ProblemDevices"
+Win98SupportedControllersSubKey = "System\CurrentControlSet\Services\SI3112\SupportedSubsystemIDs"
+
+
+ObsProblemDev1Name="ST330013AS                              108b    "
+ObsProblemDev2Name="ST330013AS                              1.20    "
+
+
+ProblemDev1Name="Maxtor 4D060H3                          DAK05GK0"
+ProblemDev1Value="MaxMode = UDMA-5"
+
+ProblemDev2Name="ST320012AS"
+ProblemDev2Value="Mod15Write"
+
+ProblemDev3Name="ST330013AS"
+ProblemDev3Value="Mod15Write"
+
+ProblemDev4Name="ST340017AS"
+ProblemDev4Value="Mod15Write"
+
+ProblemDev5Name="ST360015AS"
+ProblemDev5Value="Mod15Write"
+
+ProblemDev6Name="ST380023AS"
+ProblemDev6Value="Mod15Write"
+
+ProblemDev7Name="ST3120023AS"
+ProblemDev7Value="Mod15Write"
+
+ProblemDev8Name="ST340014ASL"
+ProblemDev8Value="Mod15Write"
+
+ProblemDev9Name="ST360014ASL"
+ProblemDev9Value="Mod15Write"
+
+ProblemDev10Name="ST380011ASL"
+ProblemDev10Value="Mod15Write"
+
+ProblemDev11Name="ST3120022ASL"
+ProblemDev11Value="Mod15Write"
+
+ProblemDev12Name="ST3160021ASL"
+ProblemDev12Value="Mod15Write"
