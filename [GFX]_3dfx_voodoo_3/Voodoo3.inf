@@ -37,18 +37,7 @@ vgartd.vxd   =1
 %Mfg%=Mfg
 
 [Mfg]
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_0030121A ; #0773
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_0036121A ; #0769
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_003A121A ; #0761
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_0037121A ; #0762
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_004D121A ; #0804
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_0057121A ; #0855
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_004B121A ; #0806
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_0060121A ; #0784
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_0061121A ; #0794
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_00041620 ; Trigem-Sigmacom
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_124F121A ; Compaq WithTV
-%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_1252121A ; Compaq With NoTV
+%DeviceDesc%=Driver.Install,PCI\VEN_121A&DEV_0005
 %DeviceDesc%=OB.Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_0004121A ; AGP
 %DeviceDesc%=OB.Driver.Install,PCI\VEN_121A&DEV_0005&SUBSYS_0070121A ; AGP
 
