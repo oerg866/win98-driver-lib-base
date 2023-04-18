@@ -6,7 +6,6 @@ Class=Display
 Signature="$CHICAGO$"
 Provider=%Mfg%
 DriverVer = 01/19/2000, 4.12.01.8233
-CatalogFile=S3_8.CAT
 
 [DestinationDirs]
 DefaultDestDir=11
