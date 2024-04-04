@@ -1,0 +1,88 @@
+;****************************************************************************
+;                                                                           *
+; INF file for Silicon Motion Lynx Family display driver                    *
+;                                                                           *
+; Copyright (C) 1996-2001 Silicon Motion Inc.                               *
+;               All Rights Reserved.                                        *
+;                                                                           *
+;****************************************************************************
+
+[version]
+Class=DISPLAY
+signature="$CHICAGO$"
+Provider=%Mfg%
+CatalogFile=smi.cat
+DriverVer=05/08/2001,4.13.01.0069
+
+[DestinationDirs]
+DefaultDestDir  = 11    ; LDID_SYS
+Driver.Copy = 11
+
+[SourceDisksNames]
+1="Silicon Motion Lynx family Driver Disk",,0
+
+[SourceDisksFiles]
+smdrv.drv=1
+smvdd.vxd=1
+smdd32.DLL=1
+smi.cat=1
+
+[Manufacturer]
+%Mfg%=Mfg
+
+[Mfg]
+%PCI\VEN_126F&DEV_0712.DeviceDesc%=Driver.Install, PCI\VEN_126F&DEV_0712
+
+[Driver.Install]
+CopyFiles=Driver.Copy
+DelReg=Prev.DelReg
+AddReg=Driver.AddReg
+UpdateInis=Smi.ini
+
+[Smi.ini]
+system.ini,386Enh,,"EMMExclude=c000-cfff"
+
+[Driver.Copy]
+smdrv.drv
+smvdd.vxd
+smdd32.DLL
+
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,MODES
+HKR,CURRENT
+
+[Driver.AddReg]
+HKR,,Ver,,4.13.01.0069
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,smdrv.drv
+HKR,DEFAULT,drv2,,smdrv.drv
+HKR,DEFAULT,vdd,,"*vdd"
+HKR,DEFAULT,minivdd,,smvdd.vxd
+HKR,DEFAULT,RefreshRate,10,-1
+HKR,DEFAULT,DDC,,1
+HKR,DEFAULT,ExtModeSwitch,,0
+HKR,"MODES\8\640,480",,,"60,75,85"
+HKR,"MODES\8\720,480",,,"60,75,85"
+HKR,"MODES\8\800,600",,,"60,75,85"
+HKR,"MODES\8\1024,600",,,"60,75,85"
+HKR,"MODES\8\1024,768",,,"60,75,85"
+HKR,"MODES\8\1280,1024",,,"60,75,85"
+HKR,"MODES\16\640,480",,,"60,75,85"
+HKR,"MODES\16\720,480",,,"60,75,85"
+HKR,"MODES\16\800,600",,,"60,75,85"
+HKR,"MODES\16\1024,600",,,"60,75,85"
+HKR,"MODES\16\1024,768",,,"60,75,85"
+HKR,"MODES\16\1280,1024",,,"60,75,85"
+HKR,"MODES\24\640,480",,,"60,75,85"
+HKR,"MODES\24\720,480",,,"60,75,85"
+HKR,"MODES\24\800,600",,,"60,75,85"
+HKR,"MODES\24\1024,600",,,"60,75,85"
+HKR,"MODES\24\1024,768",,,"60,75,85"
+HKR,"MODES\24\1280,1024",,,"60"
+
+[Strings]
+Mfg="Silicon Motion Inc."
+PCI\VEN_126F&DEV_0712.DeviceDesc="Silicon Motion LynxEM+"
