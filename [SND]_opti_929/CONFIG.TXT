@@ -1,0 +1,176 @@
+             OPTi 82C929 AUDIO DEVICE CONFIGURATION HELP MENU
+
+
+1.  KEYBOARD FUNCTION ASSIGNMENTS
+
+    The following are the keys and their function descriptions:    
+
+    [F3]            Exit to DOS, all changes are discarded.
+    [TAB]           Move to Option.
+    [ENTER]         Accept Button. 
+                    Open Combo Box for selecting options,
+                    Accept options from combo Box.
+    []            Select Options within Combo box
+    		
+
+
+2.  BUTTON FUNCTION DESCRIPTIONS
+
+    A button can be activated by either a mouse, keyboard [ENTER] or
+    ALT+button's hotkey.
+		  
+    The following are the BUTTON names and their function 
+    descriptions:
+
+    HELP            Brings up this help page.
+
+    DEFAULT         Resets sound card to default configurations.
+
+    ACCEPT          Accept the current chosen options and exit.
+                    The program checks for hardware conflicts. 
+                    If conflict exists, a warning window will show.
+                    The program updates the sound configuration and
+                    system files: SOUND16.CFG, CDROM.CFG, CONFIG.SYS
+                    AUTOEXEC.BAT, SYSTEM.INI, before exiting to DOS.
+
+    SOUND TEST      Brings up the Sound Test Window.
+                    The Sound Test Window allows the following
+                    tests with the chosen hardware settings:
+                        8-Bit Sound Test  (Test SB Pro settings)
+                        16-Bit Sound Test (Test WSS settings)
+                        FM Music Test
+
+    VOLUME          Brings up the Volume Control Window.
+                    The Volume Control Window allows the following
+                    volume adjustments:
+                        Master Volume
+                        Voice Volume
+                        FM Music Volume
+                        CD Audio Volume
+
+    CHANGE OPTIONS  Brings up the CD-ROM Configuration Window.
+                    The CD-ROM Configuration Window allows the
+                    following CD-ROM configurations:
+                        CD-ROM Drive Type
+                        MSCDEX selection
+                        I/O Address
+                        Interrupt
+                        DMA Channel
+
+
+3.  COMBO BOX FUNCTION AND HARDWARE CONFIGURATION DESCRIPTIONS
+
+    A combo box can be activated by a mouse, or a keyboard [ENTER].
+    When activated, a list box with options is opened for selecions.
+
+    The following are the descriptions for each sound card's hardware 
+    section and its options: 
+
+    -------------------------
+    Sound Card Mode Selection             
+    -------------------------
+
+    Current Mode    your sound card can operate in one 
+                    of the following 2 operation modes:
+
+                    [Sound Blaster Pro] or 
+                    [Windows Sound System] Mode
+
+                    Select [Sound Blaster Pro] mode to enable
+                    your sound card to play Sound Blaster 
+                    compatible DOS games. (Default)
+
+                    Selecting [Windows Sound System] mode will
+                    switch your sound card into the mode to 
+                    play those DOS games or utilities written
+                    for Microsoft WSS compatible sound cards.
+
+                    The selected mode becomes the current mode
+                    upon exiting.
+
+    -----------------
+    Sound Blaster Pro (for SB Pro Mode Only)
+    -----------------
+
+    I/O Port        SB Pro I/O Port selections:
+                      *220, 240
+    IRQ             SB Pro Interrpt Address selections:
+                      *5, 7, 10
+    DMA             SB Pro DMA Channel selections:
+                      *1, 0, 3
+
+    Note: 8-bit Sound Test in the Sound Test Window can be used to 
+          test Sound Blaster Pro Mode regardless of what the Current 
+          Mode setting is.
+
+    --------------------
+    Windows Sound System (for WSS Mode Only)
+    --------------------
+
+    I/O Port        WSS I/O Port selections:
+                      *530, E80, F40, 604
+    IRQ             WSS Interrpt Address selections:
+                      *11, 7, 9, 10, 5
+    DMA             WSS DMA Channel selections:
+                      *0, 1, 3, 0/1, 1/0, 3/0 
+
+    There are 2 modes for DMA selections:
+
+    [Single DMA]: uses a single DMA channel 
+                  for DMA playback and capture.
+
+    [Dual DMA]:   Allows to playback and record
+                  at the same time.
+                  0/1, 1/0, 3/0 are the Dual DMA 
+                  selections. The first one is
+                  for Playback. 2nd: recording.
+
+    Note: 16-bit Sound Test in the Sound Test Window can be used to 
+          test Windows Sound System Mode regardless of what the 
+          Current Mode setting is. 
+
+    ----------------
+    MPU401 Interface
+    ----------------
+
+    MPU401 is the industrial standard interface
+    for MIDI (Music) devices such as keyboards
+    and some Wave Table Synthesizer devices.
+
+    Interface       External MIDI enable or disable selections:
+                      *ON, OFF
+    I/O Port        External MIDI I/O Port selections:
+                      *330, 300, 320
+    IRQ             External MIDI Interrupt Address selections:
+                      *9, 5, 7
+
+    ----------------
+    CD-ROM Interface
+    ----------------
+
+    Your sound card also could be used as a
+    CD-ROM interface card to hook up to SONY,
+    MITSUMI, PANASONIC and IDE compatible 
+    CD-ROM drives.
+
+    CD Type         CD-ROM selected drive type.
+                    *NONE or CD-ROM drive types...
+    I/O Port        ** CD-ROM selected I/O port.
+    IRQ             ** CD-ROM selected Interrupt Address.
+    DMA             ** CD-ROM selected DMA Channel.
+    CHANGE OPTIONS  Brings up CD-ROM configuration menu.       
+
+
+    ------------------
+    Additional Options
+    ------------------
+
+    Game Port       Game Port enable and disable selections:
+                      *Enable, Disabled
+    Input           Audio Input Source selections:
+                      *MIC, Line (Line In jack)
+
+
+     * default Configuation
+    ** CD-ROM type dependent
+

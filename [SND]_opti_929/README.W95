@@ -1,22 +1,16 @@
                     OPTi 82C929 Windows 95 Drivers
-                        Version 4.00.00 Beta
-                                8/25/95
+                            Version 4.00.20
+                                12/06/95
 
 
 UPDATE NOTES
 
-    This version supports the following:
+    This latest version is an update from version 4.00.10 and
+    contains the following updates:
 
-    1) Full support for IDE plus propriatory CD-ROMs manufactured by
-       SONY, PANASONIC, and MITSUMI (or their compatibles).
+    1) Bug fix for recording using Single DMA Channel
 
-    2) Full Hot-Key support under Windows 95 DOS Box. Please see
-       HOT-KEY SUPPORT section below for desciption of Hot Keys.
-
-    3) Full mixer support on 929's mixer plus customization capabilities 
-       on channel mappings and additions of ON/OFF controls. Please
-       see MIXER CUSTOMIZATION section below for more details.
-
+    2) Bug fix for Sound Blaster Stereo effect in DOS Box
 
 
 INSTALLATION PROCESS
@@ -94,8 +88,14 @@ INSTALLATION PROCESS
        restart process since you should have your Sound Card properly
        plugged in and installed. If however your Sound Card has not 
        been correctly installed, you will have to select Yes to 
-       restart Windows 95.
+       restart Windows 95. 
 
+   12. Install REAL MODE DOS Support: If you prefer to use your Sound
+       Card in Real Mode DOS environment, you have to select "Yes"
+       at the "Restart System" prompt in Step 11. During the reboot
+       process the DOS Installer will be invoked automatically. Please
+       follow the instruction of DOS Installer and it will setup the
+       sound card properly for your Real Mode DOS Games or Applications.
 
 
 CONNECTING EXTERNAL DEVICES
@@ -130,14 +130,19 @@ RECONFIGURATION OF RESOURCES
 
 AUDIO SUPPORT under REAL MODE DOS
 
+    [Systems with Win95/DOS Setup]
     To enable support for DOS Games or multimedia applications under
-    a REAL MODE DOS environment, please install the deluxe SNDINIT
-    package for 82C929. When prompted during the installation for
-    the path to your Windows directory, specify the path if you have
-    Windows 3.1 installed on your system (under a seperate directory
-    from Windows 95). Select None if you do not have Windows 3.1
-    installed.
+    a REAL MODE DOS environment, please follow the Step 12 of INSTALL
+    PROCESS. If you decide not to do DOS setup now, it's OK to skip it.
+    Type C:\SND4DOS at real mode DOS prompt at any time will bring up
+    the DOS Installer.
 
+    [Systems with Dual Boot Win95/Win31 Setup]
+    Please run OPTi's Win31/DOS Install package at Real Mode DOS
+    prompt. When prompted during the installation for the path to 
+    your Windows directory, specify the path if you have Windows 
+    3.1 installed on your system (under a seperate directory from 
+    Windows 95). Select None if you do not have Windows 3.1 installed.
 
 
 AUDIO SUPPORT under WINDOWS 95 DOS BOX
@@ -192,9 +197,52 @@ HOT-KEY SUPPORT under WINDOWS 95 DOS BOX
 
 
 
+FULL-DUPLEX DUAL-DMA SUPPORT
+
+    To enable Dual-DMA channel operation for simultaneous playback and
+    recording, please ensure the following:
+   
+    1. The DMA resource settings under Device Manager must be different
+       and paired as follows: 
+                              
+                Playback DMA:  0    1    3
+               Recording DMA:  1    0    0
+
+    2. The frequency format (eg. 11KHz, 22KHz..) must be the same during
+       simultaneous playback and recording.
+                              
+    3. Full-Duplex is only supported if you have CS4231/CS4248 Class CODECs
+       interfaced with the 82C924 PnP Audio Controller.
+
+
+KARAOKE SUPPORT
+
+    The customizeable option for supporting Karaoke Sing-A-Long basically
+    turns on the LoopBack channel of the AD1848 class CODEC as well as
+    forcing the input MUX to Microphone. This will ensure that the ADC
+    signal is properly fed back to the output channel for amplification
+    using the DAC volume control. The following options may be specified 
+    in the CUSTOM.AddReg section of the INF file.
+
+    To enable support for Karaoke Sing-A-Long, the following must be
+    specified:
+
+    ..,Karaoke_Src_Name,,"Voice"          
+
+
+    To customize default settings for the Mic input gain plus the Loopback 
+    attenuation, the following must be specified:
+
+    ..,"LeftKaraokeMicVol",1,0080        // Low Byte then High Byte
+    ..,"RightKaraokeMicVol",1,0080       
+    ..,"KaraokeLoopBackVol",1,FFFF       
+
+    Valid range is from 0000 -> FFFF ( 0 to 64K )
+
+
 MIXER CUSTOMIZATION
 
-    Mixer driver customization info should be specified in the SND929P.IN_
+    Mixer driver customization info should be specified in the SND929P.INF
     file which is located in the installation diskette and is required by
     Windows 95 during installation of the drivers. 
 
@@ -215,6 +263,9 @@ MIXER CUSTOMIZATION
       ..,AUX1_Src_Name,,"CD"                // For AUX 1 Channel
       ..,AUX2_Src_Name,,"Synth"             // For AUX 2 Channel
       ..,DAC_Src_Name,,"Wave"               // For LOC and ROC channels
+
+      ..,Karaoke_Src_Name,,"Voice"          // For enabling Karaoke
+
 
       Below are supported only if you have the extended CODEC on board
       such as CS4231 or AD1845.
@@ -304,6 +355,9 @@ MIXER CUSTOMIZATION
     1) Internal and External Controls must be of the ON/OFF control types; 
        any other types are not supported for now.
 
+    2) In order to make use of the ON/OFF controls in the Volume Control
+       application bundled with Windows 95, you will have to enable the 
+       "Advance Controls" option under the "Properties" menu item.
 
 
                                 %% END %%

@@ -1,12 +1,11 @@
+;
+; OPTi 82C929 Sound & MPU401 INF
+;
 
 [Version]
 Signature="$Windows 95$"
 Class=OPT0929MEDIA
 provider=%OPTi%
-
-[ControlFlags]
-ExcludeFromSelect=MF\OPT0929_Dev0
-ExcludeFromSelect=MF\OPT0929_Dev1
 
 [ClassInstall]
 AddReg=Class.AddReg
@@ -18,6 +17,10 @@ HKR,,Installer,,mmci.dll
 
 [Manufacturer]
 %MfgName%=OPTiMediaChips
+
+[ControlFlags]
+ExcludeFromSelect=MF\OPT0929_Dev0
+ExcludeFromSelect=MF\OPT0929_Dev1
 
 [OPTiMediaChips]
 %MF\OPT9290.DeviceDesc%=OPT9290_Device, MF\OPT0929_Dev0
@@ -32,19 +35,19 @@ system.ini,boot,drivers,mmmixer.dll
 [OPT9290_Device]
 DelFiles=OPT9290.DelList
 LogConfig=OPTi9290.LC
-;DelReg=OPT9290.DelReg
 DelFiles=OPTi9290.DelList
 CopyFiles=OPT9290.CopyList
 AddReg=OPT9290.AddReg, CUSTOM.AddReg
 UpdateInis=OPTi9290.UpdateInis
+;DelReg=OPT9290.DelReg
 
 [OPT9291_Device]
 LogConfig=OPTi9291.LC
-;DelReg=OPT9291.DelReg
 DelFiles=OPTi9291.DelList
 CopyFiles=OPTi9291.CopyList
 AddReg=OPT9291.AddReg
 UpdateInis=OPTi9291.UpdateInis
+;DelReg=OPT9291.DelReg
 
 ;---------------------------------------------------------------;
 
@@ -70,6 +73,12 @@ system.ini,drivers,"wave*=sndsys.drv",,1
 system.ini,drivers,"midi*=sndsys.drv",,1
 system.ini,drivers,"aux*=sndsys.drv",,1
 system.ini,drivers,"mixer*=sndsys.drv",,1
+
+system.ini,drivers32,,"MSACM.imaadpcm=imaadpcm32.acm"
+system.ini,drivers32,,"MSACM.msadpcm=msadp32.acm"
+system.ini,drivers32,,"MSACM.msgsm610=msgsm32.acm"
+system.ini,drivers32,,"MSACM.trspch=tssoft32.acm"
+system.ini,drivers32,,"MSACM.msg711=msg711.acm"
 
 [OPTi9291.UpdateInis]
 system.ini,drivers,"midi*=mpu401.drv",,1
@@ -104,17 +113,23 @@ HKR,Config,ExtSynth,,"O3"
 HKR,Config,ExtWaveTable,,"No"
 HKR,Config,VxDVersion,,"4.00"
 HKR,Config,KeyCode,1,1A
-HKR,Config,"Single Mode DMA",1,01
+HKR,Config,"Single Mode DMA",1,00
+
+; Mic and Loopback settings for Karaoke Support in AD1848 Class CODECs
+;HKR,Config,"LeftKaraokeMicVol",1,0080        // Low Byte then High Byte
+;HKR,Config,"RightKaraokeMicVol",1,0080       // Low Byte then High Byte
+;HKR,Config,"KaraokeLoopBackVol",1,FFFF       // Low Byte then High Byte
 
 ; Start of customizeable Mixer driver section;
 ; "Yes" means no customization; "No" means customize.
-HKR,Config,Default_Codec_Mapping,,"No"
+HKR,Config,Default_Codec_Mapping,,"Yes"
 
 ; TYPE 1 - CHANNEL NAME SECTION
 ; Specify the customized names for the channels
 HKR,Config,AUX1_Src_Name,,"CD-Audio"
 HKR,Config,AUX2_Src_Name,,"Midi"
 HKR,Config,DAC_Src_Name,,"Wave"
+;HKR,Config,Karaoke_Src_Name,,"Voice"
 ;HKR,Config,LINE_Src_Name,,"Line"
 ;HKR,Config,MIC_Src_Name,,"Microphone"
 ;HKR,Config,MIX_Src_Name,,"Post-Mix"
@@ -174,6 +189,7 @@ sndsys.drv,,,1
 vsbpd.386,,,1
 vadlib.386,,,1
 nullwave.drv,,,1
+mfvxd.vxd,,,1
 
 [OPTi9291.DelList]
 mpu401.drv
@@ -263,3 +279,4 @@ V_CLSAUX="Auxiliary"
 V_GENERAL="General MIDI Instrument"
 V_INTERNAL="OPTi 929 FM Synthesis"
 V_EXTERNAL="OPTi 929 MPU-401"
+

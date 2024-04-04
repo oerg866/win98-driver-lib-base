@@ -1,0 +1,58 @@
+;       
+;     Installation Instruction File of OPTi MAD16 Installer
+; !!! WARNNING: Please DO NOT CHANGE or may DESTROY your System Settings !!!
+;
+
+[DISK]                  ; Diskette Sequence Number 
+1/1
+
+[TITLE]                 ; Title Bar of Installer  (only in 1st Diskette)
+"   OPTi 929 Pro Sound Device Installation Program v2.50   "
+
+[SIZE]                  ; Disk size requirement (only in 1st Diskette)
+951503
+
+[CUSTOM]                ; Customized installation options
+HOME=C:\SOUND16         ; default installation Directory
+SET_HOME=SOUND16        ; environment varaible for HOME  DIR & config filename
+VxD=VSND16D.386         ; Windows Virtual Driver Name for "SYSTEM.INI" update
+
+COMPANY=OPTi            ; Company Name
+PRODUCT=MAD16           ; Product Name
+WIN31=NO                ; Choice to install Windows Application?
+WINAPP=NO               ; 
+CDROM=YES               ; YES: A version with CD selection
+                        ; NO: A version with no CD selection
+MPUDRV=MPU401P.DRV      ; Windows MPU401 driver name
+BACKUP=MAD              ; File name extention for system files backup
+
+[AUTOEXEC]              ; add commands into AUTOEXEC.BAT 
+                        ; with leading HOME Dir: +command
++sndinit /b             ; or without HOME Dir: command
+
+[CONFIG.SYS]            ; add commands into CONFIG.SYS
+                        ; with leading HOME Dir: +command
+                        ; or without HOME Dir: command
+
+[SYSTEM.INI]            ; specify Windows driver in SYSTEM.INI [drivers] section
+;aux=snd16.drv
+;midi=snd16.drv
+;mixer=snd16.drv
+;wave=snd16.drv
+;midi1=mpu401p.drv
+
+[CONTROL.INI]           ; specify Windows driver names and descriptions in 
+                        ; CONTROL.INI [drivers.desc] section. 
+
+[WINDOWS]               ; specify files to copy into Windows Directory
+
+[FILES]                 ; Zip files copy section
+
+;filename,   Description,            subDir,      Percentage
+
+
+TOOLS.ZIP,    "DOS Tools",           -,           65
+DRIVERS.ZIP,  "CDROM Drivers",       -,           35
+
+
+

@@ -1,13 +1,10 @@
-;; 8/28/95
-
+;
+; OPTi 82C929 Sound WIN95 Setup
+;
 [Version]
 Signature="$Windows 95$"
 Class=OPT0929MEDIA
 provider=%OPTi%
-
-[ControlFlags]
-ExcludeFromSelect=MF\OPT0929_Dev0
-ExcludeFromSelect=MF\OPT0929_Dev1
 
 [ClassInstall]
 AddReg=Class.AddReg
@@ -19,6 +16,10 @@ HKR,,Installer,,mmci.dll
 
 [Manufacturer]
 %MfgName%=OPTiMediaChips
+
+[ControlFlags]
+ExcludeFromSelect=MF\OPT0929_Dev0
+ExcludeFromSelect=MF\OPT0929_Dev1
 
 [OPTiMediaChips]
 %*OPT0929.Device0Desc%=OPT0929_Device0, *OPT0929
@@ -34,56 +35,64 @@ HKR,,Installer,,mmci.dll
 DelReg=OPT0929.DelReg
 LogConfig=OPT0929.LC0_0_0, OPT0929.LC0_0_1, OPT0929.LC0_1_0, OPT0929.LC0_1_1,OPT0929.LC0_2_0, OPT0929.LC0_2_1, OPT0929.LC0_3_0, OPT0929.LC0_3_1
 AddReg=OPT0929MF.Reg
-CopyFiles=OPT0929.CopyList, OPT.CopyINF
+CopyFiles=OPT0929.CopyList, OPT.CopyINF, OPT.CopySND4DOS
 UpdateIniFields=Drivers.fields
+UpdateAutoBat=OPT0929.UpdateAutoexec
 
 [OPT0929_Device1]
 DelReg=OPT0929.DelReg
 LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
 AddReg=OPT0929MF.Reg
-CopyFiles=OPT0929.CopyList, OPT.CopyINF
+CopyFiles=OPT0929.CopyList, OPT.CopyINF, OPT.CopySND4DOS
 UpdateIniFields=Drivers.fields
-
-[OPT0929_Device3]
-DelReg=OPT0929.DelReg
-LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
-AddReg=OPT0929MF.Reg
-CopyFiles=OPT0929.CopyList, OPT.CopyINF
-UpdateIniFields=Drivers.fields
-
-[OPT0929_Device4]
-DelReg=OPT0929.DelReg
-LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
-AddReg=OPT0929MF.Reg
-CopyFiles=OPT0929.CopyList, OPT.CopyINF
-UpdateIniFields=Drivers.fields
-
-[OPT0929_Device5]
-DelReg=OPT0929.DelReg
-LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
-AddReg=OPT0929MF.Reg
-CopyFiles=OPT0929.CopyList, OPT.CopyINF
-UpdateIniFields=Drivers.fields
-
-[OPT0929_Device6]
-DelReg=OPT0929.DelReg
-LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
-AddReg=OPT0929MF.Reg
-CopyFiles=OPT0929.CopyList, OPT.CopyINF
-UpdateIniFields=Drivers.fields
+UpdateAutoBat=OPT0929.UpdateAutoexec
 
 [OPT0929_Device2]
 DelReg=OPT0929.DelReg
 LogConfig=OPT0929.LC2_0_0, OPT0929.LC2_0_1, OPT0929.LC2_1_0, OPT0929.LC2_1_1,OPT0929.LC2_2_0, OPT0929.LC2_2_1, OPT0929.LC2_3_0, OPT0929.LC2_3_1
 AddReg=OPT0929MF.Reg
-CopyFiles=OPT0929.CopyList, OPT.CopyINF
+CopyFiles=OPT0929.CopyList, OPT.CopyINF, OPT.CopySND4DOS
 UpdateIniFields=Drivers.fields
+UpdateAutoBat=OPT0929.UpdateAutoexec
 
+[OPT0929_Device3]
+DelReg=OPT0929.DelReg
+LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
+AddReg=OPT0929MF.Reg
+CopyFiles=OPT0929.CopyList, OPT.CopyINF, OPT.CopySND4DOS
+UpdateIniFields=Drivers.fields
+UpdateAutoBat=OPT0929.UpdateAutoexec
+
+[OPT0929_Device4]
+DelReg=OPT0929.DelReg
+LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
+AddReg=OPT0929MF.Reg
+CopyFiles=OPT0929.CopyList, OPT.CopyINF, OPT.CopySND4DOS
+UpdateIniFields=Drivers.fields
+UpdateAutoBat=OPT0929.UpdateAutoexec
+
+[OPT0929_Device5]
+DelReg=OPT0929.DelReg
+LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
+AddReg=OPT0929MF.Reg
+CopyFiles=OPT0929.CopyList, OPT.CopyINF, OPT.CopySND4DOS
+UpdateIniFields=Drivers.fields
+UpdateAutoBat=OPT0929.UpdateAutoexec
+
+[OPT0929_Device6]
+DelReg=OPT0929.DelReg
+LogConfig=OPT0929.LC1_0_0, OPT0929.LC1_0_1, OPT0929.LC1_1_0, OPT0929.LC1_1_1,OPT0929.LC1_2_0, OPT0929.LC1_2_1, OPT0929.LC1_3_0, OPT0929.LC1_3_1
+AddReg=OPT0929MF.Reg
+CopyFiles=OPT0929.CopyList, OPT.CopyINF, OPT.CopySND4DOS
+UpdateIniFields=Drivers.fields
+UpdateAutoBat=OPT0929.UpdateAutoexec
+
+;---------------------------------------------------------------;
 
 [OPT0929MF.Reg]
 HKR,,DevLoader,,*CONFIGMG
 HKR,,Enumerator,,*CONFIGMG
-HKR,,DeviceDriver,,mfvxd.vxd
+HKR,,DeviceDriver,,mf929.vxd
 
 [OPT0929.CopyList]
 snd929p.drv,,
@@ -91,12 +100,16 @@ sndopl3p.drv,,
 snd929p.vxd,,
 sndm401p.vxd,,
 sndm401p.drv,,
-mfvxd.vxd,,
+mf929.vxd,,
+
+[OPT0929.UpdateAutoexec]
+CmdAdd=SND4DOS.EXE
+
+[OPT.CopySND4DOS]
+snd4dos.exe,,
 
 [OPT.CopyINF]
-snd929p.inf,snd929p.in_
-
-
+snd929p.inf,,
 
 [Drivers.fields]
 system.ini,boot,drivers,msmixmgr.dll
@@ -104,18 +117,28 @@ system.ini,boot,drivers,mmmixer.dll
 
 ;---------------------------------------------------------------;
 [OPT0929_Device0.HW]
-AddReg=OPT0929.RegHW0
+AddReg=OPT0929.RegHWBasic
 
-[OPT0929.RegHW0]
-HKR,Child0000,HardwareID,,MF\OPT0929_Dev0
-HKR,Child0001,HardwareID,,MF\OPT0929_Dev1
-HKR,Child0002,HardwareID,,*PNPB02F
+[OPT0929_Device1.HW]
+AddReg=OPT0929.RegHWBasic,OPT0929.RegHWSony
+
+[OPT0929_Device2.HW]
+AddReg=OPT0929.RegHWBasic,OPT0929.RegHWIDE
+
+[OPT0929_Device3.HW]
+AddReg=OPT0929.RegHWBasic,OPT0929.RegHWPana
+
+[OPT0929_Device4.HW]
+AddReg=OPT0929.RegHWBasic,OPT0929.RegHWMitOSP
+
+[OPT0929_Device5.HW]
+AddReg=OPT0929.RegHWBasic,OPT0929.RegHWMitNSP
+
+[OPT0929_Device6.HW]
+AddReg=OPT0929.RegHWBasic,OPT0929.RegHWMitDP
 
 ;---------------------------------------------------------------;
-[OPT0929_Device1.HW]
-AddReg=OPT0929.RegHW1,OPT0929.RegHWSony
-
-[OPT0929.RegHW1]
+[OPT0929.RegHWBasic]
 HKR,Child0000,HardwareID,,MF\OPT0929_Dev0
 HKR,Child0001,HardwareID,,MF\OPT0929_Dev1
 HKR,Child0002,HardwareID,,*PNPB02F
@@ -135,28 +158,10 @@ HKR,Child0003,HardwareID,,*PNPA031
 [OPT0929.RegHWMitDP]
 HKR,Child0003,HardwareID,,*PNPA032
 
-[OPT0929_Device3.HW]
-AddReg=OPT0929.RegHW1,OPT0929.RegHWPana
-
-[OPT0929_Device4.HW]
-AddReg=OPT0929.RegHW1,OPT0929.RegHWMitOSP
-
-[OPT0929_Device5.HW]
-AddReg=OPT0929.RegHW1,OPT0929.RegHWMitNSP
-
-[OPT0929_Device6.HW]
-AddReg=OPT0929.RegHW1,OPT0929.RegHWMitDP
-
-;---------------------------------------------------------------;
-[OPT0929_Device2.HW]
-AddReg=OPT0929.RegHW2
-
-[OPT0929.RegHW2]
-HKR,Child0000,HardwareID,,MF\OPT0929_Dev0
-HKR,Child0001,HardwareID,,MF\OPT0929_Dev1
-HKR,Child0002,HardwareID,,*PNPB02F
+[OPT0929.RegHWIDE]
 HKR,Child0003,HardwareID,,*PNP0600
 
+;---------------------------------------------------------------;
 [OPT0929.DelReg]
 
 
@@ -510,58 +515,15 @@ HKR,,NoSetupUI,,1
 [*OPT0929.Det]
 AddReg=PreCopySection
 
-[OPT0929_Device0.FactDef]
-ConfigPriority=NORMAL
-IOConfig=201-201
-IOConfig=220-22F
-IOConfig=530-537
-IOConfig=388-38B
-IOConfig=F8D-F93 
-IOConfig=300-301
-IRQConfig=5
-IRQConfig= 7
-DMAConfig= 3 
-DMAConfig= 3 
-
-
-[OPT0929_Device1.FactDef]
-ConfigPriority=NORMAL
-IOConfig=220-22F
-IOConfig=530-537
-IOConfig=388-38B
-IOConfig=F8D-F93 
-IOConfig=300-301
-IRQConfig=5
-IRQConfig= 7
-DMAConfig= 3 
-DMAConfig= 3 
-
-
-[OPT0929_Device2.FactDef]
-ConfigPriority=NORMAL
-IOConfig=201-201
-IOConfig=170-177
-IOConfig=376-377
-IOConfig=220-22F
-IOConfig=530-537
-IOConfig=388-38B
-IOConfig=F8D-F93 
-IOConfig=300-301
-IRQConfig= 5
-IRQConfig= 7
-IRQConfig= 15 
-DMAConfig= 3 
-DMAConfig= 3 
-
-
 ;---------------------------------------------------------------;
 
 [DestinationDirs]
 DefaultDestDir = 11	; LDID_SYS
 OPT.CopyINF = 17	
+OPT.CopySND4DOS = 30
 
 [SourceDisksNames]
-1="OPTi MediaChips Multimedia Disk",,0001
+1="OPTi 82C929 Multimedia Disk",,0001
 
 [SourceDisksFiles]
 snd929p.vxd=1
@@ -584,7 +546,7 @@ KEY_CHKVER="SYSTEM\CurrentControlSet\Control\SessionManager\CheckVerDLLs"
 OPTi="OPTi Inc."
 MfgName="OPTi Inc."
 *OPT0929.Device0Desc="OPTi 929 Sound System: Sound/Game"
-*OPT0929.Device1Desc="OPTi 929 Sound System: Sound/Game/Sony Pro CD-ROM"
+*OPT0929.Device1Desc="OPTi 929 Sound System: Sound/Game/Sony Proprietary CD-ROM"
 *OPT0929.Device2Desc="OPTi 929 Sound System: Sound/Game/IDE CD-ROM"
 *OPT0929.Device3Desc="OPTi 929 Sound System: Sound/Game/MKEPanasonic CD-ROM"
 *OPT0929.Device4Desc="OPTi 929 Sound System: Sound/Game/Mitsumi Older Single Speed CD-ROM"
@@ -600,3 +562,4 @@ V_CLSAUX="Auxiliary"
 V_GENERAL="General MIDI Instrument"
 V_INTERNAL="OPTi 929 FM Synthesis"
 V_EXTERNAL="OPTi 929 MPU-401"
+
