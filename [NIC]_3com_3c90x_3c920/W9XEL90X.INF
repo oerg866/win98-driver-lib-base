@@ -1,0 +1,488 @@
+[version]
+CatalogFile 			= w9xel90x.cat
+signature			="$CHICAGO$"
+Class				=Net
+Compatible 			= 1
+ClassGUID  			= {4D36E972-E325-11CE-BFC1-08002BE10318}
+provider			=%V_MS%
+DriverVer 			=8/02/2001,04.06.0001.0
+
+[Manufacturer]
+%V_3COM%=3COM
+
+[SourceDisksNames]
+50="ECD520P90X",,0  
+
+[SourceDisksFiles]
+El90xnd5.sys =50 
+El90xnd4.sys =50 
+el90xnd3.sys =50
+w9xel90x.inf =50
+netdi90x.dll =50
+
+[3COM]
+%PCI\VEN_10b7&DEV_9050.DeviceDesc%=PCIEL905TX.ndi, PCI\VEN_10b7&DEV_9050 		
+%PCI\VEN_10b7&DEV_9051.DeviceDesc%=PCIEL905T4.ndi, PCI\VEN_10b7&DEV_9051 	
+%PCI\VEN_10b7&DEV_9000.DeviceDesc%=PCIEL900TPO.ndi, PCI\VEN_10b7&DEV_9000 		
+%PCI\VEN_10b7&DEV_9001.DeviceDesc%=PCIEL900COMBO.ndi, PCI\VEN_10b7&DEV_9001
+
+
+
+
+
+;*** WIN 9X EXLCUSIVE *************************************************************
+
+
+[PCIEL905TX.ndi]
+DriverVer	=8/02/2001,04.06.0001.0
+AddReg		=PCIEL905TX.ndi.reg,EL90x.ndi.reg,802.1p_mode, EL90x.params.tx, Flow_Control, DriverInfoAddReg
+CopyFiles	=EL90x.inf.CopyFiles, EL90x.ndis3.CopyFiles, EL90x.ndi.CopyFiles
+
+[PCIEL905T4.ndi]
+DriverVer	=8/02/2001,04.06.0001.0
+AddReg		=PCIEL900COMBO.ndi.reg,EL90x.ndi.reg,802.1p_mode, EL90x.params.t4, Flow_Control, DriverInfoAddReg
+CopyFiles	=EL90x.inf.CopyFiles, EL90x.ndis3.CopyFiles, EL90x.ndi.CopyFiles
+
+[PCIEL900TPO.ndi]
+DriverVer	=8/02/2001,04.06.0001.0
+AddReg		=PCIEL900TPO.ndi.reg,EL90x.ndi.reg,802.1p_mode, EL90x.params.tp, Flow_Control, DriverInfoAddReg
+CopyFiles	=EL90x.inf.CopyFiles, EL90x.ndis3.CopyFiles, EL90x.ndi.CopyFiles
+
+[PCIEL900COMBO.ndi]
+DriverVer	=8/02/2001,04.06.0001.0
+AddReg		=PCIEL900COMBO.ndi.reg,EL90x.ndi.reg,802.1p_mode, EL90x.params.combo, Flow_Control, DriverInfoAddReg
+CopyFiles	=EL90x.inf.CopyFiles, EL90x.ndis3.CopyFiles, EL90x.ndi.CopyFiles
+
+;------------------------------------
+
+[PCIEL900TPO.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_10b7&DEV_9000"
+
+[PCIEL900COMBO.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_10b7&DEV_9001"
+
+[PCIEL905TX.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_10b7&DEV_9050"
+
+[PCIEL905T4.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_10b7&DEV_9051"
+
+;------------------------------------
+
+[EL90x.ndi.reg]
+HKR,,DeviceVxDs,,El90xnd3.sys
+HKR,,ProviderName,,%ProviderName%
+HKR,Ndi,NdiInstaller,,"NETDI90X.DLL, MyNdiProc"
+HKR,,DevLoader,,*ndis
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+HKR,NDIS,LogDriverName,,"EL90xnd"
+HKR,NDIS,MajorNdisVersion,1,00
+HKR,NDIS,MinorNdisVersion,1,0A
+
+HKR,NDIS\NDIS2,DriverName,,"EL90x$"
+HKR,NDIS\ODI,DriverName,,"3C90x"
+HKR,NDIS\ODI,FileName,,"3c90x.com"
+
+HKR,Ndi\Interfaces,DefUpper,,"ndis2,ndis3,ndis4,ndis5"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"ndis5,ndis4,ndis3,ndis2,odi"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+
+HKR,Ndi\Install,ndis3,,"EL90x.ndis3"
+HKR,Ndi\Install,ndis2,,"EL90x.ndis2"
+HKR,Ndi\Install,odi,,"EL90x.odi"
+HKR,,wakeonmagic,,"YES"
+HKR,,wakeonlink,,"NO"
+
+HKR,,NDIS_VERSION,,"AUTO"
+HKR,NDI\params\NDIS_VERSION,,,"AUTO"
+HKR,NDI\params\NDIS_VERSION,ParamDesc,,"NDIS Driver Version"
+HKR,NDI\params\NDIS_VERSION,flag,1,20,00,00,00
+HKR,NDI\params\NDIS_VERSION,optional,,0
+HKR,NDI\params\NDIS_VERSION,type,,enum
+HKR,Ndi\params\NDIS_VERSION\enum,AUTO,,"Auto Select"
+HKR,Ndi\params\NDIS_VERSION\enum,NDIS4,,"NDIS 4"
+
+HKR,,TCAUDIAG,,"TCAUM90X"
+HKLM,Software\3Com\TCAUDIAG\TCAUM90X,DriverNames,,"3C90X.COM;EL90X.DOS;SYSTEM\EL90XND3.SYS;SYSTEM\EL90XND4.SYS;SYSTEM\EL90XND5.SYS"
+
+;------------------------------------
+
+[EL90x.inf.CopyFiles]
+w9xel90x.inf
+
+;------------------------------------
+
+[EL90x.ndi.CopyFiles]
+netdi90x.dll,,,2
+
+;------------------------------------
+
+[EL90x.odi]
+
+;------------------------------------
+
+[EL90x.odi.CopyFiles]
+3c90x.com
+
+;------------------------------------
+
+[EL90x.ndis3]
+
+;------------------------------------
+
+[EL90x.ndis3.CopyFiles]
+el90xnd5.sys,,,2
+el90xnd4.sys,,,2
+el90xnd3.sys,,,2
+
+;------------------------------------
+
+[EL90x.ndis2]
+
+;------------------------------------
+
+[EL90x.ndis2.CopyFiles]
+EL90x.dos
+
+
+;*** END WIN 9X EXCLUSIVE *********************************************************
+
+
+
+
+
+;*** WIN 2K EXCLUSIVE *************************************************************
+
+[PCIEL905TX.ndi.NT]
+Characteristics = 0x84 ; NCF_PHYSICAL + NCF_HAS_UI
+BusType         = 5
+AddReg          = EL90x.reg.NT, EL90x.software.NT, 802.1p_mode.NT, Flow_Control.NT, EL90x.params.tx.NT, DriverInfoAddReg
+CopyFiles       = EL90x.Driver.NT, EL90x.INFFile.NT
+
+[PCIEL905TX.ndi.NT.Services]
+AddService      = EL90x, 2, EL90x.Service.NT, EL90x.EventLog.NT
+
+[PCIEL905T4.ndi.NT]
+Characteristics = 0x84 ; NCF_PHYSICAL + NCF_HAS_UI
+BusType         = 5
+AddReg          = EL90x.reg.NT, EL90x.software.NT, 802.1p_mode.NT, Flow_Control.NT, EL90x.params.t4.NT, DriverInfoAddReg
+CopyFiles       = EL90x.Driver.NT, EL90x.INFFile.NT
+
+[PCIEL905T4.ndi.NT.Services]
+AddService      = EL90x, 2, EL90x.Service.NT, EL90x.EventLog.NT, DriverInfoAddReg
+
+[PCIEL900TPO.ndi.NT]
+Characteristics = 0x84 ; NCF_PHYSICAL + NCF_HAS_UI
+BusType         = 5
+AddReg          = EL90x.reg.NT, EL90x.software.NT, 802.1p_mode.NT, Flow_Control.NT, EL90x.params.tp.NT, DriverInfoAddReg
+CopyFiles       = EL90x.Driver.NT, EL90x.INFFile.NT
+
+[PCIEL900TPO.ndi.NT.Services]
+AddService      = EL90x, 2, EL90x.Service.NT, EL90x.EventLog.NT
+
+[PCIEL900COMBO.ndi.NT]
+Characteristics = 0x84 ; NCF_PHYSICAL + NCF_HAS_UI
+BusType         = 5
+AddReg          = EL90x.reg.NT, EL90x.software.NT, 802.1p_mode.NT, Flow_Control.NT, EL90x.params.combo.NT, DriverInfoAddReg
+CopyFiles       = EL90x.Driver.NT, EL90x.INFFile.NT
+
+[PCIEL900COMBO.ndi.NT.Services]
+AddService      = EL90x, 2, EL90x.Service.NT, EL90x.EventLog.NT
+
+
+;------------------------------------
+
+[EL90x.Driver.NT]
+el90xnd5.SYS,,,2
+
+;------------------------------------
+
+[EL90x.INFFile.NT]
+w9xel90x.inf,,,2
+
+;------------------------------------
+
+[EL90x.reg.NT]
+HKR, Ndi,               Service,    0, "EL90x"
+HKR, Ndi\Interfaces,    UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,    LowerRange, 0, "ethernet"
+HKR,, TCAUDIAG,,"TCAUM90X"
+
+;------------------------------------
+
+[EL90x.software.NT]
+HKLM,Software\3Com\El90x\CurrentVersion,Description,0,"%ProductSoftwareDescription%"
+HKLM,Software\3Com\El90x\CurrentVersion,MajorVersion,0x00010001,"%ProductMajorVersion%"
+HKLM,Software\3Com\El90x\CurrentVersion,MinorVersion,0x00010001,"%ProductMinorVersion%"
+HKLM,Software\3Com\El90x\CurrentVersion,Review,0x00010001,"%ProductReview%"
+HKLM,Software\3Com\El90x\CurrentVersion,ServiceName,0,"%ProductSoftwareName%"
+HKLM,Software\3Com\El90x\CurrentVersion,SoftwareType,0,"%SoftwareType%"
+HKLM,Software\3Com\El90x\CurrentVersion,Title,0,"%ProductSoftwareTitle%"
+
+HKLM,Software\3Com\El90x\CurrentVersion\NetRules,bindable,0x00010000,"%NetRuleSoftwareBindable%"
+HKLM,Software\3Com\El90x\CurrentVersion\NetRules,bindform,0,"%NetRuleSoftwareBindForm%"
+HKLM,Software\3Com\El90x\CurrentVersion\NetRules,class,0x00010000,"%NetRuleSoftwareClass%"
+HKLM,Software\3Com\El90x\CurrentVersion\NetRules,type,0,"%NetRuleSoftwareType%"
+HKLM,Software\3Com\El90x\CurrentVersion\NetRules,use,0,"%SoftwareType%"
+
+;------------------------------------
+
+[EL90x.Service.NT]
+DisplayName     = %el90x.Service.DispName%
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_DEMAND_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\el90XND5.SYS
+LoadOrderGroup  = NDIS
+
+;------------------------------------
+
+[EL90x.EventLog.NT]
+AddReg = el90x.AddEventLog.reg.NT
+
+;------------------------------------
+
+[EL90x.AddEventLog.reg.NT]
+HKR,, EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll;%%SystemRoot%%\System32\drivers\el90Xnd5.sys"
+HKR,, TypesSupported,   0x00010001, 7
+
+;End Win 2k Exclusive----------------
+
+
+
+
+
+
+
+[strings]
+InstallDiag= 				"YES"
+InstallShortcuts= 			"YES"
+InstallInstaller= 			"NO"
+V_MS=					"3Com"
+V_3COM=					"3Com"
+
+
+ProviderName=				"3Com Corporation"
+DriverVersion=				"8/02/2001,04.06.0001.0"
+DriverVersion9x=			"07/16/2001"
+
+el90x.Service.DispName = 		"3Com 3C90X Family PCI EtherLink Adapter"
+
+ProductSoftwareDescription = 		"3Com 3C90X Adapter Driver"
+ProductSoftwareTitle = 			"3Com 3C90x Adapter Driver"
+ProductMajorVersion = 			"1"
+ProductMinorVersion = 			"0"
+ProductSoftwareName = 			"El90x"
+ProductReview = 			"1"
+SoftwareType = 				"driver"
+NetRuleSoftwareType = 			"El90xSys ndisDriver El90xDriver"
+NetRuleSoftwareBindForm = 		"""El90xSys"" yes no container"
+NetRuleSoftwareClass = 			"El90xDriver basic"
+NetRuleSoftwareBindable = 		"El90xDriver El90xAdapter non exclusive 100"
+
+DISABLE= 				"Disable"
+ENABLE= 				"Enable"
+enable_all_caps=			"ENABLE"
+enum=					"enum"
+auto_select=				"Auto Select"
+8021p= 					"802.1p Support"
+flow_control=				"Flow Control"
+hardware_default=			"Hardware Default"
+media_type= 				"Media Type"
+media_default= 				"HardwareDefault"
+media_auto= 				"AutoSelect"
+media_100Full= 				"100 Mb, Full Duplex"
+media_100Half=				"100 Mb, Half Duplex"
+media_10Full= 				"10 Mb, Full Duplex"
+media_10Half= 				"10 Mb, Half Duplex"
+media_10Base2= 				"10BASE-2, Half Duplex"
+media_10AUI=				"AUI, Half Duplex"
+
+; Driver Information Entries
+; These items will be set by IHV...
+DriverMfgr="3Com"                                     ; IHV name
+DriverVersionID="03.61.0050.0"                        ; The IHV driver version
+ BaseDriverFileName="El90xnd5.sys"                    ; Key file for version
+ BaseDriverFileVersion="03.61.0050.0"                 ; version of key file
+; These items will be set by IHV and updated by OEM
+DriverOEM="3Com"                                      ; name of the OEM
+DriverFamily="NIC"                                    ; device family (NIC, Storage, Video...)
+DriverProduct="???"                                   ; Specific Name of device (chipset, for example)
+DriverDescription="Description - DriverInfo sample"   ; Description of device (product name, OS or system supported)
+DriverOEMVersion="5.4.0.0"                            ; OEM-specified version
+
+PCI\VEN_10b7&DEV_9050.DeviceDesc=	"3Com EtherLink 10/100 PCI NIC (3C905-TX)"
+PCI\VEN_10b7&DEV_9051.DeviceDesc=	"3Com EtherLink 10/100 PCI T4 NIC (3C905-T4)"
+PCI\VEN_10b7&DEV_9000.DeviceDesc=	"3Com EtherLink PCI TPO NIC (3C900-TPO)"
+PCI\VEN_10b7&DEV_9001.DeviceDesc=	"3Com EtherLink PCI Combo  NIC (3C900-COMBO)"
+
+;------------------------------------
+
+[DestinationDirs]
+DefaultDestDir =11 
+El90x.Driver.NT = 12
+El90x.INFFile.NT = 17
+EL90x.ndis3.CopyFiles =11 
+EL90x.ndis2.CopyFiles =26 
+EL90x.odi.CopyFiles =26 
+EL90x.inf.CopyFiles =17 
+EL90x.ndi.CopyFiles =11
+
+;------------------------------------
+
+
+[Flow_Control]
+HKR,,FLOWCONTROL,,"ENABLE"
+HKR,Ndi\params\FLOWCONTROL,			ParamDesc,		, %flow_control%
+HKR,NDI\params\FLOWCONTROL,			flag,			1,30,00,00,00
+HKR,Ndi\params\FLOWCONTROL,			type,			, %enum%
+HKR,Ndi\params\FLOWCONTROL,			default,		, %enable_all_caps%
+HKR,Ndi\params\FLOWCONTROL\enum,		ENABLE,			, %ENABLE%
+HKR,Ndi\params\FLOWCONTROL\enum,		DISABLE,		, %DISABLE%
+
+[Flow_Control.NT]
+HKR,,FLOWCONTROL,,"ENABLE"
+HKR,Ndi\params\FLOWCONTROL,			ParamDesc,		, %flow_control%
+HKR,Ndi\params\FLOWCONTROL,			type,			, %enum%
+HKR,NDI\params\FLOWCONTROL,			optional,		, 0
+HKR,Ndi\params\FLOWCONTROL,			default,		, %enable_all_caps%
+HKR,Ndi\params\FLOWCONTROL\enum,		DISABLE,		, %DISABLE%
+HKR,Ndi\params\FLOWCONTROL\enum,		ENABLE,			, %ENABLE%
+
+[802.1p_mode]
+HKR,,8021psupport,,%DISABLE%
+HKR,NDI\params\8021psupport,,,%DISABLE%
+HKR,Ndi\params\8021psupport,			ParamDesc,		, %8021p%
+HKR,NDI\params\8021psupport,			flag,			1,20,00,00,00
+HKR,Ndi\params\8021psupport,			type,			, %enum%
+HKR,NDI\params\8021psupport,			optional,		, 0
+HKR,Ndi\params\8021psupport\enum,		DISABLE,		, %DISABLE%
+HKR,Ndi\params\8021psupport\enum,		ENABLE,			, %ENABLE%
+
+[802.1p_mode.NT]
+HKR,,8021psupport,,%DISABLE%
+HKR,Ndi\params\8021psupport,			ParamDesc,		, %8021p%
+HKR,Ndi\params\8021psupport,			type,			, %enum%
+HKR,NDI\params\8021psupport,			optional,		, 0
+HKR,Ndi\params\8021psupport,			default,		, %DISABLE%
+HKR,Ndi\params\8021psupport\enum,		DISABLE,		, %DISABLE%
+HKR,Ndi\params\8021psupport\enum,		ENABLE,			, %ENABLE%
+
+[EL90x.params.tx]
+HKR,,media_type,,%media_default%
+HKR,NDI\params\media_type,,,%media_default%
+HKR,NDI\params\media_type,			ParamDesc,		, %media_type%
+HKR,NDI\params\media_type,			flag,			1,20,00,00,00
+HKR,NDI\params\media_type,			type,			, %enum%
+HKR,NDI\params\media_type,			optional,		, 0
+HKR,Ndi\params\media_type\enum,			HARDWAREDEFAULT,	, %hardware_default%
+HKR,Ndi\params\media_type\enum,			AUTO,			, %media_auto%
+HKR,Ndi\params\media_type\enum,			10HALF,			, %media_10Half%
+HKR,Ndi\params\media_type\enum,			10FULL,			, %media_10Full%
+HKR,Ndi\params\media_type\enum,			100HALF,		, %media_100Half%
+HKR,Ndi\params\media_type\enum,			100FULL,		, %media_100Full%
+
+[EL90x.params.tx.NT]
+HKR,,media_type,,%media_default%
+HKR,Ndi\params\media_type,			ParamDesc,		, %media_type%
+HKR,Ndi\params\media_type,			type,			, %enum%
+HKR,Ndi\params\media_type,			optional,		, 0
+HKR,Ndi\params\media_type,			default,		, %media_default%
+HKR,Ndi\params\media_type\enum,			HARDWAREDEFAULT,	, %hardware_default%
+HKR,Ndi\params\media_type\enum,			AUTO,			, %media_auto%
+HKR,Ndi\params\media_type\enum,			10HALF,			, %media_10Half%
+HKR,Ndi\params\media_type\enum,			10FULL,			, %media_10Full%
+HKR,Ndi\params\media_type\enum,			100HALF,		, %media_100Half%
+HKR,Ndi\params\media_type\enum,			100FULL,		, %media_100Full%
+
+
+[EL90x.params.tp]
+HKR,,media_type,,%media_default%
+HKR,NDI\params\media_type,,,%media_default%
+HKR,NDI\params\media_type,			ParamDesc,		, %media_type%
+HKR,NDI\params\media_type,			flag,			1,20,00,00,00
+HKR,NDI\params\media_type,			type,			, %enum%
+HKR,NDI\params\media_type,			optional,		, 0
+HKR,Ndi\params\media_type\enum,			HARDWAREDEFAULT,	, %hardware_default%
+HKR,Ndi\params\media_type\enum,			AUTO,			, %media_auto%
+HKR,Ndi\params\media_type\enum,			10HALF,			, %media_10Half%
+HKR,Ndi\params\media_type\enum,			10FULL,			, %media_10Full%
+
+[EL90x.params.tp.NT]
+HKR,,media_type,,%media_default%
+HKR,Ndi\params\media_type,			ParamDesc,		, %media_type%
+HKR,Ndi\params\media_type,			type,			, %enum%
+HKR,Ndi\params\media_type,			optional,		, 0
+HKR,Ndi\params\media_type,			default,		, %media_default%
+HKR,Ndi\params\media_type\enum,			HARDWAREDEFAULT,	, %hardware_default%
+HKR,Ndi\params\media_type\enum,			AUTO,			, %media_auto%
+HKR,Ndi\params\media_type\enum,			10HALF,			, %media_10Half%
+HKR,Ndi\params\media_type\enum,			10FULL,			, %media_10Full%
+
+
+[EL90x.params.t4]
+HKR,,media_type,,%media_default%
+HKR,NDI\params\media_type,,,%media_default%
+HKR,NDI\params\media_type,			ParamDesc,		, "Network media Connection"
+HKR,NDI\params\media_type,			flag,			1,20,00,00,00
+HKR,NDI\params\media_type,			optional,		, 0
+HKR,NDI\params\media_type,			type,			, %enum%
+HKR,Ndi\params\media_type\enum,			HARDWAREDEFAULT,	, %hardware_default%
+HKR,Ndi\params\media_type\enum,			AUTO,			, %auto_select%
+HKR,Ndi\params\media_type\enum,			10HALF,			, %media_10Half%
+HKR,Ndi\params\media_type\enum,			10FULL,			, %media_10Full%
+HKR,Ndi\params\media_type\enum,			100HALF,		, %media_100Half%
+
+[EL90x.params.T4.NT]
+HKR,,media_type,,%media_default%
+HKR,Ndi\params\media_type,			ParamDesc,		, %media_type%
+HKR,Ndi\params\media_type,			type,			, %enum%
+HKR,Ndi\params\media_type,			optional,		, 0
+HKR,Ndi\params\media_type,			default,		, %media_default%
+HKR,Ndi\params\media_type\enum,			HARDWAREDEFAULT,	, %hardware_default%
+HKR,Ndi\params\media_type\enum,			AUTO,			, %media_auto%
+HKR,Ndi\params\media_type\enum,			10HALF,			, %media_10Half%
+HKR,Ndi\params\media_type\enum,			10FULL,			, %media_10Full%
+HKR,Ndi\params\media_type\enum,			100HALF,		, %media_100Half%
+
+
+[EL90x.params.combo]
+HKR,,media_type,,%media_default%
+HKR,NDI\params\media_type,,,%media_default%
+HKR,NDI\params\media_type,			ParamDesc,		, %media_type%
+HKR,NDI\params\media_type,			flag,			1,20,00,00,00
+HKR,NDI\params\media_type,			type,			, %enum%
+HKR,NDI\params\media_type,			optional,		, 0
+HKR,Ndi\params\media_type\enum,			HARDWAREDEFAULT,	, %hardware_default%
+HKR,Ndi\params\media_type\enum,			AUTO,			, %media_auto%
+HKR,Ndi\params\media_type\enum,			10HALF,			, %media_10Half%
+HKR,Ndi\params\media_type\enum,			10FULL,			, %media_10Full%
+HKR,Ndi\params\media_type\enum,           	10BASE2,         	0, %media_10Base2%
+HKR,Ndi\params\media_type\enum,           	10AUI,           	0, %media_10AUI%
+
+[EL90x.params.combo.NT]
+HKR,,media_type,,%media_default%
+HKR,Ndi\params\media_type,			ParamDesc,		, %media_type%
+HKR,Ndi\params\media_type,			type,			, %enum%
+HKR,Ndi\params\media_type,			optional,		, 0
+HKR,Ndi\params\media_type,			default,		, %media_default%
+HKR,Ndi\params\media_type\enum,			HARDWAREDEFAULT,	, %hardware_default%
+HKR,Ndi\params\media_type\enum,			AUTO,			, %media_auto%
+HKR,Ndi\params\media_type\enum,			10HALF,			, %media_10Half%
+HKR,Ndi\params\media_type\enum,			10FULL,			, %media_10Full%
+HKR,Ndi\params\media_type\enum,         	10BASE2,         	0, %media_10Base2%
+HKR,Ndi\params\media_type\enum,         	10AUI,           	0, %media_10AUI%
+
+[DriverInfoAddReg]
+; This section is added to all INFs to add registry entries for Driver Info.
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,Description,,%DriverDescription%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,CurrentVer,,%DriverOEMVersion%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%,Ver_%DriverOEMVersion%,,%DriverVersionID%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%, BaseDriverFileName,,%BaseDriverFileName%
+HKLM,Software\InstalledOptions\%DriverOEM%\%DriverFamily%\%DriverMfgr%\%DriverProduct%, BaseDriverFileVersion,,%BaseDriverFileVersion%
+
+
+;(%VER W9XEL90X.INF - Installation file for 905BC - v5.4.11)
+
+

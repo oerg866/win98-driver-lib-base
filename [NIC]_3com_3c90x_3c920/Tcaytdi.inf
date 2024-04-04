@@ -1,0 +1,95 @@
+;-------------------------------------------------------------------------
+; TCAYTDI.INF -- TCAYTDI Protocol
+; v5.2.0.1
+; Copyright (c) 1998-1999, 3Com Corporation
+;-------------------------------------------------------------------------
+
+[version]
+Signature   = "$Windows NT$"
+Class       = NetTrans
+ClassGUID   = {4d36e975-e325-11ce-bfc1-08002be10318}
+Provider    = %Prov%
+CatalogFile = TCAYTDI.cat
+
+[Manufacturer]
+%Prov%=3Com
+
+[3Com]
+%TCAYTDI_Desc%=Install, TCAITDI
+
+;-------------------------------------------------------------------------
+; Installation Section
+;-------------------------------------------------------------------------
+[Install]
+AddReg=Inst_Ndi
+Characteristics=0x08
+;CopyFiles=CpyFiles_Sys, CpyFiles_Inf
+;-------------------------------------------------------------------------
+; Ndi installation support
+;-------------------------------------------------------------------------
+[Inst_Ndi]
+HKR,"Ndi","Service",,"TCAITDI"
+HKR,"Ndi","HelpText",,"%TCAYTDI_HelpText%"
+HKR,"Ndi\Interfaces","UpperRange",,"noupper"
+HKR,"Ndi\Interfaces","LowerRange",,"ndis5,ndis4"
+HKLM,Software\3Com\DirectBindServices,TCAITDI,0,1
+HKLM,"Software\3Com\TCAUDIAG","AutoEcho",,"YES"
+;-------------------------------------------------------------------------
+; Service installation support
+;-------------------------------------------------------------------------
+[Install.Services]
+AddService=TCAITDI,,TCAYTDI_Service_Inst, NetEventLog
+
+[TCAYTDI_Service_Inst]
+DisplayName     = %TCAYTDI_Desc%
+ServiceType     = 1 ;SERVICE_KERNEL_DRIVER
+StartType       = 2 ;SERVICE_AUTO_START
+ErrorControl    = 1 ;SERVICE_ERROR_NORMAL
+ServiceBinary   = %12%\TCAITDI.sys
+LoadOrderGroup  = PNP_TDI
+AddReg          = AddReg_TCAYTDI_Service_Inst
+Description     = %TCAYTDI_Desc%
+
+[AddReg_TCAYTDI_Service_Inst]
+HKLM,"System\CurrentControlSet\Services\TCAITDI","TextModeFlags",%REG_DWORD%,0x0001
+HKR,"Parameters",,FLG_ADDREG_KEYONLY,
+
+;-------------------------------------------------------------------------
+; Support for removal of static registry settings
+;-------------------------------------------------------------------------
+[Install.Remove]
+DelReg=Del_Static_Reg
+
+[Install.Remove.Services]
+DelService=TCAITDI
+
+[Del_Static_Reg]
+
+[NetEventLog]
+;AddReg = NetEventLog.AddReg
+
+[NetEventLog.AddReg]
+    HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\netevent.dll"
+    HKR,,TypesSupported,0x00010001,7
+
+[DestinationDirs]
+CpyFiles_Sys    = 12    ; DIRID_DRIVERS
+CpyFiles_Inf   	= 17    ; INF
+
+;-------------------------------------------------------------------------
+; Files to Copy/Delete - Referenced by Install and Remove sections above
+;-------------------------------------------------------------------------
+[CpyFiles_Sys]
+TCAITDI.sys,,,2
+
+[CpyFiles_Inf]
+TCAYTDI.inf,,,2
+
+[Strings]
+Prov = "3Com"
+TCAYTDI_Desc = "TCAITDI Protocol"
+TCAYTDI_HelpText = "3Com TCAITDI Diagnostic TDI"
+
+REG_DWORD = 0x10001
+REG_MULTI_SZ = 0x10000
+FLG_ADDREG_KEYONLY=0x00000010

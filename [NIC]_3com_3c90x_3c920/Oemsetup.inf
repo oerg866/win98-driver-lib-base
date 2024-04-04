@@ -1,0 +1,3190 @@
+	
+[InstallOptions]
+ Install_3NIC_Diag = "NO"
+ Install_Shortcuts = "NO"
+ Install_Installer = "NO"	
+
+
+[Identification]
+ OptionType = NetAdapter
+
+
+[PlatformsSupported]
+ ISA
+ EISA
+ PCI
+ "Jazz-Internal Bus"
+ForListDo $(ToInstallList)
+
+[Options]
+ 3C90X 
+ 3C905 
+ 3C900 
+
+
+[NDDriverConstantsNDIS3]
+ ND3NDNetEventDLL = "%SystemRoot%\System32\netevent.dll;%SystemRoot%\System32\drivers\el90xnd3.sys"
+ ND3NDProdSWImagePath = "%SystemRoot%\System32\drivers\el90xnd3.sys"
+ ND3NDProdSWUpgradePath = "\SystemRoot\System32\drivers\el90xnd3.sys"
+
+
+[NDDriverConstantsNDIS4]
+ ND4NDNetEventDLL = "%SystemRoot%\System32\netevent.dll;%SystemRoot%\System32\drivers\el90xnd4.sys"
+ ND4NDProdSWImagePath = "%SystemRoot%\System32\drivers\el90xnd4.sys"
+ ND4NDProdSWUpgradePath = "\SystemRoot\System32\drivers\el90xnd4.sys"
+
+
+[BCDriverConstantsNDIS3]
+ ND3BCNetEventDLL = "%SystemRoot%\System32\netevent.dll;%SystemRoot%\System32\drivers\el90xbc3.sys"
+ ND3BCProdSWImagePath = "%SystemRoot%\System32\drivers\el90xbc3.sys"
+ ND3BCProdSWUpgradePath = "\SystemRoot\System32\drivers\el90xbc3.sys"
+
+
+[BCDriverConstantsNDIS4]
+ ND4BCNetEventDLL = "%SystemRoot%\System32\netevent.dll;%SystemRoot%\System32\drivers\EL90xBC4.sys"
+ ND4BCProdSWImagePath = "%SystemRoot%\System32\drivers\EL90xBC4.sys"
+ ND4BCProdSWUpgradePath = "\SystemRoot\System32\drivers\EL90xBC4.sys"
+
+
+;**************************************************************************************************
+
+
+[FileConstants]
+ UtilityInf = "UTILITY.INF"
+ subroutineinf = "SUBROUTN.INF"
+ SWType = "driver"
+ Exit_Code = 0
+ IoLogMsgDLL = "%SystemRoot%\System32\IoLogMsg.dll"
+ NetworkCardsKey = $(!NTN_SoftwareBase)"\Microsoft\Windows NT\CurrentVersion\NetworkCards\"
+ FunctionTitle = "3Com 3C90x Adapter Card Setup"
+ 3CNUMBER = "3C90X"
+ GROUP_NAME = "3Com EtherLink PCI NIC" 
+ ProdHWXXXXXTitle = "3Com EtherLink PCI NIC "
+ ProdHWXXXXXDesc = "3Com EtherLink PCI NIC "
+ Manufacturer = "3Com"
+ EtherDiskVersion = "5.2"
+ ProdMajorVer = "1"
+ ProdMinorVer = "0"
+ ProdReview = "1"
+ ProdVer = $(ProdMajorVer)"."$(ProdMinorVer) 
+ ProdSWDesc = "3Com 3C90x Adapter BC Driver"
+ ProdSWTitle = "3Com 3C90x Adapter BC Driver"
+ ProdSWName = "El90x"
+ NetRuleSWType = "El90xSys ndisDriver El90xDriver"
+ NetRuleSWUse = $(SWType)
+ NetRuleSWBindForm = """El90xSys"" yes no container"
+ NetRuleSWClass = {"El90xDriver basic"}
+ NetRuleSWBindable = {"El90xDriver El90xAdapter non exclusive 100"}
+ ProdHWName = "El90x"
+ NetRuleHWBindForm = " yes yes container"
+ NetRuleHWType = "El90x El90xAdapter"
+ NetRuleHWClass = {"El90xAdapter basic"}
+ ProdKeyName = $(!NTN_SoftwareBase)"\"$(Manufacturer)"\"$(ProdSWName)"\CurrentVersion"
+ ParamKeyName = $(!NTN_ServiceBase)"\"$(ProdHWName)"\Parameters"
+ Hardware_Default = "HardwareDefault"
+ DiagExe = TCAUDIAG
+ NICPROP = NICPROP
+ DIAGCARDTYPE = "TCAUM90X"
+ TrayIconExe = TCAUDIAG
+ InstallerExe = TCAUDIAG
+ UnInstallerEXE = UN3C90XA 
+
+[BoomFileConstants]
+ NDProdSWDesc = "3Com 3C90x Adapter ND Driver"
+ NDProdSWTitle = "3Com 3C90x Adapter ND Driver"
+ NDProdSWName = "El90xnd"
+ NDNetRuleSWType = "El90xndSys ndisDriver El90xndDriver"
+ NDNetRuleSWBindForm = """El90xndSys"" yes no container"
+ NDNetRuleSWClass = {"El90xndDriver basic"}
+ NDNetRuleSWBindable = {"El90xndDriver El90xndAdapter non exclusive 100"}
+ NDProdHWName = "El90xnd"
+ NDNetRuleHWBindForm = " yes yes container"
+ NDNetRuleHWType = "El90xnd El90xndAdapter"
+ NDNetRuleHWClass = {"El90xndAdapter basic"}
+ NDProdKeyName = $(!NTN_SoftwareBase)"\"$(Manufacturer)"\"$(NDProdSWName)"\CurrentVersion"
+ NDParamKeyName = $(!NTN_ServiceBase)"\"$(NDProdHWName)"\Parameters"
+
+
+;--------------------these NICs use old NDIS4 driver --------------------------------
+
+ ProdHW36944Title = "3Com EtherLink 10/100 PCI NIC (3C905-TX)"
+ ProdHW36944Desc = "3Com EtherLink 10/100 PCI NIC (3C905-TX)"
+
+ ProdHW36945Title = "3Com EtherLink 10/100 PCI T4 NIC (3C905-T4)"
+ ProdHW36945Desc = "3Com EtherLink 10/100 PCI T4 NIC (3C905-T4)"
+
+ ProdHW36864Title = "3Com EtherLink 10 PCI TPO NIC (3C900-TPO)"
+ ProdHW36864Desc = "3Com EtherLink 10 PCI TPO NIC (3C900-TPO)" 
+
+ ProdHW36865Title = "3Com EtherLink 10 PCI Combo  NIC (3C900-COMBO)"
+ ProdHW36865Desc = "3Com EtherLink 10 PCI Combo  NIC (3C900-COMBO)" 
+
+
+
+
+
+
+;--------------------these NICs use new NDIS4 driver --------------------------------
+
+ ProdHW36952Title = "3Com EtherLink 10/100 PCI Combo NIC (3C905B-COMBO)"
+ ProdHW36952Desc = "3Com EtherLink 10/100 PCI Combo NIC (3C905B-COMBO)"
+
+ ProdHW37376NICTitle 	= "3Com EtherLink 10/100 PCI NIC (3C905C-TX)"
+ ProdHW37376NICDesc 	= "3Com EtherLink 10/100 PCI For Complete PC Management NIC (3C905C-TX)"
+
+ ProdHW37376MiniPCITitle= "3Com 10/100 Mini PCI Ethernet Adapter"
+ ProdHW37376MiniPCIDesc = "3Com 10/100 Mini PCI Ethernet Adapter"
+
+ ProdHW37376CatchAllTitle= "3Com 3C920 Integrated Fast Ethernet Controller (3C905C-TX Compatible)"
+ ProdHW37376CatchAllDesc = "3Com 3C920 Integrated Fast Ethernet Controller (3C905C-TX Compatible)"
+
+ ProdHW36949CatchAllTitle= "3Com 3C918 Integrated Fast Ethernet Controller (3C905B-TX Compatible)"
+ ProdHW36949CatchAllDesc = "3Com 3C918 Integrated Fast Ethernet Controller (3C905B-TX Compatible)"
+
+ ProdHW36949NICTitle 	= "3Com EtherLink 10/100 PCI NIC (3C905B-TX)"
+ ProdHW36949NICDesc 	= "3Com EtherLink 10/100 PCI TX NIC (3C905B-TX)"
+
+ ProdHW36954Title 	= "3Com EtherLink 100 PCI Fiber NIC (3C905B-FX)"
+ ProdHW36954Desc 	= "3Com EtherLink 100 PCI Fiber NIC (3C905B-FX)" 
+
+ ProdHW36868Title 	= "3Com EtherLink 10 PCI TPO NIC (3C900B-TPO)"
+ ProdHW36868Desc 	= "3Com EtherLink 10 PCI TPO NIC (3C900B-TPO)" 
+
+ ProdHW36869Title 	= "3Com EtherLink 10 PCI Combo NIC (3C900B-COMBO)"
+ ProdHW36869Desc 	= "3Com EtherLink 10 PCI Combo NIC (3C900B-COMBO)" 
+
+ ProdHW36870Title 	= "3Com EtherLink 10 PCI TPC NIC (3C900B-TPC)"
+ ProdHW36870Desc 	= "3Com EtherLink 10 PCI TPC NIC (3C900B-TPC)" 
+
+ ProdHW36874Title 	= "3Com EtherLink 10 PCI Fiber NIC (3C900B-FL)"
+ ProdHW36874Desc 	= "3Com EtherLink 10 PCI Fiber NIC (3C900B-FL)" 
+
+
+
+;---- OLD NAMES OF 90XBC NICs, THESE NAMES USED FOR CHECKING IF THE NIC ALREADY INSTALLED 
+
+ OLDProdHW36944Desc = "3Com Fast EtherLink XL 10/100Mb TX Ethernet NIC (3C905-TX)"
+ OLDProdHW36945Desc = "3Com Fast EtherLink XL 10/100Mb T4 Ethernet NIC (3C905-T4)"
+ OLDProdHW36949Desc = "3Com Fast EtherLink XL 10/100Mb TX Ethernet NIC (3C905B-TX)"
+ OLDProdHW36954Desc = "3Com Fast EtherLink XL 10/100Mb FX Ethernet NIC (3C905B-FX)"
+ OLDProdHW36864Desc = "3Com EtherLink XL TPO 10Mb Ethernet NIC (3C900-TPO)" 
+ OLDProdHW36865Desc = "3Com EtherLink XL COMBO 10Mb Ethernet NIC (3C900-COMBO)" 
+ OLDProdHW36868Desc = "3Com EtherLink XL TPO 10Mb Ethernet NIC (3C900B-TPO)" 
+ OLDProdHW36869Desc = "3Com EtherLink XL COMBO 10Mb Ethernet NIC (3C900B-COMBO)" 
+ OLDProdHW36870Desc = "3Com EtherLink XL TPC 10Mb Ethernet NIC (3C900B-TPC)" 
+ OLDProdHW36874Desc = "3Com EtherLink XL FL 10Mb Ethernet NIC (3C900B-FL)" 
+ OLDProdHW36952Desc = "3Com EtherLink XL COMBO 10/100Mb Ethernet NIC (3C905B-COMBO)"
+
+
+; EtherDisk5.0 have diff. desc. for 10Mb cards, so we need to check that, too.
+
+ ED50HW36868Desc = "3Com EtherLink PCI TPO NIC (3C900B-TPO)"
+ ED50HW36864Desc = "3Com EtherLink PCI TPO NIC (3C900-TPO)"
+ ED50HW36865Desc = "3Com EtherLink PCI Combo  NIC (3C900-COMBO)"
+ ED50HW36869Desc = "3Com EtherLink PCI Combo NIC (3C900B-COMBO)"
+ ED50HW36870Desc = "3Com EtherLink PCI TPC NIC (3C900B-TPC)" 
+ ED50HW36874Desc = "3Com EtherLink PCI Fiber NIC (3C900B-FL)" 
+
+;------------------------------------------------------------------------------------------------
+ 
+
+; List of NICs
+ CFIDList = {36944, 36945, 36864, 36865,36868, 36869, 36870, 36874, 36949, 36952, 36954, 37376}
+ AdapterType = 5
+
+NT4_CFG = NT4_CFG
+
+ 
+[GeneralConstants]
+ from = ""
+ to = ""
+ ExitCodeOk = 0
+ ExitCodeCancel = 1 
+ ExitCodeFatal = 2
+ KeyNull = ""
+ MAXIMUM_ALLOWED = 33554432
+ RegistryErrorIndex = NO_ERROR
+ KeyProduct = ""
+ KeyParameters = ""
+ TRUE = 1
+ FALSE = 0
+ NoTitle = 0
+ ExitState = "Active"
+ OldVersionExisted = $(FALSE)
+ DriverPath = $(!STF_NTPATH)\drivers
+ NT350VersionConstant = "3.50"
+ NT310VersionConstant = "3.10"
+ NT400VersionConstant = "(4.0)"
+ INF_PROCESSER = "I386"
+
+enum					= "enum"
+int					= "int"
+long					= "long"
+
+disable					= "DISABLE"
+enable					= "ENABLE"
+disable_value				= "DISABLE"
+enable_value				= "ENABLE"
+basic					= "Basic"
+enhanced				= "Enhanced"
+media_select      			= "Media Select"
+media_auto        			= "Auto-Negotiate"
+media_10_full     			= "10 Mbps, Full-Duplex"
+media_10_half     			= "10 Mbps, Half-Duplex"
+media_100_full   			= "100 Mbps, Full-Duplex"
+media_100_half    			= "100 Mbps, Half-Duplex"
+media_default     			= "Hardware Default"
+flow_control				= "Flow Control"
+rom_boot				= "ROMBoot"
+self_healing				= "Self Healing"
+num_tx_entries				= "Descriptors: Transmit"
+num_rx_entries				= "Descriptors: Receive"
+ipsec_offload				= "Offload: IPSec"
+tcpseg_offload				= "Offload: TCP Segmentation"
+checksum_offload			= "Offload: IP Checksum"
+vlan_offload				= "Offload: 802.1p"
+GenTxThreshold				= "Transmit broadcast limiting"
+
+
+[date]
+ Now = {} ? $(!LIBHANDLE) GetSystemDate
+
+
+[Identify]
+ read-syms Identification
+ set Status = STATUS_SUCCESSFUL
+ set Identifier = $(OptionType)
+ set Media = #("Source Media Descriptions", 1, 1)
+ Return $(Status) $(Identifier) $(Media)
+
+
+[ReturnOptions]
+ set Status = STATUS_FAILED
+ set OptionList = {}
+ set OptionTextList = {}
+ set LanguageList = ^(LanguagesSupported, 1)
+ Ifcontains(i) $($0) in $(LanguageList)
+ ifstr(i) $($1) == ""
+ goto returnoptions
+ endif
+ set PlatformList = ^(PlatformsSupported, 1)
+ Ifcontains(i) $($1) in $(PlatformList)
+ goto returnoptions
+ else
+ set Status = STATUS_NOTSUPPORTED
+ goto finish_ReturnOptions
+ endif
+ else
+ set Status = STATUS_NOLANGUAGE
+ goto finish_ReturnOptions
+ endif
+
+
+returnoptions = +
+ set OptionList = ^(Options, 1)
+ set OptionTextList = ^(OptionsText$($0), 1)
+ set Status = STATUS_SUCCESSFUL
+
+
+finish_ReturnOptions = +
+ Return $(Status) $(OptionList) $(OptionTextList)
+
+
+[checkFileExist]
+ DiagFound = {} ? $(!LIBHANDLE) FindFileInstances $(!STF_WINDOWSSYSPATH)"\tcaudiag.exe" 
+
+
+[DiagRegistry]
+ OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE" $(!REG_KEY_WRITE) SOFTKEY
+ OpenRegKey $(SOFTKEY) "" "3Com" $(!REG_KEY_WRITE) COMKEY
+ ifstr $(COMKEY) == ""
+	CreateRegKey $(SOFTKEY) {"3Com", 0, GenericClass} "" $(!REG_KEY_WRITE) "" COMKEY
+ endif
+ 
+ OpenRegKey $(COMKEY) "" "TCAUDIAG" $(!REG_KEY_WRITE) TCAUDIAGKEY
+ ifstr $(TCAUDIAGKEY) == ""
+	CreateRegKey $(COMKEY) {"TCAUDIAG", 0, GenericClass} "" $(!REG_KEY_WRITE) "" TCAUDIAGKEY
+ endif
+ 
+ OpenRegKey $(TCAUDIAGKEY) "" "TCAUM90X" $(!REG_KEY_WRITE) TCAUM90XKEY
+ ifstr $(TCAUM90XKEY) == ""
+	CreateRegKey $(TCAUDIAGKEY) {"TCAUM90X", 0, GenericClass} "" $(!REG_KEY_WRITE) "" TCAUM90XKEY
+ endif
+ 
+ SetRegValue $(TCAUM90XKEY) {"DriverNames", 0, $(!REG_VT_SZ), "3C90X.COM;EL90X.DOS;SYSTEM\EL90XND3.SYS;SYSTEM\EL90XND4.SYS;SYSTEM\EL90XBC4.SYS"}
+ OpenRegKey $(TCAUM90XKEY) "" "Extensions" $(!REG_KEY_WRITE) ExtensionsKEY
+ ifstr $(ExtensionsKEY) == ""
+	CreateRegKey $(TCAUM90XKEY) {"Extensions", 0, GenericClass} "" $(!REG_KEY_WRITE) "" ExtensionsKEY
+ endif
+ 
+ OpenRegKey $(ExtensionsKEY) "" "DA" $(!REG_KEY_WRITE) DAKEY
+ ifstr $(DAKEY) == ""
+	CreateRegKey $(ExtensionsKEY) {"DA", 0, GenericClass} "" $(!REG_KEY_WRITE) "" DAKEY
+ endif
+ 
+ CloseRegKey $(SOFTKEY)
+ CloseRegKey $(COMKEY)
+ CloseRegKey $(TCAUDIAGKEY)
+ CloseRegKey $(TCAUM90XKEY)
+ CloseRegKey $(ExtensionsKEY)
+ CloseRegKey $(DAKEY)
+ return
+ 
+ 
+[InstallOption]
+ set CurrLang = $($0)
+ set Option = $($1)
+ set SrcDir = $($2)
+ set AddCopy = $($3)
+ set DoCopy = $($4)
+ set DoConfig = $($5)
+ set LanguageList = ^(LanguagesSupported, 1)
+ Ifcontains(i) $($0) NOT-IN $(LanguageList)
+	Return STATUS_NOLANGUAGE
+ endif
+
+ set-subst LF = "\n"
+ read-syms InstallOptions
+ read-syms GeneralConstants
+ read-syms FileConstants
+ read-syms BoomFileConstants 
+ read-syms DialogConstants$(!STF_LANGUAGE)
+ ifstr(i) $(!NTN_Origination) == "NCPA"
+	set Continue = "OK"
+ endif
+
+ read-syms FileConstants$(!STF_LANGUAGE)
+ detect date
+ set-title $(FunctionTitle)
+ set to = Begin
+ set from = Begin
+ set CommonStatus = STATUS_SUCCESSFUL
+ EndWait
+
+
+Begin = +
+ ;*********** add this to check correct platform supported********
+   ifstr(i) $(!STF_PLATFORM) == "Alpha"      
+      set CommonStatus = STATUS_USERCANCEL
+      goto end
+   else-ifstr(i) $(!STF_PLATFORM) == "Alpha_AXP"
+      set CommonStatus = STATUS_USERCANCEL
+      goto end
+   endif
+ ;*****************************************************************
+
+ set CurrentVersionValue = ""
+ OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\Windows Nt\CurrentVersion" $(!REG_KEY_READ) KeyNt
+ Ifstr(i) $(KeyNt) != ""
+	 GetRegValue $(KeyNt) "CurrentVersion" CurrentVersionValue
+	 Debug-Output "$(InfFile) : WinNT CurrentVersion ="$(CurrentVersionValue)
+	 CloseRegKey $(KeyNt)
+ Endif
+ 
+ ifstr(i) (*($(CurrentVersionValue),4)) == $(NT400VersionConstant)
+	set NDIS_VER = NDIS4     
+ else
+	set NDIS_VER = NDIS3
+ endif
+
+ read-syms BCDriverConstants$(NDIS_VER)
+ read-syms NDDriverConstants$(NDIS_VER)
+ ifstr(i) (*($(CurrentVersionValue),4)) == $(NT310VersionConstant) 
+	 Debug-Output "$(InfFile) : Configureadapter"
+	 set Error = "Windows NT v3.10 is not support by this product"
+	 goto fatal
+ endif
+  
+ Ifstr(i) $(!NTN_InstallMode) == deinstall
+	set StartLabel = removeadapter
+
+ else-Ifstr(i) $(!NTN_InstallMode) == Update
+	set StartLabel = UpgradeSoftware
+
+ else-Ifstr(i) $(!NTN_InstallMode) == bind
+	set StartLabel = bindingadapter
+
+ else-Ifstr(i) $(!NTN_InstallMode) == configure   
+	ifstr $(!STF_PLATFORM) == $(INF_PROCESSER)
+		
+		ifstr(i) (*($(CurrentVersionValue),4)) == $(NT400VersionConstant)
+			OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3Com\TCAUDIAG\TCAUM90X" $(!REG_KEY_READ) TCAUDIAGKEY
+ 			ifstr $(TCAUDIAGKEY) != ""	     
+				detect checkFileExist
+				set Diag = *($(DiagFound), 1)
+				ifstr(i) $(Diag) == "tcaudiag.exe"
+					; UN-Block the spawning of TD-Diags upon the "Properties" event in the NCP
+					StartDetachedProcess ExitCode "Windows Directory" "" $(DiagExe).EXE
+
+				else	
+	
+		OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_RegBase) $(!REG_KEY_ALL_ACCESS) NICKey
+   		Ifstr(i) $(NICKey) != "" ; key exists
+     			GetRegValue $(NICKey) "ServiceName" ServiceNameList
+
+	     		;Determine the Service Name and put in var NICServiceName 
+    			set NICServiceName = *($(ServiceNameList), 4)
+		endif
+		CloseRegKey $(NICKey)
+
+		;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "Command Line parameter is -ServiceName_"$(NICServiceName)""
+		;"Windows Directory" being the system32 dir
+		RunProgram ExitCode "Windows Directory" "" $(NT4_CFG).EXE -ServiceName_$(NICServiceName)
+
+		;  RunProgram ExitCode "Windows Directory" "" $(InstallerExe).EXE
+ 		set CommonStatus = STATUS_USERCANCEL
+ 		goto end
+
+				;StartDetachedProcess ExitCode "Windows Directory" "" NT4_CFG.EXE $(!NTN_RegBase)
+
+				endif
+
+
+			CloseRegKey $(TCAUDIAGKEY)	
+
+			else	
+
+	
+		OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_RegBase) $(!REG_KEY_ALL_ACCESS) NICKey
+   		Ifstr(i) $(NICKey) != "" ; key exists
+     			GetRegValue $(NICKey) "ServiceName" ServiceNameList
+
+	     		;Determine the Service Name and put in var NICServiceName 
+    			set NICServiceName = *($(ServiceNameList), 4)
+		endif
+		CloseRegKey $(NICKey)
+
+		;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "Command Line parameter is -ServiceName_"$(NICServiceName)""
+		;"Windows Directory" being the system32 dir
+		RunProgram ExitCode "Windows Directory" "" $(NT4_CFG).EXE -ServiceName_$(NICServiceName)
+
+		;  RunProgram ExitCode "Windows Directory" "" $(InstallerExe).EXE
+ 		set CommonStatus = STATUS_USERCANCEL
+ 		goto end
+
+
+				StartDetachedProcess ExitCode "Windows Directory" "" NT4_CFG.EXE $(!NTN_RegBase)
+
+			endif
+
+
+		set CommonStatus = STATUS_USERCANCEL
+		goto end
+
+		else
+			set StartLabel = configureadapter
+		endif
+   
+
+	else-Ifstr(i) $(ProdKeyName) == $(!NTN_RegBase)
+		Shell $(UtilityInf),RegistryErrorString,CANNOT_CONFIGURE_SOFTWARE
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)           
+			goto ShellCodeError
+		endif
+
+		set Error = $($R0)
+		set from = end
+		set to = end
+		goto nonfatalinfo
+
+
+
+
+	else-Ifstr(i) $(NDProdKeyName) == $(!NTN_RegBase)
+		Shell $(UtilityInf),RegistryErrorString,CANNOT_CONFIGURE_SOFTWARE
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)           
+			goto ShellCodeError
+		endif      
+
+		set Error = $($R0)
+		set from = end
+		set to = end
+		goto nonfatalinfo
+
+	else
+		set StartLabel = configureadapter
+	endif
+
+ else
+	set StartLabel = installadapter
+	set OEM_ABANDON_OPTIONS = {}
+	set OEM_ABANDON_SOFTWARE = FALSE
+	set OEM_ABANDON_ON = TRUE
+ endif
+
+
+ Debug-Output "$(InfFile) : =================================================="
+ Debug-Output "$(InfFile) : STF_CWDIR is: "$(!STF_CWDIR)
+ Debug-Output "$(InfFile) : STF_SRCDIR is: "$(!STF_SRCDIR)
+ Debug-Output "$(InfFile) : STF_LANGUAGE is: "$(!STF_LANGUAGE)
+ Debug-Output "$(InfFile) : Option is: "$(Option)
+ Debug-Output "$(InfFile) : !STF_NCN_InstallMode is:"$(!NTN_InstallMode)
+ Debug-Output "$(InfFile) : !STF_NCDETECT is: "$(!STF_NCDETECT)
+ Debug-Output "$(InfFile) : !STF_NCOPTION is: "$(!STF_NCOPTION)
+ Debug-Output "$(InfFile) : !STF_NCDETCARD is: "$(!STF_NCDETCARD)
+ Debug-Output "$(InfFile) : !STF_NCDETINFO is: "$(!STF_NCDETINFO)
+ Debug-Output "$(InfFile) : !STF_GUI_UNATTENDED is: "$(!STF_GUI_UNATTENDED)
+ Debug-Output "$(InfFile) : !STF_BusType is $(!STF_BUSTYPE)" 
+ Debug-Output "$(InfFile) : !STF_BusTypeList is $(!STF_BUSTYPELIST)" 
+ Debug-Output "$(InfFile) : =================================================="
+
+ set from = $(fatal)
+ set to = $(fatal)
+ goto $(StartLabel)
+
+
+installadapter = +
+ Debug-Output "$(InfFile) : Installadapter" 
+ OpenRegKey $(!REG_H_LOCAL) "" $(ProdKeyName) $(!REG_KEY_READ) KeyProduct
+ Ifstr $(KeyProduct) != $(KeyNull)
+	CloseRegKey $(KeyProduct)
+	ifstr(i) !(NTN_RegBase) == $(ProdKeyName)
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			Debug-Output "ShellCode error: cannot get an error string."
+			goto ShellCodeError
+		endif
+		goto end
+	else
+   	   ;********* add this because of 2 service names *******************************
+	   OpenRegKey $(!REG_H_LOCAL) "" $(NDProdKeyName) $(!REG_KEY_READ) KeyProduct
+	   Ifstr $(KeyProduct) != $(KeyNull)
+			CloseRegKey $(KeyProduct)
+			ifstr(i) !(NTN_RegBase) == $(NDProdKeyName)
+				ifint $($ShellCode) != $(!SHELL_CODE_OK)
+					Debug-Output "ShellCode error: cannot get an error string."
+					goto ShellCodeError
+				endif
+				goto end
+			else
+				set OldVersionExisted = $(TRUE)
+			endif
+	   Endif
+	   ;*****************************************************************************
+	   ;;;set OldVersionExisted = $(TRUE)
+	endif
+ Endif
+ Goto adapteroptions 
+
+
+configureadapter = +
+ Debug-Output "$(InfFile) : Configureadapter"
+ set Error = "Cannot configure the software component"
+ goto fatal
+
+
+adapteroptions = +
+ Debug-Output "$(InfFile) : Adapteroptions"
+ set from = adapteroptions
+ ifstr(i) $(!NTN_InstallMode) == configure
+	goto updateparameters
+ endif
+
+
+installproduct =+
+ install "Install-OTHER"
+ Debug-Output "$(InfFile) : installproduct"
+ StartWait 
+ set AdapterList = $($R1)
+
+ Debug-Output "$(InfFile) : About to look for 3Com PCI Cards"
+ set TargetVersion = *($(CurrentVersionValue),4)
+ 
+ Debug-Output "$(InfFile) : Current Version:"$(TargetVersion)
+ ifstr $(TargetVersion) == $(NT350VersionConstant) 
+	Debug-Output "Running on WindowsNT 3.50"
+	set Version350 = $(TRUE)
+ else
+	 Debug-Output "Running on WindowsNT 3.51 or higher"
+	 set Version350 = $(FALSE)
+ endif
+
+ ifint $(Version350) == $(TRUE)
+ Debug-Output "Running on WindowsNT v3.50, Not using PCI Detection!!!"
+
+	ifstr $(!STF_GUI_UNATTENDED) == "YES"
+		Debug-Output "$(InfFile) : Running in GUI unattended mode"
+		ifstr(i) $(!AutoNetInterfaceType) != ""
+			set BusInterfaceType = $(!AutoNetInterfaceType)
+		else
+			set BusInterfaceType = 5
+		endif
+
+		ifstr(i) $(!AutoNetBusNumber) != ""
+			set BusNumber = $(!AutoNetBusNumber)
+		else
+			set BusNumber = 0
+		endif
+
+	set NTDetected = $(FALSE)
+	set AdapterList = {{$(Option),0, XXXXX}} 
+	Debug-Output "$(InfFile) : BusInterfaceType = $(BusInterfaceType)"
+	Debug-Output "$(InfFile) : BusNumber = $(BusNumber)"
+	
+	else     ;;; GUI_UNATTENDED=NO
+		Debug-Output "$(InfFile) : Running 3.50 Bus Dialog"
+		set BusInterfaceType = 5
+		set BusNumber = 0
+		set NTDetected = $(FALSE)
+		Shell $(UtilityInf),GetBusTypeDialog,$(ProdHWXXXXXDesc) $(BusInterfaceType) $(BusNumber)
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			 Debug-Output "ShellCode error."
+			 goto ShellCodeError
+		endif
+
+		set BusInterfaceType = $($R1)
+		set BusNumber = $($R2)
+		set AdapterList = {{$(Option),0, XXXXX}} 
+		Debug-Output "$(InfFile) : BusInterfaceType = $(BusInterfaceType)"
+		Debug-Output "$(InfFile) : BusNumber = $(BusNumber)"
+	endif    ;;; end check GUI_UNATTENDED
+
+
+ else      ;;; Version350=FALSE
+	 Debug-Output "$(InfFile) : Running 3.51 or higher using PCI Dectection"
+	 set NTDetected = $(TRUE)
+	 set Vendor = 4279 
+	 set CFIDList = $(CFIDList)
+	 Debug-Output "$(InfFile) : VendorID = $(Vendor)"
+	 Debug-Output "$(InfFile) : CFIDList = $(CFIDList)"
+	 set AdapterList = {}
+
+	 ForListDo $(CFIDList)
+		 set-div CFID = $($) 1
+		 set DeviceID = $($)
+		 Shell $(UtilityInf), GetPCIInformation, $(Vendor) $(CFID)
+		 ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		 endif
+
+		 ForListDo $($R0)
+			set AdapterList = >($(AdapterList), {*($($),1), *($($),2), $(DeviceID)})
+		 EndForListDo
+
+	 EndForListDo
+
+	 ifstr(i) $(AdapterList) == {}                 
+		 set Error = $(CANNOT_FIND_ANY_CARD)
+		 set CommonStatus = USER_CANCEL
+		 set from = end
+		 goto nonfatal
+	 endif
+ endif 
+
+ set ToInstallList = {}
+ Debug-Output "$(InfFile) : Adapterlist = $(AdatperList)"
+ 
+
+
+ ForListDo $(AdapterList)
+	ifint $(NTDetected) == $(TRUE)
+		 set DetectedBusNum = *($($),1)
+		 set DetectedSlotNum = *($($),2)
+		 set DeviceID = *($($),3)
+	
+
+		; 1.) Call Executable to populate the reg key "SOFTWARE\3Com\PCI_DATA" with the PCI data the current instance of the NIC
+		RunProgram ExitCode  "" "" $(SrcDir)PCI_DATA.EXE /$(DetectedBusNum) /$(DetectedSlotNum) 
+
+
+		; 2.) Check open key for the data of interest. *** DeviceID, SubSystemID, SubVendorID, and VendorID are present
+		
+		OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3Com\PCI_DATA" $(!REG_KEY_ALL_ACCESS) PCI_DATA_KEY 
+
+		GetRegValue $(PCI_DATA_KEY) "DeviceID" Array_DeviceID
+		GetRegValue $(PCI_DATA_KEY) "VendorID" Array_VendorID
+		GetRegValue $(PCI_DATA_KEY) "SubSystemID" Array_SubSystemID
+		GetRegValue $(PCI_DATA_KEY) "SubVendorID" Array_SubVendorID
+
+		Set Value_DeviceID 	= *($(Array_DeviceID),4)
+		Set Value_VendorID 	= *($(Array_VendorID),4)
+		Set Value_SubSystemID 	= *($(Array_SubSystemID),4)
+		Set Value_SubVendorID 	= *($(Array_SubVendorID),4)
+
+		;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "The detected DeviceID is ("$(Value_DeviceID)")"
+		;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "The detected VendorID is ("$(Value_VendorID)")"
+		;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "The detected SubSystemID is ("$(Value_SubSystemID)")"
+		;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "The detected SubVendorID is ("$(Value_SubVendorID)")"
+
+		; 3.)	Stepthrough logic to determine card type
+
+
+
+		; 3Com Product
+		ifstr(i) $(Value_VendorID) == "10B7"
+
+		; 3C905C NIC / Mini PCI NIC
+
+		; 3C905C (NIC) ********************************************************
+		ifstr(i) $(Value_DeviceID) == "9200"
+			ifstr(i) $(Value_SubSystemID) == "1000"
+				ifstr(i) $(Value_SubVendorID) == "10B7"
+
+					; Only in this circumstance is it a 3Com NIC
+					; Vendor and SubVendor ID = 10B7 so it's not a LOM
+					; SubSystem ID  IS NOT(!)  a duplicate of Device ID
+
+					set DeviceID = 37376NIC
+				endif
+			endif
+		endif
+
+		; 3C905C (Mini PCI NIC) ***********************************************
+		ifstr(i) $(Value_DeviceID) == "9200"
+			ifstr(i) $(Value_SubSystemID) == "7000"
+
+				ifstr(i) $(Value_SubVendorID) == "10B7"
+
+					; Only in this circumstance is it a 3Com NIC
+					; Vendor and SubVendor ID = 10B7 so it's not a LOM
+					; SubSystem ID  IS NOT(!)  a duplicate of Device ID
+
+					set DeviceID = 37376MiniPCI
+				endif
+			endif
+		endif
+
+
+		; 3C905 Catch All *****************************************************
+		ifstr(i) $(Value_DeviceID) == "9200"
+			
+			; *** The DeviceID is 9200 ***
+			; *** The Vendor ID is 10B7 (3Com) but the SubVendorID IS NOT ***
+			; *** You're in an OEM situation.  Break out of this iteration fo the Loop ***
+			; *** SubSystemID is a don't care value.  OEMs can assign this to ANYTHING ***
+
+			ifstr(i) $(Value_SubVendorID) != "10B7"
+				set DeviceID = 37376CatchAll
+			endif
+
+		endif
+
+		; 3C905B (NIC) ******************************************************
+		ifstr(i) $(Value_DeviceID) == "9055"
+			ifstr(i) $(Value_SubSystemID) == "9055"
+				ifstr(i) $(Value_SubVendorID) == "10B7"
+
+					; Only in this circumstance is it a 3Com NIC
+					; Vendor and SubVendor ID = 10B7 so it's not a LOM
+					; SubSystem ID  IS a duplicate of Device ID
+
+					set DeviceID = 36949NIC
+				endif
+			endif
+		endif
+
+		; 3C918 (LOM NIC) ****************************************************
+		ifstr(i) $(Value_DeviceID) == "9055"
+			
+			; *** The DeviceID is 9055 ***
+			; *** The Vendor ID is 10B7 (3Com) but the SubVendorID IS NOT ***
+			; *** You're in an OEM situation.  
+			; *** SubSystemID is a don't care value.  OEMs can assign this to ANYTHING ***
+
+			ifstr(i) $(Value_SubVendorID) != "10B7"
+				set DeviceID = 36949CatchAll
+			endif
+
+		endif
+
+
+		endif
+
+
+
+	CloseRegKey $(PCI_DATA_KEY)
+	
+
+		 Debug-Output "$(InfFile) : DetectedBusNumber = $(DetectedBusNum)"
+		 Debug-Output "$(InfFile) : DetectedSlotNum = $(DetectedSlotNum)"
+
+		;**************** add this because of 2 Service names**************
+		set BoomCard = FALSE     
+		ifstr(i) $(DeviceID) == "36944"
+			set BoomCard = TRUE
+		else-ifstr(i) $(DeviceID) == "36945"
+			set BoomCard = TRUE
+		else-ifstr(i) $(DeviceID) == "36864"
+			set BoomCard = TRUE
+		else-ifstr(i) $(DeviceID) == "36865"
+			set BoomCard = TRUE
+		endif
+
+		ifstr(i) $(BoomCard) == TRUE
+			Shell $(UtilityInf), IsNetCardAlreadyInstalled, $(DetectedBusNum), +
+			$(DetectedSlotNum), $(ProdHW$(DeviceID)Desc), "El90xnd"
+
+			ifstr(i) $($R1) != "YES" 
+				goto AddToNotList
+			else
+				goto endchecking
+			endif
+
+		;we don't have to check old names for Boomerang because we don't allow update on Boomerang
+		;Update only allowed if Boom card has used new service name El90xnd.
+		;Ed5.0 and anything before that didn't use service name El90xnd.
+
+		else ; 90xBC CARD
+    		Shell $(UtilityInf), IsNetCardAlreadyInstalled, $(DetectedBusNum), +
+			$(DetectedSlotNum), $(ProdHW$(DeviceID)Desc), "El90x"
+
+			;**** DO THIS BECAUSE WE NOW USE NEW NAMES FOR OUR CARDS, CHECK OLD NAME
+			ifstr(i) $($R1) != "YES"         ;not installed yet, not sure, check oldnames
+				Shell $(UtilityInf), IsNetCardAlreadyInstalled, $(DetectedBusNum), +
+				$(DetectedSlotNum), $(OLDProdHW$(DeviceID)Desc), "El90x"
+
+				ifstr(i) $($R1) != "YES"     ;not installed yet, still not sure because we changed desc twice before
+					Shell $(UtilityInf), IsNetCardAlreadyInstalled, $(DetectedBusNum), +
+					$(DetectedSlotNum), $(ED50HW$(DeviceID)Desc), "El90x"
+
+					ifstr(i) $($R1) != "YES" ;not installed yet, sure by now
+						goto AddToNotList
+					else                     ;already installed with old name on ED5.0
+						goto endchecking
+					endif  
+					          
+				else                         ;already installed with old name on ED4.0 or before that
+					goto endchecking
+				endif
+			else			     ;already installed with current name on ECD5.1
+				goto endchecking                       
+			endif
+		endif 
+
+
+AddToNotList=+
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	endif
+
+	ifstr $($R0) != "NO_ERROR"
+		set Error = $($R0)
+		goto fatal
+	endif
+
+	;ifstr(i) $(ToInstallList) == {}     ; COMMENT THIS OUT TO INSTALL MULTIPLE NIC at a time
+		ifstr(i) $($R1) != "YES"
+			set ToInstallList = >($(ToInstallList), $($))
+		endif 
+	;endif
+
+
+endchecking =+
+
+	endif 
+
+EndForListDo
+
+
+
+ 
+ ifstr(i) $(ToInstallList) == {}
+	 set Error = $(CANNOT_FIND_ANY_UNINSTALLED_CARD)
+	 set CommonStatus = USER_CANCEL
+	 set from = end
+	 goto nonfatal
+ endif
+
+
+
+ ForListDo $(ToInstallList)
+	set DetectedBusNum = *($($),1)
+	set DetectedSlotNum = *($($),2)
+	set DeviceID = *($($),3)
+	set BoomDetected = FALSE
+	set NonBoomDetected = FALSE
+
+
+		; 1.) Call Executable to populate the reg key "SOFTWARE\3Com\PCI_DATA" with the PCI data the current instance of the NIC
+		RunProgram ExitCode  "" "" $(SrcDir)PCI_DATA.EXE /$(DetectedBusNum) /$(DetectedSlotNum) 
+
+
+		; 2.) Check open key for the data of interest. *** DeviceID, SubSystemID, SubVendorID, and VendorID are present
+		
+		OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3Com\PCI_DATA" $(!REG_KEY_ALL_ACCESS) PCI_DATA_KEY 
+
+		GetRegValue $(PCI_DATA_KEY) "DeviceID" Array_DeviceID
+		GetRegValue $(PCI_DATA_KEY) "VendorID" Array_VendorID
+		GetRegValue $(PCI_DATA_KEY) "SubSystemID" Array_SubSystemID
+		GetRegValue $(PCI_DATA_KEY) "SubVendorID" Array_SubVendorID
+
+		Set Value_DeviceID 	= *($(Array_DeviceID),4)
+		Set Value_VendorID 	= *($(Array_VendorID),4)
+		Set Value_SubSystemID 	= *($(Array_SubSystemID),4)
+		Set Value_SubVendorID 	= *($(Array_SubVendorID),4)
+
+		;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "The detected DeviceID is ("$(Value_DeviceID)")"
+		;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "The detected VendorID is ("$(Value_VendorID)")"
+		;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "The detected SubSystemID is ("$(Value_SubSystemID)")"
+		;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "The detected SubVendorID is ("$(Value_SubVendorID)")"
+
+		; 3.)	Stepthrough logic to determine card type
+
+
+		; 3Com Product
+		ifstr(i) $(Value_VendorID) == "10B7"
+
+
+		; 3C905C NIC / Mini PCI NIC
+
+		; 3C905C (NIC) ********************************************************
+		ifstr(i) $(Value_DeviceID) == "9200"
+			ifstr(i) $(Value_SubSystemID) == "1000"
+				ifstr(i) $(Value_SubVendorID) == "10B7"
+
+					; Only in this circumstance is it a 3Com NIC
+					; Vendor and SubVendor ID = 10B7 so it's not a LOM
+					; SubSystem ID  IS NOT(!)  a duplicate of Device ID
+
+					set DeviceID = 37376NIC
+				endif
+			endif
+		endif
+
+		; 3C905C (Mini PCI NIC) ***********************************************
+		ifstr(i) $(Value_DeviceID) == "9200"
+			ifstr(i) $(Value_SubSystemID) == "7000"
+
+				ifstr(i) $(Value_SubVendorID) == "10B7"
+
+					; Only in this circumstance is it a 3Com NIC
+					; Vendor and SubVendor ID = 10B7 so it's not a LOM
+					; SubSystem ID  IS NOT(!)  a duplicate of Device ID
+
+					set DeviceID = 37376MiniPCI
+				endif
+			endif
+		endif
+
+
+		; 3C905 Catch All *****************************************************
+		ifstr(i) $(Value_DeviceID) == "9200"
+			
+			; *** The DeviceID is 9200 ***
+			; *** The Vendor ID is 10B7 (3Com) but the SubVendorID IS NOT ***
+			; *** You're in an OEM situation.  Break out of this iteration fo the Loop ***
+			; *** SubSystemID is a don't care value.  OEMs can assign this to ANYTHING ***
+
+			ifstr(i) $(Value_SubVendorID) != "10B7"
+				set DeviceID = 37376CatchAll
+			endif
+
+		endif
+
+		; 3C905B (NIC) ******************************************************
+		ifstr(i) $(Value_DeviceID) == "9055"
+			ifstr(i) $(Value_SubSystemID) == "9055"
+				ifstr(i) $(Value_SubVendorID) == "10B7"
+
+					; Only in this circumstance is it a 3Com NIC
+					; Vendor and SubVendor ID = 10B7 so it's not a LOM
+					; SubSystem ID  IS a duplicate of Device ID
+
+					set DeviceID = 36949NIC
+				endif
+			endif
+		endif
+
+		; 3C918 Catch All ****************************************************
+		ifstr(i) $(Value_DeviceID) == "9055"
+			
+			; *** The DeviceID is 9055 ***
+			; *** The Vendor ID is 10B7 (3Com) but the SubVendorID IS NOT ***
+			; *** You're in an OEM situation.  
+			; *** SubSystemID is a don't care value.  OEMs can assign this to ANYTHING ***
+
+			ifstr(i) $(Value_SubVendorID) != "10B7"
+				set DeviceID = 36949CatchAll
+			endif
+
+		endif
+
+	
+	endif
+
+
+
+	CloseRegKey $(PCI_DATA_KEY)
+
+
+
+
+	;********************************************************************
+	; Check if 90XBC or Boomerang
+	;********************************************************************
+	set BoomCard = FALSE 
+    
+	ifstr(i) $(DeviceID) == "36944"
+		set BoomCard = TRUE
+	else-ifstr(i) $(DeviceID) == "36945"
+		set BoomCard = TRUE
+	else-ifstr(i) $(DeviceID) == "36864"
+		set BoomCard = TRUE
+	else-ifstr(i) $(DeviceID) == "36865"
+		set BoomCard = TRUE
+	endif  
+
+	ifstr(i) $(BoomCard) == TRUE 
+	set CorrectProdHWName = $(NDProdHWName)
+	set CorrectProdSWName = $(NDProdSWName)
+	set CorrectNetRuleSWType = $(NDNetRuleSWType)
+	set CorrectNetRuleSWBindForm = $(NDNetRuleSWBindForm)
+	set CorrectNetRuleSWClass = $(NDNetRuleSWClass)
+	set CorrectNetRuleSWBindable = $(NDNetRuleSWBindable)
+	set CorrectNetRuleHWBindForm = $(NDNetRuleHWBindForm)
+	set CorrectNetRuleHWType = $(NDNetRuleHWType)
+	set CorrectNetRuleHWClass = $(NDNetRuleHWClass)
+	set CorrectProdKeyName = $(NDProdKeyName)
+	set CorrectParamKeyName = $(NDParamKeyName)
+	set CorrectProdSWDesc = $(NDProdSWDesc)
+	set CorrectProdSWTitle = $(NDProdSWTitle)
+
+		ifstr(i) (*($(CurrentVersionValue),4)) == $(NT400VersionConstant) 
+			set CorrectNetEventDLL = $(ND4NDNetEventDLL)
+			set CorrectProdSWImagePath = $(ND4NDProdSWImagePath)
+			set CorrectProdSWUpgradePath = $(ND4NDProdSWUpgradePath)
+		else
+			set CorrectNetEventDLL = $(ND3NDNetEventDLL)
+			set CorrectProdSWImagePath = $(ND3NDProdSWImagePath)
+			set CorrectProdSWUpgradePath = $(ND3NDProdSWUpgradePath)
+		endif
+
+	else ; 90XBC CARD
+	set CorrectProdSWDesc = $(ProdSWDesc)
+	set CorrectProdSWTitle = $(ProdSWTitle)
+	set CorrectProdHWName = $(ProdHWName)
+	set CorrectProdSWName = $(ProdSWName)
+	set CorrectNetRuleSWType = $(NetRuleSWType)
+	set CorrectNetRuleSWBindForm = $(NetRuleSWBindForm)
+	set CorrectNetRuleSWClass = $(NetRuleSWClass)
+	set CorrectNetRuleSWBindable = $(NetRuleSWBindable)
+	set CorrectNetRuleHWBindForm = $(NetRuleHWBindForm)
+	set CorrectNetRuleHWType = $(NetRuleHWType)
+	set CorrectNetRuleHWClass = $(NetRuleHWClass)
+	set CorrectProdKeyName = $(ProdKeyName)
+	set CorrectParamKeyName = $(ParamKeyName)
+
+		ifstr(i) (*($(CurrentVersionValue),4)) == $(NT400VersionConstant) 
+			set CorrectNetEventDLL = $(ND4BCNetEventDLL)
+			set CorrectProdSWImagePath = $(ND4BCProdSWImagePath)
+			set CorrectProdSWUpgradePath = $(ND4BCProdSWUpgradePath)
+		else
+			set CorrectNetEventDLL = $(ND3BCNetEventDLL)
+			set CorrectProdSWImagePath = $(ND3BCProdSWImagePath)
+			set CorrectProdSWUpgradePath = $(ND3BCProdSWUpgradePath)
+		endif
+
+	endif ; END CHECK CARD
+
+
+
+	;DEBUG:
+	;	ifstr(i) $(BoomCard) == TRUE 
+	;	 Set DlgText = "bOOM CARD"
+	;        else
+	;         Set DlgText = "90xbc CARD"
+	;	endif
+	;	Shell "Subroutn.Inf" SetupMessage $(!STF_LANGUAGE) "WARNING" $(DlgText)
+	;	Set DlgText = "firstDB "$(CorrectProdHWName)" "$(CorrectProdSWName)
+	;	Shell "Subroutn.Inf" SetupMessage $(!STF_LANGUAGE) "WARNING" $(DlgText)
+	;	Set DlgText = $(CorrectProdKeyName)" "$(CorrectProdSWImagePath)
+	;	Shell "Subroutn.Inf" SetupMessage $(!STF_LANGUAGE) "WARNING" $(DlgText)
+	;	Set DlgText = "Netevent "$(CorrectNetEventDLL)
+	;	Shell "Subroutn.Inf" SetupMessage $(!STF_LANGUAGE) "WARNING" $(DlgText)
+	;END DEBUG
+
+	OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_ServiceBase)"\"$(CorrectProdHWName) $(!REG_KEY_READ) KeyNt
+	CloseRegKey $(KeyNt)
+
+	Ifstr(i) $(KeyNt) == "" ; Begin check Key=null
+
+		Debug-Output "$(InfFile) : AddSoftwareComponent"
+		Shell $(UtilityInf), AddSoftwareComponent, $(Manufacturer), +
+		$(CorrectProdSWName), +
+		$(CorrectProdSWName), +
+		$(CorrectProdSWTitle), $(STF_CONTEXTINFNAME), +
+		$(CorrectProdSWImagePath), "kernel", "NDIS", {}, "",+
+		$(CorrectNetEventDLL)	
+ 		Set OEM_ABANDON_SOFTWARE = TRUE
+
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		endif
+
+		set RegistryErrorIndex = $($R0)
+		Ifstr(i) $(RegistryErrorIndex) != "NO_ERROR"
+			EndWait
+			CloseRegKey $($R1)
+			CloseRegKey $($R2)
+			CloseRegKey $($R3)
+			CloseRegKey $($R4)
+			CloseRegKey $($R5)
+			goto fatalregistry
+		endif
+
+		;DEBUG:
+		;	ifstr(i) $(BoomCard) == TRUE 
+		;	 Set DlgText = "bOOM CARD"
+		;        else
+		;         Set DlgText = "90xbc CARD"
+		;	endif
+		;	Shell "Done Add Software comp to get keyhandle"
+		;	Set DlgText = "firstDB "$(CorrectProdHWName)" "$(CorrectProdSWName)	
+		;END DEBUG	
+
+		Set SoftProductKey = $($R1)
+		Set SoftNetRuleKey = $($R2)
+		Set SoftServiceKey = $($R3)
+		Set SoftParameterKey = $($R4)
+		Set SoftLinkageKey = $($R5)
+		set NewValueList = {{SoftwareType,$(NoTitle),$(!REG_VT_SZ),$(SWType)},+
+		
+		{MajorVersion,$(NoTitle),$(!REG_VT_DWORD),$(ProdMajorVer)},+
+		{MinorVersion,$(NoTitle),$(!REG_VT_DWORD),$(ProdMinorVer)},+
+		{Title,$(NoTitle),$(!REG_VT_SZ),$(CorrectProdSWTitle)},+
+		{Description,$(NoTitle),$(!REG_VT_SZ),$(CorrectProdSWDesc)},+
+		{Review,$(NoTitle),$(!REG_VT_DWORD),$(ProdReview)},+
+		{ServiceName,$(NoTitle),$(!REG_VT_SZ),$(CorrectProdSWName)},+
+		{InstallDate,$(NoTitle),$(!REG_VT_DWORD),*($(Now),1)},+
+		{EDVersion,$(NoTitle),$(!REG_VT_SZ),$(EtherDiskVersion)}}
+		Shell $(UtilityInf), AddValueList, $(SoftProductKey), $(NewValueList)
+		
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		endif
+
+		set RegistryErrorIndex = $($R0)
+		Ifstr(i) $(RegistryErrorIndex) != "NO_ERROR"
+			EndWait
+			CloseRegKey $(SoftProductKey)
+			CloseRegKey $(SoftNetRuleKey)
+			CloseRegKey $(SoftServiceKey)
+			CloseRegKey $(SoftParameterKey)
+			CloseRegKey $(SoftLinkageKey)
+			goto fatalregistry
+		endif
+
+		set NewValueList = {{type,$(NoTitle),$(!REG_VT_SZ),$(CorrectNetRuleSWType)},+
+		
+		{use,$(NoTitle),$(!REG_VT_SZ),$(NetRuleSWUse)}, +
+		{bindform,$(NoTitle),$(!REG_VT_SZ),$(CorrectNetRuleSWBindForm)}, +
+		{class,$(NoTitle),$(!REG_VT_MULTI_SZ),$(CorrectNetRuleSWClass)}, +
+		{bindable,$(NoTitle),$(!REG_VT_MULTI_SZ),$(CorrectNetRuleSWBindable)}, +
+		{InfOption,$(NoTitle),$(!REG_VT_SZ),$(Option)}}
+		Shell $(UtilityInf), AddValueList, $(SoftNetRuleKey), $(NewValueList)
+		
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		endif
+
+		set RegistryErrorIndex = $($R0)
+		Ifstr(i) $(RegistryErrorIndex) != "NO_ERROR"
+			EndWait
+			CloseRegKey $(SoftProductKey)
+			CloseRegKey $(SoftNetRuleKey)
+			CloseRegKey $(SoftServiceKey)
+			CloseRegKey $(SoftParameterKey)
+			CloseRegKey $(SoftLinkageKey)
+			goto fatalregistry
+		endif
+
+		;********** Add parameter for driver *************************
+
+		set WakeOnLan = YES
+		set WakeOnLink = NO 
+		set ValueEnable = ENABLE 
+
+		ifstr(i) $(BoomCard) == TRUE
+			Set NewValueList = {{WakeOnMagic,$(NoTitle),$(!REG_VT_SZ),$(WakeOnLan)},+
+			{WakeOnLink,$(NoTitle),$(!REG_VT_SZ),$(WakeOnLink)},+
+			{FLOWCONTROL,$(NoTitle),$(!REG_VT_SZ),$(ValueEnable)}}
+
+		else
+			Set NewValueList = {{RWUMAGIC,$(NoTitle),$(!REG_VT_SZ),$(ValueEnable)},+
+			{FLOWCONTROL,$(NoTitle),$(!REG_VT_SZ),$(ValueEnable)}}
+		endif
+
+		Shell $(UtilityInf), AddValueList, $(SoftParameterKey), $(NewValueList)
+		CreateRegKey $(SoftParameterKey) {"3CDefault" , 0, GenericClass} "" $(!REG_KEY_ALL_ACCESS) +
+		 "" KeyNt2 
+
+		;;;
+		Set ThisValueList = {RWUMAGIC,$(NoTitle),$(!REG_VT_SZ),$(ValueEnable)}
+
+
+		OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3Com\"$(NDProdSWName) $(!REG_KEY_ALL_ACCESS) NDKeyNt 
+		ifstr $(KeyNt2) != ""	
+			SetRegValue $(KeyNt2 ) $("ThisValueList") 
+			CloseRegKey $(KeyNt2 )
+		endif
+		;;;
+
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		endif
+
+		CloseRegKey $(SoftProductKey)
+		CloseRegKey $(SoftNetRuleKey)
+		CloseRegKey $(SoftServiceKey)
+		CloseRegKey $(SoftParameterKey)
+		CloseRegKey $(SoftLinkageKey)
+
+		Ifstr(i) $(RegistryErrorIndex) != "NO_ERROR"
+			EndWait
+			goto fatalregistry
+		endif
+	
+	;*************************************************************
+	
+	endif ; end check Key=null
+
+	Debug-Output "$(InfFile) : DetectedBusNumber = $(DetectedBusNum)"
+	Debug-Output "$(InfFile) : DetectedSlotNum = $(DetectedSlotNum)"
+	Debug-Output "$(InfFile) : Installing Card at $(DetectedBusNum):$(DetectedSlotNum)!"
+
+	Shell $(UtilityInf), AddHardwareComponent, $(CorrectProdHWName),$(STF_CONTEXTINFNAME),$(CorrectProdKeyName)
+	ifint $($R4) != -1
+		Set OEM_ABANDON_OPTIONS = >($(OEM_ABANDON_OPTIONS), $(!NTN_SoftwareBase)"\Microsoft\Windows NT\CurrentVersion\NetworkCards\"$($R4))
+	endif
+
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	endif
+
+	set RegistryErrorIndex = $($R0)
+	Ifstr(i) $(RegistryErrorIndex) != "NO_ERROR"
+		EndWait
+		CloseRegKey $($R1)
+		CloseRegKey $($R2)
+		CloseRegKey $($R3)
+		goto fatalregistry
+	endif
+
+
+	Set HardNetCardKey = $($R1)
+	Set HardNetRuleKey = $($R2)
+	Set HardParameterKey = $($R3)
+	set AdapterNumber = $($R4)
+	set NewValueList = {{Manufacturer,$(NoTitle),$(!REG_VT_SZ),$(Manufacturer)},+
+	{Title,$(NoTitle),$(!REG_VT_SZ),"["$($R4)"] "$(ProdHW$(DeviceID)Title)},+
+	{Description,$(NoTitle),$(!REG_VT_SZ),$(ProdHW$(DeviceID)Desc)},+
+	{ProductName,$(NoTitle),$(!REG_VT_SZ),$(CorrectProdHWName)},+
+	{ServiceName,$(NoTitle),$(!REG_VT_SZ),$($R5)},+
+	{InstallDate,$(NoTitle),$(!REG_VT_DWORD),*($(Now),1)},+
+	{EDVersion,$(NoTitle),$(!REG_VT_SZ),$(EtherDiskVersion)},+
+	}
+
+	; Workaround: Sometimes AddHardwareComponent can't return correct handle for HardNetCardKey
+	; We have to manually open the key using adapter number returned from AddHardwareComponent	
+	; might have to do the same for HardParameterKey
+
+		OpenRegKey $(!REG_H_LOCAL) "" $(NetworkCardsKey)$($R4) $(!REG_KEY_SET_VALUE) HardNetCardKey
+
+	; end workaround
+
+	Shell $(UtilityInf), AddValueList, $(HardNetCardKey), $(NewValueList)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	endif
+
+	;set RegistryErrorIndex = $($R0)
+	;Ifstr(i) $(RegistryErrorIndex) != "NO_ERROR"
+	;EndWait
+	;goto fatalregistry
+	;endif
+
+	set BusTypeNum = 5 
+	ifstr(i) $(DeviceID) == "36944"
+		set CardType = 0
+	else-ifstr(i) $(DeviceID) == "36945"
+		set CardType = 0
+	else-ifstr(i) $(DeviceID) == "36949"
+		set CardType = 0
+	else
+		set CardType = 2
+	endif 
+
+	ifint $(NTDetected) == $(TRUE)
+		set BusNumber = $(DetectedBusNum)
+		set SlotNum = $(DetectedSlotNum) 
+		set BusInterfaceType = $(BusTypeNum)
+		set WakeOnLan = YES
+		set WakeOnLink = NO
+		set FlowControl = ENABLE
+
+;
+		Debug-Output "$(InfFile) : Set HardwareParameterKey = $(NewValueList)"
+
+	 	Set NewValueList = {+
+	 	 {BusNumber,$(NoTitle),$(!REG_VT_DWORD),$(BusNumber)},+
+	 	 {Slot,$(NoTitle),$(!REG_VT_DWORD),$(SlotNum)},+
+	 	 {FlowControl,$(NoTitle),$(!REG_VT_SZ),$(FlowControl)},+
+		 {DownPollRate,$(NoTitle),$(!REG_VT_SZ),"8"},+ 
+ 		 {NDIS_VERSION,$(NoTitle),$(!REG_VT_SZ),"NDIS 4"},+
+		 {8021pOffload,$(NoTitle),$(!REG_VT_SZ),"DISABLE"},+
+		 {RxChecksum,$(NoTitle),$(!REG_VT_SZ),"DISABLE"},+
+		 {TxChecksum,$(NoTitle),$(!REG_VT_SZ),"DISABLE"},+
+		 {RWUMAGIC,$(NoTitle),$(!REG_VT_SZ),"ENABLE"},+
+		 {InitDelayCount,$(NoTitle),$(!REG_VT_SZ),"0"},+
+		 {DoubleNego,$(NoTitle),$(!REG_VT_SZ),"ENABLE"},+
+		 {PHYCompat,$(NoTitle),$(!REG_VT_SZ),"ENABLE"},+
+		 {LnkChk,$(NoTitle),$(!REG_VT_SZ),"DISABLE"},+
+		 {CableHoldOffTimer,$(NoTitle),$(!REG_VT_SZ),"0"},+
+		 {CableToDetectTimer,$(NoTitle),$(!REG_VT_SZ),"0"},+
+		}
+
+		Debug-Output "$(InfFile) : Set HardwareParameterKey = $(NewValueList)"
+		Shell $(UtilityInf), AddValueList, $(HardParameterKey), $(NewValueList)
+
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		  goto ShellCodeError
+		endif
+
+OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE" $(!REG_KEY_WRITE) SOFTKEY
+OpenRegKey $(SOFTKEY) "" "3Com" $(!REG_KEY_WRITE) COMKEY
+
+
+; If the 3Com Key doesn't exists, create one.
+ifstr $(COMKEY) == ""
+	CreateRegKey $(SOFTKEY) {"3Com", 0, GenericClass} "" $(!REG_KEY_WRITE) "" COMKEY
+endif
+
+OpenRegKey $(!REG_H_LOCAL) "" "SYSTEM\CurrentControlSet\Services" $(!REG_KEY_ALL_ACCESS) ServicesKey
+Ifstr(i) $(ServicesKey) != "" ; key exists
+
+EnumRegKey $(ServicesKey) DriverList
+
+ForListDo $(DriverList)
+
+
+
+
+
+; *** Check whether any EL99X driver instances are present. This is a NIC project specific check!
+set foundPythonInstance = FALSE
+set Driver = *($($), 1)
+
+
+Split-String "$(Driver)" "X" DriverTokens
+
+set DriverName = *($(DriverTokens), 1)
+ifstr(i) $(Driver) != "EL90X"
+	ifstr(i) $(DriverName) == "El90"
+	; We have found a 3Com client-related key
+		set found3ComClientInstance = TRUE
+	endif
+endif
+
+
+Split-String "$(Driver)" "x" DriverTokens
+
+set DriverName = *($(DriverTokens), 1)
+ifstr(i) $(Driver) != "EL90x"
+	ifstr(i) $(DriverName) == "El90"
+	; We have found a 3Com client-related key
+		set found3ComClientInstance = TRUE
+	endif
+endif
+
+
+; *** Create a key with a cooresponding service name under the SOFTWARE\3Com key.
+
+Ifstr(i) $(found3ComClientInstance) == "TRUE"
+
+;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "Found Typhoon Driver instance ("$(DriverName)")"
+;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "Driver instance name is  ("$(Driver)")"
+
+CreateRegKey $(COMKEY) {$(Driver), 0, GenericClass} "" $(!REG_KEY_WRITE) "" THISNIC
+endif
+
+
+
+
+
+; *************************************************************************************************
+; *************************************************************************************************
+;						NT4_CFG
+;
+;					      INSTRUCTIONS
+;
+;			        HKEY_LOCAL_MACHINE\SOFTWARE\3Com\B A S E K E Y 
+;
+;Under the BASEKEY we'll have ALL of the NIC parameters the driver supports under the Windows NT 4
+;operating system.
+;
+;e.g.
+;
+;HKEY_LOCAL_MACHINE\SOFTWARE\3Com\EL99X\F L O W C O N T R O L 
+;
+;Where EL99x is the BASEKEY.  Under the parameter you'll find a subkey that determines the type of information
+;tobe/nottobe displayed.  Legal subkey types are "enum","single value","protected", and "range"
+;
+;enum:		Every Value under this key will be displayed in a listbox. User selections and changes
+;		will be based upon those value/data combinations exposed under the enum key.
+;
+;single value:	1 value is expected. The 1st value present that isn't "Default" will be shown. This
+;		value can be changed at the user's request.
+;
+;protected:	1 value is expected. Said value will be shown but can not be changed by the user.
+;
+;range:		Programmatically a value will be shown. It will be incremented/decremented based
+;		on Windows 2000 type /enum data exposed under this key
+;
+; *************************************************************************************************
+; *************************************************************************************************
+
+
+
+Ifstr(i) $(found3ComClientInstance) == "TRUE"
+
+
+
+;BEGIN PARAMETERS LIST
+; *************************************************************************************************
+
+
+
+
+; *** 8021pOffload (DATATYPE ENUM) ***
+
+CreateRegKey $(THISNIC) {"8021pOffload", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_8021pOffload
+SetRegValue $(KEY_8021pOffload),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "802.1p Support" }
+
+CreateRegKey $(KEY_8021pOffload) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = 	{{$(enable_value),$(NoTitle),$(!REG_VT_SZ),$(enable)},+
+	 	 	 {$(disable_value),$(NoTitle),$(!REG_VT_SZ),$(disable)},+
+			}
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+; *************************************************************************************************
+
+
+
+
+
+; *** DownPollRate (DATATYPE enum) ***
+
+CreateRegKey $(THISNIC) {"DownPollRate", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_DownPollRate
+SetRegValue $(KEY_DownPollRate),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "Down Poll Rate"}
+
+CreateRegKey $(KEY_DownPollRate) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = 	{{8,$(NoTitle),$(!REG_VT_SZ),"8"},+
+	 	 	 {64,$(NoTitle),$(!REG_VT_SZ),"64"},+
+			}
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+
+
+; *************************************************************************************************
+
+
+
+
+
+
+; *** FlowControl (DATATYPE ENUM) ***
+
+CreateRegKey $(THISNIC) {"FlowControl", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_FlowControl
+SetRegValue $(KEY_FlowControl),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "Flow Control" }
+
+CreateRegKey $(KEY_FlowControl) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = 	{{$(enable_value),$(NoTitle),$(!REG_VT_SZ),$(enable)},+
+	 	 	 {$(disable_value),$(NoTitle),$(!REG_VT_SZ),$(disable)},+
+			}
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+
+
+; *************************************************************************************************
+
+
+
+
+; *** Media (DATATYPE ENUM) ***
+
+CreateRegKey $(THISNIC) {"media_type", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_XCVR_SELECT
+SetRegValue $(KEY_XCVR_SELECT),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "Media Type" }
+
+CreateRegKey $(KEY_XCVR_SELECT) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = 	{{AUTOSELECT,$(NoTitle),$(!REG_VT_SZ),$(media_auto)},+
+			 {10HALF,$(NoTitle),$(!REG_VT_SZ),$(media_10_half)},+
+			 {100HALF,$(NoTitle),$(!REG_VT_SZ),$(media_100_half)},+
+			 {10FULL,$(NoTitle),$(!REG_VT_SZ),$(media_10_full)},+
+			 {100FULL,$(NoTitle),$(!REG_VT_SZ),$(media_100_full)},+
+			 {HWDEFAULT,$(NoTitle),$(!REG_VT_SZ),$(media_default)},+
+			}
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+; *************************************************************************************************
+
+
+
+
+; *** RxChecksum ***
+
+CreateRegKey $(THISNIC) {"RxChecksum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_RxChecksum
+SetRegValue $(KEY_RxChecksum),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "Rx Checksum Offload" }
+
+
+
+CreateRegKey $(KEY_RxChecksum) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = 	{{$(enable_value),$(NoTitle),$(!REG_VT_SZ),$(enable)},+
+	 	 	 {$(disable_value),$(NoTitle),$(!REG_VT_SZ),$(disable)},+
+			}
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+
+
+; *************************************************************************************************
+
+
+
+
+
+
+
+; *** TxChecksum ***
+
+CreateRegKey $(THISNIC) {"TxChecksum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_TxChecksum
+SetRegValue $(KEY_TxChecksum),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "Tx Checksum Offload" }
+
+
+
+CreateRegKey $(KEY_TxChecksum) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = 	{{$(enable_value),$(NoTitle),$(!REG_VT_SZ),$(enable)},+
+	 	 	 {$(disable_value),$(NoTitle),$(!REG_VT_SZ),$(disable)},+
+			}
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+
+; *************************************************************************************************
+
+
+; *** InitDelayCount (DATATYPE ENUM) ***
+
+CreateRegKey $(THISNIC) {"InitDelayCount", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_InitDelayCount
+
+SetRegValue $(KEY_InitDelayCount),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "InitDelayCount" }
+
+CreateRegKey $(KEY_InitDelayCount) {"range", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = 	{{ParamDesc,$(NoTitle),$(!REG_VT_SZ),"InitDelayCount"},+
+	 	 	 {Default,$(NoTitle),$(!REG_VT_SZ),"0"},+
+	 	 	 {type,$(NoTitle),$(!REG_VT_SZ),$(int)},+
+			 {min,$(NoTitle),$(!REG_VT_SZ),"0"},+
+			 {max,$(NoTitle),$(!REG_VT_SZ),"60"},+
+			 {step,$(NoTitle),$(!REG_VT_SZ),"1"},+
+			 {base,$(NoTitle),$(!REG_VT_SZ),"10"},+
+			}
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+
+; *************************************************************************************************
+
+
+; *** DoubleNego (DATATYPE ENUM) ***
+
+CreateRegKey $(THISNIC) {"DoubleNego", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_DoubleNego
+SetRegValue $(KEY_DoubleNego),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "DoubleNego" }
+
+CreateRegKey $(KEY_DoubleNego) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = 	{{$(enable_value),$(NoTitle),$(!REG_VT_SZ),$(enable)},+
+	 	 	 {$(disable_value),$(NoTitle),$(!REG_VT_SZ),$(disable)},+
+			}
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+
+
+; *************************************************************************************************
+
+
+; *** PHYCompat (DATATYPE ENUM) ***
+
+CreateRegKey $(THISNIC) {"PHYCompat", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_PHYCompat
+SetRegValue $(KEY_PHYCompat),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "PHYCompat" }
+
+CreateRegKey $(KEY_PHYCompat) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = 	{{$(enable_value),$(NoTitle),$(!REG_VT_SZ),$(enable)},+
+	 	 	 {$(disable_value),$(NoTitle),$(!REG_VT_SZ),$(disable)},+
+			}
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+
+
+; *************************************************************************************************
+
+
+; *** LnkChk (DATATYPE ENUM) ***
+
+CreateRegKey $(THISNIC) {"LnkChk", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_LnkChk
+SetRegValue $(KEY_LnkChk),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "LnkChk" }
+
+CreateRegKey $(KEY_LnkChk) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = 	{{$(enable_value),$(NoTitle),$(!REG_VT_SZ),$(enable)},+
+	 	 	 {$(disable_value),$(NoTitle),$(!REG_VT_SZ),$(disable)},+
+			}
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+
+; *************************************************************************************************
+
+; *** CableHoldOffTimer (DATATYPE enum) ***
+
+CreateRegKey $(THISNIC) {"CableHoldOffTimer", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_CableHoldOffTimer
+SetRegValue $(KEY_CableHoldOffTimer),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "Cable Hold Off Timer"}
+
+CreateRegKey $(KEY_CableHoldOffTimer) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = 	{{0,$(NoTitle),$(!REG_VT_SZ),"0"},+
+			 {15,$(NoTitle),$(!REG_VT_SZ),"15"},+
+			 {30,$(NoTitle),$(!REG_VT_SZ),"30"},+
+			 {45,$(NoTitle),$(!REG_VT_SZ),"45"},+
+			 {60,$(NoTitle),$(!REG_VT_SZ),"60"},+
+			}
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+; *************************************************************************************************
+
+; *** CableToDetectTimer (DATATYPE enum) ***
+
+CreateRegKey $(THISNIC) {"CableToDetectTimer", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_CableToDetectTimer
+SetRegValue $(KEY_CableToDetectTimer),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "Cable To Detect Timer"}
+
+CreateRegKey $(KEY_CableToDetectTimer) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+Set ThisValueList = {{0,$(NoTitle),$(!REG_VT_SZ),"0"},+
+		     {3,$(NoTitle),$(!REG_VT_SZ),"3"},+
+		     {4,$(NoTitle),$(!REG_VT_SZ),"4"},+
+		     {5,$(NoTitle),$(!REG_VT_SZ),"5"},+
+		     {6,$(NoTitle),$(!REG_VT_SZ),"6"},+
+		    }
+
+Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+endif
+
+; *************************************************************************************************
+
+endif ; End of "Ifstr(i) $(found3ComClientInstance) == "TRUE""
+
+set found3ComClientInstance = FALSE
+
+EndForListDo
+
+CloseRegKey $(ServicesKey)
+CloseRegKey COMKEY
+CloseRegKey SOFTKEY
+CloseRegKey THISNIC
+
+
+;-------------END-------------------------
+
+
+		Set NewValueList = {{SlotNumber,$(NoTitle),$(!REG_VT_DWORD),$(SlotNum)},+
+		{media_type,$(NoTitle),$(!REG_VT_SZ),"HWDEFAULT"}}
+
+		Debug-Output "$(InfFile) : Set HardwareParameterKey = $(NewValueList)"
+		Shell $(UtilityInf), AddValueList, $(HardParameterKey), $(NewValueList)
+
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		endif
+
+	else  ; NTDetected != TRUE
+
+		Set NewValueList = {+
+		{BusNumber,$(NoTitle),$(!REG_VT_DWORD),$(BusNumber)},+
+		{media_type,$(NoTitle),$(!REG_VT_SZ),"HWDEFAULT"}}
+
+		Debug-Output "$(InfFile) : Set HardwareParameterKey = $(NewValueList)"
+		Shell $(UtilityInf), AddValueList, $(HardParameterKey), $(NewValueList)
+
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		endif
+
+	endif ;
+
+
+	Set NewValueList = {{BusType,$(NoTitle),$(!REG_VT_DWORD),$(BusInterfaceType)},+
+	{CardType,$(NoTitle),$(!REG_VT_DWORD),$(CardType)},+
+	{MediaType,$(NoTitle),$(!REG_VT_DWORD),1},+
+	}
+
+	Debug-Output "$(InfFile) : Set HardwareParameterKey = $(NewValueList)"
+	Shell $(UtilityInf), AddValueList, $(HardParameterKey), $(NewValueList)
+
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	endif
+
+	ifstr(i) $(!STF_GUI_UNATTENDED) == "YES"
+		Shell $(UtilityInf), AddDefaultNetcardParameters, $(HardParameterKey)
+	endif
+
+	set TempProdName = """"$(CorrectProdHWName)$(AdapterNumber)""""
+	set TempBindForm = $(TempProdName)$(CorrectNetRuleHWBindForm)
+
+	set NewValueList = {{type,$(NoTitle),$(!REG_VT_SZ),$(CorrectNetRuleHWType)},+
+	{bindform,$(NoTitle),$(!REG_VT_SZ),$(TempBindForm)}, +
+	{class,$(NoTitle),$(!REG_VT_MULTI_SZ),$(CorrectNetRuleHWClass)}, +
+	{InfOption,$(NoTitle),$(!REG_VT_SZ),$(Option)}}
+ 
+	Debug-Output "$(InfFile) : HardwareRuleKey = $(NewValueList)"
+	Shell $(UtilityInf), AddValueList, $(HardNetRuleKey), $(NewValueList)
+
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeEror
+	endif
+
+;******************************************************************************************************************
+;3CDefault
+		set ValueEnable = ENABLE 
+
+		ifstr(i) $(BoomCard) == TRUE
+			Set ThisValueList = {{WakeOnMagic,$(NoTitle),$(!REG_VT_SZ),$(WakeOnLan)},+
+					     {WakeOnLink,$(NoTitle),$(!REG_VT_SZ),$(WakeOnLink)},+
+			                     {FLOWCONTROL,$(NoTitle),$(!REG_VT_SZ),$(ValueEnable)}}
+		else
+			Set ThisValueList = {{RWUMAGIC,$(NoTitle),$(!REG_VT_SZ),$(ValueEnable)},+
+			                     {FLOWCONTROL,$(NoTitle),$(!REG_VT_SZ),$(ValueEnable)}}
+		endif
+
+		Shell $(UtilityInf), AddValueList, $(HardParameterKey), $(ThisValueList)
+		
+		; Create 3CDefault key iff it's a non BOOM card since BOOM cards don't support Wake on Magic Packet
+ 		ifstr(i) $(BoomCard) == FALSE 
+			CreateRegKey $(HardParameterKey) {"3CDefault" , 0, GenericClass} "" $(!REG_KEY_ALL_ACCESS) +
+		 	"" KeyNt2 
+
+			Set ThisValueList = {RWUMAGIC,$(NoTitle),$(!REG_VT_SZ),$(ValueEnable)}
+			SetRegValue $(KeyNt2) $("ThisValueList") 
+		endif
+
+;******************************************************************************************************************
+
+	CloseRegKey $(HardNetCardKey)
+	CloseRegKey $(HardNetRuleKey)
+	CloseRegKey $(HardParameterKey)
+
+ 	ifstr(i) $(BoomCard) == FALSE  
+     		set NonBoomDetected = TRUE
+     		goto endsequence 
+	endif 		
+ 		
+	ifstr(i) $(BoomCard) == TRUE
+		set BoomDetected = TRUE
+    endif
+	
+endsequence =+
+
+
+
+				;*******************************************
+				;* Driver History Information              *
+				;* The following code adds Driver History  *
+				;* Information to the system registry      *
+				;*******************************************
+
+				; Driver Information Entries
+				; These items will be set by IHV...
+				Set DriverMfgr = "3Com Corporation"                      ; IHV name
+				Set DriverVersionID = "5.4.0.0"                     ; The IHV driver package version
+				Set BaseDriverFileName = "EL90XBC4.SYS"          ; Key file for version check
+				Set BaseDriverFileVersion = "5.4.0.0"               ; Version in Key file
+				; These items will be set to VENDOR values, and then set to OEM-specific by OEM
+				Set DriverOEM = "3Com Corporation"                       ; name of the OEM
+				Set DriverFamily = "NIC"                         ; device family (NIC, Storage, Video...)
+				Set DriverProduct = "???"                   ; Specific Name of device (chipset, for example)
+				Set DriverDescription = " Description - DriverInfo sample"   ; Description of device (product name, OS or system supported)
+				Set DriverOEMVersion = "5.4.0.0"                     ; OEM-specified version
+
+				; This section is added to all INFs to add registry entries for Driver Info.
+
+				set DriverInfoRegList = {"InstalledOptions",$(DriverOEM),$(DriverFamily),$(DriverMfgr),$(DriverProduct)}
+				set DriverInfoKey = "SOFTWARE"
+				OpenRegKey $(!REG_H_LOCAL) "" $(DriverInfoKey) $(!REG_KEY_CREATE_SUB_KEY) DriverInfoOldKeyHandle
+				ifstr $(DriverInfoOldKeyHandle) == ""
+				   shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "DriverInfo registry failed. Could not open HKLM\Software ("$(RegLastError)")"
+				   set DriverInfoFailed = "FAIL"
+				else
+				   ForListDo $(DriverInfoRegList)
+					  Set NewDriverInfoKey = $(DriverInfoKey)"\"$($)
+					  OpenRegKey $(!REG_H_LOCAL) "" $(NewDriverInfoKey) $(!REG_KEY_ALL_ACCESS) DriverInfoKeyHandle
+					  ifstr(i) $(DriverInfoKeyHandle) == ""
+						 CreateRegKey $(DriverInfoOldKeyHandle) {$($),0,GenericClass} "" $(!REG_KEY_ALL_ACCESS) "" DriverInfoKeyHandle
+						 ifstr $(DriverInfoKeyHandle) == ""
+							shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" "DriverInfo registry failed. Could not create key:"$($)" ("$(RegLastError)")"
+							set DriverInfoFailed = "FAIL"
+						 endif
+					  endif
+					  CloseRegKey $(DriverInfoOldKeyHandle)
+					  set DriverInfoOldKeyHandle = $(DriverInfoKeyHandle)
+					  set DriverInfoKey = $(NewDriverInfoKey)
+				   EndForListDo
+				endif
+
+				ifstr $(DriverInfoFailed) != "FAIL"
+				   SetRegValue $(DriverInfoKeyHandle) {"Description",0,$(!REG_VT_SZ),$(DriverDescription)}
+				   SetRegValue $(DriverInfoKeyHandle) {"CurrentVer",0,$(!REG_VT_SZ),$(DriverOEMVersion)}
+				   SetRegValue $(DriverInfoKeyHandle) {"Ver_"$(DriverOEMVersion),0,$(!REG_VT_SZ),$(DriverVersionID)}
+				   SetRegValue $(DriverInfoKeyHandle) {" BaseDriverFileName",0,$(!REG_VT_SZ),$( BaseDriverFileName)}
+				   SetRegValue $(DriverInfoKeyHandle) {" BaseDriverFileVersion",0,$(!REG_VT_SZ),$(BaseDriverFileVersion)}
+
+				   CloseRegKey $(DriverInfoKeyHandle)
+				endif
+
+				;*******************************************
+				;* End of Driver History Information       *
+				;***********************************************
+
+
+ ;******* CREATE DIAG REGISTRY FOR TOUCHDOWN SINCE WE SUPPORT IT **************
+ ; Place an instance in the registry for each instance of the Nic card
+
+ set TrayIconList = {TCAUDIAG,$(NoTitle),$(!REG_VT_SZ),$(DIAGCARDTYPE)} 
+
+ OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3Com\"$(CorrectProdSWName) $(!REG_KEY_ALL_ACCESS) NDKeyNt 
+ ifstr $(NDKeyNt) != ""	
+	SetRegValue $(NDKeyNt) $(TrayIconList) 
+	CloseRegKey $(NDKeyNt)
+ endif
+
+
+
+
+ ; End of Primary installation Loop
+
+ EndForListDo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+set TrayIconList = {TCAUDIAG,$(NoTitle),$(!REG_VT_SZ),$(DIAGCARDTYPE)} 
+
+ OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3Com\TCAUDIAG" $(!REG_KEY_ALL_ACCESS) NDKeyNt 
+ ifstr $(NDKeyNt) == ""	
+	CreateRegKey $(!REG_H_LOCAL) {"SOFTWARE\3Com\TCAUDIAG", 0, GenericClass} "" $(!REG_KEY_WRITE) "" NDKeyNt
+ endif
+	SetRegValue $(NDKeyNt) $(TrayIconList) 
+	CloseRegKey $(NDKeyNt)
+
+
+
+    ;;; Add in entries to support the DA/Touchdown integration - REALNICS Key
+    OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3Com\TCAUDIAG\RealNICs" $(!REG_KEY_ALL_ACCESS) RealNICsKey
+
+    Ifstr(i) $(RealNICsKey) == "" ; key doesn't exist so create it
+	CreateRegKey $(!REG_H_LOCAL) {"SOFTWARE\3Com\TCAUDIAG\RealNICs", 0, GenericClass} "" $(!REG_KEY_ALL_ACCESS) "" RealNICsKey
+    endif
+
+   
+      Ifstr(i) $(RealNICsKey) != "" ; key exists
+
+        OpenRegKey $(!REG_H_LOCAL) "" "SYSTEM\CurrentControlSet\Services" $(!REG_KEY_ALL_ACCESS) ServicesKey
+        Ifstr(i) $(ServicesKey) != "" ; key exists
+          EnumRegKey $(ServicesKey) DriverList
+          ForListDo $(DriverList)
+            ;;; Check whether any EL980X driver instances are present still
+            ;;; If not, remove Touchdown and delete some leftover files
+            set foundPythonInstance = FALSE
+            set Driver = *($($), 1)
+            Split-String "$(Driver)" "N" DriverTokens
+            set DriverName = *($(DriverTokens), 1)
+            ifstr(i) $(Driver) != "El980n4"
+              ifstr(i) $(DriverName) == "El980"
+                ;;; We have found a Python-related key
+                set foundPythonInstance = TRUE
+              endif
+            endif
+
+            ifstr(i) $(Driver) != "El98xn4"
+              ifstr(i) $(DriverName) == "El98x"
+                ;;; We have found a Python-related key
+                set foundPythonInstance = TRUE
+              endif
+            endif
+
+            Ifstr(i) $(foundPythonInstance) == "TRUE"
+              ;; Add this driver instance name to the list of realNICs
+              SetRegValue $(RealNICsKey) {$(Driver), 0, $(!REG_VT_SZ), ""}
+            endif
+
+            set found3ComClientInstance = FALSE
+            Split-String "$(Driver)" "x" DriverTokens
+            set DriverName = *($(DriverTokens), 1)
+            ifstr(i) $(Driver) != "El90x"
+              ifstr(i) $(DriverName) == "El90"
+                ;;; We have found a 3Com client-related key
+                set found3ComClientInstance = TRUE
+              endif
+            endif
+
+            Split-String "$(Driver)" "d" DriverTokens
+            set DriverName = *($(DriverTokens), 1)
+            ifstr(i) $(Driver) != "El90xnd"
+              ifstr(i) $(DriverName) == "El90xn"
+                ;;; We have found a 3Com client-related key
+                set found3ComClientInstance = TRUE
+              endif
+            endif
+
+            Split-String "$(Driver)" "x" DriverTokens
+            set DriverName = *($(DriverTokens), 1)
+            ifstr(i) $(Driver) != "EL99X"
+              ifstr(i) $(DriverName) == "El99"
+                ;;; We have found a 3Com client-related key
+                set found3ComClientInstance = TRUE
+              endif
+            endif
+
+            Ifstr(i) $(found3ComClientInstance) == "TRUE"
+              ;; Add this driver instance name to the list of realNICs
+              SetRegValue $(RealNICsKey) {$(Driver), 0, $(!REG_VT_SZ), ""}
+            endif
+
+          EndForListDo
+
+          CloseRegKey $(ServicesKey)
+        Endif
+      Endif
+
+
+    CloseRegKey $(DiagKey)
+    CloseRegKey $(RealNICsKey)
+ 
+;End - Add in entries to support the DA/Touchdown integration - REALNICS Key
+
+
+ ;;ifstr(i) (*($(CurrentVersionValue),4)) == $(NT400VersionConstant) 
+ 
+ OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_ServiceBase)"\"$(CorrectProdHWName) $(!REG_KEY_ALL_ACCESS) KeyService
+ Ifstr $(KeyService) != "" 
+	SetRegValue $(KeyService) {ImagePath,$(NoTitle),$(!REG_VT_SZ),$(CorrectProdSWUpgradePath)}
+ else 
+	goto fatalregistry 
+ endif 
+
+ CloseRegKey $(KeyService)
+ OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_ServiceBase)"\EventLog\System\"$(CorrectProdHWName) $(!REG_KEY_ALL_ACCESS) KeyEventLog
+ Ifstr $(KeyEventLog) != "" 
+	 SetRegValue $(KeyEventLog) {EventMessageFile,$(NoTitle),$(!REG_VT_SZ),$(CorrectNetEventDLL)} 
+ else 
+	goto fatalregistry 
+ endif 
+
+ CloseRegKey $(KeyEventLog)
+ ;;endif
+
+
+ ifint $(OldVersionExisted) == $(FALSE)
+	Ifstr(i) $(DoCopy) == "YES"
+		Shell $(UtilityInf), DoAskSource, $(!STF_CWDDIR), $(SrcDir) NO
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			Goto ShellCodeError
+		endif
+
+	Else-Ifstr(i) $($R0) == STATUS_FAILED
+		Shell $(UtilityInf) RegistryErrorString "ASK_SOURCE_FAIL"
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		endif
+
+		set Error = $($R0)
+		Goto fatal
+
+	Else-Ifstr(i) $($R0) == STATUS_USERCANCEL
+		Goto successful
+	Endif 
+ Endif
+
+
+ ;******* CREATE DIAG REGISTRY FOR TOUCHDOWN SINCE WE SUPPORT IT **************
+
+ set TrayIconList = {TCAUDIAG,$(NoTitle),$(!REG_VT_SZ),$(DIAGCARDTYPE)} 
+
+ OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3Com\TCAUDIAG" $(!REG_KEY_ALL_ACCESS) NDKeyNt 
+ ifstr $(NDKeyNt) != ""	
+	SetRegValue $(NDKeyNt) $(TrayIconList) 
+	CloseRegKey $(NDKeyNt)
+ endif
+
+;******************************************************************************************
+NextCommon =+
+;******************************************************************************************
+
+
+
+ ; *** All responsibilityies related to the Diags are governed by the Master Navigator.  Section below
+ ; becomes redundant
+
+ ;install "Install-Uninstaller" 
+
+ ;OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3Com\"$(ProductSoftwareName) $(!REG_KEY_ALL_ACCESS) + 
+ ;KeyNt
+
+ ;set TrayIconList = {TCAUDIAG,$(NoTitle),$(!REG_VT_SZ),$(DIAGCARDTYPE)} 
+ ;SetRegValue $(KeyNt) $(TrayIconList) 
+ ;CloseRegKey $(KeyNt) 
+
+; ifstr(i) (*($(CurrentVersionValue),4)) == $(NT400VersionConstant) 
+;	
+;	ifstr $(Install_3NIC_Diag) == "YES"
+;		RunProgram ExitCode "Windows Directory" "" $(UnInstallerEXE).EXE "-upgrade" 
+;		OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" + 
+;		$(!REG_KEY_ALL_ACCESS) KeyNt 
+;		
+;		ifstr $(KeyNt) == "" 
+;			CreateRegKey $(!REG_H_LOCAL) {"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall", + 
+;			0, GenericClass} "" $(!REG_KEY_ALL_ACCESS) "" KeyNt 
+;		endif 
+;
+;		OpenRegKey $(KeyNt) "" "3ComNicUnInstall" $(!REG_KEY_ALL_ACCESS) KeyNt2 
+;		
+;		ifstr $(KeyNt2) == "" 
+;			CreateRegKey $(KeyNt) {"3ComNicUnInstall" , 0, GenericClass} "" $(!REG_KEY_ALL_ACCESS) +
+;			 "" KeyNt2 
+;		endif 
+;
+;		set NewValueList = {{DisplayName, $(NoTitle), $(!REG_VT_SZ), "3Com NIC Diagnostics"}, + 
+;		{UninstallString, $(NoTitle), $(!REG_VT_SZ), $(UnInstallerEXE).EXE}} 
+;
+;		Shell $(UtilityInf), AddValueList, $(KeyNt2), $(NewValueList) 
+;
+;		ifint $($ShellCode) != $(!SHELL_CODE_OK) 
+;			goto ShellCodeError 
+;		endif 
+;
+;		CloseRegKey $(KeyNt) 
+;		CloseRegKey $(KeyNt2) 
+;
+;	endif 
+; endif 
+
+
+ ;ifstr(i) (*($(CurrentVersionValue),4)) == $(NT400VersionConstant) 
+	;OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" + 	 
+	;$(!REG_KEY_ALL_ACCESS) KeyNt 	 
+	 
+	;set TrayIconList = {TCASUTIEXE,$(NoTitle),$(!REG_VT_SZ),$(TrayIconExe)" -off"}
+	;DeleteRegValue $(KeyNt) "COMSMDEXE" 			 
+	;SetRegValue $(KeyNt) $(TrayIconList) 	 
+	;CloseRegKey $(KeyNt) 	 
+	  	 
+	;ifstr $(Install_3NIC_Diag) == "YES" 
+		;Debug-Output "$(InfFile) : (Install_3NIC_Diag) == "YES"" 
+		; Shell "", DiagRegistry 
+	 
+		; ***
+	 	;install "Install-3nicdiag" 
+
+		;ifstr $(Install_Installer) == "YES" 
+		;	ifstr(i) $(!STF_GUI_UNATTENDED) != "YES" 
+		;		ForListDo $(ToInstallList) 
+		;			set BusNum = *($($),1) 
+		;			set SlotNum = *($($),2) 
+		;			RunProgram ExitCode "Windows Directory" "" $(InstallerExe).EXE + 
+		;			"cardtype=TCAUM90X" "bus="$(BusNum) "slot="$(SlotNum) 
+		;		EndForListDo 
+		;	endif 
+		;endif 
+	 	 
+		;set SRCDIR_OVERRIDE_Save = $(!STF_SRCDIR_OVERRIDE) 
+		;set !STF_SRCDIR_OVERRIDE = $(SrcDir) 
+			 ;Shell $(!STF_WINDOWSSYSPATH)\TCAITDI.INF, InstallOption, $(CurrLang),+ 
+			 ;"TCAITDI" ,$(SrcDir), YES, YES, YES, NO 
+		;set !STF_SRCDIR_OVERRIDE = $(SRCDIR_OVERRIDE_Save) 
+	 
+		;ifstr(i) $(Install_Shortcuts) == "YES" 
+			;Debug-Output "$(InfFile) : (Install_Shortcuts) == "YES"" 
+					; *** Responsilibity of the MasterNavigator ***
+					;RunProgram ExitCode "Windows Directory" "" $(UnInstallerEXE).EXE "-setup" 
+
+			;Debug-Output "$(InfFile) : Enabling Tray Icon" 
+			;OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" +
+			; $(!REG_KEY_ALL_ACCESS) KeyNt 
+
+			;set TrayIconList = {TCASUTIEXE,$(NoTitle),$(!REG_VT_SZ),$(TrayIconExe)" -off"} 
+			;SetRegValue $(KeyNt) $(TrayIconList)
+			;DeleteRegValue $(KeyNt) "COMSMDEXE" 
+			;CloseRegKey $(KeyNt) 
+		;endif 
+	 ;endif 
+ ;endif 
+
+ ifint $(OldVersionExisted) == $(FALSE)
+	Ifstr(i) $(DoCopy) == "YES"
+		Shell $(UtilityInf), DoAskSource, $(!STF_CWDDIR), $(SrcDir) NO
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			Goto ShellCodeError
+
+		Else-Ifstr(i) $($R0) == STATUS_FAILED
+			Shell $(UtilityInf) RegistryErrorString "ASK_SOURCE_FAIL"
+
+			ifint $($ShellCode) != $(!SHELL_CODE_OK)
+				goto ShellCodeError
+			endif
+
+			set Error = $($R0)
+			Goto fatal
+		
+		Else-Ifstr(i) $($R0) == STATUS_USERCANCEL
+			Goto successful
+		Endif
+ 
+	Endif
+
+ ;**************** check if 905BC and copy new NDIS4 driver ********************
+
+	ifstr(i) $(NonBoomDetected) == TRUE
+		install "Install-OptionNewNDIS"
+	endif
+
+	ifstr(i) $(BoomDetected) == TRUE
+		goto oldndis
+	endif
+
+oldndis =+
+	install "Install-Option" 
+	
+endcurrent =+
+	ifstr(i) $(STF_INSTALL_OUTCOME) != STF_SUCCESS
+		Shell $(UtilityInf) RegistryErrorString "UNABLE_COPY_FILE"
+		
+		ifint $($ShellCode) != $(!SHELL_CODE_OK)
+			goto ShellCodeError
+		endif
+
+		set Error = $($R0)
+		goto fatal
+	endif
+ endif
+
+
+ EndWait
+ goto successful
+
+updateparameters =+
+ Debug-Output "$(InfFile) : Updateparameters"
+ set HardParameterKey = $($R3)
+ 
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+ endif
+
+ CloseRegKey $(KeyParameters)
+ goto successful
+
+bindingadapter =+
+ Debug-Output "$(InfFile) : bindingadapter"
+ Return STATUS_SUCCESSFUL
+ 
+ set Error = "Binding: Sorry, not yet implemented."
+ goto fatal
+
+removeadapter = +
+
+ ;****************************************************************************************
+ ; Check if 905BC or Boomerang
+ ;****************************************************************************************
+
+ set BoomCard = FALSE
+ set CurrentCardPath =  $(!NTN_RegBase)
+ set TitleValue = ""
+ set CardTitle = ""
+ set NameTokenList = ""
+
+ OpenRegKey $(!REG_H_LOCAL) "" $(CurrentCardPath) $(!REG_KEY_READ) CurrentCardKey
+
+ Ifstr(i) $(CurrentCardKey) != ""
+	GetRegValue $(CurrentCardKey) "Title" TitleValue
+	set CardTitle = *($(TitleValue), 4)
+	Split-String $(CardTitle) "()" NameTokenList
+	set NameCode = *($(NameTokenList), 3)
+
+	Ifstr(i) $(NameCode) == "3C905-TX"
+	   set BoomCard = TRUE 
+	Else-Ifstr(i) $(NameCode) == "3C905-T4"
+	   set BoomCard = TRUE 
+	Else-Ifstr(i) $(NameCode) == "3C900-TPO"
+	   set BoomCard = TRUE 
+	Else-Ifstr(i) $(NameCode) == "3C900-COMBO"
+	   set BoomCard = TRUE 
+	endif
+
+	CloseRegKey $(CurrentCardKey)
+ Endif                         ;end checking currentCardKey
+;****************************************************************************************
+
+
+ ifstr(i) $(BoomCard) == TRUE 
+	set CorrectProdHWName = $(NDProdHWName)
+	set CorrectProdSWName = $(NDProdSWName)
+	set CorrectProdKeyName = $(NDProdKeyName)
+ else
+	set CorrectProdHWName = $(ProdHWName)
+	set CorrectProdSWName = $(ProdSWName)
+	set CorrectProdKeyName = $(ProdKeyName)
+ endif
+
+ Debug-Output "$(InfFile) : removeadapter"
+ Debug-Output "$(InfFile) : ----> $(CorrectProdKeyName), $(!NTN_RegBase)"
+ 
+ Ifstr(i) $(CorrectProdKeyName) == $(!NTN_RegBase)
+	 Shell $(UtilityInf), RemoveSoftwareComponent, $(Manufacturer), +
+	 $(CorrectProdSWName)
+
+	 ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	 endif
+
+	 set RegistryErrorIndex = $($R0)
+	 Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+		goto fatalregistry
+	 endif
+ else
+	; Populate Driver Instance
+   	OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_RegBase) $(!REG_KEY_ALL_ACCESS) CardIndexKey
+   	Ifstr(i) $(CardIndexKey) != "" ; key exists
+     		GetRegValue $(CardIndexKey) "ServiceName" ServiceNameList
+
+     		;;; The name of the service being removed is stored in DriverInstance
+     		set DriverInstance = *($(ServiceNameList), 4)
+   	endif
+   	CloseRegKey $(CardIndexKey)
+; End - Populate Driver Instance
+
+;------------Added Maanasa Kasturi 05/04/01 3:04pm---------------------------
+	; Remove NT4_CFG nic instance key
+	OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_RegBase) $(!REG_KEY_ALL_ACCESS) CardInstanceKey
+   	Ifstr(i) $(CardInstanceKey) != "" ; key exists
+     		GetRegValue $(CardIndexKey) "ServiceName" ServiceNameList
+
+     		;;; The name of the service being removed is stored in NICServiceName
+     		set NICServiceName = *($(ServiceNameList), 4)
+		
+		OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3COM\" $(!REG_KEY_ALL_ACCESS) 3ComNT4_CFGKEY
+		Ifstr(i) $(3ComNT4_CFGKEY) != "" ; key exists
+			DeleteRegTree $(3ComNT4_CFGKEY) $(NICServiceName) 
+
+		endif
+   	endif
+	CloseRegKey $(3ComNT4_CFGKEY)
+   	CloseRegKey $(CardInstanceKey)
+
+
+; End - Remove NT4_CFG nic instance key
+;---------------------------------------------END--------------------------------
+
+
+	 Shell $(UtilityInf), RemoveHardwareComponent, $(Manufacturer), +
+	 $(CorrectProdSWName), $(!NTN_RegBase)
+	 ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	 endif
+
+	 set RegistryErrorIndex = $($R0)
+	 Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+		goto fatalregistry
+	 endif
+ endif
+
+
+
+
+ ifstr(i) $(!STF_PLATFORM) == $(INF_PROCESSER) 
+	; *** Responsilibity of the MasterNavigator ***
+        ; RunProgram ExitCode "Windows Directory" "" $(UnInstallerEXE).EXE "-inf" 
+ endif
+
+
+ ;;; Remove the Service Name held in DriverInstance from the RealNICs key
+
+ OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3Com\TCAUDIAG\RealNICs" $(!REG_KEY_ALL_ACCESS) RealNICsKey
+ Ifstr(i) $(RealNICsKey) != "" ; key exists
+   EnumRegValue $(RealNICsKey) RealNICsList
+   set RealNICsValues = {}
+   ForListDo $(RealNICsList)
+     set RealNICsArray = *($($), 1)
+     ForListDo $(RealNICsArray)
+       set DriverInstanceName = *($($), 1)
+       QueryListSize RealNICsValuesSize $(RealNICsValues)
+       ifstr(i) $(RealNICsValuesSize) == 0
+         set RealNICsValues = {$(DriverInstanceName)}
+       else
+         set RealNICsValues = >($(RealNICsValues), $(DriverInstanceName))
+       endif
+     EndForListDo
+   EndForListDo
+
+   set NewRealNICsValues = {}
+
+   ForListDo $(RealNICsValues)
+     ifstr(i) *($($), 1) != $(DriverInstance)
+       set NewRealNICsValues = >($(NewRealNICsValues), *($($), 1))
+     endif
+   EndForListDo
+
+   CloseRegKey $(DiagKey)
+   OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\3Com\TCAUDIAG" $(!REG_KEY_ALL_ACCESS) DiagKey
+   Ifstr(i) $(DiagKey) != "" ; key exists
+     DeleteRegTree $(DiagKey) "RealNICs"
+     CreateRegKey $(DiagKey) {"RealNICs", 0, GenericClass} "" $(!REG_KEY_ALL_ACCESS) "" NewRealNICsKey
+     Ifstr(i) $(NewRealNICsKey) != "" ; key exists
+       ForListDo $(NewRealNICsValues)
+         SetRegValue $(NewRealNICsKey) {*($($), 1), 0, $(!REG_VT_SZ), ""}
+       EndForListDo
+     Endif
+   Endif
+ Endif
+
+ CloseRegKey $(NewRealNICsKey)
+ CloseRegKey $(RealNICsKey)
+ CloseRegKey $(DiagKey)
+
+; End Remove the Service Name held in DriverInstance from the RealNICs key
+
+ goto end
+
+
+
+UpgradeSoftware = +
+
+ ;****************************************************************************************
+ ; Check if 90xBC or Boomerang
+ ;****************************************************************************************
+
+		
+		OpenRegKey $(!REG_H_LOCAL) "" "Software\Microsoft\Windows NT\CurrentVersion\NetworkCards" $(MAXIMUM_ALLOWED) NetworkCardsKey
+						
+		Ifstr $(NetworkCardsKey) == $(KeyNull)
+		    goto fatalregistry
+		endif
+
+		EnumRegKey $(NetworkCardsKey) NetworkCardsList
+
+						
+		ForListDo $(NetworkCardsList)
+		    OpenRegKey $(NetworkCardsKey) "" *($($), 1) $(MAXIMUM_ALLOWED) CurrentNetworkKey
+						    
+		    ifstr $(CurrentNetworkKey) == $(KeyNull)
+			goto fatalregistry
+		    endif
+		    
+		    GetRegValue $(CurrentNetworkKey) "ProductName" ProductNameValue
+			
+		    set List = {$(NDProdSWName), $(ProdSWName)} 
+		    Set NICProductName = *($(ProductNameValue),4)
+				
+		    ifcontains(i) $(NICProductName) in $(List)
+				
+		        GetRegValue $(CurrentNetworkKey) "ServiceName" ServiceNameValue
+	  	        ifstr $(ServiceNameValue) == $(KeyNull)
+				goto fatalregistry
+		        endif	
+		        Set NICServiceName = *($(ServiceNameValue),4)
+				
+		        OpenRegKey $(!REG_H_LOCAL) "" "SYSTEM\CurrentControlSet\Services\"$(NICServiceName)"\Parameters" $(!REG_KEY_ALL_ACCESS) ParametersServicesKey
+				SetRegValue $(ParametersServicesKey) {"InitDelayCount", 0, $(!REG_VT_SZ), "0"}
+				SetRegValue $(ParametersServicesKey) {"DoubleNego", 0, $(!REG_VT_SZ), "ENABLE"}
+				SetRegValue $(ParametersServicesKey) {"PHYCompat", 0, $(!REG_VT_SZ), "ENABLE"}
+				SetRegValue $(ParametersServicesKey) {"LnkChk", 0, $(!REG_VT_SZ), "DISABLE"}
+				SetRegValue $(ParametersServicesKey) {"CableHoldOffTimer", 0, $(!REG_VT_SZ), "0"}
+				SetRegValue $(ParametersServicesKey) {"CableToDetectTimer", 0, $(!REG_VT_SZ), "0"}
+
+			CloseRegKey $(ParametersServicesKey)
+
+			; Update Keys for NT4_CFG.EXE in 3Com\Software section for NIC instance  *****************************************
+
+			OpenRegKey $(!REG_H_LOCAL) "" "Software\3Com\"$(NICServiceName)"" $(!REG_KEY_ALL_ACCESS) THISNIC
+				
+
+					; *** InitDelayCount (DATATYPE ENUM) ***
+
+					CreateRegKey $(THISNIC) {"InitDelayCount", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_InitDelayCount
+
+					SetRegValue $(KEY_InitDelayCount),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "InitDelayCount" }
+
+					CreateRegKey $(KEY_InitDelayCount) {"range", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+					Set ThisValueList = 	{{ParamDesc,$(NoTitle),$(!REG_VT_SZ),"InitDelayCount"},+
+	 	 	 					{Default,$(NoTitle),$(!REG_VT_SZ),"0"},+
+	 	 		 				{type,$(NoTitle),$(!REG_VT_SZ),$(int)},+
+			 					{min,$(NoTitle),$(!REG_VT_SZ),"0"},+
+			 					{max,$(NoTitle),$(!REG_VT_SZ),"60"},+
+			 					{step,$(NoTitle),$(!REG_VT_SZ),"1"},+
+			 					{base,$(NoTitle),$(!REG_VT_SZ),"10"},+
+								}
+
+					Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+					ifint $($ShellCode) != $(!SHELL_CODE_OK)
+						goto ShellCodeError
+					endif
+
+
+					; *************************************************************************************************
+
+					; *** DoubleNego (DATATYPE ENUM) ***
+
+					CreateRegKey $(THISNIC) {"DoubleNego", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_DoubleNego
+					SetRegValue $(KEY_DoubleNego),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "DoubleNego" }
+
+					CreateRegKey $(KEY_DoubleNego) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+					Set ThisValueList = 	{{$(enable_value),$(NoTitle),$(!REG_VT_SZ),$(enable)},+
+	 	 						 {$(disable_value),$(NoTitle),$(!REG_VT_SZ),$(disable)},+
+								}
+
+					Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+					ifint $($ShellCode) != $(!SHELL_CODE_OK)
+						goto ShellCodeError
+					endif
+
+
+
+					; *************************************************************************************************
+
+
+					; *** PHYCompat (DATATYPE ENUM) ***
+
+					CreateRegKey $(THISNIC) {"PHYCompat", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_PHYCompat
+					SetRegValue $(KEY_PHYCompat),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "PHYCompat" }
+
+					CreateRegKey $(KEY_PHYCompat) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+					Set ThisValueList = 	{{$(enable_value),$(NoTitle),$(!REG_VT_SZ),$(enable)},+
+	 	 						 {$(disable_value),$(NoTitle),$(!REG_VT_SZ),$(disable)},+
+								}
+
+					Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+					ifint $($ShellCode) != $(!SHELL_CODE_OK)
+						goto ShellCodeError
+					endif
+
+
+
+					; *************************************************************************************************
+
+
+					; *** LnkChk (DATATYPE ENUM) ***
+
+					CreateRegKey $(THISNIC) {"LnkChk", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_LnkChk
+					SetRegValue $(KEY_LnkChk),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "LnkChk" }
+
+					CreateRegKey $(KEY_LnkChk) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+					Set ThisValueList = 	{{$(enable_value),$(NoTitle),$(!REG_VT_SZ),$(enable)},+
+	 	 						 {$(disable_value),$(NoTitle),$(!REG_VT_SZ),$(disable)},+
+								}
+
+					Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+					ifint $($ShellCode) != $(!SHELL_CODE_OK)
+						goto ShellCodeError
+					endif
+
+					; *************************************************************************************************
+
+					; *** CableHoldOffTimer (DATATYPE enum) ***
+
+					CreateRegKey $(THISNIC) {"CableHoldOffTimer", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_CableHoldOffTimer
+					SetRegValue $(KEY_CableHoldOffTimer),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "Cable Hold Off Timer"}
+
+					CreateRegKey $(KEY_CableHoldOffTimer) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+					Set ThisValueList = 	{{0,$(NoTitle),$(!REG_VT_SZ),"0"},+
+								 {15,$(NoTitle),$(!REG_VT_SZ),"15"},+
+								 {30,$(NoTitle),$(!REG_VT_SZ),"30"},+
+								 {45,$(NoTitle),$(!REG_VT_SZ),"45"},+
+								 {60,$(NoTitle),$(!REG_VT_SZ),"60"},+
+								}
+
+					Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+					ifint $($ShellCode) != $(!SHELL_CODE_OK)
+						goto ShellCodeError
+					endif
+
+					; *************************************************************************************************
+
+					; *** CableToDetectTimer (DATATYPE enum) ***
+
+					CreateRegKey $(THISNIC) {"CableToDetectTimer", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_CableToDetectTimer
+					SetRegValue $(KEY_CableToDetectTimer),{FriendlyName,$(NoTitle),$(!REG_VT_SZ), "Cable To Detect Timer"}
+
+					CreateRegKey $(KEY_CableToDetectTimer) {"enum", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KEY_ENUM
+
+					Set ThisValueList = {{0,$(NoTitle),$(!REG_VT_SZ),"0"},+
+							     {3,$(NoTitle),$(!REG_VT_SZ),"3"},+
+							     {4,$(NoTitle),$(!REG_VT_SZ),"4"},+
+							     {5,$(NoTitle),$(!REG_VT_SZ),"5"},+
+							     {6,$(NoTitle),$(!REG_VT_SZ),"6"},+
+							    }
+
+					Shell $(UtilityInf), AddValueList, $(KEY_ENUM), $(ThisValueList)
+
+					ifint $($ShellCode) != $(!SHELL_CODE_OK)
+						goto ShellCodeError
+					endif
+
+					; *************************************************************************************************
+			
+			CloseRegKey (THISNIC)
+
+			; End Update Keys for NT4_CFG.EXE in 3Com\Software section for NIC instance ****************************************
+
+		    else
+	  	    endif
+			CloseRegKey $(CurrentNetworkKey)
+		EndForListDo
+		CloseRegKey $(NetworkCardsKey)
+
+ set BoomCard = FALSE
+ set CurrentCardPath =  $(!NTN_RegBase)
+ set TitleValue = ""
+ set CardTitle = ""
+ set NameTokenList = ""
+
+ OpenRegKey $(!REG_H_LOCAL) "" $(CurrentCardPath) $(!REG_KEY_READ) CurrentCardKey
+ Ifstr(i) $(CurrentCardKey) != ""
+	GetRegValue $(CurrentCardKey) "Title" TitleValue
+	set CardTitle = *($(TitleValue), 4)
+	Split-String $(CardTitle) "()" NameTokenList
+	set NameCode = *($(NameTokenList), 3)
+
+	Ifstr(i) $(NameCode) == "3C905-TX"
+	   set BoomCard = TRUE  
+	Else-Ifstr(i) $(NameCode) == "3C905-T4"
+	   set BoomCard = TRUE 
+	Else-Ifstr(i) $(NameCode) == "3C900-TPO"
+	   set BoomCard = TRUE 
+	Else-Ifstr(i) $(NameCode) == "3C900-COMBO"
+	   set BoomCard = TRUE
+	Else-Ifstr(i) $(NameCode) == "3C905"       ; name in oemsetup.inf provided by Microsoft
+	   set BoomCard = TRUE  
+	endif
+
+	CloseRegKey $(CurrentCardKey)
+ Endif                         ;end checking currentCardKey
+
+
+
+ ifstr(i) $(BoomCard) == TRUE ; BOOM CARD
+ ;****************************************************************************************
+ ; ONLY SUPPORT BOOMERANG UPDATE WHEN IT HAD NEW SERVICE NAME EL90XND IN THE REGISTRY 
+ ;****************************************************************************************
+
+	OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_ServiceBase)"\El90xnd" $(!REG_KEY_ALL_ACCESS) KeyService
+	Ifstr $(KeyService) == ""
+		Set DlgText = "UPDATE not supported. Please remove this NIC and reinstall it"       
+		Shell "Subroutn.Inf" SetupMessage $(!STF_LANGUAGE) "WARNING" $(DlgText) 
+		goto end
+	endif  
+
+	CloseRegKey $(KeyService) 
+	set CorrectProdHWName = $(NDProdHWName)
+	set CorrectProdSWName = $(NDProdSWName)
+	set CorrectNetRuleSWType = $(NDNetRuleSWType)
+	set CorrectNetRuleSWBindForm = $(NDNetRuleSWBindForm)
+	set CorrectNetRuleSWClass = $(NDNetRuleSWClass)
+	set CorrectNetRuleSWBindable = $(NDNetRuleSWBindable)
+	set CorrectNetRuleHWBindForm = $(NDNetRuleHWBindForm)
+	set CorrectNetRuleHWType = $(NDNetRuleHWType)
+	set CorrectNetRuleHWClass = $(NDNetRuleHWClass)
+	set CorrectProdKeyName = $(NDProdKeyName)
+	set CorrectParamKeyName = $(NDParamKeyName)
+
+	ifstr(i) (*($(CurrentVersionValue),4)) == $(NT400VersionConstant) 
+		set CorrectNetEventDLL = $(ND4NDNetEventDLL)
+		set CorrectProdSWImagePath = $(ND4NDProdSWImagePath)
+		set CorrectProdSWUpgradePath = $(ND4NDProdSWUpgradePath)
+	else
+		set CorrectNetEventDLL = $(ND3NDNetEventDLL)
+		set CorrectProdSWImagePath = $(ND3NDProdSWImagePath)
+		set CorrectProdSWUpgradePath = $(ND3NDProdSWUpgradePath)
+	endif
+
+ else ; 90XBC CARD
+
+	set CorrectProdHWName = $(ProdHWName)
+	set CorrectProdSWName = $(ProdSWName)
+	set CorrectNetRuleSWType = $(NetRuleSWType)
+	set CorrectNetRuleSWBindForm = $(NetRuleSWBindForm)
+	set CorrectNetRuleSWClass = $(NetRuleSWClass)
+	set CorrectNetRuleSWBindable = $(NetRuleSWBindable)
+	set CorrectNetRuleHWBindForm = $(NetRuleHWBindForm)
+	set CorrectNetRuleHWType = $(NetRuleHWType)
+	set CorrectNetRuleHWClass = $(NetRuleHWClass)
+	set CorrectProdKeyName = $(ProdKeyName)
+	set CorrectParamKeyName = $(ParamKeyName)
+
+	ifstr(i) (*($(CurrentVersionValue),4)) == $(NT400VersionConstant) 
+		set CorrectNetEventDLL = $(ND4BCNetEventDLL)
+		set CorrectProdSWImagePath = $(ND4BCProdSWImagePath)
+		set CorrectProdSWUpgradePath = $(ND4BCProdSWUpgradePath)
+	else
+		set CorrectNetEventDLL = $(ND3BCNetEventDLL)
+		set CorrectProdSWImagePath = $(ND3BCProdSWImagePath)
+		set CorrectProdSWUpgradePath = $(ND3BCProdSWUpgradePath)
+	endif
+
+ endif ; END CHECK CARD
+
+ ;****************************************************************************************
+ OpenRegKey $(!REG_H_LOCAL) "" $(CorrectProdKeyName) $(!REG_KEY_ALL_ACCESS) KeyProduct 
+ Ifstr $(KeyProduct) != "" 
+	Shell $(UtilityInf), GetInfFileNameFromRegistry, $(KeyProduct) 
+	ifint $($ShellCode) != $(!SHELL_CODE_OK) 
+		Debug-Output "ShellCode error" 
+		goto ShellCodeError 
+	endif 
+
+	set !UG_Filename = $($R0) 
+	install "Install-INF" 
+	ifstr(i) $(STF_INSTALL_OUTCOME) != STF_SUCCESS 
+		goto fatal 
+	endif 
+
+	SetRegValue $(KeyProduct) {MajorVersion,$(NoTitle),$(!REG_VT_DWORD),$(ProdMajorVer)} 
+	SetRegValue $(KeyProduct) {MinorVersion,$(NoTitle),$(!REG_VT_DWORD),$(ProdMinorVer)} 
+	SetRegValue $(KeyProduct) {Review,$(NoTitle),$(!REG_VT_DWORD),$(ProdReview)} 
+	SetRegValue $(KeyProduct) {EDVersion,$(NoTitle),$(!REG_VT_SZ),$(EtherDiskVersion)} 
+	CloseRegKey $(KeyProduct)
+
+	OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_ServiceBase)"\"$(CorrectProdHWName) $(!REG_KEY_ALL_ACCESS) KeyService
+	Ifstr $(KeyService) != "" 
+		SetRegValue $(KeyService) {ImagePath,$(NoTitle),$(!REG_VT_SZ),$(CorrectProdSWUpgradePath)}
+	else 
+		goto fatalregistry
+	endif  
+	
+	CloseRegKey $(KeyService) 
+	OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_ServiceBase)"\EventLog\System\"$(CorrectProdHWName) $(!REG_KEY_ALL_ACCESS) KeyEventLog
+
+	Ifstr $(KeyEventLog) != "" 
+		SetRegValue $(KeyEventLog) {EventMessageFile,$(NoTitle),$(!REG_VT_SZ),$(CorrectNetEventDLL)} 
+	else 
+		goto fatalregistry 
+	endif 
+
+	CloseRegKey $(KeyEventLog)
+OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_ServiceBase) $(!REG_KEY_ALL_ACCESS) KeyNt 
+
+;******************************************************************************************************************
+;Update Loop
+
+		set ValueEnable = ENABLE 
+		set Count 	= "0"
+		set MaxLoop	= "128"
+		
+		Begin_Upgrade_Loop =+
+
+
+		;shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) WARNING "Count equals "$(Count)
+		
+		OpenRegKey $(KeyNt) "" $(CorrectProdHWName)$(Count)"\Parameters" $(!REG_KEY_ALL_ACCESS) TestKey 
+		ifstr $(TestKey) != $(KeyNull) 
+			OpenRegKey $(!REG_H_LOCAL) "" $(NetworkCardsKey)$(Count)"\NetRules" $(!REG_KEY_ALL_ACCESS) NetCardKey 
+			ifstr $(NetCardKey) != $(KeyNull) 
+				SetRegValue $(NetCardKey) {"InfName",$(NoTitle),$(!REG_VT_SZ),$(!UG_Filename)} 
+				CloseRegKey $(NetCardKey) 
+			else
+				goto Emergency_Out
+			endif 
+			CloseRegKey $(TestKey) 
+		endif 
+	
+		;Increment Loop counter then compare against maximum allowed value
+		set-add Count = $(Count),"1"
+
+		ifstr(i) $(Count) == $(MaxLoop)
+			
+			goto Emergency_Out
+		else
+			
+			goto Begin_Upgrade_Loop
+		endif
+
+;******************************************************************************************************************
+Emergency_Out =+
+
+ else 
+	goto fatalregistry 
+ endif 
+ ;endif
+
+
+
+
+ ifstr(i) $(BoomCard) == FALSE  
+     ;install "Install-3nicdiag" 
+     install "Install-OptionNewNDIS"
+     goto laststep   
+ else
+    goto upgradeOldNDIS;
+ endif
+
+upgradeOldNDIS =+
+
+ ifstr $(!STF_PLATFORM) == $(INF_PROCESSER) 
+
+
+	ifstr(i) (*($(CurrentVersionValue),4)) == $(NT400VersionConstant) 
+
+		;OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" + 	 
+		;$(!REG_KEY_ALL_ACCESS) KeyNt 	 
+
+		;set TrayIconList = {TCASUTIEXE,$(NoTitle),$(!REG_VT_SZ),$(TrayIconExe)" -off"} 	 
+		;SetRegValue $(KeyNt) $(TrayIconList) 
+
+		;DeleteRegValue $(KeyNt) "COMSMDEXE"
+		;CloseRegKey $(KeyNt) 	 
+
+		ifstr $(Install_3NIC_Diag) == "YES" 
+			Debug-Output "$(InfFile) : (Install_3NIC_Diag) == "YES"" 
+			; Shell "", DiagRegistry 
+
+			; ***
+			 ;install "Install-3nicdiag" 
+
+			set InstallMode_Save = $(!NTN_InstallMode) 
+			set !NTN_InstallMode = install 
+			set SRCDIR_OVERRIDE_Save = $(!STF_SRCDIR_OVERRIDE) 
+			set !STF_SRCDIR_OVERRIDE = $(SrcDir) 
+
+			Shell $(!STF_WINDOWSSYSPATH)\TCAITDI.INF, InstallOption, $(CurrLang), + 
+			"TCAITDI" ,$(SrcDir), YES, YES, YES, NO 
+			set !NTN_InstallMode = $(InstallMode_Save) 
+			set !STF_SRCDIR_OVERRIDE = $(SRCDIR_OVERRIDE_Save) 
+	 
+			ifstr(i) $(Install_Shortcuts) == "YES" 
+				Debug-Output "$(InfFile) : (Install_Shortcuts) == "YES"" 
+				; *** Responsilibity of the MasterNavigator ***
+				; RunProgram ExitCode "Windows Directory" "" $(UnInstallerEXE).EXE "-setup" 
+
+				;Debug-Output "$(InfFile) : Enabling Tray Icon" 
+				;OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\Windows\CurrentVersion\Run" +
+				;$(!REG_KEY_ALL_ACCESS) KeyNt 
+
+				;set TrayIconList = {TCASUTIEXE,$(NoTitle),$(!REG_VT_SZ),$(TrayIconExe)" -off"} 
+				;SetRegValue $(KeyNt) $(TrayIconList)
+				;DeleteRegValue $(KeyNt) "COMSMDEXE" 
+				;CloseRegKey $(KeyNt) 
+			endif 
+		endif 
+	endif 
+ endif
+
+
+
+ ;********************************************************************************
+
+ install "Install-Option"
+
+ ;*********************************************************************************
+laststep =+
+ ;*********************************************************************************
+
+
+ ifstr(i) $(STF_INSTALL_OUTCOME) != STF_SUCCESS 
+	Shell $(UtilityInf) RegistryErrorString "UNABLE_COPY_FILE" 
+	ifint $($ShellCode) != $(!SHELL_CODE_OK) 
+		goto ShellCodeError 
+	endif 
+
+	set Error = $($R0) 
+	goto fatal 
+ endif
+
+ ; *** Responsilibity of the MasterNavigator ***
+ ; RunProgram ExitCode "Windows Directory" "" $(UnInstallerEXE).EXE "-upgrade" 
+ goto end
+
+successful = +
+ Debug-Output "$(InfFile) : Successful"
+ goto end
+
+abandon = +
+ Debug-Output "$(InfFile) : Abandon"
+ ForListDo $(OEM_ABANDON_OPTIONS)
+	 Shell $(UtilityInf), RemoveHardwareComponent, $(Manufacturer), +
+	 $(CorrectProdSWName), $($)
+	 ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		 goto ShellCodeError
+	 endif
+
+	 set RegistryErrorIndex = $($R0)
+	 Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+		goto fatalregistry
+	 endif	
+ EndForListDo
+
+ Ifstr(i) $(OEM_ABANDON_SOFTWARE) == TRUE
+	Shell $(UtilityInf), RemoveSoftwareComponent, $(Manufacturer), +
+	$(CorrectProdSWName), FALSE
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	endif
+
+	detect checkFileExist
+	set Uninst = *($(uninstFound), 1)
+
+	; *** Responsilibity of the MasterNavigator ***
+	;ifstr(i) $(Uninst) == "un3c90xa.exe"
+	;	ifstr(i) $(!STF_PLATFORM) == $(INF_PROCESSER) 
+	;		RunProgram ExitCode "Windows Directory" "" $(UnInstallerEXE).EXE "-inf" 
+	;	endif
+	;endif
+
+	set RegistryErrorIndex = $($R0)
+	Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+		goto fatalregistry
+	endif
+ endif
+ goto end
+
+
+warning = +
+ Debug-Output "$(InfFile) : warning"
+ Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), "WARNING", $(Error)
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+ endif
+
+ ifstr(i) $($R1) == "OK"
+	goto $(to)
+ else-ifstr(i) $($R1) == "CANCEL"
+	goto $(from)
+ else
+	goto "end"
+ endif
+
+
+nonfatalinfo = +
+ Debug-Output "$(InfFile) : nonfatalinfo"
+ Set CommonStatus = STATUS_USERCANCEL
+ Set Severity = STATUS
+ goto nonfatalmsg
+
+
+nonfatal = +
+ Debug-Output "$(InfFile) : nonfatal"
+ Set Severity = NONFATAL
+ goto nonfatalmsg
+
+
+nonfatalmsg = +
+ Debug-Output "$(InfFile) : nonfatalmsg"
+ ifstr(i) $(Error) == ""
+	Set Severity = NONFATAL
+	Shell $(UtilityInf) RegistryErrorString "SETUP_FAIL"
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	endif
+ 
+	set Error = $($R0)
+ endif
+
+ Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), $(Severity), $(Error)
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+ endif
+
+ ifstr(i) $($R1) == "OK"
+	goto $(from)
+ else
+	goto "RemoveAdapter"
+ endif
+
+
+fatalregistry = +
+ Debug-Output "$(InfFile) : fatalregistry"
+ Shell $(UtilityInf) RegistryErrorString $(RegistryErrorIndex)
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+ endif
+ set Error = $($R0)
+ goto fatal
+
+
+fatal = +
+ Debug-Output "$(InfFile) : fatal"
+ ifstr(i) $(Error) == ""
+	Shell $(UtilityInf) RegistryErrorString "SETUP_FAIL"
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+		goto ShellCodeError
+	endif
+	set Error = $($R0)
+ endif
+
+ Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), "FATAL", $(Error)
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	goto ShellCodeError
+ endif
+ goto setfailed
+
+
+ShellCodeError = +
+ ifint $($ShellCode) == $(!SHELL_CODE_NO_SUCH_INF)
+	Debug-Output "$(InfFile) : ShellCodeError - SHELL_CODE_NO_SUCH_INF"
+ else-ifint $($ShellCode) == $(!SHELL_CODE_NO_SUCH_SECTION)
+	Debug-Output "$(InfFile) : ShellCodeError - SHELL_CODE_NO_SUCH_SECTION"
+ else
+	Debug-Output "$(InfFile) : ShellCodeError - SHELL_CODE_ERROR"
+ endif
+
+ set DlgType = "MessageBox"
+ set STF_MB_TITLE = $(ShellCodeErrorTitle)
+ set STF_MB_TEXT = $(ShellCodeErrorText) 
+ set STF_MB_TYPE = 1
+ set STF_MB_ICON = 3
+ set STF_MB_DEF = 1
+ ui start "Error Message"
+ goto setfailed
+
+
+setfailed = +
+ Debug-Output "$(InfFile) : Setfailed"
+ set CommonStatus = STATUS_FAILED
+ ifstr(i) $(OEM_ABANDON_ON) == TRUE
+	set OEM_ABANDON_ON = FALSE
+	goto abandon
+ endif
+ goto end
+
+
+end = +
+ goto term
+
+
+term = +
+ Return $(CommonStatus)
+
+
+
+[checkFileExist]
+ uninstFound = {} ? $(!LIBHANDLE) FindFileInstances $(!STF_WINDOWSSYSPATH)"\un3c90xa.exe" 
+ DiagFound = {} ? $(!LIBHANDLE) FindFileInstances $(!STF_WINDOWSSYSPATH)"\tcaudiag.exe" 
+
+[Install-Option]
+ set STF_VITAL = ""
+ set STF_OVERWRITE = "VERIFYSOURCEOLDER"
+ Debug-Output $(InfName)"Adding files: Files-$(NDIS_VER), SrcDir=$(SrcDir)"
+ AddSectionFilesToCopyList Files-$(NDIS_VER) $(SrcDir) $(!STF_WINDOWSSYSPATH)\drivers
+
+	; DA installationn is now the responsibility of the Master Navigator
+	; ifstr(i) (*($(CurrentVersionValue),4)) == $(NT400VersionConstant) 
+	; 	AddSectionFilesToCopyList Files-DA $(SrcDir) $(!STF_WINDOWSSYSPATH)
+	; endif
+
+ set !STF_NCPA_FLUSH_COPYLIST = TRUE
+ CopyFilesInCopyList
+ Exit
+
+ ;***********************************************************************************
+[Install-OptionNewNDIS]
+ set STF_VITAL = ""
+ set STF_OVERWRITE = "VERIFYSOURCEOLDER"
+ Debug-Output $(InfName)"Adding files: Files-$(NDIS_VER), SrcDir=$(SrcDir)"
+ AddSectionFilesToCopyList Files-905BC$(NDIS_VER) $(SrcDir) $(!STF_WINDOWSSYSPATH)\drivers
+ set !STF_NCPA_FLUSH_COPYLIST = TRUE
+ CopyFilesInCopyList
+ Exit
+ ;**************************************************************************************
+
+[Install-3nicdiag]
+ set STF_VITAL = ""
+ set STF_OVERWRITE = "VERIFYSOURCEOLDER"
+ AddSectionFilesToCopyList Files-3nicdiag $(SrcDir) $(!STF_WINDOWSSYSPATH)
+ ;AddSectionFilesToCopyList Files-Cpl $(SrcDir) $(!STF_WINDOWSPATH)
+ set !STF_NCPA_FLUSH_COPYLIST = TRUE
+ CopyFilesInCopyList
+ Exit
+
+[Install-INF]
+ set STF_VITAL = ""
+ AddSectionFilesToCopyList Files-Inf $(SrcDir) $(!STF_WINDOWSSYSPATH)
+ set !STF_NCPA_FLUSH_COPYLIST = TRUE
+ CopyFilesInCopyList
+ Exit
+
+
+[Install-Uninstaller]
+ set STF_VITAL = ""
+ set STF_OVERWRITE = "VERIFYSOURCEOLDER"
+ AddSectionFilesToCopyList Files-Uninstaller $(SrcDir) $(!STF_WINDOWSSYSPATH)
+ set !STF_NCPA_FLUSH_COPYLIST = TRUE
+ CopyFilesInCopyList
+ Exit
+
+[Install-OTHER]
+ set STF_VITAL = ""
+ set STF_OVERWRITE = "VERIFYSOURCEOLDER"
+ AddSectionFilesToCopyList Files-OTHER $(SrcDir) $(!STF_WINDOWSSYSPATH)
+ set !STF_NCPA_FLUSH_COPYLIST = TRUE
+ CopyFilesInCopyList
+ Exit
+
+[Source Media Descriptions]
+ 1 = "ECD520P90X", TAGFILE = 3CDdisk1 
+
+[ProductType]
+ STF_PRODUCT = Winnt
+
+[Files-Inf] 
+ 1, oemsetup.inf,SIZE=36000, RENAME=$(!UG_Filename)
+
+[Files-905BCNDIS3]
+ 1,EL90xBC3.SYS , SIZE=25001
+
+[Files-905BCNDIS4]
+ 1,EL90xBC4.SYS , SIZE=25001
+
+[Files-NDIS3]
+ 1,EL90xnd3.SYS , SIZE=25001
+
+[Files-NDIS4]
+ 1,EL90xnd4.SYS , SIZE=25001
+
+[Files-Configuration]
+1,NT4_CFG.EXE	, SIZE=592000
+
+[Files-3nicdiag]
+
+ 1,TCAUDIAG.EXE, SIZE=165504
+ 1,TCAUDIAG.URL, SIZE=15
+ 1,TCAUDIAG.HLP, SIZE=20877
+ 1,TCAUPROT.HLP, SIZE=20877
+ 1,TCAUM90X.HLP, SIZE=20877
+ 1,TCAUDCUS.TXT, SIZE=113
+ 1,TCAUDEXP.TXT, SIZE=113
+ 1,TCAUPROT.DLL, SIZE=12345
+ 1,TCAUM90X.DLL, SIZE=12345
+ 1,TCAMHWAC.DLL, SIZE=20198
+ 1,TCAICCHG.SYS, SIZE=5000
+ 1,TCAITDI.INF, SIZE=15000
+
+[Files-DA]
+ 1,DAINST.EXE, SIZE=800000
+
+[Files-Uninstaller]
+ 1,UN3C90XA.EXE, 	SIZE=6617
+
+[Files-OTHER]
+ 1, NT4_CFG.EXE,	SIZE=24000
+ 1, PCI_DATA.EXE, 	SIZE=65
+ 1, PCI_FIX.SYS,	SIZE=65
+
+[LanguagesSupported]
+ ENG
+
+[OptionsTextENG]
+ 3C90X = "3Com EtherLink PCI NIC"
+ 
+[FileConstantsENG]
+ ProCaption = "Windows NT NIC Setup"
+ ProCancel = "Cancel"
+ ProCancelMsg = "Windows NT Networking is not correctly installed. "+
+ "Are you sure you want to cancel copying files?"
+ ProCancelCap = "Network Setup Message"
+ ProText1 = "Copying:"
+ ProText2 = "To:"
+
+ ConnectionList = ^(ConnectionChoices, 1)
+ ConnectionValues = ^(ConnectionChoices, 2)
+ NoList = ^(NoChoices, 1)
+ NoValues = ^(NoChoices, 2)
+ ShellCodeErrorTitle = "Error: "$(Function$(Option)Title)
+ ShellCodeErrorText = "Shell Code Error."
+ CANNOT_FIND_ANY_CARD = "Network card is not present in the system"
+ CANNOT_FIND_ANY_UNINSTALLED_CARD = "All the NICs supported by this product have already been installed."
+
+[DialogConstantsENG]
+ Help = "&Help"
+ Exit = "Cancel"
+ OK = "OK"
+ HelpContext = ""
+ Continue = "Continue"
+ Cancel = "Cancel"
+
+;(%VER OEMSETUP.INF - Installation file for 3C90X - v5.4.4)

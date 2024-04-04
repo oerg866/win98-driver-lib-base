@@ -1,0 +1,458 @@
+
+
+[Identification]
+ OptionType = NetTransport
+[Options]
+ TCAITDI
+[FileConstants]
+UtilityInf = "UTILITY.INF"
+subroutineinf = "SUBROUTN.INF"
+SoftwareType = "service"
+Exit_Code = 0
+NetEventDLL = "%SystemRoot%\System32\netevent.dll"
+Manufacturer = "3Com"
+TCAITDIMajorVersion = "1"
+TCAITDIMinorVersion = "0"
+TCAITDIVersion = $(TCAITDIMajorVersion)"."$(TCAITDIMinorVersion)
+TCAITDISoftwareName = "TCAITDI"
+TCAITDISoftwareImagePath = "%SystemRoot%\System32\drivers\TCAITDI.sys"
+NetRuleSoftwareType = "TCAITDI lmNetService ndisTransport"
+NetRuleSoftwareClass = {"rasCapableTransport netBiosTransport"}
+
+NetRuleSoftwareUse = $(SoftwareType)" yes yes"
+NetRuleSoftwareBindForm = """TCAITDI"" yes yes simple"
+
+TCAITDIKeyName = $(!NTN_SoftwareBase)"\"$(Manufacturer)"\"$(TCAITDISoftwareName)"\CurrentVersion"
+
+
+[GeneralConstants]
+from = ""
+to = ""
+ExitCodeOk = 0
+ExitCodeCancel = 1
+ExitCodeFatal = 2
+KeyNull = ""
+MAXIMUM_ALLOWED = 33554432
+RegistryErrorIndex = NO_ERROR
+KeyTCAITDI = ""
+KeyParameters = ""
+TRUE = 1
+FALSE = 0
+NoTitle = 0
+ExitState = "Active"
+OldVersionExisted = $(FALSE)
+DriverPath = $(!STF_NTPATH)\drivers
+
+[date]
+ Now = {} ? $(!LIBHANDLE) GetSystemDate
+[Identify]
+ read-syms Identification
+ set Status = STATUS_SUCCESSFUL
+ set Identifier = $(OptionType)
+ set Media = #("Source Media Descriptions", 1, 1)
+ Return $(Status) $(Identifier) $(Media)
+[ReturnOptions]
+ set Status = STATUS_FAILED
+ set OptionList = {}
+ set OptionTextList = {}
+ set LanguageList = ^(LanguagesSupported, 1)
+ Ifcontains(i) $($0) in $(LanguageList)
+ goto returnoptions
+ else
+ set Status = STATUS_NOLANGUAGE
+ goto finish_ReturnOptions
+ endif
+returnoptions = +
+ set OptionList = ^(Options, 1)
+ set OptionTextList = ^(OptionsText$($0), 1)
+ set Status = STATUS_SUCCESSFUL
+finish_ReturnOptions = +
+ Return $(Status) $(OptionList) $(OptionTextList)
+[InstallOption]
+ set Option = $($1)
+ set SrcDir = $($2)
+ set AddCopy = $($3)
+ set DoCopy = $($4)
+ set DoConfig = $($5)
+ set CalledFrom = $($6)
+ Debug-Output "TCAITDI.INF: $($6) is: "$(CalledFrom)
+ set LanguageList = ^(LanguagesSupported, 1)
+ Ifcontains(i) $($0) NOT-IN $(LanguageList)
+ Return STATUS_NOLANGUAGE
+ endif
+ Debug-Output "OEMNXPNB.INF: STF_CWDDIR is: "$(!STF_CWDDIR)
+ Debug-Output "OEMNXPNB.INF: STF_LANGUAGE is: "$(!STF_LANGUAGE)
+ set-subst LF = "\n"
+ read-syms GeneralConstants
+ read-syms FileConstants
+ read-syms DialogConstants$(!STF_LANGUAGE)
+ ifstr(i) $(!NTN_Origination) == "NCPA"
+ set Continue = $(OK)
+ endif
+ read-syms FileConstants$(!STF_LANGUAGE)
+ detect date
+ set-title $(FunctionTitle)
+ set to = Begin
+ set from = Begin
+ set CommonStatus = STATUS_SUCCESSFUL
+ EndWait
+Begin = +
+ Ifstr(i) $(!NTN_InstallMode) == deinstall
+ set StartLabel = removeadapter
+ else-Ifstr(i) $(!NTN_InstallMode) == Update
+ set StartLabel = UpgradeSoftware
+ else-Ifstr(i) $(!NTN_InstallMode) == bind
+ set StartLabel = bindingadapter
+ else-Ifstr(i) $(!NTN_InstallMode) == configure
+ Shell $(UtilityInf),RegistryErrorString,CANNOT_CONFIGURE_SOFTWARE
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+ Debug-Output "OEMNXPNB.INF: ShellCode error: cannot get an error string."
+ goto ShellCodeError
+ endif
+ set Error = $($R0)
+ set from = end
+ set to = end
+ goto nonfatalinfo
+ else
+ set StartLabel = installadapter
+ endif
+ set RadioDefault = 2
+ set RadioIn = {$(RadioDefault)}
+ set from = $(fatal)
+ set to = $(fatal)
+ goto $(StartLabel)
+installadapter = +
+ OpenRegKey $(!REG_H_LOCAL) "" $(TCAITDIKeyName) $(MAXIMUM_ALLOWED) KeyTCAITDI
+ Ifstr $(KeyTCAITDI) != $(KeyNull)
+ CloseRegKey $(KeyTCAITDI)
+ ifstr $(Option) == "TCAITDI"
+ goto end
+ endif
+ endif
+ goto installproduct
+installproduct = +
+ StartWait
+ ifint $(OldVersionExisted) == $(FALSE)
+ Ifstr(i) $(DoCopy) == "YES"
+ Shell $(UtilityInf), DoAskSource, $(!STF_CWDDIR), $(SrcDir) YES
+ Ifint $($ShellCode) != $(!SHELL_CODE_OK)
+ Goto ShellCodeError
+ Else-Ifstr(i) $($R0) == STATUS_FAILED
+ Shell $(UtilityInf) RegistryErrorString "ASK_SOURCE_FAIL"
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+ goto ShellCodeError
+ endif
+ set Error = $($R0)
+ Goto fatal
+ Else-Ifstr(i) $($R0) == STATUS_USERCANCEL
+ Goto successful
+ Endif
+ Set SrcDir = $($R1)
+ Endif
+ install "Install-Option"
+ ifstr(i) $(STF_INSTALL_OUTCOME) != STF_SUCCESS
+ Shell $(UtilityInf) RegistryErrorString "UNABLE_COPY_FILE"
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+ goto ShellCodeError
+ endif
+ set Error = $($R0)
+ goto fatal
+ endif
+ set OEM_ABANDON_ON = TRUE
+ 
+Shell $(UtilityInf), AddSoftwareComponent, $(Manufacturer), +
+ $(TCAITDISoftwareName), +
+ $(TCAITDISoftwareName), +
+ $(TCAITDISoftwareDisplayName), $(STF_CONTEXTINFNAME), +
+ $(TCAITDISoftwareImagePath), "kernel", "TDI", {}, "",+
+ $(NetEventDLL)
+ set RegistryErrorIndex = $($R0)
+ Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+ EndWait
+ CloseRegKey $($R1)
+ CloseRegKey $($R2)
+ CloseRegKey $($R3)
+ CloseRegKey $($R4)
+ CloseRegKey $($R5)
+ goto fatalRegistry
+ endif
+ Set SoftTCAITDIKey = $($R1)
+ Set SoftNetRuleKey = $($R2)
+ Set SoftServiceKey = $($R3)
+ set KeyParameters = $($R4)
+ Set SoftLinkageKey = $($R5)
+ set NewValueList = {{SoftwareType,$(NoTitle),$(!REG_VT_SZ),$(SoftwareType)},+
+ {MajorVersion,$(NoTitle),$(!REG_VT_DWORD),$(TCAITDIMajorVersion)},+
+ {MinorVersion,$(NoTitle),$(!REG_VT_DWORD),$(TCAITDIMinorVersion)},+
+ {"Locked",$(NoTitle),$(!REG_VT_SZ),"ON"},+
+ {"Uninstall",$(NoTitle),$(!REG_VT_SZ),"NO"},+
+ {Title,$(NoTitle),$(!REG_VT_SZ),$(TCAITDISoftwareTitle)},+
+ {Description,$(NoTitle),$(!REG_VT_SZ),$(TCAITDISoftwareDescription)},+
+ {ServiceName,$(NoTitle),$(!REG_VT_SZ),$(TCAITDISoftwareName)},+
+ {InstallDate,$(NoTitle),$(!REG_VT_DWORD),*($(Now),1)}}
+ Shell $(UtilityInf), AddValueList, $(SoftTCAITDIKey), $(NewValueList)
+ set RegistryErrorIndex = $($R0)
+ Ifstr $(RegistryErrorIndex) != NO_ERROR
+ CloseRegKey $(SoftTCAITDIKey)
+ CloseRegKey $(SoftNetRuleKey)
+ CloseRegKey $(SoftServiceKey)
+ CloseRegKey $(SoftLinkageKey)
+ CloseRegKey $(KeyParameters)
+ goto fatalRegistry
+ endif
+ set NewValueList = {{type ,$(NoTitle),$(!REG_VT_SZ),$(NetRuleSoftwareType)}, +
+ {use ,$(NoTitle),$(!REG_VT_SZ),$(NetRuleSoftwareUse)}, +
+ {bindform,$(NoTitle),$(!REG_VT_SZ),$(NetRuleSoftwareBindForm)}, +
+ {InfOption,$(NoTitle),$(!REG_VT_SZ),"TCAITDI"}}
+ Shell $(UtilityInf), AddValueList, $(SoftNetRuleKey), $(NewValueList)
+ set RegistryErrorIndex = $($R0)
+ Ifstr $(RegistryErrorIndex) != NO_ERROR
+ CloseRegKey $(SoftTCAITDIKey)
+ CloseRegKey $(SoftNetRuleKey)
+ CloseRegKey $(SoftServiceKey)
+ CloseRegKey $(SoftLinkageKey)
+ CloseRegKey $(KeyParameters)
+ goto fatalRegistry
+ endif
+ Set NewValueList = {{NbProvider,$(NoTitle),$(!REG_VT_SZ),"_nb"}}
+ Shell $(UtilityInf), AddValueList, $(KeyParameters), $(NewValueList)
+ Ifstr $(RegistryErrorIndex) != NO_ERROR
+ CloseRegKey $(SoftTCAITDIKey)
+ CloseRegKey $(SoftNetRuleKey)
+ CloseRegKey $(SoftServiceKey)
+ CloseRegKey $(SoftLinkageKey)
+ goto fatalRegistry
+ endif
+ CloseRegKey $(SoftTCAITDIKey)
+ CloseRegKey $(SoftNetRuleKey)
+ CloseRegKey $(SoftServiceKey)
+ CloseRegKey $(SoftLinkageKey)
+ endif
+
+	OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE" $(!REG_KEY_WRITE) SOFTWAREKEY
+	OpenRegKey $(SOFTWAREKEY) "" "3Com" $(!REG_KEY_WRITE) COMKEY
+	 ifstr $(COMKEY) == ""
+	 CreateRegKey $(SOFTWAREKEY) {"3Com", 0, GenericClass} "" $(!REG_KEY_WRITE) "" COMKEY
+	 endif
+	 
+	OpenRegKey $(COMKEY) "" "TCAUDIAG" $(!REG_KEY_WRITE) KeyAutoEcho
+	 ifstr $(KeyAutoEcho) == ""
+	 CreateRegKey $(COMKEY) {"TCAUDIAG", 0, GenericClass} "" $(!REG_KEY_WRITE) "" KeyAutoEcho
+	 endif
+ Set NewValueList = {{AutoEcho,$(NoTitle),$(!REG_VT_SZ),"YES"}}
+ Shell $(UtilityInf), AddValueList, $(KeyAutoEcho), $(NewValueList)
+ Ifstr $(RegistryErrorIndex) != NO_ERROR
+ goto fatalRegistry
+ endif
+ CloseRegKey $(SOFTWAREKEY)
+ CloseRegKey $(COMKEY)
+ CloseRegKey $(KeyAutoEcho)
+ 
+
+goto writeparameters
+writeparameters = +
+ CloseRegKey $(KeyParameters)
+ 
+
+EndWait
+ goto successful
+bindingadapter =+
+ set Error = "Binding: Sorry, not yet implemented."
+ goto fatal
+removeadapter = +
+ 
+Shell $(UtilityInf), RemoveSoftwareComponent, $(Manufacturer), +
+$(TCAITDISoftwareName)
+ifint $($ShellCode) != $(!SHELL_CODE_OK)
+Debug-Output "ShellCode error"
+goto ShellCodeError
+endif
+set RegistryErrorIndex = $($R0)
+Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+goto fatalregistry
+endif
+ 
+goto end
+UpgradeSoftware = +
+ 
+goto end
+successful = +
+ goto end
+warning = +
+ Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), "WARNING", $(Error)
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+ goto ShellCodeError
+ endif
+ ifstr(i) $($R1) == "OK"
+ goto $(to)
+ else-ifstr(i) $($R1) == "CANCEL"
+ goto $(from)
+ else
+ goto "end"
+ endif
+nonfatalinfo = +
+ Set CommonStatus = STATUS_USERCANCEL
+ Set Severity = STATUS
+ goto nonfatalmsg
+nonfatal = +
+ Set Severity = NONFATAL
+ goto nonfatalmsg
+nonfatalmsg = +
+ ifstr(i) $(Error) == ""
+ Shell $(UtilityInf) RegistryErrorString "SETUP_FAIL"
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+ goto ShellCodeError
+ endif
+ set Error = $($R0)
+ endif
+ Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), $(Severity), $(Error)
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+ goto ShellCodeError
+ endif
+ ifstr(i) $($R1) == "OK"
+ goto $(from)
+ else
+ goto "end"
+ endif
+fatalregistry = +
+ Shell $(UtilityInf) RegistryErrorString $(RegistryErrorIndex)
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+ goto ShellCodeError
+ endif
+ set Error = $($R0)
+ goto fatal
+fatal = +
+ ifstr(i) $(Error) == ""
+ Shell $(UtilityInf) RegistryErrorString "SETUP_FAIL"
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+ goto ShellCodeError
+ endif
+ set Error = $($R0)
+ endif
+ Shell $(subroutineinf) SetupMessage, $(!STF_LANGUAGE), "FATAL", $(Error)
+ ifint $($ShellCode) != $(!SHELL_CODE_OK)
+ goto ShellCodeError
+ endif
+ goto setfailed
+ShellCodeError = +
+ set DlgType = "MessageBox"
+ set STF_MB_TITLE = $(ShellCodeErrorTitle)
+ set STF_MB_TEXT = $(ShellCodeErrorText) 
+set STF_MB_TYPE = 1
+ set STF_MB_ICON = 3
+ set STF_MB_DEF = 1
+ ui start "Error Message"
+ goto setfailed
+setfailed = +
+ set CommonStatus = STATUS_FAILED
+ ifstr(i) $(OEM_ABANDON_ON) == TRUE
+ set OEM_ABANDON_ON = FALSE
+ goto removeadapter
+ endif
+ goto end
+end = +
+ goto term
+term = +
+ Return $(CommonStatus)
+
+
+[UserAbort]
+read-syms GeneralConstants
+ read-syms FileConstants
+ read-syms DialogConstants$(!STF_LANGUAGE)
+ read-syms FileConstants$(!STF_LANGUAGE)
+
+detect checkExist
+set Untdi = *($(TdiuninstFound), 1)
+ifstr(i) $(Untdi) == "untcatdi.exe" 
+RunProgram status "x" "" $(!STF_WINDOWSSYSPATH)\unTCATDI.exe -test 
+RunProgram status "x" "" $(!STF_WINDOWSSYSPATH)\unTCATDI.exe -inf
+endif
+
+OpenRegKey $(!REG_H_LOCAL) "" $(TCAITDIKeyName) $(MAXIMUM_ALLOWED) TCAITDIKey
+GetRegValue $(TCAITDIKey) "Uninstall" TCAITDIList
+ set Uninst = *($(TCAITDIList),4)
+ Ifstr(i) $(Uninst) == "YES" 
+	Shell $(UtilityInf), RemoveSoftwareComponent, $(Manufacturer), +
+	$(TCAITDISoftwareName)
+	ifint $($ShellCode) != $(!SHELL_CODE_OK)
+	Debug-Output "ShellCode error"
+	goto ShellCodeError
+	endif
+	set RegistryErrorIndex = $($R0)
+	Ifstr(i) $(RegistryErrorIndex) != NO_ERROR
+	goto fatalregistry
+	endif
+endif
+CloseRegKey $(TCAITDIKey)
+Set CommonStatus = STATUS_USERCANCEL 
+Return $(CommonStatus)
+
+[checkExist]
+TdiuninstFound = {} ? $(!LIBHANDLE) FindFileInstances $(!STF_WINDOWSSYSPATH)"\untcatdi.exe"
+
+[Install-Option]
+ set STF_VITAL = ""
+ ifstr(i) $(AddCopy) == "YES"
+ ;AddSectionFilesToCopyList Files-TCAITDI $(SrcDir) $(!STF_WINDOWSSYSPATH)\drivers
+ ;AddSectionFilesToCopyList Files-SetUp $(SrcDir) $(!STF_WINDOWSSYSPATH)
+ endif
+ ifstr(i) $(DoCopy) == "YES"
+ set !STF_NCPA_FLUSH_COPYLIST = TRUE
+ CopyFilesInCopyList
+ endif
+ ifstr(i) $(DoConfig) == "YES"
+ endif
+ Exit
+
+[Source Media Descriptions]
+ 1 = "3Com EtherCD for 3Com EtherLink PCI NICs", TAGFILE = boom90x.inf
+ 
+[ProductType]
+STF_PRODUCT = Winnt
+STF_PLATFORM = I386
+
+
+[Files-TCAITDI]
+
+[Files-SetUp] 
+
+[LanguagesSupported]
+ ENG
+[OptionsTextENG]
+ NDISPERF = "3Com TCAITDI Diagnostic TDI"
+[FileConstantsENG]
+ProCaption = "Windows NT Setup"
+ProCancel = "Cancel"
+ProCancelMsg = "Windows NT Networking is not correctly installed. "+
+ "Are you sure you want to cancel copying files?"
+ProCancelCap = "Network Setup Message"
+ProText1 = "Copying:"
+ProText2 = "To:"
+FunctionTitle = "TCAITDI Driver"
+;TCAITDISoftwareDescription = "3Com Diagnostic Communication Module"
+TCAITDISoftwareDescription = "This module controls communication between the diagnostic and the 3Com NIC driver."
+TCAITDISoftwareDisplayName = "3Com Diagnostic Communication Module" 
+TCAITDISoftwareTitle = $(TCAITDISoftwareDisplayName)
+TCAITDIServiceDisplayName = $(TCAITDISoftwareDisplayName)
+ShellCodeErrorTitle = "Error: "$(FunctionTitle)
+ShellCodeErrorText = "Shell Code Error."
+[DialogConstantsENG]
+Help = "&Help"
+Exit = "Cancel"
+OK = "OK"
+HelpContext = ""
+Continue = "Continue"
+Cancel = "Cancel"
+[FileDependentDlgENG]
+GroupLabel = "Optimization:"
+Radio1 = "&Minimize Memory Used"
+Radio2 = "&Balance"
+Radio3 = "M&aximize Throughput && Connections"
+DlgType = "Radio" 
+DlgTemplate = "NBF" 
+Caption = $(FunctionTitle)
+OptionsGreyed = {}
+HelpContext = $(!IDH_DB_OEMNXPNB_INS)
+
+;(%VER TCAITDI.INF - Disk Directory v5.1.0.2)
