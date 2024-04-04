@@ -1,0 +1,111 @@
+; NDIS2 Wrapper Inf
+; (C) 2024 Eric Voirin (oerg866@googlemail.com)
+[Version]
+LayoutFile=layout.inf
+Signature="$CHICAGO$"
+Class=Net
+Provider=%VENDOR%
+
+[Manufacturer]
+%VENDOR%=ND2WRAP
+
+[ND2WRAP]
+%DEVICE%=nd2wrap0.ndi,PCI\VEN_10ec&DEV_8136&REV_04
+%DEVICE%=nd2wrap0.ndi,PCI\VEN_10ec&DEV_8136&REV_05
+%DEVICE%=nd2wrap0.ndi,PCI\VEN_10ec&DEV_8136&REV_06
+%DEVICE%=nd2wrap0.ndi,PCI\VEN_10ec&DEV_8136&REV_07
+%DEVICE%=nd2wrap0.ndi,PCI\VEN_10ec&DEV_8136&REV_08
+%DEVICE%=nd2wrap0.ndi,PCI\VEN_10ec&DEV_8136&REV_09
+%DEVICE%=nd2wrap0.ndi,PCI\VEN_10ec&DEV_8136&REV_0A
+
+[SourceDisksNames]
+1="NDIS2 Driver",,
+
+[SourceDisksFiles]
+RTEND.DOS=1
+
+[nd2wrap0.ndi]
+AddReg=nd2wrap0.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap0.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_10ec&DEV_8136"
+
+
+[nd2wrap.ndi.reg]
+HKR,,DevLoader,,*ndis
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+; NDIS Info
+HKR,NDIS,LogDriverName,,"RTEND"
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,NDIS\NDIS2,DriverName,,"RTEND$"
+HKR,NDIS\NDIS2,FileName,,"RTEND.DOS"
+; Interfaces
+HKR,Ndi\Interfaces,DefUpper,,"ndis2"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"ndis2"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+; Install sections
+HKR,Ndi\Install,ndis2,,"nd2wrap.inst.ndis2"
+HKR,Ndi\Remove,ndis2,,"nd2wrap.rmv.ndis2"
+
+
+
+HKR, , MEDIUM, 0, ""
+HKR, Ndi\params\MEDIUM,ParamDesc,0,"Medium Type"
+HKR, Ndi\params\MEDIUM,Default,  0,""
+HKR, Ndi\params\MEDIUM,type,     0,"edit"
+HKR, Ndi\params\MEDIUM,LimitText,0,"10"
+HKR, Ndi\params\MEDIUM,optional,0,"0"
+
+HKR, , NETADDRESS, 0, ""
+HKR, Ndi\params\NETADDRESS,ParamDesc,0,"Network adapter address"
+HKR, Ndi\params\NETADDRESS,Default,  0,""
+HKR, Ndi\params\NETADDRESS,type,     0,"edit"
+HKR, Ndi\params\NETADDRESS,LimitText,0,"13"
+HKR, Ndi\params\NETADDRESS,optional,0,"1"
+
+HKR, , ETHERID, 0, ""
+HKR, Ndi\params\ETHERID,ParamDesc,0,"Node address"
+HKR, Ndi\params\ETHERID,Default,  0,""
+HKR, Ndi\params\ETHERID,type,     0,"edit"
+HKR, Ndi\params\ETHERID,LimitText,0,"13"
+HKR, Ndi\params\ETHERID,optional,0,"1"
+
+HKR, , BUSNO, 0, ""
+HKR, Ndi\params\BUSNO,ParamDesc,0,"Bus Number:"
+HKR, Ndi\params\BUSNO,Default,  0,""
+HKR, Ndi\params\BUSNO,type,     0,"int"
+HKR, Ndi\params\BUSNO,optional,0,"0"
+
+HKR, , DEVICENO, 0, ""
+HKR, Ndi\params\DEVICENO,ParamDesc,0,"Device Number:"
+HKR, Ndi\params\DEVICENO,Default,  0,""
+HKR, Ndi\params\DEVICENO,type,     0,"int"
+HKR, Ndi\params\DEVICENO,optional,0,"0"
+
+HKR,,MsPciScan,0,"2"
+
+[nd2wrap.inst.ndis2]
+CopyFiles=nd2wrap.ndis2.CopyFiles
+AddReg=nd2wrap.inst.ndis2.reg
+
+[nd2wrap.rmv.ndis2]
+AddReg=nd2wrap.rmv.ndis2.reg
+
+[nd2wrap.inst.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",RTEND.DOS,,low
+
+[nd2wrap.rmv.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",RTEND.DOS
+
+[nd2wrap.ndis2.CopyFiles]
+RTEND.DOS
+
+[DestinationDirs]
+nd2wrap.ndis2.CopyFiles=26
+
+[Strings]
+VENDOR="NDIS2Infer by Oerg866"
+DEVICE="Realtek RTL8139/810x Family Fast Ethernet Network Adapter (NDIS2)"
+

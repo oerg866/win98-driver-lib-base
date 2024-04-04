@@ -1,0 +1,18 @@
+
+;RTL8100E and RTL8101E OEMSETUP.INF File:
+
+[netcard]
+RTL8101="Realtek RTL8139/810x Family Fast Ethernet Network Adapter",000,ndis,ethernet,real,RTL8101,RTL8101_nif
+
+
+[RTL8101]
+devdir=?:rtend.dos
+device=rtend.dos,@devdir\rtend.dos
+
+[RTL8101_nif]
+drivername=rtend$
+param=Medium,"Medium type ",text,"_Auto,_1000Full,_100Full,_100Half,_10Full,_10Half",_Auto,0x30
+param=NETADDRESS,"Network Address",chars,13,"@000000000000",0x02
+param=ETHERID,"Node Address",chars,13,"@000000000000",0x02
+param=BusNo ,"Adpater's Bus Number",int,"0,255,1",0,0x32
+param=DeviceNo ,"Adpater's Device Number",int,"0,31,1",0,0x32
