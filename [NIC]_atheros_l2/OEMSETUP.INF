@@ -1,0 +1,19 @@
+
+;ATTANSICL2  OEMSETUP.INF File:
+
+[netcard]
+ATTANSICL2="Attansic L2 Fast Ethernet Adapter",000,ndis,ethernet,real,ATTANSICL2,ATTANSICL2_nif
+
+
+[ATTANSICL2]
+devdir=?:l2.dos
+device=l2.dos,@devdir\l2.dos
+
+[ATTANSICL2_nif]
+drivername=ATL2$
+param=ETHERID,"Node Address",chars,13,"@000000000000",0x02
+
+
+
+
+
