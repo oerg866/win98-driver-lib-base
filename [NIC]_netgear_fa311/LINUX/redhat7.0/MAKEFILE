@@ -1,7 +1,0 @@
-all: fa31x.o
-
-fa31x.o: fa31x.c fa31x.h
-	kgcc -D__KERNEL__ -DMODULE -DMODVERSIONS -w -Wstrict-prototypes -O -m486 -c fa31x.c -I/usr/src/linux/include
-
-clean: 
-	rm -f core *.o
