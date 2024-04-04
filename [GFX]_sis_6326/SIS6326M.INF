@@ -5,7 +5,6 @@
 Class=DISPLAY
 signature="$CHICAGO$"
 Provider=%Mfg%
-CatalogFile=sis6326.cat
 
 [DestinationDirs]
 DefaultDestDir=11
@@ -25,7 +24,6 @@ dd326.dll=1
 dd326_32.dll=1
 sis6326m.inf=1
 setuplib.dll=1
-sis6326.cat=0,,920
 
 [Manufacturer]
 %Mfg%=Mfg
