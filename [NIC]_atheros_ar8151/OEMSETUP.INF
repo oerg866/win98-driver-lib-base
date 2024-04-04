@@ -1,0 +1,18 @@
+
+;L1C  OEMSETUP.INF File:
+
+[netcard]
+ATNDS2="Atheros PCI-E Ethernet Adapter",000,ndis,ethernet,real,ATNDS2,ATNDS2_nif
+
+
+[ATNDS2]
+devdir=?:atnds2.dos
+device=atnds2.dos,@devdir\atnds2.dos
+
+[ATNDS2_nif]
+drivername=ATNDS2$
+param=ETHERID,"Node Address",chars,13,"@000000000000",0x02
+
+
+
+
