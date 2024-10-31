@@ -1,0 +1,153 @@
+; W940ND.INF
+;
+; Winbond W89C940 Based PCI Network Adapter
+;
+; Copyright Winbond Electronic Corporation
+
+[version]
+LayoutFile=layout.inf
+signature="$CHICAGO$"
+Class=Net
+ClassGUID  = {4d36e972-e325-11ce-bfc1-08002be10318}
+provider=%Msft%
+
+[Manufacturer]
+%V_Winbond%=Winbond
+
+[Winbond]
+%w89c940.DeviceDesc%=W89C940.ndi, PCI\VEN_1050&DEV_0940 ; Winbond W89C940 PCI
+;%w89c940.DeviceDesc%=w89c940.ndi, PCI\VEN_1050&DEV_0940&SUBSYS_00011050 ; Winbond W89C940 PCI
+
+;****************************************************************************
+;    NT main section
+;
+;    W89C940   Winbond 940 PCI
+;****************************************************************************
+[W89C940.ndi.NT]
+AddReg          = W89C940.nt.reg, W940ND.params.reg, W940ND.nt.reg
+BusType         = 5
+Characteristics = 0x4 ;NCF_PHYSICAL
+
+;****************************************************************************
+; Win9x main sections
+;
+;    W89C940   Winbond 940 PCI
+;****************************************************************************
+
+[W89C940.ndi]
+AddReg=W89C940.win.reg, W940ND.params.reg, W940ND.win.reg
+DeviceID = "PCI\VEN_1050&DEV_0940"
+LogConfig = DefaultConfig
+
+;****************************************************************************
+;W89C940 platform specific
+;
+[W89C940.win.reg]
+HKR, Ndi,               DeviceID, 0, "PCI\VEN_1050&DEV_0940"
+HKR, Ndi\Interfaces,    DefUpper, 0, "ndis3"
+HKR, Ndi\Interfaces,    DefLower, 0, "ethernet"
+HKR, Ndi\Interfaces,    UpperRange, 0, "ndis3"
+HKR, Ndi\Interfaces,    LowerRange, 0, "ethernet"
+
+[W89C940.nt.reg]
+HKR, ,                  BusType, 0, "5"
+HKR, ,                  MsPciScan, 0, "1"
+HKR, Ndi\Interfaces,    DefUpper, 0, "ndis5"
+HKR, Ndi\Interfaces,    DefLower, 0, "ethernet"
+HKR, Ndi\Interfaces,    UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,    LowerRange, 0, "ethernet"
+
+;****************************************************************************
+; W940ND NT specific
+;
+
+[W940ND.nt.reg]
+HKR, Ndi,               Service,        0, "W940ND"
+HKR, Ndi\Install,       ,               0, "W940ND.Install"
+
+[W940ND.Install.NT]
+CopyFiles = W940ND.Install.CopyFiles
+
+[W940ND.Install.NT.Services]
+AddService = W940ND, 2, W940ND.Service, common.EventLog
+
+[W940ND.Install.CopyFiles]
+W940ND.sys,,,2 ;Do not allow the user to skip this file
+
+[W940ND.Service]
+DisplayName    = %W940ND.Service.DispName%
+ServiceType    = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType      = 2 ;%SERVICE_AUTO_START%
+ErrorControl   = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\W940ND.sys
+LoadOrderGroup = NDIS
+
+[common.EventLog]
+AddReg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+;****************************************************************************
+; W940ND Win9x specific
+;
+
+[W940ND.win.reg]
+; key,subkey,valuname,type,value
+HKR, ,          DevLoader,              0, "*ndis"
+HKR, ,          DeviceVxDs,             0, "W940ND.sys"
+HKR, ,          EnumPropPages,          0, "netdi.dll,EnumPropPages"
+
+; NDIS Info
+HKR, NDIS,      LogDriverName,          0, "W940ND"
+HKR, NDIS,      MajorNdisVersion,       1, 03
+HKR, NDIS,      MinorNdisVersion,       1, 0A
+
+; Install sectioins
+HKR, Ndi\Install, ndis3,        0, "W940ND.ndis3.install"
+
+[w940nd.ndis3.install]
+CopyFiles=W940ND.inf.CopyFiles,w940nd.ndis3.CopyFiles
+;CopyFiles=W940ND.ndis3.CopyFiles
+
+[w940nd.ndis3.CopyFiles]
+W940ND.sys,,,2
+
+;****************************************************************************
+; extra params for w89c940
+;
+
+[W940ND.params.reg]
+; Resources
+;SelectedID
+;HKR,NDI\params\SelectedID,ParamDesc,,"Selected Ethernet ID"
+;HKR,NDI\params\SelectedID,type,,edit
+;HKR,NDI\params\SelectedID,LimitText,,12
+;HKR,NDI\params\SelectedID,UpperCase,,1
+;HKR,Ndi\params\SelectedID,default,,"00e801020304"
+;HKR,NDI\params\SelectedID,flag,1,20,00,00,00
+;HKR,Ndi\params\SelectedID,optional,,1
+
+;****************************************************************************
+; Destination Directories
+;****************************************************************************
+[DestinationDirs]
+W940ND.Install.CopyFiles    =12 ; WINNT
+DefaultDestDir              =11 ; LDID_SYS
+W940ND.ndis3.CopyFiles      =11 ; LDIR_SYS
+W940ND.inf.CopyFiles        =17 ; INF_DIR
+
+
+;****************************************************************************
+; Localizable Strings
+;****************************************************************************
+[strings]
+; Provider
+Msft= "Microsoft"
+
+; Manufacturers
+V_Winbond="Winbond Electronic Corporation"
+W89C940.DeviceDesc="Winbond W89C940 Based PCI Ethernet Adapter"
+W940ND.Service.DispName = "Winbond W89C940 Based PCI Ethernet Adapter"
+
