@@ -1,0 +1,135 @@
+; NE34ND.INF
+;
+; NE-34 PCI Network Interface Cards
+;
+
+[version]
+LayoutFile=layout.inf
+signature="$CHICAGO$"
+Class=Net
+provider=%V_MS%
+
+[Manufacturer]
+%V_NE34%=NE34
+
+[NE34]
+%ne34pci.DeviceDesc%=ne34pci.ndi, PCI\VEN_10BD&DEV_0E34
+
+;****************************************************************************
+;    NE-34 PCI
+;****************************************************************************
+
+[ne34pci.ndi]
+AddReg=ne34pci.ndi.reg,NE34nd.ndi.reg,NE34ND.params.reg
+;LogConfig=ne34pci.LogConfig
+
+[ne34pci.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_10BD&DEV_0E34"
+
+[ne34pci.LogConfig]
+IRQConfig=3,4,5,9
+IOConfig=20@300-37F%FFE0(3FF::)
+ConfigPriority=HARDRECONFIG
+
+;****************************************************************************
+; ne34pci Drivers
+;****************************************************************************
+; Base section for ne34pci users
+[NE34nd.ndi.reg]
+; key,subkey,valuname,type,value
+HKR,,DevLoader,,*ndis
+HKR,,DeviceVxDs,,NE34nd.sys
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+; NDIS Info
+HKR,NDIS,LogDriverName,,"NE34ND"
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+;HKR,NDIS\NDIS2,DriverName,,"NE34ND$"
+;HKR,NDIS\NDIS2,FileName,,"ne34nd.dos"
+;HKR,NDIS\ODI,DriverName,,"ne34OD"
+;HKR,NDIS\ODI,FileName,,"ne34od.com"
+; Interfaces
+;HKR,Ndi\Interfaces,DefUpper,,"ndis2,ndis3"
+HKR,Ndi\Interfaces,DefUpper,,"ndis3"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+;HKR,Ndi\Interfaces,UpperRange,,"ndis2,ndis3,odi"
+;HKR,Ndi\Interfaces,UpperRange,,"ndis2,ndis3"
+HKR,Ndi\Interfaces,UpperRange,,"ndis3"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+; Install sectioins
+HKR,Ndi\Install,ndis3,,"NE34nd.ndis3"
+;HKR,Ndi\Install,ndis2,,"ne34nd.ndis2"
+;HKR,Ndi\Install,odi,,"ne34od.odi"
+
+
+; Install NDIS3
+[NE34nd.ndis3]
+CopyFiles=NE34nd.ndis3.CopyFiles
+[NE34nd.ndis3.CopyFiles]
+NE34nd.sys
+
+; Install NDIS2
+;[NE34ND.ndis2]
+;CopyFiles=ne34nd.ndis2.CopyFiles
+;[ne34nd.ndis2.CopyFiles]
+;ne34nd.dos
+
+; Install ODI
+;[NE34OD.odi]
+;CopyFiles=ne34od.odi.CopyFiles
+;[ne34od.odi.CopyFiles]
+;ne34od.com
+
+; extra params for ne34pci
+[NE34ND.params.reg]
+; Resources
+;HKR,,InterruptNumber,1,04,00,00,00
+;HKR,,IOBaseAddress,1,02,00,00,00
+;HKR,NDI\params\InterruptNumber,resc,1,04,00,00,00
+;HKR,Ndi\params\interruptNumber,ParamDesc,,"Interrupt Level"
+;HKR,NDI\params\InterruptNumber,flag,1,60,00,00,00
+;HKR,NDI\params\IOBaseAddress,resc,1,02,00,00,00
+;HKR,NDI\params\IOBaseAddress,ParamDesc,,"I/O Base Address"
+;HKR,NDI\params\IOBaseAddress,flag,1,20,00,00,00
+;ndis2
+;HKR,NDI\params\Interrupt,resc,1,04,00,00,00
+;HKR,Ndi\params\interrupt,ParamDesc,,"Interrupt Level"
+;HKR,NDI\params\Interrupt,flag,1,10,00,00,00
+;HKR,NDI\params\IOBase,resc,1,02,00,00,00
+;HKR,NDI\params\IOBase,ParamDesc,,"I/O Base Address"
+;HKR,NDI\params\IOBase,flag,1,10,00,00,00
+;Select Early Interrupt Function
+;HKR,NDI\params\EarlyInt,ParamDesc,,"Early Interrupt Function"
+;HKR,NDI\params\EarlyInt,flag,1,20,00,00,00
+;HKR,NDI\params\EarlyInt,default,,Disable
+;HKR,NDI\params\EarlyInt,type,,enum
+;HKR,NDI\params\EarlyInt\enum,Disable,,Disable
+;HKR,NDI\params\EarlyInt\enum,Enable,,Enable
+
+;SelectedID
+HKR,NDI\params\SelectedID,ParamDesc,,"Selected Ethernet ID"
+HKR,NDI\params\SelectedID,type,,edit
+HKR,NDI\params\SelectedID,LimitText,,12
+HKR,NDI\params\SelectedID,UpperCase,,1
+HKR,Ndi\params\SelectedID,default,,"00e801020304"
+HKR,NDI\params\SelectedID,flag,1,20,00,00,00
+HKR,Ndi\params\SelectedID,optional,,1
+;****************************************************************************
+; Destination Directories
+;****************************************************************************
+[DestinationDirs]
+DefaultDestDir              =11 ; LDID_SYS
+NE34nd.ndis3.CopyFiles      =11
+;ne34nd.ndis2.CopyFiles      =26 ; LDID_WINBOOT
+;ne34od.odi.CopyFiles        =26
+
+;****************************************************************************
+; Localizable Strings
+;****************************************************************************
+[strings]
+; Provider
+V_MS="Microsoft"
+; Manufacturers
+V_NE34="NE Series"
+ne34pci.DeviceDesc="NE-34 PCI Ethernet Adapter"
+
