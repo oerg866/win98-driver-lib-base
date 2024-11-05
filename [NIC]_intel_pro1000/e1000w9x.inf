@@ -71,6 +71,10 @@ DriverVer  	= 01/06/2006,8.6.17.0
 %E1076NC.DeviceDesc%           = E1076.ndi,         PCI\VEN_8086&DEV_1076
 %E1077MC.DeviceDesc%           = E1076.ndi,         PCI\VEN_8086&DEV_1077
 %E107CDA.DeviceDesc%           = E107C.ndi,         PCI\VEN_8086&DEV_107C
+; BEGIN WIN98QUICKINSTALL-FIX
+%E100CSRV.DeviceDesc%           = E100C.ndi,         PCI\VEN_8086&DEV_1004
+%E100ESRV.DeviceDesc%           = E100E.ndi,         PCI\VEN_8086&DEV_100F
+; END WIN98QUICKINSTALL-FIX
 
 ;-------------------------------------------------------------------------------
 ; Intel PRO\1000 T Desktop Adapter (Generic)
@@ -593,6 +597,10 @@ E100EIBM.DeviceDesc        = "Intel(R) PRO/1000 MT Network Connection"
 E100CGEN.DeviceDesc        = "Intel(R) PRO/1000 T Network Connection"
 E100DGEN.DeviceDesc        = "Intel(R) PRO/1000 XT Network Connection"
 E100EGEN.DeviceDesc        = "Intel(R) PRO/1000 MT Network Connection"
+; BEGIN WIN98QUICKINSTALL-FIX
+E100CSRV.DeviceDesc        = "Intel(R) PRO/1000 T Server Connection"
+E100ESRV.DeviceDesc        = "Intel(R) PRO/1000 MT Server Connection"
+; END WIN98QUICKINSTALL-FIX
 
 
 E1000.Service.DispName     = "Intel(R) PRO/1000 Network Connection Driver"
