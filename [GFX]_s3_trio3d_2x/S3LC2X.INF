@@ -5,7 +5,7 @@
 Class=Display
 Signature="$CHICAGO$"
 Provider=%Mfg%
-DriverVer = 04/26/1999, 4.11.01.5001
+DriverVer = 10/11/1999, 4.11.01.5002
 
 [DestinationDirs]
 DefaultDestDir=11
@@ -285,5 +285,5 @@ GAMMANAME   = "S3 Gamma"
 SCHEMES     = "Schemes"
 S3GKEY      = "SOFTWARE\S3\S3 Gamma"
 
-S3Trio3D2X.DeviceDesc=  "S3 Inc. Trio3D/2X (1.00.31)"
+S3Trio3D2X.DeviceDesc=  "S3 Inc. Trio3D/2X (Engineering Release)"
 ;----------------------------------------------
