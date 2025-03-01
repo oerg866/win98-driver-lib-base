@@ -1,0 +1,247 @@
+; This INF file installs the Silicon Image Serial ATA non-Raid driver
+; for the SiI 3112 controller on systems running Windows 98/ME,
+; Windows NT 4.0, Windows 2000, and Windows XP.
+
+[Version]
+Signature="$Chicago$"
+Class=SCSIAdapter
+ClassGuid={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%SI%
+;;CatalogFile=ASH1205.cat
+DriverVer=12/17/2002, 1.0.0.41
+
+
+[SourceDisksNames]
+1="Adaptec Serial ATA 1205SA Driver Installation Disk",ASH1205.sys,,
+
+[SourceDisksFiles]
+ASH1205.sys	= 1
+ASH1205.mpd	= 1
+ASH1205.cpl	= 1
+
+[DestinationDirs]
+DefaultDestDir	= 12
+DriverFiles	= 12
+DriverFiles.NT	= 12
+DllFiles		= 11
+
+[DriverFiles]
+ASH1205.mpd,,,0x20
+
+[DriverFiles.NTX86]
+ASH1205.sys,,,0x20
+
+[DllFiles]
+ASH1205.cpl,,,0x20
+
+[Manufacturer]
+%SI%=SI_HDC
+
+[SI_HDC]
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=SI_3512, PCI\VEN_1095&DEV_3512&SUBSYS_34238086
+%PCI\VEN_1095&DEV_3112&SUBSYS_02509005.DeviceDesc%=SI_3112, PCI\VEN_1095&DEV_3112&SUBSYS_02509005
+
+[SI_3112]
+DriverVer=12/17/2002, 1.0.0.41
+Copyfiles=DriverFiles, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedSubSystemIds
+
+[SI_3512]
+DriverVer=12/17/2002, 1.0.0.41
+Copyfiles=DriverFiles, DllFiles
+DelReg = Win98ProblemDeviceList_DelReg
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedSubSystemIds
+
+
+[SI_3112.NTX86]
+Copyfiles=DriverFiles.NTX86
+
+[SI_3112.NTX86.Services]
+AddService=ASH1205,0x00000002,SI_3112_Service_Install, Miniport_EventLog_Inst
+
+
+[SI_3112.NTX86.CoInstallers]
+CopyFiles = DllFiles
+AddReg = SI_3112.NTX86.CoInstall_AddReg
+
+[SI_3112.NTX86.CoInstall_AddReg]
+HKR,,CoInstallers32,0x00010000,"ASH1205.cpl, CoInstHandler"
+
+[SI_3112_Service_Install]
+DisplayName=%ASH1205.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\ASH1205.sys
+LoadOrderGroup=Scsi miniport
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+
+
+[SI_3512.NTX86]
+Copyfiles=DriverFiles.NTX86
+
+[SI_3512.NTX86.Services]
+AddService=ASH1205,0x00000002,SI_3512_Service_Install, Miniport_EventLog_Inst
+
+[SI_3512.NTX86.CoInstallers]
+CopyFiles = DllFiles
+AddReg = SI_3512.NTX86.CoInstall_AddReg
+
+[SI_3512.NTX86.CoInstall_AddReg]
+HKR,,CoInstallers32,0x00010000,"ASH1205.cpl, CoInstHandler"
+
+[SI_3512_Service_Install]
+DisplayName=%SI3512.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\ASH1205.sys
+LoadOrderGroup=Scsi miniport
+DelReg=ProblemDeviceList_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+
+
+; Mark device as supporting Plug & Play on the PCI(5) bus.
+[PnPSupport_AddReg]
+HKR,Parameters\PnPInterface,5,0x00010001,1
+
+; List of possible obsolete problem device list entries that should be
+; removed prior to the addition of the replacement problem device list
+; entries.
+[ProblemDeviceList_DelReg]
+HKR,ProblemDevices, %ObsProblemDev1Name%
+HKR,ProblemDevices, %ObsProblemDev2Name%
+
+
+; List of devices with known configuration issues.
+[ProblemDeviceList_AddReg]
+HKR,ProblemDevices
+HKR,ProblemDevices, %ProblemDev1Name%, 0, %ProblemDev1Value%
+HKR,ProblemDevices, %ProblemDev2Name%, 0, %ProblemDev2Value%
+HKR,ProblemDevices, %ProblemDev3Name%, 0, %ProblemDev3Value%
+HKR,ProblemDevices, %ProblemDev4Name%, 0, %ProblemDev4Value%
+HKR,ProblemDevices, %ProblemDev5Name%, 0, %ProblemDev5Value%
+HKR,ProblemDevices, %ProblemDev6Name%, 0, %ProblemDev6Value%
+HKR,ProblemDevices, %ProblemDev7Name%, 0, %ProblemDev7Value%
+HKR,ProblemDevices, %ProblemDev8Name%, 0, %ProblemDev8Value%
+HKR,ProblemDevices, %ProblemDev9Name%, 0, %ProblemDev9Value%
+HKR,ProblemDevices, %ProblemDev10Name%, 0, %ProblemDev10Value%
+HKR,ProblemDevices, %ProblemDev11Name%, 0, %ProblemDev11Value%
+HKR,ProblemDevices, %ProblemDev12Name%, 0, %ProblemDev12Value%
+
+
+; List of controller subsystem IDs to be supported by the ASH1205.sys driver on
+; NT/Win2K/XP systems.
+[SupportedSubSystemIds_AddReg]
+HKR,SupportedSubsystemIDs,%PCI\VEN_1095&DEV_3512.DeviceDesc%,0x00010001, 0x35121095
+HKR,SupportedSubsystemIDs,%PCI\VEN_1095&DEV_3112&SUBSYS_02509005.DeviceDesc%,0x00010001, 0x02509005
+
+
+
+[Win98ProblemDeviceList_DelReg]
+HKLM,%Win98ProblemDeviceSubKey%, %ObsProblemDev1Name%
+HKLM,%Win98ProblemDeviceSubKey%, %ObsProblemDev2Name%
+
+
+[Win98ProblemDeviceList]
+HKLM,%Win98ProblemDeviceSubKey%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev1Name%, 0, %ProblemDev1Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev2Name%, 0, %ProblemDev2Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev3Name%, 0, %ProblemDev3Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev4Name%, 0, %ProblemDev4Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev5Name%, 0, %ProblemDev5Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev6Name%, 0, %ProblemDev6Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev7Name%, 0, %ProblemDev7Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev8Name%, 0, %ProblemDev8Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev9Name%, 0, %ProblemDev9Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev10Name%, 0, %ProblemDev10Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev11Name%, 0, %ProblemDev11Value%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev12Name%, 0, %ProblemDev12Value%
+
+
+; List of controller subsystem IDs to be supported by the ASH1205.mpd driver on
+; Windows 98/ME systems.
+[Win98SupportedSubSystemIds]
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1095&DEV_3512.DeviceDesc%,0x00010001, 0x35121095
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1095&DEV_3112&SUBSYS_02509005.DeviceDesc%,0x00010001, 0x02509005
+
+
+;*************************************************************
+;The NT EventLog entries are the same for all SCSI miniports.
+[Miniport_EventLog_Inst]
+AddReg = Miniport_EventLog_AddReg
+
+[Miniport_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,0x00010001,7
+
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+
+[WIN98.REG]
+HKR,,PortDriver,,ASH1205.mpd
+
+
+[Strings]
+SI="Silicon Image"
+
+PCI\VEN_1095&DEV_3112.DeviceDesc="Silicon Image SiI 3112 SATALink Controller"
+ASH1205.SvcDesc="SiI-3112 SATALink Controller"
+
+PCI\VEN_1095&DEV_3512.DeviceDesc="Silicon Image SiI 3512 SATALink Controller"
+SI3512.SvcDesc="SiI-3512 SATALink Controller"
+
+PCI\VEN_1095&DEV_3112&SUBSYS_02509005.DeviceDesc="Adaptec Serial ATA 1205SA Host Controller"
+
+Win98ProblemDeviceSubKey = "System\CurrentControlSet\Services\ASH1205\ProblemDevices"
+Win98SupportedControllersSubKey = "System\CurrentControlSet\Services\ASH1205\SupportedSubsystemIDs"
+
+
+ObsProblemDev1Name="ST330013AS                              108b    "
+ObsProblemDev2Name="ST330013AS                              1.20    "
+
+
+ProblemDev1Name="Maxtor 4D060H3                          DAK05GK0"
+ProblemDev1Value="MaxMode = UDMA-5"
+
+ProblemDev2Name="ST320012AS"
+ProblemDev2Value="Mod15Write"
+
+ProblemDev3Name="ST330013AS"
+ProblemDev3Value="Mod15Write"
+
+ProblemDev4Name="ST340017AS"
+ProblemDev4Value="Mod15Write"
+
+ProblemDev5Name="ST360015AS"
+ProblemDev5Value="Mod15Write"
+
+ProblemDev6Name="ST380023AS"
+ProblemDev6Value="Mod15Write"
+
+ProblemDev7Name="ST3120023AS"
+ProblemDev7Value="Mod15Write"
+
+ProblemDev8Name="ST340014ASL"
+ProblemDev8Value="Mod15Write"
+
+ProblemDev9Name="ST360014ASL"
+ProblemDev9Value="Mod15Write"
+
+ProblemDev10Name="ST380011ASL"
+ProblemDev10Value="Mod15Write"
+
+ProblemDev11Name="ST3120022ASL"
+ProblemDev11Value="Mod15Write"
+
+ProblemDev12Name="ST3160021ASL"
+ProblemDev12Value="Mod15Write"
