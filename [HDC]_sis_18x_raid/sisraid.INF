@@ -1,0 +1,57 @@
+; SISRAID.INF
+; Copyright 2003 SiS corp.
+
+[Version]
+signature="$CHICAGO$"
+Class=SCSIAdapter
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%SiS%
+;CatalogFile=sisraid.cat
+DriverVer=07/23/2004,5.0.1039.1061
+
+[DestinationDirs]
+DefaultDestDir    = 12  ;Driver directory 
+MiniPortDriver    = 12   ;
+
+[ControlFlags]
+
+[Manufacturer]
+%SiS%=SIS
+
+[SIS]
+%PCI\VEN_1039&DEV_0180.DeviceDesc% = SISRAID , PCI\VEN_1039&DEV_0180
+%PCI\VEN_1039&DEV_0180.DeviceDesc% = SISRAID , PCI\VEN_1039&DEV_0181
+%PCI\VEN_1039&DEV_0182.DeviceDesc% = SISRAID , PCI\VEN_1039&DEV_0182
+%PCI\VEN_1039&DEV_0182.DeviceDesc% = SISRAID , PCI\VEN_1039&DEV_1182
+
+[SISRAID]
+CopyFiles=MiniPortDriver
+AddReg=IOS,Install.Reg
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[Install.Reg]
+HKR,,PortDriver,,sisraid.mpd
+
+[MiniPortDriver]
+sisraid.mpd
+sispuvsd.vxd
+
+[SourceDisksFiles]
+sisraid.mpd=11
+sispuvsd.vxd=11
+
+[SourceDisksNames]
+11 = %DISKNAME1%,,,,
+
+[sisinf]
+sisraid.inf
+
+[strings]
+SiS="Silicon Integrated Systems Corp." 
+PCI\VEN_1039&DEV_0180.DeviceDesc="SiS 180/181 IDE/RAID Controller"
+PCI\VEN_1039&DEV_0182.DeviceDesc="SiS 965/966(L) IDE/RAID Controller"
+DISKNAME1="SiS 18X IDE/RAID Driver Diskette"
+
