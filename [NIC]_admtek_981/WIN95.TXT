@@ -1,0 +1,138 @@
+****************************************************************************
+		    Fast Ethernet Controller Provider Inc.     
+		       PCI 10/100 Fast Ethernet Adapter                    
+
+	      NDIS 3 Miniport Driver For Windows 95 Installation 
+	      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	   Copyright (C) 2000 Fast Ethernet Controller Provider Inc.     
+			     All rights reserved.
+****************************************************************************
+
+The driver conforms to the Network Driver Interface Specification(NDIS) 3.1, 
+and used with Microsoft Windows 95, Windows 95 OSR2
+
+
+Contents
+--------
+    A) Installing NDIS 3 Miniport driver on Microsoft Windows 95
+    B) Installing NDIS 3 Miniport driver on Microsoft Windows 95 OSR2
+    C) Configuring NDIS 3 Miniport driver on Microsoft Windows 95 (OSR2)
+
+
+A) Installing NDIS 3 Miniport driver on Microsoft Windows 95
+============================================================
+  1. Plug the PCI 10/100 Fast Ethernet Adapter into one of the Master PCI                   
+     slots of your PCI platform.
+
+  2. Turn ON the power of PC then boot from Windows 95.
+
+  3. Windows95 will prompt "PCI Ethernet Controller" in "New Hardware Found"
+     dialog box.
+
+  4. Select "Driver from disk provided by hardware manufacturer" from 
+     "New Hardware Found" dialog box, then click OK button.
+
+  5. Insert the PCI 10/100 Fast Ethernet Adapter Driver Diskette in your                   
+     floppy drive.
+
+  6. Enter the driver pathname, i.e. A:\WIN95 (or B:\WIN95), then click OK 
+     button from "Install from Disk" dialog box.
+
+  7. Follow the screen's prompt, insert "Windows 95 CD-ROM" and click
+     OK button from "Insert Disk" dialog box.
+
+  8. Otherwise enter the full pathname of the "Windows 95 CD-ROM" 
+     installation files in "Copying Files..." dialog box, then click OK 
+     button.
+
+  9. Windows 95 will copy the driver (FastNIC.SYS) from A:\WIN95 to   
+     C:\WINDOWS\SYSTEM directory and the FastNIC.INF file from A:\WIN95 to   
+     C:\WINDOWS\INF directory.
+
+ 10. Remove the FPCI 10/100 Fast Ethernet Adapter Driver Diskette from your                   
+     floppy drive.
+
+ 11. Restart your computer for the network function to take effective.
+
+
+NOTICE!!
+  C:\WINDOWS is the directory where your Windows 95 O.S. is located.
+
+
+B) Installing NDIS 3 Miniport driver on Microsoft Windows 95 OSR2
+=================================================================
+  1. Plug the PCI 10/100 Fast Ethernet Adapter into one of the Master PCI                    
+     slots of your PCI platform.
+
+  2. Turn ON the power of PC then boot from Windows 95.
+
+  3. Windows 95 will prompt "PCI Ethernet Controller" in "New Hardware Found"
+     dialog box and "Update Device Driver Wizard" dialog box.
+
+  4. Insert the PCI 10/100 Fast Ethernet Adapter Driver Diskette in your                    
+     floppy drive.
+
+  5. Click "Next" button from "Update Device Driver Wizard" dialog box.
+
+  6. Click "Other location" button from "Update Device Driver Wizard" dialog
+     box.
+
+  7. Type "A:\Win95" from "Select other location".
+
+  8. Windows 95 will prompt "PCI 10/100 Fast Ethernet Adapter" in                    
+     "Update Device Driver Wizard" dialog box.
+
+  9. Click "Finish" button from "Update Device Driver Wizard" dialog box.
+
+ 10. Click OK button when the screen prompts the following message;
+       "Please insert 'PCI 10/100 Fast Ethernet Adapter Driver Diskette'"                   
+
+ 11. Enter the full pathname "A:\WIN95" of the FastNIC.INF file, then click  
+     OK button from "Copying Files..." dialog box.
+
+ 12. Following the screen's prompt, insert "Windows 95 CD-ROM" and click 
+     OK button from "Insert Disk" dialog box.
+
+ 13. Windows 95 will copy the driver(FastNIC.SYS) from A:\WIN95 to   
+     C:\WINDOWS\SYSTEM directory and the FastNIC.INF file from A:\WIN95 to  
+     C:\WINDOWS\INF directory.
+ 
+ 14. Remove the PCI 10/100 Fast Ethernet Adapter Driver Diskette from your                    
+     floppy drive.
+
+ 15. Restart your computer for the network function to take effect.
+
+
+NOTICE!!
+  C:\WINDOWS is the directory where your Windows 95 OSR2 O.S. is located.
+
+
+
+C) Configuring NDIS 3 Miniport driver on Microsoft Windows 95(OSR2)
+===================================================================
+  1. Click the "My Computer" icon in the Main Program Group.
+
+  2. Click the "Control Panel" icon from My Computer window.
+
+  3. Click the "Network" icon from the Control Panel window.
+
+  4. Select "PCI 10/100 Fast Ethernet Adapter" item from "Network" dialog                    
+     box, then click "Properties" button.
+
+  5. Click "Advanced" button from "PCI 10/100 Fast Ethernet Adapter" dialog                    
+     box.
+
+  6. Select the Media Type value (AutoDetect, 10BaseT, 10BaseT Full_Duplex,
+     100BaseTX, 100BaseTX Full_Duplex) from "Value" item, then click OK 
+     button from "PCI 10/100 Fast Ethernet Adapter Properties" dialog box.                   
+
+  7. Click OK button from "Network" dialog box.
+
+  8. Restart your computer to implement the new configuration.
+
+
+
+
+Trademarks:
+Microsoft Windows 95 is a trademark of Microsoft Corporation.

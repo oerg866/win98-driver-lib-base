@@ -1,0 +1,329 @@
+;;**************************************************************************
+;;             Copyright 1999-2002 Fast Ethernet Controller Provider Inc.     
+;;          Windows 2000 & Win98 combined inf for NDIS5 driver 
+;;**************************************************************************
+
+[version]
+Signature   = "$CHICAGO$"
+Compatible  = 1
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %FastNIC%  
+;LayoutFile  = layout.inf                             ;; for put-on-list
+;CatalogFile = FastNIC.cat                            ;; for WHQL certified  
+DriverVer   = 02/21/2002, 2.18.0221.2002
+
+[Manufacturer]
+%FastNIC%   = FastNIC  
+
+[ControlFlags]
+ExcludeFromSelect = \
+		PCI\VEN_1317&DEV_0985, \
+		PCI\VEN_1317&DEV_1985, \
+		PCI\VEN_1317&DEV_9511, \
+		PCI\VEN_1317&DEV_9513
+
+[FastNIC]
+%FastNIC.DeviceDesc%     = FastNIC.ndi,     PCI\VEN_1317&DEV_0985
+%FastNIC_C.DeviceDesc%   = FastNIC_C.ndi,   PCI\VEN_1317&DEV_1985
+%FastNIC9511.DeviceDesc% = FastNIC9511.ndi, PCI\VEN_1317&DEV_9511 
+%FastNIC9513.DeviceDesc% = FastNIC9513.ndi, PCI\VEN_1317&DEV_9513
+
+;;----------------------------;;
+;; Windows 98                 ;;
+;;----------------------------;;
+[FastNIC.ndi]   
+AddReg          = FastNIC.Reg, FastNIC.com.Reg, FastNIC.pci.reg, FastNIC.con.reg        
+CopyFiles       = FastNIC.ndis.copyfiles
+
+[FastNIC_C.ndi]  
+AddReg          = FastNIC_C.Reg, FastNIC.com.Reg, FastNIC.pci.reg, FastNIC.con.reg     
+CopyFiles       = FastNIC.ndis.copyfiles  
+
+[FastNIC9510.ndi]
+AddReg          = FastNIC9510.Reg, FastNIC.com.Reg, FastNIC.pci.reg, FastNIC.con.reg     
+CopyFiles       = FastNIC.ndis.copyfiles 
+
+[FastNIC9511.ndi]
+AddReg          = FastNIC9511.Reg, FastNIC.com.Reg, FastNIC.pci.reg, FastNIC.con.reg     
+CopyFiles       = FastNIC.ndis.copyfiles  
+
+[FastNIC9513.ndi]
+AddReg          = FastNIC9513.Reg, FastNIC.com.Reg, FastNIC.pci.reg, FastNIC.con.reg     
+CopyFiles       = FastNIC.ndis.copyfiles  
+
+;;----------------------------;;
+;; Windows 2000               ;;
+;;----------------------------;;
+[FastNIC.ndi.NT]  
+Characteristics = 0x84
+BusType         = 5
+AddReg          = FastNIC.ndi.reg, FastNIC.ndi.com.reg, FastNIC.pci.reg, FastNIC.con.reg     
+CopyFiles       = FastNIC.ndis.copyfiles.NT  
+
+[FastNIC.ndi.NT.Services]  
+AddService      = FastNIC, 2, FastNIC.Service, FastNIC.EventLog    
+
+[FastNIC_C.ndi.NT]  
+Characteristics = 0x84
+BusType         = 5
+AddReg          = FastNIC_C.ndi.reg, FastNIC.ndi.com.reg, FastNIC.pci.reg, FastNIC.con.reg     
+CopyFiles       = FastNIC.ndis.copyfiles.NT  
+
+[FastNIC_C.ndi.NT.Services]  
+AddService      = FastNIC, 2, FastNIC.Service, FastNIC.EventLog    
+
+[FastNIC9510.ndi.NT]  
+Characteristics = 0x84
+BusType         = 5
+AddReg          = FastNIC9510.ndi.reg, FastNIC.ndi.com.reg, FastNIC.pci.reg, FastNIC.con.reg     
+CopyFiles       = FastNIC.ndis.copyfiles.NT  
+
+[FastNIC9510.ndi.NT.Services]  
+AddService      = FastNIC, 2, FastNIC.Service, FastNIC.EventLog   
+
+[FastNIC9511.ndi.NT]  
+Characteristics = 0x84
+BusType         = 5
+AddReg          = FastNIC9511.ndi.reg, FastNIC.ndi.com.reg, FastNIC.pci.reg, FastNIC.con.reg     
+CopyFiles       = FastNIC.ndis.copyfiles.NT
+
+[FastNIC9511.ndi.NT.Services]  
+AddService      = FastNIC, 2, FastNIC.Service, FastNIC.EventLog   
+
+[FastNIC9513.ndi.NT]  
+Characteristics = 0x84
+BusType         = 5
+AddReg          = FastNIC9513.ndi.reg, FastNIC.ndi.com.reg, FastNIC.pci.reg, FastNIC.con.reg     
+CopyFiles       = FastNIC.ndis.copyfiles.NT  
+
+[FastNIC9513.ndi.NT.Services]
+AddService      = FastNIC, 2, FastNIC.Service, FastNIC.EventLog    
+
+[FastNIC.ndis.copyfiles]  
+FastNIC.sys,,,2  
+
+[FastNIC.ndis.copyfiles.NT]  
+FastNIC.sys,,,2  
+
+;;-------------------------------------------------------------------------
+;; Windows 98 Parameters
+;;-------------------------------------------------------------------------
+[FastNIC.Reg]  
+;; key,subkey,valuname,type,value
+HKR, NDI,            DeviceID,          , "PCI\VEN_1317&DEV_0985"
+HKR,               , AdapterCFID,       , 09851317
+
+[FastNIC_C.Reg]  
+;; key,subkey,valuname,type,value
+HKR, NDI,            DeviceID,          , "PCI\VEN_1317&DEV_1985"
+HKR,               , AdapterCFID,       , 19851317
+
+[FastNIC9510.Reg]  
+;; key,subkey,valuname,type,value
+HKR, NDI,            DeviceID,          , "PCI\VEN_1317&DEV_0985"
+HKR,               , AdapterCFID,       , 09851317
+
+[FastNIC9511.Reg]  
+;; key,subkey,valuname,type,value
+HKR, NDI,            DeviceID,          , "PCI\VEN_1317&DEV_9511"
+HKR,               , AdapterCFID,       , 95111317
+
+[FastNIC9513.Reg]  
+;; key,subkey,valuname,type,value
+HKR, NDI,            DeviceID,          , "PCI\VEN_1317&DEV_9513"
+HKR,               , AdapterCFID,       , 95131317
+
+
+[FastNIC.com.Reg]  
+HKR,               , DevLoader,         , *ndis
+HKR,               , DeviceVxDs,        , FastNIC.sys  
+
+;;Parameters
+HKR,               , AdapterType,       , 5
+HKR,               , BusType,           , 5
+
+;;NDIS Info
+HKR, NDIS,           MajorNdisVersion, 1, 04
+HKR, NDIS,           MinorNdisVersion, 1, 00
+HKR, NDIS,           LogDriverName,     , "FastNIC"  
+
+;;Interfaces
+HKR, Ndi\Interfaces, DefUpper,          , "ndis3"
+HKR, Ndi\Interfaces, DefLower,          , "ethernet"
+HKR, Ndi\Interfaces, UpperRange,        , "ndis3"
+HKR, Ndi\Interfaces, LowerRange,        , "ethernet"
+
+;;Install sections
+HKR, Ndi\Install,    ndis3,            0, "FastNIC.Install"  
+
+
+;;-------------------------------------------------------------------------
+;; Windows 2000 Parameters
+;;-------------------------------------------------------------------------
+[FastNIC.ndi.reg]  
+HKR,               , AdapterCFID,      0, "09851317"
+
+[FastNIC_C.ndi.reg]  
+HKR,               , AdapterCFID,      0, "19851317"
+
+[FastNIC9510.ndi.reg]  
+HKR,               , AdapterCFID,      0, "09851317"
+
+[FastNIC9511.ndi.reg]  
+HKR,               , AdapterCFID,      0, "95111317"
+
+[FastNIC9513.ndi.reg]  
+HKR,               , AdapterCFID,      0, "95131317"
+
+[FastNIC.ndi.com.reg]  
+HKR, Ndi,            Service,          0, "FastNIC"  
+HKR, Ndi\Interfaces, LowerRange,       0, "ethernet"
+HKR, Ndi\Interfaces, UpperRange,       0, "ndis5"
+HKR,               , MediaType,        0, "0"
+
+;;-------------------------------------------------------------------------
+;; FastNIC PCI Parameters
+;;-------------------------------------------------------------------------
+[FastNIC.pci.reg]  
+HKR, , AdapterType,    0, "5"
+HKR, , TxPacketDesc,    , "300"
+HKR, , RxPacketDesc,    , "120"      ; 0x78
+HKR, , TxDmaDesc,       , "600"      ; 0x10
+HKR, , RxDmaDesc,       , "40"       ; 0x28
+HKR, , PacketsPerTxInt, , "10"       ; 0x0a
+HKR, , PacketsPerRxInd, , "10"       ; 0x0a
+HKR, , BurstLength,     , "0"        ; 0(Unlimited), 1 DW, 2 DW, 3 DW,...
+
+
+;;-------------------------------------------------------------------------
+;; FastNIC Common Parameters
+;;-------------------------------------------------------------------------
+[FastNIC.con.reg]
+HKR, Ndi\Params\MediaType,            ParamDesc,  , "Media Type"
+HKR, Ndi\Params\MediaType,            default,    , "0"
+HKR, Ndi\Params\MediaType,            type,       , "enum"
+HKR, Ndi\Params\MediaType\enum,       0,          , "AutoSense"
+HKR, Ndi\Params\MediaType\enum,       1,          , "10BaseT"
+HKR, Ndi\Params\MediaType\enum,       2,          , "10BaseT Full_Duplex"
+HKR, Ndi\Params\MediaType\enum,       3,          , "100BaseTX"
+HKR, Ndi\Params\MediaType\enum,       4,          , "100BaseTX Full_Duplex"
+HKR, Ndi\Params\MediaType,            flag,      1, "20","00","00","00"
+
+HKR, Ndi\Params\PowerManagement,      ParamDesc,  , "PME Enable"
+HKR, Ndi\Params\PowerManagement,      default,    , "1"
+HKR, Ndi\Params\PowerManagement,      type,       , "enum"
+HKR, Ndi\Params\PowerManagement\enum, 0,          , "Disabled"
+HKR, Ndi\Params\PowerManagement\enum, 1,          , "Enabled"
+HKR, Ndi\Params\PowerManagement,      flag,      1, "20","00","00","00"
+
+HKR, Ndi\Params\WakeupFrame,          ParamDesc,  , "Pattern Match Wakeup"
+HKR, Ndi\Params\WakeupFrame,          default,    , "1"
+HKR, Ndi\Params\WakeupFrame,          type,       , "enum"
+HKR, Ndi\Params\WakeupFrame\enum,     0,          , "Disabled"
+HKR, Ndi\Params\WakeupFrame\enum,     1,          , "Enabled"
+HKR, Ndi\Params\WakeupFrame,          flag,      1, "20","00","00","00"
+
+HKR, Ndi\Params\LinkOnChange,         ParamDesc,  , "Link Wakeup(Off->On)"
+HKR, Ndi\Params\LinkOnChange,         default,    , "1"
+HKR, Ndi\Params\LinkOnChange,         type,       , "enum"
+HKR, Ndi\Params\LinkOnChange\enum,    0,          , "Disabled"
+HKR, Ndi\Params\LinkOnChange\enum,    1,          , "Enabled"
+HKR, Ndi\Params\LinkOnChange,         flag,      1, "20","00","00","00"
+ 
+HKR, Ndi\Params\LinkOffChange,        ParamDesc,  , "Link Wakeup(On->Off)"
+HKR, Ndi\Params\LinkOffChange,        default,    , "0"
+HKR, Ndi\Params\LinkOffChange,        type,       , "enum"
+HKR, Ndi\Params\LinkOffChange\enum,   0,          , "Disabled"
+HKR, Ndi\Params\LinkOffChange\enum,   1,          , "Enabled"
+HKR, Ndi\Params\LinkOffChange,        flag,      1, "20","00","00","00"
+
+HKR, Ndi\Params\MagicPacket,          ParamDesc,  , "Magic Packet Wakeup"
+HKR, Ndi\Params\MagicPacket,          default,    , "1"
+HKR, Ndi\Params\MagicPacket,          type,       , "enum"
+HKR, Ndi\Params\MagicPacket\enum,     0,          , "Disabled"
+HKR, Ndi\Params\MagicPacket\enum,     1,          , "Enabled"
+HKR, Ndi\Params\MagicPacket,          flag,      1, "20","00","00","00"
+
+HKR, Ndi\Params\FlowControl,          ParamDesc,  , "Flow Control"
+HKR, Ndi\Params\FlowControl,          default,    , "1"
+HKR, Ndi\Params\FlowControl,          type,       , "enum"
+HKR, Ndi\Params\FlowControl\enum,     0,          , "Disabled"
+HKR, Ndi\Params\FlowControl\enum,     1,          , "Enabled"
+HKR, Ndi\Params\FlowControl,          flag,      1, "20","00","00","00"
+
+HKR, Ndi\Params\PriorityPacket,       ParamDesc,  , "Priority Packet"
+HKR, Ndi\Params\PriorityPacket,       default,    , "0"
+HKR, Ndi\Params\PriorityPacket,       type,       , "enum"
+HKR, Ndi\Params\PriorityPacket\enum,  0,          , "Disabled"
+HKR, Ndi\Params\PriorityPacket\enum,  1,          , "Enabled"
+HKR, Ndi\Params\PriorityPacket,       flag,      1, "20","00","00","00"
+
+HKR,Ndi\params\VlanId,                ParamDesc, 0, "VLAN ID"
+HKR,Ndi\params\VlanId,                type,      0, "edit"
+HKR,Ndi\params\VlanId,                default,   0, "0"
+HKR,Ndi\params\VlanId,                LimitText, 0, "4"
+HKR,Ndi\params\VlanId,                UpperCase, 0, "1"
+HKR,Ndi\params\VlanId,                Optional,  0, "1"
+
+;;-------------------------------------------------------------------------
+;; Service
+;;-------------------------------------------------------------------------
+[FastNIC.Service]  
+DisplayName     = %FastNIC.Service.DispName%  
+ServiceType     = 1                                ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3                                ;%SERVICE_AUTO_START%
+ErrorControl    = 1                                ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\FastNIC.sys  
+LoadOrderGroup  = NDIS
+AddReg          = TextModeFlags.reg
+
+[FastNIC.EventLog]
+AddReg = FastNIC.AddEventLog.reg  
+
+[FastNIC.AddEventLog.reg]  
+HKR, , EventMessageFile, 0x00020000, %%SystemRoot%%\System32\netevent.dll
+HKR, , TypesSupported,   0x00010001, 7
+
+[TextModeFlags.reg]
+HKR, , TextModeFlags, 0x00010001, 0x0001
+
+
+;;-------------------------------------------------------------------------
+;; Destination Directory
+;;-------------------------------------------------------------------------
+[DestinationDirs]
+FastNIC.ndis.copyfiles       = 11
+FastNIC.ndis.copyfiles.NT    = 12
+DefaultDestDir               = 11                               ; LDID_SYS
+
+
+;;-------------------------------------------------------------------------
+;; Source Files
+;;-------------------------------------------------------------------------
+[SourceDisksNames]
+1=%DISKNAME%,,,
+
+[SourceDisksFiles]
+FastNIC.sys  = 1  
+FastNIC.inf  = 1  
+;FastNIC.cat = 1  
+
+
+;;-------------------------------------------------------------------------
+;; Strings
+;;-------------------------------------------------------------------------
+[Strings]
+;Msft    = "Microsoft"
+FastNIC  ="ADMTEK"     
+
+;;Source Disk Name
+DISKNAME = "PCI/CardBus 10/100 Fast Ethernet Adapter Driver Diskette "
+
+FastNIC.DeviceDesc       = "PCI 10/100 Fast Ethernet Adapter(983)"                    
+FastNIC_C.DeviceDesc     = "CardBus 10/100 Fast Ethernet Adapter"                    
+FastNIC9510.DeviceDesc   = "PCI 10/100 Fast Ethernet Adapter(9510)"                    
+FastNIC9511.DeviceDesc   = "PCI 10/100 Fast Ethernet Adapter(9511)"                    
+FastNIC9513.DeviceDesc   = "PCI 10/100 Fast Ethernet Adapter(9513)"                    
+FastNIC.Service.DispName = "PCI/CardBus 10/100 Fast Ethernet Adapter"
+

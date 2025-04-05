@@ -1,0 +1,86 @@
+****************************************************************************
+		    Fast Ethernet Controller Provider Inc.     
+		       PCI 10/100 Fast Ethernet Adapter                   
+
+	   NDIS 5 Miniport Driver For Windows 98/98_SE Installation 
+	   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	   Copyright (C) 2000 Fast Ethernet Controller Provider Inc.     
+			     All rights reserved.
+****************************************************************************
+
+The driver conforms to the Network Driver Interface Specification (NDIS)5.0,
+and used with Microsoft Windows OS.
+
+
+
+
+Contents
+--------
+    A) Install NDIS5.0 Miniport driver to Microsoft Windows 98/98_SE
+    B) Configure NDIS5.0 Miniport driver to Microsoft Windows 98/98_SE
+
+	
+
+A) Installing NDIS 5 Miniport driver to Microsoft Windows 98/98_SE
+==================================================================
+
+  1. Plug the PCI 10/100 Fast Ethernet Adapter into one of the Master PCI                   
+     slots of your PCI platform.
+
+  2. Turn ON the power of PC then boot into Windows 98/98_SE.
+
+  3. Windows 98/98_SE will prompt "PCI Ethernet Controller" in "New Hardware 
+     Found" dialog box and "Update Device Driver Wizard" dialog box.
+
+  4. Click "Next" button when "Search for the best driver for your device"
+     [Recommended] is on.
+
+  5. Insert the PCI 10/100 Fast Ethernet Adapter Driver Diskette in your                   
+     floppy drive.
+
+  6. Disable the "Floppy disk drives" check box. Click "Specify a location",
+     type "A:\WIN98" and then click "Next" button.
+
+  7. Windows 98/98_SE will prompt "PCI 10/100 Fast Ethernet Adapter" in "Add                   
+     New Hardware Wizard" dialog box.
+
+  8. Click "Next" button and Windows starts to copy files from Windows
+     98/98_SE CD-ROM to your hard disk.
+
+  9. Click "Finish" button from "Add New Hardware Wizard" dialog box.
+
+ 10. Remove the Adapter Driver Diskette from your floppy drive.
+
+ 11. Restart your computer to implement the network function.
+
+
+
+B) Configuring NDIS5.0 Miniport driver to Microsoft Windows 98/98_SE
+====================================================================
+  1. Click the "My Computer" icon in the Main Program Group.
+
+  2. Click the "Control Panel" icon from My Computer window.
+
+  3. Click the "Network" icon from the Control Panel window.
+
+  4. Select "PCI 10/100 Fast Ethernet Adapter" item from "Network" dialog box,                    
+     then click "Properties" button.
+
+  5. Click "Advanced" button from "PCI 10/100 Fast Ethernet Adapter Properties"                   
+     dialog box.
+
+  6. Select the Media Type value (AutoDetect, 10BaseT, 10BaseT Full_Duplex,
+     100BaseTX, 100BaseTX Full_Duplex) from "Value" item, then click OK 
+     button from "PCI 10/100 Fast Ethernet Adapter Properties" dialog box.                   
+
+  7. Click OK button from "Network" dialog box.
+
+  8. Restart your computer for the new configuration to take effect.
+
+
+
+
+Trademarks:
+Microsoft Windows 98 and 98_SE is a trademark of Microsoft Corporation.
+

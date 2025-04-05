@@ -1,0 +1,159 @@
+;FastNIC.INF -  Win95 driver installation file for    
+;Fast Ethernet 10/100 PCI Adapter Driver                   
+;
+; Copyright 2000, Fast Ethernet Controller Provider Inc.     
+;
+; Author: Junius
+;
+; History:
+;
+;  02-Feb-99  Junius Pre Release
+;  25-Aug-99  Alan   Add AN983, AN985, DEC21140 and DEC21143 support
+;  09-Jun-00  Axl    Add HomePNA
+
+[version]
+LayoutFile=layout.inf
+signature="$WINDOWS 95$"
+Class=Net
+provider=%V_MS%
+
+[Manufacturer]
+%V_FastNIC%=FastNIC   
+
+[FastNIC]  
+%FastNIC981.DeviceDesc%   =  FastNIC981.ndi,  PCI\VEN_1317&DEV_0981  ;FastNIC  Series    
+
+;***************************************************************************
+[FastNIC981.ndi]  
+AddReg=FastNIC981.ndi.reg,FastNIC.ndi.reg,FastNIC.pci.reg,Common.con.reg    
+[FastNIC983.ndi]  
+AddReg=FastNIC983.ndi.reg,FastNIC.ndi.reg,FastNIC.pci.reg,Common.con.reg    
+[FastNIC985.ndi]  
+AddReg=FastNIC985.ndi.reg,FastNIC.ndi.reg,FastNIC.pci.reg,Common.con.reg    
+[FastNIC9510.ndi]  
+AddReg=FastNIC9510.ndi.reg,FastNIC.ndi.reg,FastNIC.pci.reg,Common.con.reg    
+[FastNIC9511.ndi]  
+AddReg=FastNIC9511.ndi.reg,FastNIC.ndi.reg,FastNIC.pci.reg,Common.con.reg    
+[FastNIC9513.ndi]  
+AddReg=FastNIC9513.ndi.reg,FastNIC.ndi.reg,FastNIC.pci.reg,Common.con.reg    
+
+[FastNIC981.ndi.reg]  
+HKR, Ndi,DeviceID, ,"PCI\VEN_1317&DEV_0981"
+HKR,,AdapterCFID,  ,09811317
+[FastNIC983.ndi.reg]  
+HKR, Ndi,DeviceID, ,"PCI\VEN_1317&DEV_0985"
+HKR,,AdapterCFID,  ,09851317
+[FastNIC985.ndi.reg]  
+HKR, Ndi,DeviceID, ,"PCI\VEN_1317&DEV_1985"  
+HKR,,AdapterCFID,  ,19851317
+[FastNIC9510.ndi.reg]  
+HKR, Ndi,DeviceID, ,"PCI\VEN_1317&DEV_0985"
+HKR,,AdapterCFID,  ,09851317
+[FastNIC9511.ndi.reg]  
+HKR, Ndi,DeviceID, ,"PCI\VEN_1317&DEV_9511"
+HKR,,AdapterCFID,  ,95111317
+[FastNIC9513.ndi.reg]  
+HKR, Ndi,DeviceID, ,"PCI\VEN_1317&DEV_9513"
+HKR,,AdapterCFID,  ,95131317
+
+
+;****************************************************************************
+; Driver parameters
+;****************************************************************************
+[FastNIC.ndi.reg]
+; key,subkey,valuname,type,value
+HKR,,DevLoader,,*ndis
+HKR,,DeviceVxDs,,FastNIC.SYS  
+; NDIS Info
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,NDIS,LogDriverName,,"FastNIC"  
+; Interfaces
+HKR,Ndi\Interfaces,DefLower,   ,"ethernet"
+HKR,Ndi\Interfaces,LowerRange, ,"ethernet"
+HKR,Ndi\Interfaces,DefUpper,   ,"ndis3"
+HKR,Ndi\Interfaces,UpperRange, ,"ndis3"
+; Install sections
+HKR,Ndi\Install,   ndis3,      ,"FastNIC.ndis3"  
+;params
+HKR,,MediaType,,1
+
+
+;****************************************************************************
+; PCI common parameters
+;****************************************************************************
+
+[FastNIC.pci.reg]  
+;params
+HKR,,AdapterType,     ,5
+HKR,,BusType,         ,5
+HKR,,TxPacketDesc,    ,160   ; 0xa0
+HKR,,RxPacketDesc,    ,120   ; 0x78
+HKR,,TxDmaDesc,       ,320   ; 0x140
+HKR,,RxDmaDesc,       ,40    ; 0x28
+HKR,,PacketsPerTxInt, ,10    ; 0x0a
+HKR,,PacketsPerRxInd, ,10    ; 0x0a
+HKR,,BurstLength,     ,0     ; 0 (Unlimited), 1 DW, 2 DW, 3 DW, ...
+
+;****************************************************************************
+; Device specific parameters
+;****************************************************************************
+
+[Common.con.reg]
+HKR, Ndi\Params\MediaType,      ParamDesc, ,"Media Type"
+HKR, Ndi\Params\MediaType,      default,   ,0
+HKR, Ndi\Params\MediaType,      type,      ,enum
+HKR, Ndi\Params\MediaType\enum, 0,         ,"AutoSense"
+HKR, Ndi\Params\MediaType\enum, 1,         ,"10BaseT"
+HKR, Ndi\Params\MediaType\enum, 2,         ,"10BaseT Full_Duplex"
+HKR, Ndi\Params\MediaType\enum, 3,         ,"100BaseTX"
+HKR, Ndi\Params\MediaType\enum, 4,         ,"100BaseTX Full_Duplex"
+HKR, Ndi\Params\MediaType,flag,1,20,00,00,00
+
+;****************************************************************************
+; Drivers
+;****************************************************************************
+
+; Install NDIS3
+
+[FastNIC.ndis3]  
+CopyFiles=FastNIC.ndis3.CopyFiles, FastNIC.ndis3.CopyInf   
+
+[FastNIC.ndis3.CopyFiles]  
+FastNIC.sys  
+
+[FastNIC.ndis3.CopyInf]  
+FastNIC.inf  
+
+;****************************************************************************
+; Destination Directories
+;****************************************************************************
+[DestinationDirs]
+DefaultDestDir                =11 ; LDID_SYS
+FastNIC.ndis3.CopyFiles       =11  
+FastNIC.ndis3.CopyInf         =17  
+
+[SourceDisksNames]
+50="PCI/CardBus 10/100 Fast Ethernet Adapter Drivers Diskette", "",0
+
+[SourceDisksFiles]
+FastNIC.sys=50,,10000  
+FastNIC.inf=50,,10000  
+
+;****************************************************************************
+; Localizable Strings
+;****************************************************************************
+[strings]
+; Provider
+V_MS="Microsoft"
+; Manufacturers
+V_FastNIC="ADMTEK"       
+
+; PNP Devices
+FastNIC981.DeviceDesc  =  "PCI 10/100 Fast Ethernet Adapter(981)"                   
+FastNIC983.DeviceDesc  =  "PCI 10/100 Fast Ethernet Adapter(983)"                   
+FastNIC985.DeviceDesc  =  "CardBus 10/100 Fast Ethernet Adapter"                   
+FastNIC9510.DeviceDesc =  "PCI 10/100 Fast Ethernet Adapter(9510)"                   
+FastNIC9511.DeviceDesc =  "PCI 10/100 Fast Ethernet Adapter(9511)"                   
+FastNIC9513.DeviceDesc =  "PCI 10/100 Fast Ethernet Adapter(9513)"                   
+
