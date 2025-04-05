@@ -1,0 +1,298 @@
+;
+; Version v4.40
+;
+; Copyright 1996-1999, Netgear Corporation
+; Modified 2025 for QuickInstall
+;
+
+
+[version]
+LayoutFile=layout.inf
+signature="$CHICAGO$"
+Class=Net
+provider=%V_MS%
+
+[Manufacturer]
+%V_MANUF%=Vendor
+
+[Vendor]
+%Pnic.DeviceDesc%=Pnic.ndi,        PCI\VEN_11AD&DEV_0002
+%PnicII.DeviceDesc%=PnicII.ndi,    PCI\VEN_11AD&DEV_C115
+
+;***************************************************************************
+
+[Pnic.ndi]
+AddReg=Pnic.ndi.reg,Pnic.spec.reg,Fa310.ndi.reg,Pnics.pci.reg,Fa310.con.reg
+
+[PnicII.ndi]
+AddReg=PnicII.ndi.reg,PnicII.spec.reg,Fa310.ndi.reg,Pnics.pci.reg,Fa310.con.reg
+
+;***************************************************************************
+
+[Pnic.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AD&DEV_0002"
+HKR,,AdapterCFID,,000211AD
+
+[PnicII.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AD&DEV_C115"
+HKR,,AdapterCFID,,C11511AD
+
+;****************************************************************************
+; Driver parameters
+;****************************************************************************
+
+[Fa310.ndi.reg]
+; key,subkey,valuname,type,value
+HKR,,DevLoader,,*ndis
+HKR,,DeviceVxDs,,Ngrpci.sys
+; NDIS Info
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,NDIS,LogDriverName,,"NGRPCI"
+HKR,NDIS,MajorDriverVersion,1,4
+HKR,NDIS,MinorDriverVersion,1,28
+HKR,NDIS\NDIS2,DriverName,,"NGRPCI$"
+HKR,NDIS\NDIS2,FileName,,"NGRPCI.dos"
+HKR,NDIS\ODI,DriverName,,"NGRPCI"
+HKR,NDIS\ODI,FileName,,"NGRPCI.com"
+
+; Interfaces
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+HKR,Ndi\Interfaces,DefUpper,,"ndis2,ndis3"
+;HKR,Ndi\Interfaces,UpperRange,,"ndis2,ndis3,odi"
+HKR,Ndi\Interfaces,UpperRange,,"ndis2,ndis3"
+
+; Install sections
+HKR,Ndi\Install,ndis3,,"Fa310.ndis3"
+HKR,Ndi\Install,ndis2,,"Fa310.ndis2"
+HKR,Ndi\Install,odi,,"Fa310.odi"
+
+;params
+HKR,,MediaType,,1
+
+;****************************************************************************
+; PCI common parameters
+;****************************************************************************
+
+[21x4.pci.reg]
+;params
+HKR,,AdapterType,,5
+HKR,,BusType,,5
+
+;Burst Length
+HKR,Ndi\params\BurstLength,ParamDesc,,"Burst Length"
+HKR,Ndi\params\BurstLength,default,,10
+HKR,Ndi\params\BurstLength,type,,enum
+HKR,Ndi\params\BurstLength\enum,1,,"1 DWORD"
+HKR,Ndi\params\BurstLength\enum,2,,"2 DWORDS"
+HKR,Ndi\params\BurstLength\enum,4,,"4 DWORDS"
+HKR,Ndi\params\BurstLength\enum,8,,"8 DWORDS"
+HKR,Ndi\params\BurstLength\enum,10,,"16 DWORDS"
+HKR,Ndi\params\BurstLength\enum,20,,"32 DWORDS"
+HKR,NDI\params\BurstLength,flag,1,20,00,00,00
+
+;Receive Buffers
+HKR,Ndi\params\ReceiveBuffers,ParamDesc,,"Receive Buffers"
+HKR,Ndi\params\ReceiveBuffers,default,,40
+HKR,Ndi\params\ReceiveBuffers,type,,enum
+HKR,Ndi\params\ReceiveBuffers\enum,8,," 8"
+HKR,Ndi\params\ReceiveBuffers\enum,10,,"16"
+HKR,Ndi\params\ReceiveBuffers\enum,20,,"32"
+HKR,Ndi\params\ReceiveBuffers\enum,30,,"48"
+HKR,Ndi\params\ReceiveBuffers\enum,40,,"64"
+HKR,NDI\params\ReceiveBuffers,flag,1,20,00,00,00
+
+[Pnics.pci.reg]
+;params
+HKR,,AdapterType,,5
+HKR,,BusType,,5
+
+;Burst Length
+HKR,Ndi\params\BurstLength,ParamDesc,,"Burst Length"
+HKR,Ndi\params\BurstLength,default,,10
+HKR,Ndi\params\BurstLength,type,,enum
+HKR,Ndi\params\BurstLength\enum,1,,"1 DWORD"
+HKR,Ndi\params\BurstLength\enum,2,,"2 DWORDS"
+HKR,Ndi\params\BurstLength\enum,4,,"4 DWORDS"
+HKR,Ndi\params\BurstLength\enum,8,,"8 DWORDS"
+HKR,Ndi\params\BurstLength\enum,10,,"16 DWORDS"
+HKR,Ndi\params\BurstLength\enum,20,,"32 DWORDS"
+HKR,NDI\params\BurstLength,flag,1,20,00,00,00
+
+;****************************************************************************
+; Device specific parameters
+;****************************************************************************
+
+[2114x.ndi.reg]
+;Transmit Threshold 100Mbps
+;HKR,Ndi\params\TransmitThreshold100,ParamDesc,,"100Mbps Transmit Threshold"
+;HKR,Ndi\params\TransmitThreshold100,default,,80
+;HKR,Ndi\params\TransmitThreshold100,type,,enum
+;HKR,Ndi\params\TransmitThreshold100\enum,80,," 128 bytes"
+;HKR,Ndi\params\TransmitThreshold100\enum,100,," 256 bytes"
+;HKR,Ndi\params\TransmitThreshold100\enum,200,," 512 bytes"
+;HKR,Ndi\params\TransmitThreshold100\enum,400,,"1024 bytes"
+;HKR,NDI\params\TransmitThreshold100,flag,1,20,00,00,00
+;Transmit Threshold 10Mbps
+;HKR,Ndi\params\TransmitThreshold,ParamDesc,,"10Mbps Transmit Threshold"
+;HKR,Ndi\params\TransmitThreshold,default,,60
+;HKR,Ndi\params\TransmitThreshold,type,,enum
+;HKR,Ndi\params\TransmitThreshold\enum,48,,"  72 bytes"
+;HKR,Ndi\params\TransmitThreshold\enum,60,,"  96 bytes"
+;HKR,Ndi\params\TransmitThreshold\enum,80,," 128 bytes"
+;HKR,Ndi\params\TransmitThreshold\enum,A0,," 160 bytes"
+;HKR,NDI\params\TransmitThreshold,flag,1,20,00,00,00
+
+;StoreAndForward
+HKR,Ndi\params\StoreAndForward,ParamDesc,,"Store And Forward"
+HKR,Ndi\params\StoreAndForward,default,,0
+HKR,Ndi\params\StoreAndForward,type,,enum
+HKR,Ndi\params\StoreAndForward\enum,0,,"Disabled"
+HKR,Ndi\params\StoreAndForward\enum,1,,"Enabled"
+HKR,NDI\params\StoreAndForward,flag,1,20,00,00,00
+
+[Pnic.spec.reg]
+;Transmit Threshold
+HKR,Ndi\params\TransmitThreshold,ParamDesc,,"Transmit Threshold"
+HKR,Ndi\params\TransmitThreshold,default,,6
+HKR,Ndi\params\TransmitThreshold,type,,enum
+HKR,Ndi\params\TransmitThreshold\enum,0,,"Store and Forward"
+HKR,Ndi\params\TransmitThreshold\enum,1,,"36 Bytes"
+HKR,Ndi\params\TransmitThreshold\enum,2,,"72 Bytes"
+HKR,Ndi\params\TransmitThreshold\enum,3,,"96 Bytes"
+HKR,Ndi\params\TransmitThreshold\enum,4,,"128 Bytes"
+HKR,Ndi\params\TransmitThreshold\enum,5,,"160 Bytes"
+HKR,Ndi\params\TransmitThreshold\enum,6,,"256 Bytes"
+HKR,NDI\params\TransmitThreshold,flag,1,30,00,00,00
+
+[PnicII.spec.reg]
+;Transmit Threshold
+HKR,Ndi\params\TransmitThreshold,ParamDesc,,"Transmit Threshold"
+HKR,Ndi\params\TransmitThreshold,default,,200
+HKR,Ndi\params\TransmitThreshold,type,,enum
+HKR,Ndi\params\TransmitThreshold\enum,0,,"Store and Forward"
+HKR,Ndi\params\TransmitThreshold\enum,80,,"128 Bytes"
+HKR,Ndi\params\TransmitThreshold\enum,100,,"256 Bytes"
+HKR,Ndi\params\TransmitThreshold\enum,200,,"512 Bytes"
+HKR,Ndi\params\TransmitThreshold\enum,400,,"1024 Bytes"
+HKR,NDI\params\TransmitThreshold,flag,1,30,00,00,00
+
+[Fa310.con.reg]
+;network address
+; for NDIS3 only (flag=20)
+HKR,Ndi\params\NetworkAddress,ParamDesc,,"Network Address (32 bits)"
+HKR,Ndi\params\NetworkAddress,type,,edit
+HKR,Ndi\params\NetworkAddress,LimitText,,12
+HKR,Ndi\params\NetworkAddress,UpperCase,,1
+HKR,Ndi\params\NetworkAddress,default,,""
+HKR,Ndi\params\NetworkAddress,flag,1,20,00,00,00
+HKR,Ndi\params\NetworkAddress,optional,,1
+
+;;;;for NIDS2 only (flag=10)
+;HKR,Ndi\params\NetworkAddress,ParamDesc,,"Network Address (16/32 bits)"
+;HKR,Ndi\params\NetworkAddress,type,,edit
+;HKR,Ndi\params\NetworkAddress,LimitText,,12
+;HKR,Ndi\params\NetworkAddress,UpperCase,,1
+;HKR,Ndi\params\NetworkAddress,default,,""
+;HKR,Ndi\params\NetworkAddress,flag,1,10,00,00,00
+;HKR,Ndi\params\NetworkAddress,optional,,1
+
+;ConnectionType
+HKR,Ndi\params\ConnectionType,ParamDesc,,"Connection Type (32 bits)"
+HKR,Ndi\params\ConnectionType,default,,0
+HKR,Ndi\params\ConnectionType,type,,enum
+HKR,Ndi\params\ConnectionType\enum,0,,"AutoSense"
+HKR,Ndi\params\ConnectionType\enum,2,,"10Base-T"
+HKR,Ndi\params\ConnectionType\enum,3,,"10Base-T Full_Duplex"
+HKR,Ndi\params\ConnectionType\enum,8,,"100Base-Tx"
+HKR,Ndi\params\ConnectionType\enum,9,,"100Base-Tx Full_Duplex"
+HKR,NDI\params\ConnectionType,flag,1,20,00,00,00
+
+;;
+;;For Media Type  for NDIS2
+;;
+HKR,Ndi\params\SIA_MODE,ParamDesc,,"Full/Half Duplex (16 bits)"
+HKR,Ndi\params\SIA_MODE,default,,"AUTOSENSE"
+HKR,Ndi\params\SIA_MODE,type,,enum
+HKR,Ndi\params\SIA_MODE\enum,"AUTOSENSE",,"AutoSense"
+HKR,Ndi\params\SIA_MODE\enum,"TP",,"Half Duplex"
+HKR,Ndi\params\SIA_MODE\enum,"TP_FULL_DUPLEX",,"Full Duplex"
+HKR,NDi\params\SIA_MODE,flag,1,10,00,00,00
+HKR,Ndi\params\SIA_MODE,optional,,1
+
+;;
+;;For Line Speed
+;;
+HKR,Ndi\params\DATA_RATE,ParamDesc,,"Speed 10M/100M (16 bits)"
+HKR,Ndi\params\DATA_RATE,default,,""
+HKR,Ndi\params\DATA_RATE,type,,enum
+HKR,Ndi\params\DATA_RATE\enum,"MB10",,"10BaseT"
+HKR,Ndi\params\DATA_RATE\enum,"MB100",,"100BaseTx"
+HKR,NDI\params\DATA_RATE,flag,1,10,00,00,00
+HKR,Ndi\params\DATA_RATE,optional,,1
+
+;****************************************************************************
+; Drivers
+;****************************************************************************
+
+; Install NDIS3
+[Fa310.ndis3]
+CopyFiles=Fa310.inf.CopyFiles,Fa310.ndis3.CopyFiles
+
+[Fa310.ndis3.CopyFiles]
+NGRPCI.sys, NGRPCI.sy_,,2
+
+; Install NDIS2
+[Fa310.ndis2]
+CopyFiles=Fa310.ndis2.CopyFiles
+
+[Fa310.ndis2.CopyFiles]
+NGRPCI.dos, NGRPCI.dos,,2
+
+; Install ODI
+[Fa310.odi]
+CopyFiles=Fa310.odi.CopyFiles
+
+[Fa310.odi.CopyFiles]
+NGRPCI.com
+
+; Install INF
+[Fa310.inf.CopyFiles]
+NETDLPCI.inf, NGRPCI.inf
+
+
+;****************************************************************************
+; Destination Directories
+;****************************************************************************
+[DestinationDirs]
+DefaultDestDir            =11 ; LDID_SYS
+Fa310.ndis3.CopyFiles     =11
+Fa310.ndis2.CopyFiles     =26 ; LDID_WINBOOT
+;Fa310.odi.CopyFiles      =26
+Fa310.inf.CopyFiles       =17
+
+
+[SourceDisksNames]
+1="Liteon PNIC/PNIC II Fast Ethernet PCI Adapter Drivers disk","",0
+
+[SourceDisksFiles]
+NGRPCI.sy_=1
+NGRPCI.dos=1
+NGRPCI.inf=1
+NGRPCI.com=1
+
+
+;****************************************************************************
+; Localizable Strings
+;****************************************************************************
+[strings]
+; Provider
+V_MS="Lite-On"
+; Manufacturers
+V_MANUF="Lite-On"
+
+; PCI Devices
+21140M.DeviceDesc= "Lite-On 82c168 PNIC Fast Ethernet PCI Adapter"
+Pnic.DeviceDesc="Lite-On 82c168 PNIC Fast Ethernet PCI Adapter"
+PnicII.DeviceDesc="Lite-On PNIC-II Fast Ethernet PCI Adapter"
