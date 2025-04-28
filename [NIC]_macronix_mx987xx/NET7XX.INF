@@ -1,0 +1,176 @@
+; NET7xx.INF
+; Macronix MX987xx Family Fast Ethernet Adapters
+; Copyright (c) 1989-2000, Macronix International Corporation
+; Inf for Windows 98 and Windows 2000
+
+[version]
+Signature   = "$Windows NT$"
+Compatible  = 1
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %MXIC%
+CatalogFile = net7xx.cat
+DriverVer=06/13/2000,2.13.2195.5
+
+[Manufacturer]
+%MXIC% = MXIC
+
+[ControlFlags]
+ExcludeFromSelect = PCI\VEN_10d9&DEV_0512, \
+                    PCI\VEN_10d9&DEV_0531
+                    
+[MXIC]
+; DisplayName          Section            DeviceID
+; -----------        -----------    -------------------------------------
+%0512.DeviceDesc%    = 0512.ndi,    PCI\VEN_10d9&DEV_0512
+%0531.DeviceDesc%    = 0531.ndi,    PCI\VEN_10d9&DEV_0531
+
+;----------------------------------------------------------------------------
+; NT main sections
+;
+[0512.ndi.NTX86]
+Characteristics = 0x84 ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5    ; PCI
+AddReg          = pci.reg, speed.reg, 0512.nt.id.reg, mx9871x.nt.reg
+CopyFiles       = mx9871x_NT.Copyfiles
+
+[0512.ndi.NTX86.Services]
+AddService      = MXNIC, 2, mx9871x.Service, common.EventLog
+
+[0531.ndi.NTX86]
+Characteristics = 0x84 ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5    ; PCI
+AddReg          = pci.reg, speed.reg, 0531.nt.id.reg, mx9871x.nt.reg
+CopyFiles       = mx9871x_NT.CopyFiles
+
+[0531.ndi.NTX86.Services]
+AddService      = MXNIC, 2, mx9871x.Service, common.EventLog
+
+;-----------------------------------------------------------------------------
+; Win9x main sections
+;
+[0512.ndi]
+AddReg          = pci.reg, speed.reg, 0512.win.id.reg, mx9871x.win.reg
+CopyFiles       = mx9871x.CopyFiles
+
+[0531.ndi]
+AddReg          = pci.reg, speed.reg, 0531.win.id.reg, mx9871x.win.reg
+CopyFiles       = mx9871x.CopyFiles
+
+;-----------------------------------------------------------------------------
+; Common sections
+;
+[pci.reg]
+HKR,,AdapterType,0,"5"
+HKR,,BusType,0,"5"
+
+[speed.reg]
+HKR, Ndi\params\ConnectionType,              ParamDesc,0, %ConnectionType%
+HKR, Ndi\params\ConnectionType,              default,  0, "0"
+HKR, Ndi\params\ConnectionType,              type,     0, "enum"
+HKR, Ndi\params\ConnectionType\enum,         0,        0, %SpeedAutoDetect%
+HKR, Ndi\params\ConnectionType\enum,         1,        0, %100MbFull_Duplex%
+HKR, Ndi\params\ConnectionType\enum,         2,        0, %100MbHalf_Duplex%
+HKR, Ndi\params\ConnectionType\enum,         3,        0, %10MbFull_Duplex%
+HKR, Ndi\params\ConnectionType\enum,         4,        0, %10MbHalf_Duplex%
+
+;----------------------------------------------------------------------------
+; NT specific
+;
+[0512.nt.id.reg]
+HKR,,AdapterCFID,0, "051210d9"
+
+[0531.nt.id.reg]
+HKR,,AdapterCFID,0, "053110d9"
+
+[mx9871x.nt.reg]
+HKR, Ndi,                       Service,    0, "MXNIC"
+HKR, Ndi\Interfaces,            DefUpper,   0, "ndis5"
+HKR, Ndi\Interfaces,            DefLower,   0, "ethernet"
+HKR, Ndi\Interfaces,            UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,            LowerRange, 0, "ethernet"
+
+[mx9871x.Service]
+DisplayName     = %mx9871x.Service.DispName%
+ServiceType     = 1 ;%SERVICE_KERNEL_DRIVER%
+StartType       = 3 ;%SERVICE_AUTO_START%
+ErrorControl    = 1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\mxnic.sys
+LoadOrderGroup  = NDIS
+
+[common.EventLog]
+AddReg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+;----------------------------------------------------------------------------
+; Win9x specific
+;
+[0512.win.id.reg]
+HKR, Ndi, DeviceID, 0, "PCI\VEN_10d9&DEV_0512"
+HKR,,AdapterCFID,,051210d9
+
+[0531.win.id.reg]
+HKR, Ndi, DeviceID, 0, "PCI\VEN_10d9&DEV_0531"
+HKR,,AdapterCFID,,053110d9
+
+[mx9871x.win.reg]
+HKR, ,              DevLoader,          0, "*ndis"
+HKR, ,              DeviceVxDs,         0, "mxnic.sys"
+HKR, ,              EnumPropPages,      0, "netdi.dll,EnumPropPages"
+HKR, Ndi\Interfaces,DefUpper,           0, "ndis3"
+HKR, Ndi\Interfaces,DefLower,           0, "ethernet"
+HKR, Ndi\Interfaces,UpperRange,         0, "ndis3"
+HKR, Ndi\Interfaces,LowerRange,         0, "ethernet"
+
+HKR, NDIS,          LogDriverName,      0, "MXNIC"
+HKR, NDIS,          MajorNdisVersion,   1, 03
+HKR, NDIS,          MinorNdisVersion,   1, 0A
+
+;----------------------------------------------------------------------------
+; DestinationDirs
+;
+[mx9871x_NT.CopyFiles]
+mxnic.sys,,,2
+
+[mx9871x.CopyFiles]
+mxnic.sys
+
+[DestinationDirs]
+DefaultDestDir        = 11 ; LDID_SYSTEM
+mx9871x_NT.CopyFiles  = 12 ; LDID_SYSTEM32\DRIVERS
+mx9871x.CopyFiles     = 11 ; LDID_SYSTEM
+
+[SourceDisksNames]
+1 = %DISKNAME%,,,
+
+[SourceDisksFiles]
+mxnic.sys = 1,,..\Win2000
+
+;----------------------------------------------------------------------------
+; Localizable Strings
+; 
+[Strings]
+;Vendors
+MXIC      = "MXIC"
+
+;Source disk name
+DISKNAME="Macronix driver floppy disk"
+
+;Speed descriptions
+ConnectionType   = "Connection Type" 
+SpeedAutoDetect  = "Speed AutoDetect"
+100MbFull_Duplex = "100Mb Full_Duplex"
+100MbHalf_Duplex = "100Mb Half_Duplex"
+10MbFull_Duplex  = "10Mb  Full_Duplex"
+10MbHalf_Duplex  = "10Mb  Half_Duplex"
+
+;Device descriptions
+0512.DeviceDesc    = "Macronix MX987xx Family Fast Ethernet Adapter"
+0531.DeviceDesc    = "Macronix MX987xx Family Fast Ethernet Adapter (ACPI)"
+
+;NT service name
+mx9871x.Service.DispName  = "Macronix MX987xx Family Fast Ethernet NT Driver"
+
