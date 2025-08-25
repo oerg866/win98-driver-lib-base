@@ -21,8 +21,8 @@ VXDFileSection = 12
 %ITE%=ITE.MFG
 
 [ITE.MFG]
-%ITE.DeviceDesc0% = iteraid, PCI\VEN_1283&DEV_8212
-%ITE.DeviceDesc0% = iteraid, PCI\VEN_1283&DEV_8211
+%ITE.DeviceDesc0% = iteraid, PCI\VEN_1283&DEV_8212&CC_0104
+%ITE.DeviceDesc0% = iteraid, PCI\VEN_1283&DEV_8211&CC_0104
 
 [iteraid]
 Copyfiles=MoveMiniPort, VXDFileSection
