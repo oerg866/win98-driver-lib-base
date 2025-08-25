@@ -1,0 +1,134 @@
+; AX88140.INF
+;
+; INF file for Windows 98
+;
+; ASIX AX88140 Based PCI Fast Ethernet Adapter
+;
+; Copyright 1996-1997, ASIX Corporation
+
+[version]
+LayoutFile=layout.inf, layout1.inf
+signature="$CHICAGO$"
+Class=Net
+provider=%V_ASIX%
+
+[Manufacturer]
+%V_ASIX%=ASIX
+
+[ASIX]
+%AX88140.DeviceDesc%=88140.ndi, PCI\VEN_125B&DEV_1400
+
+[88140.ndi]
+AddReg=88140.ndi.reg,8814.ndi.reg,8814.pci.reg
+CopyFiles=8814.ndis3.inf.CopyFiles
+
+;***************************************************************************
+
+[88140.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_125B&DEV_1400"
+HKR,Ndi,CardType,,"PCI"
+
+;****************************************************************************
+; Driver parameters
+;****************************************************************************
+
+[8814.ndi.reg]
+; key,subkey,valuname,type,value
+HKR,,DevLoader,,*ndis
+HKR,,DeviceVxDs,,ax88140.sys
+; NDIS Info
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,NDIS,LogDriverName,,"AX88140"
+
+; Interfaces
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+HKR,Ndi\Interfaces,DefUpper,,"ndis3"
+HKR,Ndi\Interfaces,UpperRange,,"ndis3"
+
+; Install sections
+HKR,Ndi\Install,ndis3,,"8814.ndis3"
+
+;params
+;network address
+HKR,NDI\params\NetworkAddress,ParamDesc,,"Network Address"
+HKR,NDI\params\NetworkAddress,type,,edit
+HKR,NDI\params\NetworkAddress,LimitText,,18
+HKR,NDI\params\NetworkAddress,UpperCase,,1
+HKR,Ndi\params\NetworkAddress,default,,""
+HKR,NDI\params\NetworkAddress,flag,1,20,00,00,00
+HKR,Ndi\params\NetworkAddress,optional,,1
+
+HKR,Ndi\params\ConnectionType,ParamDesc,,"Connection Type"
+HKR,Ndi\params\ConnectionType,default,,0
+HKR,Ndi\params\ConnectionType,type,,enum
+HKR,Ndi\params\ConnectionType\enum,0,,"AutoSense"
+HKR,Ndi\params\ConnectionType\enum,8,,"100BaseTx"
+HKR,Ndi\params\ConnectionType\enum,9,,"100BaseTx Full_Duplex"
+HKR,Ndi\params\ConnectionType\enum,2,,"10BaseT (Twisted_Pair)"
+HKR,Ndi\params\ConnectionType\enum,3,,"10BaseT Full_Duplex"
+HKR,NDI\params\ConnectionType,flag,1,20,00,00,00
+
+HKR,Ndi\params\RxBuffers,ParamDesc,,"Receive Buffers"
+HKR,Ndi\params\RxBuffers,default,,8
+HKR,Ndi\params\RxBuffers,type,,enum
+HKR,Ndi\params\RxBuffers\enum,8,,"Small"
+HKR,Ndi\params\RxBuffers\enum,32,,"Medium"
+HKR,Ndi\params\RxBuffers\enum,64,,"Large"
+HKR,NDI\params\RxBuffers,flag,1,20,00,00,00
+
+;****************************************************************************
+; PCI common parameters
+;****************************************************************************
+
+[8814.pci.reg]
+;params
+HKR,,AdapterType,,5
+HKR,,BusType,,5
+HKR,,BusNumber,,0
+HKR,,SlotNumber,,0
+
+;****************************************************************************
+; Drivers
+;****************************************************************************
+
+; Install NDIS4
+[8814.ndis3]
+CopyFiles=8814.ndis3.sys.CopyFiles
+
+[8814.ndis3.sys.CopyFiles]
+ax88140.sys
+
+[8814.ndis3.inf.CopyFiles]
+ax88140.inf
+
+
+[SourceDisksNames]
+1="ASIX AX88140 Installation Diskette", "",
+
+[SourceDisksFiles]
+ax88140.sys =1
+ax88140.inf =1
+
+
+;****************************************************************************
+; Destination Directories
+;****************************************************************************
+[DestinationDirs]
+DefaultDestDir               =11 ; LDID_SYS
+8814.ndis3.sys.CopyFiles     =11 ; LDID_SYS
+8814.ndis3.inf.CopyFiles     =17
+
+
+;****************************************************************************
+; Localizable Strings
+;****************************************************************************
+[strings]
+; Provider
+; Manufacturers
+V_ASIX="ASIX Electronics Corporation"
+; PNP Devices
+AX88140.DeviceDesc="ASIX AX88140 Based PCI Fast Ethernet Adapter"
+
+

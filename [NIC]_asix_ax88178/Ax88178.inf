@@ -1,0 +1,182 @@
+;****************************************************************
+; ASIX AX88178 USB2.0 to Gigabit Ethernet Adapter
+;
+; Copyright 2004-2005, ASIX Electronics Corporation
+;
+; Version: 1.0.3.46	for windows 98 & windows ME
+;****************************************************************
+[Version]
+Signature  = "$CHICAGO$"
+Compatible = 1
+Class      = Net
+ClassGUID  = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider   = %ASIX%
+DriverVer = 01/18/2005, 1.0.3.46
+
+[Manufacturer]
+%ASIX%   = USB
+
+[ControlFlags]
+ExcludeFromSelect = USB\VID_0B95&PID_1780
+
+[USB]
+%AX88178.DeviceDesc% = AX88178.Ndi,USB\VID_0B95&PID_1780
+
+;****************************************************************
+;Win98 main section
+;****************************************************************
+[AX88178.Ndi]
+AddReg   = AX88178.Reg, AX88178.Con.Reg;
+DeviceID = USB\VID_0B95&PID_1780
+
+[AX88178.Reg]
+HKR,Ndi,DeviceID,,USB\VID_0B95&PID_1780
+HKR,Ndi,CardType,,"PNP"
+
+HKR,,AdapterName,,AX88178
+HKR,,DevLoader,,*ndis,*ntkern,*ndis
+HKR,,DeviceVxDs,,ax88178.sys
+
+; NDIS Info
+HKR,NDIS,MajorNdisVersion,1,05
+HKR,NDIS,MinorNdisVersion,1,00
+HKR,NDIS,LogDriverName,,AX88178
+
+; Interfaces
+HKR,Ndi\Interfaces,DefUpper,,"ndis3"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"ndis3"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+
+; Install sections
+HKR,Ndi\Install,ndis3,,"AX88178.Install"
+HKR,Ndi,HelpText,,"AX88178 USB2.0 to Gigabit Ethernet Adpater"
+
+;****************************************************************
+; NT main sections
+;****************************************************************
+[AX88178.Ndi.NT]
+AddReg          = AX88178.NT.Reg, AX88178.Con.Reg
+Characteristics = 0x84
+BusType         = 1
+CopyFiles       = CopyFile.NT.Sys
+
+[AX88178.Ndi.NT.Services]
+AddService = AX88178, 2, AX88178.Service, Common.EventLog
+
+;****************************************************************
+; Driver parameters
+;****************************************************************
+[AX88178.Con.Reg]
+; Connection Type
+HKR,Ndi\params\ConnectionType,ParamDesc,,"Connection Type"
+HKR,Ndi\params\ConnectionType,default,,"0"
+HKR,Ndi\params\ConnectionType,type,,"enum"
+HKR,Ndi\params\ConnectionType\enum,0,,"AutoSense"
+HKR,Ndi\params\ConnectionType\enum,2,,"10BaseT Half_Duplex"
+HKR,Ndi\params\ConnectionType\enum,3,,"10BaseT Full_Duplex"
+HKR,Ndi\params\ConnectionType\enum,8,,"100BaseTx Half_Duplex"
+HKR,Ndi\params\ConnectionType\enum,9,,"100BaseTx Full_Duplex"
+HKR,Ndi\params\ConnectionType\enum,17,,"1000BaseT Full_Duplex"
+HKR,NDI\params\ConnectionType,flag,1,20,00,00,00
+
+; Mac Address
+HKR,Ndi\params\NetworkAddress,ParamDesc,0,"NetworkAddress"
+HKR,Ndi\params\NetworkAddress,type,0,"edit"
+HKR,Ndi\params\NetworkAddress,default,0, "000000000000"
+HKR,Ndi\params\NetworkAddress,LimitText,0,"12"
+HKR,Ndi\params\NetworkAddress,UpperCase,0,"1"
+HKR,Ndi\params\NetworkAddress,Optional,0,"1"
+HKR,NDI\params\NetworkAddress,flag,1,20,00,00,00
+
+; Flow Control
+HKR,Ndi\params\FlowControl,ParamDesc,,"Flow Control"
+HKR,Ndi\params\FlowControl,default,,"3"
+HKR,Ndi\params\FlowControl,type,,"enum"
+HKR,Ndi\params\FlowControl\enum,0,,"Disable"
+HKR,Ndi\params\FlowControl\enum,1,,"Tx PAUSE"
+HKR,Ndi\params\FlowControl\enum,2,,"Rx PAUSE"
+HKR,Ndi\params\FlowControl\enum,3,,"Enable"
+HKR,NDI\params\FlowControl,flag,1,20,00,00,00
+
+; Wake Up
+HKR,Ndi\params\WakeUp,ParamDesc,,"Wake Up"
+HKR,Ndi\params\WakeUp,default,,"0"
+HKR,Ndi\params\WakeUp,type,,"enum"
+HKR,Ndi\params\WakeUp\enum,0,,"Disable"
+HKR,Ndi\params\WakeUp\enum,2,,"Link Up"
+HKR,Ndi\params\WakeUp\enum,4,,"Magic Packet"
+HKR,Ndi\params\WakeUp\enum,6,,"Both"
+HKR,NDI\params\WakeUp,flag,1,20,00,00,00
+
+; Jumbo Packet
+HKR,Ndi\params\JumboPacket,ParamDesc,,"Jumbo Packet"
+HKR,Ndi\params\JumboPacket,default,,"0"
+HKR,Ndi\params\JumboPacket,type,,"enum"
+HKR,Ndi\params\JumboPacket\enum,0,,"Disable"
+HKR,Ndi\params\JumboPacket\enum,1,,"4088 Bytes"
+HKR,Ndi\params\JumboPacket\enum,2,,"9014 Bytes"
+;HKR,Ndi\params\JumboPacket\enum,3,,"9216 Bytes"
+HKR,NDI\params\JumboPacket,flag,1,20,00,00,00
+
+;****************************************************************
+; Install section Windows 98
+;****************************************************************
+[AX88178.Install]
+CopyFiles=CopyFile.Sys
+
+[CopyFile.Sys]
+ax88178.sys
+
+;****************************************************************
+; Install section for Windows NT 5								*
+;****************************************************************
+[AX88178.NT.Reg]
+; Interfaces
+HKR, Ndi\Interfaces, LowerRange, 0, "ethernet"
+HKR, Ndi\Interfaces, UpperRange, 0, "ndis5"
+HKR, Ndi,            Service,    0, "AX88178"
+
+[AX88178.Service]
+DisplayName    = %AX88178.DeviceDesc%
+ServiceType    = 1
+StartType      = 3
+ErrorControl   = 1
+ServiceBinary  = %12%\ax88178.sys
+LoadOrderGroup = NDIS
+AddReg         = TextModeFlags.Reg
+
+[Common.EventLog]
+AddReg = Common.AddEventLog.Reg
+
+[Common.AddEventLog.Reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported  , 0x00010001, 7
+
+[TextModeFlags.Reg]
+HKR, , TextModeFlags, 0x00010001, 0x0001
+
+[CopyFile.NT.Sys]
+ax88178.sys,,,2
+
+;**********************************************************************
+; Destination directories
+;**********************************************************************
+[DestinationDirs]
+CopyFile.Sys    = 11
+CopyFile.NT.Sys = 12
+
+[SourceDisksNames]
+50=%AX88178.DiskName%,,
+
+[SourceDisksFiles]
+ax88178.sys=50,.,ax88178.sys,10000
+
+;**********************************************************************
+; Localizable strings                                                 *
+;**********************************************************************
+[Strings]
+ASIX = "ASIX"
+AX88178.DiskName = "AX88178 USB2.0 to Gigabit Ethernet Driver Diskette"
+AX88178.DeviceDesc = "ASIX AX88178 USB2.0 to Gigabit Ethernet Adapter"
+
