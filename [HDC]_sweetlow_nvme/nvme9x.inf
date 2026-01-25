@@ -1,0 +1,55 @@
+; nvme9x.inf
+; Windows 9x Installation File for NVMe Storage Controller Driver
+; Copyright (c) 2025 SweetLow
+
+[Version]
+Signature="$CHICAGO"
+Class=SCSIAdapter
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%ProviderString%
+DriverVer=11/24/2025,1.0.0.2
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskName%,,
+
+[SourceDisksFiles]
+nvme2k.mpd = 1
+nvmevsd.vxd = 1
+
+[Manufacturer]
+%VendorString%=NVMe_Models
+
+[NVMe_Models]
+%NVMe.DeviceDesc% = NVMe_Inst, PCI\CC_010802
+
+[NVMe_Inst]
+CopyFiles = NVMe_CopyFiles
+;AddReg = IOS, NVMe_AddReg, NVMe_AddReg_9x
+AddReg = IOS, NVMe_AddReg_9x
+
+[NVMe_CopyFiles]
+nvme2k.mpd
+nvmevsd.vxd
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[NVMe_AddReg_9x]
+HKR,,PortDriver,,nvme2k.mpd
+
+[NVMe_AddReg]
+HKR, "Parameters\Device", "DriverParameter",, "PlaceHolder=0"
+HKR, "Parameters\Device", "MaximumSGList", 0x00010001, 0x00000200
+HKR, "Parameters\Device", "NumberOfRequests", 0x00010001, 0x00000020
+; Enable tagged command queuing
+HKR, "Parameters\Device", "MaxQueueDepth", 0x00010001, 0x00000020
+
+[Strings]
+ProviderString = "NVMe Storage Driver"
+VendorString = "Standard NVM Express Controller"
+NVMe.DeviceDesc = "NVMe Storage Controller (Windows 9x)"
+DiskName = "NVMe Storage Controller Installation Disk"
