@@ -1,0 +1,165 @@
+; Copyright 2001-2003
+; Microsoft Corporation
+; USB2.INF
+; USB 2.0 Add-On Driver support
+; For Windows 98SE and Windows ME
+
+[Version]
+signature="$CHICAGO$"
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+Provider=%Msft%
+DriverVer=09/26/2003,4.90.3000.10
+
+[SourceDisksNames]
+1=%Distribution%,usbehci.sys,, 
+
+[SourceDisksFiles]
+usbehci.sys = 1
+usbport.sys = 1
+usbhub20.sys = 1
+usbccgp.sys = 1
+usb2.inf = 1
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[DestinationDirs]
+DefaultDestDir=10 
+EHCI.CopyFiles         = 10, system32\drivers
+HUB20.CopyFiles        = 10, system32\drivers
+Composite.CopyFiles    = 10, system32\drivers
+INF.CopyFiles          = 17
+
+; note that these are in alphabetical order
+;
+
+[Manufacturer]
+%Generic%=Generic
+%Intel%=Intel
+%NEC%=NEC
+%VIA%=VIA
+%SIS%=SIS
+
+; --------------------------------------------------------------
+; EHCI 
+; --------------------------------------------------------------
+
+[EHCI]
+AddReg=EHCI.AddReg
+CopyFiles=EHCI.CopyFiles,HUB20.CopyFiles,Composite.CopyFiles
+
+[EHCI.AddReg]
+HKR,,DevLoader,,*NTKERN
+HKR,,NTMPDriver,,usbehci.sys
+HKR,,EnumPropPages,,"sysclass.dll,USBControllerPropPage"
+
+[EHCI.CopyFiles]
+usbehci.sys
+usbport.sys
+
+; --------------------------------------------------------------
+; USB ROOT HUB (USB 2.0)
+; --------------------------------------------------------------
+
+[ROOTHUB2]
+AddReg=Usb2Hub.AddReg
+CopyFiles=HUB20.CopyFiles
+
+; --------------------------------------------------------------
+; USB 2.0 Hub Support
+; --------------------------------------------------------------
+
+[Usb2Hub.Dev]
+CopyFiles=HUB20.CopyFiles
+AddReg=Usb2Hub.AddReg
+
+[Usb2Hub.AddReg]
+HKR,,DevLoader,,*NTKERN
+HKR,,NTMPDriver,,usbhub20.sys
+HKR,,EnumPropPages,,"sysclass.dll,USBHubPropPage"
+
+[HUB20.CopyFiles]
+usbhub20.sys
+
+; --------------------------------------------------------------
+; Composite Device
+; --------------------------------------------------------------
+
+[Composite.Dev]
+CopyFiles=Composite.CopyFiles
+AddReg=Composite.AddReg
+DelReg=Composite.DelReg
+
+[Composite.AddReg]
+HKR,,DevLoader,,*NTKERN
+HKR,,NTMPDriver,,usbccgp.sys
+
+[Composite.DelReg]
+HKR,,EnumPropPages
+
+[Composite.CopyFiles]
+usbccgp.sys
+
+; =================== GENERIC ===================================
+[Generic]
+%PCI\CC_0C0320.DeviceDesc%=EHCI,PCI\CC_0C0320
+%USB\ROOT_HUB20.DeviceDesc%=ROOTHUB2,USB\ROOT_HUB20
+; 2.0 HUBs
+%USB\HubClass.DeviceDesc%=Usb2Hub.Dev,USB\HubClass
+ 
+;%USB\COMPOSITE2.DeviceDesc%=Composite.Dev,USB\COMPOSITE2
+%USB\COMPOSITE.DeviceDesc%=Composite.Dev,USB\COMPOSITE
+
+; =================== NEC ==================================
+[NEC] 
+%PCI\VEN_1033&DEV_00E0&REV_01.DeviceDesc%=EHCI,PCI\VEN_1033&DEV_00E0&REV_01
+%PCI\VEN_1033&DEV_00E0&REV_02.DeviceDesc%=EHCI,PCI\VEN_1033&DEV_00E0&REV_02
+
+; =================== INTEL ===================================
+[Intel]
+%PCI\VEN_8086&DEV_24CD.DeviceDesc%=EHCI,PCI\VEN_8086&DEV_24CD
+
+; =================== VIA ===================================
+[VIA]
+%PCI\VEN_1106&DEV_3104.DeviceDesc%=EHCI,PCI\VEN_1106&DEV_3104
+
+; =================== SIS ===================================
+[SIS]
+%PCI\VEN_1039&DEV_7002.DeviceDesc%=EHCI,PCI\VEN_1039&DEV_7002
+
+; =================== DefaultInstall ========================
+[DefaultInstall]
+CopyFiles=INF.CopyFiles,EHCI.CopyFiles,HUB20.CopyFiles,Composite.CopyFiles
+
+[INF.CopyFiles]
+usb2.inf
+
+;------------------------------------------ cut here ---------------------------
+
+[Strings] 
+Distribution="USB 2.0 (EHCI) Driver Disk"
+Msft="Microsoft"
+
+Generic="(Standard USB Host Controller / Hub)"
+Intel="Intel"
+NEC="NEC"
+VIA="VIA"
+SIS="SiS"
+
+PCI\VEN_1033&DEV_00E0&REV_01.DeviceDesc="NEC PCI to USB Enhanced Host Controller B0"
+PCI\VEN_1033&DEV_00E0&REV_02.DeviceDesc="NEC PCI to USB Enhanced Host Controller B1"
+
+PCI\VEN_8086&DEV_24CD.DeviceDesc="Intel PCI to USB Enhanced Host Controller"
+
+PCI\VEN_1106&DEV_3104.DeviceDesc="VIA PCI to USB Enhanced Host Controller"
+
+PCI\VEN_1039&DEV_7002.DeviceDesc="SiS PCI to USB Enhanced Host Controller"
+
+PCI\CC_0C0320.DeviceDesc="Standard PCI to USB Enhanced Host Controller"
+
+USB\ROOT_HUB20.DeviceDesc="USB 2.0 Root Hub"
+USB\HubClass.DeviceDesc="Generic USB Hub (EHCI)"
+
+USB\COMPOSITE2.DeviceDesc="Composite Device (EHCI)"
+USB\COMPOSITE.DeviceDesc="Composite Device"
