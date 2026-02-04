@@ -68,10 +68,12 @@ AddService = ipg, 2, ipgxp.Service, common.EventLog
 ipgnd4.sys,,,2
 
 [ipg.nt5.copyfiles]
-ipgnd5.sys,,,2
+; 98QI mod: File doesn't exist
+;ipgnd5.sys,,,2
 
 [ipg.nt51.copyfiles]
-ipgnd51.sys,,,2
+; 98QI mod: File doesn't exist
+;ipgnd51.sys,,,2
 
 ;-----------------------------------------------------------------------------
 ; Win 9x registration parameters
@@ -236,7 +238,8 @@ ipg.nt51.copyfiles         = 12    ; LDID_IOS  Windows Iosubsys dir.
 
 [SourceDisksFiles]
 ipgnd4.sys  = 1
-ipgnd51.sys = 1
+; 98QI mod: File doesn't exist
+;ipgnd51.sys = 1
 
 ;-----------------------------------------------------------------------------
 ; Localization string

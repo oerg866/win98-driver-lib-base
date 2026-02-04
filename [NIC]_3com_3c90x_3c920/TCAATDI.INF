@@ -119,8 +119,9 @@ AddReg=TCAATDI.Rmv.AddReg
 50="3Com EtherCD for EtherLink XL NICs",,0
 
 [SourceDisksFiles]
-TCAATDI.INF		=50 
-TCAATDI.VXD		=50
+;98QI MOD - Files don't exist
+;TCAATDI.INF		=50 
+;TCAATDI.VXD		=50
 
 
 [strings]

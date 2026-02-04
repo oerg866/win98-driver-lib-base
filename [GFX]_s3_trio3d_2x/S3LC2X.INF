@@ -33,7 +33,8 @@ s3lc2x.INF=51
 vgartd.vxd=51
 S3Gamma.dll=51
 S3Gamma.cfg=51
-S3Gamma.inf=51
+; 98QI mod: File doesn't exist
+; S3Gamma.inf=51
 S3gamENU.hlp=51
 S3gamCHT.hlp=51
 S3gamCHS.hlp=51
@@ -52,7 +53,8 @@ S3gamFIN.hlp=51
 S3gamNOR.hlp=51
 S3uninst.exe=51
 S3_Refre.dll=51
-S3_Refre.inf=51
+; 98QI mod: File doesn't exist
+; S3_Refre.inf=51
 S3Refre.cfg=51
 S3refre.vxd=51
 

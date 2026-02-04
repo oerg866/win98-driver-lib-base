@@ -416,7 +416,8 @@ Remove.exe=1
 readme.txt=1
 eusynth.dat=2
 eupatch.dat=2
-Configur.doc=3
+;98QI mod - Missing file
+;Configur.doc=3
 
 
 [Strings]

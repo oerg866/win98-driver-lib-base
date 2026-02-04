@@ -51,7 +51,9 @@ ConfigPriority=HARDWIRED
 1 = %ID1%,\,,,
 
 [SourceDiskSFiles]
-MPDCopyFile=1
+; Win98 QI Fix - section name instead of filename in sourcedisksfiles
+inic162x.mpd=1
+;MPDCopyFile=1
 
 [MPDCopyFile]
 inic162x.mpd,,,1

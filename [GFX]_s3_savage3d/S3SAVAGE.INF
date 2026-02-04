@@ -72,7 +72,7 @@ S3ClrDAN.hlp=51
 S3ClrNOR.hlp=51
 S3Gamma.dll=51
 S3Gamma.cfg=51
-S3Gamma.inf=51
+;S3Gamma.inf=51
 S3gamENU.hlp=51
 S3gamCHT.hlp=51
 S3gamCHS.hlp=51
@@ -141,7 +141,7 @@ HKLM,SOFTWARE\S3\S3TVOUT3,FileName,,"S3TVOUT3.DLL"
 HKLM,SOFTWARE\S3\S3TVOUT3,UtilityName,,"S3TVOUT3 Utility"
 HKLM,SOFTWARE\S3\S3TVOUT3,AlwaysEnableTVDevice,,"OFF"
 HKLM,SOFTWARE\S3\S3TVOUT3,ApertureControlSupport,,"ON"
-HKLM,SOFTWARE\S3\S3TVOUT3,AspectRatioLockSupport,,"OFF
+HKLM,SOFTWARE\S3\S3TVOUT3,AspectRatioLockSupport,,"OFF"
 HKLM,SOFTWARE\S3\S3TVOUT3,RemoveInfoPage,,"OFF"
 
 HKLM,SOFTWARE\S3\S3TVOUT3\BlockMode\BlockMode1,ChipID,,"GX3"

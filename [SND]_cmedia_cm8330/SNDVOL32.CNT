@@ -1,8 +1,0 @@
-:Base sndvol32.hlp>proc4
-:Title Volume Control Help
-:Index Volume Control Help =sndvol32.hlp
-1 Adjusting the playback volume=SNDVOL32_VOLUME_BALANCE
-1 Displaying specific devices=SNDVOL32_ADJUST_SPECIFIC_DEVICE
-1 Turning sound off=SNDVOL32_MUTE_RESTORE
-1 Adjusting the recording volume=SNDVOL32_ADJUST_RECORDING_LEVEL
-1 Adjusting the voice-input volume=SNDVOL32_ADJUST_VOICE_COMMANDS

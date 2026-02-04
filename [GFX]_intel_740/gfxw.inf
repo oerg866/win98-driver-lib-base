@@ -53,7 +53,8 @@ gfxdrv.drv=1
 gfx.vxd=1
 gfxdd16.dll=1
 gfxdd32.dll=1
-i740i2c.vxd=1
+;98QI MOD - File doesn't exist
+;i740i2c.vxd=1
 gfxi2c.vxd=1
 gfxtvout.dll=1
 gfxCfg.dll=1

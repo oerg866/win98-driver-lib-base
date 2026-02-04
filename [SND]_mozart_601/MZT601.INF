@@ -169,7 +169,8 @@ vmztss.vxd=1,,
 mztss.drv=1,,
 vmztmid.vxd=1,,
 mztmid.drv=1,,
-mztinit.sys=1,,
+; 98QI mod: File doesn't exist
+;mztinit.sys=1,,
 
 ;---------------------------------------------------------------;
 

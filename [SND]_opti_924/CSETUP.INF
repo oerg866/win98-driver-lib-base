@@ -209,8 +209,9 @@ sndm401p.vxd=1
 
 ;---------------------------------------------------------------;
 ;Localized strings
+;Missing [Strings] Line added by WIN98QI
+[Strings]
 OPTi="OPTi Inc."
 MfgName="OPTi Inc."
 DeviceDesc = "OPTi Plug-N-Play 924 Installation"
 OPTiMediaClassName="OPTi Plug-N-Play Sound System"
-
