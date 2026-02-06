@@ -1,0 +1,169 @@
+[Version]
+Signature="$CHICAGO$"
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+provider=%MSFT%
+LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer=06/08/2000, 5.00.2042.1
+[ControlFlags]
+ExcludeFromSelect = *
+[Manufacturer]
+%MfgName%=Microsoft
+[Microsoft]
+%USB\VID_03EE&PID_0000.DeviceDesc%=USBSTOR_CBI,        ,USB\VID_03EE&PID_0000
+%USB\VID_03EE&PID_6901.DeviceDesc%=USBSTOR_CBI,         USB\VID_03EE&PID_6901
+%USB\VID_03F0&PID_0107.DeviceDesc%=USBSTOR_BULK,       ,USB\VID_03F0&PID_0107
+%USB\VID_03F0&PID_4002.DeviceDesc%=USBSTOR_BULK,        USB\VID_03F0&PID_4002
+%USB\VID_03F3&PID_0001.DeviceDesc%=USBSTOR_BULKNO,     ,USB\VID_03F3&PID_0001
+%USB\VID_0409&PID_002C.DeviceDesc%=USBSTOR_BULK,        USB\VID_0409&PID_002C
+%USB\VID_0409&PID_0040.DeviceDesc%=USBSTOR_CBI,         USB\VID_0409&PID_0040
+%USB\VID_0411&PID_0001.DeviceDesc%=USBSTOR_BULKNO,     ,USB\VID_0411&PID_0001
+%USB\VID_04BB&PID_0301.DeviceDesc%=USBSTOR_CBI,         USB\VID_04BB&PID_0301
+%USB\VID_04E6&PID_0001.DeviceDesc%=USBSTOR_CB,          USB\VID_04E6&PID_0001
+%USB\VID_04E6&PID_0002.DeviceDesc%=USBSTOR_BULKNO,     ,USB\VID_04E6&PID_0002
+%USB\VID_04E6&PID_0101.DeviceDesc%=USBSTOR_BULK,       ,USB\VID_04E6&PID_0101
+%USB\VID_054C&PID_0012.DeviceDesc%=USBSTOR_BULKNO,     ,USB\VID_054C&PID_0012
+%USB\VID_054C&PID_0023.DeviceDesc%=USBSTOR_CB,         ,USB\VID_054C&PID_0023
+%USB\VID_054C&PID_002D.DeviceDesc%=USBSTOR_CB,          USB\VID_054C&PID_002D
+%USB\VID_057B&PID_0000.DeviceDesc%=USBSTOR_CBI,         USB\VID_057B&PID_0000
+%USB\VID_059B&PID_0001.DeviceDesc%=USBSTOR_BULK,        USB\VID_059B&PID_0001
+%USB\VID_059B&PID_0030.DeviceDesc%=USBSTOR_BULK,        USB\VID_059B&PID_0030
+%USB\VID_059B&PID_0031.DeviceDesc%=USBSTOR_BULK,        USB\VID_059B&PID_0031
+%USB\VID_059F&PID_A601.DeviceDesc%=USBSTOR_CB,          USB\VID_059F&PID_A601
+%USB\VID_059F&PID_A602.DeviceDesc%=USBSTOR_CB,         ,USB\VID_059F&PID_A602
+%USB\VID_0644&PID_0000.DeviceDesc%=USBSTOR_CBI,         USB\VID_0644&PID_0000
+%USB\VID_0644&PID_1000.DeviceDesc%=USBSTOR_BULK,       ,USB\VID_0644&PID_1000
+%USB\VID_0693&PID_0002.DeviceDesc%=USBSTOR_BULK,        USB\VID_0693&PID_0002
+%USB\VID_0693&PID_0003.DeviceDesc%=USBSTOR_BULK,        USB\VID_0693&PID_0003
+%USB\VID_0693&PID_0005.DeviceDesc%=USBSTOR_BULK,        USB\VID_0693&PID_0005
+%USB\VID_0693&PID_0007.DeviceDesc%=USBSTOR_BULK_AUTH,   USB\VID_0693&PID_0007
+%USB\VID_0718&PID_0002.DeviceDesc%=USBSTOR_BULK,        USB\VID_0718&PID_0002
+%USB\VID_0781&PID_0001.DeviceDesc%=USBSTOR_CB,          USB\VID_0781&PID_0001
+%USB\VID_0781&PID_0002.DeviceDesc%=USBSTOR_BULK_AUTH,   USB\VID_0781&PID_0002
+%USB\VID_55AA&PID_1234.DeviceDesc%=USBSTOR_BULK,       ,USB\VID_55AA&PID_1234
+%USB\VID_084B&PID_A001.DeviceDesc%=USBSTOR_BULKNO,     ,USB\VID_084B&PID_A001
+%GenericBulkOnly.DeviceDesc%=USBSTOR_BULK, USB\Class_08&SubClass_02&Prot_50
+%GenericBulkOnly.DeviceDesc%=USBSTOR_BULK, USB\Class_08&SubClass_05&Prot_50
+%GenericBulkOnly.DeviceDesc%=USBSTOR_BULK, USB\Class_08&SubClass_06&Prot_50
+[PreCopySection]
+HKR,,NoSetupUI,,1
+[DestinationDirs]
+USBSTOR.CopyList = 10, system32\drivers
+USBNTMAP.CopyList = 10, system32\drivers
+USBAUTH.CopyList = 10, system32\drivers
+[USBSTOR_CBI]
+CopyFiles=USBSTOR.CopyList, USBNTMAP.CopyList
+AddReg=USBSTOR.AddReg, USBSTOR_CBI.AddReg
+DriverVer=06/08/2000
+[USBSTOR_CB]
+CopyFiles=USBSTOR.CopyList, USBNTMAP.CopyList
+AddReg=USBSTOR.AddReg, USBSTOR_CB.AddReg
+DriverVer=06/08/2000
+[USBSTOR_BULK]
+CopyFiles=USBSTOR.CopyList, USBNTMAP.CopyList
+AddReg=USBSTOR.AddReg, USBSTOR_BULK.AddReg
+DriverVer=06/08/2000
+[USBSTOR_BULK_AUTH]
+CopyFiles=USBSTOR.CopyList, USBNTMAP.CopyList, USBAUTH.CopyList
+AddReg=USBSTOR.AddReg, USBSTOR_BULK.AddReg
+DriverVer=06/08/2000
+[USBSTOR_BULKNO]
+[USBSTOR_CBI.NT]
+CopyFiles=USBSTOR.CopyList
+AddReg=USBSTOR_CBI.AddReg
+DriverVer=06/08/2000
+[USBSTOR_CB.NT]
+CopyFiles=USBSTOR.CopyList
+AddReg=USBSTOR_CB.AddReg
+DriverVer=06/08/2000
+[USBSTOR_BULK.NT]
+CopyFiles=USBSTOR.CopyList
+AddReg=USBSTOR_BULK.AddReg
+DriverVer=06/08/2000
+[USBSTOR_BULK_AUTH.NT]
+CopyFiles=USBSTOR.CopyList
+AddReg=USBSTOR_BULK.AddReg
+DriverVer=06/08/2000
+[USBSTOR.AddReg]
+HKR,,DevLoader,,*NTKERN
+HKR,,NTMPDriver,,USBSTOR.SYS
+[USBSTOR_CBI.AddReg]
+HKR,,DriverFlags,0x00010001,0x00000002
+[USBSTOR_CB.AddReg]
+HKR,,DriverFlags,0x00010001,0x00000003
+[USBSTOR_BULK.AddReg]
+HKR,,DriverFlags,0x00010001,0x00000001
+[USBSTOR_CBI.HW]
+AddReg=USBSTOR.HW.AddReg
+[USBSTOR_CB.HW]
+AddReg=USBSTOR.HW.AddReg
+[USBSTOR_BULK.HW]
+AddReg=USBSTOR.HW.AddReg
+[USBSTOR_BULK_AUTH.HW]
+AddReg=USBSTOR.HW.AddReg, USBSTOR_AUTH.HW.AddReg
+[USBSTOR.HW.AddReg]
+HKR,,upperfilters,0,"USBNTMAP.SYS"
+HKLM,System\CurrentControlSet\Control\USBSTOR\Default,MaximumTransferLength,0x00010001,0x00080000
+HKLM,System\CurrentControlSet\Services\USB\SilentClasses,0,1,80,09,00,00
+HKLM,System\CurrentControlSet\Services\USB\SilentClasses,1,1,43,03,01,01
+HKLM,System\CurrentControlSet\Services\USB\SilentClasses,2,1,43,03,01,02
+HKLM,System\CurrentControlSet\Services\USB\SilentClasses,3,1,C3,08,06,50
+HKLM,System\CurrentControlSet\Services\USB\SilentClasses,4,1,83,03,01,01
+HKLM,System\CurrentControlSet\Services\USB\SilentClasses,5,1,83,03,01,02
+[USBSTOR_AUTH.HW.AddReg]
+HKR,,lowerfilters,0,"USBAUTH.SYS"
+[USBSTOR_CBI.NT.Services]
+Addservice = USBSTOR, 0x00000002, USBSTOR.AddService
+[USBSTOR_CB.NT.Services]
+Addservice = USBSTOR, 0x00000002, USBSTOR.AddService
+[USBSTOR_BULK.NT.Services]
+Addservice = USBSTOR, 0x00000002, USBSTOR.AddService
+[USBSTOR.AddService]
+DisplayName    = %USBSTOR.SvcDesc%
+ServiceType    = 1
+StartType      = 3
+ErrorControl   = 1
+ServiceBinary  = %12%\USBSTOR.SYS
+[USBSTOR.CopyList]
+USBSTOR.SYS
+[USBNTMAP.CopyList]
+USBNTMAP.SYS
+[USBAUTH.CopyList]
+USBAUTH.SYS
+[Strings]
+MSFT="Microsoft"
+MfgName="Microsoft"
+USB\VID_03EE&PID_0000.DeviceDesc = "Mitsumi USB CD-R/RW Drive"
+USB\VID_03EE&PID_6901.DeviceDesc = "Mitsumi USB Floppy"
+USB\VID_03F0&PID_0107.DeviceDesc = "HP USB CD-Writer Plus"
+USB\VID_03F0&PID_4002.DeviceDesc = "Hewlett-Packard Digital Camera"
+USB\VID_03F3&PID_0001.DeviceDesc = "Please install manufacturer supplied driver"
+USB\VID_0409&PID_002C.DeviceDesc = "NEC Clik!-USB Drive"
+USB\VID_0409&PID_0040.DeviceDesc = "NEC USB Floppy"
+USB\VID_0411&PID_0001.DeviceDesc = "Please install manufacturer supplied driver"
+USB\VID_04BB&PID_0301.DeviceDesc = "USB Storage Device"
+USB\VID_04E6&PID_0001.DeviceDesc = "USB ATAPI Storage Device"
+USB\VID_04E6&PID_0002.DeviceDesc = "Please install manufacturer supplied driver"
+USB\VID_04E6&PID_0101.DeviceDesc = "USB ATAPI Storage Device"
+USB\VID_054C&PID_0012.DeviceDesc = "Please install manufacturer supplied driver"
+USB\VID_054C&PID_0023.DeviceDesc = "Sony USB CD-R/RW Drive"
+USB\VID_054C&PID_002D.DeviceDesc = "Sony Memory Stick Reader/Writer"
+USB\VID_057B&PID_0000.DeviceDesc = "Y-E Data USB Floppy"
+USB\VID_059B&PID_0001.DeviceDesc = "Iomega USB Zip 100"
+USB\VID_059B&PID_0030.DeviceDesc = "Iomega USB Zip 250"
+USB\VID_059B&PID_0031.DeviceDesc = "Iomega USB Zip 100"
+USB\VID_059F&PID_A601.DeviceDesc = "LaCie USB Hard Drive"
+USB\VID_059F&PID_A602.DeviceDesc = "LaCie USB CD-R/RW Drive"
+USB\VID_0644&PID_0000.DeviceDesc = "TEAC USB Floppy"
+USB\VID_0644&PID_1000.DeviceDesc = "TEAC USB CD-ROM Drive"
+USB\VID_0693&PID_0002.DeviceDesc = "USB SmartMedia Reader/Writer"
+USB\VID_0693&PID_0003.DeviceDesc = "USB CompactFlash Reader/Writer"
+USB\VID_0693&PID_0005.DeviceDesc = "USB Dual Slot Reader/Writer"
+USB\VID_0693&PID_0007.DeviceDesc = "FlashGate ME (Authenticated)"
+USB\VID_0718&PID_0002.DeviceDesc = "Imation SuperDisk USB 120MB"
+USB\VID_0781&PID_0001.DeviceDesc = "SanDisk USB ImageMate"
+USB\VID_0781&PID_0002.DeviceDesc = "SanDisk USB Imagemate (Authenticated)"
+USB\VID_55AA&PID_1234.DeviceDesc = "USB ATAPI Storage Device"
+USB\VID_084B&PID_A001.DeviceDesc = "Please install manufacturer supplied driver"
+GenericBulkOnly.DeviceDesc = "USB Mass Storage Device"
+USBSTOR.SvcDesc = "USB Mass Storage Driver"

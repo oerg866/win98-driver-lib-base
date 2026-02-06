@@ -1,0 +1,44 @@
+[Version]
+signature="$CHICAGO$"
+Class=Storage
+Provider=%Msft%
+LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer=06/08/2000
+[DestinationDirs]
+defaultdestdir=12
+[ClassInstall]
+Addreg=StorageClassReg
+ClassOrder=CLASS_ORDER_STORAGE
+[StorageClassReg]
+HKR,,,,%StorageClassName%
+HKR,,Icon,,-9
+[Manufacturer]
+%GenericMfg%=GENERIC
+[GENERIC]
+%GenOpticalDeviceDesc%=USBMPHLP.Dev,GenOptical
+%GenDiskDeviceDesc%=USBMPHLP.Dev,USBSTOR\GenDisk
+%GenCdRomDeviceDesc%=USBMPHLP.Dev,USBSTOR\GenCdRom
+%GenTapeDeviceDesc%=USBMPHLP.Dev,GenSequential
+%GenFloppyDeviceDesc%=USBMPHLP.Dev,USBSTOR\GenSfloppy
+[USBMPHLP.Dev]
+AddReg=USBMPHLP.AddReg
+CopyFiles=USBMPHLP.CopyFiles
+DriverVer=06/08/2000
+[USBMPHLP.AddReg]
+HKR,,DevLoader,,*IOS
+HKR,,PortDriver,,USBMPHLP.PDR
+HKR,,PreloadDrivers,,""
+[USBMPHLP.CopyFiles]
+usbmphlp.pdr
+[ControlFlags]
+CopyFilesOnly=GenSequential
+CopyFilesOnly=GenOptical
+[Strings]
+Msft="Microsoft"
+GenericMfg="Generic"
+StorageClassName="Storage device"
+GenDiskDeviceDesc="USB Disk"
+GenCdRomDeviceDesc="USB CD-ROM"
+GenOpticalDeviceDesc="USB Optical Disk"
+GenTapeDeviceDesc="USB Tape"
+GenFloppyDeviceDesc="USB Floppy"
