@@ -4,7 +4,7 @@
 **
 **  NDIS Driver for Windows 95/95OSR2/98/98SE/ME/2000/XP, Server 2003 x86 Edition
 **
-**  v1.44   Jun, 2005
+**  v1.55   Dec, 2006
 **
 **
 

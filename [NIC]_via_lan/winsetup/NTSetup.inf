@@ -1,0 +1,480 @@
+[StfVariableDetect]
+    !STF_PROCESSOR = "" ? $(!LIBHANDLE) GetProcessor
+    !STF_PLATFORM  = "I386"        
+    !STF_LANGUAGE   = "" ? $(!LIBHANDLE) GetLanguage
+    LanguageList   = ^(LanguageID, 1)
+    !STF_WINDOWSPATH    = "" ? $(!LIBHANDLE) GetWindowsNtDir
+    !STF_WINDOWSSYSPATH = "" ? $(!LIBHANDLE) GetWindowsNtSysDir
+    !STF_NTPATH         = $(!STF_WINDOWSPATH)
+    !STF_COMPUTERNAME   = "" ? $(!LIBHANDLE) GetMyComputerName
+    !STF_BUSTYPE        = "" ? $(!LIBHANDLE) GetMyBusType
+    !STF_BUSTYPELIST    = "" ? $(!LIBHANDLE) GetMyBusTypeList
+[StfVariableSyms]
+    !ProcessorID_I386  = I386
+    !ProcessorID_I486  = I486
+    !ProcessorID_I586  = I586
+    !ProcessorID_R4000 = R4000
+    !ProcessorID_Alpha = Alpha_AXP
+    !ProcessorID_PPC601  = PPC601
+    !ProcessorID_PPC603  = PPC603
+    !ProcessorID_PPC604  = PPC604
+    !ProcessorID_PPC620  = PPC620
+    !PlatformID_I386   = I386
+    !PlatformID_Mips   = Mips
+    !PlatformID_Alpha  = Alpha
+    !PlatformID_PPC    = ppc
+    !STF_PRODUCT        = WINNT    
+    !STF_USERNAME       = ""       
+    !STF_INSTALL_MODE   = "CUSTOM" 
+    !STF_UPDGRADE       = NO       
+    !STF_NCDETECT       = NO       
+    !STF_NCOPTION       = ""       
+    !STF_NCDETCARD      = 99999    
+    !STF_NCDETINFO      = {}       
+    !STF_NC_PARAMS      = {}       
+    !STF_NC_PNAMES      = {}       
+    !STF_SRCDIR_KEYED   = ""       
+    !STF_SRCDIR_USED    = ""       
+    !STF_SRCDIR_OVERRIDE = ""      
+    !STF_SRCDIR_WINNT   = ""       
+    !STF_TEMPLATE_CRITERR = "CRITERR2"
+    !STF_TEMPLATE_NONCRITERR = "NONCRITERR2"
+    !STF_INSTALLED_OS = {} ? $(!LIBHANDLE) GetInstalledOSNames
+    FatalErrorIndex = 1
+    Exit_Code = 0
+
+
+[DoAskOemsetupSource]
+    read-syms DoAskUpgradeSrcDlgText$(!STF_LANGUAGE)
+    shell "subroutn.inf" DoAskSourceEx $($0) $(DlgText)
+    Return $($R0) $($R1) $($R2) $($R3)
+[Shell Commands]
+     set-title "Windows NT Setup"
+     Set !G:DebugOutputControl = 0
+     LoadLibrary "x" $(!STF_CWDDIR)setupdll.dll !LIBHANDLE
+     Set !NCPA_HANDLE = ""
+     Ifstr(i) $(!NTN_InfSection) != OemSoftwareInstall
+	 Debug-Output "NCPASHEL.INF: LoadLibrary on "$(!STF_CWDDIR)ncpa.cpl
+	 LoadLibrary "y" $(!STF_CWDDIR)ncpa.cpl !NCPA_HANDLE
+     Endif
+     Shell "subroutn.inf" ReadSetupHelpIds
+     SetHelpFile "NetCfg.hlp" $(!MinimumID) $(!MaximumID)
+     set-subst LF = "\n"
+     StartWait
+     read-syms StfVariableSyms
+     read-syms StfVariableDetect
+     detect StfVariableDetect
+     Set !STF_NTPATH = $(!STF_WINDOWSSYSPATH)
+     OpenRegKey $(!REG_H_LOCAL) "" "System\CurrentControlSet\Control\ProductOptions" 33554432 KeyProductOption
+     ifstr(i) $(KeyProductOption) != ""
+	 GetRegValue $(KeyProductOption) "ProductType" ProductTypeList
+	 set TempProductType = *($(ProductTypeList),4)
+	 ifstr(i) $(TempProductType) == "winnt"
+	     set !STF_PRODUCT = WINNT
+	 else-ifstr(i) $(TempProductType) == "lanmannt"
+	     set !STF_PRODUCT = LANMANNT
+	 else-ifstr(i) $(TempProductType) == "servernt"
+	     set !STF_PRODUCT = SERVERNT
+	 endif
+	 CloseRegKey $(KeyProductOptions)
+     endif
+     Debug-Output "NCPASHEL.INF: STF_SRCDIR is "$(!STF_SRCDIR)
+     Debug-Output "NCPASHEL.INF: NTN_SRCPATH is "$(!NTN_SRCPATH)
+     ;Ifstr(i) $(!NTN_SRCPATH) != ""
+     ;    Set !STF_ORIGINAL_SRCDIR = $(!STF_SRCDIR)
+     ;    Set !STF_SRCDIR = $(!NTN_SRCPATH)
+     ;    Debug-Output "NCPASHEL.INF: Reset STF_SRCDIR to:"$(!STF_SRCDIR)
+     ;else
+	 OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\Windows Nt\CurrentVersion" $(!REG_KEY_READ) KeyNt
+	 Ifstr(i) $(KeyNt) != ""
+	     GetRegValue $(KeyNt) "SourcePath" SourcePathValue
+	     Set !STF_SRCDIR = *($(SourcePathValue),4)
+	     Debug-Output "NCPASHEL.INF: SourcePath retrieved is "$(!STF_SRCDIR)
+	     CloseRegKey $(KeyNt)
+	 Endif
+	 Ifstr(i) $(!STF_SRCDIR) == ""
+	   Set !STF_SRCDIR = "A:\"
+	 Endif
+     ;Endif
+     Set SetupInp = 0
+     Set !NTN_InstallPhase = secondary
+     ifstr(i) $(!NTN_OVERIDEPHASE) != ""
+	 Set !NTN_InstallPhase = $(!NTN_OVERIDEPHASE)
+     Else
+	 OpenRegKey $(!REG_H_LOCAL) "" "SYSTEM\Setup" $(!REG_KEY_READ) KeySetup
+	 Ifstr(i) $(KeySetup) != ""
+	     GetRegValue $(KeySetup) "SystemSetupInProgress" SetupInpValue
+	     Ifint $(RegLastError) == $(!REG_ERROR_SUCCESS)
+		 Set SetupInp = *($(SetupInpValue),4)
+		 Debug-Output "NCPASHEL.INF: SetupInp = "$(SetupInp)
+	     Endif
+	     Ifint $(SetupInp) == 1
+		 Set !NTN_InstallPhase = primary
+		 GetRegValue $(KeySetup) "WinntPath" SetupPathValue
+		 Ifint $(RegLastError) == $(!REG_ERROR_SUCCESS)
+		     Set !STF_SRCDIR_WINNT = *($(SetupPathValue),4)
+		     Debug-Output "NCPASHEL.INF: STF_SRCDIR_WINNT = "$(!STF_SRCDIR_WINNT)
+		 Endif
+	     Endif
+	     CloseRegKey $(KeySetup)
+	 Endif
+     EndIf
+     Debug-Output "NCPASHEL.INF: NTN_InstallPhase = "$(!NTN_InstallPhase)
+     Debug-Output "NCPASHEL.INF: NTN_InfSection = "$(!NTN_InfSection)
+     Debug-Output "NCPASHEL.INF: NTN_InstallMode = "$(!NTN_InstallMode)
+   ;Ifstr(i) $(!NTN_Origination) == "install"
+   ;     Goto skipdetection
+   ;Endif
+   Ifstr(i) $(!NTN_InfSection) == BindingsReview
+	Goto skipdetection
+   Endif
+   Ifstr(i) $(!NTN_InstallMode) == install
+	Goto startdetection
+   Endif
+   Ifstr(i) $(!NTN_InstallMode) == configure
+	Goto startdetection
+   Endif
+   Goto skipdetection
+startdetection = +
+   Ifstr(i) $(!NCPA_HANDLE) != ""
+       Debug-Output "NCPASHEL.INF: Enable netcard detection from NCPA.CPL"
+       Shell "NCPARAM.INF" Param_ControlDetection DTSTART
+   Endif
+skipdetection = +
+     ifstr(i) $(!STF_PROCESSOR) == $(!ProcessorID_I386)
+	 set !STF_PLATFORM = $(!PlatformID_I386)
+	 set !SYS      = $(!ProcessorID_I386)
+     else-ifstr(i) $(!STF_PROCESSOR) == $(!ProcessorID_I486)
+	 set !STF_PLATFORM = $(!PlatformID_I386)
+	 set !SYS      = $(!ProcessorID_I386)
+     else-ifstr(i) $(!STF_PROCESSOR) == $(!ProcessorID_I586)
+	 set !STF_PLATFORM = $(!PlatformID_I386)
+	 set !SYS      = $(!ProcessorID_I386)
+     else-ifstr(i) $(!STF_PROCESSOR) == $(!ProcessorID_R4000)
+	 set !STF_PLATFORM = $(!PlatformID_Mips)
+	 set !SYS      = $(!ProcessorID_R4000)
+     else-ifstr(i) $(!STF_PROCESSOR) == $(!ProcessorID_Alpha)
+	 set !STF_PLATFORM = $(!PlatformID_Alpha)
+	 set !SYS      = $(!ProcessorID_Alpha)
+     else-ifstr(i) $(!STF_PROCESSOR) == $(!ProcessorID_PPC601)
+	 set !STF_PLATFORM = $(!PlatformID_PPC)
+	 set !SYS      = $(!ProcessorID_PPC601)
+     else-ifstr(i) $(!STF_PROCESSOR) == $(!ProcessorID_PPC603)
+	 set !STF_PLATFORM = $(!PlatformID_PPC)
+	 set !SYS      = $(!ProcessorID_PPC603)
+     else-ifstr(i) $(!STF_PROCESSOR) == $(!ProcessorID_PPC604)
+	 set !STF_PLATFORM = $(!PlatformID_PPC)
+	 set !SYS      = $(!ProcessorID_PPC604)
+     else-ifstr(i) $(!STF_PROCESSOR) == $(!ProcessorID_PPC620)
+	 set !STF_PLATFORM = $(!PlatformID_PPC)
+	 set !SYS      = $(!ProcessorID_PPC620)
+     else
+	 set !STF_PLATFORM = $(!PlatformID_I386)
+	 set !SYS      = $(!ProcessorID_I386)
+     endif
+     Ifstr(i) $(!STF_LANGUAGE) != "ENG"    
+	 Debug-Output "NCPASHEL: Language not set to English; resetting"
+	 !STF_LANGUAGE = "ENG"
+     Endif
+     read-syms ProgressCopy$(!STF_LANGUAGE)
+    Ifstr(i) $(!NTN_RegBase) == ""
+	set !NTN_RegBase = ""
+    Endif
+    set !NTN_ServiceBase  = "SYSTEM\CurrentControlSet\SERVICES"
+    Ifstr(i) $(!NTN_InstallMode) == ""
+	Debug-Output "NCPASHEL:!NTN_InstallMode was not defined!"
+	set !NTN_InstallMode  = "configure"
+    Endif
+    Ifstr(i) $(!NTN_SoftwareBase) == ""
+	set !NTN_SoftwareBase = "SOFTWARE"
+    Endif
+    Ifstr(i) $(!NTN_Origination) == ""
+	set !NTN_Origination = "ncpa"
+    Endif
+    Ifstr(i) $(!NTN_Infname) == ""
+	goto fatalnoinfname
+    Endif
+    Ifstr(i) $(!NTN_InfSection) == ""
+	Set !NTN_InfSection = "InstallOption"
+    Endif
+    ifstr(i) $(!NTN_InstallMode) == "Update"
+	;Debug-Output "NCPASHEL.INF: Upgrade mode"
+	;Shell "" DoAskOemsetupSource $(!STF_SRCDIR)
+	;Ifstr(i) $($ShellCode) != $(!SHELL_CODE_OK)
+	;    goto shellerror
+	;Endif
+	;ifstr(i) $($R0) == STATUS_SUCCESSFUL
+	;    set !STF_SRCDIR = $($R1)
+	;else-ifstr(i) $($R0) == STATUS_USERCANCEL
+	;    set Exit_Code = 1
+	;    goto end
+	;else
+	;    set Exit_Code = 2
+	;    goto end
+	;endif
+	Set !NTN_Infname = $(!STF_SRCDIR)\oemsetup.inf
+    endif
+    Ifstr(i) $(!NTN_InstallMode) == install
+	set AddCopy  = YES
+	set DoCopy   = YES
+	set DoConfig = YES
+    Else-ifstr(i) $(!NTN_InstallMode) == "Update"
+	set AddCopy  = YES
+	set DoCopy   = YES
+	set DoConfig = NO
+	Debug-Output "NCPASHEL.INF: Shell to "$(!NTN_Infname)
+	Shell $(!NTN_Infname) ReturnOptions $(!STF_LANGUAGE)
+	Ifstr(i) $($ShellCode) != $(!SHELL_CODE_OK)
+	   Debug-Output "NCPASHEL.INF: SHELL ERROR: "$($ShellCode)
+	   goto shellerror
+	Endif
+	Ifstr(i) $($R0) == "STATUS_SUCCESSFUL"
+	   IfContains(i) $(!NTN_InfOption) in $($R1)
+	      goto ContinueUpgrade
+	   endif
+	endif
+	read-syms IncorrectOemsetupDisk$(!STF_LANGUAGE)
+	shell "subroutn.inf" SetupMessage $(!STF_LANGUAGE) "NONFATAL" $(ErrorText)
+	set Exit_Code = 1
+	goto end
+ContinueUpgrade = +
+    Endif
+    ifstr(i) $(!NTN_SRCPATH) != ""
+	Set !STF_SRCDIR_OVERRIDE = $(!STF_SRCDIR)
+    Endif
+;    
+    OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\Tcpip\CurrentVersion" $(!REG_KEY_READ) KeyProduct
+    ifstr(i) $(KeyProduct) == ""
+	Shell "oemnxptc.inf" $(!NTN_InfSection) +
+		$(!STF_LANGUAGE) TC +
+		$(!STF_SRCDIR) $(AddCopy) $(DoCopy) $(DoConfig) 
+    endif
+    CloseRegKey $(KeyProduct)
+;    
+    OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\LanmanServer\CurrentVersion" $(!REG_KEY_READ) KeyProduct
+    ifstr(i) $(KeyProduct) == ""
+	Shell "oemnsvsv.inf" $(!NTN_InfSection) +
+		$(!STF_LANGUAGE) SRV +
+		$(!STF_SRCDIR) $(AddCopy) $(DoCopy) $(DoConfig)    
+	
+    endif
+    CloseRegKey $(KeyProduct)
+
+;    
+    OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\LanmanWorkstation\CurrentVersion" $(!REG_KEY_READ) KeyProduct
+    ifstr(i) $(KeyProduct) == ""
+	Shell "oemnsvwk.inf" $(!NTN_InfSection) +
+		$(!STF_LANGUAGE) WKSTA +
+		$(!STF_SRCDIR) $(AddCopy) $(DoCopy) $(DoConfig) 
+
+	OpenRegKey $(!REG_H_LOCAL) "" "SYSTEM\CurrentControlSet\Services\NetLogon" $(!REG_KEY_WRITE) KeyStart
+	SetRegValue $(KeyStart) {"Start", 0, $(!REG_VT_DWORD),3}
+	CloseRegKey $(KeyStart)
+
+    endif
+    CloseRegKey $(KeyProduct)
+
+;    
+    OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\NetBios\CurrentVersion" $(!REG_KEY_READ) KeyProduct
+    ifstr(i) $(KeyProduct) == ""
+	Shell "oemnsvnb.inf" $(!NTN_InfSection) +
+		$(!STF_LANGUAGE) NETBIOS +
+		$(!STF_SRCDIR) $(AddCopy) $(DoCopy) $(DoConfig)    
+	
+    endif
+    CloseRegKey $(KeyProduct)
+
+;    
+    OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\RPCLOCATOR\CurrentVersion" $(!REG_KEY_READ) KeyProduct
+    ifstr(i) $(KeyProduct) == ""
+	Shell "oemnsvrp.inf" $(!NTN_InfSection) +
+		$(!STF_LANGUAGE) RPCLOCATE +
+		$(!STF_SRCDIR) $(AddCopy) $(DoCopy) $(DoConfig)    
+	
+    endif
+    CloseRegKey $(KeyProduct)
+
+    Set !STF_SRCDIR_OVERRIDE = $(!NTN_SRCPATH)
+    Set !STF_SRCDIR = $(!NTN_SRCPATH)
+
+    Shell $(!NTN_Infname) $(!NTN_InfSection) +
+	 $(!STF_LANGUAGE) $(!NTN_InfOption) +
+	 $(!STF_SRCDIR) $(AddCopy) $(DoCopy) $(DoConfig)    
+    Ifstr(i) $($ShellCode) != $(!SHELL_CODE_OK)
+       Debug-Output "NCPASHEL.INF: SHELL ERROR: "$($ShellCode)
+       goto shellerror
+    Endif
+    Debug-Output "NCPASHEL: INF return: "$($R0)
+    
+    Ifstr(i) $($R0) == STATUS_SUCCESSFUL
+	set Exit_Code = 0
+	ifstr(i) $(!NTN_InstallMode) == install            
+	    OpenRegKey $(!REG_H_LOCAL) "" $(!NTN_ServiceBase)"\Tcpip\Parameters" $(!REG_KEY_WRITE) ParametersKey
+	    SetRegValue $(ParametersKey) {"EnableDHCP", 0, $(!REG_VT_DWORD),1}
+	    CloseRegKey $(ParametersKey)
+	    Shell "", INSTALL-INF
+	Endif
+	LibraryProcedure StartResult $(!NCPA_HANDLE), CPlSetup $(!STF_HWND), NCPA
+	
+    else-ifstr(i) $($R0) == STATUS_USERCANCEL
+	set Exit_Code = 1
+    else-ifstr(i) $($R0) == STATUS_NO_EFFECT
+	set Exit_Code = 3
+    else-ifstr(i) $($R0) == STATUS_REBIND
+	set Exit_Code = 4
+    else-ifstr(i) $($R0) == STATUS_REBOOT
+	set Exit_Code = 5
+    else
+	set Exit_Code = 2
+    Endif
+    EndWait    
+    goto end
+shellerror = +
+   read-syms ShellError$(!$ShellCode)$(!STF_LANGUAGE)
+   Debug-Output "NCPASHEL: SHELL ERROR: "$(Error)
+   goto fatal
+fatalnoinfname = +
+   set FatalErrorIndex = 2
+   goto fatalmsg
+fatalmsg = +
+   read-syms FatalError$(FatalErrorIndex)$(!STF_LANGUAGE)
+   Debug-Output "NCPASHEL: FATAL ERROR: "$(Error)
+   goto fatal
+fatal = +
+   read-syms FatalDlg$(!STF_LANGUAGE)
+   ui start "FatalError"
+   goto end
+end = +
+   Ifstr(i) $(!LIBHANDLE) != ""
+       LibraryProcedure DontCare, $(!LIBHANDLE), DeleteAllConnections
+   Endif
+   Debug-Output "NCPASHEL: NCPASHEL: returning to NCPA"
+   goto term
+term = +
+   Debug-Output "NCPASHEL: Bye."
+   exit   
+   
+[Install-INF]        
+    Set Prefix = "oemnad"
+    Set Index = 0    
+NextFile = +    
+    LibraryProcedure STATUS,$(!LIBHANDLE),CheckFileExistance $(!STF_WINDOWSSYSPATH)\$(Prefix)$(Index).inf
+    Ifstr(i) $(STATUS) == "YES"
+	Set-add Index = $(Index),1
+	goto    NextFile
+    Endif
+    
+    Set InfName = $(Prefix)$(Index).inf
+
+    OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\NCPA" $(!REG_KEY_WRITE) KeyNt
+    SetRegValue $(KeyNt), {InfReturn, 0, $(!REG_VT_SZ), $(InfName)","$(!STF_SRCDIR)","$(!NTN_InfOption)",Ethernet Adapter Information"}
+    CloseRegKey $(KeyNt)
+	
+    Set Index = 1    
+NextCard = +
+    Ifint $(Index) < 10
+    	OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkCards\"$(Index) $(!REG_KEY_READ) KeyNt
+    	Ifstr(i) $(KeyNt) != $(KeyNull)                        
+            GetRegValue $(KeyNt) "ProductName" ProductName
+            GetRegValue $(KeyNt) "ServiceName" ServiceName
+            GetRegValue $(KeyNt) "Manufacturer" Manufacturer
+    	    CloseRegKey $(KeyNt)
+            Debug-Output "NCPASHEL: ProductName is : "$(ProductName)
+            Debug-Output "NCPASHEL: ServiceName is : "$(ServiceName)
+
+            OpenRegKey $(!REG_H_LOCAL) "" "SYSTEM\CurrentControlSet\Services\"*($(ServiceName),4)"\Parameters" $(!REG_KEY_READ) KeyNtParameters
+    		Ifstr(i) $(KeyNtParameters) != $(KeyNull)                        
+                GetRegValue $(KeyNtParameters) "AdapterCFID" AdapterCFID
+                Debug-Output "NCPASHEL: AdapterCFID is : "*($(AdapterCFID),4)
+                Set-mul nResult1 = 4358, 65536  ;4358=0x1106
+                Debug-Output "NCPASHEL: Set-mul nResult is : "$(nResult1)
+                Set-div nResult2 = *($(AdapterCFID),4), 65536
+                Debug-Output "NCPASHEL: Set-div nResult is : "$(nResult2)
+                Set-sub nResult = nResult2, nResult1
+                Debug-Output "NCPASHEL: Set-sub nResult is : "$(nResult)
+                CloseRegKey $(KeyNtParameters)
+                ifint $(nResult) == 0
+                    OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkCards\"$(Index)"\NetRules" $(!REG_KEY_READ) KeyNetRules
+                    Ifstr(i) $(KeyNetRules) != $(KeyNull)
+                        GetRegValue $(KeyNetRules) "InfOption" InfOption
+                        Debug-Output "NCPASHEL: InfOption is : "*($(InfOption),4)
+                        CloseRegKey $(KeyNetRules)
+                    Endif
+                    Ifstr(i) *($(InfOption),4) == $(!NTN_InfOption)
+    	                Debug-Output "NCPASHEL: NetworkCards Index is : "$(Index)
+                        Debug-Output "NCPASHEL: NetRules InfName is : "$(InfName)
+    
+                        OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkCards\"$(Index)"\NetRules" $(!REG_KEY_WRITE) KeyNetRules
+                        Ifstr(i) $(KeyNetRules) != $(KeyNull)
+                            SetRegValue $(KeyNetRules) , {InfName , 0,$(!REG_VT_SZ), $(InfName)}
+                            CloseRegKey $(KeyNetRules)
+                        Endif
+
+                        OpenRegKey $(!REG_H_LOCAL) "" "SOFTWARE\"*($(Manufacturer),4)"\"*($(ProductName),4)"\CurrentVersion\NetRules" $(!REG_KEY_WRITE) KeyNetRules
+                        Ifstr(i) $(KeyNetRules) != $(KeyNull)
+                            SetRegValue $(KeyNetRules), {Infname, 0, $(!REG_VT_SZ), $(InfName)}    
+                            CloseRegKey $(KeyNetRules)
+                        Endif
+
+                    Endif
+                Endif
+            Endif        
+        Endif        
+
+	Set-add Index = $(Index), 1 
+	goto NextCard
+    Endif    
+    
+    LibraryProcedure STATUS,$(!NCPA_HANDLE), CopySingleFile $(!STF_HWND) $(!STF_SRCDIR)\oemsetup.inf $(!STF_WINDOWSSYSPATH)\$(InfName)
+    Return 0
+[Source Media Descriptions]
+    1 = "Windows NT Workstation CD-ROM" , TAGFILE = cdrom_w.40
+[Signature]
+    FileType = MICROSOFT_FILE
+[GetSignature]
+    read-syms Signature
+    return $(FileType)
+[ProductType]
+STF_PRODUCT  = Winnt
+STF_PLATFORM = I386
+[Files-Inf]
+2,      oemsetup.inf,    SIZE=1000,     RENAME=$(!UG_Filename)
+[LanguageID]
+   ENG
+[LanguageTextENG]
+   "English (United States)"
+[ProgressCopyENG]
+    ProCaption   = "Windows NT Networking Setup"
+    ProCancel    = "Cancel"
+    ProCancelMsg = "Windows NT is not correctly installed.  Are you sure you want "+
+		   "to cancel copying files?"
+    ProCancelCap = "Setup Message"
+    ProText1     = "Copying:"
+    ProText2     = "To:"
+    PlatformID_I386 = I386
+    PlatformID_Mips = Mips
+    PlatformID_PPC  = ppc
+[FatalDlgENG]
+STF_MB_TITLE = "Setup Message"
+DlgType = "MessageBox"
+STF_MB_TEXT  = $(Error)
+STF_MB_TYPE  = 1
+STF_MB_ICON  = 3
+STF_MB_DEF   = 1
+[FatalError1ENG]
+Error = "Initialization failed"
+[FatalError2ENG]
+Error = "No INF file name given (NTN_Infname)"
+[FatalError3ENG]
+Error = "Invocation of INF file "$(!NTN_Infname)" failed"
+[ShellError1ENG]
+Error = "INF file "$(!NTN_Infname)" does not exist"
+[ShellError2ENG]
+Error = "INF file "$(!NTN_Infname)" does not have a section named "$(!NTN_InfSection)
+[ShellError3ENG]
+Error = "INF file "$(!NTN_Infname)", section "$(!NTN_InfSection)" has syntax errors"
+[DoAskUpgradeSrcDlgTextENG]
+    DlgText        = "Please enter the full path for the upgrade/update "+
+		     "OEMSETUP.INF file. Then choose Continue."
+[IncorrectOemsetupDiskENG]
+    ErrorText      = "Update aborted. The OEMSETUP.INF does not support upgrade for the specified component."

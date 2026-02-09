@@ -1,11 +1,11 @@
 ;
-;  Purpose:   Netcard setup information file for Windows 95(OSR2)/98(SE)/ME/2000/XP x86 Edition
+;  Purpose:   Netcard setup information file for Windows 95(OSR2)/98(SE)/ME/2000/XP/Server2003 x86 Edition
 ;
 ;  Author:    Tevin Chen
 ;
-;  Date:      Jun, 2005
+;  Date:      Dec, 2006
 ;
-;  Copyright: VIA Networking Technologies, Inc.
+;  Copyright: Copyright (C) VIA Networking Technologies, Inc.
 ;
 
 
@@ -16,7 +16,7 @@ Compatible  = 1
 Class       = Net
 ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
 Provider    = %Prov%
-DriverVer   = 06/14/2005, 1.44.0.102
+DriverVer   = 12/12/2006, 1.55.0.113
 
 [Manufacturer]
 %Manuf%     = MANUF
@@ -43,11 +43,10 @@ CopyFiles       = GET.CopyFiles.NTx86, GET.SW.CopyFiles.NTx86
 AddService      = GETND5BV, 2, GET.Service, GET.EventLog
 
 ;-------------------------------------------------------------------------------
-; VT3119 specific , AdapterCFID = 0x31191106 (HEX) = 823726342 (DEC)
+; VT3119 specific
 ;
 [VT3119.reg]
 HKR, Ndi, DeviceID,    0, "PCI\VEN_1106&DEV_3119"
-HKR, ,    AdapterCFID, 0, "823726342"
 HKR, ,    AdapterType, 0, "5"
 HKR, ,    MediaType,   0, "1"
 
@@ -297,6 +296,7 @@ HKR, Ndi\params\Wakeup,      flag,      1, "20","00","00","00"
 ;
 [GET.CopyFiles.NTx86]
 getnd5bv.sys,,,2
+
 [GET.SW.CopyFiles.NTx86]
 vuins32.dll,,,2
 
@@ -364,11 +364,10 @@ GET.SW.CopyFiles             = 11
 [SourceDisksFiles]
 getnd5av.sys = 1
 getnd5bv.sys = 1
-getnd4.sys   = 1
+etnd4.sys   = 1
 getnd3.sys   = 1
-getndis.inf  = 1
 wndi.dll     = 1
-getnd2.dos   = 1
+;getnd2.dos   = 1
 vuins32.dll  = 1
 vuins16.dll  = 1
 

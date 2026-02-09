@@ -2,9 +2,9 @@
 **
 **  VIA Rhine Family Fast Ethernet Adapter
 **
-**  NDIS Driver for Windows 95/95OSR2/98/98SE/ME/2000/XP/SRV2003
+**  NDIS Driver for Windows 98SE/ME/2000/XP/SRV2003/Vista
 **
-**  v3.41   Dec, 2004
+**  v3.84   May, 2009
 **
 **
 
@@ -16,15 +16,13 @@ Introduction:
 Contents of the Subdirectory:
 =============================
 
-    FETND5AV.SYS        The NDIS5 driver for Windows 98/98SE/ME.
-    FETND5BV.SYS        The NDIS5 driver for Windows 2000/XP/SRV2003.
-    FETND4.SYS          The NDIS4 driver for Windows 95OSR2.
-    FETND3.SYS          The NDIS3 driver for Windows 95.
-    FETND.DOS           The NDIS2 driver for Windows.
-    FETODI.COM          The ODI driver for Windows.
+    FETND5AV.SYS        The NDIS5 driver for Windows 98SE/ME.
+    FETND5BV.SYS        The NDIS5 driver for Windows 2000/XP/SRV2003/Vista.
     FETNDIS.INF         The installation information file.
     WINNDI.DLL          The Co-installer for Windows.
-    WCOINST.DLL         The Co-installer for Windows 2K/XP/SRV2003.
+    VUINS16.DLL         The Un-installer for Windows.
+    VUINS32.DLL         The Un-installer for Windows 2000/XP/SRV2003.
+    DIFXAPI.DLL         The DIFx API for Vista.
     WIN.TXT             This file.
 
 Installation:
@@ -48,12 +46,9 @@ Installation:
 
   Note:
 
-    1. The NDIS2 and ODI drivers are only supported in Windows 95.
-
-    2. In Setup Option "Flow Control":
+    1. In Setup Option "Flow Control":
        When setting to Hardware Default(Auto), the flow control setting is 
        according to the auto-negotiation result based on PHY hardware default
        values. However, when setting to other values(Disable, Enable), driver 
        will just disable or enable flow control ability according to your setting.
-
 

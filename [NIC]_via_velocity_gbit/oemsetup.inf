@@ -3,7 +3,7 @@
 ;
 ;  Author:    Tevin Chen
 ;
-;  Date:      Jun, 2005
+;  Date:      Dec, 2006
 ;
 
 [Identification]
@@ -26,9 +26,9 @@ IoLogMsgDLL     = "%SystemRoot%\System32\IoLogMsg.dll"
 Manufacturer    = "VIA Networking Technologies, Inc."
 
 ; Driver Version info
-; VERSION.... 1.44
+; VERSION.... 1.55
 ProductMajorVersion = "1"
-ProductMinorVersion = "44"
+ProductMinorVersion = "55"
 ProductVersion  = $(ProductMajorVersion)"."$(ProductMinorVersion)
 
 ; DEVICE_ID....
