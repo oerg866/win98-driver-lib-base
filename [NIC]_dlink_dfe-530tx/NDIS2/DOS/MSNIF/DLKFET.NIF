@@ -1,7 +1,0 @@
-Model = D-Link DFE-530TX PCI Fast Ethernet Adapter                           
-Path = ETHERNET\DLKFET
-DeviceDriver = DLKFET.DOS
-DeviceName = DLKFET
-Type = NDIS
-XPorts = NETBEUI
-
