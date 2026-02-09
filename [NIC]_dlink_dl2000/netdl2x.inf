@@ -362,7 +362,7 @@ DL2X.nt5.copyfiles          = 12    ; LDID_IOS  Windows Iosubsys dir.
 
 [SourceDisksFiles]
 ;netdl2x.inf  = 1
-dl2xnd3.sys  = 1
+;dl2xnd3.sys  = 1
 dl2xnd4.sys  = 1
 dl2xd50.sys  = 1
 dlhlpndi.dll = 1
@@ -374,7 +374,7 @@ dlhlpndi.dll,,,2
 dl2xd50.sys,,,2
 
 [DL2X.ndis3.copyfiles]
-dl2xnd3.sys,,,2
+;dl2xnd3.sys,,,2
 
 [DL2X.ndis4.copyfiles]
 dl2xnd4.sys,,,2

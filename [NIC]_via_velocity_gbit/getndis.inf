@@ -346,7 +346,7 @@ getnd4.sys,,,2
 getnd3.sys,,,2
 
 [GET.ndis2.CopyFiles]
-getnd2.dos
+;getnd2.dos
 
 [GET.SW.CopyFiles]
 vuins16.dll,,,2
@@ -364,7 +364,7 @@ GET.SW.CopyFiles             = 11
 [SourceDisksFiles]
 getnd5av.sys = 1
 getnd5bv.sys = 1
-etnd4.sys   = 1
+getnd4.sys   = 1
 getnd3.sys   = 1
 wndi.dll     = 1
 ;getnd2.dos   = 1

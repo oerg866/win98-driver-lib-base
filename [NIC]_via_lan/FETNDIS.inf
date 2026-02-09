@@ -486,16 +486,16 @@ winndi.dll,,,2
 fetnd5av.sys,,,2
 
 [FET.ndis4.CopyFiles]
-fetnd4.sys,,,2
+;fetnd4.sys,,,2
 
 [FET.ndis3.CopyFiles]
-fetnd3.sys,,,2
+;fetnd3.sys,,,2
 
 [FET.ndis2.CopyFiles]
-fetnd.dos
+;fetnd.dos
 
 [FET.odi.CopyFiles]
-fetodi.com
+;fetodi.com
 
 [FET.SW.CopyFiles]
 vuins16.dll,,,2
@@ -514,13 +514,13 @@ FET.SW.CopyFiles        = 11
 [SourceDisksFiles]
 fetnd5av.sys         = 1
 fetnd5bv.sys         = 1
-fetnd4.sys          = 1
-fetnd3.sys          = 1
+;fetnd4.sys          = 1
+;fetnd3.sys          = 1
 winndi.dll          = 1
 vuins32.dll         = 1
 vuins16.dll         = 1
-fetnd.dos           = 1
-fetodi.com          = 1
+;fetnd.dos           = 1
+;fetodi.com          = 1
 difxapi.dll         = 1
 
 [SourceDisksNames]

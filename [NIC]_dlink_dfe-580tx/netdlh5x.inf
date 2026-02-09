@@ -107,7 +107,7 @@ CopyFiles       = DLH5X.ndis4.copyfiles
 CopyFiles       = DLH5X.ndis3.copyfiles
 
 [DLH5X.ndis3.copyfiles]
-dlh5xnd3.sys,,,2
+;dlh5xnd3.sys,,,2
 
 [DLH5X.ndis4.copyfiles]
 dlh5xnd4.sys,,,2
@@ -463,7 +463,7 @@ alta.CopyFiles              = 12
 
 [SourceDisksFiles]
 ;netdlh5x.inf = 50
-dlh5xnd3.sys = 50
+;dlh5xnd3.sys = 50
 dlh5xnd4.sys = 50
 dlh5xnd5.sys = 50
 dlhlpndi.dll = 50

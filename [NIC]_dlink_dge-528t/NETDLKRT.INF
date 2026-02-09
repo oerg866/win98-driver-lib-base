@@ -71,7 +71,7 @@ CopyFiles       = Rtlnic.CopyFilesXP
 AddService = RTL8023xp, 2, rtsntxp.Service, common.EventLog
 
 [Rtlnic.CopyFilesXP]
-DLKRTXP.SYS,,,2
+;DLKRTXP.SYS,,,2
 
 ;;****************************************************************************
 ;; Windows XP 64-bit
@@ -87,7 +87,7 @@ CopyFiles       = Rtlnic.CopyFilesX64
 AddService = RTL8023x64, 2, rtsntx64.Service, common.EventLog
 
 [Rtlnic.CopyFilesX64]
-DLKRT64.SYS,,,2
+;DLKRT64.SYS,,,2
 
 ;;***************************************************************************
 ;; Windows 9x parameters
@@ -302,8 +302,8 @@ DefaultDestDir             = 11        ; LDID_SYS
 
 [SourceDisksFiles]
 DLKRTGB.SYS       = 1
-DLKRTXP.SYS     = 1
-DLKRT64.SYS     = 1
+;DLKRTXP.SYS     = 1
+;DLKRT64.SYS     = 1
 
 ;;****************************************************************************
 ;; Strings
