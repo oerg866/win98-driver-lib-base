@@ -1,0 +1,364 @@
+(C)Copyright 2002-2005 Marvell(R).
+All rights reserved.
+===========================================================================
+
+m4cxw9x.txt created 10-Mar-2005
+
+Readme File for M4CXW9X.sys v7.42.1.3
+D-Link DGE-530T Gigabit Ethernet Adapter
+
+NDIS5 Miniport Driver for Windows ME and 98SE
+
+This file contains
+ 1  Overview
+ 2  Required Files
+ 3  Installation
+    3.1  Installing the driver
+    3.2  Updating the driver
+ 4  Parameters
+
+===========================================================================
+
+
+1  Overview
+===========
+
+M4CXW9X.sys is the NDIS5 32-bit Miniport driver.
+
+
+***
+
+
+2  Required Files
+=================
+
+To install the driver, the following files are required:
+M4CXW9X.sys NDIS5 Miniport driver 
+M4CXW9X.inf installation setup script
+***
+
+3  Installation
+===============
+
+3.1  Installing the driver
+--------------------------
+
+Read the installation instructions in the adapter manual carefully.
+Follow these instructions to install the adapter in your computer.
+
+
+
+NOTE: Do *not* try to install a driver for a adapter using the    CONTROL 
+PANEL / NETWORK / CONFIGURATION / ADD / ADAPTER utility of    the operating 
+system. The operating system will always detect new hardware    during the 
+boot process. You will be asked for a respective driver    diskette if the 
+system does not find the respective installation    .INF file in its system 
+directories. 
+
+If you install the operating system with an already inserted adapter, then 
+the operating system may identify the adapter as an "Unknown Device". 
+
+In this case, remove this "Unknown Device" after you have completed the
+installation of the operating system:
+
+1. Click CONTROL PANEL / SYSTEM / DEVICE MANAGER.
+2. In the "Device Manager" window click VIEW DEVICES BY TYPE.
+3. Examine the list of devices under "Computer". 
+   The "Unknown Device" is listed under "Other Devices". 
+4. Click OTHER DEVICES.
+   The "Ethernet Controller" is displayed. 
+5. Click "Ethernet Controller".
+6. Click REMOVE.
+7. Reboot the operating system.
+8. Follow the installation instructions below.
+
+Due to the plug & play facility, the operating system is able to find, 
+identify, and configure an adapter automatically. 
+
+To install the driver, proceed as follows:
+1. Install the adapter in your computer. 
+2. Start the machine.
+The operating system will detect the adapter during boot operation. 
+3. Follow the instructions given by the operating system to install the 
+driver. 
+4. If the operating system asks for a path, enter the path to the required 
+files   depending on the type of medium (e.g. CD-ROM, floppy diskette, 
+network   drive, etc.) containing the M4CXW9X driver files.  5. To configure 
+any driver options for your adapter, follow   the instructions in the 
+section "Driver Options" in this readme file. 
+***
+
+
+3.2  Updating the driver
+------------------------
+
+
+
+To update an already installed driver for your adapter, proceed as follows: 
+
+1.  Click CONTROL PANEL / SYSTEM.
+2. Click DEVICE MANAGER / NETWORK ADAPTERS / ADAPTERNAME /   PROPERTIES / 
+DRIVER. 
+3.  Click UPDATE DRIVER.
+4.  When prompted "Do you want Windows to search for the driver", select 
+    the check box "No, select driver from list".
+5.  Click HAVE DISK.
+6.  Enter the path to the required files depending on the type of medium 
+    (e.g.CD-ROM, floppy diskette, network drive, etc.) containing the 
+    M4CXW9X driver files. 
+7.  Click OK.
+8. Select the adapter. 
+9.  Click OK.
+10. After the operating system has copied the driver files, reboot the 
+computer. 
+
+Please note that the latest version of the M4CXW9X driver is
+available for download from our web site.
+
+
+4  Parameters
+=============
+
+The M4CXW9X.sys driver allows you to modify several options in order to 
+optimize the operation of your adapter. 
+
+1.  Start NETWORK from the CONTROL PANEL.
+2.  Select CONFIGURATION.
+3. Select the adapter. 
+4.  Click PROPERTIES.
+5.  Click ADVANCED.
+6.  In the "Property" box, select the option that you want to change.
+7.  Enter the desired value in the "Value" box.
+8.  When finished, click OK.
+9.  Reboot the machine.
+NOTE: The machine must be rebooted before any changed options can 
+      take effect.
+
+The parameters supported by the driver are described below.
+
+
+
+Network Address
+------------------------
+Default value:  burned-in adapter address
+Valid range:    02-00-00-00-00-01 to FE-FF-FF-FF-FF-FF (hexadecimal), 
+                where at least the "multicast" bit(Bit 0) must not be set 
+                (it indicates that the address field contains an 
+                individual address)and the "locally administered" bit (Bit 1) 
+                is set (the address has been assigned by a local
+                administrator). These two bits are first and second 
+                bits transmitted on the LAN medium.
+
+CAUTION: Each individual network MAC address can only be used once in a
+         network. Assigning the same address to more than one adapter in 
+         the same network is not allowed and can cause serious network 
+         problems.
+
+To use a network MAC address other than the one burned into the adapter,
+enter the network address in the following hexadecimal format:
+
+	e.g.: 02-00-5A-98-12-34
+
+If the network address field blank is left blank (or a different number of
+digits is specified), the network address burned into the adapter will 
+be used.
+
+
+Jumbo Frame
+------------------------
+Default value: "Disabled"
+Valid values:   
+	-"Disabled"
+	-"Bytes4088"
+	-"Bytes9014"
+
+This parameter specifies the frame size that the driver will support. 
+The performance of your network usually increases If "Jumbo" frames are 
+used. Do not enable this option if you are not sure that your network 
+supports jumbo frames.
+
+Note: For Fast Ethernet adapters the valid range is limited to 1514.
+
+
+
+Wake Up Capabilities
+------------------------
+Default value: "Magic Packet and Pattern Magic"
+Valid values:
+	-"None"
+		wake on LAN capabilities are disabled
+	-"Magic Packet"
+		wake up with MagicPacket from ShutDown state,
+		OS Controlled from Hibernate or Standby state
+	-"Pattern Match"
+		wake up with a packet containing a special pattern
+		from ShutDown state, OS Controlled from Hibernate 
+		or Standby state
+	-"Magic Packet and Pattern Match"
+		wake up with both from ShutDown state, OS Controlled
+		from Hibernate or Standby state
+	-"Link Change"
+		wake up with link change from ShutDown state,
+		OS Controlled from Hibernate or Standby state
+
+                        
+Wake From Shutdown
+------------------------
+Default value: "Off"
+Valid values:
+	-"Off"
+		disable the capabilities of the NIC to wake the computer 
+		from shutdown.
+	-"On"
+		enable the NIC to be capable to wake the computer from shutdown.
+
+
+Number of Receive Buffers
+------------------------
+For Yukon family based ethernet controllers the following values are used:
+Default value:  50 (decimal)
+Valid range:    3..500 (decimal)
+
+For Yukon2 family based ethernet controllers the following values are used:
+Default value:  256 (decimal)
+Valid range:    128..512 (decimal)
+
+This parameters defines the number of receive buffers allocated by the
+driver. If the system does not have enough resources the driver will fail 
+to load. Increasing this value may improve performance.
+
+
+Number of Transmit Buffers
+------------------------
+For Yukon family based ethernet controllers the following values are used:
+Default value:  50 (decimal)
+Valid range:    4..200 (decimal)
+
+For Yukon2 family based ethernet controllers the following values are used:
+Default value:  256 (decimal)
+Valid range:    128..512 (decimal)
+
+This parameters defines the number of transmit buffers allocated by the
+driver. If the system does not have enough resources the driver will 
+fail to load. Increasing this value may improve performance.
+
+
+Interrupt Moderation
+------------------------
+Default value: "On"
+Valid values:
+	-"On"
+	-"Off"
+
+If more than the specified rate of interrupts occur, the function 
+Interrupt Moderation groups these interrupts so that several data packets 
+can be handled per interrupt. This will lead to lower CPU utilization 
+but may increase the latency.
+
+
+Max IRQ per Sec
+------------------------
+Default value:  5000 (decimal)
+Valid range:    1000..30000 (decimal)
+
+This parameter specifies the interrupt rate for Interrupt Moderation. If
+Interrupt Moderation is set to "Off" it will be ignored.
+
+
+Speed & Duplex
+------------------------
+Default value: "Auto-Sense"
+Valid range:
+	-"Auto-Sense"
+	-"10Mbps Half Duplex"
+	-"10Mbps Full Duplex"
+	-"100Mbps Half Duplex"
+	-"100Mbps Full Duplex"
+
+This parameter contain information regarding autonegotiation, 
+duplex capabilities and link speed. Only if the setting is "Auto" the 
+Autonegotiation is set to "On", in every other settings it is turned "Off".
+
+NOTE: This parameter is not valid for fiber adapter.
+
+
+Preferred Port
+------------------------
+Default value: "A"
+Valid range:
+	-"A"
+	-"B"
+
+NOTE: This parameter is only available for dual link adapters.
+
+Use this parameter to set the preferred port the RLMT (Redundant
+Link Management Technology) will use for all network traffic, if more than
+one port has an active link to the network.
+
+
+RLMT Mode
+------------------------
+Default value: "CLS"
+Valid range:
+	-"CLS" (Check Link State): 
+		RLMT uses the link state reported by the
+ 		adapter hardware for each individual port to determine whether a 
+ 		port can be used for all network traffic or not.
+
+	-"CLP" (Check Local Port):
+		In this mode, RLMT monitors the network path
+ 		between the two ports of an adapter by regularly exchanging packets 
+		between them. This mode requires a network configuration in which 
+		the two ports "see" each other (i.e. there must not be any router 
+		between the ports).
+
+	-"CLPSS" (Check Local Ports and Segmentation Status):
+		This mode supports 
+		the same functions as the CLP mode and additionally checks network 
+		segmentation by sending BPDU hello packets. Thus, this mode is only 
+		to be used if Gigabit Ethernet switches are installed on the network
+		that have been configured to use the Spanning Tree protocol.
+
+NOTE: RLMT modes "CLP" and "CLPSS" are designed to operate in 
+      configurations where a network path between the ports on one adapter
+      exists. Moreover, they are not designed to work where adapters are
+      connected back-to-back.
+      This parameter is only available for dual link adapters.
+
+
+
+
+FlowControl
+------------------------
+Default value: "On"
+Valid range:
+	-"Off":
+		No link partner is allowed to send PAUSE frames.
+
+	-"On":
+		Both link partners are allowed to send PAUSE frames.
+		
+This parameter can be used to set the flow control capabilities the port 
+reports during auto-negotiation. This parameter can be set for each port 
+individually, which is helpful if the port at the other end of the cable 
+cannot handle all possible combinations. Using the default setting, the 
+adapter should automatically detect the capabilities of the peer port. 
+
+   
+TCP Segmentation
+------------------------
+Default value: "On"
+Valid range:
+	-"On":
+		The big packets are segmented on the NIC before to be sent to the 
+ 		network. Using this method the processor will be not loaded to do 
+		this job.
+
+	-"Off":
+		The packets are not segmented by the NIC.
+
+NOTE: 	This parameter is only available starting with the NICs based on 
+		Yukon2 chip.
+
+*** End of Readme File ***
+

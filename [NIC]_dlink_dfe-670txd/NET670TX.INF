@@ -1,0 +1,184 @@
+;; NET670TX.INF
+;;
+;; D-Link DFE-670TXD Fast Ethernet PC Card
+;;
+;; Copyright , 2001 D-Link Corp. All Rights Reserved.
+;;
+;; Version 5.00.0130.1
+;;
+;; Supports  Windows XP, Windows 2000, Windows Me, Windows 98
+;;
+;; NDIS Version 5.0
+
+[Version]
+Signature      = "$Chicago$"
+Compatible     = 1
+Class          = Net
+ClassGUID      = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider       = %V_MS%
+CatalogFile    = DFE670W9.CAT
+CatalogFile.NT = DFE670NT.CAT
+DriverVer      = 01/03/2002,5.00.0130.1
+
+[ControlFlags]
+;ExcludeFromSelect = PCMCIA\D-Link-DFE-670TXD-FCE7
+
+
+;****************************************************************************
+; Table of Contents
+;****************************************************************************
+[Manufacturer]
+%V_MANUF% = D-Link
+
+;****************************************************************************
+; The various flavors of D-Link DFE-670TXD Fast Ethernet PC Card
+;****************************************************************************
+[D-Link]
+%DFE670.DeviceDesc% = DFE670.ndi, PCMCIA\D-Link-DFE-670TXD-FCE7
+
+;
+; Windows 2000, XP section
+;
+[DFE670.ndi.NT]
+Characteristics = 0x84
+BusType         = 8
+AddReg          = DFE670.NT.reg, DFE670.params.reg
+CopyFiles       = DFE670.NT.CopyFiles
+
+[DFE670.ndi.NT.Services]
+AddService = DFE670, 2, DFE670.Service, DFE670.AddEventLog
+
+[DFE670.NT.reg]
+HKR, Ndi,               Service,    0, "DFE670"
+HKR, Ndi\Interfaces,    DefUpper,   0, "ndis5"
+HKR, Ndi\Interfaces,    DefLower,   0, "ethernet"
+HKR, Ndi\Interfaces,    UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,    LowerRange, 0, "ethernet"
+
+[DFE670.NT.CopyFiles]
+DFE670.SYS, DFE670.SYS,,2
+
+[DFE670.Service]
+DisplayName     =   %Service.DispName%
+ServiceType     =   1 ;%SERVICE_KERNEL_DRIVER%
+StartType       =   3 ;%SERVICE_DEMAND_START%
+ErrorControl    =   1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary   =   %12%\DFE670.SYS
+LoadOrderGroup  =   NDIS
+AddReg          =   TextModeFlags.reg
+
+[DFE670.AddEventLog]
+AddReg = DFE670.AddEventLog.reg
+
+[DFE670.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+[TextModeFlags.reg]
+HKR, , TextModeFlags, 0x00010001, 0x0001
+
+
+;
+; Common Params
+;
+[DFE670.params.reg]
+;Connection Type
+HKR,Ndi\params\ConnectionType,      ParamDesc,      0, %ConnectionType%
+HKR,Ndi\params\ConnectionType,      type,           0, "enum"
+HKR,Ndi\params\ConnectionType,      default,        0, "7"
+HKR,Ndi\params\ConnectionType\enum, 0,              0, %10HD%
+HKR,Ndi\params\ConnectionType\enum, 2,              0, %10FD%
+HKR,Ndi\params\ConnectionType\enum, 4,              0, %100HD%
+HKR,Ndi\params\ConnectionType\enum, 6,              0, %100FD%
+HKR,Ndi\params\ConnectionType\enum, 7,              0, %AutoSense%
+HKR,                              , ConnectionType, 0, "7"
+
+;Network Address
+HKR,NDI\params\NetworkAddress, ParamDesc,      0, %NetworkAddress%
+HKR,NDI\params\NetworkAddress, type,           0, "edit"
+HKR,NDI\params\NetworkAddress, default,        0, ""
+HKR,NDI\params\NetworkAddress, LimitText,      0, "18"
+HKR,NDI\params\NetworkAddress, UpperCase,      0, "1"
+HKR,NDI\params\NetworkAddress, optional,       0, "1"
+HKR,                         , NetworkAddress, 0, ""
+
+HKR,,DelayTime,,"3000"
+HKR,,TransmitCounter,,"50"
+
+
+;
+; Windows 9x, ME section
+;
+[DFE670.ndi]
+AddReg    = DFE670.ndi.reg, ne2000.ndi.reg, Clone.params.reg, DFE670.params.reg
+CopyFiles = DFE670.ndis3.CopyFiles
+
+[DFE670.ndi.reg]
+HKR,Ndi,DeviceID,,"PCMCIA\D-Link-DFE-670TXD-FCE7"
+HKR,Ndi,CardType,,"PCMCIA"
+HKR,,AdapterType,,"2"
+
+; Base section for ne2000 users
+[ne2000.ndi.reg]
+; key,subkey,valuname,type,value
+HKR,,DevLoader,,*ndis
+HKR,,DeviceVxDs,,DFE670.SYS
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+; NDIS Info
+HKR,NDIS,LogDriverName,,"DFE670"
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+; Interfaces
+HKR,Ndi\Interfaces,DefUpper,,"ndis3"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"ndis3"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+
+; Install NDIS3
+[DFE670.ndis3.CopyFiles]
+DFE670.SYS, DFE670.SYS,,2
+
+; extra params for clones
+[Clone.params.reg]
+; Resources
+HKR,,InterruptNumber,1,04,00,00,00
+HKR,,IOBaseAddress,1,02,00,00,00
+HKR,NDI\params\InterruptNumber,resc,1,04,00,00,00
+HKR,NDI\params\InterruptNumber,ParamDesc,,"Interrupt Level"
+HKR,NDI\params\InterruptNumber,flag,1,60,00,00,00
+HKR,NDI\params\IoBaseAddress,resc,1,02,00,00,00
+HKR,NDI\params\IoBaseAddress,ParamDesc,,"I/O Base Address"
+HKR,NDI\params\IoBaseAddress,flag,1,20,00,00,00
+
+
+[DestinationDirs]
+DefaultDestDir          = 11     ; LDID_SYS
+DFE670.ndis3.CopyFiles   = 11
+DFE670.NT.CopyFiles      = 12
+
+[SourceDisksNames]
+1=%DFE670DiskName%,,,
+
+[SourceDisksFiles]
+DFE670.SYS = 1
+
+;****************************************************************************
+; Translatable strings
+;****************************************************************************
+[Strings]
+V_MS    = "D-Link"
+V_MANUF = "D-Link"
+
+; Common Parameter
+ConnectionType  = "Connection Type"
+AutoSense       = "Auto Sense"
+100FD           = "100Mbps Full Duplex"
+100HD           = "100Mbps"
+10HD            = "10Mbps"
+10FD            = "10Mbps Full Duplex"
+NetworkAddress  = "Network Address"
+
+; Adapter names
+DFE670.DeviceDesc = "D-Link DFE-670TXD Fast Ethernet PC Card"
+Service.DispName = "D-Link DFE-670TXD Fast Ethernet PC Card"
+DFE670DiskName    = "D-Link DFE-670TXD Fast Ethernet PC Card Driver Disk"

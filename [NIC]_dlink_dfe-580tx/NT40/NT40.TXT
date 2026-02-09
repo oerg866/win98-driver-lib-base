@@ -1,0 +1,75 @@
+
+	    D-Link DL10050-based FAST Ethernet Adapter
+	    D-Link DFE-550TX FAST Ethernet 10/100 Adapter
+	    D-Link DFE-550FX 100Mbps Fiber-optics Adapter
+	    D-Link DFE-580TX 4 Port Server Adapter
+	    D-Link DFE-530TXS PCI Fast Ethernet Adapter
+		Installation for Windows NT V4.0
+
+ Getting Started
+ ---------------
+
+    - Start your Windows NT 4.0 PC normally and inserting the network
+      adapter into your computer.
+
+    - Open "My Computer" -> "Control Panel" -> "Networks" icons.
+
+    - Select "Add adapter" -> "Have disk" items.
+      Type the following (assume the driver is located at A:\)
+
+	A:\winnt	(A: is floppy drive)
+	OR 
+	D:\winnt	(D: is CD drive)
+
+      Select the adapter name, like "D-Link DFE-550TX ...".
+
+    - Windows NT 4.0 will copy the driver files from the driver disk.
+      It also will pop up the configuration window, you can assign the
+      "Connection Type" and "Network Address" here.
+
+    - After finishing file copy, Windows NT 4.0 will ask you to
+      reboot the PC. Select YES.
+
+    - Restart the computer.
+
+
+ How to configure VLAN ID and GVRP
+ ---------------------------------
+    System requirement: Windows NT 4.0 + SP5 (or later).
+    
+    - Please install adpcfg.exe after driver install successfully. 
+      The setup program will upadte new system files. You must restart the system
+      and continue the installation.
+    - Select "D-Link Network Adapter" --> "D-Link Adapter Configuration" on Start menu.
+    - PLease select "VLAN" item and set the VLAN ID and GVRP.
+    - The VLAN ID and GVRP will active after system restart.
+
+  
+
+    Driver keywords:
+    ----------------
+
+    - Open "My Computer" -> "Control Pannel" -> "Network" ->
+      Double click the adapter, like "D-Link DFE-550TX ..." etc.
+
+	Connection Type	Specify the connection type for the adapter.
+			default: AutoSense
+			(for DFE-550FX default setting is 100Base-FX
+			Full Duplex)
+
+	Network Address	You can set the Ethernet address for your adapter.
+			It is not recommended to use this keyword. Please
+			use default value if possible.
+			As you know two or more adapter in the same
+			network with same Ethernet address will cause
+			a little problem.
+
+			When using this keyword you need to input exactly
+			6 bytes of Ethernet address using one of the
+			following format:
+
+			xx-xx-xx-xx-xx-xx
+			OR
+			xxxxxxxxxxxx
+
+			default: read address from adapter ROM.

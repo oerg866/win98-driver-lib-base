@@ -1,0 +1,424 @@
+;
+; NETDL2X.INF
+;
+; Copyright (c) 1993-1998, Microsoft Corporation.
+; Copyright (c) 1998-2004, D-Link Corporation.
+;
+
+;
+; D-Link DL2000-based Gigabit Ethernet Adapters
+; INF for Windows 9x and 2000 (NT5) (Deserialized)
+; #@ Revision: 2.0 (010807) @#
+;
+
+
+[Version]
+Signature   = "$Chicago$"
+Compatible  = 1
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %V_DLINK%
+CatalogFile = dl2x.cat
+DriverVer   = 04/08/2004,2.1.1.0
+
+[Manufacturer]
+%V_DLINK%   = DLink
+
+
+[DLink]
+; DisplayName             Section       DeviceID
+;------------             -------       --------
+%DGE550SX.DeviceDesc%   = DGE550SX.ndi, PCI\VEN_1186&DEV_4000&SUBSYS_40011186  ;D-Link DGE-550SX Gigabit Ethernet Adapter
+%DGE550T.DeviceDesc%    = DGE550T.ndi,  PCI\VEN_1186&DEV_4000&SUBSYS_40001186  ;D-Link DGE-550T Gigabit Ethernet Adapter
+%DGE510T.DeviceDesc%    = DGE510T.ndi,  PCI\VEN_1186&DEV_4000&SUBSYS_40041186  ;D-Link DGE-510T Gigabit Ethernet Adapter
+%DGE570T.DeviceDesc%    = DGE570T.ndi,  PCI\VEN_1186&DEV_4000&SUBSYS_40031186  ;D-Link DGE-570T 2 Port Gigabit Ethernet Server Adapter
+%DL2000.DeviceDesc%     = DL2000.ndi,   PCI\VEN_1186&DEV_4000                  ;D-Link DL2000-based Gigabit Ethernet Adapter (generic)
+
+
+;-----------------------------------------------------------------------------
+; D-Link DGE-550SX Gigabit Ethernet Adapter
+;
+[DGE550SX.ndi]
+DriverVer   	= 04/08/2004
+AddReg          = SX1000.reg, DL2X.reg, DL2X.ndi.reg
+CopyFiles       = DL2X.win9x.copyfiles
+
+[DGE550SX.ndi.NT]
+Characteristics = 0x84  ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5     ; PCI
+AddReg          = SX1000.reg, DL2X.reg, DL2X.ndi.NT.reg
+CopyFiles       = DL2X.nt5.copyfiles
+
+[DGE550SX.ndi.NT.Services]
+AddService = DL2X, 2, dl2x.Service, common.EventLog
+
+;-----------------------------------------------------------------------------
+; D-Link DGE-550T Gigabit Ethernet Adapter
+;
+[DGE550T.ndi]
+DriverVer   	= 04/08/2004
+AddReg          = TP1000.reg, DL2X.reg, DL2X.ndi.reg
+CopyFiles       = DL2X.win9x.copyfiles
+
+[DGE550T.ndi.NT]
+Characteristics = 0x84  ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5     ; PCI
+AddReg          = TP1000.reg, DL2X.reg, DL2X.ndi.NT.reg
+CopyFiles       = DL2X.nt5.copyfiles
+
+[DGE550T.ndi.NT.Services]
+AddService = DL2X, 2, dl2x.Service, common.EventLog
+
+;-----------------------------------------------------------------------------
+; D-Link DGE-510T Gigabit Ethernet Adapter
+;
+[DGE510T.ndi]
+DriverVer   	= 04/08/2004
+AddReg          = TP1000.reg, DL2X.reg, DL2X.ndi.reg
+CopyFiles       = DL2X.win9x.copyfiles
+
+[DGE510T.ndi.NT]
+Characteristics = 0x84  ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5     ; PCI
+AddReg          = TP1000.reg, DL2X.reg, DL2X.ndi.NT.reg
+CopyFiles       = DL2X.nt5.copyfiles
+
+[DGE510T.ndi.NT.Services]
+AddService = DL2X, 2, dl2x.Service, common.EventLog
+
+;-----------------------------------------------------------------------------
+; D-Link DGE-570T Gigabit Ethernet Adapter
+;
+[DGE570T.ndi]
+DriverVer   	= 04/08/2004
+AddReg          = TP1000.reg, DL2X.reg, DL2X.ndi.reg
+CopyFiles       = DL2X.win9x.copyfiles
+
+[DGE570T.ndi.NT]
+Characteristics = 0x84  ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5     ; PCI
+AddReg          = TP1000.reg, DL2X.reg, DL2X.ndi.NT.reg
+CopyFiles       = DL2X.nt5.copyfiles
+
+[DGE570T.ndi.NT.Services]
+AddService = DL2X, 2, dl2x.Service, common.EventLog
+
+;-----------------------------------------------------------------------------
+; D-Link DL2000-based Gigabit Ethernet Adapter
+;
+[DL2000.ndi]
+DriverVer   	= 04/08/2004
+AddReg          = TP1000.reg, DL2X.reg, DL2X.ndi.reg
+CopyFiles       = DL2X.win9x.copyfiles
+
+[DL2000.ndi.NT]
+Characteristics = 0x84  ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5     ; PCI
+AddReg          = TP1000.reg, DL2X.reg, DL2X.ndi.NT.reg
+CopyFiles       = DL2X.nt5.copyfiles
+
+[DL2000.ndi.NT.Services]
+AddService = DL2X, 2, dl2x.Service, common.EventLog
+
+
+;-----------------------------------------------------------------------------
+; Common DL2X NDI parameters
+;
+[DL2X.reg]
+;Receive Buffers
+HKR,Ndi\params\RxBuffer,            ParamDesc,  0, %RxBuffer%
+HKR,Ndi\params\RxBuffer,            Type,       0, "dword"
+HKR,Ndi\params\RxBuffer,            Default,    0, "256"
+HKR,Ndi\params\RxBuffer,            Flag,       1, 20,00,00,00
+HKR,Ndi\params\RxBuffer,            Min,        0, "16"
+HKR,Ndi\params\RxBuffer,            Max,        0, "512"
+HKR,Ndi\params\RxBuffer,            Step,       0, "8"
+
+;Transmit Buffers
+HKR,Ndi\params\TxBuffer,            ParamDesc,  0, %TxBuffer%
+HKR,Ndi\params\TxBuffer,            Type,       0, "dword"
+HKR,Ndi\params\TxBuffer,            Default,    0, "256"
+HKR,Ndi\params\TxBuffer,            Flag,       1, 20,00,00,00
+HKR,Ndi\params\TxBuffer,            Min,        0, "16"
+HKR,Ndi\params\TxBuffer,            Max,        0, "512"
+HKR,Ndi\params\TxBuffer,            Step,       0, "8"
+
+;Network Address
+HKR,Ndi\params\NetworkAddress,      ParamDesc,  0, %NetworkAddress%
+HKR,Ndi\params\NetworkAddress,      Type,       0, "edit"
+HKR,Ndi\params\NetworkAddress,      Default,    0, ""
+HKR,Ndi\params\NetworkAddress,      Flag,       1, 20,00,00,00
+HKR,Ndi\params\NetworkAddress,      LimitText,  0, "12"
+HKR,Ndi\params\NetworkAddress,      UpperCase,  0, "1"
+HKR,Ndi\params\NetworkAddress,      Optional,   0, "1"
+
+;Tx Start Threshold
+HKR,Ndi\params\TxStartThreshold,    ParamDesc,  0, %TxStartThreshold%
+HKR,Ndi\params\TxStartThreshold,    Type,       0, "enum"
+HKR,Ndi\params\TxStartThreshold,    Default,    0, "8188"
+HKR,Ndi\params\TxStartThreshold,    Flag,       1, 20,00,00,00
+HKR,Ndi\params\TxStartThreshold\enum,   "256",  0, "256"
+HKR,Ndi\params\TxStartThreshold\enum,   "512",  0, "512"
+HKR,Ndi\params\TxStartThreshold\enum,   "768",  0, "768"
+HKR,Ndi\params\TxStartThreshold\enum,   "1024", 0, "1024"
+HKR,Ndi\params\TxStartThreshold\enum,   "8188", 0, %StoreAndForward%
+
+;VLAN tagging
+HKR,Ndi\params\EnableTagging,       ParamDesc,  0, %EnableTagging%
+HKR,Ndi\params\EnableTagging,       Type,       0, "enum"
+HKR,Ndi\params\EnableTagging,       Default,    0, "0"
+HKR,Ndi\params\EnableTagging,       Flag,       1, 20,00,00,00
+HKR,Ndi\params\EnableTagging\enum,  "0",        0, %Disabled%
+HKR,Ndi\params\EnableTagging\enum,  "1",        0, %Enabled%
+
+;Default VLAN ID
+HKR,Ndi\params\VLANID,              ParamDesc,  0, %VLANID%
+HKR,Ndi\params\VLANID,              Type,       0, "dword"
+HKR,Ndi\params\VLANID,              Default,    0, "6"
+HKR,Ndi\params\VLANID,              Flag,       1, 20,00,00,00
+HKR,Ndi\params\VLANID,              Min,        0, "0"
+HKR,Ndi\params\VLANID,              Max,        0, "4094"
+HKR,Ndi\params\VLANID,              Step,       0, "1"
+
+;Enable GVRP
+HKR,Ndi\params\EnableGVRP,          ParamDesc,  0, %EnableGVRP%
+HKR,Ndi\params\EnableGVRP,          Type,       0, "enum"
+HKR,Ndi\params\EnableGVRP,          Default,    0, "1"
+HKR,Ndi\params\EnableGVRP,          Flag,       1, 20,00,00,00
+HKR,Ndi\params\EnableGVRP\enum,     "0",        0, %Disabled%
+HKR,Ndi\params\EnableGVRP\enum,     "1",        0, %Enabled%
+
+;Enable FlowControl
+HKR,Ndi\params\FlowControl,         ParamDesc,  0, %FlowControl%
+HKR,Ndi\params\FlowControl,         Type,       0, "enum"
+HKR,Ndi\params\FlowControl,         Default,    0, "1"
+HKR,Ndi\params\FlowControl,         Flag,       1, 20,00,00,00
+HKR,Ndi\params\FlowControl\enum,    "0",        0, %Disabled%
+HKR,Ndi\params\FlowControl\enum,    "1",        0, %Enabled%
+
+;FlowOnThresh
+;HKR,Ndi\params\FlowOnThresh,        ParamDesc,  0, %FlowOnThresh%
+;HKR,Ndi\params\FlowOnThresh,        Type,       0, "dword"
+;HKR,Ndi\params\FlowOnThresh,        Default,    0, "1791"   ;0x06FF
+;HKR,Ndi\params\FlowOnThresh,        Flag,       1, 20,00,00,00
+;HKR,Ndi\params\FlowOnThresh,        Min,        0, "0"
+;HKR,Ndi\params\FlowOnThresh,        Max,        0, "2047"
+;HKR,Ndi\params\FlowOnThresh,        Step,       0, "1"
+
+;FlowOffThresh
+;HKR,Ndi\params\FlowOffThresh,       ParamDesc,  0, %FlowOffThresh%
+;HKR,Ndi\params\FlowOffThresh,       Type,       0, "dword"
+;HKR,Ndi\params\FlowOffThresh,       Default,    0, "0"
+;HKR,Ndi\params\FlowOffThresh,       Flag,       1, 20,00,00,00
+;HKR,Ndi\params\FlowOffThresh,       Min,        0, "0"
+;HKR,Ndi\params\FlowOffThresh,       Max,        0, "2047"
+;HKR,Ndi\params\FlowOffThresh,       Step,       0, "1"
+
+;IFSSelect
+HKR,Ndi\params\IFSSelect,           ParamDesc,  0, %IFSSelect%
+HKR,Ndi\params\IFSSelect,           Type,       0, "enum"
+HKR,Ndi\params\IFSSelect,           Default,    0, "3"
+HKR,Ndi\params\IFSSelect,           Flag,       1, 20,00,00,00
+HKR,Ndi\params\IFSSelect\enum,      "0",        0, "96 bit times"
+HKR,Ndi\params\IFSSelect\enum,      "1",        0, "1024 bit times"
+HKR,Ndi\params\IFSSelect\enum,      "2",        0, "1792 bit times"
+HKR,Ndi\params\IFSSelect\enum,      "3",        0, "4352 bit times"
+
+;TCP/IP Checksum Offload
+HKR,Ndi\params\ChecksumOffload,     ParamDesc,  0, %ChecksumOffload%
+HKR,Ndi\params\ChecksumOffload,     Type,       0, "enum"
+HKR,Ndi\params\ChecksumOffload,     Default,    0, "1"
+HKR,Ndi\params\ChecksumOffload,     Flag,       1, 20,00,00,00
+HKR,Ndi\params\ChecksumOffload\enum,"0",        0, %Disabled%
+HKR,Ndi\params\ChecksumOffload\enum,"1",        0, %Enabled%
+
+;Jumbo Frame
+HKR,Ndi\params\JumboFrame,     		ParamDesc,  0, %JumboFrame%
+HKR,Ndi\params\JumboFrame,     		Type,       0, "enum"
+HKR,Ndi\params\JumboFrame,		Default,    0, "0"
+HKR,Ndi\params\JumboFrame,     		Flag,       1, 20,00,00,00
+HKR,Ndi\params\JumboFrame\enum,		"0",        0, %Disabled%
+HKR,Ndi\params\JumboFrame\enum,		"1",        0, %Enabled%
+
+; This option for ScatterGatherDma function 
+; 0 for disable, 1 for enable, default is disabled
+HKR,,			ScatterGatherDma,	0, "0"
+
+;-----------------------------------------------------------------------------
+; 10/100/1000 mbps connection selection
+;
+[SX1000.reg]
+HKR,Ndi\params\ConnectionType,      ParamDesc,  0, %ConnectionType%
+HKR,Ndi\params\ConnectionType,      Type,       0, "enum"
+HKR,Ndi\params\ConnectionType,      Default,    0, "0"
+HKR,Ndi\params\ConnectionType,      Flag,       1, 20,00,00,00
+HKR,Ndi\params\ConnectionType\enum, "0",        0, %Autosense%
+;HKR,Ndi\params\ConnectionType\enum, "15",       0, %1000MHD%
+HKR,Ndi\params\ConnectionType\enum, "16",       0, %1000MFD%
+
+[TP1000.reg]
+HKR,Ndi\params\ConnectionType,      ParamDesc,  0, %ConnectionType%
+HKR,Ndi\params\ConnectionType,      Type,       0, "enum"
+HKR,Ndi\params\ConnectionType,      Default,    0, "0"
+HKR,Ndi\params\ConnectionType,      Flag,       1, 20,00,00,00
+HKR,Ndi\params\ConnectionType\enum, "0",        0, %Autosense%
+HKR,Ndi\params\ConnectionType\enum, "11",       0, %10MHD%
+HKR,Ndi\params\ConnectionType\enum, "12",       0, %10MFD%
+HKR,Ndi\params\ConnectionType\enum, "13",       0, %100MHD%
+HKR,Ndi\params\ConnectionType\enum, "14",       0, %100MFD%
+
+;-----------------------------------------------------------------------------
+; Win 9x NDI object registration
+;
+[DL2X.ndi.reg]
+HKR,,                               MediaType,          0, "1"
+HKR,,                               BusType,            0, "5"
+HKR,,                               DevLoader,          0, "*ndis"
+HKR,,                               DeviceVxDs,         0, "dl2xd50.sys"
+HKR,Ndi,                            DeviceID,           0, "PCI\VEN_1186&DEV_4000"
+HKR,Ndi,                            NdiInstaller,       0, "dlhlpndi.dll, DlhlpNdiProc"
+HKR,Ndi\Interfaces,                 DefLower,           0, "ethernet"
+HKR,Ndi\Interfaces,                 LowerRange,         0, "ethernet"
+HKR,Ndi\Interfaces,                 DefUpper,           0, "ndis3"
+HKR,Ndi\Interfaces,                 UpperRange,         0, "ndis3"
+HKR,NDIS,                           LogDrivername,      0, "DL2X"
+HKR,NDIS,                           MajorNdisVersion,   1, 5
+HKR,NDIS,                           MinorNdisVersion,   1, 0
+HKR,NDIS,                           MajorDriverVersion, 1, 2
+HKR,NDIS,                           MinorDrvierVersion, 1, 0
+;private (for DL2X driver)
+HKR,,                               AdapterCFID,        0, "40001186"   ;(private)
+HKR,,                               AdapterType,        0, "5"          ;(private)
+;For DlhlpNdi
+HKR,DlhlpNdi\ndis3,                 Install,            0, "DL2X.ndis3"
+HKR,DlhlpNdi\ndis3,                 DeviceVxDs,         0, "dl2xnd3.sys"
+HKR,DlhlpNdi\ndis4,                 Install,            0, "DL2X.ndis4"
+HKR,DlhlpNdi\ndis4,                 DeviceVxDs,         0, "dl2xnd4.sys"
+HKR,DlhlpNdi\ndis5,                 Install,            0, "DL2X.ndis5"
+HKR,DlhlpNdi\ndis5,                 DeviceVxDs,         0, "dl2xd50.sys"
+
+;-----------------------------------------------------------------------------
+; NT NDI object registration
+;
+[DL2X.ndi.NT.reg]
+HKR,,                               AdapterCFID,        0, "40001186"   ;(private)
+HKR,,                               AdapterType,        0, "5"          ;(private)
+;HKR,,                              MediaType,          0, "1"
+HKR,Ndi,                            Service,            0, "DL2X"
+HKR,Ndi\Interfaces,                 UpperRange,         0, "ndis5"
+HKR,Ndi\Interfaces,                 LowerRange,         0, "ethernet"
+
+;-----------------------------------------------------------------------------
+; NT Service registration
+;
+[dl2x.Service]
+DisplayName     = %dl2xnt.Service.DispName%
+ServiceType     = 1 ; %SERVICE_KERNEL_DRIVER%
+StartType       = 3 ; %SERVICE_DEMAND_START%
+ErrorControl    = 1 ; %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\dl2xd50.sys
+LoadOrderGroup  = NDIS
+AddReg          = TextModeFlags.reg
+
+;-----------------------------------------------------------------------------
+; NT common base for all driver for Eventlog and TextModeFlags
+;
+[common.EventLog]
+AddReg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR,,EventMessageFile,  0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR,,TypesSupported,    0x00010001, 7
+
+[TextModeFlags.reg]
+HKR,,TextModeFlags,     0x00010001, 0x0001
+
+;-----------------------------------------------------------------------------
+; Driver Install Sections
+;
+[DL2X.ndis5]
+CopyFiles       = DL2X.ndis5.copyfiles
+
+[DL2X.ndis4]
+CopyFiles       = DL2X.ndis4.copyfiles
+
+[DL2X.ndis3]
+CopyFiles       = DL2X.ndis3.copyfiles
+
+;-----------------------------------------------------------------------------
+; Copy Files
+;
+[DestinationDirs]
+DefaultDestDir              = 11    ; LDID_SYS  Windows System Dir.
+DL2X.win9x.copyfiles        = 11    ; LDID_SYS  Windows System Dir.
+DL2X.ndis3.copyfiles        = 11    ; LDID_SYS  Windows System Dir.
+DL2X.ndis4.copyfiles        = 11    ; LDID_SYS  Windows System Dir.
+DL2X.ndis5.copyfiles        = 11    ; LDID_SYS  Windows System Dir.
+DL2X.nt5.copyfiles          = 12    ; LDID_IOS  Windows Iosubsys dir.
+
+
+[SourceDisksNames]
+1 = %DriverDisketteName%,,,
+
+[SourceDisksFiles]
+;netdl2x.inf  = 1
+dl2xnd3.sys  = 1
+dl2xnd4.sys  = 1
+dl2xd50.sys  = 1
+dlhlpndi.dll = 1
+
+[DL2X.win9x.copyfiles]
+dlhlpndi.dll,,,2
+
+[DL2X.nt5.copyfiles]
+dl2xd50.sys,,,2
+
+[DL2X.ndis3.copyfiles]
+dl2xnd3.sys,,,2
+
+[DL2X.ndis4.copyfiles]
+dl2xnd4.sys,,,2
+
+[DL2X.ndis5.copyfiles]
+dl2xd50.sys,,,2
+
+
+;-----------------------------------------------------------------------------
+; Localization string
+;
+[Strings]
+V_DLINK             = "D-Link"
+
+RxBuffer            = "Receive Buffers"
+TxBuffer            = "Transmit Buffers"
+NoCableIndication   = "No Cable Indication"
+NetworkAddress      = "Network Address"
+TxStartThreshold    = "Tx Threshold"
+StoreAndForward     = "Store and forward"
+EnableTagging       = "802.1Q/1P VLAN tagging"
+VLANID              = "VLAN ID"
+EnableGVRP          = "GVRP"
+FlowControl         = "Flow Control"
+FlowOnThresh        = "Flow on threshold"
+FlowOffThresh       = "Flow off threshold"
+IFSSelect           = "Inter-Frame Spacing"
+ChecksumOffload		= "TCP/IP Checksum Offload"
+JumboFrame		= "Jumbo Frame Support"
+Disabled            = "Disabled"
+Enabled             = "Enabled"
+ConnectionType      = "Connection Type"
+Autosense           = "AutoSense"
+10MHD               = "10Mbps Half Duplex"
+10MFD               = "10Mbps Full Duplex"
+100MHD              = "100Mbps Half Duplex"
+100MFD              = "100Mbps Full Duplex"
+1000MHD             = "1000Mbps Half Duplex"
+1000MFD             = "1000Mbps Full Duplex"
+
+DGE550SX.DeviceDesc     = "D-Link DGE-550SX Gigabit Ethernet Adapter"
+DGE550T.DeviceDesc      = "D-Link DGE-550T Gigabit Ethernet Adapter"
+DGE510T.DeviceDesc      = "D-Link DGE-510T Gigabit Ethernet Adapter"
+DGE570T.DeviceDesc	= "D-Link DGE-570T 2 Port Gigabit Ethernet Server Adapter"
+DL2000.DeviceDesc       = "D-Link DL2000-based Gigabit Ethernet Adapter (generic)"
+dl2xnt.Service.DispName = "D-Link Gigabit (DL2X) Adapter NT Driver"
+DriverDisketteName	= "D-Link Gigabit (DL2X) Adapter Driver CD/Diskette"

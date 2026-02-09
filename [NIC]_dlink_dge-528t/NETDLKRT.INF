@@ -1,0 +1,346 @@
+;; D-Link DGE-528T Gigabit Ethernet Adapter NDIS Driver
+;;
+;; Copyright 2006, D-Link Corp. All Rights Reserved.
+;;
+;; .this release is primarily for motherboard OEM for WHQL test.
+
+[version]
+Signature      = "$Chicago$"
+Compatible     = 1
+Class          = Net
+ClassGUID      = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider       = %D-Link%                               
+CatalogFile.NT    = NETDLKRT.CAT                        ;;for WHQL certified
+DriverVer      = 03/10/2006,5.641.0209.2006
+
+[Manufacturer]
+%D-Link%   = D-Link, NTx86.5.1, NTamd64
+
+[ControlFlags]
+;;ExcludeFromSelect = PCI\VEN_1186&DEV_4300
+
+[D-Link]
+; DisplayName            Section            DeviceID
+; -----------            -------            --------
+%DGE528T.DeviceDesc%    = DGE528T.ndi,      PCI\VEN_1186&DEV_4300&SUBSYS_43001186
+
+[D-Link.NTx86.5.1]; This section will only be installed by Windows XP
+%DGE528T.DeviceDesc%    = DGE528Tx.ndi,     PCI\VEN_1186&DEV_4300&SUBSYS_43001186
+
+[D-Link.NTamd64]; This section will only be installed by Windows XP 64-bit
+%DGE528T.DeviceDesc%    = DGE528Ta.ndi,     PCI\VEN_1186&DEV_4300&SUBSYS_43001186
+
+;;****************************************************************************
+;; Windows 98/ME
+;;****************************************************************************
+[DGE528T.ndi]
+DriverVer       = 03/10/2006,641
+AddReg          = DGE528T.id.reg, RTLnic.all.reg, DGE528T.common.reg
+CopyFiles       = Rtlnic.CopyFiles9x
+
+;;****************************************************************************
+;; Windows 2000
+;;****************************************************************************
+[DGE528T.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTL8023.reg, RTLnic.all.reg, DGE528T.common.reg, DGE528T.W2K.reg
+CopyFiles       = Rtlnic.CopyFiles
+
+[DGE528T.ndi.NT.Services]
+AddService = RTL8023, 2, rtsnt.Service, common.EventLog
+
+[Rtlnic.CopyFiles]
+DLKRTGB.SYS,,,2
+
+[Rtlnic.CopyFiles9x]
+DLKRTGB.SYS,,,2
+
+;;****************************************************************************
+;; Windows XP
+;;****************************************************************************
+[DGE528Tx.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTL8023xp.reg, RTLnic.all.reg, DGE528T.common.reg, DGE528T.W2K.reg
+CopyFiles       = Rtlnic.CopyFilesXP
+
+[DGE528Tx.ndi.NT.Services]
+AddService = RTL8023xp, 2, rtsntxp.Service, common.EventLog
+
+[Rtlnic.CopyFilesXP]
+DLKRTXP.SYS,,,2
+
+;;****************************************************************************
+;; Windows XP 64-bit
+;;****************************************************************************
+[DGE528Ta.ndi.NT]
+DelReg          = GigPreParams.DelReg
+Characteristics = 0x84
+BusType         = 5
+AddReg          = RTL8023x64.reg, RTLnic.all.reg, DGE528T.common.reg, DGE528T.W2K.reg
+CopyFiles       = Rtlnic.CopyFilesX64
+
+[DGE528Ta.ndi.NT.Services]
+AddService = RTL8023x64, 2, rtsntx64.Service, common.EventLog
+
+[Rtlnic.CopyFilesX64]
+DLKRT64.SYS,,,2
+
+;;***************************************************************************
+;; Windows 9x parameters
+;;***************************************************************************
+[DGE528T.id.reg]
+HKR,,               MediaType,        0, 1
+HKR,,               AdapterType,      0, 5
+HKR,,               BusType,          0, 5
+HKR,,               DevLoader,        0, "*ndis"
+HKR,,               DeviceVxDs,       0, "DLKRTGB.SYS"
+HKR,,               EnumPropPages,    0, "netdi.dll,EnumPropPages"
+HKR,NDIS,           LogDriverName,    0, "RTL8023"
+HKR,NDIS,           MajorNdisVersion, 1, 03
+HKR,NDIS,           MinorNdisVersion, 1, 0A
+HKR,Ndi,            DeviceID,         0, "PCI\VEN_1186&DEV_4300"
+HKR,Ndi\Interfaces, DefUpper,         0, "ndis3"  
+HKR,Ndi\Interfaces, DefLower,         0, "ethernet"
+HKR,Ndi\Interfaces, UpperRange,       0, "ndis3"
+HKR,Ndi\Interfaces, LowerRange,       0, "ethernet"
+
+;;****************************************************************************
+;; common parameters
+;;****************************************************************************
+[RTLnic.all.reg]
+HKR,Ndi\params\NetworkAddress,  ParamDesc,      0, %NetworkAddress%
+HKR,Ndi\params\NetworkAddress,  type,           0, "edit"
+HKR,Ndi\params\NetworkAddress,  default,        0, "000000000000"
+HKR,Ndi\params\NetworkAddress,  LimitText,      0, "12"
+HKR,Ndi\params\NetworkAddress,  UpperCase,      0, "1"
+HKR,Ndi\params\NetworkAddress,  Optional,       0, "1"
+
+[GigPreParams.DelReg]
+HKR,Ndi\Params\WakeUpFrame
+HKR,,WakeUpFrame
+HKR,Ndi\Params\NumTxDesc
+HKR,,NumTxDesc
+HKR,Ndi\Params\NumRxDesc
+HKR,,NumRxDesc
+HKR,Ndi\Params\NumTxDescHPQ
+HKR,,NumTxDescHPQ
+HKR,Ndi\Params\RegVlanid
+HKR,,RegVlanid
+HKR,Ndi\Params\CksOffload
+HKR,,CksOffload
+HKR,Ndi\Params\Largesend
+HKR,,Largesend
+
+[DGE528T.common.reg]
+HKR, Ndi\params\DuplexMode,       ParamDesc,  0, %SpeedDuplexMode%
+HKR, Ndi\params\DuplexMode,       type,       0, "enum"
+HKR, Ndi\params\DuplexMode,       default,    0, "1"
+HKR, Ndi\params\DuplexMode\enum,  1,          0, %auto_nego%
+HKR, Ndi\params\DuplexMode\enum,  2,          0, %sd10half%
+HKR, Ndi\params\DuplexMode\enum,  3,          0, %sd10full%
+HKR, Ndi\params\DuplexMode\enum,  4,          0, %sd100half%
+HKR, Ndi\params\DuplexMode\enum,  5,          0, %sd100full%
+HKR, Ndi\params\DuplexMode\enum,  6,          0, %sd1000full%
+
+;HKR,Ndi\Params\NumTxDesc,         ParamDesc,  0, %TxDescNumber%
+;HKR,Ndi\Params\NumTxDesc,         Type,       0, "int"
+;HKR,Ndi\Params\NumTxDesc,         Default,    0, "256"
+;HKR,Ndi\Params\NumTxDesc,         Min,        0, "64"
+;HKR,Ndi\Params\NumTxDesc,         Max,        0, "512"
+;HKR,Ndi\Params\NumTxDesc,         Step,       0, "1"
+;HKR,Ndi\Params\NumTxDesc,         Base,       0, "10"
+
+;HKR,Ndi\Params\NumRxDesc,         ParamDesc,  0, %RxDescNumber%
+;HKR,Ndi\Params\NumRxDesc,         Type,       0, "int"
+;HKR,Ndi\Params\NumRxDesc,         Default,    0, "256"
+;HKR,Ndi\Params\NumRxDesc,         Min,        0, "64"
+;HKR,Ndi\Params\NumRxDesc,         Max,        0, "512"
+;HKR,Ndi\Params\NumRxDesc,         Step,       0, "1"
+;HKR,Ndi\Params\NumRxDesc,         Base,       0, "10"
+
+HKR,Ndi\params\Jumboframe,        ParamDesc,  0, %JumboFrame%
+HKR,Ndi\params\Jumboframe,        default,    0, "0"
+HKR,Ndi\params\Jumboframe,        type,       0, "enum"
+HKR,Ndi\params\Jumboframe\enum,   "0",        0, "Disable"
+HKR,Ndi\params\Jumboframe\enum,   "1",        0, "2KB MTU"
+HKR,Ndi\params\Jumboframe\enum,   "2",        0, "3KB MTU"
+HKR,Ndi\params\Jumboframe\enum,   "3",        0, "4KB MTU"
+HKR,Ndi\params\Jumboframe\enum,   "4",        0, "5KB MTU"
+HKR,Ndi\params\Jumboframe\enum,   "5",        0, "6KB MTU"
+HKR,Ndi\params\Jumboframe\enum,   "6",        0, "7KB MTU"
+
+HKR,Ndi\params\FlowControl,      ParamDesc,  0, %FlowControl%
+HKR,Ndi\params\FlowControl,      default,    0, "1"
+HKR,Ndi\params\FlowControl,      type,       0, "enum"
+HKR,Ndi\params\FlowControl\enum, "0",        0, "Disable"
+HKR,Ndi\params\FlowControl\enum, "1",        0, "Enable"
+HKR,,FlowControl,0,"1" 
+
+HKR,,SuperSwitch,0,"0"
+
+;HKR,Ndi\params\S5WakeOnLan,      ParamDesc,  0, %S5Wake-On-Lan%
+;HKR,Ndi\params\S5WakeOnLan,      default,    0, "1"
+;HKR,Ndi\params\S5WakeOnLan,      type,       0, "enum"
+;HKR,Ndi\params\S5WakeOnLan\enum, "0",        0, "Disable"
+;HKR,Ndi\params\S5WakeOnLan\enum, "1",        0, "Enable"
+
+;HKR,Ndi\params\AutoSpeedDown,         ParamDesc,  0, %AutoSpeedDown%
+;HKR,Ndi\params\AutoSpeedDown,         default,    0, "1"
+;HKR,Ndi\params\AutoSpeedDown,         type,       0, "enum"
+;HKR,Ndi\params\AutoSpeedDown\enum,    "1",        0, "Enable"
+;HKR,Ndi\params\AutoSpeedDown\enum,    "0",        0, "Disable"
+
+
+[DGE528T.W2K.reg]
+HKR,Ndi\params\CksOffload,        ParamDesc,  0, %ChecksumOffload%
+HKR,Ndi\params\CksOffload,        default,    0, "1"
+HKR,Ndi\params\CksOffload,        type,       0, "enum"
+HKR,Ndi\params\CksOffload\enum,   "0",        0, "Disable"
+HKR,Ndi\params\CksOffload\enum,   "1",        0, "Tx/Rx Checksum"
+HKR,Ndi\params\CksOffload\enum,   "3",        0, "Rx Checksum"
+HKR,Ndi\params\CksOffload\enum,   "4",        0, "Tx Checksum"
+
+HKR,Ndi\params\Largesend,         ParamDesc,  0, %LargesendOffload%
+HKR,Ndi\params\Largesend,         default,    0, "1"
+HKR,Ndi\params\Largesend,         type,       0, "enum"
+HKR,Ndi\params\Largesend\enum,    "1",        0, "Enable"
+HKR,Ndi\params\Largesend\enum,    "0",        0, "Disable"
+
+HKR,Ndi\params\Support8021p,      ParamDesc,  0, %VLanTagging%
+HKR,Ndi\params\Support8021p,      default,    0, "0"
+HKR,Ndi\params\Support8021p,      type,       0, "enum"
+HKR,Ndi\params\Support8021p\enum, "0",        0, "Disable"
+HKR,Ndi\params\Support8021p\enum, "1",        0, "Enable"
+
+;HKR,Ndi\Params\RegVlanid,   ParamDesc,  0, %VLanID%
+;HKR,Ndi\Params\RegVlanid,   Type,       0, "int"
+;HKR,Ndi\Params\RegVlanid,   Default,    0, "0"
+;HKR,Ndi\Params\RegVlanid,   Min,        0, "0"
+;HKR,Ndi\Params\RegVlanid,   Max,        0, "4094"
+;HKR,Ndi\Params\RegVlanid,   Step,       0, "1"
+;HKR,Ndi\Params\RegVlanid,   Base,       0, "10"
+
+;HKR,Ndi\Params\NumTxDescHPQ,      ParamDesc,  0, %TxHPQDescNumber%
+;HKR,Ndi\Params\NumTxDescHPQ,      Type,       0, "int"
+;HKR,Ndi\Params\NumTxDescHPQ,      Default,    0, "256"
+;HKR,Ndi\Params\NumTxDescHPQ,      Min,        0, "64"
+;HKR,Ndi\Params\NumTxDescHPQ,      Max,        0, "512"
+;HKR,Ndi\Params\NumTxDescHPQ,      Step,       0, "1"
+;HKR,Ndi\Params\NumTxDescHPQ,      Base,       0, "10"
+
+HKR,,CksOffload,0,"1" 
+HKR,,Largesend,0,"1" 
+
+;;****************************************************************************
+;; NT 5.0 parameters
+;;****************************************************************************
+[RTL8023.reg]
+HKR, Ndi\Interfaces,            UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,            LowerRange, 0, "ethernet"
+HKR, Ndi,                       Service,    0, "RTL8023"
+
+[rtsnt.Service]
+DisplayName     = %Rtlnic.Service.DispName%
+ServiceType     = 1                             ; %SERVICE_KERNEL_DRIVER%
+StartType       = 3                             ; %SERVICE_DEMAND_START%
+ErrorControl    = 1                             ; %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\DLKRTGB.SYS
+LoadOrderGroup  = NDIS
+
+[RTL8023xp.reg]
+HKR, Ndi\Interfaces,            UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,            LowerRange, 0, "ethernet"
+HKR, Ndi,                       Service,    0, "RTL8023xp"
+
+[rtsntxp.Service]
+DisplayName     = %Rtlnicxp.Service.DispName%
+ServiceType     = 1                             ; %SERVICE_KERNEL_DRIVER%
+StartType       = 3                             ; %SERVICE_DEMAND_START%
+ErrorControl    = 1                             ; %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\DLKRTXP.SYS
+LoadOrderGroup  = NDIS
+
+[RTL8023x64.reg]
+HKR, Ndi\Interfaces,            UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,            LowerRange, 0, "ethernet"
+HKR, Ndi,                       Service,    0, "RTL8023x64"
+
+[rtsntx64.Service]
+DisplayName     = %Rtlnicx64.Service.DispName%
+ServiceType     = 1                             ; %SERVICE_KERNEL_DRIVER%
+StartType       = 3                             ; %SERVICE_DEMAND_START%
+ErrorControl    = 1                             ; %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\DLKRT64.SYS
+LoadOrderGroup  = NDIS
+
+[common.EventLog]
+Addreg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+;;****************************************************************************
+;; Destination Directory
+;;****************************************************************************
+[DestinationDirs]
+Rtlnic.CopyFiles           = 12
+Rtlnic.CopyFilesXP         = 12
+Rtlnic.CopyFilesX64        = 12
+Rtlnic.CopyFiles9x         = 11
+DefaultDestDir             = 11        ; LDID_SYS
+
+;;****************************************************************************
+;; Source Files
+;;****************************************************************************
+[SourceDisksNames]
+1=%DISKNAME%,,,
+
+[SourceDisksFiles]
+DLKRTGB.SYS       = 1
+DLKRTXP.SYS     = 1
+DLKRT64.SYS     = 1
+
+;;****************************************************************************
+;; Strings
+;;****************************************************************************
+[Strings]
+D-Link                 = "D-Link Corp."
+VLanTagging             = "802.1Q/1p VLAN Tagging"
+;VLanID                 = "802.1Q VLAN ID"
+ChecksumOffload         = "Offload Checksum"
+LargesendOffload        = "Offload TCP_LargeSend"
+SpeedDuplexMode         = "Link Speed/Duplex Mode"
+auto_nego               = "Auto Negotiation"
+sd10half                = "10Mbps/Half Duplex"
+sd10full                = "10Mbps/Full Duplex"
+sd100half               = "100Mbps/Half Duplex"
+sd100full               = "100Mbps/Full Duplex"
+sd1000full              = "1000Mbps/Full Duplex"
+NetworkAddress          = "Network Address"
+JumboFrame              = "Jumbo Frame"
+;TxDescNumber           = "Number of Tx Descriptor"
+;RxDescNumber           = "Number of Rx Descriptor"
+;TxHPQDescNumber        = "Number of High Priority Tx Descriptor"
+WOLCapability           = "WakeUp on ARP/PING"
+WOLLinkChange           = "WakeUp on Link Change"
+LDPSCapability          = "Link Down Power Saving"
+OptimalPerf             = "Optimal Performance"
+FlowControl             = "Flow Control"
+AutoSpeedDown           = "Auto Speed Down"
+S5Wake-On-Lan           = "S5 Wake-On-Lan"
+
+;;Source disk name
+DISKNAME = "D-Link DGE-528T Gigabit Ethernet Adapter NDIS Driver"
+
+;;Display Name
+DGE528T.DeviceDesc = "D-Link DGE-528T Gigabit Ethernet Adapter"
+
+;;NT service name
+Rtlnic.Service.DispName    = "D-Link DGE-528T Gigabit Ethernet Adapter NDIS Driver"
+Rtlnicxp.Service.DispName  = "D-Link DGE-528T Gigabit Ethernet Adapter NDIS XP Driver"
+Rtlnicx64.Service.DispName = "D-Link DGE-528T Gigabit Ethernet Adapter NDIS XP(x64) Driver"

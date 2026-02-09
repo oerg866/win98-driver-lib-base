@@ -1,0 +1,265 @@
+; netdf650.INF
+;
+; D-Link DFE-650 Fast Ethernet PC Card.
+;
+
+[version]
+signature  = "$Chicago$"
+Class      = Net
+Compatible = 1
+ClassGUID  = {4d36e972-e325-11ce-bfc1-08002be10318}
+LayoutFile = layout.inf
+provider   = %V_MS%
+
+[Manufacturer]
+%V_MANUF%=PCMCIA
+
+[PCMCIA]
+%PCMCIA.DeviceDesc%  = dfe650cc.ndi, PCMCIA\D-Link-DFE-650-7143
+%PCMCIA.DeviceDesc%  = dfe650cc.ndi, PCMCIA\D-Link-DFE-650TXD-303F
+
+[dfe650cc.ndi.NT]
+Characteristics = 0x4
+BusType         = 8
+AddReg          = common.reg, dfe650X.ndi.reg
+CopyFiles       = dfe650.ndis5.CopyFiles
+
+[dfe650cc.ndi.NT.Services]
+AddService = dfe650, 2, dfe650.Service, dfe650.AddEventLog
+
+[common.reg]
+;Connection Type
+HKR,Ndi\params\ConnectionType,          ParamDesc,      0, %ConnectionType%
+HKR,Ndi\params\ConnectionType,          default,        0, "5"
+HKR,Ndi\params\ConnectionType,          type,           0, "enum"
+HKR,Ndi\params\ConnectionType\enum,     0,              0, %10HD%
+HKR,Ndi\params\ConnectionType\enum,     2,              0, %10FD%
+HKR,Ndi\params\ConnectionType\enum,     4,              0, %100HD%
+HKR,Ndi\params\ConnectionType\enum,     6,              0, %100FD%
+HKR,Ndi\params\ConnectionType\enum,     5,              0, %AutoSense%
+HKR,                              ,     ConnectionType, 0, "5"
+
+;network address
+HKR,NDI\params\NetworkAddress,          ParamDesc,      0, %NetworkAddress%
+HKR,NDI\params\NetworkAddress,          type,           0, edit
+HKR,NDI\params\NetworkAddress,          LimitText,      0, 18
+HKR,NDI\params\NetworkAddress,          UpperCase,      0, 1
+HKR,NDI\params\NetworkAddress,          default,        0, ""
+HKR,NDI\params\NetworkAddress,          optional,       0, 1
+HKR,                         ,          NetworkAddress, 0, ""
+
+HKR,,DelayTime,,3000
+HKR,,TransmitCounter,,50
+
+;-------------------------------------------------------------------------------
+; DFE-650 Service and Driver
+;
+[dfe650X.ndi.reg]
+HKR, Ndi,               Service,    0, "dfe650"
+HKR, Ndi\Interfaces,    LowerRange, 0, "ethernet"
+HKR, Ndi\Interfaces,    UpperRange, 0, "ndis3,ndis5"
+
+HKR,,InterruptNumber,1,04,00,00,00
+HKR,,IOBaseAddress,1,02,00,00,00
+
+[dfe650.ndis5.CopyFiles]
+dfe650.sys,,,2
+
+[dfe650.Service]
+DisplayName         =   %Service.DispName%
+ServiceType         =   1 ;%SERVICE_KERNEL_DRIVER%
+StartType           =   3 ;%SERVICE_AUTO_START%
+ErrorControl        =   1 ;%SERVICE_ERROR_NORMAL%
+ServiceBinary       =   %12%\dfe650.sys
+LoadOrderGroup      =   NDIS
+AddReg              =   TextModeFlags.reg
+
+[dfe650.AddEventLog]
+AddReg = dfe650.AddEventLog.reg
+
+[dfe650.AddEventLog.reg]
+HKR,    ,   EventMessageFile,   0x00020000,"%%SystemRoot%%\System32\netevent.dll"
+HKR,    ,   TypesSupported,     0x00010001, 7
+
+[TextModeFlags.reg]
+HKR, , TextModeFlags, 0x00010001, 0x0001
+
+;****************************************************************************
+; D-Link DFE-650 Fast Ethernet PC Card
+;****************************************************************************
+[dfe650cc.ndi]
+AddReg=PCMCIA.ndi.reg, DFE650.ndi.reg, DFE650.params.reg, common.reg
+CopyFiles=PCMCIA.ndis3.CopyFiles,PCMCIA.inf.CopyFiles
+;LogConfig=PCMCIA.LogConfig
+
+[PCMCIA.ndi.reg]
+HKR,Ndi,DeviceID,,"PCMCIA\D-Link-DFE-650-7143"
+HKR,Ndi,CardType,,"PCMCIA"
+HKR,,AdapterType,,"2"
+
+[PCMCIA.LogConfig]
+ConfigPriority=HARDRECONFIG
+IRQConfig=3,4,5,9,10,11,15
+IOConfig=20@200-3FF%FFE0(3FF::)
+
+;****************************************************************************
+; D-Link DFE-650 Fast Ethernet PC Card Drivers
+;****************************************************************************
+[DFE650.ndi.reg]
+; key,subkey,valuname,type,value
+HKR,,DevLoader,,*ndis
+HKR,,DeviceVxDs,,dfe650.sys
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+; NDIS Info
+HKR,NDIS,LogDriverName,,"DFE650"
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,NDIS\NDIS2,DriverName,,"DFE650$"
+HKR,NDIS\NDIS2,FileName,,"dfe650.dos"
+HKR,NDIS\ODI,DriverName,,"DFE650"
+HKR,NDIS\ODI,FileName,,"dfe650.com"
+
+; Interfaces
+;;HKR,Ndi\Interfaces,DefUpper,,"ndis2,ndis3"
+HKR,Ndi\Interfaces,DefUpper,,"ndis3"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+;;HKR,Ndi\Interfaces,UpperRange,,"ndis2,ndis3"
+HKR,Ndi\Interfaces,UpperRange,,"ndis3"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+
+; Install sections
+;;HKR,Ndi\Install,ndis3,,"PCMCIA.ndis3"
+;;HKR,Ndi\Install,ndis2,,"PCMCIA.ndis2"
+;;HKR,Ndi\Install,odi,,"PCMCIA.odi"
+
+; Install NDIS3
+[PCMCIA.ndis3]
+CopyFiles=PCMCIA.ndis3.CopyFiles,PCMCIA.inf.CopyFiles
+DelFiles=PCMCIA.inf.DeleteFiles
+
+[PCMCIA.ndis3.CopyFiles]
+dfe650.sys
+
+; Install NDIS2
+[PCMCIA.ndis2]
+CopyFiles=PCMCIA.ndis2.CopyFiles
+[PCMCIA.ndis2.CopyFiles]
+dfe650.dos
+
+; Install ODI
+;[PCMCIA.odi]
+;CopyFiles=PCMCIA.odi.CopyFiles
+;[PCMCIA.odi.CopyFiles]
+;dfe650.com
+
+
+[PCMCIA.inf.CopyFiles]
+netdf650.inf
+
+[PCMCIA.inf.DeleteFiles]
+drvidx.bin
+drvdata.bin
+
+[DestinationDirs]
+DefaultDestDir          =11     ; LDID_SYS
+PCMCIA.ndis3.CopyFiles  =11
+PCMCIA.inf.CopyFiles    =17     ; INF
+PCMCIA.inf.DeleteFiles  =17 ;
+dfe650.ndis5.CopyFiles  =12
+
+[DFE650.params.reg]
+; Resources
+HKR,,InterruptNumber,1,04,00,00,00
+HKR,,IOBaseAddress,1,02,00,00,00
+HKR,NDI\params\InterruptNumber,resc,1,04,00,00,00
+HKR,NDI\params\InterruptNumber,ParamDesc,,"Interrupt Level"
+HKR,NDI\params\InterruptNumber,flag,1,60,00,00,00
+HKR,NDI\params\IoBaseAddress,resc,1,02,00,00,00
+HKR,NDI\params\IoBaseAddress,ParamDesc,,"I/O Base Address"
+HKR,NDI\params\IoBaseAddress,flag,1,20,00,00,00
+;ndis2
+HKR,NDI\params\interrupt,resc,1,04,00,00,00
+HKR,NDI\params\interrupt,ParamDesc,,"Interrupt Level"
+HKR,NDI\params\interrupt,flag,1,10,00,00,00
+HKR,NDI\params\ioaddress,resc,1,02,00,00,00
+HKR,NDI\params\ioaddress,ParamDesc,,"I/O Base Address"
+HKR,NDI\params\ioaddress,flag,1,10,00,00,00
+
+;Override
+HKR,Override,0000,1, \
+00,04,00,00, \
+;
+; PRIORITY
+;
+00,00,00,00, \
+;
+; I/O Resource Descriptor 0: LAN port
+;
+24,00,00,00, \ ; Total length of I/O Resource Descriptor
+02,00,00,00, \ ; ResType_IO = 0x00000002
+01,00, \       ; IOD_Count;
+0C,00, \       ; IOD_Type;         // IOType_Range = 0x000C
+00,00, \       ; IOD_Alloc_Base;
+00,00, \       ; IOD_Alloc_End;
+00,00, \       ; IOD_DesFlags;
+00, \          ; IOD_Alloc_Alias;
+00, \          ; IOD_Alloc_Decode;
+E0,FF, \       ; IOR_Align;        // Mask for base alignment E0/F0
+20,00, \       ; IOR_nPorts;       // Number of ports, pony=10
+00,01, \       ; IOR_Min;          // Min port address
+FF,03, \       ; IOR_Max;          // Max port address
+00,00, \       ; IOR_RangeFlags;   // Flags
+00, \          ; IOR_Alias;        // Alias offset
+00, \          ; IOR_Decode;       // Address specified
+40,00,00,00, \ ; PCCARD flags, 0x40 = 16-bit port
+;
+; IRQ Resource Descriptor
+;
+14,00,00,00, \ ; Total length of IRQ Resource Descriptor
+04,00,00,00, \ ; ResType_IRQ = 0x00000004
+00,00, \       ; IRQD_Flags;
+00,00, \       ; IRQD_Alloc_Num;   // Allocated IRQ number
+FF,FF, \       ; IRQD_Req_Mask;    // Mask of possible IRQs
+00,00, \       ; IRQD_Reserved;
+20,00,00,00, \ ; PCCARD flags, 0x20 = Level mode interrupts
+;
+; REQUEST_CONFIG_PKT Descriptor
+;
+19,00,00,00, \ ; Total length of REQUEST_CONFIG_PKT Descriptor
+7C,89,00,00, \ ; (ResType_Ignored_Bit + PCCARD_DEVICE_ID) = 0x897C
+00,00, \       ; Socket;
+02,00, \       ; Attributes;
+32, \          ; Vcc;
+32, \          ; Vpp1; 78
+32, \          ; Vpp2; 78
+02, \          ; IntType;
+00,04,00,00, \ ; ConfigBase;
+00, \          ; Status;
+00, \          ; Pin;
+00, \          ; Copy;
+01, \          ; ConfigIndex;
+03, \          ; Present;
+;
+; TERMINATOR
+;
+00,00,00,00
+
+
+;****************************************************************************
+; Localizable Strings
+;****************************************************************************
+[Strings]
+V_MS="Microsoft"
+V_MANUF="D-Link"
+
+ConnectionType          = "Connection Type"
+AutoSense               = "Auto Sense"
+100FD                   = "100Mbps Full Duplex"
+100HD                   = "100Mbps"
+10HD                    = "10Mbps"
+10FD                    = "10Mbps Full Duplex"
+NetworkAddress          = "Network Address"
+
+PCMCIA.DeviceDesc="D-Link DFE-650TX/TXD Fast Ethernet PC Card"
+Service.DispName =   "D-Link DFE-650TX/TXD Fast Ethernet PC Card NT Driver"
+

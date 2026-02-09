@@ -1,0 +1,509 @@
+;
+;   NETDLH5X.INF
+;
+;   Copyright (c) 1993-1998, Microsoft Corporation.
+;   Copyright (c) 1998-2002, D-Link Corporation.
+;
+
+
+[Version]
+Signature   = "$Chicago$"
+Compatible  = 1
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %DLink%
+CatalogFile = dlh5x.cat
+;LayoutFile  = layout.inf
+DriverVer	=10/20/2002,2.5.13.0
+
+[Manufacturer]
+%DLink%     = DLink
+
+[ControlFlags]
+ExcludeFromSelect = PCI\VEN_1186&DEV_1002&SUBSYS_10021186, \
+                    PCI\VEN_1186&DEV_1002&SUBSYS_10031186, \
+                    PCI\VEN_1186&DEV_1002&SUBSYS_10121186, \
+			PCI\VEN_1186&DEV_1002&SUBSYS_10401186, \
+                    PCI\VEN_1186&DEV_1002
+
+[DLink]
+%DFE550TX.DeviceDesc%   = dl5tx.ndi, PCI\VEN_1186&DEV_1002&SUBSYS_10021186  ;D-Link DFE-550TX
+%DFE550FX.DeviceDesc%   = dl5fx.ndi, PCI\VEN_1186&DEV_1002&SUBSYS_10031186  ;D-Link DFE-550FX
+%DFE580TX.DeviceDesc%   = dl5sv.ndi, PCI\VEN_1186&DEV_1002&SUBSYS_10121186  ;D-Link DFE-580TX
+%DFE530TXS.DeviceDesc%  = dlh5x.ndi, PCI\VEN_1186&DEV_1002&SUBSYS_10401186  ;D-Link DFE-530TXS
+%DL10050.DeviceDesc%    = dlh5x.ndi, PCI\VEN_1186&DEV_1002                  ;D-Link DL10050
+
+;-----------------------------------------------------------------------------
+;   W i n d o w s   9 x
+
+;-----------------------------------------------------------------------------
+; D-Link DLH5X
+[dlh5x.ndi]
+CopyFiles   = alta.win9x.ndis32.CopyFiles	;, win9x.inf.CopyFiles
+AddReg      = dlh5x.ndi.reg, alta.win9x.reg, alta.param.reg, dlh5x.flags.reg, dlh5x.param.reg
+
+[dl5tx.ndi]
+CopyFiles   = alta.win9x.ndis32.CopyFiles	;, win9x.inf.CopyFiles
+AddReg      = dlh5x.ndi.reg, alta.win9x.reg, alta.param.reg, dlh5x.flags.reg, alta.flags.reg, dl5tx.param.reg
+
+[dl5fx.ndi]
+CopyFiles   = alta.win9x.ndis32.CopyFiles	;, win9x.inf.CopyFiles
+AddReg      = dlh5x.ndi.reg, alta.win9x.reg, alta.param.reg, dlh5x.flags.reg, alta.flags.reg, dl5fx.param.reg
+
+[dl5sv.ndi]
+CopyFiles   = alta.win9x.ndis32.CopyFiles	;, win9x.inf.CopyFiles
+AddReg      = dlh5x.ndi.reg, alta.win9x.reg, alta.param.reg, dlh5x.flags.reg, alta.flags.reg, dl5srv.param.reg
+
+;-----------------------------------------------------------------------------
+; D-Link DLH5X
+[dlh5x.ndi.reg]
+HKR, ,                              AdapterCFID,        0,  "10021186"
+HKR, ,                              AdapterType,        0,  "5"
+HKR, ,                              MediaType,          0,  "1"
+HKR,Ndi,                            DeviceID,           0,  "PCI\VEN_1186&DEV_1002"  
+HKR,Ndi,                            NdiInstaller,       0,  "dlhlpndi.dll, DlhlpNdiProc"
+
+;-----------------------------------------------------------------------------
+[alta.win9x.reg]
+HKR, ,                              BusType,            0,  "5"
+HKR, ,                              DevLoader,          0,  "*ndis"
+HKR, ,                              DeviceVxDs,         0,  "dlh5xnd3.sys"
+HKR, NDIS,                          LogDriverName,      0,  "DLH5X"
+HKR, NDIS,                          MajorNdisVersion,   1,  3
+HKR, NDIS,                          MinorNdisVersion,   1,  0
+HKR, NDIS,                          MajorDriverVersion, 1,  2
+HKR, NDIS,                          MinorDriverVersion, 1,  5
+HKR, Ndi\Interfaces,                DefLower,           ,   "ethernet"
+HKR, Ndi\Interfaces,                LowerRange,         ,   "ethernet"
+HKR, Ndi\Interfaces,                DefUpper,           ,   "ndis3"
+HKR, Ndi\Interfaces,                UpperRange,         ,   "ndis3"
+;For DlhlpNdi
+HKR,DlhlpNdi\ndis3,                 Install,            0, "DLH5X.ndis3"
+HKR,DlhlpNdi\ndis3,                 DeviceVxDs,         0, "dlh5xnd3.sys"
+HKR,DlhlpNdi\ndis4,                 Install,            0, "DLH5X.ndis4"
+HKR,DlhlpNdi\ndis4,                 DeviceVxDs,         0, "dlh5xnd4.sys"
+HKR,DlhlpNdi\ndis5,                 Install,            0, "DLH5X.ndis5"
+HKR,DlhlpNdi\ndis5,                 DeviceVxDs,         0, "dlh5xnd5.sys"
+
+;[alta.ndis32.install]
+;CopyFiles = alta.win9x.ndis32.CopyFiles
+
+[alta.win9x.ndis32.CopyFiles]
+dlhlpndi.dll,,,2
+
+;[win9x.inf.CopyFiles]
+;netdlh5x.inf,,,2
+
+;-----------------------------------------------------------------------------
+; Driver Install Sections
+;
+[DLH5X.ndis5]
+CopyFiles       = DLH5X.ndis5.copyfiles
+
+[DLH5X.ndis4]
+CopyFiles       = DLH5X.ndis4.copyfiles
+
+[DLH5X.ndis3]
+CopyFiles       = DLH5X.ndis3.copyfiles
+
+[DLH5X.ndis3.copyfiles]
+dlh5xnd3.sys,,,2
+
+[DLH5X.ndis4.copyfiles]
+dlh5xnd4.sys,,,2
+
+[DLH5X.ndis5.copyfiles]
+dlh5xnd5.sys,,,2
+
+
+;--------------------------------------------------------------------------
+;   W i n d o w s   2 0 0 0
+;--------------------------------------------------------------------------
+
+;--------------------------------------------------------------------------
+; D-Link DLH5x
+[dlh5x.ndi.NT]
+Characteristics = 0x84  ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5     ; PCI
+AddReg          = dlh5x.nt.reg, alta.nt.reg, alta.param.reg, dlh5x.param.reg
+CopyFiles       = alta.CopyFiles
+
+[dlh5x.ndi.NT.Services]
+AddService = DLH5X, 2, dlh5x.Service, common.EventLog
+
+;--------------------------------------------------------------------------
+; D-Link DFE-550TX
+[dl5tx.ndi.NT]
+Characteristics = 0x84  ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5     ; PCI
+AddReg          = dlh5x.nt.reg, alta.nt.reg, alta.param.reg, dl5tx.param.reg
+CopyFiles       = alta.CopyFiles
+
+[dl5tx.ndi.NT.Services]
+AddService = DLH5X, 2, dlh5x.Service, common.EventLog
+
+;--------------------------------------------------------------------------
+; D-Link DFE-550FX
+[dl5fx.ndi.NT]
+Characteristics = 0x84  ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5     ; PCI
+AddReg          = dlh5x.nt.reg, alta.nt.reg, alta.param.reg, dl5fx.param.reg
+CopyFiles       = alta.CopyFiles
+
+[dl5fx.ndi.NT.Services]
+AddService = DLH5X, 2, dlh5x.Service, common.EventLog
+
+;--------------------------------------------------------------------------
+; D-Link DFE-580TX
+[dl5sv.ndi.NT]
+Characteristics = 0x84  ; NCF_HAS_UI | NCF_PHYSICAL
+BusType         = 5     ; PCI
+AddReg          = dlh5x.nt.reg, alta.nt.reg, alta.param.reg, dl5srv.param.reg
+CopyFiles       = alta.CopyFiles
+
+[dl5sv.ndi.NT.Services]
+AddService = DLH5X, 2, dlh5x.Service, common.EventLog
+
+;--------------------------------------------------------------------------
+; D-Link DLH5X
+[dlh5x.nt.reg]
+HKR, ,                              AdapterCFID,        0,  "10021186"
+
+;--------------------------------------------------------------------------
+[alta.nt.reg]
+HKR, ,                              AdapterType,        0,  "5"
+HKR, ,                              MediaType,          0,  "1"
+HKR, Ndi,                           Service,            ,   "DLH5X"
+HKR, Ndi\Interfaces,                LowerRange,         ,   "ethernet"
+HKR, Ndi\Interfaces,                UpperRange,         ,   "ndis5"
+
+;--------------------------------------------------------------------------
+; D-Link DLH5X
+[dlh5x.Service]
+DisplayName     = %Dlh5x.Service.DispName%
+ServiceType     = 1 ; %SERVICE_KERNEL_DRIVER%
+StartType       = 3 ; %SERVICE_AUTO_START%
+ErrorControl    = 1 ; %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\dlh5x.sys
+LoadOrderGroup  = NDIS
+AddReg          = TextModeFlags.reg
+
+;--------------------------------------------------------------------------
+[common.EventLog]
+AddReg = common.AddEventLog.reg
+
+[common.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystenRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+[TextModeFlags.reg]
+HKR, , TextModeFlags,    0x00010001, 0x0001
+
+[alta.CopyFiles]
+;dlh5xnd5.sys,,,2
+dlh5x.sys,dlh5xnd5.sys,,2
+
+;-----------------------------------------------------------------------------
+; D-Link DLH5X (Both Windows 2000 & 9x)
+; (The flags sections are not needed by Windows 2000.)
+;
+
+[dlh5x.param.reg]
+; Connection Type
+HKR, Ndi\params\ConnectionType,             ParamDesc,  ,   %ConnectionType%
+HKR, Ndi\params\ConnectionType,             default,    ,   "0"
+HKR, Ndi\params\ConnectionType,             type,       ,   "enum"
+HKR, Ndi\params\ConnectionType\enum,        0,          ,   %Autosense%
+HKR, Ndi\params\ConnectionType\enum,        1,          ,   %10MHD%
+HKR, Ndi\params\ConnectionType\enum,        2,          ,   %10MFD%
+HKR, Ndi\params\ConnectionType\enum,        3,          ,   %100MHD%
+HKR, Ndi\params\ConnectionType\enum,        4,          ,   %100MFD%
+;Receive Buffers
+HKR,Ndi\params\RxBuffer,            ParamDesc,  0, %RxBuffer%
+HKR,Ndi\params\RxBuffer,            Type,       0, "dword"
+HKR,Ndi\params\RxBuffer,            Default,    0, "16"
+HKR,Ndi\params\RxBuffer,            Flag,       1, 20,00,00,00
+HKR,Ndi\params\RxBuffer,            Min,        0, "4"
+HKR,Ndi\params\RxBuffer,            Max,        0, "32"
+HKR,Ndi\params\RxBuffer,            Step,       0, "4"
+;Transmit Buffers
+HKR,Ndi\params\TxBuffer,            ParamDesc,  0, %TxBuffer%
+HKR,Ndi\params\TxBuffer,            Type,       0, "dword"
+HKR,Ndi\params\TxBuffer,            Default,    0, "16"
+HKR,Ndi\params\TxBuffer,            Flag,       1, 20,00,00,00
+HKR,Ndi\params\TxBuffer,            Min,        0, "4"
+HKR,Ndi\params\TxBuffer,            Max,        0, "32"
+HKR,Ndi\params\TxBuffer,            Step,       0, "4"
+
+
+[dl5tx.param.reg]
+; Connection Type
+HKR, Ndi\params\ConnectionType,             ParamDesc,  ,   %ConnectionType%
+HKR, Ndi\params\ConnectionType,             default,    ,   "0"
+HKR, Ndi\params\ConnectionType,             type,       ,   "enum"
+HKR, Ndi\params\ConnectionType\enum,        0,          ,   %Autosense%
+HKR, Ndi\params\ConnectionType\enum,        1,          ,   %10BaseT%
+HKR, Ndi\params\ConnectionType\enum,        2,          ,   %10BaseTFD%
+HKR, Ndi\params\ConnectionType\enum,        3,          ,   %100BaseTx%
+HKR, Ndi\params\ConnectionType\enum,        4,          ,   %100BaseTxFD%
+; Enable tagging
+HKR, Ndi\params\EnableTagging,              ParamDesc,  ,   %EnableTagging%
+HKR, Ndi\params\EnableTagging,              default,    ,   "0"
+HKR, Ndi\params\EnableTagging,              type,       ,   "enum"
+HKR, Ndi\params\EnableTagging\enum,         0,          ,   %Disabled%
+HKR, Ndi\params\EnableTagging\enum,         1,          ,   %Enabled%
+; VLAN ID
+HKR, Ndi\params\VLANID,                     ParamDesc,  ,   %VLANID%
+HKR, Ndi\params\VLANID,                     default,    ,   "3"
+HKR, Ndi\params\VLANID,                     type,       ,   "dword"
+HKR, Ndi\params\VLANID,                     min,        ,   "0"
+HKR, Ndi\params\VLANID,                     max,        ,   "4094"
+HKR, Ndi\params\VLANID,                     step,       ,   "1"
+; Enable GVRP
+HKR, Ndi\params\EnableGVRP,                 ParamDesc,  ,   %EnableGVRP%
+HKR, Ndi\params\EnableGVRP,                 default,    ,   "1"
+HKR, Ndi\params\EnableGVRP,                 type,       ,   "enum"
+HKR, Ndi\params\EnableGVRP\enum,            0,          ,   %Disabled%
+HKR, Ndi\params\EnableGVRP\enum,            1,          ,   %Enabled%
+;Receive Buffers
+HKR,Ndi\params\RxBuffer,            ParamDesc,  0, %RxBuffer%
+HKR,Ndi\params\RxBuffer,            Type,       0, "dword"
+HKR,Ndi\params\RxBuffer,            Default,    0, "64"
+HKR,Ndi\params\RxBuffer,            Flag,       1, 20,00,00,00
+HKR,Ndi\params\RxBuffer,            Min,        0, "4"
+HKR,Ndi\params\RxBuffer,            Max,        0, "128"
+HKR,Ndi\params\RxBuffer,            Step,       0, "4"
+;Transmit Buffers
+HKR,Ndi\params\TxBuffer,            ParamDesc,  0, %TxBuffer%
+HKR,Ndi\params\TxBuffer,            Type,       0, "dword"
+HKR,Ndi\params\TxBuffer,            Default,    0, "64"
+HKR,Ndi\params\TxBuffer,            Flag,       1, 20,00,00,00
+HKR,Ndi\params\TxBuffer,            Min,        0, "4"
+HKR,Ndi\params\TxBuffer,            Max,        0, "128"
+HKR,Ndi\params\TxBuffer,            Step,       0, "4"
+
+[dl5fx.param.reg]
+; Connection Type
+HKR, Ndi\params\ConnectionType,             ParamDesc,  ,   %ConnectionType%
+HKR, Ndi\params\ConnectionType,             default,    ,   "4"
+HKR, Ndi\params\ConnectionType,             type,       ,   "enum"
+HKR, Ndi\params\ConnectionType\enum,        3,          ,   %100BaseFx%
+HKR, Ndi\params\ConnectionType\enum,        4,          ,   %100BaseFxFD%
+; Enable tagging
+HKR, Ndi\params\EnableTagging,              ParamDesc,  ,   %EnableTagging%
+HKR, Ndi\params\EnableTagging,              default,    ,   "0"
+HKR, Ndi\params\EnableTagging,              type,       ,   "enum"
+HKR, Ndi\params\EnableTagging\enum,         0,          ,   %Disabled%
+HKR, Ndi\params\EnableTagging\enum,         1,          ,   %Enabled%
+; VLAN ID
+HKR, Ndi\params\VLANID,                     ParamDesc,  ,   %VLANID%
+HKR, Ndi\params\VLANID,                     default,    ,   "3"
+HKR, Ndi\params\VLANID,                     type,       ,   "dword"
+HKR, Ndi\params\VLANID,                     min,        ,   "0"
+HKR, Ndi\params\VLANID,                     max,        ,   "4094"
+HKR, Ndi\params\VLANID,                     step,       ,   "1"
+; Enable GVRP
+HKR, Ndi\params\EnableGVRP,                 ParamDesc,  ,   %EnableGVRP%
+HKR, Ndi\params\EnableGVRP,                 default,    ,   "1"
+HKR, Ndi\params\EnableGVRP,                 type,       ,   "enum"
+HKR, Ndi\params\EnableGVRP\enum,            0,          ,   %Disabled%
+HKR, Ndi\params\EnableGVRP\enum,            1,          ,   %Enabled%
+;Receive Buffers
+HKR,Ndi\params\RxBuffer,            ParamDesc,  0, %RxBuffer%
+HKR,Ndi\params\RxBuffer,            Type,       0, "dword"
+HKR,Ndi\params\RxBuffer,            Default,    0, "64"
+HKR,Ndi\params\RxBuffer,            Flag,       1, 20,00,00,00
+HKR,Ndi\params\RxBuffer,            Min,        0, "4"
+HKR,Ndi\params\RxBuffer,            Max,        0, "128"
+HKR,Ndi\params\RxBuffer,            Step,       0, "4"
+;Transmit Buffers
+HKR,Ndi\params\TxBuffer,            ParamDesc,  0, %TxBuffer%
+HKR,Ndi\params\TxBuffer,            Type,       0, "dword"
+HKR,Ndi\params\TxBuffer,            Default,    0, "64"
+HKR,Ndi\params\TxBuffer,            Flag,       1, 20,00,00,00
+HKR,Ndi\params\TxBuffer,            Min,        0, "4"
+HKR,Ndi\params\TxBuffer,            Max,        0, "128"
+HKR,Ndi\params\TxBuffer,            Step,       0, "4"
+
+
+[alta.param.reg]
+; Receive Buffers
+;HKR, Ndi\params\RxBuffer,                   ParamDesc,  ,   %RxBuffer%
+;HKR, Ndi\params\RxBuffer,                   default,    ,   "16"
+;HKR, Ndi\params\RxBuffer,                   type,       ,   "enum"
+;HKR, Ndi\params\RxBuffer\enum,              4,          ,   "4"
+;HKR, Ndi\params\RxBuffer\enum,              8,          ,   "8"
+;HKR, Ndi\params\RxBuffer\enum,              12,         ,   "12"
+;HKR, Ndi\params\RxBuffer\enum,              16,         ,   "16"
+;HKR, Ndi\params\RxBuffer\enum,              20,         ,   "20"
+;HKR, Ndi\params\RxBuffer\enum,              24,         ,   "24"
+;HKR, Ndi\params\RxBuffer\enum,              28,         ,   "28"
+;HKR, Ndi\params\RxBuffer\enum,              32,         ,   "32"
+; Transmit Buffers
+;HKR, Ndi\params\TxBuffer,                   ParamDesc,  ,   %TxBuffer%
+;HKR, Ndi\params\TxBuffer,                   default,    ,   "16"
+;HKR, Ndi\params\TxBuffer,                   type,       ,   "enum"
+;HKR, Ndi\params\TxBuffer\enum,              4,          ,   "4"
+;HKR, Ndi\params\TxBuffer\enum,              8,          ,   "8"
+;HKR, Ndi\params\TxBuffer\enum,              12,         ,   "12"
+;HKR, Ndi\params\TxBuffer\enum,              16,         ,   "16"
+;HKR, Ndi\params\TxBuffer\enum,              20,         ,   "20"
+;HKR, Ndi\params\TxBuffer\enum,              24,         ,   "24"
+;HKR, Ndi\params\TxBuffer\enum,              28,         ,   "28"
+;HKR, Ndi\params\TxBuffer\enum,              32,         ,   "32"
+; No Cable Indication
+HKR, Ndi\params\NoCableIndication,          ParamDesc,  ,   %NoCableIndication%
+HKR, Ndi\params\NoCableIndication,          default,    ,   "0"
+HKR, Ndi\params\NoCableIndication,          type,       ,   "enum"
+HKR, Ndi\params\NoCableIndication\enum,     0,          ,   %Disabled%
+HKR, Ndi\params\NoCableIndication\enum,     1,          ,   %Enabled%
+; Network Address
+HKR, Ndi\params\NetworkAddress,             ParamDesc,  ,   %NetworkAddress%
+HKR, Ndi\params\NetworkAddress,             type,       ,   "edit"
+HKR, Ndi\params\NetworkAddress,             LimitText,  ,   "12"
+HKR, Ndi\params\NetworkAddress,             UpperCase,  ,   "1"
+HKR, Ndi\params\NetworkAddress,             default,    ,   ""
+HKR, Ndi\params\NetworkAddress,             optional,   ,   "1"
+; Tx start threshold
+HKR, Ndi\params\TxStartThreshold,           ParamDesc,  ,   %TxStartTheshold%
+HKR, Ndi\params\TxStartThreshold,           default,    ,   "8188"
+HKR, Ndi\params\TxStartThreshold,           type,       ,   "enum"
+HKR, Ndi\params\TxStartThreshold\enum,      256,        ,   "256"
+HKR, Ndi\params\TxStartThreshold\enum,      512,        ,   "512"
+HKR, Ndi\params\TxStartThreshold\enum,      768,        ,   "768"
+HKR, Ndi\params\TxStartThreshold\enum,      1024,       ,   "1024"
+HKR, Ndi\params\TxStartThreshold\enum,      8188,       ,   %StoreAndForward%
+
+[dl5srv.param.reg]
+; Connection Type
+HKR, Ndi\params\ConnectionType,             ParamDesc,  ,   %ConnectionType%
+HKR, Ndi\params\ConnectionType,             default,    ,   "0"
+HKR, Ndi\params\ConnectionType,             type,       ,   "enum"
+HKR, Ndi\params\ConnectionType\enum,        0,          ,   %Autosense%
+HKR, Ndi\params\ConnectionType\enum,        1,          ,   %10BaseT%
+HKR, Ndi\params\ConnectionType\enum,        2,          ,   %10BaseTFD%
+HKR, Ndi\params\ConnectionType\enum,        3,          ,   %100BaseTx%
+HKR, Ndi\params\ConnectionType\enum,        4,          ,   %100BaseTxFD%
+; Enable tagging
+HKR, Ndi\params\EnableTagging,              ParamDesc,  ,   %EnableTagging%
+HKR, Ndi\params\EnableTagging,              default,    ,   "0"
+HKR, Ndi\params\EnableTagging,              type,       ,   "enum"
+HKR, Ndi\params\EnableTagging\enum,         0,          ,   %Disabled%
+HKR, Ndi\params\EnableTagging\enum,         1,          ,   %Enabled%
+; VLAN ID
+HKR, Ndi\params\VLANID,                     ParamDesc,  ,   %VLANID%
+HKR, Ndi\params\VLANID,                     default,    ,   "3"
+HKR, Ndi\params\VLANID,                     type,       ,   "dword"
+HKR, Ndi\params\VLANID,                     min,        ,   "0"
+HKR, Ndi\params\VLANID,                     max,        ,   "4094"
+HKR, Ndi\params\VLANID,                     step,       ,   "1"
+; Enable GVRP
+HKR, Ndi\params\EnableGVRP,                 ParamDesc,  ,   %EnableGVRP%
+HKR, Ndi\params\EnableGVRP,                 default,    ,   "1"
+HKR, Ndi\params\EnableGVRP,                 type,       ,   "enum"
+HKR, Ndi\params\EnableGVRP\enum,            0,          ,   %Disabled%
+HKR, Ndi\params\EnableGVRP\enum,            1,          ,   %Enabled%
+;Receive Buffers
+HKR,Ndi\params\RxBuffer,            ParamDesc,  0, %RxBuffer%
+HKR,Ndi\params\RxBuffer,            Type,       0, "dword"
+HKR,Ndi\params\RxBuffer,            Default,    0, "128"
+HKR,Ndi\params\RxBuffer,            Flag,       1, 20,00,00,00
+HKR,Ndi\params\RxBuffer,            Min,        0, "4"
+HKR,Ndi\params\RxBuffer,            Max,        0, "256"
+HKR,Ndi\params\RxBuffer,            Step,       0, "4"
+;Transmit Buffers
+HKR,Ndi\params\TxBuffer,            ParamDesc,  0, %TxBuffer%
+HKR,Ndi\params\TxBuffer,            Type,       0, "dword"
+HKR,Ndi\params\TxBuffer,            Default,    0, "128"
+HKR,Ndi\params\TxBuffer,            Flag,       1, 20,00,00,00
+HKR,Ndi\params\TxBuffer,            Min,        0, "4"
+HKR,Ndi\params\TxBuffer,            Max,        0, "256"
+HKR,Ndi\params\TxBuffer,            Step,       0, "4"
+; Working mode
+HKR, Ndi\params\WorkingMode,                 ParamDesc,  ,   %WorkingMode%
+HKR, Ndi\params\WorkingMode,                 default,    ,   "0"
+HKR, Ndi\params\WorkingMode,                 type,       ,   "enum"
+HKR, Ndi\params\WorkingMode\enum,            0,          ,   %Server%
+HKR, Ndi\params\WorkingMode\enum,            1,          ,   %Bridge%
+
+[alta.flags.reg]
+HKR, Ndi\params\EnableTagging,              flag,       1,  20,00,00,00
+HKR, Ndi\params\VLANID,                     flag,       1,  20,00,00,00
+HKR, Ndi\params\EnableGVRP,                 flag,       1,  20,00,00,00
+
+[dlh5x.flags.reg]
+HKR, Ndi\params\RxBuffer,                   flag,       1,  20,00,00,00
+HKR, Ndi\params\TxBuffer,                   flag,       1,  20,00,00,00
+HKR, Ndi\params\NoCableIndication,          flag,       1,  20,00,00,00
+HKR, Ndi\params\NetworkAddress,             flag,       1,  20,00,00,00
+HKR, Ndi\params\ConnectionType,             flag,       1,  20,00,00,00
+HKR, Ndi\params\TxStartThreshold,           flag,       1,  20,00,00,00
+;HKR, Ndi\params\EnableTagging,              flag,       1,  20,00,00,00
+;HKR, Ndi\params\VLANID,                     flag,       1,  20,00,00,00
+;HKR, Ndi\params\EnableGVRP,                 flag,       1,  20,00,00,00
+
+;-----------------------------------------------------------------------------
+; DestinationDirs
+;
+[DestinationDirs]
+DefaultDestDir 		    = 11
+alta.win9x.ndis32.CopyFiles = 11   ; LDID_SYS
+;DLH5X.ndis3.copyfiles	    = 11
+;DLH5X.ndis4.copyfiles	    = 11
+;DLH5X.ndis5.copyfiles	    = 11
+;win9x.inf.CopyFiles         = 17   ; INF file directory.
+alta.CopyFiles              = 12
+
+
+;-----------------------------------------------------------------------------
+; Source Disk layout
+;
+[SourceDisksNames]
+50=%DriverDisketteName%,"NETDLH5X.inf",		; remove the "0" for HCT test
+
+[SourceDisksFiles]
+;netdlh5x.inf = 50
+dlh5xnd3.sys = 50
+dlh5xnd4.sys = 50
+dlh5xnd5.sys = 50
+dlhlpndi.dll = 50
+
+[Strings]
+DLink               = "D-Link"
+
+RxBuffer            = "Receive Buffers"
+TxBuffer            = "Transmit Buffers"
+NoCableIndication   = "No Cable Indication"
+NetworkAddress      = "Network Address"
+ConnectionType      = "Connection Type"
+Disabled            = "Disabled"
+Enabled             = "Enabled"
+Autosense           = "Auto-Negotiation (twisted pair)"
+10BaseT             = "10Base-T Half Duplex"
+10BaseTFD           = "10Base-T Full Duplex"
+100BaseTx           = "100Base-Tx Half Duplex"
+100BaseTxFD         = "100Base-Tx Full Duplex"
+100BaseFX           = "100Base-FX Half Duplex"
+100BaseFXFD         = "100Base-FX Full Duplex"
+10MHD               = "10Mbps Half Duplex"
+10MFD               = "10Mbps Full Duplex"
+100MHD              = "100Mbps Half Duplex"
+100MFD              = "100Mbps Full Duplex"
+TxStartTheshold     = "Tx Threshold"
+StoreAndForward     = "Store and forward"
+EnableTagging       = "802.1Q/1P VLAN tagging"
+VLANID              = "VLAN ID"
+EnableGVRP          = "GVRP"
+WorkingMode	= "Working Mode"
+Bridge		= "Bridge Mode"
+Server		= "Server Mode"
+
+DL10050.DeviceDesc      = "D-Link DL10050-based FAST Ethernet Adapter (generic)"
+DFE550TX.DeviceDesc     = "D-Link DFE-550TX FAST Ethernet 10/100 Adapter"
+DFE550FX.DeviceDesc     = "D-Link DFE-550FX 100Mbps Fiber-optics Adapter"
+DFE580TX.DeviceDesc     = "D-Link DFE-580TX 4 Port Server Adapter"
+DFE530TXS.DeviceDesc    = "D-Link DFE-530TXS FAST Ethernet 10/100 Adapter"
+
+Dlh5x.Service.DispName  = "D-Link DL10050-based Adapter NT Driver"
+
+DriverDisketteName		= "D-Link LAN Adapter Driver Diskette"
