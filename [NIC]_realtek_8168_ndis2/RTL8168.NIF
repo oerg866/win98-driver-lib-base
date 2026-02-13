@@ -1,0 +1,73 @@
+[RTL8168]
+ Type = NDIS
+ Title = "RealTek RTL8168/8111 PCI-E Family Gigabit Ethernet Adapter"
+ Version = 1.06
+ DriverName = RTGND$
+ XPORTS = NETBEUI LANDD
+[File]
+ Name = RTGND.DOS
+ Path = IBMCOM\MACS
+
+[MEDIUM]
+display = "Medium Type"
+type = string
+strlength = 10
+set = _AUTO,_1000FULL,_100FULL,_100HALF,_10FULL,_10HALF
+optional = yes
+default = _AUTO
+Help = "This keyword support Medium to force Speed/Duplex Mode of this adapter
+       card. The strings of this parameter is '_AUTO','_1000FULL','_100FULL','_100HALF','_10FULL','_10HALF'"
+
+[NETADDRESS]
+tag = NETADDRESS
+display = "Network adapter address"
+type = string
+Strlength = 13
+optional = YES
+editable = YES
+help = "This parameter overrides the network address of the network
+ adapter card.  The value of this parameter is a hexadecimal string of
+ 13 digits, as in @52544C333333.  The address must be unique among
+  all other network adapter addresses on the network."
+
+[ETHERID]
+tag = ETHERID
+display = "Node address"
+type = string
+Strlength = 13
+optional = YES
+editable = YES
+help = "This parameter using multiple network adapter card.
+  The value of this parameter is a hexadecimal string of
+ 13 digits, as in @52544C333333.  The address must be unique among
+  all other network adapter addresses on the network."
+
+
+
+[BUSNO]
+ Tag=BUSNO
+ Display = "Bus Number:"
+ Type = decimal
+;default = "0"
+ Optional = Yes
+ Editable = Yes
+ range = 0-31
+ Virtual = No
+ Help = "This parameter is the PCI BUS number to combined this adapter card.
+         The value of this parameter is 0-31"
+
+
+
+[DEVICENO]
+ Tag=DEVICENO
+ Display = "Device Number:"
+ Type = decimal
+;default = "0"
+ Optional = Yes
+ Editable = Yes
+ range = 0-255
+ Virtual = No
+ Help = "This parameter is the PCI DEVICE number to combined this adapter card.
+        The value of this parameter is 0-255."
+
+

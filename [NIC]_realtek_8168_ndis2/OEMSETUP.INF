@@ -1,0 +1,18 @@
+
+;RTL8168/8111 and RTL8100E  OEMSETUP.INF File:
+
+[netcard]
+RTL8168="RTL8168/8111 Family Gigabit Ethernet Adapter",000,ndis,ethernet,real,RTL8168,RTL8168_nif
+
+
+[RTL8168]
+devdir=?:rtgnd.dos
+device=rtgnd.dos,@devdir\rtgnd.dos
+
+[RTL8168_nif]
+drivername=rtgnd$
+param=Medium,"Medium type ",text,"_Auto,_1000Full,_100Full,_100Half,_10Full,_10Half",_Auto,0x30
+param=NETADDRESS,"Network Address",chars,13,"@000000000000",0x02
+param=ETHERID,"Node Address",chars,13,"@000000000000",0x02
+param=BusNo ,"Adpater's Bus Number",int,"0,255,1",0,0x32
+param=DeviceNo ,"Adpater's Device Number",int,"0,31,1",0,0x32

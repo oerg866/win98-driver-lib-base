@@ -1,0 +1,117 @@
+[Version]
+;NDIS2 Wrapper INF v2.0
+;(C) 2026 Eric Voirin (oerg866@googlemail.com)
+;http://github.com/oerg866/ndis2infer9x
+;Command Line: [ndis2infer9x.py --inf RTGBND2.1.54_EXE68\EXE68\OEMSETUP.INF --id 10ec:8168 --lookup --out RTGBND2.1.54_EXE68\EXE68\rtgbnd2.inf]
+LayoutFile = layout.inf
+Signature = $CHICAGO$
+Class = Net
+Provider = %VENDOR%
+
+[Manufacturer]
+%VENDOR% = ND2WRAP
+
+[ND2WRAP]
+"RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (NDIS2)" = nd2wrap0.ndi,PCI\VEN_10EC&DEV_8168&REV_04
+"RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (NDIS2)" = nd2wrap0.ndi,PCI\VEN_10EC&DEV_8168&REV_05
+"RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (NDIS2)" = nd2wrap0.ndi,PCI\VEN_10EC&DEV_8168&REV_06
+"RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (NDIS2)" = nd2wrap0.ndi,PCI\VEN_10EC&DEV_8168&REV_07
+"RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (NDIS2)" = nd2wrap0.ndi,PCI\VEN_10EC&DEV_8168&REV_08
+"RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (NDIS2)" = nd2wrap0.ndi,PCI\VEN_10EC&DEV_8168&REV_09
+"RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (NDIS2)" = nd2wrap0.ndi,PCI\VEN_10EC&DEV_8168&REV_0A
+
+[SourceDisksNames]
+1 = "Oerg866 NDIS2INFER9X Driver",,
+
+[SourceDisksFiles]
+rtgnd.dos = 1
+
+[nd2wrap0.ndi]
+AddReg = nd2wrap0.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap0.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_10EC&DEV_8168"
+
+[nd2wrap.ndi.reg]
+HKR,,DevLoader,,*ndis
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+; NDIS Info
+HKR,NDIS,LogDriverName,,"rtgnd"
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,NDIS\NDIS2,DriverName,,"rtgnd$"
+HKR,NDIS\NDIS2,FileName,,"rtgnd.dos"
+; Interfaces
+HKR,Ndi\Interfaces,DefUpper,,"ndis2"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"ndis2"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+; Install sections
+HKR,Ndi\Install,ndis2,,"nd2wrap.inst.ndis2"
+HKR,Ndi\Remove,ndis2,,"nd2wrap.rmv.ndis2"
+;Original NDIS2 Parameter: Medium,"Medium type ",text,"_Auto,_1000Full,_100Full,_100Half,_10Full,_10Half",_Auto,0x30
+HKR,Ndi\params\Medium,ParamDesc,,"Medium type"
+HKR,Ndi\params\Medium,default,,_Auto
+HKR,Ndi\params\Medium,type,,enum
+HKR,Ndi\params\Medium,_Auto,,"_Auto"
+HKR,Ndi\params\Medium,_1000Full,,"_1000Full"
+HKR,Ndi\params\Medium,_100Full,,"_100Full"
+HKR,Ndi\params\Medium,_100Half,,"_100Half"
+HKR,Ndi\params\Medium,_10Full,,"_10Full"
+HKR,Ndi\params\Medium,_10Half,,"_10Half"
+
+;Original NDIS2 Parameter: NETADDRESS,"Network Address",chars,13,"@000000000000",0x02
+HKR,Ndi\params\NETADDRESS,ParamDesc,,"Network Address"
+HKR,Ndi\params\NETADDRESS,default,,"@000000000000"
+HKR,Ndi\params\NETADDRESS,LimitText,,13
+HKR,Ndi\params\NETADDRESS,type,,edit
+
+;Original NDIS2 Parameter: ETHERID,"Node Address",chars,13,"@000000000000",0x02
+HKR,Ndi\params\ETHERID,ParamDesc,,"Node Address"
+HKR,Ndi\params\ETHERID,default,,"@000000000000"
+HKR,Ndi\params\ETHERID,LimitText,,13
+HKR,Ndi\params\ETHERID,type,,edit
+
+;Original NDIS2 Parameter: BusNo ,"Adpater's Bus Number",int,"0,255,1",0,0x32
+HKR,Ndi\params\BusNo,ParamDesc,,"Adpater's Bus Number"
+HKR,Ndi\params\BusNo,default,,0
+HKR,Ndi\params\BusNo,min,,0
+HKR,Ndi\params\BusNo,max,,255
+HKR,Ndi\params\BusNo,step,,1
+HKR,Ndi\params\BusNo,base,,10
+HKR,Ndi\params\BusNo,type,,int
+
+;Original NDIS2 Parameter: DeviceNo ,"Adpater's Device Number",int,"0,31,1",0,0x32
+HKR,Ndi\params\DeviceNo,ParamDesc,,"Adpater's Device Number"
+HKR,Ndi\params\DeviceNo,default,,0
+HKR,Ndi\params\DeviceNo,min,,0
+HKR,Ndi\params\DeviceNo,max,,31
+HKR,Ndi\params\DeviceNo,step,,1
+HKR,Ndi\params\DeviceNo,base,,10
+HKR,Ndi\params\DeviceNo,type,,int
+
+HKR,,MsPciScan,0,"2"
+
+[nd2wrap.inst.ndis2]
+CopyFiles = nd2wrap.ndis2.CopyFiles
+AddReg = nd2wrap.inst.ndis2.reg
+
+[nd2wrap.rmv.ndis2]
+AddReg = nd2wrap.rmv.ndis2.reg
+
+[nd2wrap.inst.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",rtgnd.dos,,low
+
+[nd2wrap.rmv.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",rtgnd.dos
+
+[nd2wrap.ndis2.CopyFiles]
+rtgnd.dos
+
+[DestinationDirs]
+nd2wrap.ndis2.CopyFiles = 26
+
+[Strings]
+VENDOR = "NDIS2INFER by Oerg866"
+DEVICE = "RTL8168/8111 Family Gigabit Ethernet Adapter (NDIS2)"
+
