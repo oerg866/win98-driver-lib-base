@@ -1,0 +1,104 @@
+[Version]
+;NDIS2 Wrapper INF v2.0
+;(C) 2026 Eric Voirin (oerg866@googlemail.com)
+;http://github.com/oerg866/ndis2infer9x
+;Command Line: [ndis2infer9x.py --inf jmicron\OEMSETUP.INF --id 197B:0250 --id 197B:0260 --lookup --out jmicron\jmnd.inf]
+LayoutFile = layout.inf
+Signature = $CHICAGO$
+Class = Net
+Provider = %VENDOR%
+
+[Manufacturer]
+%VENDOR% = ND2WRAP
+
+[ND2WRAP]
+"JMC250 PCI Express Gigabit Ethernet Controller" = nd2wrap0.ndi,PCI\VEN_197B&DEV_0250
+"JMC260 PCI Express Fast Ethernet Controller" = nd2wrap1.ndi,PCI\VEN_197B&DEV_0260
+
+[SourceDisksNames]
+1 = "Oerg866 NDIS2INFER9X Driver",,
+
+[SourceDisksFiles]
+JMND.dos = 1
+
+[nd2wrap0.ndi]
+AddReg = nd2wrap0.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap0.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_197B&DEV_0250"
+
+[nd2wrap1.ndi]
+AddReg = nd2wrap1.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap1.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_197B&DEV_0260"
+
+[nd2wrap.ndi.reg]
+HKR,,DevLoader,,*ndis
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+; NDIS Info
+HKR,NDIS,LogDriverName,,"JMND"
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,NDIS\NDIS2,DriverName,,"JMND$"
+HKR,NDIS\NDIS2,FileName,,"JMND.dos"
+; Interfaces
+HKR,Ndi\Interfaces,DefUpper,,"ndis2"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"ndis2"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+; Install sections
+HKR,Ndi\Install,ndis2,,"nd2wrap.inst.ndis2"
+HKR,Ndi\Remove,ndis2,,"nd2wrap.rmv.ndis2"
+;Original NDIS2 Parameter: BUSNUM,"Adapter's PCI Bus Number",int,"0,255,1",0,0x32
+HKR,Ndi\params\BUSNUM,ParamDesc,,"Adapter's PCI Bus Number"
+HKR,Ndi\params\BUSNUM,default,,0
+HKR,Ndi\params\BUSNUM,min,,0
+HKR,Ndi\params\BUSNUM,max,,255
+HKR,Ndi\params\BUSNUM,step,,1
+HKR,Ndi\params\BUSNUM,base,,10
+HKR,Ndi\params\BUSNUM,type,,int
+
+;Original NDIS2 Parameter: DEVNUM,"Adapter's PCI Device Number",int,"0,31,1",0,0x32
+HKR,Ndi\params\DEVNUM,ParamDesc,,"Adapter's PCI Device Number"
+HKR,Ndi\params\DEVNUM,default,,0
+HKR,Ndi\params\DEVNUM,min,,0
+HKR,Ndi\params\DEVNUM,max,,31
+HKR,Ndi\params\DEVNUM,step,,1
+HKR,Ndi\params\DEVNUM,base,,10
+HKR,Ndi\params\DEVNUM,type,,int
+
+;Original NDIS2 Parameter: FUNNUM,"Adapter's PCI Function Number",int,"0,7,1",0,0x32
+HKR,Ndi\params\FUNNUM,ParamDesc,,"Adapter's PCI Function Number"
+HKR,Ndi\params\FUNNUM,default,,0
+HKR,Ndi\params\FUNNUM,min,,0
+HKR,Ndi\params\FUNNUM,max,,7
+HKR,Ndi\params\FUNNUM,step,,1
+HKR,Ndi\params\FUNNUM,base,,10
+HKR,Ndi\params\FUNNUM,type,,int
+
+HKR,,MsPciScan,0,"2"
+
+[nd2wrap.inst.ndis2]
+CopyFiles = nd2wrap.ndis2.CopyFiles
+AddReg = nd2wrap.inst.ndis2.reg
+
+[nd2wrap.rmv.ndis2]
+AddReg = nd2wrap.rmv.ndis2.reg
+
+[nd2wrap.inst.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",JMND.dos,,low
+
+[nd2wrap.rmv.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",JMND.dos
+
+[nd2wrap.ndis2.CopyFiles]
+JMND.dos
+
+[DestinationDirs]
+nd2wrap.ndis2.CopyFiles = 26
+
+[Strings]
+VENDOR = "NDIS2INFER by Oerg866"
+DEVICE = "JMicron(R) Gigabit/Fast Ethernet Controller (NDIS2)"
+

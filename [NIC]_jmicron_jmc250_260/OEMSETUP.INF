@@ -1,0 +1,20 @@
+;
+; OEMSETUP.INF for the JMND NDIS2 driver supporting the
+; JMicron(R) Gigabit Ethernet Controller.
+;
+; (C)Copyright 2008 JMicron(R).
+; All rights reserved..
+;
+
+[netcard]
+JM$JMND="JMicron(R) Gigabit/Fast Ethernet Controller",0,ndis,ethernet,real,JM$JMND,JM$JMND_nif
+
+[JM$JMND]
+devdir=?:JMND.dos
+device=JMND.dos,@devdir\JMND.dos
+
+[JM$JMND_nif]
+DriverName="JMND$"
+param=BUSNUM,"Adapter's PCI Bus Number",int,"0,255,1",0,0x32
+param=DEVNUM,"Adapter's PCI Device Number",int,"0,31,1",0,0x32
+param=FUNNUM,"Adapter's PCI Function Number",int,"0,7,1",0,0x32
