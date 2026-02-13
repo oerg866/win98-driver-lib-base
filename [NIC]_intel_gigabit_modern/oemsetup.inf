@@ -1,0 +1,38 @@
+; ******************************************************************************
+; * INTEL CONFIDENTIAL                                                         *
+; * Copyright 2014-2014 Intel Corporation All Rights Reserved.                 *
+; *                                                                            *
+; * The source code contained or described herein and all documents related    *
+; * to the source code ("Material") are owned by Intel Corporation or          *
+; * its suppliers or licensors. Title to the Material remains                  *
+; * with Intel Corporation or its suppliers and licensors.                     *
+; * The Material contains trade secrets and proprietary and confidential       *
+; * information of Intel or its suppliers and licensors.                       *
+; * The Material is protected by worldwide copyright and trade secret laws     *
+; * and treaty provisions. No part of the Material may be used, copied,        *
+; * reproduced, modified, published, uploaded, posted, transmitted,            *
+; * distributed, or disclosed in any way without Intel's                       *
+; * prior express written permission.                                          *
+; *                                                                            *
+; * No license under any patent, copyright, trade secret or other              *
+; * intellectual property right is granted to or conferred upon you            *
+; * by disclosure or delivery of the Materials, either expressly,              *
+; * by implication, inducement, estoppel or otherwise.                         *
+; * Any license under such intellectual property rights                        *
+; * must be express and approved by Intel in writing.                          *
+; ******************************************************************************
+; OEMSETUP.INF for Intel(R) Gigabit Connection Driver 0.05
+
+[netcard]
+E1000$="Intel(R) Gigabit Network Connection",0,NDIS,Ethernet,REAL,E1000,E1000_ini
+
+[E1000]
+devdir=1:E1000.dos
+device=E1000.DOS,@devdir\E1000.DOS
+
+[E1000_ini]
+DriverName=E1000$
+
+[PCI]
+VENDOR_ID=8086
+DEVICE_ID=1000;1001;1004;1008;1009;100C;100D;100E;100F;1010;1011;1012;1013;1015;1016;1017;1018;1019;101D;101E;1026;1027;1028;1049;104A;104B;104C;104D;105E;105F;1060;1075;1076;1077;1078;1079;107A;107B;107C;107D;107E;107F;108A;108B;108C;1096;1097;1098;109A;10A4;10A5;10A7;10A9;10B5;10B9;10BA;10BB;10BC;10BD;10BF;10C0;10C2;10C3;10C4;10C5;10C9;10CB;10CC;10CD;10CE;10D3;10D5;10D6;10D9;10DA;10DE;10DF;10E2;10E5;10E6;10E7;10E8;10EA;10EB;10EF;10F0;10F5;10F6;1501;1502;1503;150A;150C;150D;150E;150F;1510;1511;1516;1518;1521;1522;1523;1524;1525;1526;1527;1533;1536;1537;1538;1539;153A;153B;1559;155A;156F;1570;15A0;15A1;15A2;15A3;15B7;15B8;15B9;15D6;15D7;15D8;15E3;294C

@@ -1,0 +1,973 @@
+[Version]
+;NDIS2 Wrapper INF v2.0
+;(C) 2026 Eric Voirin (oerg866@googlemail.com)
+;http://github.com/oerg866/ndis2infer9x
+;Command Line: [ndis2infer9x.py --inf intel\OEMSETUP.INF --out intel\e1knd2.inf --lookup --exclude e1000w9x.inf]
+LayoutFile = layout.inf
+Signature = $CHICAGO$
+Class = Net
+Provider = %VENDOR%
+
+[Manufacturer]
+%VENDOR% = ND2WRAP
+
+[ND2WRAP]
+"82542 Gigabit Ethernet Controller (Fiber)" = nd2wrap0.ndi,PCI\VEN_8086&DEV_1000
+"82543GC Gigabit Ethernet Controller (Fiber)" = nd2wrap1.ndi,PCI\VEN_8086&DEV_1001
+"82543GC Gigabit Ethernet Controller (Copper)" = nd2wrap2.ndi,PCI\VEN_8086&DEV_1004
+"82544EI Gigabit Ethernet Controller (Copper)" = nd2wrap3.ndi,PCI\VEN_8086&DEV_1008
+"82544EI Gigabit Ethernet Controller (Fiber)" = nd2wrap4.ndi,PCI\VEN_8086&DEV_1009
+"82544GC Gigabit Ethernet Controller (Copper)" = nd2wrap5.ndi,PCI\VEN_8086&DEV_100C
+"82544GC Gigabit Ethernet Controller (LOM)" = nd2wrap6.ndi,PCI\VEN_8086&DEV_100D
+"82540EM Gigabit Ethernet Controller" = nd2wrap7.ndi,PCI\VEN_8086&DEV_100E
+"82545EM Gigabit Ethernet Controller (Copper)" = nd2wrap8.ndi,PCI\VEN_8086&DEV_100F
+"82546EB Gigabit Ethernet Controller (Copper)" = nd2wrap9.ndi,PCI\VEN_8086&DEV_1010
+"82545EM Gigabit Ethernet Controller (Fiber)" = nd2wrap10.ndi,PCI\VEN_8086&DEV_1011
+"82546EB Gigabit Ethernet Controller (Fiber)" = nd2wrap11.ndi,PCI\VEN_8086&DEV_1012
+"82541EI Gigabit Ethernet Controller" = nd2wrap12.ndi,PCI\VEN_8086&DEV_1013
+"82540EM Gigabit Ethernet Controller (LOM)" = nd2wrap13.ndi,PCI\VEN_8086&DEV_1015
+"82540EP Gigabit Ethernet Controller (Mobile)" = nd2wrap14.ndi,PCI\VEN_8086&DEV_1016
+"82540EP Gigabit Ethernet Controller" = nd2wrap15.ndi,PCI\VEN_8086&DEV_1017
+"82541EI Gigabit Ethernet Controller" = nd2wrap16.ndi,PCI\VEN_8086&DEV_1018
+"82547EI Gigabit Ethernet Controller" = nd2wrap17.ndi,PCI\VEN_8086&DEV_1019
+"82546EB Gigabit Ethernet Controller" = nd2wrap18.ndi,PCI\VEN_8086&DEV_101D
+"82540EP Gigabit Ethernet Controller (Mobile)" = nd2wrap19.ndi,PCI\VEN_8086&DEV_101E
+"82545GM Gigabit Ethernet Controller" = nd2wrap20.ndi,PCI\VEN_8086&DEV_1026
+"82545GM Gigabit Ethernet Controller" = nd2wrap21.ndi,PCI\VEN_8086&DEV_1027
+"82545GM Gigabit Ethernet Controller" = nd2wrap22.ndi,PCI\VEN_8086&DEV_1028
+"82566MM Gigabit Network Connection" = nd2wrap23.ndi,PCI\VEN_8086&DEV_1049
+"82566DM Gigabit Network Connection" = nd2wrap24.ndi,PCI\VEN_8086&DEV_104A
+"82566DC Gigabit Network Connection" = nd2wrap25.ndi,PCI\VEN_8086&DEV_104B
+"82562V 10/100 Network Connection" = nd2wrap26.ndi,PCI\VEN_8086&DEV_104C
+"82566MC Gigabit Network Connection" = nd2wrap27.ndi,PCI\VEN_8086&DEV_104D
+"82571EB/82571GB Gigabit Ethernet Controller D0/D1" = nd2wrap28.ndi,PCI\VEN_8086&DEV_105E
+"82571EB Gigabit Ethernet Controller" = nd2wrap29.ndi,PCI\VEN_8086&DEV_105F
+"82571EB Gigabit Ethernet Controller" = nd2wrap30.ndi,PCI\VEN_8086&DEV_1060
+"82547GI Gigabit Ethernet Controller" = nd2wrap31.ndi,PCI\VEN_8086&DEV_1075
+"82541GI Gigabit Ethernet Controller" = nd2wrap32.ndi,PCI\VEN_8086&DEV_1076
+"82541GI Gigabit Ethernet Controller" = nd2wrap33.ndi,PCI\VEN_8086&DEV_1077
+"82541ER Gigabit Ethernet Controller" = nd2wrap34.ndi,PCI\VEN_8086&DEV_1078
+"82546GB Gigabit Ethernet Controller" = nd2wrap35.ndi,PCI\VEN_8086&DEV_1079
+"82546GB Gigabit Ethernet Controller" = nd2wrap36.ndi,PCI\VEN_8086&DEV_107A
+"82546GB Gigabit Ethernet Controller" = nd2wrap37.ndi,PCI\VEN_8086&DEV_107B
+"82541PI Gigabit Ethernet Controller" = nd2wrap38.ndi,PCI\VEN_8086&DEV_107C
+"82572EI Gigabit Ethernet Controller (Copper)" = nd2wrap39.ndi,PCI\VEN_8086&DEV_107D
+"82572EI Gigabit Ethernet Controller (Fiber)" = nd2wrap40.ndi,PCI\VEN_8086&DEV_107E
+"82572EI Gigabit Ethernet Controller" = nd2wrap41.ndi,PCI\VEN_8086&DEV_107F
+"82546GB Gigabit Ethernet Controller" = nd2wrap42.ndi,PCI\VEN_8086&DEV_108A
+"82573V Gigabit Ethernet Controller (Copper)" = nd2wrap43.ndi,PCI\VEN_8086&DEV_108B
+"82573E Gigabit Ethernet Controller (Copper)" = nd2wrap44.ndi,PCI\VEN_8086&DEV_108C
+"80003ES2LAN Gigabit Ethernet Controller (Copper)" = nd2wrap45.ndi,PCI\VEN_8086&DEV_1096
+"631xESB/632xESB DPT LAN Controller (Fiber)" = nd2wrap46.ndi,PCI\VEN_8086&DEV_1097
+"80003ES2LAN Gigabit Ethernet Controller (Serdes)" = nd2wrap47.ndi,PCI\VEN_8086&DEV_1098
+"82573L Gigabit Ethernet Controller" = nd2wrap48.ndi,PCI\VEN_8086&DEV_109A
+"82571EB Gigabit Ethernet Controller" = nd2wrap49.ndi,PCI\VEN_8086&DEV_10A4
+"82571EB Gigabit Ethernet Controller (Fiber)" = nd2wrap50.ndi,PCI\VEN_8086&DEV_10A5
+"82575EB Gigabit Network Connection" = nd2wrap51.ndi,PCI\VEN_8086&DEV_10A7
+"82575EB Gigabit Backplane Connection" = nd2wrap52.ndi,PCI\VEN_8086&DEV_10A9
+"82546GB Gigabit Ethernet Controller (Copper)" = nd2wrap53.ndi,PCI\VEN_8086&DEV_10B5
+"82572EI Gigabit Ethernet Controller (Copper)" = nd2wrap54.ndi,PCI\VEN_8086&DEV_10B9
+"80003ES2LAN Gigabit Ethernet Controller (Copper)" = nd2wrap55.ndi,PCI\VEN_8086&DEV_10BA
+"80003ES2LAN Gigabit Ethernet Controller (Serdes)" = nd2wrap56.ndi,PCI\VEN_8086&DEV_10BB
+"82571EB/82571GB Gigabit Ethernet Controller (Copper)" = nd2wrap57.ndi,PCI\VEN_8086&DEV_10BC
+"82566DM-2 Gigabit Network Connection" = nd2wrap58.ndi,PCI\VEN_8086&DEV_10BD
+"82567LF Gigabit Network Connection" = nd2wrap59.ndi,PCI\VEN_8086&DEV_10BF
+"82562V-2 10/100 Network Connection" = nd2wrap60.ndi,PCI\VEN_8086&DEV_10C0
+"82562G-2 10/100 Network Connection" = nd2wrap61.ndi,PCI\VEN_8086&DEV_10C2
+"82562GT-2 10/100 Network Connection" = nd2wrap62.ndi,PCI\VEN_8086&DEV_10C3
+"82562GT 10/100 Network Connection" = nd2wrap63.ndi,PCI\VEN_8086&DEV_10C4
+"82562G 10/100 Network Connection" = nd2wrap64.ndi,PCI\VEN_8086&DEV_10C5
+"82576 Gigabit Network Connection" = nd2wrap65.ndi,PCI\VEN_8086&DEV_10C9
+"82567V Gigabit Network Connection" = nd2wrap66.ndi,PCI\VEN_8086&DEV_10CB
+"82567LM-2 Gigabit Network Connection" = nd2wrap67.ndi,PCI\VEN_8086&DEV_10CC
+"82567LF-2 Gigabit Network Connection" = nd2wrap68.ndi,PCI\VEN_8086&DEV_10CD
+"82567V-2 Gigabit Network Connection" = nd2wrap69.ndi,PCI\VEN_8086&DEV_10CE
+"82574L Gigabit Network Connection" = nd2wrap70.ndi,PCI\VEN_8086&DEV_10D3
+"82571PT Gigabit PT Quad Port Server ExpressModule" = nd2wrap71.ndi,PCI\VEN_8086&DEV_10D5
+"82575GB Gigabit Network Connection" = nd2wrap72.ndi,PCI\VEN_8086&DEV_10D6
+"82571EB Dual Port Gigabit Mezzanine Adapter" = nd2wrap73.ndi,PCI\VEN_8086&DEV_10D9
+"82571EB Quad Port Gigabit Mezzanine Adapter" = nd2wrap74.ndi,PCI\VEN_8086&DEV_10DA
+"82567LM-3 Gigabit Network Connection" = nd2wrap75.ndi,PCI\VEN_8086&DEV_10DE
+"82567LF-3 Gigabit Network Connection" = nd2wrap76.ndi,PCI\VEN_8086&DEV_10DF
+"82575GB Gigabit Network Connection" = nd2wrap77.ndi,PCI\VEN_8086&DEV_10E2
+"82567LM-4 Gigabit Network Connection" = nd2wrap78.ndi,PCI\VEN_8086&DEV_10E5
+"82576 Gigabit Network Connection" = nd2wrap79.ndi,PCI\VEN_8086&DEV_10E6
+"82576 Gigabit Network Connection" = nd2wrap80.ndi,PCI\VEN_8086&DEV_10E7
+"82576 Gigabit Network Connection" = nd2wrap81.ndi,PCI\VEN_8086&DEV_10E8
+"82577LM Gigabit Network Connection" = nd2wrap82.ndi,PCI\VEN_8086&DEV_10EA
+"82577LC Gigabit Network Connection" = nd2wrap83.ndi,PCI\VEN_8086&DEV_10EB
+"82578DM Gigabit Network Connection" = nd2wrap84.ndi,PCI\VEN_8086&DEV_10EF
+"82578DC Gigabit Network Connection" = nd2wrap85.ndi,PCI\VEN_8086&DEV_10F0
+"82567LM Gigabit Network Connection" = nd2wrap86.ndi,PCI\VEN_8086&DEV_10F5
+"82574L Gigabit Network Connection" = nd2wrap87.ndi,PCI\VEN_8086&DEV_10F6
+"82567V-3 Gigabit Network Connection" = nd2wrap88.ndi,PCI\VEN_8086&DEV_1501
+"82579LM Gigabit Network Connection (Lewisville)" = nd2wrap89.ndi,PCI\VEN_8086&DEV_1502
+"82579V Gigabit Network Connection" = nd2wrap90.ndi,PCI\VEN_8086&DEV_1503
+"82576NS Gigabit Network Connection" = nd2wrap91.ndi,PCI\VEN_8086&DEV_150A
+"82583V Gigabit Network Connection" = nd2wrap92.ndi,PCI\VEN_8086&DEV_150C
+"82576 Gigabit Backplane Connection" = nd2wrap93.ndi,PCI\VEN_8086&DEV_150D
+"82580 Gigabit Network Connection" = nd2wrap94.ndi,PCI\VEN_8086&DEV_150E
+"82580 Gigabit Fiber Network Connection" = nd2wrap95.ndi,PCI\VEN_8086&DEV_150F
+"82580 Gigabit Backplane Connection" = nd2wrap96.ndi,PCI\VEN_8086&DEV_1510
+"82580 Gigabit SFP Connection" = nd2wrap97.ndi,PCI\VEN_8086&DEV_1511
+"82580 Gigabit Network Connection" = nd2wrap98.ndi,PCI\VEN_8086&DEV_1516
+"82576NS SerDes Gigabit Network Connection" = nd2wrap99.ndi,PCI\VEN_8086&DEV_1518
+"I350 Gigabit Network Connection" = nd2wrap100.ndi,PCI\VEN_8086&DEV_1521
+"I350 Gigabit Fiber Network Connection" = nd2wrap101.ndi,PCI\VEN_8086&DEV_1522
+"I350 Gigabit Backplane Connection" = nd2wrap102.ndi,PCI\VEN_8086&DEV_1523
+"I350 Gigabit Connection" = nd2wrap103.ndi,PCI\VEN_8086&DEV_1524
+"82567V-4 Gigabit Network Connection" = nd2wrap104.ndi,PCI\VEN_8086&DEV_1525
+"82576 Gigabit Network Connection" = nd2wrap105.ndi,PCI\VEN_8086&DEV_1526
+"82580 Gigabit Fiber Network Connection" = nd2wrap106.ndi,PCI\VEN_8086&DEV_1527
+"I210 Gigabit Network Connection" = nd2wrap107.ndi,PCI\VEN_8086&DEV_1533
+"I210 Gigabit Fiber Network Connection" = nd2wrap108.ndi,PCI\VEN_8086&DEV_1536
+"I210 Gigabit Backplane Connection" = nd2wrap109.ndi,PCI\VEN_8086&DEV_1537
+"I210 Gigabit Network Connection" = nd2wrap110.ndi,PCI\VEN_8086&DEV_1538
+"I211 Gigabit Network Connection" = nd2wrap111.ndi,PCI\VEN_8086&DEV_1539
+"Ethernet Connection I217-LM" = nd2wrap112.ndi,PCI\VEN_8086&DEV_153A
+"Ethernet Connection I217-V" = nd2wrap113.ndi,PCI\VEN_8086&DEV_153B
+"Ethernet Connection I218-V" = nd2wrap114.ndi,PCI\VEN_8086&DEV_1559
+"Ethernet Connection I218-LM" = nd2wrap115.ndi,PCI\VEN_8086&DEV_155A
+"Ethernet Connection I219-LM" = nd2wrap116.ndi,PCI\VEN_8086&DEV_156F
+"Ethernet Connection I219-V" = nd2wrap117.ndi,PCI\VEN_8086&DEV_1570
+"Ethernet Connection (2) I218-LM" = nd2wrap118.ndi,PCI\VEN_8086&DEV_15A0
+"Ethernet Connection (2) I218-V" = nd2wrap119.ndi,PCI\VEN_8086&DEV_15A1
+"Ethernet Connection (3) I218-LM" = nd2wrap120.ndi,PCI\VEN_8086&DEV_15A2
+"Ethernet Connection (3) I218-V" = nd2wrap121.ndi,PCI\VEN_8086&DEV_15A3
+"Ethernet Connection (2) I219-LM" = nd2wrap122.ndi,PCI\VEN_8086&DEV_15B7
+"Ethernet Connection (2) I219-V" = nd2wrap123.ndi,PCI\VEN_8086&DEV_15B8
+"Ethernet Connection (3) I219-LM" = nd2wrap124.ndi,PCI\VEN_8086&DEV_15B9
+"Ethernet Connection (5) I219-V" = nd2wrap125.ndi,PCI\VEN_8086&DEV_15D6
+"Ethernet Connection (4) I219-LM" = nd2wrap126.ndi,PCI\VEN_8086&DEV_15D7
+"Ethernet Connection (4) I219-V" = nd2wrap127.ndi,PCI\VEN_8086&DEV_15D8
+"Ethernet Connection (5) I219-LM" = nd2wrap128.ndi,PCI\VEN_8086&DEV_15E3
+"82566DC-2 Gigabit Network Connection" = nd2wrap129.ndi,PCI\VEN_8086&DEV_294C
+
+[SourceDisksNames]
+1 = "Oerg866 NDIS2INFER9X Driver",,
+
+[SourceDisksFiles]
+E1000.DOS = 1
+
+[nd2wrap0.ndi]
+AddReg = nd2wrap0.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap0.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1000"
+
+[nd2wrap1.ndi]
+AddReg = nd2wrap1.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap1.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1001"
+
+[nd2wrap2.ndi]
+AddReg = nd2wrap2.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap2.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1004"
+
+[nd2wrap3.ndi]
+AddReg = nd2wrap3.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap3.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1008"
+
+[nd2wrap4.ndi]
+AddReg = nd2wrap4.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap4.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1009"
+
+[nd2wrap5.ndi]
+AddReg = nd2wrap5.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap5.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_100C"
+
+[nd2wrap6.ndi]
+AddReg = nd2wrap6.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap6.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_100D"
+
+[nd2wrap7.ndi]
+AddReg = nd2wrap7.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap7.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_100E"
+
+[nd2wrap8.ndi]
+AddReg = nd2wrap8.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap8.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_100F"
+
+[nd2wrap9.ndi]
+AddReg = nd2wrap9.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap9.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1010"
+
+[nd2wrap10.ndi]
+AddReg = nd2wrap10.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap10.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1011"
+
+[nd2wrap11.ndi]
+AddReg = nd2wrap11.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap11.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1012"
+
+[nd2wrap12.ndi]
+AddReg = nd2wrap12.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap12.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1013"
+
+[nd2wrap13.ndi]
+AddReg = nd2wrap13.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap13.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1015"
+
+[nd2wrap14.ndi]
+AddReg = nd2wrap14.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap14.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1016"
+
+[nd2wrap15.ndi]
+AddReg = nd2wrap15.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap15.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1017"
+
+[nd2wrap16.ndi]
+AddReg = nd2wrap16.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap16.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1018"
+
+[nd2wrap17.ndi]
+AddReg = nd2wrap17.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap17.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1019"
+
+[nd2wrap18.ndi]
+AddReg = nd2wrap18.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap18.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_101D"
+
+[nd2wrap19.ndi]
+AddReg = nd2wrap19.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap19.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_101E"
+
+[nd2wrap20.ndi]
+AddReg = nd2wrap20.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap20.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1026"
+
+[nd2wrap21.ndi]
+AddReg = nd2wrap21.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap21.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1027"
+
+[nd2wrap22.ndi]
+AddReg = nd2wrap22.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap22.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1028"
+
+[nd2wrap23.ndi]
+AddReg = nd2wrap23.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap23.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1049"
+
+[nd2wrap24.ndi]
+AddReg = nd2wrap24.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap24.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_104A"
+
+[nd2wrap25.ndi]
+AddReg = nd2wrap25.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap25.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_104B"
+
+[nd2wrap26.ndi]
+AddReg = nd2wrap26.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap26.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_104C"
+
+[nd2wrap27.ndi]
+AddReg = nd2wrap27.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap27.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_104D"
+
+[nd2wrap28.ndi]
+AddReg = nd2wrap28.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap28.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_105E"
+
+[nd2wrap29.ndi]
+AddReg = nd2wrap29.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap29.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_105F"
+
+[nd2wrap30.ndi]
+AddReg = nd2wrap30.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap30.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1060"
+
+[nd2wrap31.ndi]
+AddReg = nd2wrap31.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap31.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1075"
+
+[nd2wrap32.ndi]
+AddReg = nd2wrap32.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap32.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1076"
+
+[nd2wrap33.ndi]
+AddReg = nd2wrap33.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap33.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1077"
+
+[nd2wrap34.ndi]
+AddReg = nd2wrap34.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap34.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1078"
+
+[nd2wrap35.ndi]
+AddReg = nd2wrap35.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap35.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1079"
+
+[nd2wrap36.ndi]
+AddReg = nd2wrap36.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap36.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_107A"
+
+[nd2wrap37.ndi]
+AddReg = nd2wrap37.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap37.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_107B"
+
+[nd2wrap38.ndi]
+AddReg = nd2wrap38.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap38.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_107C"
+
+[nd2wrap39.ndi]
+AddReg = nd2wrap39.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap39.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_107D"
+
+[nd2wrap40.ndi]
+AddReg = nd2wrap40.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap40.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_107E"
+
+[nd2wrap41.ndi]
+AddReg = nd2wrap41.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap41.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_107F"
+
+[nd2wrap42.ndi]
+AddReg = nd2wrap42.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap42.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_108A"
+
+[nd2wrap43.ndi]
+AddReg = nd2wrap43.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap43.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_108B"
+
+[nd2wrap44.ndi]
+AddReg = nd2wrap44.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap44.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_108C"
+
+[nd2wrap45.ndi]
+AddReg = nd2wrap45.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap45.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1096"
+
+[nd2wrap46.ndi]
+AddReg = nd2wrap46.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap46.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1097"
+
+[nd2wrap47.ndi]
+AddReg = nd2wrap47.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap47.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1098"
+
+[nd2wrap48.ndi]
+AddReg = nd2wrap48.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap48.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_109A"
+
+[nd2wrap49.ndi]
+AddReg = nd2wrap49.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap49.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10A4"
+
+[nd2wrap50.ndi]
+AddReg = nd2wrap50.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap50.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10A5"
+
+[nd2wrap51.ndi]
+AddReg = nd2wrap51.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap51.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10A7"
+
+[nd2wrap52.ndi]
+AddReg = nd2wrap52.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap52.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10A9"
+
+[nd2wrap53.ndi]
+AddReg = nd2wrap53.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap53.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10B5"
+
+[nd2wrap54.ndi]
+AddReg = nd2wrap54.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap54.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10B9"
+
+[nd2wrap55.ndi]
+AddReg = nd2wrap55.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap55.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10BA"
+
+[nd2wrap56.ndi]
+AddReg = nd2wrap56.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap56.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10BB"
+
+[nd2wrap57.ndi]
+AddReg = nd2wrap57.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap57.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10BC"
+
+[nd2wrap58.ndi]
+AddReg = nd2wrap58.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap58.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10BD"
+
+[nd2wrap59.ndi]
+AddReg = nd2wrap59.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap59.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10BF"
+
+[nd2wrap60.ndi]
+AddReg = nd2wrap60.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap60.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10C0"
+
+[nd2wrap61.ndi]
+AddReg = nd2wrap61.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap61.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10C2"
+
+[nd2wrap62.ndi]
+AddReg = nd2wrap62.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap62.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10C3"
+
+[nd2wrap63.ndi]
+AddReg = nd2wrap63.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap63.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10C4"
+
+[nd2wrap64.ndi]
+AddReg = nd2wrap64.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap64.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10C5"
+
+[nd2wrap65.ndi]
+AddReg = nd2wrap65.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap65.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10C9"
+
+[nd2wrap66.ndi]
+AddReg = nd2wrap66.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap66.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10CB"
+
+[nd2wrap67.ndi]
+AddReg = nd2wrap67.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap67.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10CC"
+
+[nd2wrap68.ndi]
+AddReg = nd2wrap68.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap68.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10CD"
+
+[nd2wrap69.ndi]
+AddReg = nd2wrap69.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap69.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10CE"
+
+[nd2wrap70.ndi]
+AddReg = nd2wrap70.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap70.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10D3"
+
+[nd2wrap71.ndi]
+AddReg = nd2wrap71.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap71.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10D5"
+
+[nd2wrap72.ndi]
+AddReg = nd2wrap72.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap72.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10D6"
+
+[nd2wrap73.ndi]
+AddReg = nd2wrap73.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap73.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10D9"
+
+[nd2wrap74.ndi]
+AddReg = nd2wrap74.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap74.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10DA"
+
+[nd2wrap75.ndi]
+AddReg = nd2wrap75.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap75.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10DE"
+
+[nd2wrap76.ndi]
+AddReg = nd2wrap76.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap76.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10DF"
+
+[nd2wrap77.ndi]
+AddReg = nd2wrap77.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap77.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10E2"
+
+[nd2wrap78.ndi]
+AddReg = nd2wrap78.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap78.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10E5"
+
+[nd2wrap79.ndi]
+AddReg = nd2wrap79.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap79.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10E6"
+
+[nd2wrap80.ndi]
+AddReg = nd2wrap80.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap80.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10E7"
+
+[nd2wrap81.ndi]
+AddReg = nd2wrap81.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap81.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10E8"
+
+[nd2wrap82.ndi]
+AddReg = nd2wrap82.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap82.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10EA"
+
+[nd2wrap83.ndi]
+AddReg = nd2wrap83.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap83.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10EB"
+
+[nd2wrap84.ndi]
+AddReg = nd2wrap84.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap84.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10EF"
+
+[nd2wrap85.ndi]
+AddReg = nd2wrap85.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap85.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10F0"
+
+[nd2wrap86.ndi]
+AddReg = nd2wrap86.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap86.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10F5"
+
+[nd2wrap87.ndi]
+AddReg = nd2wrap87.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap87.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_10F6"
+
+[nd2wrap88.ndi]
+AddReg = nd2wrap88.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap88.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1501"
+
+[nd2wrap89.ndi]
+AddReg = nd2wrap89.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap89.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1502"
+
+[nd2wrap90.ndi]
+AddReg = nd2wrap90.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap90.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1503"
+
+[nd2wrap91.ndi]
+AddReg = nd2wrap91.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap91.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_150A"
+
+[nd2wrap92.ndi]
+AddReg = nd2wrap92.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap92.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_150C"
+
+[nd2wrap93.ndi]
+AddReg = nd2wrap93.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap93.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_150D"
+
+[nd2wrap94.ndi]
+AddReg = nd2wrap94.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap94.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_150E"
+
+[nd2wrap95.ndi]
+AddReg = nd2wrap95.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap95.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_150F"
+
+[nd2wrap96.ndi]
+AddReg = nd2wrap96.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap96.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1510"
+
+[nd2wrap97.ndi]
+AddReg = nd2wrap97.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap97.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1511"
+
+[nd2wrap98.ndi]
+AddReg = nd2wrap98.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap98.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1516"
+
+[nd2wrap99.ndi]
+AddReg = nd2wrap99.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap99.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1518"
+
+[nd2wrap100.ndi]
+AddReg = nd2wrap100.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap100.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1521"
+
+[nd2wrap101.ndi]
+AddReg = nd2wrap101.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap101.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1522"
+
+[nd2wrap102.ndi]
+AddReg = nd2wrap102.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap102.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1523"
+
+[nd2wrap103.ndi]
+AddReg = nd2wrap103.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap103.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1524"
+
+[nd2wrap104.ndi]
+AddReg = nd2wrap104.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap104.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1525"
+
+[nd2wrap105.ndi]
+AddReg = nd2wrap105.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap105.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1526"
+
+[nd2wrap106.ndi]
+AddReg = nd2wrap106.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap106.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1527"
+
+[nd2wrap107.ndi]
+AddReg = nd2wrap107.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap107.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1533"
+
+[nd2wrap108.ndi]
+AddReg = nd2wrap108.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap108.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1536"
+
+[nd2wrap109.ndi]
+AddReg = nd2wrap109.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap109.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1537"
+
+[nd2wrap110.ndi]
+AddReg = nd2wrap110.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap110.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1538"
+
+[nd2wrap111.ndi]
+AddReg = nd2wrap111.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap111.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1539"
+
+[nd2wrap112.ndi]
+AddReg = nd2wrap112.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap112.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_153A"
+
+[nd2wrap113.ndi]
+AddReg = nd2wrap113.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap113.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_153B"
+
+[nd2wrap114.ndi]
+AddReg = nd2wrap114.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap114.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1559"
+
+[nd2wrap115.ndi]
+AddReg = nd2wrap115.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap115.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_155A"
+
+[nd2wrap116.ndi]
+AddReg = nd2wrap116.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap116.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_156F"
+
+[nd2wrap117.ndi]
+AddReg = nd2wrap117.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap117.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_1570"
+
+[nd2wrap118.ndi]
+AddReg = nd2wrap118.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap118.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_15A0"
+
+[nd2wrap119.ndi]
+AddReg = nd2wrap119.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap119.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_15A1"
+
+[nd2wrap120.ndi]
+AddReg = nd2wrap120.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap120.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_15A2"
+
+[nd2wrap121.ndi]
+AddReg = nd2wrap121.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap121.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_15A3"
+
+[nd2wrap122.ndi]
+AddReg = nd2wrap122.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap122.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_15B7"
+
+[nd2wrap123.ndi]
+AddReg = nd2wrap123.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap123.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_15B8"
+
+[nd2wrap124.ndi]
+AddReg = nd2wrap124.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap124.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_15B9"
+
+[nd2wrap125.ndi]
+AddReg = nd2wrap125.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap125.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_15D6"
+
+[nd2wrap126.ndi]
+AddReg = nd2wrap126.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap126.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_15D7"
+
+[nd2wrap127.ndi]
+AddReg = nd2wrap127.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap127.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_15D8"
+
+[nd2wrap128.ndi]
+AddReg = nd2wrap128.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap128.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_15E3"
+
+[nd2wrap129.ndi]
+AddReg = nd2wrap129.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap129.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_8086&DEV_294C"
+
+[nd2wrap.ndi.reg]
+HKR,,DevLoader,,*ndis
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+; NDIS Info
+HKR,NDIS,LogDriverName,,"E1000"
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,NDIS\NDIS2,DriverName,,"E1000$"
+HKR,NDIS\NDIS2,FileName,,"E1000.DOS"
+; Interfaces
+HKR,Ndi\Interfaces,DefUpper,,"ndis2"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"ndis2"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+; Install sections
+HKR,Ndi\Install,ndis2,,"nd2wrap.inst.ndis2"
+HKR,Ndi\Remove,ndis2,,"nd2wrap.rmv.ndis2"
+HKR,,MsPciScan,0,"2"
+
+[nd2wrap.inst.ndis2]
+CopyFiles = nd2wrap.ndis2.CopyFiles
+AddReg = nd2wrap.inst.ndis2.reg
+
+[nd2wrap.rmv.ndis2]
+AddReg = nd2wrap.rmv.ndis2.reg
+
+[nd2wrap.inst.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",E1000.DOS,,low
+
+[nd2wrap.rmv.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",E1000.DOS
+
+[nd2wrap.ndis2.CopyFiles]
+E1000.DOS
+
+[DestinationDirs]
+nd2wrap.ndis2.CopyFiles = 26
+
+[Strings]
+VENDOR = "NDIS2INFER by Oerg866"
+DEVICE = "Intel(R) Gigabit Network Connection (NDIS2)"
+
