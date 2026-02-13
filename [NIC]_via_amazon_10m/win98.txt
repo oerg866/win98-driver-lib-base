@@ -1,0 +1,79 @@
+*****************************************************************************
+*                                                                           *
+*                         PCI Ethernet Adapter                              *
+*                                                                           *
+*                     NDIS3 Driver for Windows 98                           *
+*                                                                           *
+*                         V. 3.56,   Mar. 1999                               *
+*                                                                           *
+*****************************************************************************
+
+Introduction:
+=============
+
+  This document shows you how to setup the driver and how to use the enhanced
+  functions by setting the custom keywords.
+
+
+Contents of the Subdirectory:
+=============================
+
+    PCIWNT.SYS          The NDIS3 driver for Windows 98.
+    PCIW2K.INF          The installation information file.
+    WIN98.TXT           This file.
+
+
+Installation:
+=============
+
+  Before starting with the installation process, make sure that the adapter
+  is properly installed and configured. You can use the diagnostic program
+  (A:\SETUP.EXE) in DOS mode to make sure your connection with the network is
+  correct.
+
+    1. Turn the power of your PC on to boot from Windows 98. Windows 98 may
+       auto-detect your new adapter installed, and the "New Hardware Found"
+       dialogue box will appear. Select "Driver from disk provided by hardware
+       manufacturer" to install driver from the diskette that come with your
+       lan adapter.
+
+       Note: If your new adapter is not detected by Windows 98, you can open
+       "My Computer" -> "Control Panel" -> "Networks" after Windows 98 comes up,
+       and select "Add adapter" -> "Have disk" to install driver from the
+       diskette that come with your lan adapter.
+
+    2. Insert the driver diskette into your floppy drive, and specify the
+       path of the driver in the diskette(i.e. A:\WIN98) to copy the driver
+       files to your system.
+
+    3. When the driver installation is completed, restart Windows 98.
+
+
+Configuration Parameters:
+=========================
+    Configuration:
+    --------------
+      1) Open "My Computer" -> "Control Panel" -> "Networks". Select "PCI
+         Ethernet Adapter" from the Network Components list, and then click
+         the "Properties" button.
+
+      2) Click "Advanced" button, and you will see the following properties:
+         EarlyReceive, EarlyTransmit, and FullDuplex. Turn the properties on
+         if you want to enable the functions.
+
+    Custom Properties:
+    ------------------
+        EARLYTRANSMIT                   This keyword is used to enable turbo
+                                        transmission mode for accelerating data
+                                        transmission.
+
+        EARLYRECEIVE                    This keyword is used to enable turbo
+                                        receiption mode for accelerating data
+                                        receiption.
+
+        FULLDUPLEX                      This keyword is used to enable full
+                                        duplex mode.
+
+
+
+

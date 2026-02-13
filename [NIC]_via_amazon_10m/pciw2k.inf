@@ -1,0 +1,160 @@
+; 
+;  Purpose: 926 setup information file for Windows 98 / Windows 2000
+;
+;  Author:  AJ Jiang
+; 
+;  Date:    Mar 10, 1999
+; 
+; 
+
+[Version]
+Signature   = "$Chicago$"
+Compatible  = 1						; for supporting both Win2000 and Win98
+Class       = Net
+ClassGUID   = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider    = %MSFT%
+LayoutFile  = layout.inf
+
+[Manufacturer]
+%Manuf%       = MANUF
+
+[MANUF]
+%VT3016.DeviceDesc% = VT3016.ndi,   PCI\VEN_1106&DEV_0926
+
+; Windows 2000 Install section
+[VT3016.ndi.NT]
+Characteristics = 0x84
+BusType         = 5
+AddReg          = VT3016.reg, VT3016.params.reg, VT3016.reg.NT
+LogConfig	= VT3016.LogConfig
+CopyFiles       = VT3016.NT.CopyFiles
+
+; Windows 98 Install section
+[VT3016.ndi]
+Characteristics = 0x84
+BusType         = 5
+AddReg          = VT3016.reg, VT3016.params.reg, VT3016.reg.w98
+LogConfig	= VT3016.LogConfig
+CopyFiles       = VT3016.w98.CopyFiles
+
+[VT3016.ndi.NT.Services]
+AddService      = VT3016, 2, VT3016.Service, VT3016.EventLog
+
+[VT3016.LogConfig]
+IRQConfig=3,4,5,9,10,11,12,15
+IOConfig=20@200-3FF%FFE0(3FF::)
+ConfigPriority=REBOOT
+
+[VT3016.reg]
+
+HKR,Ndi,DeviceID,,				"PCI\VEN_1106&DEV_0926"
+
+; key,subkey,valuname,type,value
+HKR,,				DevLoader,,*ndis
+HKR,,				DeviceVxDs,,PCIWNT.sys
+HKR,,				EnumPropPages,,"netdi.dll,EnumPropPages"
+
+; NDIS Info
+HKR,NDIS,			LogDriverName,,"PCIWNT"
+HKR,NDIS,			MajorNdisVersion,1,03
+HKR,NDIS,			MinorNdisVersion,1,0A
+HKR,Ndi,                        Service,        0, "VT3016"
+
+[VT3016.reg.NT]
+; In Windows 2000, only "ndis5" can be specified
+HKR,Ndi\Interfaces,UpperRange	,0,		"ndis5"
+HKR,Ndi\Interfaces,LowerRange	,0,		"ethernet"
+
+
+[VT3016.reg.w98]
+; In Windows 98, specify "ndis3" is OK. (if "ndis5" , there'd be a failure)
+HKR,Ndi\Interfaces,UpperRange	,0,		"ndis3"
+HKR,Ndi\Interfaces,LowerRange	,0,		"ethernet"
+
+; extra params for VT3016
+[VT3016.params.reg]
+; Resources
+HKR,,InterruptNumber,1,04,00,00,00
+HKR,,IOBaseAddress,1,02,00,00,00
+
+; Interrupt Number
+HKR,NDI\params\InterruptNumber,resc,1,04,00,00,00
+HKR,Ndi\params\interruptNumber,ParamDesc,,"Interrupt Level"
+HKR,NDI\params\InterruptNumber,flag,1,60,00,00,00
+
+; IO Base Address
+HKR,NDI\params\IOBaseAddress,resc,1,02,00,00,00
+HKR,NDI\params\IOBaseAddress,ParamDesc,,"I/O Base Address"
+HKR,NDI\params\IOBaseAddress,flag,1,20,00,00,00
+
+; Early Transmit parameter
+HKR,NDI\params\EarlyTransmit,ParamDesc,,"Early Transmit"
+;HKR,NDI\params\EarlyTransmit,flag,1,28,00,00,00
+HKR,NDI\params\EarlyTransmit,default,,"0"
+HKR,NDI\params\EarlyTransmit,type,,enum
+HKR,NDI\params\EarlyTransmit\enum,"0",,"Disable"
+HKR,NDI\params\EarlyTransmit\enum,"1",,"Enable"
+
+; Early Receive parameter
+HKR,NDI\params\EarlyReceive,ParamDesc,,"Early Receive"
+;HKR,NDI\params\EarlyReceive,flag,1,28,00,00,00
+HKR,NDI\params\EarlyReceive,default,,"0"
+HKR,NDI\params\EarlyReceive,type,,enum
+HKR,NDI\params\EarlyReceive\enum,"0",,"Disable"
+HKR,NDI\params\EarlyReceive\enum,"1",,"Enable"
+
+; Full Duplex parameter
+HKR,NDI\params\FullDuplex,ParamDesc,,"FullDuplex"
+;HKR,NDI\params\FullDuplex,flag,1,28,00,00,00
+HKR,NDI\params\FullDuplex,default,,"0"
+HKR,NDI\params\FullDuplex,type,,enum
+HKR,NDI\params\FullDuplex\enum,"0",,"Disable"
+HKR,NDI\params\FullDuplex\enum,"1",,"Enable"
+
+[VT3016.Service]
+DisplayName     = %VT3016.Service.DispName%
+ServiceType     = 1 	; SERVICE_KERNEL_DRIVER
+StartType       = 3 	; SERVICE_DEMAND_START
+ErrorControl    = 1 	; SERVICE_ERROR_NORMAL
+ServiceBinary   = %12%\PCIWNT.SYS
+LoadOrderGroup  = NDIS
+
+
+[VT3016.w98.CopyFiles]
+PCIWNT.SYS,,,2
+
+[VT3016.NT.CopyFiles]
+PCIWNT.SYS,,,2
+
+[VT3016.EventLog]
+AddReg = VT3016.AddEventLog.reg
+
+[VT3016.AddEventLog.reg]
+HKR, , EventMessageFile, 0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,   0x00010001, 7
+
+; Destination Directories
+[DestinationDirs]
+; In Windows2000, driver directory is %winroot%\system32\driver
+; In Windows98, driver directory is %winroot%\system
+VT3016.w98.CopyFiles    	=11
+VT3016.NT.CopyFiles		=12
+
+;[SourceDisksNames]
+;50="PCI Ethernet Adapter Drivers Disk","",0
+
+;[SourceDisksFiles]
+;pciwnt.sys			=50
+
+[Strings]
+; Manufacturer
+Manuf   			= "PCI Ethernet Adapter Manufacturer"
+
+; Provider
+MSFT				="Microsoft"
+
+; Device description
+VT3016.DeviceDesc		="PCI Ethernet Adapter"
+
+; DISPLAY NAME
+VT3016.Service.DispName		="PCI Ethernet Adapter Windows 2000/Windows 98 Driver"
