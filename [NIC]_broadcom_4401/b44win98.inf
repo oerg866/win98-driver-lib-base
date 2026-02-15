@@ -447,14 +447,14 @@ BCM4401.CopyFileW9x = 11
 1=%BCM4401.DiskName%,,
 
 [SourceDisksFiles]
-bcm4sbxp.sys=1
+;bcm4sbxp.sys=1
 bcm4sbe5.sys=1
 
 [BCM4401.CopyFileNT]
 bcm4sbe5.sys,,,1
 
 [BCM4401.CopyFileXP]
-bcm4sbxp.sys,,,1
+;bcm4sbxp.sys,,,1
 
 [BCM4401.CopyFileW9x]
 bcm4sbe5.sys,,,1
