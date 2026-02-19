@@ -1,0 +1,104 @@
+; FASTTX2K.INF
+; Copyright 2002 Promise Technology, Inc.
+
+[Version]
+CatalogFile=Fasttx2k.cat
+signature="$CHICAGO$"
+Class=SCSIAdapter
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%PROMISE%
+DriverVer=06/16/2003,1.00.1.30
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+MoveMiniPort   = 12;
+promiseinf = 17,"other";	INF directory
+PTISETUP=11;
+
+[ControlFlags]
+
+[Manufacturer]
+%Promise%=Promise
+
+[Promise]
+%PCI\VEN_105A&DEV_3376.DeviceDesc% = FasttrakPCI_376 , PCI\VEN_105A&DEV_3376,,PCI\VEN_105A&DEV_3373
+%Promise_Raid_ControllerDesc%=NODRV,SCSI\ProcessorPromise_RAID_CONSOLE__
+
+[NODRV]
+AddReg=NODRV_AddReg
+;
+
+[NODRV.Services]
+;
+; this is blank to just allow the install to succeed
+;
+AddService = , %SPSVCINST_ASSOCSERVICE%   ; null service install
+
+[FasttrakPCI_376]
+CopyFiles=MoveMiniPort,PTISETUP
+AddReg=ios,FasttrakPCI.reg,RegUninstall376
+Reboot
+
+[FasttrakPCI_376.Uninstall]
+DelReg=RegUninstall.del
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+Reboot
+
+[RegUninstall376]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Fasttrak,"DisplayName",,%PCI\VEN_105A&DEV_3376.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Fasttrak,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%Fasttx2k.inf;FasttrakPCI_376.Uninstall;PCI\VEN_105A&DEV_3376"
+
+[RegUninstall.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Fasttrak
+
+[FasttrakPCI.PosDup]
+*BUS0042
+
+[*BUS0042.Det]
+AddReg=ForceMPCopy
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[FasttrakPCI.reg]
+HKR,,PortDriver,,Fasttx2k.mpd
+
+[ForceMPCopy]
+HKR,,NoSetupUI,,1
+
+[MoveMiniPort]
+Fasttx2k.mpd
+Fttkvsd.VXD
+pu66vsd.VXD
+
+[PTISETUP]
+PTISTP.dll,,,0x10000
+
+[promiseinf]
+%Promise%Fasttx2k.inf,,,
+
+[SourceDisksFiles]
+Fasttx2k.mpd = 1
+pu66vsd.VXD = 1
+PTISTP.dll = 1
+Fttkvsd.VXD = 1
+
+[SourceDisksNames]
+1 = %DISKNAME1%,,,,
+2 = %DISKNAME2%,,,,
+
+[NODRV_AddReg]
+
+[strings]
+Promise="Promise Technology"
+PCI\VEN_105A&DEV_3376.DeviceDesc="Win98-ME Promise FastTrak 376/378 (tm) Controller"
+
+REG_EXPAND_SZ=0x00020000
+REG_DWORD=0x00010001
+IOLOGMSGDLL="\IoLogMsg.dll"
+DISKNAME1="Promise FastTrak 376/378 Driver Diskette"
+DISKNAME2="Windows system"
+
+Promise_Raid_ControllerDesc= "Win98-ME Promise Raid Console SCSI Processor Device" 
+SPSVCINST_ASSOCSERVICE = 0x00000002

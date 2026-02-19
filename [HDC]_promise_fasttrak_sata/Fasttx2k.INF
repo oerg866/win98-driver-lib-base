@@ -1,0 +1,108 @@
+; FASTTX2K.INF
+; Copyright 2002 Promise Technology, Inc.
+
+[Version]
+CatalogFile=Fasttx2k.cat
+signature="$CHICAGO$"
+Class=SCSIAdapter
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%PROMISE%
+DriverVer=08/06/2003, 1.00.0.37
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+MoveMiniPort   = 12;
+promiseinf = 17,"other";	INF directory
+PTISETUP=11;
+
+[ControlFlags]
+
+[Manufacturer]
+%Promise%=Promise
+
+[Promise]
+%PCI\VEN_105A&DEV_6629.DeviceDesc% = FasttrakPCI_TX4000, PCI\VEN_105A&DEV_6629
+%PCI\VEN_105A&DEV_3371.DeviceDesc% = FasttrakPCI_TX4000, PCI\VEN_105A&DEV_3371
+%PCI\VEN_105A&DEV_3319.DeviceDesc% = FasttrakPCI_TX4000, PCI\VEN_105A&DEV_3319
+%Promise_Raid_ControllerDesc%=NODRV,SCSI\ProcessorPromise_RAID_Console____
+
+[NODRV]
+AddReg=NODRV_AddReg
+;
+
+[NODRV.Services]
+;
+; this is blank to just allow the install to succeed
+;
+AddService = , %SPSVCINST_ASSOCSERVICE%   ; null service install
+
+[FasttrakPCI_TX4000]
+CopyFiles=MoveMiniPort,PTISETUP
+AddReg=ios,FasttrakPCI.reg,RegUninstallTX4000
+Reboot
+
+[FasttrakPCI_TX4000.Uninstall]
+DelReg=RegUninstall.del
+DelFiles=promiseinf,MoveMiniPort,PTISETUP
+Reboot
+
+[RegUninstallTX4000]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Fasttrak,"DisplayName",,%PCI\VEN_105A&DEV_6629.DeviceDesc%
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Fasttrak,"UninstallString",,"RunDll32 ptistp.dll,LaunchINFSection %17%\other\%Promise%Fasttx2k.inf;FasttrakPCI_TX4000.Uninstall;PCI\VEN_105A&DEV_6629"
+
+[RegUninstall.del]
+HKLM, SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Fasttrak
+
+[FasttrakPCI.PosDup]
+*BUS0042
+
+[*BUS0042.Det]
+AddReg=ForceMPCopy
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+[FasttrakPCI.reg]
+HKR,,PortDriver,,Fasttx2k.mpd
+
+[ForceMPCopy]
+HKR,,NoSetupUI,,1
+
+[MoveMiniPort]
+Fasttx2k.mpd
+Fttkvsd.VXD
+pu66vsd.VXD
+
+[PTISETUP]
+PTISTP.dll,,,0x10000
+
+[promiseinf]
+%Promise%Fasttx2k.inf,,,
+
+[SourceDisksFiles]
+Fasttx2k.mpd = 1
+pu66vsd.VXD = 1
+PTISTP.dll = 1
+Fttkvsd.VXD = 1
+
+[SourceDisksNames]
+1 = %DISKNAME1%,,,,
+2 = %DISKNAME2%,,,,
+
+[NODRV_AddReg]
+
+[strings]
+Promise="Promise Technology"
+PCI\VEN_105A&DEV_6629.DeviceDesc="Win98-ME Promise FastTrak TX4000 (tm) Controller"
+PCI\VEN_105A&DEV_3371.DeviceDesc="Win98-ME Promise FastTrak S150 TX2plus (tm) Controller"
+PCI\VEN_105A&DEV_3319.DeviceDesc="Win98-ME Promise FastTrak S150 TX4 (tm) Controller"
+
+REG_EXPAND_SZ=0x00020000
+REG_DWORD=0x00010001
+IOLOGMSGDLL="\IoLogMsg.dll"
+DISKNAME1="Promise FastTrak TX4000/S150 TX Series Driver Diskette"
+DISKNAME2="Windows system"
+
+Promise_Raid_ControllerDesc= "Win98-ME Promise RAID Console SCSI Processor Device" 
+SPSVCINST_ASSOCSERVICE = 0x00000002
