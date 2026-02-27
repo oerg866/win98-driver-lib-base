@@ -1,10 +1,10 @@
-(C)Copyright 2002-2005 Marvell(R).
-All rights reserved.
+(C)Copyright 2002-2004 Marvell(R).
+All rights reserved
 ===========================================================================
 
-yukonw9x.txt created 10-Mar-2005
+yukonw9x.txt created 16-Jun-2004
 
-Readme File for YUKONW9X.sys v7.42.1.3
+Readme File for YUKONW9X.sys v7.14.1.3
 Marvell Yukon Ethernet Controller
 
 NDIS5 Miniport Driver for Windows ME and 98SE
@@ -16,6 +16,7 @@ This file contains
     3.1  Installing the driver
     3.2  Updating the driver
  4  Parameters
+ 5  Troubleshooting
 
 ===========================================================================
 
@@ -23,9 +24,15 @@ This file contains
 1  Overview
 ===========
 
-YUKONW9X.sys is the NDIS5 32-bit Miniport driver.
+YUKONW9X.sys is the NDIS5 32-bit Miniport driver for the
+Marvell Yukon Ethernet Controller.
 
+This driver supports only Windows ME and 98SE.
+This README file explains how to install the Miniport driver on a machine
+running Windows ME and 98SE.
 
+This YUKONW9X NDIS5 Miniport driver cannot be used with other 
+Windows versions than Windows ME and 98SE.
 ***
 
 
@@ -33,9 +40,10 @@ YUKONW9X.sys is the NDIS5 32-bit Miniport driver.
 =================
 
 To install the driver, the following files are required:
-YUKONW9X.sys NDIS5 Miniport driver 
-YUKONW9X.inf installation setup script
+YUKONW9X.sys Marvell Yukon Ethernet Controller NDIS5 Miniport driver 
+yukonw9x.inf installation setup script
 ***
+
 
 3  Installation
 ===============
@@ -48,44 +56,48 @@ Follow these instructions to install the adapter in your computer.
 
 
 
-NOTE: Do *not* try to install a driver for a adapter using the    CONTROL 
-PANEL / NETWORK / CONFIGURATION / ADD / ADAPTER utility of    the operating 
-system. The operating system will always detect new hardware    during the 
-boot process. You will be asked for a respective driver    diskette if the 
-system does not find the respective installation    .INF file in its system 
-directories. 
+NOTE: Do *not* try to install a driver for a PCI adapter using the    
+CONTROL PANEL / NETWORK / CONFIGURATION / ADD / ADAPTER utility of    
+Windows ME and 98SE. Windows ME and 98SE will always detect new PCI hardware 
+  during the boot process. You will be asked for a respective driver    
+diskette if the system does not find the respective installation    .INF 
+file in its system directories. 
 
-If you install the operating system with an already inserted adapter, then 
-the operating system may identify the adapter as an "Unknown Device". 
+If you install Windows ME and 98SE with an already inserted Marvell Yukon 
+Ethernet Controller, then Windows ME and 98SE may identify the adapter as an 
+"Unknown Device". 
 
 In this case, remove this "Unknown Device" after you have completed the
-installation of the operating system:
+installation of Windows ME and 98SE:
 
 1. Click CONTROL PANEL / SYSTEM / DEVICE MANAGER.
 2. In the "Device Manager" window click VIEW DEVICES BY TYPE.
 3. Examine the list of devices under "Computer". 
    The "Unknown Device" is listed under "Other Devices". 
 4. Click OTHER DEVICES.
-   The "Ethernet Controller" is displayed. 
-5. Click "Ethernet Controller".
+   The "PCI Ethernet Controller" is displayed. 
+5. Click PCI ETHERNET CONTROLLER.
 6. Click REMOVE.
-7. Reboot the operating system.
+7. Reboot Windows ME and 98SE.
 8. Follow the installation instructions below.
 
-Due to the plug & play facility, the operating system is able to find, 
-identify, and configure an adapter automatically. 
+With PCI adapters, due to the plug & play facility of PCI, the Windows ME 
+and 98SE system is able to find, identify, and configure an adapter 
+automatically. 
 
 To install the driver, proceed as follows:
-1. Install the adapter in your computer. 
-2. Start the machine.
-The operating system will detect the adapter during boot operation. 
-3. Follow the instructions given by the operating system to install the 
+1. Install the Marvell Yukon Ethernet Controller in your computer. 
+2. Start Windows ME and 98SE.
+Windows ME and 98SE will detect the Marvell Yukon Ethernet Controller during 
+boot operation. 
+3. Follow the instructions given by Windows ME and 98SE to install the 
 driver. 
-4. If the operating system asks for a path, enter the path to the required 
+4. If Windows ME and 98SE asks for a path, enter the path to the required 
 files   depending on the type of medium (e.g. CD-ROM, floppy diskette, 
 network   drive, etc.) containing the YUKONW9X driver files.  5. To 
-configure any driver options for your adapter, follow   the instructions in 
-the section "Driver Options" in this readme file. 
+configure any driver options for your Marvell Yukon Ethernet Controller, 
+follow   the instructions in the section "Driver Options" in this readme 
+file. 
 ***
 
 
@@ -94,11 +106,12 @@ the section "Driver Options" in this readme file.
 
 
 
-To update an already installed driver for your adapter, proceed as follows: 
+To update an already installed driver for your Marvell Yukon Ethernet 
+Controller, proceed as follows: 
 
 1.  Click CONTROL PANEL / SYSTEM.
-2. Click DEVICE MANAGER / NETWORK ADAPTERS / ADAPTERNAME /   PROPERTIES / 
-DRIVER. 
+2. Click DEVICE MANAGER / NETWORK ADAPTERS / Marvell Yukon Ethernet 
+Controller /   PROPERTIES / DRIVER. 
 3.  Click UPDATE DRIVER.
 4.  When prompted "Do you want Windows to search for the driver", select 
     the check box "No, select driver from list".
@@ -107,9 +120,9 @@ DRIVER.
     (e.g.CD-ROM, floppy diskette, network drive, etc.) containing the 
     YUKONW9X driver files. 
 7.  Click OK.
-8. Select the adapter. 
+8. Select the Marvell Yukon Ethernet Controller. 
 9.  Click OK.
-10. After the operating system has copied the driver files, reboot the 
+10. After Windows ME and 98SE has copied the driver files, reboot the 
 computer. 
 
 Please note that the latest version of the YUKONW9X driver is
@@ -119,12 +132,21 @@ available for download from our web site.
 4  Parameters
 =============
 
+
 The YUKONW9X.sys driver allows you to modify several options in order to 
-optimize the operation of your adapter. 
+optimize the operation of your Marvell Yukon Ethernet Controller. 
+
+2.  Select "Properties". 
+3.  Click "Configure".
+4.  Click "Advanced".
+5.  In the "Property" box, select the option that you want to change.
+6.  Enter the desired value in the "Value" box.
+7.  When finished, click OK .
+ Windows ME and 98SE will reload the driver with the changed settings. 
 
 1.  Start NETWORK from the CONTROL PANEL.
 2.  Select CONFIGURATION.
-3. Select the adapter. 
+3. Select the Marvell Yukon Ethernet Controller. 
 4.  Click PROPERTIES.
 5.  Click ADVANCED.
 6.  In the "Property" box, select the option that you want to change.
@@ -139,12 +161,14 @@ The parameters supported by the driver are described below.
 
 
 Network Address
-------------------------
+---------------
+
+Registry Name:	"NetworkAddress"
 Default value:  burned-in adapter address
-Valid range:    02-00-00-00-00-01 to FE-FF-FF-FF-FF-FF (hexadecimal), 
-                where at least the "multicast" bit(Bit 0) must not be set 
+Valid range:    0y-00-00-00-00-01 to FE-FF-FF-FF-FF-FF (hexadecimal), 
+                where at least the "multicast" bit must not be set 
                 (it indicates that the address field contains an 
-                individual address)and the "locally administered" bit (Bit 1) 
+                individual address)and the "locally administered" bit 
                 is set (the address has been assigned by a local
                 administrator). These two bits are first and second 
                 bits transmitted on the LAN medium.
@@ -157,71 +181,67 @@ CAUTION: Each individual network MAC address can only be used once in a
 To use a network MAC address other than the one burned into the adapter,
 enter the network address in the following hexadecimal format:
 
-	e.g.: 02-00-5A-98-12-34
+    XX-XX-XX-XX-XX-XX (e.g. 02-00-5A-98-12-34).
 
 If the network address field blank is left blank (or a different number of
 digits is specified), the network address burned into the adapter will 
 be used.
 
 
-Jumbo Frame
-------------------------
-Default value: "Disabled"
-Valid values:   
-	-"Disabled"
-	-"Bytes4088"
-	-"Bytes9014"
+Maximum Frame Size
+------------------
 
-This parameter specifies the frame size that the driver will support. 
-The performance of your network usually increases If "Jumbo" frames are 
-used. Do not enable this option if you are not sure that your network 
-supports jumbo frames.
+Registry Name:	"MaxFrameSize"
+Default value:  1514 (decimal)
+Valid range:    12..9014 (decimal)
 
-Note: For Fast Ethernet adapters the valid range is limited to 1514.
+This parameter specifies the maximum frame size in bytes that the driver
+will support. The performance of your network usually increases when
+a large packet size is used. Do not use values larger than 1514 if you
+are not sure if your network supports jumbo frames.
+
+
 
 
 
 Wake Up Capabilities
-------------------------
-Default value: "Magic Packet and Pattern Magic"
-Valid values:
-	-"None"
-		wake on LAN capabilities are disabled
-	-"Magic Packet"
-		wake up with MagicPacket from ShutDown state,
-		OS Controlled from Hibernate or Standby state
-	-"Pattern Match"
-		wake up with a packet containing a special pattern
-		from ShutDown state, OS Controlled from Hibernate 
-		or Standby state
-	-"Magic Packet and Pattern Match"
-		wake up with both from ShutDown state, OS Controlled
-		from Hibernate or Standby state
-	-"Link Change"
-		wake up with link change from ShutDown state,
-		OS Controlled from Hibernate or Standby state
+--------------------
 
-                        
-Wake From Shutdown
-------------------------
-Default value: "Off"
-Valid values:
-	-"Off"
-		disable the capabilities of the NIC to wake the computer 
-		from shutdown.
-	-"On"
-		enable the NIC to be capable to wake the computer from shutdown.
+Registry Name:	"WakeUpModeCap_<n>"	<n> = port designator (A or B)
+Default value:  27 (Magic Packet and Pattern Magic)
+Valid values:   0  = "None"
+		15 = "OS Controlled"
+                25 = "Magic Packet"
+                26 = "Pattern Match"
+		27 = "Magic Packet and Pattern Match"
+                28 = "Link Change"
+
+- "None"                wake on LAN capabilities are disabled
+- "OS Controlled"	wake up with the default settings 
+		 	provided through the OS from Hibernate or Standby
+                        state
+- "Magic Packet" 	wake up with MagicPacket from ShutDown state,
+		 	OS Controlled from Hibernate or Standby state
+- "Pattern Match"	wake up with a packet containing a special pattern
+		  	from ShutDown state, OS Controlled from Hibernate 
+		  	or Standby state
+- "Magic Packet
+   and Pattern Match"	wake up with both from ShutDown state, OS Controlled
+		        from Hibernate or Standby state
+- "Link Change"		wake up with link change from ShutDown state,
+			OS Controlled from Hibernate or Standby state
+
+This parameter is only available for V2.0 copper versions of the Marvell 
+Yukon Ethernet Controller. 
+
 
 
 Number of Receive Buffers
-------------------------
-For Yukon family based ethernet controllers the following values are used:
-Default value:  50 (decimal)
-Valid range:    3..500 (decimal)
+-------------------------
 
-For Yukon2 family based ethernet controllers the following values are used:
+Registry Name:	"MaxReceives"
 Default value:  256 (decimal)
-Valid range:    128..512 (decimal)
+Valid range:    256..512 (decimal)
 
 This parameters defines the number of receive buffers allocated by the
 driver. If the system does not have enough resources the driver will fail 
@@ -229,26 +249,23 @@ to load. Increasing this value may improve performance.
 
 
 Number of Transmit Buffers
-------------------------
-For Yukon family based ethernet controllers the following values are used:
-Default value:  50 (decimal)
-Valid range:    4..200 (decimal)
+--------------------------
 
-For Yukon2 family based ethernet controllers the following values are used:
+Registry Name:	"MaxTransmits"
 Default value:  256 (decimal)
-Valid range:    128..512 (decimal)
+Valid range:    256..512 (decimal)
 
 This parameters defines the number of transmit buffers allocated by the
 driver. If the system does not have enough resources the driver will 
 fail to load. Increasing this value may improve performance.
 
-
 Interrupt Moderation
-------------------------
-Default value: "On"
-Valid values:
-	-"On"
-	-"Off"
+--------------------
+
+Registry Name:	"Moderate"
+Default value:  1 (On)
+Valid values:   1 = "On"
+                0 = "Off"
 
 If more than the specified rate of interrupts occur, the function 
 Interrupt Moderation groups these interrupts so that several data packets 
@@ -257,7 +274,9 @@ but may increase the latency.
 
 
 Max IRQ per Sec
-------------------------
+---------------
+
+Registry Name:	"FixedIntMod"
 Default value:  5000 (decimal)
 Valid range:    1000..30000 (decimal)
 
@@ -265,100 +284,44 @@ This parameter specifies the interrupt rate for Interrupt Moderation. If
 Interrupt Moderation is set to "Off" it will be ignored.
 
 
-Speed & Duplex
-------------------------
-Default value: "Auto-Sense"
-Valid range:
-	-"Auto-Sense"
-	-"10Mbps Half Duplex"
-	-"10Mbps Full Duplex"
-	-"100Mbps Half Duplex"
-	-"100Mbps Full Duplex"
+Connection Type
+---------------
+
+Registry Name:	"ConnectionType_<n>"  <n> = port designator (A or B)
+Default value:  0 = "Auto-Sense"
+Valid range:    0 = "Auto-Sense"
+                11 = "10Mbps Half Duplex"
+                12 = "10Mbps Full Duplex"
+		13 = "100Mbps Half Duplex"
+		14 = "100Mbps Full Duplex"
+
 
 This parameter contain information regarding autonegotiation, 
-duplex capabilities and link speed. Only if the setting is "Auto" the 
-Autonegotiation is set to "On", in every other settings it is turned "Off".
+duplex capabilities and link speed. The link between Connection type and 
+these parameters above mentionated is presented below.
 
-NOTE: This parameter is not valid for fiber adapter.
-
-
-Preferred Port
-------------------------
-Default value: "A"
-Valid range:
-	-"A"
-	-"B"
-
-NOTE: This parameter is only available for dual link adapters.
-
-Use this parameter to set the preferred port the RLMT (Redundant
-Link Management Technology) will use for all network traffic, if more than
-one port has an active link to the network.
-
-
-RLMT Mode
-------------------------
-Default value: "CLS"
-Valid range:
-	-"CLS" (Check Link State): 
-		RLMT uses the link state reported by the
- 		adapter hardware for each individual port to determine whether a 
- 		port can be used for all network traffic or not.
-
-	-"CLP" (Check Local Port):
-		In this mode, RLMT monitors the network path
- 		between the two ports of an adapter by regularly exchanging packets 
-		between them. This mode requires a network configuration in which 
-		the two ports "see" each other (i.e. there must not be any router 
-		between the ports).
-
-	-"CLPSS" (Check Local Ports and Segmentation Status):
-		This mode supports 
-		the same functions as the CLP mode and additionally checks network 
-		segmentation by sending BPDU hello packets. Thus, this mode is only 
-		to be used if Gigabit Ethernet switches are installed on the network
-		that have been configured to use the Spanning Tree protocol.
-
-NOTE: RLMT modes "CLP" and "CLPSS" are designed to operate in 
-      configurations where a network path between the ports on one adapter
-      exists. Moreover, they are not designed to work where adapters are
-      connected back-to-back.
-      This parameter is only available for dual link adapters.
+Connection 	Autoneg.	Duplex			Link Speed
+Type				Capabilities	
+---------------------------------------------------------------------------
+AutoSense		On	Half and Full Fuplex	Auto
+10Mbps Half Duplex	Off	Half Duplex		  10
+10Mbps Full Duplex	Off	Full Fuplex		  10
+100Mbps Half Duplex	Off	Half Duplex		 100
+100Mbps Full Duplex	Off	Full Fuplex		 100
 
 
 
 
-FlowControl
-------------------------
-Default value: "On"
-Valid range:
-	-"Off":
-		No link partner is allowed to send PAUSE frames.
 
-	-"On":
-		Both link partners are allowed to send PAUSE frames.
-		
-This parameter can be used to set the flow control capabilities the port 
-reports during auto-negotiation. This parameter can be set for each port 
-individually, which is helpful if the port at the other end of the cable 
-cannot handle all possible combinations. Using the default setting, the 
-adapter should automatically detect the capabilities of the peer port. 
+5  Troubleshooting
+==================
 
-   
-TCP Segmentation
-------------------------
-Default value: "On"
-Valid range:
-	-"On":
-		The big packets are segmented on the NIC before to be sent to the 
- 		network. Using this method the processor will be not loaded to do 
-		this job.
+If you should encounter any problems with your Marvell Yukon Ethernet 
+Controller, please re-read the instructions above and the documentation 
+supplied with the operating system. 
+If you do not find a solution, please send us a description of the
+problem.
 
-	-"Off":
-		The packets are not segmented by the NIC.
-
-NOTE: 	This parameter is only available starting with the NICs based on 
-		Yukon2 chip.
 
 *** End of Readme File ***
 
