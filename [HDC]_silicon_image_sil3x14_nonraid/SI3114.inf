@@ -1,0 +1,202 @@
+; This INF file installs the Silicon Image Serial ATA non-Raid driver
+; for the SiI 3114 controller on systems running Windows 98/ME,
+; Windows NT 4.0, Windows 2000/XP, Windows Server 2003,
+; and Windows Vista.
+;
+; Copyright (C) 2003-2006 by Silicon Image, Inc.
+; All rights reserved
+
+[Version]
+Signature="$Chicago$"
+Class=SCSIAdapter
+ClassGuid={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%SI%
+CatalogFile=SI3114.cat
+DriverVer=11/10/2006, 1.3.10.0
+
+
+[SourceDisksNames]
+1="Silicon Image SiI 3114 SATALink Driver Installation Disk",SI3114.sys,,
+
+[SourceDisksFiles]
+SI3114.sys	= 1
+SiiSupp.vxd	= 1
+SilSupp.cpl	= 1
+SiWinAcc.sys	= 1
+
+[DestinationDirs]
+DefaultDestDir	= 12
+DllFiles		= 11
+
+[DriverFiles_9X]
+SI3114.mpd,SI3114.sys,,0x20
+SiiSupp.vxd,,,0x20
+
+[DriverFiles_NT_2K]
+SI3114.sys,,,0x20
+
+[DriverFiles_XP]
+SI3114.sys,,,0x20
+SiWinAcc.sys,,,0x20
+
+[DllFiles]
+SilSupp.cpl,,,0x20
+
+[Manufacturer]
+%SI%=SI_HDC,NTx86.5.1
+
+[SI_HDC]
+%PCI\VEN_1095&DEV_3114.DeviceDesc%=SI_3114, PCI\VEN_1095&DEV_3114&CC_0106
+%PCI\VEN_1095&DEV_3114.DeviceDesc%=SI_3114, PCI\VEN_1095&DEV_3114&CC_0180s
+
+[SI_HDC.NTx86.5.1]
+%PCI\VEN_1095&DEV_3114.DeviceDesc%=SI_3114_XP, PCI\VEN_1095&DEV_3114&SUBSYS_31141095
+%PCI\VEN_1095&DEV_3114.DeviceDesc%=SI_3114_XP, PCI\VEN_1095&DEV_3114&SUBSYS_B0021458
+%PCI\VEN_1095&DEV_3114.DeviceDesc%=SI_3114_XP, PCI\VEN_1095&DEV_3114&SUBSYS_003915D4
+%PCI\VEN_1095&DEV_3114.DeviceDesc%=SI_3114_XP, PCI\VEN_1095&DEV_3114&SUBSYS_31148086
+
+
+;; Win9x install section
+;;
+[SI_3114]
+Copyfiles=DriverFiles_9X, DllFiles
+AddReg = ios, win98.reg, Win98ProblemDeviceList, Win98SupportedSubSystemIds
+
+
+;; Windows NT4.0 and Windows 2000 install sections
+;;
+[SI_3114.NTX86]
+Copyfiles=DriverFiles_NT_2K, DllFiles
+
+[SI_3114.NTX86.Services]
+AddService=SI3114,0x00000002,SI_3114_Service_Install, Miniport_EventLog_Inst
+
+[SI_3114.NTX86.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3114_CoInstall_AddReg
+
+
+
+;; Windows XP install sections
+;;
+[SI_3114_XP]
+Copyfiles=DriverFiles_XP, DllFiles
+
+[SI_3114_XP.Services]
+AddService=SI3114,0x00000002,SI_3114_Service_Install, Miniport_EventLog_Inst
+AddService=SiFilter,0,FilterService_Install
+
+[SI_3114_XP.CoInstallers]
+Copyfiles=DllFiles
+AddReg = SI_3114_CoInstall_AddReg
+
+
+
+[SI_3114_CoInstall_AddReg]
+HKR,,CoInstallers32,0x00010000,"SilSupp.cpl, CoInstHandler"
+
+[SI_3114_Service_Install]
+DisplayName=%SI3114.SvcDesc%
+ServiceType=1
+StartType=0
+ErrorControl=1
+ServiceBinary=%12%\SI3114.sys
+LoadOrderGroup=Scsi miniport
+DelReg=NT4WorkAround_DelReg
+AddReg=PnPSupport_AddReg
+AddReg=PortConfigure_AddReg
+AddReg=ProblemDeviceList_AddReg
+AddReg=SupportedSubSystemIds_AddReg
+
+
+[FilterService_Install]
+DisplayName=SATALink driver accelerator
+ServiceType=1
+StartType=0
+ErrorControl=0
+ServiceBinary=%12%\SiWinAcc.sys
+LoadOrderGroup=Filter
+
+
+; Mark device as supporting Plug & Play on the PCI(5) bus.
+[PnPSupport_AddReg]
+HKR,Parameters\PnPInterface,5,0x00010001,1
+
+
+[PortConfigure_AddReg]
+HKR,Parameters\Device,NumberOfRequests,0x00010001, 64
+HKR,Parameters\Device,MaximumSGList,0x00010001, 33
+HKR, Parameters\Device, CreateInitiatorLU, 0x00010001, 1
+
+
+; List of devices with known configuration issues.
+[ProblemDeviceList_AddReg]
+HKR,ProblemDevices
+HKR,ProblemDevices, %ProblemDev1Name%, 0, %ProblemDev1Value%
+
+
+; Remove dummy registry value that may have been created during text mode
+; setup of Windows NT4.0.  This value is created to work around the inability
+; text mode setup to create multiple subkeys at a time.
+[NT4WorkAround_DelReg]
+HKR, Parameters, NT40WorkAround
+
+
+; List of controller subsystem IDs to be supported by the SI3114.sys driver on
+; NT/Win2K/XP systems.
+[SupportedSubSystemIds_AddReg]
+HKR,SupportedSubsystemIDs,%PCI\VEN_1095&DEV_3114.DeviceDesc%,0x00010001, 0x31141095
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3114.DeviceDesc% (Gigabyte)",0x00010001, 0xB0021458
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3114.DeviceDesc% (Iwill)",0x00010001, 0x003915D4
+HKR,SupportedSubsystemIDs,"%PCI\VEN_1095&DEV_3114.DeviceDesc% (Intel)",0x00010001, 0x31148086
+
+
+[Win98ProblemDeviceList]
+HKLM,%Win98ProblemDeviceSubKey%
+HKLM,%Win98ProblemDeviceSubKey%, %ProblemDev1Name%, 0, %ProblemDev1Value%
+
+
+; List of controller subsystem IDs to be supported by the SI3114.mpd driver on
+; Windows 98/ME systems.
+; NOTE: Because of a bug in the INF file handling on Win98, hex dword values that use letters A - F must be
+;          specified as bytes, least significant byte first.
+[Win98SupportedSubSystemIds]
+HKLM, %Win98SupportedControllersSubKey%,%PCI\VEN_1095&DEV_3114.DeviceDesc%,0x00010001, 0x31141095
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3114.DeviceDesc% (Gigabyte)",0x00010001, 0x58, 0x14, 0x02, 0xB0
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3114.DeviceDesc% (Iwill)",0x00010001, 0xD4, 0x15, 0x39, 0x00
+HKLM, %Win98SupportedControllersSubKey%,"%PCI\VEN_1095&DEV_3114.DeviceDesc% (Intel)",0x00010001, 0x31148086
+
+
+
+;*************************************************************
+;The NT EventLog entries are the same for all SCSI miniports.
+[Miniport_EventLog_Inst]
+AddReg = Miniport_EventLog_AddReg
+
+[Miniport_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,0x00010001,7
+
+
+[IOS]
+HKR,,DevLoader,,*IOS
+HKR,,DontLoadIfConflict,,"Y"
+
+
+[WIN98.REG]
+HKR,,PortDriver,,SI3114.mpd
+
+
+[Strings]
+SI="Silicon Image"
+
+PCI\VEN_1095&DEV_3114.DeviceDesc="Silicon Image SiI 3114 SATALink Controller"
+SI3114.SvcDesc="SiI-3114 SATALink Controller"
+
+
+Win98ProblemDeviceSubKey = "System\CurrentControlSet\Services\SI3114\ProblemDevices"
+Win98SupportedControllersSubKey = "System\CurrentControlSet\Services\SI3114\SupportedSubsystemIDs"
+
+
+ProblemDev1Name="Maxtor 4D060H3                          DAK05GK0"
+ProblemDev1Value="MaxMode = UDMA-5"

@@ -1,0 +1,61 @@
+; This file installs the SiI 3114 non-RAID serial ATA driver as part
+; of text mode setup on Windows NT, Windows 2000, Windows XP,
+; Windows Server 2003, and Windows Vista.
+;
+; Copyright (C) 2003-2006 by Silicon Image, Inc.
+; All rights reserved
+
+
+[Disks]
+disk1 = "Silicon Image SiI 3114 SATALink Driver Installation Disk",\si3114.sys,\
+
+
+[Defaults]
+SCSI = Si3114_XP
+
+
+[SCSI]                  ; HwComponent section
+Si3114_XP = "Silicon Image SiI 3114 SATALink Controller for Windows XP/Server 2003"
+Si3114_NT = "Silicon Image SiI 3114 SATALink Controller for Windows NT 4.0 and 2000"
+
+
+[Files.SCSI.Si3114_XP]
+driver = disk1,si3114.sys, Si3114
+driver = disk1,SiWinAcc.sys, SiFilter
+inf = disk1,SI3114.inf
+dll = disk1,SilSupp.cpl
+catalog = disk1, Si3114.cat
+
+
+[Files.SCSI.Si3114_NT]
+driver = disk1,si3114.sys, Si3114
+inf = disk1,SI3114.inf
+dll = disk1,SilSupp.cpl
+catalog = disk1, Si3114.cat
+
+
+[HardwareIds.SCSI.Si3114_XP]
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_31141095", "Si3114"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_B0021458", "Si3114"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_003915D4", "Si3114"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_31148086", "Si3114"
+
+
+[HardwareIds.SCSI.Si3114_NT]
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_31141095", "Si3114"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_B0021458", "Si3114"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_003915D4", "Si3114"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_31148086", "Si3114"
+
+
+; NOTE:	In order to install Windows 2000 onto a drive that is attached
+;	to this controller you must delete the line that reads:
+;
+;	value = Parameters\PnpInterface, "5", REG_DWORD, 1
+;
+;	from the [Config.Si3114] section below.
+
+[Config.Si3114]
+value = Parameters\PnpInterface, "5", REG_DWORD, 1
+value = ProblemDevices, "", REG_SZ, ""
+value = ProblemDevices, "Maxtor 4D060H3                          DAK05GK0", REG_SZ, "MaxMode = UDMA-5"

@@ -1,0 +1,89 @@
+; This file installs the SiI 3114 serial ATA RAID driver as part of
+; text mode setup on Windows NT, Windows 2000, and Windows XP.
+;
+; Copyright (C) 2003-2005 by Silicon Image, Inc.
+; All rights reserved
+
+
+[Disks]
+disk1 = "Silicon Image SiI 3114 SATARaid Driver Installation Disk",\Si3114r.sys,\
+
+
+[Defaults]
+SCSI = Si3114r_XP
+
+
+[SCSI]                  ; HwComponent section
+Si3114r_XP = "Silicon Image SiI 3114 SATARaid Controller for Windows XP/Server 2003"
+Si3114r_NT = "Silicon Image SiI 3114 SATARaid Controller for Windows NT 4.0 and 2000"
+
+
+[Files.SCSI.Si3114r_XP]
+driver = disk1,si3114r.sys, Si3114r
+driver = disk1,SiWinAcc.sys, SiFilter
+inf = disk1,SI3114r.inf
+dll = disk1,SilSupp.cpl
+catalog = disk1, Si3114r.cat
+
+
+[Files.SCSI.Si3114r_NT]
+driver = disk1,si3114r.sys, Si3114r
+inf = disk1,SI3114r.inf
+dll = disk1,SilSupp.cpl
+catalog = disk1, Si3114r.cat
+                                                           
+
+[HardwareIds.SCSI.Si3114r_XP]
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_61141095", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_288510F1", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_047AA0A0", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_0478A0A0", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_0479A0A0", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_90181695", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_F642270F", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_100415BD", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_12501462", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_13101462", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_15601462", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_16101462", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_B0031458", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_1B711019", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_61141071", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_003515D4", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_1025147B", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_1001147B", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_130A147B", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_1C0A147B", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_81361043", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_2A1E103C", "Si3114r"
+
+
+[HardwareIds.SCSI.Si3114r_NT]
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_61141095", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_288510F1", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_047AA0A0", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_0478A0A0", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_0479A0A0", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_90181695", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_F642270F", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_100415BD", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_12501462", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_13101462", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_15601462", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_16101462", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_B0031458", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_1B711019", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_61141071", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_003515D4", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_1025147B", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_1001147B", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_130A147B", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_1C0A147B", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_81361043", "Si3114r"
+id = "PCI\VEN_1095&DEV_3114&SUBSYS_2A1E103C", "Si3114r"
+
+[Config.Si3114r]
+;value = Parameters, NT40WorkAround, REG_DWORD, 1
+value = Parameters\PnpInterface, "5", REG_DWORD, 1
+value = ProblemDevices, "", REG_SZ, ""
+value = ProblemDevices, "Maxtor 4D060H3                          DAK05GK0", REG_SZ, "MaxMode = UDMA-5"
