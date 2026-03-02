@@ -9,7 +9,7 @@
                                        for
                                   DOS/OS2 NDIS2
 
-                   Copyright (c) 2002-2011 Broadcom Corporation
+                   Copyright (c) 2002-2013 Broadcom Corporation
 		               All rights reserved.
 
 

@@ -1,0 +1,762 @@
+
+
+                           ============================
+                            R E A D M E    N O T E S
+                           ============================
+
+
+	                   Broadcom  NetXtreme II Gigabit
+                                  Ethernet Driver
+                                       for
+                                   DOS/OS2 NDIS2
+
+                    Copyright (c) 2002-2009 Broadcom Corporation
+		                All rights reserved.
+
+
+
+Revision History
+================
+
+Version 5.0.0 April 20, 2009
+----------------------------
+
+   Enhancements:
+   =============
+   1. Ajust version number to reflect software release.
+   2. Updated Copyright banner to reflect year of 2009.
+
+Version 4.6.2 December 2, 2008
+------------------------------
+
+    Enhancement:
+    ============
+    
+    1. Added support for BCM5716S.
+
+   Notes:
+   ======
+
+   1. Built with Lower Module of MBA v4.6.9
+
+Version 4.6.1 October 10, 2008
+------------------------------
+
+    1. Problem:
+               CQ #37438 - Driver does not preserve registers on entry/exit.
+
+      Cause:
+               Driver did not preserve all used registers during initialization
+               call from Protocol to bind.
+
+      Change:
+               Driver preserved all used registers.
+
+      Impact:
+               None.
+
+   Notes:
+   ======
+
+   1. Built with Lower Module of MBA v4.6.7
+
+version 4.6.0 September 03, 2008
+--------------------------------
+
+    Enhancement:
+    ============
+    
+    1. Added support for BCM5716.
+
+version 4.4.4 May 09, 2008
+--------------------------
+
+   1. Problem:
+               CQ #35231 DOS drivers display incorrect line speed when
+               forced on BCM5709SC0 while remote phy is enabled.
+      Cause:
+               Driver reported the line speed when its detected link
+               is up. During which time, the line speed might not be
+               correct when it is forced while remote phy is enabled.
+      Change:
+               Driver polls up to 10s until line speed and duplex are
+               matched with user requested values.
+
+      Impact:
+               Driver might takes longer to load when cable is not present
+               and/or loading on multiple NICs system.
+
+version 4.4.3 April 24, 2008
+----------------------------
+
+   1. Problem:
+               CQ #34951 DOS drivers display link speed at 2.5Gbps
+               instead of 1Gbps on BCM5709S.
+      Cause:
+               Driver queried unstable information to determine if
+               AutoNeg is currently enabled. In turn, shows incorrect
+               Line Speed.
+
+      Change:
+               Driver follows "Default Link Setting" value in NVRAM
+               configuration to determine the state of AutoNeg.
+
+      Impact:
+               BCM5709S.
+
+version 4.4.2 April 18, 2008
+----------------------------
+
+   1. Problem:
+               CQ #34858 DOS drivers - Forced speed 10 Full, banner
+               display 10 Half and can not pass traffic on BCM5709S
+               when remote phy is enabled.
+      Cause:
+               Driver did not set enable-bit for Timer Abort Interrupt.
+
+      Change:
+               Driver set enable-bit for Timer Abort Interrupt.
+
+      Impact:
+               BCM5709S.
+
+version 4.4.1 March 19, 2008
+----------------------------
+
+   1. Problem:
+               CQ #34220 Need to add workaround for CQ #30504 to NDIS2.
+
+      Change:
+               Timer to check link every 1 second.
+
+      Impact:
+               BCM5706S.
+
+version 4.4.0 February 28, 2008
+-------------------------------
+
+    Enhancements:
+    =============
+
+   1. Updated Copyright banner to reflect year of 2008. 
+
+
+Version 4.0.0 December 7, 2007
+------------------------------
+
+   1. Problem:
+               Driver fails to connect at 2.5Gbps with BCM5708S.
+
+      Cause:
+               Bit 15 of AUTONEG register was set by the Bootcode and this bit 
+               needs to be cleared for 2.5Gps mode.
+               Energy link detection prematurely declared no media detect.
+
+      Change:
+               Driver to reset bit 15 if it's set and restart AUTONEG.
+               Driver to make sure energy detection is present before polling
+               for link status.
+
+   2. Problem:
+               BCM5709 B0 and B1 devices doesn't establish link with a certain
+               link partners.
+
+      Change:
+               Driver to turn off Early DAC Wakeup feature for BCM5709 B0 and B1.
+
+      Impact:
+               None.
+
+Version 3.7.1 October 1, 2007
+-----------------------------
+
+   1. Problem: 
+               CQ #31625: Driver doesn't detect link when switch module is used
+               and remote phy is enabled.
+
+      Cause:
+               Driver sets NETLINK_DRV_SET_LINK_PHY_APP_REMOTE bit unconditionally.
+
+      Change :
+               Driver is to set NETLINK_DRV_SET_LINK_PHY_APP_REMOTE bit only if
+               it's a remote phy application.
+
+      Impact:
+               None.
+
+Version 3.7.0 September 21, 2007
+--------------------------------
+
+   1. Problem:
+               BCM5709 devices doesn't establish link with a certain link 
+               partners.
+
+      Change:
+               Changed driver to turn off Early DAC Wakeup feature on the
+               PHY core.
+
+      Impact:
+               None.
+
+Version 3.5.6 October 1, 2007
+-----------------------------
+
+   1. Problem: 
+               CQ #31625: Driver doesn't detect link when switch module is used
+               and remote phy is enabled.
+
+      Cause:
+               Driver sets NETLINK_DRV_SET_LINK_PHY_APP_REMOTE bit unconditionally.
+
+      Change :
+               Driver is to set NETLINK_DRV_SET_LINK_PHY_APP_REMOTE bit only if
+               it's a remote phy application.
+
+      Impact:
+               None.
+
+version 3.5.5 August 01, 2007
+-----------------------------
+
+   1. Problem:
+               CQ #30851: NXII DOS drivers displayed LineSpeed 100H
+               when forcing 100F.
+
+      Cause:
+               Driver initialized loop count for delay routine with
+               incorrect value.
+
+      Change:
+               Driver initializes loop count for delay routine with
+               correct value.
+
+      Impact:
+               None.
+
+version 3.5.4 July 15, 2007
+---------------------------
+
+   1. Problem:
+               CQ #30277: NXII Ndis2 driver v3.5.3 reports LineSpeed
+               undeterminable on BCM5706S.
+
+      Cause:
+               Driver did not read correct Phy register for BCM5706S
+               when first query for line speed.
+
+      Change:
+               Driver to read correct phy register when first query
+               for line speed.
+
+      Impact:
+               None.
+
+   Notes:
+   ======
+
+   1. The RXP firmware have fixes to pass required parameters to 
+      MCP processor that resolved problem of IPMI doesn't work
+      when PXE driver is loaded.
+
+
+version 3.5.3 May 31, 2007
+--------------------------
+
+    Enhancement:
+    ============
+    
+    1. Added support for BCM5709 Fiber.
+
+
+version 3.5.2 May 30, 2007
+--------------------------
+
+   1. Problem:
+               CQ #29661: NXII DOS NDIS2 driver shows as 1000Gbps when
+               when forced in PROTOCOL.INI and connected a swicth
+               configed at auto.
+
+      Cause:
+               Driver always set to auto when connected to a swicth
+               configed at auto.
+
+      Change:
+               Driver to set speed accordingly.
+
+      Impact:
+               None.
+
+version 3.5.1 May 29, 2007
+--------------------------
+
+   Enhancement:
+   ============
+
+   1. Request:
+               Add support for the following devices:
+                BCM5709 family.
+
+      Change:
+               Added support for new device IDs.
+
+      Impact:
+               None.
+
+version 3.5.0 May 9, 2007
+-------------------------
+
+   Enhancement:
+   ============
+
+   1. Request:
+               Add remote PHY support.
+ 
+      Change : Added remote PHY support.
+
+      Impact:
+               None.
+
+version 3.4.2 April 25, 2007
+----------------------------
+
+   Enhancement:
+   ============
+
+   1. Request:
+               Remove remote PHY support.
+ 
+      Change : Removed remote PHY support.
+
+      Impact:
+               None.
+
+
+Version 3.4.1 April 25, 2007
+----------------------------
+
+   1. Problem:
+               CQ #29168: NXII DOS NDIS2 driver shows as 1000Gbps when
+               connecting at 2500Gbps.
+
+      Cause:
+               Driver does not dectect 2500Gbps. 
+
+      Change:
+               Added code to detect 2500Gbps.
+
+      Impact:
+               None.
+
+   Enhancements:
+   =============
+
+   1. Request:
+               CQ #29250: Remove support for the following devices:
+                BCM5709 family.
+
+      Change : Removed support for BCM5709 family.
+
+   2. Added remote PHY support.
+
+
+Version 3.4.0 February 15, 2007
+-------------------------------
+
+   1. Problem:
+               CQ #28459: When NDIS2 driver loads up on 5709 device, it does
+               not display the device's PortNum/FunNum information.
+
+      Cause:
+               Driver does not detect 5709 as a dual port device. 
+
+      Change:
+               Driver detects 5709 as a dual port device.
+
+      Impact:
+               None.
+
+   2. Problem:
+               CQ #28465: NDIS2 shows screenfull of invalid devices when 8 or
+               more devices are present.
+
+      Cause:
+               Memory allocated to store detected devices information was
+               overflowed.
+
+      Change: 
+               Allocated memory to store up 12 found devices.
+
+      Impact:
+               None.
+
+   Notes:
+   ======
+
+   1. Changed version format from Major.Minor to Major.Minor.Version to match
+      software releases.
+
+
+Version 3.00 January 04, 2007
+-----------------------------
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Add support for the following devices:
+                BCM5709 family.
+
+      Change:
+               Added support for new device IDs.
+
+      Impact:
+               None.
+
+   2. Request:
+               Carry over the fixes in NetXtreme I NDIS2 driver for CQ #26644: 
+               NetXtreme I NDIS2 driver causes OEM platform Point Of Sale (POS)
+               terminals to flood the network with Remote Program Load (RPL) packets.
+
+      Change:
+               The NDIS2 driver is NOT to deliver Multicast packets to the upper
+               protocol when the Multicast Address Table is empty. Also, add a
+               Keyword "AcceptAllMC" in the PROTOCOL.INI file to inform the NDIS2
+               driver to deliver ALL Multicast packets to the upper protocol.
+
+      Impact:
+               Similar problems to NetXtreme I CQ #12373 and CQ #24095, where the Protocol
+               wants to receive Multicast address but does not provide the Driver with any 
+               particular Multicast address. Then, keyword "AcceptAllMC" must be added in
+               the PROTOCOL.INI file.
+
+   Notes:
+   ======
+
+   1. The Lower Module is aligned with PXE v3.4.1.
+   2. Updated copyright banner to reflect year of 2007.
+
+
+Version 2.01 June 22, 2006
+--------------------------
+
+
+   1. Problem:
+               CQ #25277: DOS NDIS2 intermittently hangs during Ghostcast sessions on 
+               OEM platform.
+
+      Cause:
+               Teton NDIS2 driver to implement "Force Update Status Block" in the Timer
+               Tick routine at 33ms interval as the Nextreme NDIS2 driver.
+
+      Change: 
+               Implemented "Force Update Status Block".
+
+      Impact:
+               None.
+
+   2. Problem:
+               CQ #25017: DOS drivers reported incorrect duplex when in forced mode.
+
+      Cause:
+               Driver only set for Auto Negotiation.
+
+      Change: 
+               Driver set according to forced speed and duplex.
+
+      Impact:
+               None.
+
+   3. Problem:
+               CQ #24666: DOS NDIS2 driver cannot map the network drive on OEM platforms
+               when using PCI-E NIC.
+
+      Cause:
+               Driver does EOI on other interrupt.
+
+      Change: 
+               Driver issues EOI on its own interrupt only.
+
+      Impact:
+               DOS driver only.
+
+   4. Problem:
+               CQ #24148: Dos drivers intermittently hangs on Crichton.
+
+      Cause:
+               Status Block updated after the driver has check it and causes the driver to
+               interpreted as other's interrupt.
+
+      Change: 
+               When Status Block does not review the NIC's interrupt state, Driver will
+               check for Interrupt State bit of the PCI State Register to ensure of its
+               interrupt state or not.
+
+      Impact:
+               None.
+
+
+Version 2.00 May 02, 2006
+-------------------------
+
+   Enhancement:
+   ============
+
+   1. Request:  
+               Developed NDIS2 driver for BCM5706 and BCM5708 family using
+               existing NDIS2 Upper Module and PXE's Lower Module to replace
+               the existing NDIS2 DOS driver (v1.4.2) to provide complete NDIS2
+               features and for better of code sharing.
+
+      Change:
+               New driver.
+
+      Impact:
+               New driver.
+
+   Notes:
+   ======
+
+   1. No release for v1.4.4 - v1.99.
+
+
+Version 1.4.3 April 05, 2006
+----------------------------
+
+
+   1. Problem:
+               CQ #23831: bxnd20x.dos driver fails with packet driver in
+               a multicast environment.
+
+      Cause:
+               The driver's Multicast Address filter logic was not correct
+               when comparing multiple Multicast Addresses.        
+
+      Change:
+               The driver is now filtering  Multicast Address accordingly.
+
+      Impact:
+               None.
+
+
+Version 1.4.2 February 27, 2006
+-------------------------------
+
+
+   1. Problem:
+               CQ #22899: bxnd20x.dos NDIS driver does not receive packets
+               under Caldera DR-DOS.
+
+      Cause:
+               This problem is not OS related but rather Protocol related.
+               The Protocol in use is a Packet Driver to NDIS2 "shim" and
+               it’s required an extra call to the NDIS2 driver to transfer
+               the remainder data of the receiving packet. This module has
+               never being implemented.
+
+      Change:
+               Implemented Transfer Data module to hanle the extra call.
+
+      Impact:
+               None.
+
+
+Version 1.4.1 December 12, 2005
+-------------------------------
+
+   Enhancement:
+   =============
+
+   1. Request:  
+               Added workaround for ISR acknowledging procedure.
+               Two writes to Interrupt Acknowledge register are used.
+
+
+    V1.4.0  10/28/2005
+---------------------------
+
+ 
+     Enhancements:
+    ==============
+    
+    1. Made the change about the way the link is detected while picking
+      a NIC from the system to load. 
+
+
+   V1.3.7  9/21/2005
+---------------------------
+
+ 
+     Enhancements:
+    ==============
+    
+    1. Added the support to program the PHY register offset 0x17 of 
+       page register 5 (TxAControl3) properly according to the 
+       non-default value stored in NVRAM.
+
+
+  V1.3.6  9/01/2005
+---------------------------
+
+ 
+     Enhancements:
+    ==============
+    
+    1. Added the support for loading the driver onto a 5706/5708 card 
+       which has the link/cable, when multiple cards are present in
+       the system. (see CQ entry 603).
+
+    
+  V1.3.5  8/26/2005
+---------------------------
+
+ 
+     Enhancements:
+    ==============
+    
+    1. Added the support for reporting the link status into shared memory
+       structure.
+
+
+V1.3.4   8/15/2005
+---------------------------
+
+    Fixes:
+    ============
+    
+    1. Problem: The NDIS2 driver had problem with multicast traffic.
+                (see CQ entry 1532).
+
+       Cause:  The driver was propagating the requested multicast address
+               in a near instead of a far pointer, which is required. 
+       Change: Changed the corresponding code.
+       Impact:  None.
+
+
+    2. Problem: The NDIS2 driver showed extra chars in the banner. 
+                (see CQ entry 1587).
+
+       Cause:  The driver was reusing part of the data segment for BD chain 
+               while they were still active. Therefore, during the BD init
+               stage, the active data area got corrutped.
+       Change: Do not reuse data space for bd chains since they are small 
+               anyway.
+       Impact: It increases the executable size by 0.75k.
+
+
+ V1.3.3   7/31/2005
+---------------------------
+
+ 
+     Enhancements:
+    ==============
+    
+    1. Added the support for some OEMs not to start with AutoNeg, and instead
+       to read the hardware default from the shared memory region.
+
+    2. Added the support for a new shared memory offset mechanism.
+ 
+
+ V1.3.2   7/19/2005
+---------------------------
+
+ 
+     Enhancements:
+    ==============
+    
+    1. Added the support for 5708 B0, including a new set of firmwares to 
+       work compatibily with management firmware.
+       
+
+ V1.3.1   5/17/2005
+---------------------------
+
+ 
+     Enhancements:
+    ==============
+    
+    1. Added the support for 5708 Fiber.     
+
+ 
+ V1.3.0   4/20/2005
+---------------------------
+
+ 
+     Enhancements:
+    ==============
+    
+    1. Added the support for 5708 copper.     
+     
+
+V1.2.2   2/14/2005
+---------------------------
+
+    Fixes:
+    ============
+    
+    1. Problem: The NDIS2 driver stopped passing traffic on certain systems
+                (see CQ entry TO904).
+
+       Cause: On some systems spurious interrupts get generated, and at this 
+              situation BIOSs on these systems will disable/mask interrupts
+              coming from this IRQ. Therefore, no more interrupt from our
+              device will be seviced.
+
+       Change: Suspected the config write to acknowledge the interrupt on our 
+               device may get posted until the EOI reaches the PIC; however, 
+               on these systems after these changes are made, the failure still
+               existed. Therefore the suspicion is that the the spurious
+               interrupt is not generated by our device instead; so the workaround
+               is to enable our device interrupt again after going through the
+               chained ISRs.
+       
+       Impact:  It might have little performance hit.
+
+
+
+     Enhancements:
+    ==============
+    
+    1. Made the driver configuration parameters not case-sensitive( see CQ entry
+       TO836).
+
+
+V1.2.1    9/15/2004
+---------------------------
+
+    Enhancements:
+    ==============
+    
+    1. Made minor change for 5706 A1 revision.
+    2. Made the change to accommodate the general request to the driver to 
+       add an entry to the chip multicast address table.
+
+
+V1.2.0    8/12/2004
+---------------------------
+
+    Fixes:
+    ============
+    
+    1. Problem: The NDIS2 driver hangs while running with IPX/SPX stack.
+
+       Cause: The NDIS2 driver was using an incorrect protocol ID to confirm
+              the transmission request coming from the IPX/SPX stack.
+
+       Change: The protocol ID from the tx request instead of the one exchanged
+                at the binding time is used to confirm the request.
+
+       Impact:  None.
+
+
+    Enhancements:
+    ==============
+    
+    1. Reused most of the driver initialization code space and firmware data
+       space for TX/RX related buffer allocation. By doing so, the size of 
+       the executable is reduced from 54k to 37k.
+ 
+
+V1.1.2    7/26/2004
+---------------------------
+
+    Initial Release of the NDIS2 driver for DOS.

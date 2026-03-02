@@ -2,7 +2,8 @@
 ;NDIS2 Wrapper INF v2.0
 ;(C) 2026 Eric Voirin (oerg866@googlemail.com)
 ;http://github.com/oerg866/ndis2infer9x
-;Command Line: [ndis2infer9x.py --rel --lookup --dir intel_e1000 --out e1000nd2.inf --exclude ../[NIC]_intel_pro1000/e1000w9x.inf]
+;Command Line: [ndis2infer9x.py --rel --lookup --dir intel_e1000 --out e1000nd2.inf --ver 12/28/2015 0.05.0.0 --exclude ../[NIC]_intel_pro1000/e1000w9x.inf]
+DriverVer = 12/28/2015, 0.05.0.0
 LayoutFile = layout.inf
 Signature = $CHICAGO$
 Class = Net

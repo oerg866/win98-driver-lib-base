@@ -1,0 +1,3568 @@
+
+
+                                    ============================
+                                     R E L E A S E    N O T E S
+                                    ============================
+
+	                              Broadcom Ethernet Driver
+                                                for
+                                           DOS/OS2 NDIS2
+
+                            Copyright (c) 2002-2013 Broadcom Corporation
+		                         All rights reserved.
+
+Revision History
+================
+Version 16.2.0 August 16, 2013
+------------------------------
+  Fixes:
+  ======
+   1. Problem:
+              CQ #70541 Driver failed when BCM5762 devices links
+              at 10Mbps/100Mbps on certain platform.
+      Change:
+              Updated reset code to force GRC clock to run
+              at 62.5MHz.
+      Impact:
+              BCM5762, BCM57767, BCM57787, BCM57764 and
+              BCM5725 controllers.
+
+Version 16.0.2 March 12, 2013
+-----------------------------
+    Enhancements:
+    =============
+    1. Added support for BCM5727.
+
+Version 16.0.1 January 22, 2013
+-------------------------------
+    Enhancements:
+    =============
+   1. Added support for BCM5762, BCM57767, BCM57787, BCM57764 and
+      BCM5725 controllers.
+
+   Notes:
+   ======
+    1. Updated Copyright banner to reflect year of 2013.
+
+Version 16.0.0 December 11, 2012
+--------------------------------
+   Notes:
+   ======
+   1. Adjust version number for Software Rel 16.0
+
+Version 15.6.1 October 29, 2012
+-------------------------------
+    Enhancements:
+    =============
+    1. Added support for new PCI device ID (0x1665) of BCM5717 C0 silicon.
+
+Version 15.6.0 September 14, 2012
+---------------------------------
+   Enhancements:
+   =============
+   1. Added support for BCM5717 C0 silicon.
+
+   Notes:
+   ======
+   1. Adjust version number for Software Rel 15.6
+
+Version 15.4.0 July 5, 2012
+---------------------------
+   Enhancements:
+   =============
+   1. Remove EEE support for BCM57762, BCM57766, BCM57782, and 
+      BCM57786 controllers.
+
+      Impact:
+              BCM57762, BCM57766, BCM57782, and BCM57786 controllers.
+   Notes:
+   ======
+   1. Adjust version number for Software Rel 15.4
+
+Version 15.2.3 February 22, 2012
+--------------------------------
+  Fixes:
+  ======
+   1. Problem:
+              CQ #61634 EEE does not function when EEE is enabled
+              on BCM57762 and BCM57766 controllers.
+      Change:
+              Excluded EEE PHY interoperability software workaround 
+              for BCM57762 and BCM57766 controllers at the correct
+              locations.
+      Impact:
+              BCM57762 and BCM57766 controllers only.
+
+Version 15.2.2 February 16, 2012
+--------------------------------
+  Fixes:
+  ======
+   1. Problem:
+              CQ #61634 EEE does not function when EEE is enabled
+              on BCM57762 and BCM57766 controllers.
+      Change:
+              Excluded EEE PHY interoperability software workaround 
+              for BCM57762 and BCM57766 controllers.
+      Impact:
+              BCM57762 and BCM57766 controllers only.
+
+   2. Problem:
+              CQ #61123 LEDs turned off when driver is loaded on BCM57762
+              and BCM57766 controllers.
+      Change:
+              Driver sets Link Activity LED BIT.
+      Impact:
+              BCM57762 and BCM57766 controllers only.
+   Notes:
+   ======
+    1. Updated Copyright banner to reflect year of 2012.
+
+Version 15.2.1 December 21, 2011
+--------------------------------
+   Enhancements:
+   =============
+   1. Added support for BCM57786 and BCM57782 controllers.
+
+Version 15.2.0 October 06, 2011
+-------------------------------
+   Enhancements:
+   =============
+   1. Added support for BCM57762 and BCM57766 controllers.
+
+   Notes:
+   ======
+   1. Adjust version number for Software Rel 15.2
+
+Version 15.0.1 August 02, 2011
+------------------------------
+   Enhancements:
+   =============
+   1. Implement software workaround for EEE PHY interoperability
+      issues for all EEE capable devices except for BCM5720.
+
+      Impact: BCM5717, BCM5718, BCM5719, BCM57761, BCM57765, BCM57781,
+              BCM57785, BCM57791, and BCM57795 controllers only.
+
+Version 15.0.0 July 26, 2011
+----------------------------
+  Fixes:
+  ======
+   1. Problem:
+               Link flap when EEE is enabled on BCM57761, BCM57765,
+               BCM57781, BCM57785, BCM57791, and BCM57795 controllers.
+      Change:
+               Updated software workaround for EEE PHY interoperability
+               issues for EEE capable devices.
+      Impact:
+               BCM57761, BCM57765, BCM57781, BCM57785, BCM57791, and
+               BCM57795 controllers only.
+   2. Problem:
+              CQ #55742 When NCSI is enabled, driver shown incorrect duplex
+              when forced 10Mbps Full duplex.
+      Change:
+              Driver to halt NCSI when obtain link speed.
+   Notes:
+   ======
+   1. Adjust version number for Software Rel 15.0
+
+Version 14.8.3 May 06, 2011
+---------------------------
+   Enhancements:
+   =============
+   1. Implement software workaround for EEE PHY interoperability
+      issues for EEE capable devices.
+
+Version 14.8.2 April 11, 2011
+-----------------------------
+   Enhancements:
+   =============
+   1. Driver to read the Hardware Configuration from shared memory
+      to Enable/Disable EEE mode in EEE capable devices. (CQ #54514)
+
+Version 14.8.1 March 15, 2011
+-----------------------------
+  Fixes:
+  ======
+   1. Problem:
+              Device didn't generate interrupt on certain platform if
+              device was previously loaded/unloaded in uEFI environment.
+
+      Change:
+              Updated driver to initialize mailbox interrupt to a value
+              of 0 during device initialization.
+
+Version 14.8.0 March 2, 2011
+----------------------------
+  Fixes:
+  ======
+   1. Problem:
+              In EEE capable devices, Boot Code's link status polling frequency
+              intermittently collided with Driver during its initialization which 
+              caused Driver to interpret as no cable is attached.
+
+      Change:
+              Driver to acquire PHY access Mutex before issue GRC reset. This change
+              also requires changes in Boot Code to reduce the link status polling
+              frequency in EEE capable devices. Please use boot code v1.02 or newer.
+
+      Impact:
+              BCM5718 B0, BCM5719, and BCM5720 controllers only.
+
+   2. Problem:
+              Driver did not read the NIC Config Data for BCM5718 B0, BCM5719,
+              and BCM5720 controllers.
+
+      Cause:
+              This bug was introduced in v14.6.2 when implementing the read from
+              register instead from shared memory to determine Copper/Serdes
+              configuration.
+
+      Change:
+              Driver to read NIC Config Data for BCM5718 B0, BCM5719, and 
+              BCM5720 controllers.
+
+      Impact:
+              BCM5718 B0, BCM5719, and BCM5720 controllers only.
+
+   Notes:
+   ======
+   1. Adjust version number for Software Rel 14.8
+
+Version 14.6.2 February 10, 2011
+--------------------------------
+   Enhancements:
+   =============
+   1. Driver to read from register instead of from shared memory to determine
+      Copper/Serdes configuration.
+
+      Impact:
+              BCM5718 B0, BCM5719, and BCM5720 family controllers only.
+
+Version 14.6.1 December 7, 2010
+-------------------------------
+   Enhancements:
+   =============
+   1. Add EEE support for BCM57761, BCM57765, BCM57781, BCM57785,
+      BCM57791, and BCM57795 controllers.
+
+      Impact:
+              BCM57761, BCM57765, BCM57781, BCM57785, BCM57791, and
+              BCM57795 controllers.
+
+   2. Added support for BCM5720 controller.
+
+Version 14.6.0 November 15, 2010
+--------------------------------
+   Enhancements:
+   =============
+   1. Added support for BCM5719 controller.
+
+   Notes:
+   ======
+   1. Adjust version number for Software Rel 14.6
+
+Version 14.4.4 December 7, 2010
+-------------------------------
+   Enhancements:
+   =============
+   1. Add EEE support for BCM57761, BCM57765, BCM57781, BCM57785,
+      BCM57791, and BCM57795 controllers.
+
+      Impact:
+              BCM57761, BCM57765, BCM57781, BCM57785, BCM57791, and
+              BCM57795 controllers.
+
+Version 14.4.3 November 1, 2010
+-------------------------------
+   Enhancements:
+   =============
+   1. Remove EEE support for BCM57761, BCM57765, BCM57781, BCM57785,
+      BCM57791, and BCM57795 controllers.
+
+      Impact:
+              BCM57761, BCM57765, BCM57781, BCM57785, BCM57791, and
+              BCM57795 controllers.
+
+Version 14.4.2 October 22, 2010
+-------------------------------
+   Enhancements:
+   =============
+   1. Add EEE support for BCM5717, BCM5718, BCM57761, BCM57765, BCM57781,
+      BCM57785, BCM57791, and BCM57795 controllers.
+
+      Impact:
+              BCM5717, BCM5718, BCM57761, BCM57765, BCM57781, BCM57785,
+              BCM57791, and BCM57795 controllers.
+
+   2. Port over fixes in v14.2.3 for CQ #50447 - Incorrect link LED behavior
+      after Driver executed.
+
+      Impact:
+              BCM57761, BCM57765, BCM57781, BCM57785, BCM57791,
+              and BCM57795 controllers.
+
+Version 14.4.1 October 15, 2010
+-------------------------------
+   1. Problem:
+               CQ #50409 - Driver wipes out hardware configuration when in
+               Self-Boot configuration.
+      Change:
+               Updated reset code to do a read-modify-write when updates the
+               register to disable clkreg when in Self-Boot configuration.
+      Impact:
+               BCM57761, BCM57765, BCM57781, BCM57785, BCM57791,
+               and BCM57795 controllers Self-Boot configuration.
+
+Version 14.4.0 October 07, 2010
+-------------------------------
+   Enhancements:
+   =============
+   1. Updated APE inter-processor interface code for BCM5717 and BCM5718
+      controllers.
+
+      Impact:
+              BCM5717 and BCM5718 controllers only.
+
+   Notes:
+   ======
+   1. Adjust version number for Software Rel 14.4
+
+Version 14.2.4 March 15, 2011
+-----------------------------
+  Fixes:
+  ======
+   1. Problem:
+              Device didn't generate interrupt on certain platform if
+              device was previously loaded/unloaded in uEFI environment.
+
+      Change:
+              Updated driver to initialize mailbox interrupt to a value
+              of 0 during device initialization.
+
+Version 14.2.3 October 20, 2010
+-------------------------------
+  Fixes:
+  ======
+   1. Problem:
+              CQ #50409 - Driver wipes out hardware configuration when in
+              Self-Boot configuration.
+      Change:
+              Updated reset code to do a read-modify-write when updates the
+              register to disable clkreg when in Self-Boot configuration.
+      Impact:
+              BCM57761, BCM57765, BCM57781, BCM57785, BCM57791,
+              and BCM57795 controllers Self-Boot configuration.
+
+   2. Problem:
+              CQ #50447 - Incorrect link LED behavior after Driver executed.
+      Change:
+              Driver sets Link Activiy LED BIT.
+      Impact:
+              BCM57761, BCM57765, BCM57781, BCM57785, BCM57791,
+              and BCM57795 controllers.
+
+Version 14.2.2 October 04, 2010
+-------------------------------
+   1. Problem:
+              CQ #50187 - BCM5718 Fiber cannot pass traffic.
+      Change:
+              Add support for Fiber phy.
+      Impact:
+              BCM5718 controllers only.
+
+Version 14.2.1 June 25, 2010
+----------------------------
+   Enhancements:
+   =============
+   1. Add NCSI support for BCM5717, BCM5718, and BCM5724 controllers.
+
+      Impact:
+              BCM5717, BCM5718, and BCM5724 family controllers only.
+
+   2. Add EEE support for BCM5785 controller.
+
+      Impact:
+              BCM5785 controller only.
+
+Version 14.2.0 April 06, 2010
+-----------------------------
+   Enhancements:
+   =============
+   1. Added supports for SelfBoot/OTP Devices.
+   2. Updated Copyright banner to reflect year of 2010.
+
+   Notes:
+   ======
+   1. Adjust version number for Software Rel 14.2.
+
+Version 14.0.1 October 05, 2009
+-------------------------------
+   Enhancements:
+   =============
+   1. Added support for BCM5717, BCM5718, and BCM5724 controllers.
+
+Version 14.0.0 September 23, 2009
+---------------------------------
+   Enhancements:
+   =============
+   1. Added support for BCM57781, BCM57785, BCM57761, BCM57765, BCM57791,
+      and BCM57795 controllers.
+
+   Notes:
+   ======
+   1. Adjust version number for Software Rel 14.
+
+Version 12.4.0 October 12, 2009
+-------------------------------
+
+    1. Problem:
+               CQ #43851 - BCM57760, BCM57780, and BCM57790 LOM device disappeared
+               after multiple iteration of copy/compare test on some platforms.
+       Change:
+               Apply work-around after Chip Reset.
+       Impact:
+               BCM57760, BCM57780, and BCM57790 controllers only.
+  Notes:
+  ======
+   1. Adjust version number for Software Rel 12.4.
+
+Version 12.2.0 July 10, 2009
+----------------------------
+   Enhancements:
+   =============
+   1. Added support for BCM57788 devices.
+
+   Notes:
+   ======
+   1. Adjust version number for Software Rel 12.2.
+
+Version 12.0.3 July 08, 2009
+----------------------------
+
+    1. Problem:
+               CQ #42408 - Driver Unable to obtain link when loading on BCM5785
+               controller with AC131 PHY.
+       Change:
+               Added support for AC131 PHY for BCM5785 controllers.
+       Impact:
+               BCM5785 controllers only.
+
+Version 12.0.2 March 27, 2009
+-----------------------------
+   Enhancements:
+   =============
+   1. Added support for BCM5785 10/100 controllers.
+
+Version 12.0.1 March 20, 2009
+-----------------------------
+
+    1. Problem:
+               CQ #40091 - NDIS2 v12.0.0 fails when driver was forced to load on
+               the second port for the BCM5704.
+      Cause:
+               Driver initialization used wrong register to valid the device when
+               user forced driver to load by using BusNum, DevNum, and PortNum in
+               file PROTOCOL.INI.
+      Change:
+               Driver uses correct register with value from user input.
+
+      Impact:
+               When force to load on multiple ports devices.
+
+Version 12.0.0 March 12, 2009
+-----------------------------
+
+    1. Problem:
+               CQ #39870 - NDIS2 driver failed to load on system that has the
+               device at Bus Number equal or greater than 128.
+      Cause:
+               During initialization, driver miscalculated the PCI Config Base
+               value when device is at Bus Number equal or greater than 128.
+      Change:
+               Driver calculates the PCI Config Base value for device at Bus Number
+               equal or greater than 128 accordingly.
+      Impact:
+               System that has the device at Bus Number equal or greater than 128.
+
+Version 11.9.7 January 5, 2009
+------------------------------
+
+   Enhancements:
+   =============
+   1. Added support for BCM5761S controllers.
+   2. Updated Copyright banner to reflect year of 2009.
+
+   Notes:
+   ======
+
+   1. No release for v11.9.6. Adjust version number to match with ODI-16.
+
+Version 11.9.5 November 18, 2008
+--------------------------------
+
+    1. Problem:
+               CQ #38565 - ODI/NDIS2: No LEDs are lit when after loading driver.
+      Cause:
+               Driver did not preserve the Miscellaneous Local Control register.
+      Change:
+               Driver performs read and modify when setting the Miscellaneous
+               Local Control register.
+      Impact:
+               None.
+
+Version 11.9.4 November 7, 2008
+-------------------------------
+
+    1. Problem:
+               Driver takes up to two minutes or longer to load when
+               loading from floppy drive.
+      Cause:
+               Delay macro MM_Wait() uses 16 bit value instead of 32 bit 
+               value as the actual delay routine MM_Stall() expected. When
+               booting up from a floppy drive, the upper 16 bit value on the
+               stack happen to be non zero, so the wait takes much longer than
+               anticipated.
+      Change:
+               Removed the use of the macro. Use the actual delay routine.
+      Impact:
+               None.
+
+Version 11.9.3 October 30, 2008
+-------------------------------
+
+    1. Problem:
+               CQ #38216 - NDIS2/ODI16: BCM57780 is unable to link at 1G.
+      Cause:
+               Driver used incorrect Device ID for BCM57780.
+      Change:
+               Driver use correct Device ID for BCM57780.
+      Impact:
+               None.
+
+Version 11.9.2 October 28, 2008
+-------------------------------
+   Enhancements:
+   =============
+   1. Added support for BCM57760 and BCM57790 controllers.
+
+Version 11.9.1 October 17, 2008
+-------------------------------
+
+   Enhancements:
+   =============
+   1. Added support for the 5785 controllers.
+
+Version 11.9.0 October 14, 2008
+-------------------------------
+
+   Enhancements:
+   =============
+   1. Added support for the 57780 controllers.
+
+Version 11.4.4 September 25, 2008
+---------------------------------
+
+    1. Problem:
+               CQ #37438 - Driver does not preserve registers on entry/exit.
+      Cause:
+               Driver did not preserve all used registers during initialization
+               call from Protocol to bind.
+      Change:
+               Driver preserved all used registers.
+      Impact:
+               None.
+
+Version 11.4.3 September 22, 2008
+---------------------------------
+
+    1. Problem:
+               CQ #37438 - Driver does not preserve registers on entry/exit
+               caused "Driver did not stay resident" error when using
+               with Dynaload.
+      Cause:
+               Driver did not preserve DI and SI registers during initialization
+               call from Protocol to bind.
+      Change:
+               Driver preserved DI and SI registers.
+      Impact:
+               None.
+
+Version 11.4.2 June 13, 2008
+----------------------------
+
+    1. Problem:
+               CQ #35755 Loading driver takes a significant time
+               longer when Management FW is enabled.
+      Cause:
+               Driver mistaken for non PCI-E device and awaits for non existing
+               event until timer is expired.
+      Change:
+               Driver takes corrective path.
+      Impact:
+               None.
+
+Version 11.4.1 May 29, 2008
+---------------------------
+
+    1. Problem:
+               DASH processor stalls when the driver applies a GRC reset
+               while the DASH processor is also accessing the GRC reset register.
+      Cause:
+               A LSI bug is causing this behavior. This driver implements the
+               LSI recommended workaround.        
+      Change:
+               The workaround requires the driver to acquire a mutex register
+               before issuing the GRC reset.
+      Impact:
+               DASH firmware 0.96 or later is required for this fix to work.
+
+Version 11.4.0 April 25, 2008
+-----------------------------
+
+   Enhancements:
+   =============
+
+   1. Change:
+               CQ #34684: Add new banner.
+      Impact :
+               None.
+
+Version 11.0.8 March 07, 2008
+-----------------------------
+
+    1. Problem:
+               DOS drivers loss of mgmt fw connection when DASH enabled.
+               As in PXE CQ #33998.
+      Cause:
+               Drivers did not implement the new DASH firmware setup rules
+               for the BCM5761/BCM5761E controllers.
+      Change:
+               Implemented required DASH firmware setup rules for the
+               BCM5761/BCM5761E controllers.
+      Impact:
+               None.
+
+Version 11.0.7 February 11, 2008
+--------------------------------
+
+    1. Problem:
+               CQ #33808: System might hang during driver bringup/shutdown
+               if CLKREQ and ASPM L0s/L1 are enabled on PCI-E link control
+               registers. 
+      Cause:
+               Issuing a GRC reset with CLKREQ enabled is causing a global chip 
+	       reset which causes PCI-E link to drop.
+      Change:
+               When ClkReq and L0s/L1 ASPM are enabled, driver will clear ClkReq 
+	       enable bit before doing GRC reset and restore it after GRC reset.
+      Impact:
+               None.
+
+Version 11.0.6 January 29, 2008
+-------------------------------
+
+   Enhancements:
+   =============
+    1. Implemented software workaround for BCM5764/BCM5784/BCM5723 B0 devices
+       during Phy Reset.
+
+Version 11.0.5 January 29, 2008
+-------------------------------
+
+   Enhancements:
+   =============
+    1. Removed support for BCM5784/BCM5764/BCM5723 Ax devices.
+    2. Implemented software workaround for AFE BW and Line Distortion problem
+       based on the content of One-Time-Program (OTP) memory on the device.
+    3. Updated APE inter-processor interface code to work with updated DASH
+       firmware for BCM5761/BCM5761E device.
+
+   Notes:
+   ======
+
+   1. The Lower Module is aligned with PXE v11.0.10.
+
+Version 11.0.4 January 17, 2008
+-------------------------------
+
+   Enhancements:
+   =============
+
+    1. Updated Copyright banner to reflect year of 2008.
+    2. Implemented software workaround for AFE BW and Line Distortion problem
+       with BCM5764/BCM5784/BCM5723 B0 devices.
+
+   Notes:
+   ======
+
+   1. The Lower Module is aligned with PXE v11.0.9.
+
+Version 11.0.3 December 7, 2007
+-------------------------------
+
+   Enhancement:
+   ============
+   1. Added support for the BCM5723 controllers.
+
+Version 11.0.2 November 21, 2007
+--------------------------------
+
+   Enhancements:
+   =============
+
+   1. Implemented required software workaround for BCM5764 A0/A1 
+      where driver configures clock policy for CPMU block.
+
+   2. Added software handshake with DASH firmware for the BCM5761/BCM5761E 
+      controllers.
+
+   Notes:
+   ======
+
+   1. The Lower Module is aligned with PXE v11.0.7.
+
+Version 11.0.1 October 23, 2007
+-------------------------------
+
+   Enhancements:
+   =============
+
+   1. Optimized Tx performance for BCM5764/BCM5784 A0 devices by programming 
+      Maximum Read Request size to 4K.
+
+Version 11.0.0 October 12, 2007
+-------------------------------
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Add support for the following devices:
+                BCM5761, BCM5761E, BCM5764, and BCM5784.
+
+      Change:
+               Added support for the following devices:
+                BCM5761, BCM5761E, BCM5764, and BCM5784.
+
+      Impact:
+               None.
+
+   Notes:
+   ======
+
+   1. The Lower Module is aligned with PXE v11.0.2.
+   2. No release for v10.4.7 - v10.9.9.
+
+Version 10.4.6 May 24, 2007
+---------------------------
+
+   Enhancement:
+   ============
+
+   1. Request:
+               Add support for the following device:
+                BCM5756(BCM5755ME).
+
+      Change:
+               Added support for the following device:
+                BCM5756(BCM5755ME).
+
+      Impact:
+               None.
+
+Version 10.4.5 May 23, 2007
+---------------------------
+
+   1. Problem:
+               CQ #28789: DOS NDIS2 Ghostcast session (with a MAC/DIS to Packet
+               Driver Converter) is running at 20%-25% slower than a third party NIC.
+
+      Cause:
+               The UDP stream causes the NDIS2 driver to drop packets due to lack
+               of receive buffer (one Receive buffer) and driver is Config Cycle
+               dependency.
+
+      Change: 
+               Add one additional receive buffer and add keyword NoTagStatus. The
+               NoTagStatus will sets the driver NOT to utilize the default method
+               Tag Status of handling interrupts. This will reduce the number of
+               Config Cycle Read/Write in the ISR Loop. Hence, speed up the packet
+               receiving process.
+
+      Impact:
+               Driver size is increased by 2KB.
+
+   Enhancement:
+   ============
+
+   1. Request:
+               Remove support for the following device:
+                BCM5756(BCM5755ME).
+
+     Change:
+               Removed support for the following device:
+                BCM5756(BCM5755ME).
+
+     Impact:
+               None.
+
+   Note:
+   =====
+
+   1. Use this driver in conjunction with the keyword NoTagStatus in the Protocol.ini
+      file will increase the Ghostcast session (with a MAC/DIS to Packet Driver
+      Converter) performance by 10%-15%.
+
+
+Version 10.4.4 April 17, 2007
+-----------------------------
+
+   Enhancement:
+   ============
+
+   1. Request:
+               CQ #29087: Improve performance on PCI-Express mobile devices
+               when they are interconnected with a certain mobile Intel chipset.
+
+      Cause:
+               There is an interoperability issue between the Broadcom LAN
+               controllers and the INtel ICH7/8 that may cause the
+               Rx-performance at 100 Mbps to be lower than expected when
+               L1 ASPM is enabled along with system CPU C3E, or C4, or C4E,
+               or higher state.
+
+      Change:
+               Changed the driver to disable L1 ASPM during initialization
+               and restore the configuration at the driver shutdown.
+
+      Impact:
+               None.
+
+   Notes:
+   ======
+
+   1. No release for v10.4.3. Adjust version number to match with ODI-16 driver.
+
+
+Version 10.4.2 February 20, 2007
+--------------------------------
+
+   1. Problem:
+               CQ #28528: Loading NDIS2 drivers with max values of BusNum, DevNum,
+               and FunNum/PortNum in PROTOCOL.INI does not show error message.
+
+      Cause:
+               Driver does not check for Max value.
+
+      Change: 
+               Driver checks for Max value and displays error message.
+
+      Impact:
+               multiple ports devices.
+
+
+   2. Problem:
+               CQ #28465: NDIS2 shows screenfull of invalid devices when 8 or
+               more devices are present.
+
+      Cause:
+               Memory allocated to store detected devices information was
+               overflowed.
+
+      Change: 
+               Allocated memory to store up 12 found devices.
+
+      Impact:
+               None.
+
+
+Version 10.4.1 February 03, 2007
+--------------------------------
+
+      Change:
+               Adjust version number to match with other DOS/OS2 family drivers.
+
+      Impact:
+               None.
+
+
+Version 10.4.0 January 15, 2007
+-------------------------------
+
+
+1. Problem:
+               NDIS2 OS/2 driver takes up 5 minutes to load, this occurred since
+               v9.08.
+
+      Cause:
+               Delay routine provide a dirty stack at upper 16 bit when called in
+               OS/2 causes the time to wait to be inaccurate.
+
+      Change:
+               Changed Delay routine to guarantee a clean initial value to use.
+
+      Impact:
+               none.
+
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Add support for the following devices:
+                BCM5722 and BCM5756.
+
+      Change:
+               Added support for new device IDs.
+
+      Impact:
+               None.
+
+   Notes:
+   ======
+
+   1. Changed version format from Major.Minor to Major.Minor.Version to match
+      software releases.
+
+
+Version 10.03 December 15, 2006
+-------------------------------
+
+   1. Problem:
+               CQ #27832: BCM5755M/GEN6 PHY failing IEEE in customer systems.
+
+      Cause:
+               System related issue, refer to CQ #27832.
+
+      Change:
+               Adding workaround after PHY Reset.
+
+      Impact:
+               BCM5755M only.
+
+
+Version 10.02 November 15, 2006
+-------------------------------
+
+   Enhancement:
+   ============
+
+   1. Request:
+               Remove support for the following devices:
+                BCM5756 and BCM5722.
+
+     Change:
+               Removed support for the following devices:
+                BCM5756 and BCM5722.
+
+     Impact:
+               None.
+
+
+Version 10.01 October 03, 2006
+------------------------------
+
+   Enhancements:
+   =============
+
+   1. Carry over the fixes in v9.13.
+
+
+Version 10.00 September 19, 2006
+--------------------------------
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Add support for the following devices:
+                BCM5906 family, BCM5756ME, and BCM5722.
+
+      Change:
+               Added support for new device IDs.
+
+      Impact:
+               None.
+
+   Notes:
+   ======
+
+   1. The Lower Module is aligned with PXE v10.0.0.
+
+
+Version 9.13 October 02, 2006
+-----------------------------
+
+   1. Problem:
+               CQ #26644: NDIS2 driver causes OEM platform Point Of Sale (POS)
+               terminals to flood the network with Remote Program Load (RPL)
+               packets.
+
+      Cause:
+               The fix in NDIS2 v8.15 that resolved CQ #12373 which will forward
+               all the Multicast traffic to the upper protocol in used: TCP/IP.
+               This causes the upper protocol responses to a Logical Link Control
+               (LLC) Multicast packet with a XID packet. This XID response packet
+               triggers the Point Of Sale terminals to flood the network with
+               RPL packets.
+
+      Change:
+               The NDIS2 driver is NOT to deliver Multicast packets to the upper
+               protocol when the Multicast Address Table is empty (as before v8.15).
+               Also, add a Keyword "AcceptAllMC" in the PROTOCOL.INI file to inform
+               the NDIS2 driver to deliver ALL Multicast packets to the upper
+               protocol.
+
+      Impact:
+               CQ #12373 and CQ #24095 must add a Keyword "AcceptAllMC" in the
+               PROTOCOL.INI file.
+
+   Notes:
+   ======
+
+   1. The Lower Module is aligned with PXE v10.0.0.
+
+
+Version 9.12 August 22, 2006
+----------------------------
+
+   Enhancement:
+   ============
+
+   1. Request:
+               Remove support for the following devices:
+                BCM5906 family.
+
+     Change:
+               Removed support for the following devices:
+                BCM5906 family.
+
+     Impact:
+               None.
+
+
+Version 9.11 August 11, 2006
+----------------------------
+
+   1. Problem:
+               CQ #26217: NDIS2 displayed wrong speed when forced or connected
+               to 10Mbps or 100Mbps hub using BCM5906 Family.
+
+      Cause:
+               BCM5906 PHY core doesn't report highest common denominator (HCD)
+               in PHY register 0x19 when AUTONEG is not enabled at link partner.
+
+      Change:
+               For BCM5906 devices, if HCD is not available (value of zero) then
+               driver determines link speed by looking at other status bits that
+               are specific to BCM5706 PHY core.
+
+      Impact:
+               BCM5906 devices.
+   
+   Notes:
+   ======
+
+   1. The Lower Module is aligned with PXE v9.7.6.
+
+
+Version 9.10 August 04, 2006
+----------------------------
+
+   1. Problem:
+               CQ #26038: Ndis2 driver v9.09 fails to determine the line speed.
+
+      Cause:
+               Free running timer in BCM5906 runs at a fixed-rate at 25MHz core
+               clock.
+
+      Change:
+               Changed time-calibrating routine to use correct scaling factor.
+
+      Impact:
+               BCM5906 devices.
+
+   Enhancement:
+   ============
+
+   1. Request:
+		CQ #25849: BCM5906 fails to connect when forcing link speed settings.
+
+      Change:
+               Enhanced driver to enable Auto MDIX when link is forced at either
+               10Mbps or 100Mbps on BCM5906 devices.
+
+      Impact:
+               BCM5906 devices.   
+
+   Notes:
+   ======
+
+   1. The Lower Module is aligned with PXE v9.7.5. Driver is now used Host SendBD
+      instead of NIC SendBD for BCM5705 family and beyond.
+
+      Impact:
+               BCM5705 family and beyond.
+
+
+Version 9.09 July 18, 2006
+--------------------------
+
+   1. Problem:
+               CQ #25575: NDIS2 driver v9.08 reports error for driver speed when user
+               selected the speed and duplex.
+
+      Cause:
+               Driver does not record the user's selected speed and duplex.
+
+      Change:
+               Driver records the user's selected speed and duplex.
+
+      Impact:
+               None.
+
+   2. Problem:
+               CQ #25846: Ndis2 driver v9.08 doesn't report link speed when it loads up on
+               Fiber NICs.
+
+      Cause:
+               Driver does not record the speed and duplex when loaded up on fiber NICs.
+
+      Change:
+               Driver records the speed and duplex when loaded up on fiber NICs.
+
+      Impact:
+               None.
+
+
+   Enhancement:
+   ============
+
+   1. Request:
+               Add support for the following devices:
+                BCM5906 family and BCM5755ME.
+
+      Change:
+               Added support for new device IDs.
+
+      Impact:
+               None.
+
+   Notes:
+   ======
+
+   1. The Lower Module is aligned with PXE v9.7.1.
+
+
+Version 9.08 June 23, 2006
+--------------------------
+
+   Enhancement:
+   ============
+
+   1. Request:
+               Per CQ #9987: Driver to enable the HW fix for BCM575x family.
+
+      Change: 
+               Driver enabled the HW fix for BCM575x family.
+
+      Impact:
+               BCM575x family.
+
+   Notes:
+   ======
+
+   1. The Lower Module is aligned with PXE v9.4.5.
+
+
+Version 9.07 May 16, 2006
+-------------------------
+
+
+   1. Problem:
+               CQ #24666: DOS NDIS2 driver cannot map the network drive on OEM platforms
+               when using PCI-E NIC.
+
+      Cause:
+               Driver does EOI on other interrupt.
+
+      Change: 
+               Driver issues EOI on its own interrupt only.
+
+      Impact:
+               DOS driver only. OS/2 only to adjust version number to match with DOS
+               driver and already doing this.
+
+
+Version 9.06 May 11, 2006
+-------------------------
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Remove support for the following devices:
+                BCM5757 family, BCM5906 family, and BCM5755ME.
+
+     Change:
+               Removed support for the following devices:
+                BCM5757 family, BCM5906 family, and BCM5755ME.
+
+     Impact:
+               None.
+
+
+   2. Request:
+               CQ #24525: Programming the PHY Tabs to achieve better,
+               more reliable Gig-E Link.
+
+     Change:
+               Programming the PHY Tabs after Phy Reset.
+
+     Impact:
+               BCM5754 family, BCM5755 family, BCM5786, and BCM5787 family.
+
+
+Version 9.05 May 02, 2006
+-------------------------
+
+
+   1. Problem:
+               CQ #24545: DOS Driver causes system errors when the ASF v.7.0x is enabled.
+
+      Cause:
+               DOS driver does not support ASF but allowed ASF to run after a software
+               reset. Without the require communications to ASF causes ASF to perform its
+               tasks without realizing the driver is in operation, in turn causing system
+               errors.
+
+      Change:
+               DOS driver terminates ASF after software reset.
+
+      Impact:
+               None.
+
+
+Version 9.04 April 14, 2006
+---------------------------
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Add support for the following devices:
+                BCM5757 family, BCM5906 family, and BCM5755ME.
+
+     Change:
+               Added support for new device IDs.
+
+     Impact:
+               None.
+
+
+Version 9.03 April 02, 2006
+---------------------------
+
+   1. Problem:
+               CQ #23217: OS/2 multicast communication leads to system hang.
+
+      Cause:
+               The first problem was fixed in v9.01. However, when run the
+               same test again the system hangs. This problem was cause by
+               driver not delete the Multicast Addresses in its table when
+               the test program terminated. When the test runs again the
+               driver continue to add new Multicast Addresses to its table
+               without checking it boundary and over written its vital data
+               then causes the system to crash.
+
+      Change:
+               The driver is now maintain its Multicast Address Table
+               accordingly.
+
+      Impact:
+               None.
+
+
+   2. Problem:
+               CQ #24095: NDIS2 driver failed to establish automatic session
+               with the PowerQuest PowerCast Server through the DHCP Server.
+
+      Cause:
+               The driver's Multicast Address filter logic was not correct
+               when comparing multiple Multicast Addresses. It then drops the
+               require packets to establish the PowerQuest's automatic session.       
+
+      Change:
+               The driver is now filtering  Multicast Address accordingly.
+  
+      Impact:
+               None.
+
+
+Version 9.02 March 22, 2006
+---------------------------
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Add support for the following devices:
+                BCM5755 family and BCM5786.
+
+     Change:
+               Added support for new device IDs.
+
+     Impact:
+               None.
+
+
+Version 9.01 February 24, 2006
+------------------------------
+
+
+   1. Problem:
+               CQ #23217: OS/2 multicast communication leads to system hang.
+
+      Cause:
+               NDIS2 driver is configurable up 16 Multicast addresses. However,
+               it recorded and accepts up to 4 Multicast addresses only.
+
+      Change:
+               The driver is now configurable, record, and accepts up 16
+               Multicast addresses.
+
+      Impact:
+               None.
+
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Remove support for device BCM5755 family.
+
+     Change:
+               Removed support for device BCM5755 family.
+
+     Impact:
+               None.
+
+
+Version 9.00 November 01, 2005
+------------------------------
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Add support for the following devices:
+                BCM5755 family, BCM5787 family, BCM5714S, BCM5715S,
+                and BCM5754 family.
+
+     Change:
+               Added support for new device IDs.
+
+     Impact:
+               None.
+
+   2. Removed PHY BER software workaround for BCM5755/BCM5787/BCM5754 
+      family devices.
+
+     Impact:
+               None.
+
+
+Version 8.30 January 10, 2006
+-----------------------------
+
+   1. Problem:
+               Implement "phantom link" workaround (when fiber cable is
+               unplugged, the LED is still on) for BCM5714S and BCM5715S
+               Serdes device family.
+
+      Cause:
+               PHY status register doesn't indicate valid link
+               intermittently.
+
+      Change:
+              Driver to enable the H/W fix and query link status from
+              the MAC status register.
+
+      Impact:
+               None.
+
+
+Version 8.29 December 20, 2005
+------------------------------
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Add support for BCM5714S, BCM5715S.
+ 
+     Change:
+               Added support for new device IDs.
+
+     Impact:
+               None.
+
+
+Version 8.28 October 27, 2005
+-----------------------------
+
+
+   1. Problem:
+               CQ #13666: NDIS2 OS/2 traps when copy files only when HPFS386
+               is installed.
+
+      Cause:
+               HPFS386 passes a physical pointer to the driver and it needs to
+               be mapped to a GDT Selector so the driver can use it to copy the
+               receiving data up to the Protocol. The driver uses an invalid
+               data selector/segment to address the call to the OS/2 DevHlp
+               for the mapping of the physical pointer.
+
+      Change:
+               Driver uses correct data selector/segment to make the call.
+
+      Impact:
+               OS/2 driver.
+
+
+Version 8.27 October 24, 2005
+-----------------------------
+
+      Change:
+               Removed support for the following devices:
+                BCM 5755 family, BCM5787 family, BCM5714S, BCM5715S,
+                and BCM5903M.
+
+      Impact:
+               None.
+
+
+Version 8.26 October 06, 2005
+-----------------------------
+
+   1. Problem:
+               CQ #14170: NDIS2 Ghostcast session is very slow for 5714/5715.
+
+      Cause:
+               Status Block updated after the driver has check it and causes
+               the driver to interpreted as other's interrupt and called the
+               next interrupt in the chain.
+
+      Change:
+               When Status Block does not review the NIC's interrupt state,
+               Driver will check for Interrupt State bit of the PCI State
+               Register to ensure of its interrupt state or not.
+
+      Impact:
+               Shared IRQ.
+
+   Notes:
+   ========
+
+   1. No release for OS/2. This modification will be implemented for the OS/2
+      driver in the next release.
+
+
+Version 8.25 September 23, 2005
+--------------------------------
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Add support for BCM5755 family devices.
+
+     Change:
+               Added support for new device IDs.
+
+     Impact:
+               None.
+
+
+Version 8.24 September 08, 2005
+--------------------------------
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Add support for BCM5787 family devices, BCM5903M, BCM5714,
+               BCM5714S, BCM5715, and BCM5715S.
+
+     Change:
+               Added support for new device IDs.
+
+     Impact:
+               None.
+
+
+Version 8.23 July 20, 2005
+---------------------------
+
+      Change:
+               Removed support for device: BCM5714,BCM5714S,BCM5715,BCM5715S.
+
+      Impact:
+               None.
+
+
+Version 8.22 June 15, 2005
+-----------------------------
+
+   1. Problem:
+               CQ #13132: OEM platform freezes when loading NDIS2 driver
+               from USB floppy.
+
+      Cause:
+               Shared interrupt device's service routine does not protect
+               itself from re-entrances. 
+
+      Change:
+               Driver masks off the shared IRQ before passes control to the
+               shared interrupt device's service routine.
+
+      Impact:
+               Shared IRQ.
+
+   Notes:
+   ========
+
+   1. Update README.TXT for the NET START BASIC "autostart".
+
+
+Version 8.21 May 12, 2005
+-----------------------------
+
+   1. Problem:
+               When NDIS2 driver loads up on 5780 device, it does not display the
+               device's PortNum/FunNum information.
+
+      Cause:
+               Driver does not detect 5780 as a dual port device. 
+
+      Change:
+               Driver detects 5780 as a dual port device.
+
+      Impact:
+               None.
+
+
+Version 8.20 May 05, 2005
+---------------------------
+
+      Change:
+               Added support for Hamilton family hardware:
+                Hamilton family devices (BCM5714,BCM5714S,BCM5715,BCM5715S,
+                                          BCM5780, BCM5780S).
+
+      Impact:
+               None.
+
+
+   1. Problem:
+               CQ #12667: Network devices are detected twice when loading
+               NDIS2 v8.18 or later.
+
+      Cause:
+               The scan logic adds same device which previously detected by the
+               BIOS call to the Driver's adapter list. 
+
+      Change:
+               Driver checks for duplicate devices found after the scan.
+
+      Impact:
+               None.
+
+
+Version 8.19 April 02, 2005
+---------------------------
+
+      Change:
+               Removed support for Hamilton family hardware:
+                Hamilton family devices (BCM5714,BCM5714S,BCM5715,BCM5715S,
+                                          BCM5780, BCM5780S).
+
+      Impact:
+               None.
+
+
+Version 8.18 April 01, 2005
+-----------------------------
+
+   1. Problem:
+               CQ #12564: Cannot load NDIS2 driver when PCI-E NIC installed
+               in PCI-Ex1 slots on MSI-7058 system.
+
+      Cause:
+               Driver utilizes system's BIOS to detect the device. In this system,
+               its BIOS did not return valid data to identify the PCI-E NIC when
+               installed in PCI-Ex1 slots. 
+
+      Change:
+               Driver scans for the device after BIOS detection failed.
+
+      Impact:
+               None.
+
+
+Version 8.17 March 17, 2005
+-----------------------------
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Added support for new device IDs, 5780 devices (BCM5780 and
+               BCM5780S).
+
+      Change:
+               Add support for new device IDs.
+
+      Impact:
+               None.
+
+
+Version 8.16 March 15, 2005
+---------------------------
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Added support for Baxter family devices (BCM5752,BCM5752M)
+               and Hamilton family devices (BCM5714,BCM5714S).
+
+      Change:
+               Add support for Baxter and Hamilton hardware.
+
+      Impact:
+               None.
+
+
+Version 8.15 March 11, 2005
+---------------------------
+
+   1. Problem:
+               CQ #12373: The NDIS2 driver does not respond to some of the
+               Multicast Addresses.
+
+      Cause:
+               Driver filtered Multicast Addresses base on its Multicast Address
+               Table. The Protocol in used, TCP/IP, does not providing any Multicast
+               Addresses to the driver's Multicast Address Table when requesting it to
+               accept Multicast Addresses.
+
+      Change:
+               Driver accepts all Multicast Addresses when the Protocol requesting it
+               to accept Multicast Addresses with out providing any Multicast Addresses
+               to its table.
+
+      Impact:
+               DOS driver only due to CQ #8265.
+
+
+Version 8.14 March 01, 2005
+---------------------------
+
+      Change:
+               Removed support for Baxter and Hamilton family hardware:
+                Baxter family devices (BCM5752,BCM5752M) and
+                Hamilton family devices (BCM5714,BCM5714S,BCM5715,BCM5715S).
+
+      Impact:
+               None.
+
+
+Version 8.13 February 18, 2005
+------------------------------
+
+   1. Problem:
+               System crashes when using PreWorX's PXE on Disk to
+               download image from Novell Zenwork 6.5 Server.
+
+      Cause:
+               Driver's ISR Stack is not big enough to accommodate
+               the call to the next ISR in the Interrupt chain.
+
+      Change:
+               Increased both ISR and TimerTick stack by 96 bytes each.
+
+      Impact:
+               DOS Driver only; Driver size increased by 192 bytes.
+
+
+Version 8.12 February 10, 2005
+------------------------------
+
+   1. Problem:
+               CQ #12120: Not able to map to server after driver is loaded.
+               Driver doesn't work with Hamilton/HTLE A1 or newer devices.
+
+      Cause:
+               ASIC IDs for Hamilton and HTLE A1 or newer have been changed
+               from 5 to 9 and 8, respectively.
+
+      Change:
+               Changed Driver to accomodate the ASIC ID changes.
+
+      Impact:
+               None.
+
+
+Version 8.11 January 13, 2005
+------------------------------
+
+   1. Problem:
+               CQ #11738: Lose link after loading NDIS2 driver on Hamilton
+               board. Driver does not work with Hamilton devices.
+
+      Cause:
+               There is an ASIC problem where the device misdetects parity
+               errors. This causes DMA engine to halt after first DMA write
+               transaction.
+  
+      Change:
+                Added software workaround by disabling device's parity
+                detection logic.
+
+      Impact:
+               None.
+
+   Notes:
+   ========
+
+   1. The download firmware in use is v1.16.0 to align with PXE. Only impact
+      BCM5701/02/03/04.
+
+
+Version 8.10 December 17, 2004
+-------------------------------
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Added support for Baxter family devices (BCM5752,BCM5752M)
+               and Hamilton family devices (BCM5714,BCM5714S,BCM5715
+               BCM5715S).
+
+      Change:
+               Add support for Baxter and Hamilton hardware.
+
+      Impact:
+               None.
+   
+   Notes:
+   ========
+
+   1. No release for v7.73-v8.09. Adjust version number for new NICs support.
+
+
+version 7.72  December 01, 2004
+-------------------------------
+
+   1. Problem:
+               CQ #11486: Driver prematurely determines no link and loads
+               on device first found.
+
+      Cause:
+               As CQ #11271 of DOS ODI, the time to detect the cable was
+               not significant to allow some switches to finish its link
+               establishment process. So, the driver determines there is
+               no link prematurely then load up on the first found device.
+
+      Change:
+               Driver continuously senses for 3 seconds before determines
+               there is no link.
+               
+      Impact:
+               Driver load time will be a multiple of 3 seconds per NICs on
+               multiple NICs system that has only one cable connected.
+
+
+version 7.71  November 11, 2004
+-------------------------------
+
+   Enhancements:
+   =============
+
+   1. Request:
+               CQ #11117: SerDes Pre-Emphasis Enhancement Request.
+
+      Change:
+               This modification was made in the driver download firmware
+               v1.15.0.
+
+      Impact:
+               None.
+
+
+version 7.70  October 08, 2004
+-------------------------------
+
+   Enhancements:
+   =============
+
+   1. Change:
+
+              Add support for 5753, 5753M, 5753F and 5781.
+
+      Impact :
+               None.
+
+   Notes:
+   ========
+
+   1. No release for v7.66-v7.69. Adjust version number to be the same
+      as ODI's version number.
+
+
+version 7.65  June 18, 2004
+-------------------------------
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Added Capacitive Coupling support for BCM5705 devices.
+  
+      Change:
+               Enable capacitive coupling feature on the PHY if this
+               feature is administratively enabled.
+
+      Impact :
+               None.
+
+
+version 7.64  June 01, 2004
+-------------------------------
+
+   Enhancements:
+   =============
+
+   1. Change:
+
+              Add support for 5751F and 5789.
+
+      Impact :
+               None.
+
+
+version 7.63  May 25, 2004
+-------------------------------
+
+   1. Problem:
+               CQ #10188: NDIS2 driver does not display BusNum and DevNum
+               correctly when device not found.
+
+      Cause:
+               Driver displays only the lower 4 bits of BusNum and DevNum.
+
+      Change:
+               Driver displays all 8 bits of BusNum and DevNum.
+
+      Impact:
+               None.
+
+   Enhancements:
+   =============
+
+   1. Change:
+               Add support for a test device.
+
+      Impact :
+               None.
+
+   Notes:
+   ========
+
+   1. The Lower Module is aligned with PXE v7.5.15.
+
+
+version 7.62  May 10, 2004
+-------------------------------
+
+   1. Problem:
+               CQ #9615: NDIS2 OS/2 driver does not works correctly with
+               OS/2 suspend mode.
+
+      Cause:
+               NDIS2 Specifications does not required the driver to
+               support suspend mode.
+
+      Change:
+               Driver re-initializes the NIC when its detects no update
+               status block activities for more than 1 seconds.
+
+      Impact:
+               None.
+
+   2. Problem:
+               When disconnect/reconnect using 3 pairs cable, NDIS2 driver
+               takes about 34-35 seconds to get the link and causes the
+               system to suspend during this link re-establishment period.
+
+      Cause:
+               When the 3 pairs cable is reconnected, its takes approximately
+               17 seconds until the driver detects the link change activity.
+               The driver is then resets the PHY, which causes another 17
+               seconds before the NIC could gets the link back. Driver polls
+               for the link during the link re-establishment.
+
+      Change:
+               Driver resets the PHY as when its detects the cable is
+               disconnected. Driver does not poll for link during link
+               re-establishment.
+
+      Impact:
+               None.
+
+   3. Problem:
+               CQ #9981: DOS NDIS2 displays BusNum = 0 when BusNum is
+               greater than 15.
+
+      Cause:
+               Driver displays only the lower 4 bits of BusNum.
+
+      Change:
+               Driver displays all 8 bits of BusNum.
+
+      Impact:
+               None.
+
+
+   Enhancements:
+   =============
+
+   1. Change:
+               Add support for device was previously removed per CQ #9955.
+
+      Impact :
+               None.
+
+
+version 7.61  April 23, 2004
+-------------------------------
+
+   1. Problem:
+               CQ #9955: Need to remove support for an untested controller.
+
+      Cause:
+               The controller has not been tested for this release.
+
+      Change:
+               PCI Device ID for non-production controller was removed 
+               from driver.
+
+      Impact:
+               None.
+
+
+version 7.60  April 19, 2004
+-------------------------------
+
+   1. Problem:
+               Driver might not detects link if RJ-45 cable has broken
+               pairs with Shasta family devices.
+
+      Cause:
+               Ethernet@WireSpeed is not enabled and Driver doesn't wait
+               long enough before declaring no link.
+
+      Change:
+               Driver to enable Ethernet@WireSpeed and waits longer before
+               declaring no link.
+
+      Impact:
+               Driver might takes longer to load when cable is not present
+               and/or loading on multiple NICs system.
+
+   2. Problem:
+               On certain corners, Bit-Error-Rate(BER) was higher than
+               desired when cable length was 70m or less.
+
+      Cause:
+               PHY related issue.
+
+      Change:
+               Applied the workaround for higher BER problem.
+
+      Impact:
+               5705 Family and later.
+
+   3. Problem:
+               CQ #9873: When the NIC is configured in Shasta Mac Mode,
+               the Speed LED stuck at 10 Mbps after the cable was moved
+               to different switches that has different speed set up.
+
+      Cause:
+               Driver did not update the setting of the MI Status
+               Register properly when speed is changed.
+
+      Change:
+               Driver update the setting of the MI Status Register 
+               according the changed speed.
+
+      Impact:
+               None.
+
+   Notes:
+   ========
+
+   1. This code base was merged with v7.14 to carry over its fixes of
+      problem 1 & 2.
+
+   2. The Lower Module is aligned with PXE v7.5.13.
+
+
+version 7.59  April 09, 2004
+-------------------------------
+
+
+   Enhancements:
+   =============
+
+   1. Change:
+               per CQ #9792: Add new banner.
+
+      Impact :
+               None.
+
+
+version 7.58  April 05, 2004
+-------------------------------
+
+
+   1. Problem:
+               Shasta shared traffic/link LED mode doesn't work. 
+
+      Cause:
+               There is a bug in Shasta A0/A1 (MAC block) where shared
+               traffic/link LED mode doesn't work correctly.
+
+      Change:
+               Driver to program the device to use this feature provided
+               by the PHY block.
+
+      Impact:
+               None.
+
+   Enhancement:
+   =============
+
+   1. Request:
+               LED mode is now programmed only by the boot code firmware.
+
+      Change:
+               Driver doesn't program LED mode for Shasta family devices.
+
+      Impact:
+               None.
+
+   Notes:
+   ========
+
+   1. The Lower Module is aligned with PXE v7.5.12.
+
+
+version 7.57  March 29, 2004
+-------------------------------
+
+
+   1. Problem:
+               CQ #9732: NDis2 failed when test with RPL on Windows NT. 
+
+      Cause:
+               Driver's Timer Tick's Stack is not big enough to
+               accommodate the call to the next in the chain of the
+               Timer Tick.
+
+      Change:
+               Driver calls the next in the chain of the Timer Tick out
+               side of its stack.
+
+      Impact:
+               DOS Driver only.
+
+
+   Enhancements:
+   =============
+
+   1. Change:
+               per CQ #9678: Add new banner.
+
+      Impact :
+               None.
+
+
+   Notes:
+   ========
+
+   1. This code base was merged with v7.13 to carry over its fixes but w/o
+      the CQ #9792 banner change.
+
+
+version 7.56  March 16, 2004
+-------------------------------
+
+
+   1. Problem:
+               CQ #9582: Link problems when forcing speeds on Cisco
+               Catalyst switch. 
+
+      Cause:
+               Driver forces selected speed before the PHY reset process
+               is completed.
+
+      Change:
+               Driver waits for the PHY reset process to be completed
+               before forcing the selected speed.
+
+      Impact:
+               None.
+
+   Notes:
+   ========
+
+   1. The CQ #9582 can not be re-produce with NDIS2 driver becauce it
+      cannot be dynamically load and unload.
+
+   2. This code base was merged with v7.12 to carry over its fixes.
+
+
+version 7.55  February 26, 2004
+-------------------------------
+
+
+   1. Problem:
+               CQ #9494 system hangs while loading NDIS2 on BCM5751/21 A1
+               silicon during a cold boot.
+ 
+      Cause:
+               BCM5721/51 A1 or newer silicon has fixes so that PCI Express
+               link is maintained after a GRC reset. Driver enabled this fix
+               while issuing GRC reset without realizing it was previously
+               disabled.
+
+      Change:
+               Driver to enable this fix before issue GRC reset.
+
+      Impact:
+               None.
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Enable H/W fixes for BCM5721/51.
+
+      Change :
+               Enable Rx FIFO fix.
+
+      Impact :
+               None.
+
+   Notes:
+   ========
+
+   1. The Lower Module is aligned with PXE v7.5.9.
+
+
+version 7.54  February 19, 2004
+-------------------------------
+
+
+   1. Problem:
+               System generates an NMI whenever driver issues software 
+               GRC reset.  
+
+      Cause:
+               BCM5751/21 A0 silicon device does not generate Completion TLP
+               associated with the last Configuration Write to the chipset. Due
+               to this abnormality, the chipset will generate a NMI as fatal
+               completion timeout error.
+
+      Change:
+               Added a software workaround in the driver so that core clock is
+               slowed down to 6.25MHz which will give some time for the PCI-E block 
+               to send back Completion TLP to the chipset. 
+
+      Impact:
+               None.
+
+   2. Problem:
+               After a GRC reset, link is dropped and therefore retrained with 
+               link partner. Link retrain might take up to 500ms. If device is
+               accessed before link retrain is complete, system might lock up
+               or encounter fatal errors. This change only applies to BCM5751/21 
+               (PCI express family) revision A0 devices.
+
+      Cause:
+               BCM5751/21 A0 silicon.
+
+      Change:
+               Changed chip reset routine to delay 500ms after A GRC reset.
+
+      Impact:
+               None.
+
+   3. Problem:
+               CQ #9240: Executing Ghost at 1Gbps using PC-DOS will freeze system.
+
+      Cause:
+               Driver's ISR stack was over-run due to re-entrances.
+
+      Change:
+               Increased stack size (64 Bytes).
+
+      Impact:
+               None.
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Add additional LED modes for BCM575x/2x family.
+
+      Change:
+               Changed to support new LED modes.
+
+      Impact:
+               None.
+
+   2. Request:
+               BCM5721/51 A1 or newer silicon has fixes so that PCI Express
+               link is maintained after a GRC reset.
+
+      Change:
+               Driver to enable this fix so that PCI express link doesn't drop.
+               
+      Impact:
+               None.
+
+   3. Request:
+               Banner change to NetLink (TM) for BCM5788 device.
+
+      Change:
+               Driver displays NetLink (TM) when load up on BCM5788 device.
+               
+      Impact:
+               None.
+ 
+   Notes:
+   ========
+
+   1. The Lower Module is aligned with PXE v7.5.8.
+
+
+version 7.53 January 10, 2004
+-------------------------------
+
+   1. Problem:
+               CQ #9077, CQ #9090, and CQ #9101: Driver will not load when PXE
+               is enabled.
+
+      Cause:
+               Driver uses of register during initialization to determine if the
+               NIC is in used by another instance of the driver was contaminated
+               when PXE is loaded.
+
+      Change:
+               Driver uses other register that is not conflict with PXE.
+
+      Impact:
+               None.
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Provide work-around in the driver for version of TCPIP stack that
+               does not recognize the 1's compliment checksum.
+
+      Change:
+               Modify only valid received TCPIP frame's checksum. Add keyword
+               FixCheckSumOff to turn off this work-around.
+
+      Impact:
+               None.
+ 
+   Notes:
+   ========
+
+   1. This code base was merged with v7.11 to carry over its fixes.
+   2. The Lower Module is aligned with PXE v7.5.4.
+
+
+Version 7.52 December 19, 2003
+-------------------------------
+
+   1. Problem:
+               CQ #8975 and CQ #9067: NDIS2 driver hangs and displays "interger
+               divive by 0".
+
+      Cause:
+               Driver initialize the use of NIC's core clock BEFORE enable the
+               PCI access, result with the loop count of zero for the Delay
+               routine.
+
+      Change:
+               Driver initialize the use of NIC's core clock AFTER enable the
+               PCI access.
+
+      Impact:
+               None.
+
+   Notes:
+   ========
+
+   1. This code base was merged with v7.10 to carry over its fixes.
+
+
+Version 7.51 November 26, 2003
+-------------------------------
+
+   1. Problem:
+               CQ #8943: NDIS2 driver is not picking up the right MAC Address.
+
+      Cause:
+               Missing one MAC register read due to source code condition
+               compilation.
+
+      Change:
+               Included complete read of the MAC address registers.
+
+      Impact:
+               None.
+
+   2. Problem:
+               CQ #8914: Ndis2 driver failed Read/Write stress test when there
+               are more than one UUT.
+
+      Cause:
+               Driver picked the wrong MAC address (CQ #8943) and uses the same
+               MAC address resulting duplicate MAC address on the LAN.
+
+      Change:
+               Included complete read of the MAC address registers.
+
+      Impact:
+               None.
+
+   3. Problem:
+               CQ #8911 & CQ #8918: NDIS2 driver fails to bind protocols with
+               5751 nic and takes 20-30 minutes to bind protocols.
+
+      Cause:
+               Delay value was too large for the current delay routine, which
+               uses the system's timer tick as one unit (54ms).
+
+      Change:
+               Driver uses NIC's core clock to calculate number of loop for the
+               delay routine to achieve approximate 1us as one unit.
+
+      Impact:
+               Driver will initializes faster.
+
+
+Version 7.50 November 21, 2003
+-------------------------------
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Add full support for BCM5751/21-based NICs/LOMs (PCI Express
+               interface).
+
+      Change:
+               The Lower Module is ported from PXE v7.5.2 (since PXE v6.2.4
+               ported at NDIS2 v6.41).
+
+      Impact:
+               None.
+   
+   Notes:
+   ========
+
+   1. No release for v7.15-v7.49. Adjust version number for new NICs support.
+
+
+version 7.14  April 19, 2004
+-------------------------------
+
+
+   1. Problem:
+               Driver might not detects link if RJ-45 cable has broken
+               pairs with Shasta family devices.
+
+      Cause:
+               Ethernet@WireSpeed is not enabled and Driver doesn't wait
+               long enough before declaring no link.
+
+      Change:
+               Driver to enable Ethernet@WireSpeed and waits longer before
+               declaring no link.
+
+      Impact:
+               Driver might takes longer to load when cable is not present
+               and/or loading on multiple NICs system.
+
+   2. Problem:
+               On certain corners, Bit-Error-Rate(BER) was higher than
+               desired when cable length was 70m or less.
+
+      Cause:
+               PHY related issue.
+
+      Change:
+               Applied the workaround for higher BER problem.
+
+      Impact:
+               5705 Family and later.
+
+
+version 7.13  April 09, 2004
+-------------------------------
+
+
+   1. Problem:
+               DOS NDis2 hangs when perform file copy and compare test on
+               some system.
+ 
+      Cause:
+               Driver's Timer Tick's Stack is not big enough to
+               accommodate the call to the next in the chain of the
+               Timer Tick.
+
+      Change:
+               Driver calls the next in the chain of the Timer Tick out
+               side of its stack.
+
+      Impact:
+               DOS Driver only.
+
+   Enhancement:
+   =============
+
+   1. Change:
+               per CQ #9792: Add new banner.
+
+      Impact :
+               None.
+
+
+version 7.12 March 13, 2004
+------------------------------
+
+   1. Problem:
+               CQ #9085: 2074 (Granite with OS/2) won't reconnect to the LAN
+               after dis/reconnect the cable.
+
+      Cause:
+               2074 utility doubled up the rate of the system's timer tick. The
+               Driver's MM_Wait routine is based off the system's timer tick.
+               This MM_Wait routine is used during LM_SetupPhy() to obtain the
+               correct line speed. With the MM_wait is now half of the original
+               time after the 2074 utility started, the driver was never able to
+               obtain the correct line speed when the cable was reconnected.
+
+      Change:
+               Driver uses NIC's core clock to calculate number of loop for the
+               MM_Wait()/MM_Stall() delay routine.
+
+      Impact:
+               None.
+
+   2. Problem:
+               CQ #9240: Executing Ghost at 1Gbps using PC-DOS will freeze system.
+
+      Cause:
+               Driver's ISR stack was over-run due to re-entrances.
+
+      Change:
+               Increased stack size (64 Bytes) and add Timer Tick's Stack (80B).
+
+      Impact:
+               None.
+
+   3. Problem:
+               CQ #9582: Link problems when forcing speeds on Cisco
+               Catalyst switch. 
+
+      Cause:
+               Driver forces selected speed before the PHY reset process
+               is completed.
+
+      Change:
+               Driver waits for the PHY reset process to be completed
+               before forcing the selected speed.
+
+      Impact:
+               None.
+
+   Notes:
+   ========
+
+   1. The CQ #9582 can not be re-produce with NDIS2 driver becauce it
+      cannot be dynamically load and unload.
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Banner change to NetLink (TM) for BCM5788 device.
+
+      Change:
+               Driver displays NetLink (TM) when load up on BCM5788 device.
+               
+      Impact:
+               None.
+
+
+version 7.11 January 9, 2004
+------------------------------
+
+   1. Problem:
+               Driver will not load when PXE is enabled.
+
+      Cause:
+               Driver uses of register during initialization to determine if the
+               NIC is in used by another instance of the driver was contaminated
+               when PXE is loaded.
+
+      Change:
+               Driver uses other register that is not conflict with PXE.
+
+      Impact:
+               None.
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Provide work-around in the driver for version of TCPIP stack that
+               does not recognize the 1's compliment checksum.
+
+      Change:
+               Modify only valid received TCPIP frame's checksum. Add keyword
+               FixCheckSumOff to turn off this work-around.
+
+      Impact:
+               None.
+
+
+version 7.10 December 18, 2003
+------------------------------
+
+   1. Problem:
+               CQ #9018: OS2 client - Cannot connect to server when LAA (Locally
+               Administered Address) is used.
+
+      Cause:
+               Type casting was set incorrectly when written to the MAC address
+               registers in the Set Station function.
+
+      Change:
+               Set type casting correctly when write to the MAC address registers
+               in the Set Station function.
+
+      Impact:
+               None.
+
+   2. Problem:
+               CQ #9015: NDIS2 DOS takes anywhere between 2-8 minutes to establish
+               link with 3Com Superstack 3 Switch (Model #3C16468).
+
+      Cause:
+               Driver unnecessarily reset the PHY when performing cable auto
+               sensing to load upon in case of use in multiple NICs system. This
+               causes the auto negotiation to continue after the Driver is armed
+               then the PHY Link Change Interrupt services this incomplete auto
+               negotiation and mistaken for the link lost then reset the PHY when
+               the link is recovered resulting the lengthy link fluctuation on some
+               switch.
+
+      Change:
+               Driver will not perform PHY reset when sensing for cable and in the
+               PHY Link Change Interrupt logic to include condition when auto
+               negotiation is completed.
+
+      Impact:
+               Driver will initialize faster when use in multiple NICs system.
+
+
+   Enhancement:
+   =============
+
+   1. Request:
+               Banner change to include NC10xx.
+
+      Change:
+               Sign on banner.
+
+      Impact:
+              None.
+
+
+version 7.09 October 27, 2003
+----------------------------
+
+   1. Problem:
+               CQ #8743: NDIS2 DOS failed to start the download image process
+               when using Ghost v7.5 to download image via multicast. The
+               Protocol in use was Symantec's MAC/DIS to Packet Driver Converter
+               over TCP/IP.
+
+      Cause:
+               Driver filtered 48-bit on the Multicast address set by the Ghost
+               server while it expects communication on 23-bit filtering of the
+               set Multicast address.
+
+      Change:
+               Driver filtered 23-bit of the set Multicast address.
+
+      Impact:
+               None.
+
+
+version 7.08 October 23, 2003
+----------------------------
+
+   1. Problem:
+               CQ #8663: NDIS2 DOS causes Ghost v7.5 to freeze when uploading
+               image via multicast. The Protocol in use was Symantec's MAC/DIS
+               to Packet Driver Converter over TCP/IP.
+
+      Cause:
+               Driver miss-used Transmission Confirm Counter when deferring
+               the Protocol's request to transmit while in Receive Look Ahead
+               up call and caused the system to hang when the extra Transmit
+               Confirm was made.
+
+      Change:
+               Driver responses with "REQUEST_QUEUED" on all Transmit Requests
+               from the Protocol and call Transmit Confirm if required at
+               Transmit Complete Interrupt.
+
+      Impact:
+               None.
+
+   2. Problem:
+               None.
+
+      Change:
+               PCI configuration data register (0xCFC) does NOT needed to be
+               preserve in Driver's PCI configuration Read and Write
+               subroutines. Removed the preserve of PCI configuration data
+               register (0xCFC) that was put in v7.05.
+
+      Impact:
+               This would remove unnecessary I/O cycles every time the driver
+               accesses the PCI configuration area.
+
+
+version 7.07 October 16, 2003
+----------------------------
+
+   1. Problem:
+               CQ #8631: When attempting to force the 100/Full or Half
+               with LineSpeed forced in protocol.ini while the switch is
+               set to AutoNeg. The driver's signon message indicates
+               "forced", but the switch reports 100 Full when it should
+               reports 100 Half.
+ 
+      Cause:
+               Driver configured the NIC properly but on some switch;
+               it's required a "line drop" to update the duplex status.
+
+      Change:
+               Driver toggled the SuperIsolate bit to simulate a
+               "line drop" that allows the far-end to adjust to the forced
+               speed and duplex.
+
+      Impact:
+               None.
+
+
+version 7.06 October 13, 2003
+----------------------------
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Added new device ID and displays banner properly.
+
+      Change:
+               Added new device ID and displays banner properly.
+
+      Impact:
+               None.
+
+
+Version 7.05 October 03, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem:
+               CQ #8528: Linespeed "Undeterminable" is displayed when driver
+               loads using 5705F connected to 1G Switch.
+ 
+      Cause:
+               Driver was not configure properly for 5705F.
+
+      Change:
+               Driver initializes correctly for 5705F.
+
+      Impact:
+               none.
+
+   2. Problem:
+               PCI configuration data register (0xCFC) was not preserve in Driver's
+               PCI configuration Read and Write subroutines.
+
+      Change:
+               Driver preserves PCI configuration data register (0xCFC) also.
+
+      Impact:
+               none.
+
+
+version 7.04 September 23, 2003
+----------------------------
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Add support for 5705F and displays banner properly.
+
+      Change:
+               Add support for 5705F and displays banner properly.
+
+      Impact:
+               None.
+
+   Fixes:
+   ========
+
+   1. Problem:
+               CQ #8424: 5704s will not pass traffic when "FullSize"
+               parameter is used.
+
+      Cause:
+               When "FullSize" keyword is used, the driver will not be 
+               download its own firmware. So it is NOT needed to command
+               the firmware to use AUTONEG or 1000Mbps FULL for fiber NIC.
+
+      Change:
+               When "FullSize" keyword is used Driver is NOT to command the
+               firmware.
+
+     Impact:
+               Fiber NIC.
+
+
+Version 7.03 September 03, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem:
+               CQ #8407: NDIS2 OS2 - Connection is lost under heavy
+               IP/NetBEUI stress.
+
+      Cause:
+               Driver's Middle Module had some debug codes to verify its 
+               configuration space access sequence got corrupted. These codes
+               added overhead to its normal timing and this additional time
+               caused NetBEUI to terminate its communication to the driver
+               while the driver is under enormous stress.
+
+      Change:
+               Remove the debug codes.
+
+     Impact:
+               None.
+
+
+Version 7.02 August 29, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem:
+               CQ #8402: NDIS2 DOS/OS2 - Cannot pass traffic on fiber NIC.
+
+      Cause:
+               Driver's Lower Module required to instruct firmware (v1.14.0)
+               to use AUTONEG or 1000Mbps FULL for fiber NIC.
+
+      Change:
+               Driver's Lower Module commands the firmware to use AUTONEG or
+               1000Mbps FULL for fiber NIC.
+
+     Impact:
+               Fiber NIC.
+
+
+Version 7.01 August 29, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem:
+               Driver uses zero MAC address on 5700 & 5701-based NIC/LOM
+               when reads it from Serial EEPROM.
+
+      Cause:
+               Serial EEPROM routine has a bug, which causes MAC address in
+               the serial EEPROM cannot be read correctly.
+
+      Change:
+               Fixed serial EEPROM driver so that MAC address can be read
+               correctly.
+
+      Impact:
+               None.
+
+    Notes:
+    ========
+
+    1. This is a "theoretical problem" only.
+
+
+Version 7.00 August 27, 2003
+-------------------------
+
+   Fixes:
+   ========
+
+   1. Problem:
+               CQ #8360: Driver will load on the first copper port that is
+               detected with a link. This feature does not work on fiber
+               NIC.
+
+      Cause:
+               This feature is not implement for fiber NIC.
+
+      Change:
+               Enable this feature for fiber NIC.
+
+      Impact:
+               none.
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Improve bit error performance of 5703AX and 5704AX when used
+               with long cable lengths.
+      Change:
+               Program the phy's ADC and Gamma registers to more optimum 
+               settings.
+      Impact:
+               None.
+
+   2. Request:
+               Improve Serdes drive levels on 5704s.
+
+      Change:
+               Programed the serdes config registers so that SerDes' drive 
+               transmission level is 1.2V. This modification was made in the
+               driver download firmware v1.14.0.
+      Impact:
+               None. 
+
+   Notes:
+   ========
+
+   1. Firmware v1.14.0 is used in place of v1.9.0 was used since DOS ODI v6.07.
+   2. No release for v6.47-v6.99. Adjust version number for Software Rel 6.8.
+
+
+Version 6.47 Aug 07, 2003
+----------------------------
+****************************
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Enable hardware fixes in 5704_Bx parts for known 5704 Ax errata.
+      Change:
+               Added code to driver init routines to enable hardware fixes in
+               5704 B0 silicon.  See 5704 errata for more details info about
+               the changes/fixes in B0 silicon.
+
+      Impact:
+               None.
+
+   Fixes:
+   ========
+
+   1. Problem:
+               CQ #8240: NDIS2 DOS driver causes divide over flow if IRQ is
+               disabled in BIOS.
+     
+      Cause:
+               Driver still loads when BIOS provided with an invalid IRQ.
+
+      Change:
+               Driver only loads when BIOS provided with IRQ value between
+               2 and 15.
+
+      Impact:
+               none.
+
+   2. Problem:
+               CQ #8205: NDIS2 OS2 driver causes system to idle approximately
+               1 minute after NDIS2 OS2 driver banner shows when binding
+               with IBM IEEE 802.2 protocol.
+     
+      Cause:
+               IBM IEEE 802.2 protocol calls ResetMAC function after driver is
+               already initialized the NIC. The driver does not support this
+               request but returns SUCCESS.
+
+      Change:
+               Driver returns NOT_SUPPORTED when ResetMAC is called.
+
+      Impact:
+               none.
+
+   3. Problem:
+               CQ #8265: When OS2 is boot up from floppy, NDIS2 OS2 driver
+               causes the system to trap when it is connected to CISCO Catalyst
+               3550 switch.
+     
+      Cause:
+               CISCO switch transmits Multicast discovery protocol packets
+               while the Protocol and the Driver are binding.
+
+      Change:
+               Driver set Multicast filtering after the binding process.
+
+      Impact:
+               none.
+
+   4. Problem:
+               NDIS2 driver uses same MAC address for both ports on 5704 NIC
+               when reads it from NVRAM.
+     
+      Cause:
+               Driver uses the same offset for both ports.
+
+      Change:
+               Driver uses correct offset for the second port.
+
+      Impact:
+               none.
+
+
+Version 6.46 June 25, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem:
+               (CQ #8086) NDIS2 DOS intermittent failed on RPL test when
+               using 5702 NIC. This problem traced back to v6.40 and
+               v5.00-v5.22. However, V5.23-v6.30 had no problem.
+     
+      Cause:
+               The current Download Firmware (v1.9.0) combines with Tag
+               Status method of handling interrupt causes the RPL Protocol
+               waits for a response for a packet that was transmitted while
+               processing the receiving packet in ReceiveLookahead.
+
+      Change:
+               Driver queue all transmission requests during up-call to
+               ReceiveLookahead and returns REQUEST_QUEUED.
+
+      Impact:
+               Protocol that chooses to transmit while processing a
+               receiving packet in ReceiveLookahead such as Netbeui and RPL.
+
+
+   Enhancements:
+   =============
+
+   1. Change:
+               Added NoTagStatus Keyword in the PROTOCOL.INI to set Driver NOT
+               to utilize the default method Tag Status of handling interrupts
+               for none 5700 NIC.
+
+      Impact:
+               Helps stabilize on certain platforms when using with protocol
+               such as Netbeui and RPL.
+
+
+Version 6.45 June 23, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem:
+               (CQ #7988) OS2 APING stress test, the APPC conversation
+               failed. There were two issues in this problem.
+
+      Cause 1:
+               Index BX register was changed while Driver copying transmit
+               data fragments when Protocol delivered a Physical addressed
+               data fragment pointer.
+
+      Change 1:
+               Driver disables interrupts and preserves the BX register
+               before makes the call to OS2 Device Helpers to map the
+               Physical addressed data fragment pointer to a Selector.
+
+      Impact 1:
+               Driver's transmission logic for OS2 only.
+
+      Cause 2:
+               Driver miss-handled OUT_OF_RESOURCE that was returned from
+               the Protocol after the ReceiveLookahead call.
+
+      Change 2:
+               Driver will not turns Indication Off as before but simply
+               continue and makes no effort to re-deliver the packet.
+
+      Impact 2:
+               Driver's receive logic.
+
+   2. Problem:
+               OS2 system crashed when using IBM TCP/IP ping a large
+               packet size (14500 bytes).
+
+      Cause:
+              Protocol delivered zero byte count in the data fragment.
+              Driver does not copy zero byte count data fragment but
+              uses the number of data fragment supplies by the Protocol.
+
+      Change:
+              Driver calculates the number of data fragment copied
+              instead of use the number delivered from the Protocol.
+
+      Impact:
+               Driver's transmission logic.
+
+
+Version 6.44 May 21, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem:
+               (CQ #7839) (CQ #7840) When connected to a hub, a
+               momentary disconnect will cause to lose the network
+               connection until the driver is reloaded.
+
+      Cause:
+               The NIC does not generates PHY Change Interrupt after
+               the PHY Reset when the link is first lost.
+
+      Change:
+               Driver preserves and restores Auto-negotiation
+               advertisement register after the PHY Reset.
+
+      Impact:
+               None.
+
+   2. Problem:
+               (CQ #7843) User try to force 1G.
+
+      Cause:
+              Driver allows parameter to be set.
+
+      Change:
+              Driver will performs Auto-negotiation when LineSpeed is
+              set to 1000.
+
+      Impact:
+               None.
+
+
+Version 6.43 May 11, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem:
+               (CQ #7677) OS2 system crashes when uses 5700 Ax and Bx
+               or FullSize mode.
+
+      Cause:
+               Driver provided incorrect Global Descriptor Table to OS2
+               when called to map to its Physical area.
+
+      Change:
+               Driver obtains correct Global Descriptor Table to OS2
+               when called to map to its Physical area during
+               initialization.
+
+      Impact:
+               5700 Ax & Bx or runs in FullSize Mode in OS2.
+
+
+   2. Problem:
+               (CQ #7683) Intermittently slow with BCM5704 Serdes/
+               CIOBE Serdes.
+
+      Cause:
+               Firmware (v1.8.0) performs autonegotiation when link is
+               up and hardware autonegotiation logic indicates AUTONEG
+               is completed.
+
+      Change:
+               Changed the firmware (v1.9.0) so that it will not
+               perform autonegotiation when link is up and hardware 
+               autonegotiation logic indicates AUTONEG complete.
+
+      Impact:
+               5704 Serdes/CIOBE Serdes.
+
+
+   3. Problem:
+               (CQ #7718) Link detection intermittently fails when ASF
+               is enabled. 
+
+      Cause:
+               Contention with ASF firmware polls for PHY registers
+               during PHY reset routine with PHY lockup Work-Around.
+
+     Change:
+               Driver stops ASF firmware before accessing PHY during
+               initialization. 
+
+      Impact:
+               When ASF is enabled, link establishment will take twice
+               as long when ASF is disabled.
+
+
+   4. Problem:
+               (CQ #7648) Fixed a problem where dynamic 10/100 or
+               10/100/1000 PHY auto-neg advertising based on GPIO2 state
+               might not work correctly and appears to take a long time
+               to re-establish the link. 
+
+     Cause:
+               This issue was introduced when the PHY lockup workaround
+               was added. This problem only occurs on the platform where
+               GPIO2 state is used for dynamic PHY auto-neg.
+
+      Change: 
+               Changed the PHY lockup workaround code so that it restores 
+               AUTONEG configuration.
+
+      Impact:
+               None.
+
+   5. Problem:
+               (CQ #7706) Fixed a problem where driver would reports
+               the forced LineSpeed when there is no cable detected.
+
+      Cause:
+              Driver was not checking for link when LineSpeed and Duplex
+              were forced.
+
+      Change: 
+              Driver checks for link always.
+ 
+      Impact:
+               None.
+
+   6. Problem:
+               OS2 system hangs when NIC is sharing interrupts. This was
+               introduced since v5.29.
+
+      Cause:
+               Driver does EOI on other interrupt.
+
+      Change: 
+               Driver does EOI on its own interrupt only.
+
+      Impact:
+               OS2 driver only.
+
+
+Version 6.42 April 29, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem:
+               The PHY lockup problem described in v6.35 Fix #1 below
+               theoretically can affect other PHY cores in 5703 and 5705. 
+
+      Cause:
+               Hardware bug in the PHY core. Probability of lockup is
+               extremely small.
+
+      Change:
+               Expanded the lockup detection and recovery code to 5703,
+               5704, and 5705. Also changed the driver to do a PHY reset
+               on link down.
+
+      Impact:
+               5703 and 5704.
+
+
+   2. Problem:
+               (CQ #7658) (CQ #7660) OS2 system crashes when uses 5703,
+               5703S and OS2 system cannot pass traffic with 5704, 5704S.
+
+      Cause:
+               Download Firmware's length was not set correct for OS2.
+
+      Change:
+               Set the Download Firmware's length accordingly.
+
+      Impact:
+               5703, 5703S, 5704 and 5704S.
+
+
+   3. Problem:
+               (CQ #7642) Driver cannot detects link change status
+               when driver first initialized without cable attached.
+
+      Cause:
+               When driver initialized without cable attached, driver 
+               does not enable Link Change Status Interrupt.
+
+      Change:
+               Enable Link Change Status Interrupt when initialized even
+               without cable.
+
+      Impact:
+               None.
+
+   4. Problem:
+               (CQ #7648) When the cable is disconnected and reconnected,
+               its takes longer than expected to re-establish link.
+
+      Cause:
+               When the cable is reconnected, driver runs Setup PHY with
+               long delay.
+
+      Change:
+               Reduce the delay time in Setup PHY routine.
+
+      Impact:
+               None.
+
+
+Version 6.41 April 25, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem: 
+               (CQ #6467) Intermittently, 5704S Fiber NICs cannot pass traffic when connect
+               3COM SuperStack 4900sx after a system-soft reset.
+      Cause:
+               Auto-Negotiation timing.
+   
+      Change:
+               The fix was in the firm ware that gets download during initialization.
+
+      Impact:
+               5704S Fiber.
+
+   Enhancements:
+   =============
+
+   1. Request:
+               Added support for dynamic 10/100 or 10/100/1000 phy auto-neg
+               advertising for certain platforms.
+
+      Change:
+               Added a check for the state of GPIO2 during link change events 
+               and adjust auto-neg capability advertising accordingly.
+
+      Impact:
+               None.
+
+   Notes:
+   ========
+
+   1. The code base for this version is from v6.40 with the 5704 PHY lock up work-around
+      and zero MAC address fixes in v6.35.
+   2. The Lower Module is ported from PXE v6.2.4.
+
+
+Version 6.35 April 18, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem: 
+               In some extremely rare situations, 5704/CIOBE copper NICs may not link up
+               after a PHY reset.
+      Cause:
+               On some 5704/CIOBE PHY cores, there is a small probability of lock up after
+               a PHY reset.
+      Change:
+               Added 5704/CIOB-E copper support.
+               Added code to detect PHY lock up after a PHY reset and reset again if lock
+               up is detected.
+      Impact:
+               5704/CIOB-E copper.
+
+   Notes:
+   ========
+
+   1. The code base for this version is from v6.34.
+
+
+Version 6.34 April 18, 2003
+----------------------------
+
+   Fixes:
+   ========
+
+   1. Problem: 
+               In some extremely rare situations, 5704/CIOBE copper NICs may not link up
+               after a PHY reset.
+      Cause:
+               On some 5704/CIOBE PHY cores, there is a small probability of lock up after
+               a PHY reset.
+      Change:
+               Removed 5704/CIOB-E copper support.
+      Impact:
+               5704/CIOB-E copper.
+
+   2. Problem: 
+               Driver Intermittently using a MAC address of all zeros.
+      Cause:
+               In some rare timing related situations, the Firmware is behind in providing
+               the MAC address for the Driver at the MAC Control Registers.
+      Change:
+               Driver will get the MAC address from NVRAM when the MAC address read from the
+               MAC Control Registers is all zeros.
+      Impact:
+               Code size increased by 944 bytes.
+
+   Notes:
+   ========
+
+   1. The code base for this version is from v6.33.
+
+
+03/20/03 - v6.40-
+        Added 5788, 5704 Fiber & 5700 supports.
+        Support 5700 AX & BX using full size mode (48KB more-total 83KB).
+        Added keyword FullSize.
+        Added feature to detect and load on device that have cable first.
+        No release for v6.34-v6.39
+
+03/05/03 - v6.33-
+        Removed 5700 support.
+
+02/20/03 - v6.32-
+        Fixed intermittent error in EMM386 introduced since v5.25.
+        Fixed problem of identify the second 5704 on the same system.
+        Fixed loss connection during file copy with 5700 in 10MB.
+        Removed 5704 fiber support. 
+
+02/15/03 - v6.31-
+        Fixed problem with forced LineSpeed and Duplex of new PXE's LM.
+
+02/12/03 - v6.30-
+	Updated with PXE's LM v6.0.3 and have following fixes:
+           1) Fix bug in Transmit routine that did not preserve EAX register causing  
+              intermittent problems when running with DOS-Extender Applications.
+           2) Fix passing traffic problem with 5700 B0&B2.
+           3) Fix "security flaw" in packet padding.
+           4) Make some "branding" changes.
+           5) Add recognition of new Device IDs for 5705/5901 A2/A3.
+           6) Merged source code with DOS and OS2.
+
+02/05/03 - v6.29-
+        Enabled 5704.
+        No release for v5.29-v6.18.
+
+01/28/03 - v5.28-
+        Added key word NodeAddress in Protocol.ini.
+        Resolved duplicate name if driver loaded more than once to support multiple
+        adapters.
+
+01/23/03 - v5.27-
+        Add Set Station Address function.
+        Support multiple adapters by recognize the previously loaded driver(s).
+        No DOS release.
+
+01/20/03 - v5.26-
+        Fix a Tx/Rx HW race condition where only Tx was reported with forcing
+        Status Block to update periodically (every 55ms).
+        No OS2 release.
+
+01/17/03 - v5.25-
+        EOI before handle own interrupt.
+        Correction releasing transmission resources logic.
+        Fix a Tx/Rx HW race condition where only Tx was reported.
+        No OS2 release.
+
+01/02/03 - v5.24-
+        Remove 5704, added Fast Ethernet Banner, and enable ClockRun support
+        for 5705.
+        No OS2 release.
+
+12/13/02 - v5.23-
+        Updated with PXE's LM v3.1.25 and have following fixes:
+           1) Firmware handles links negotiation for fiber.
+           2) Fix bug in ISR that will cause system to lockup when other device
+              shared ISR don't have share-interrupt signature. This bug was
+              introduced since v5.00.
+           3) Speed correction for 5705FE.
+           4) Add recognitions for 5702/3 A3 and 5782.
+
+12/04/02 - v5.22-
+        Back off Tagged Status. It causes intermittent problem when running
+        with Netbeui.
+
+11/25/02 - v5.21-
+        Fix problem with Network disconnection.
+        Used Tagged Status.
+
+10/25/02 - v5.20-
+        Updated with PXE's LM v3.1.18.
+        Back off EOI before handle own interrupt.
+        Fix performance issue.
+        Fixed problem with forced LineSpeed and Duplex.
+        Fixed problem with EMM386 for 5705.
+        Fixed problem with system appeared to hang when cable was removed.
+        No release for v5.01-v5.19.
+
+10/09/02 - v5.00 - OS2 only
+        Fixed problem with system appeared to hang when cable was removed.
+
+09/24/02 - v5.00- DOS only
+        Fixed problem with ASF enabled.
+        Updated with PXE's LM v3.1.14.
+        Fixed problem with RIS Client Installation.
+        EOI before handle own interrupt.
+        Added 5704 Fiber support.
+
+08/13/02 - v3.07-
+        Added 5705 & 5901 support.
+        Used PXE v3.1.5 's LM.
+
+08/13/02 - v3.06-
+        Removed Alpha Driver Label.
+
+08/01/02 - v3.06- Alpha Driver
+        Fixed problem with EMM386.
+
+07/24/02 - v3.05- Alpha Driver
+        Used PXE's LM.
+   
+07/23/02 - v3.04- Alpha Driver
+        Clean out NIC's Status Block during initialization to prevent spur-interrupt after
+        initialization.
+
+07/17/02 - v3.04- Alpha Driver
+	Slim down Host memory used by adpater (dropped 48K memory foot print).
+        Hanle Transmit Segment equal to 0 for OS2 Granite trap.
+
+06/19/02 - v3.03-
+        Fixed problem with the RPL boot up, the driver hangs while downloading file image.
+        The Boot Block Configuration file *.cnf MUST specify in the DRV Type's second field
+        the additional memory (53KB-60KB) used by the driver as follows:
+
+         DRV BBLOCK\NDIS\B57.DOS ~ 53 ~
+
+        Block re-entrance during Interrupt handler loop in OS2 driver.
+
+05/23/02 - v3.02-
+        Fixed a low performance problem with BCM5701 Serdes LOMs with Copper Trace
+        media. As in the PXE v2.1.2.
+
+05/17/02 - v3.01-
+        Port number correction.
+
+05/15/02 - v3.00-
+        Added support for 5704.
+
+07/12/02 - v1.12-
+        Fixed problem with the RPL boot up, the driver hangs while downloading file image.
+        The Boot Block Configuration file *.cnf MUST specify in the DRV Type's second field
+        the additional memory (53KB-60KB) used by the driver as follows:
+
+         DRV BBLOCK\NDIS\B57.DOS ~ 53 ~
+
+        Block re-entrance during Interrupt handler loop in OS2 driver.
+        Hanle Transmit Segment equal to 0 for OS2 Granite trap.
+
+        Fixed a low performance problem with BCM5701 Serdes LOMs with Copper Trace
+        media. As in the PXE v2.1.2.
+
+        Port number correction.
+
+05/10/02 - v1.11-
+        Minor Modification to accommodate IBM IEEE 802.2 Protocol.
+
+04/29/02 - v1.10-
+        Drivers allocate system's memory for adapter use to reduce the file size.
+
+04/22/02 - v1.09-
+        Removed unused adapter's specific features.
+
+04/19/02 - v1.08- 
+        1. Latest LM from ODI16 v1.17 that have following fixes:
+            a) DMA once bit with PCI-X
+            b) LINK polarity bit for 5703/02.
+            c) Removed the runt packet configuration setup.
+            d) The PHY ADC Decimator fix.
+            e) Additional delays are needed during PCI config B2B access.
+            f) 40us delay after GPIO access.
+        3. Added PortNum Keyword.
+        4. New banner displays other NICS present in the system (up to 8).
+        5. Support up to 4 adapters.
+        6. Os2 Traps during Fibre Auto-Negotiation.
+
+04/03/02 - v1.07- 
+        Removed debug statements conflict with retail OS/2 kernel.
+
+03/27/02 - v1.06- 
+        Fixed inconsistent Fibre Auto-Negotiation.
+
+03/25/02 - v1.05- 
+	Fixed high data rate Netbeui protocol's flowcontrol, Added Fiber LED control,
+        and fixed locked up when cable is disconnected and re-connected during file
+        transfer.
+
+03/07/02 - v1.04- 
+        Added 16a6, 16a7, 164d device ids. Drivers utilized ODI16 v1.15's LM supports
+        nic send bds and wirespeed.
+
+02/25/02 - v1.03- 
+        Added LineSpeed, Duplex, and FuncNum keywords.
+
+02/08/02 - v1.02- 
+	Fixed BusNum and DevNum keywords to pickup the assigned adapter when there
+	are more than one adapter present. Utilized ODI16 v1.14's LM modules.
+
+02/07/02 - v1.01- 
+	Add OS2 support. Current drivers does not support any Ax firm ware fixes.
+
+02/06/02 - v1.00- 
+	First Engineering Release.

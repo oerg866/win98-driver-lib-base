@@ -2,7 +2,8 @@
 ;NDIS2 Wrapper INF v2.0
 ;(C) 2026 Eric Voirin (oerg866@googlemail.com)
 ;http://github.com/oerg866/ndis2infer9x
-;Command Line: [ndis2infer9x.py --rel --lookup --dir broadcom_nextreme --out bcmnend2.inf --id 14e4:165F --id 14e4:1657 --id 14e4:16B1 --id 14e4:16B5 --id 14e4:16B0 --id 14e4:16B4 --id 14e4:16B2 --id 14e4:16B6 --id 14e4:1691 --id 14e4:165C --id 14e4:1656 --id 14e4:1655 --id 14e4:16A0 --id 14e4:1688 --id 14e4:1699 --id 14e4:1694 --id 14e4:1692 --id 14e4:1690 --id 14e4:165B --id 14e4:1698 --id 14e4:1684 --id 14e4:1681 --id 14e4:1680 --id 14e4:165A --id 14e4:1712 --id 14e4:1713 --id 14e4:169A --id 14e4:167A --id 14e4:1672 --id 14e4:167B --id 14e4:1673 --id 14e4:1674 --id 14e4:167F --id 14e4:1693 --id 14e4:169B --id 14e4:166A --id 14e4:166B --id 14e4:1600 --id 14e4:1601 --id 14e4:1679 --id 14e4:1678 --id 14e4:1669 --id 14e4:1668 --id 14e4:16F7 --id 14e4:16FD --id 14e4:16FE --id 14e4:16DD --id 14e4:169D --id 14e4:167E --id 14e4:167D --id 14e4:167C --id 14e4:1677 --id 14e4:1676 --id 14e4:1659 --id 14e4:1658 --id 14e4:166E --id 14e4:169C --id 14e4:16C7 --id 14e4:16C6 --id 14e4:1696 --id 14e4:166D --id 14e4:16A8 --id 14e4:170E --id 14e4:170D --id 14e4:165E --id 14e4:165D --id 14e4:1654 --id 14e4:1653 --id 14e4:16A7 --id 14e4:16A6 --id 14e4:164D --id 14e4:1648 --id 14e4:1647 --id 14e4:1646 --id 14e4:1645 --id 14e4:1644]
+;Command Line: [ndis2infer9x.py --rel --lookup --dir broadcom_nextreme --out bcmnend2.inf --ver 08/16/2013 16.2.0.0 --id 14e4:16F3 --id 14e4:1665 --id 14e4:1687 --id 14e4:1683 --id 14e4:1641 --id 14e4:1642 --id 14e4:1643 --id 14e4:16B7 --id 14e4:16B3 --id 14e4:1686 --id 14e4:1682 --id 14e4:165F --id 14e4:1657 --id 14e4:16B1 --id 14e4:16B5 --id 14e4:16B0 --id 14e4:16B4 --id 14e4:16B2 --id 14e4:16B6 --id 14e4:1691 --id 14e4:165C --id 14e4:1656 --id 14e4:1655 --id 14e4:16A0 --id 14e4:1688 --id 14e4:1699 --id 14e4:1694 --id 14e4:1692 --id 14e4:1690 --id 14e4:165B --id 14e4:1698 --id 14e4:1684 --id 14e4:1681 --id 14e4:1680 --id 14e4:165A --id 14e4:1712 --id 14e4:1713 --id 14e4:169A --id 14e4:167A --id 14e4:1672 --id 14e4:167B --id 14e4:1673 --id 14e4:1674 --id 14e4:167F --id 14e4:1693 --id 14e4:169B --id 14e4:166A --id 14e4:166B --id 14e4:1600 --id 14e4:1601 --id 14e4:1679 --id 14e4:1678 --id 14e4:1669 --id 14e4:1668 --id 14e4:16F7 --id 14e4:16FD --id 14e4:16FE --id 14e4:16DD --id 14e4:169D --id 14e4:167E --id 14e4:167D --id "14e4:167C:::NetXtreme BCM5750M Gigabit Ethernet" --id 14e4:1677 --id "14e4:1676:::NetXtreme BCM5750 Gigabit Ethernet" --id 14e4:1659 --id "14e4:1658:::NetXtreme BCM5720 Gigabit Ethernet" --id 14e4:166E --id 14e4:169C --id 14e4:16C7 --id 14e4:16C6 --id 14e4:1696 --id 14e4:166D --id 14e4:16A8 --id 14e4:170E --id 14e4:170D --id 14e4:165E --id 14e4:165D --id 14e4:1654 --id 14e4:1653 --id 14e4:16A7 --id 14e4:16A6 --id 14e4:164D --id 14e4:1648 --id 14e4:1647 --id 14e4:1646 --id 14e4:1645 --id 14e4:1644]
+DriverVer = 08/16/2013, 16.2.0.0
 LayoutFile = layout.inf
 Signature = $CHICAGO$
 Class = Net
@@ -12,82 +13,93 @@ Provider = %VENDOR%
 %VENDOR% = ND2WRAP
 
 [ND2WRAP]
-"NetXtreme BCM5720 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap0.ndi,PCI\VEN_14E4&DEV_165F
-"NetXtreme BCM5719 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap1.ndi,PCI\VEN_14E4&DEV_1657
-"NetLink BCM57781 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap2.ndi,PCI\VEN_14E4&DEV_16B1
-"NetLink BCM57785 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap3.ndi,PCI\VEN_14E4&DEV_16B5
-"NetXtreme BCM57761 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap4.ndi,PCI\VEN_14E4&DEV_16B0
-"NetXtreme BCM57765 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap5.ndi,PCI\VEN_14E4&DEV_16B4
-"NetLink BCM57791 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap6.ndi,PCI\VEN_14E4&DEV_16B2
-"NetLink BCM57795 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap7.ndi,PCI\VEN_14E4&DEV_16B6
-"NetLink BCM57788 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap8.ndi,PCI\VEN_14E4&DEV_1691
-"NetXtreme BCM5724 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap9.ndi,PCI\VEN_14E4&DEV_165C
-"NetXtreme BCM5718 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap10.ndi,PCI\VEN_14E4&DEV_1656
-"NetXtreme BCM5717 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap11.ndi,PCI\VEN_14E4&DEV_1655
-"NetLink BCM5785 Fast Ethernet (NDIS2)" = nd2wrap12.ndi,PCI\VEN_14E4&DEV_16A0
-"NetXtreme BCM5761 10/100/1000BASE-T Ethernet (NDIS2)" = nd2wrap13.ndi,PCI\VEN_14E4&DEV_1688
-"NetLink BCM5785 Gigabit Ethernet (NDIS2)" = nd2wrap14.ndi,PCI\VEN_14E4&DEV_1699
-"NetLink BCM57790 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap15.ndi,PCI\VEN_14E4&DEV_1694
-"NetLink BCM57780 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap16.ndi,PCI\VEN_14E4&DEV_1692
-"NetXtreme BCM57760 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap17.ndi,PCI\VEN_14E4&DEV_1690
-"NetXtreme BCM5723 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap18.ndi,PCI\VEN_14E4&DEV_165B
-"NetLink BCM5784M Gigabit Ethernet PCIe (NDIS2)" = nd2wrap19.ndi,PCI\VEN_14E4&DEV_1698
-"NetXtreme BCM5764M Gigabit Ethernet PCIe (NDIS2)" = nd2wrap20.ndi,PCI\VEN_14E4&DEV_1684
-"NetXtreme BCM5761 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap21.ndi,PCI\VEN_14E4&DEV_1681
-"NetXtreme BCM5761e Gigabit Ethernet PCIe (NDIS2)" = nd2wrap22.ndi,PCI\VEN_14E4&DEV_1680
-"NetXtreme BCM5722 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap23.ndi,PCI\VEN_14E4&DEV_165A
-"NetLink BCM5906 Fast Ethernet PCI Express (NDIS2)" = nd2wrap24.ndi,PCI\VEN_14E4&DEV_1712
-"NetLink BCM5906M Fast Ethernet PCI Express (NDIS2)" = nd2wrap25.ndi,PCI\VEN_14E4&DEV_1713
-"NetLink BCM5786 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap26.ndi,PCI\VEN_14E4&DEV_169A
-"NetXtreme BCM5754 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap27.ndi,PCI\VEN_14E4&DEV_167A
-"NetXtreme BCM5754M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap28.ndi,PCI\VEN_14E4&DEV_1672
-"NetXtreme BCM5755 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap29.ndi,PCI\VEN_14E4&DEV_167B
-"NetXtreme BCM5755M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap30.ndi,PCI\VEN_14E4&DEV_1673
-"NetXtreme BCM5756ME Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap31.ndi,PCI\VEN_14E4&DEV_1674
-"NetLink BCM5787F Fast Ethernet PCI Express (NDIS2)" = nd2wrap32.ndi,PCI\VEN_14E4&DEV_167F
-"NetLink BCM5787M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap33.ndi,PCI\VEN_14E4&DEV_1693
-"NetLink BCM5787 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap34.ndi,PCI\VEN_14E4&DEV_169B
-"NetXtreme BCM5780 Gigabit Ethernet (NDIS2)" = nd2wrap35.ndi,PCI\VEN_14E4&DEV_166A
-"NetXtreme BCM5780S Gigabit Ethernet (NDIS2)" = nd2wrap36.ndi,PCI\VEN_14E4&DEV_166B
-"NetXtreme BCM5752 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap37.ndi,PCI\VEN_14E4&DEV_1600
-"NetXtreme BCM5752M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap38.ndi,PCI\VEN_14E4&DEV_1601
-"NetXtreme BCM5715S Gigabit Ethernet (NDIS2)" = nd2wrap39.ndi,PCI\VEN_14E4&DEV_1679
-"NetXtreme BCM5715 Gigabit Ethernet (NDIS2)" = nd2wrap40.ndi,PCI\VEN_14E4&DEV_1678
-"NetXtreme 5714S Gigabit Ethernet (NDIS2)" = nd2wrap41.ndi,PCI\VEN_14E4&DEV_1669
-"NetXtreme BCM5714 Gigabit Ethernet (NDIS2)" = nd2wrap42.ndi,PCI\VEN_14E4&DEV_1668
-"NetXtreme BCM5753 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap43.ndi,PCI\VEN_14E4&DEV_16F7
-"NetXtreme BCM5753M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap44.ndi,PCI\VEN_14E4&DEV_16FD
-"NetXtreme BCM5753F Fast Ethernet PCI Express (NDIS2)" = nd2wrap45.ndi,PCI\VEN_14E4&DEV_16FE
-"NetLink BCM5781 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap46.ndi,PCI\VEN_14E4&DEV_16DD
-"NetLink BCM5789 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap47.ndi,PCI\VEN_14E4&DEV_169D
-"NetXtreme BCM5751F Fast Ethernet PCI Express (NDIS2)" = nd2wrap48.ndi,PCI\VEN_14E4&DEV_167E
-"NetXtreme BCM5751M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap49.ndi,PCI\VEN_14E4&DEV_167D
-%DEVICE% = nd2wrap50.ndi,PCI\VEN_14E4&DEV_167C
-"NetXtreme BCM5751 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap51.ndi,PCI\VEN_14E4&DEV_1677
-%DEVICE% = nd2wrap52.ndi,PCI\VEN_14E4&DEV_1676
-"NetXtreme BCM5721 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap53.ndi,PCI\VEN_14E4&DEV_1659
-%DEVICE% = nd2wrap54.ndi,PCI\VEN_14E4&DEV_1658
-"570x 10/100 Integrated Controller (NDIS2)" = nd2wrap55.ndi,PCI\VEN_14E4&DEV_166E
-"NetXtreme BCM5788 Gigabit Ethernet (NDIS2)" = nd2wrap56.ndi,PCI\VEN_14E4&DEV_169C
-"NetXtreme BCM5703 Gigabit Ethernet (NDIS2)" = nd2wrap57.ndi,PCI\VEN_14E4&DEV_16C7
-"NetXtreme BCM5702A3 Gigabit Ethernet (NDIS2)" = nd2wrap58.ndi,PCI\VEN_14E4&DEV_16C6
-"NetXtreme BCM5782 Gigabit Ethernet (NDIS2)" = nd2wrap59.ndi,PCI\VEN_14E4&DEV_1696
-%DEVICE% = nd2wrap60.ndi,PCI\VEN_14E4&DEV_166D
-"NetXtreme BCM5704S Gigabit Ethernet (NDIS2)" = nd2wrap61.ndi,PCI\VEN_14E4&DEV_16A8
-"NetXtreme BCM5901 100Base-TX (NDIS2)" = nd2wrap62.ndi,PCI\VEN_14E4&DEV_170E
-"NetXtreme BCM5901 100Base-TX (NDIS2)" = nd2wrap63.ndi,PCI\VEN_14E4&DEV_170D
-"NetXtreme BCM5705M_2 Gigabit Ethernet (NDIS2)" = nd2wrap64.ndi,PCI\VEN_14E4&DEV_165E
-"NetXtreme BCM5705M Gigabit Ethernet (NDIS2)" = nd2wrap65.ndi,PCI\VEN_14E4&DEV_165D
-"NetXtreme BCM5705_2 Gigabit Ethernet (NDIS2)" = nd2wrap66.ndi,PCI\VEN_14E4&DEV_1654
-"NetXtreme BCM5705 Gigabit Ethernet (NDIS2)" = nd2wrap67.ndi,PCI\VEN_14E4&DEV_1653
-"NetXtreme BCM5703X Gigabit Ethernet (NDIS2)" = nd2wrap68.ndi,PCI\VEN_14E4&DEV_16A7
-"NetXtreme BCM5702X Gigabit Ethernet (NDIS2)" = nd2wrap69.ndi,PCI\VEN_14E4&DEV_16A6
-"NetXtreme BCM5702FE Gigabit Ethernet (NDIS2)" = nd2wrap70.ndi,PCI\VEN_14E4&DEV_164D
-"NetXtreme BCM5704 Gigabit Ethernet (NDIS2)" = nd2wrap71.ndi,PCI\VEN_14E4&DEV_1648
-"NetXtreme BCM5703 Gigabit Ethernet (NDIS2)" = nd2wrap72.ndi,PCI\VEN_14E4&DEV_1647
-"NetXtreme BCM5702 Gigabit Ethernet (NDIS2)" = nd2wrap73.ndi,PCI\VEN_14E4&DEV_1646
-"NetXtreme BCM5701 Gigabit Ethernet (NDIS2)" = nd2wrap74.ndi,PCI\VEN_14E4&DEV_1645
-"NetXtreme BCM5700 Gigabit Ethernet (NDIS2)" = nd2wrap75.ndi,PCI\VEN_14E4&DEV_1644
+"NetXtreme BCM5727 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap0.ndi,PCI\VEN_14E4&DEV_16F3
+"NetXtreme BCM5717 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap1.ndi,PCI\VEN_14E4&DEV_1665
+"NetXtreme BCM5762 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap2.ndi,PCI\VEN_14E4&DEV_1687
+"NetXtreme BCM57767 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap3.ndi,PCI\VEN_14E4&DEV_1683
+"NetXtreme BCM57787 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap4.ndi,PCI\VEN_14E4&DEV_1641
+"NetXtreme BCM57764 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap5.ndi,PCI\VEN_14E4&DEV_1642
+"NetXtreme BCM5725 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap6.ndi,PCI\VEN_14E4&DEV_1643
+"NetXtreme BCM57782 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap7.ndi,PCI\VEN_14E4&DEV_16B7
+"NetXtreme BCM57786 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap8.ndi,PCI\VEN_14E4&DEV_16B3
+"NetXtreme BCM57766 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap9.ndi,PCI\VEN_14E4&DEV_1686
+"NetXtreme BCM57762 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap10.ndi,PCI\VEN_14E4&DEV_1682
+"NetXtreme BCM5720 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap11.ndi,PCI\VEN_14E4&DEV_165F
+"NetXtreme BCM5719 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap12.ndi,PCI\VEN_14E4&DEV_1657
+"NetLink BCM57781 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap13.ndi,PCI\VEN_14E4&DEV_16B1
+"NetLink BCM57785 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap14.ndi,PCI\VEN_14E4&DEV_16B5
+"NetXtreme BCM57761 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap15.ndi,PCI\VEN_14E4&DEV_16B0
+"NetXtreme BCM57765 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap16.ndi,PCI\VEN_14E4&DEV_16B4
+"NetLink BCM57791 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap17.ndi,PCI\VEN_14E4&DEV_16B2
+"NetLink BCM57795 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap18.ndi,PCI\VEN_14E4&DEV_16B6
+"NetLink BCM57788 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap19.ndi,PCI\VEN_14E4&DEV_1691
+"NetXtreme BCM5724 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap20.ndi,PCI\VEN_14E4&DEV_165C
+"NetXtreme BCM5718 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap21.ndi,PCI\VEN_14E4&DEV_1656
+"NetXtreme BCM5717 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap22.ndi,PCI\VEN_14E4&DEV_1655
+"NetLink BCM5785 Fast Ethernet (NDIS2)" = nd2wrap23.ndi,PCI\VEN_14E4&DEV_16A0
+"NetXtreme BCM5761 10/100/1000BASE-T Ethernet (NDIS2)" = nd2wrap24.ndi,PCI\VEN_14E4&DEV_1688
+"NetLink BCM5785 Gigabit Ethernet (NDIS2)" = nd2wrap25.ndi,PCI\VEN_14E4&DEV_1699
+"NetLink BCM57790 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap26.ndi,PCI\VEN_14E4&DEV_1694
+"NetLink BCM57780 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap27.ndi,PCI\VEN_14E4&DEV_1692
+"NetXtreme BCM57760 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap28.ndi,PCI\VEN_14E4&DEV_1690
+"NetXtreme BCM5723 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap29.ndi,PCI\VEN_14E4&DEV_165B
+"NetLink BCM5784M Gigabit Ethernet PCIe (NDIS2)" = nd2wrap30.ndi,PCI\VEN_14E4&DEV_1698
+"NetXtreme BCM5764M Gigabit Ethernet PCIe (NDIS2)" = nd2wrap31.ndi,PCI\VEN_14E4&DEV_1684
+"NetXtreme BCM5761 Gigabit Ethernet PCIe (NDIS2)" = nd2wrap32.ndi,PCI\VEN_14E4&DEV_1681
+"NetXtreme BCM5761e Gigabit Ethernet PCIe (NDIS2)" = nd2wrap33.ndi,PCI\VEN_14E4&DEV_1680
+"NetXtreme BCM5722 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap34.ndi,PCI\VEN_14E4&DEV_165A
+"NetLink BCM5906 Fast Ethernet PCI Express (NDIS2)" = nd2wrap35.ndi,PCI\VEN_14E4&DEV_1712
+"NetLink BCM5906M Fast Ethernet PCI Express (NDIS2)" = nd2wrap36.ndi,PCI\VEN_14E4&DEV_1713
+"NetLink BCM5786 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap37.ndi,PCI\VEN_14E4&DEV_169A
+"NetXtreme BCM5754 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap38.ndi,PCI\VEN_14E4&DEV_167A
+"NetXtreme BCM5754M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap39.ndi,PCI\VEN_14E4&DEV_1672
+"NetXtreme BCM5755 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap40.ndi,PCI\VEN_14E4&DEV_167B
+"NetXtreme BCM5755M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap41.ndi,PCI\VEN_14E4&DEV_1673
+"NetXtreme BCM5756ME Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap42.ndi,PCI\VEN_14E4&DEV_1674
+"NetLink BCM5787F Fast Ethernet PCI Express (NDIS2)" = nd2wrap43.ndi,PCI\VEN_14E4&DEV_167F
+"NetLink BCM5787M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap44.ndi,PCI\VEN_14E4&DEV_1693
+"NetLink BCM5787 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap45.ndi,PCI\VEN_14E4&DEV_169B
+"NetXtreme BCM5780 Gigabit Ethernet (NDIS2)" = nd2wrap46.ndi,PCI\VEN_14E4&DEV_166A
+"NetXtreme BCM5780S Gigabit Ethernet (NDIS2)" = nd2wrap47.ndi,PCI\VEN_14E4&DEV_166B
+"NetXtreme BCM5752 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap48.ndi,PCI\VEN_14E4&DEV_1600
+"NetXtreme BCM5752M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap49.ndi,PCI\VEN_14E4&DEV_1601
+"NetXtreme BCM5715S Gigabit Ethernet (NDIS2)" = nd2wrap50.ndi,PCI\VEN_14E4&DEV_1679
+"NetXtreme BCM5715 Gigabit Ethernet (NDIS2)" = nd2wrap51.ndi,PCI\VEN_14E4&DEV_1678
+"NetXtreme 5714S Gigabit Ethernet (NDIS2)" = nd2wrap52.ndi,PCI\VEN_14E4&DEV_1669
+"NetXtreme BCM5714 Gigabit Ethernet (NDIS2)" = nd2wrap53.ndi,PCI\VEN_14E4&DEV_1668
+"NetXtreme BCM5753 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap54.ndi,PCI\VEN_14E4&DEV_16F7
+"NetXtreme BCM5753M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap55.ndi,PCI\VEN_14E4&DEV_16FD
+"NetXtreme BCM5753F Fast Ethernet PCI Express (NDIS2)" = nd2wrap56.ndi,PCI\VEN_14E4&DEV_16FE
+"NetLink BCM5781 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap57.ndi,PCI\VEN_14E4&DEV_16DD
+"NetLink BCM5789 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap58.ndi,PCI\VEN_14E4&DEV_169D
+"NetXtreme BCM5751F Fast Ethernet PCI Express (NDIS2)" = nd2wrap59.ndi,PCI\VEN_14E4&DEV_167E
+"NetXtreme BCM5751M Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap60.ndi,PCI\VEN_14E4&DEV_167D
+"NetXtreme BCM5750M Gigabit Ethernet (NDIS2)" = nd2wrap61.ndi,PCI\VEN_14E4&DEV_167C
+"NetXtreme BCM5751 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap62.ndi,PCI\VEN_14E4&DEV_1677
+"NetXtreme BCM5750 Gigabit Ethernet (NDIS2)" = nd2wrap63.ndi,PCI\VEN_14E4&DEV_1676
+"NetXtreme BCM5721 Gigabit Ethernet PCI Express (NDIS2)" = nd2wrap64.ndi,PCI\VEN_14E4&DEV_1659
+"NetXtreme BCM5720 Gigabit Ethernet (NDIS2)" = nd2wrap65.ndi,PCI\VEN_14E4&DEV_1658
+"570x 10/100 Integrated Controller (NDIS2)" = nd2wrap66.ndi,PCI\VEN_14E4&DEV_166E
+"NetXtreme BCM5788 Gigabit Ethernet (NDIS2)" = nd2wrap67.ndi,PCI\VEN_14E4&DEV_169C
+"NetXtreme BCM5703 Gigabit Ethernet (NDIS2)" = nd2wrap68.ndi,PCI\VEN_14E4&DEV_16C7
+"NetXtreme BCM5702A3 Gigabit Ethernet (NDIS2)" = nd2wrap69.ndi,PCI\VEN_14E4&DEV_16C6
+"NetXtreme BCM5782 Gigabit Ethernet (NDIS2)" = nd2wrap70.ndi,PCI\VEN_14E4&DEV_1696
+%DEVICE% = nd2wrap71.ndi,PCI\VEN_14E4&DEV_166D
+"NetXtreme BCM5704S Gigabit Ethernet (NDIS2)" = nd2wrap72.ndi,PCI\VEN_14E4&DEV_16A8
+"NetXtreme BCM5901 100Base-TX (NDIS2)" = nd2wrap73.ndi,PCI\VEN_14E4&DEV_170E
+"NetXtreme BCM5901 100Base-TX (NDIS2)" = nd2wrap74.ndi,PCI\VEN_14E4&DEV_170D
+"NetXtreme BCM5705M_2 Gigabit Ethernet (NDIS2)" = nd2wrap75.ndi,PCI\VEN_14E4&DEV_165E
+"NetXtreme BCM5705M Gigabit Ethernet (NDIS2)" = nd2wrap76.ndi,PCI\VEN_14E4&DEV_165D
+"NetXtreme BCM5705_2 Gigabit Ethernet (NDIS2)" = nd2wrap77.ndi,PCI\VEN_14E4&DEV_1654
+"NetXtreme BCM5705 Gigabit Ethernet (NDIS2)" = nd2wrap78.ndi,PCI\VEN_14E4&DEV_1653
+"NetXtreme BCM5703X Gigabit Ethernet (NDIS2)" = nd2wrap79.ndi,PCI\VEN_14E4&DEV_16A7
+"NetXtreme BCM5702X Gigabit Ethernet (NDIS2)" = nd2wrap80.ndi,PCI\VEN_14E4&DEV_16A6
+"NetXtreme BCM5702FE Gigabit Ethernet (NDIS2)" = nd2wrap81.ndi,PCI\VEN_14E4&DEV_164D
+"NetXtreme BCM5704 Gigabit Ethernet (NDIS2)" = nd2wrap82.ndi,PCI\VEN_14E4&DEV_1648
+"NetXtreme BCM5703 Gigabit Ethernet (NDIS2)" = nd2wrap83.ndi,PCI\VEN_14E4&DEV_1647
+"NetXtreme BCM5702 Gigabit Ethernet (NDIS2)" = nd2wrap84.ndi,PCI\VEN_14E4&DEV_1646
+"NetXtreme BCM5701 Gigabit Ethernet (NDIS2)" = nd2wrap85.ndi,PCI\VEN_14E4&DEV_1645
+"NetXtreme BCM5700 Gigabit Ethernet (NDIS2)" = nd2wrap86.ndi,PCI\VEN_14E4&DEV_1644
 
 [SourceDisksNames]
 1 = "Oerg866 NDIS2INFER9X Driver",,
@@ -99,456 +111,522 @@ B57.dos = 1
 AddReg = nd2wrap0.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap0.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165F"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16F3"
 
 [nd2wrap1.ndi]
 AddReg = nd2wrap1.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap1.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1657"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1665"
 
 [nd2wrap2.ndi]
 AddReg = nd2wrap2.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap2.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B1"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1687"
 
 [nd2wrap3.ndi]
 AddReg = nd2wrap3.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap3.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B5"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1683"
 
 [nd2wrap4.ndi]
 AddReg = nd2wrap4.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap4.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B0"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1641"
 
 [nd2wrap5.ndi]
 AddReg = nd2wrap5.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap5.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B4"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1642"
 
 [nd2wrap6.ndi]
 AddReg = nd2wrap6.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap6.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B2"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1643"
 
 [nd2wrap7.ndi]
 AddReg = nd2wrap7.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap7.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B6"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B7"
 
 [nd2wrap8.ndi]
 AddReg = nd2wrap8.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap8.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1691"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B3"
 
 [nd2wrap9.ndi]
 AddReg = nd2wrap9.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap9.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165C"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1686"
 
 [nd2wrap10.ndi]
 AddReg = nd2wrap10.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap10.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1656"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1682"
 
 [nd2wrap11.ndi]
 AddReg = nd2wrap11.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap11.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1655"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165F"
 
 [nd2wrap12.ndi]
 AddReg = nd2wrap12.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap12.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16A0"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1657"
 
 [nd2wrap13.ndi]
 AddReg = nd2wrap13.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap13.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1688"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B1"
 
 [nd2wrap14.ndi]
 AddReg = nd2wrap14.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap14.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1699"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B5"
 
 [nd2wrap15.ndi]
 AddReg = nd2wrap15.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap15.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1694"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B0"
 
 [nd2wrap16.ndi]
 AddReg = nd2wrap16.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap16.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1692"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B4"
 
 [nd2wrap17.ndi]
 AddReg = nd2wrap17.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap17.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1690"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B2"
 
 [nd2wrap18.ndi]
 AddReg = nd2wrap18.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap18.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165B"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16B6"
 
 [nd2wrap19.ndi]
 AddReg = nd2wrap19.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap19.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1698"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1691"
 
 [nd2wrap20.ndi]
 AddReg = nd2wrap20.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap20.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1684"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165C"
 
 [nd2wrap21.ndi]
 AddReg = nd2wrap21.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap21.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1681"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1656"
 
 [nd2wrap22.ndi]
 AddReg = nd2wrap22.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap22.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1680"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1655"
 
 [nd2wrap23.ndi]
 AddReg = nd2wrap23.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap23.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165A"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16A0"
 
 [nd2wrap24.ndi]
 AddReg = nd2wrap24.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap24.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1712"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1688"
 
 [nd2wrap25.ndi]
 AddReg = nd2wrap25.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap25.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1713"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1699"
 
 [nd2wrap26.ndi]
 AddReg = nd2wrap26.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap26.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_169A"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1694"
 
 [nd2wrap27.ndi]
 AddReg = nd2wrap27.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap27.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167A"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1692"
 
 [nd2wrap28.ndi]
 AddReg = nd2wrap28.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap28.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1672"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1690"
 
 [nd2wrap29.ndi]
 AddReg = nd2wrap29.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap29.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167B"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165B"
 
 [nd2wrap30.ndi]
 AddReg = nd2wrap30.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap30.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1673"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1698"
 
 [nd2wrap31.ndi]
 AddReg = nd2wrap31.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap31.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1674"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1684"
 
 [nd2wrap32.ndi]
 AddReg = nd2wrap32.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap32.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167F"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1681"
 
 [nd2wrap33.ndi]
 AddReg = nd2wrap33.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap33.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1693"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1680"
 
 [nd2wrap34.ndi]
 AddReg = nd2wrap34.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap34.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_169B"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165A"
 
 [nd2wrap35.ndi]
 AddReg = nd2wrap35.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap35.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_166A"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1712"
 
 [nd2wrap36.ndi]
 AddReg = nd2wrap36.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap36.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_166B"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1713"
 
 [nd2wrap37.ndi]
 AddReg = nd2wrap37.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap37.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1600"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_169A"
 
 [nd2wrap38.ndi]
 AddReg = nd2wrap38.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap38.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1601"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167A"
 
 [nd2wrap39.ndi]
 AddReg = nd2wrap39.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap39.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1679"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1672"
 
 [nd2wrap40.ndi]
 AddReg = nd2wrap40.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap40.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1678"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167B"
 
 [nd2wrap41.ndi]
 AddReg = nd2wrap41.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap41.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1669"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1673"
 
 [nd2wrap42.ndi]
 AddReg = nd2wrap42.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap42.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1668"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1674"
 
 [nd2wrap43.ndi]
 AddReg = nd2wrap43.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap43.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16F7"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167F"
 
 [nd2wrap44.ndi]
 AddReg = nd2wrap44.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap44.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16FD"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1693"
 
 [nd2wrap45.ndi]
 AddReg = nd2wrap45.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap45.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16FE"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_169B"
 
 [nd2wrap46.ndi]
 AddReg = nd2wrap46.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap46.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16DD"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_166A"
 
 [nd2wrap47.ndi]
 AddReg = nd2wrap47.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap47.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_169D"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_166B"
 
 [nd2wrap48.ndi]
 AddReg = nd2wrap48.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap48.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167E"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1600"
 
 [nd2wrap49.ndi]
 AddReg = nd2wrap49.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap49.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167D"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1601"
 
 [nd2wrap50.ndi]
 AddReg = nd2wrap50.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap50.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167C"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1679"
 
 [nd2wrap51.ndi]
 AddReg = nd2wrap51.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap51.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1677"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1678"
 
 [nd2wrap52.ndi]
 AddReg = nd2wrap52.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap52.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1676"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1669"
 
 [nd2wrap53.ndi]
 AddReg = nd2wrap53.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap53.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1659"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1668"
 
 [nd2wrap54.ndi]
 AddReg = nd2wrap54.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap54.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1658"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16F7"
 
 [nd2wrap55.ndi]
 AddReg = nd2wrap55.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap55.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_166E"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16FD"
 
 [nd2wrap56.ndi]
 AddReg = nd2wrap56.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap56.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_169C"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16FE"
 
 [nd2wrap57.ndi]
 AddReg = nd2wrap57.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap57.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16C7"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16DD"
 
 [nd2wrap58.ndi]
 AddReg = nd2wrap58.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap58.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16C6"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_169D"
 
 [nd2wrap59.ndi]
 AddReg = nd2wrap59.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap59.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1696"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167E"
 
 [nd2wrap60.ndi]
 AddReg = nd2wrap60.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap60.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_166D"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167D"
 
 [nd2wrap61.ndi]
 AddReg = nd2wrap61.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap61.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16A8"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_167C"
 
 [nd2wrap62.ndi]
 AddReg = nd2wrap62.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap62.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_170E"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1677"
 
 [nd2wrap63.ndi]
 AddReg = nd2wrap63.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap63.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_170D"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1676"
 
 [nd2wrap64.ndi]
 AddReg = nd2wrap64.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap64.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165E"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1659"
 
 [nd2wrap65.ndi]
 AddReg = nd2wrap65.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap65.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165D"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1658"
 
 [nd2wrap66.ndi]
 AddReg = nd2wrap66.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap66.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1654"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_166E"
 
 [nd2wrap67.ndi]
 AddReg = nd2wrap67.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap67.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1653"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_169C"
 
 [nd2wrap68.ndi]
 AddReg = nd2wrap68.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap68.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16A7"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16C7"
 
 [nd2wrap69.ndi]
 AddReg = nd2wrap69.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap69.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16A6"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16C6"
 
 [nd2wrap70.ndi]
 AddReg = nd2wrap70.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap70.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_164D"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1696"
 
 [nd2wrap71.ndi]
 AddReg = nd2wrap71.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap71.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1648"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_166D"
 
 [nd2wrap72.ndi]
 AddReg = nd2wrap72.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap72.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1647"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16A8"
 
 [nd2wrap73.ndi]
 AddReg = nd2wrap73.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap73.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1646"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_170E"
 
 [nd2wrap74.ndi]
 AddReg = nd2wrap74.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap74.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1645"
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_170D"
 
 [nd2wrap75.ndi]
 AddReg = nd2wrap75.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap75.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165E"
+
+[nd2wrap76.ndi]
+AddReg = nd2wrap76.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap76.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_165D"
+
+[nd2wrap77.ndi]
+AddReg = nd2wrap77.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap77.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1654"
+
+[nd2wrap78.ndi]
+AddReg = nd2wrap78.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap78.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1653"
+
+[nd2wrap79.ndi]
+AddReg = nd2wrap79.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap79.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16A7"
+
+[nd2wrap80.ndi]
+AddReg = nd2wrap80.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap80.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16A6"
+
+[nd2wrap81.ndi]
+AddReg = nd2wrap81.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap81.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_164D"
+
+[nd2wrap82.ndi]
+AddReg = nd2wrap82.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap82.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1648"
+
+[nd2wrap83.ndi]
+AddReg = nd2wrap83.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap83.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1647"
+
+[nd2wrap84.ndi]
+AddReg = nd2wrap84.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap84.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1646"
+
+[nd2wrap85.ndi]
+AddReg = nd2wrap85.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap85.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1645"
+
+[nd2wrap86.ndi]
+AddReg = nd2wrap86.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap86.ndi.reg]
 HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1644"
 
 [nd2wrap.ndi.reg]

@@ -2,7 +2,8 @@
 ;NDIS2 Wrapper INF v2.0
 ;(C) 2026 Eric Voirin (oerg866@googlemail.com)
 ;http://github.com/oerg866/ndis2infer9x
-;Command Line: [ndis2infer9x.py --rel --lookup --dir realtek_8125 --out rtl25nd2.inf --id 10ec:8125 --id 10ec:8161 --id 10ec:8167 --id 10ec:3000 --id 10ec:2600 --id "10ec:2502:::Killer E2500v2 GbE Controller"]
+;Command Line: [ndis2infer9x.py --rel --lookup --dir realtek_8125 --out rtl25nd2.inf --ver 03/15/2021 1.56.0.0 --id 10ec:8125 --id 10ec:8161 --id 10ec:8167 --id 10ec:3000 --id 10ec:2600 --id "10ec:2502:::Killer E2500v2 GbE Controller"]
+DriverVer = 03/15/2021, 1.56.0.0
 LayoutFile = layout.inf
 Signature = $CHICAGO$
 Class = Net

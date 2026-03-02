@@ -2,7 +2,8 @@
 ;NDIS2 Wrapper INF v2.0
 ;(C) 2026 Eric Voirin (oerg866@googlemail.com)
 ;http://github.com/oerg866/ndis2infer9x
-;Command Line: [ndis2infer9x.py --rel --lookup --dir atheros_l1 --out athl1nd2.inf --id 1969:1048]
+;Command Line: [ndis2infer9x.py --rel --lookup --dir atheros_l1 --out athl1nd2.inf --ver 01/30/2007 1.0.613.6 --id 1969:1048]
+DriverVer = 01/30/2007, 1.0.613.6
 LayoutFile = layout.inf
 Signature = $CHICAGO$
 Class = Net

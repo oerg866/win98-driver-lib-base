@@ -2,7 +2,8 @@
 ;NDIS2 Wrapper INF v2.0
 ;(C) 2026 Eric Voirin (oerg866@googlemail.com)
 ;http://github.com/oerg866/ndis2infer9x
-;Command Line: [ndis2infer9x.py --rel --lookup --dir broadcom_10gbps --out bcm10nd2.inf --id 14e4:16AB --id 14e4:16AE --id 14e4:16A5 --id 14e4:168D --id 14e4:168E --id 14e4:168A --id 14e4:1663 --id 14e4:1662 --id 14e4:1650 --id 14e4:164F --id 14e4:164E]
+;Command Line: [ndis2infer9x.py --rel --lookup --dir broadcom_10gbps --out bcm10nd2.inf --ver 12/21/2012 7.8.0.0 --id 14e4:16AB --id 14e4:16AE --id 14e4:16A5 --id 14e4:168D --id 14e4:168E --id 14e4:168A --id 14e4:1663 --id 14e4:1662 --id 14e4:1650 --id 14e4:164F --id 14e4:164E]
+DriverVer = 12/21/2012, 7.8.0.0
 LayoutFile = layout.inf
 Signature = $CHICAGO$
 Class = Net

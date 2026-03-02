@@ -2,7 +2,8 @@
 ;NDIS2 Wrapper INF v2.0
 ;(C) 2026 Eric Voirin (oerg866@googlemail.com)
 ;http://github.com/oerg866/ndis2infer9x
-;Command Line: [ndis2infer9x.py --rel --lookup --dir marvell_yukon --out yukonnd2.inf --exclude ../[NIC]_marvell_yukon/yukonw9x.inf --id 11ab:4381 --id 11ab:4360 --id 11ab:4361 --id 11ab:4362 --id 11ab:4350 --id 11ab:4351 --id 11ab:4340 --id 11ab:4341 --id 11ab:4342 --id 11ab:4343 --id 11ab:4344 --id 11ab:4345 --id 11ab:4346 --id 11ab:4347 --id 11ab:4363 --id 11ab:4352 --id 11ab:4356 --id 11ab:4366 --id 11ab:4364 --id 11ab:4369 --id 11ab:4353 --id 11ab:4365 --id 11ab:436B --id 11ab:4354 --id 11ab:4367 --id 11ab:4368 --id 11ab:436A --id 11ab:436C --id 11ab:4357 --id 11ab:4370 --id 11ab:4355 --id 11ab:435A --id 11ab:436D --id 11ab:4380]
+;Command Line: [ndis2infer9x.py --rel --lookup --dir marvell_yukon --out yukonnd2.inf --ver 10/28/2009 9.55.1.3 --exclude ../[NIC]_marvell_yukon/yukonw9x.inf --id 11ab:4381 --id 11ab:4360 --id 11ab:4361 --id 11ab:4362 --id 11ab:4350 --id 11ab:4351 --id 11ab:4340 --id 11ab:4341 --id 11ab:4342 --id 11ab:4343 --id 11ab:4344 --id 11ab:4345 --id 11ab:4346 --id 11ab:4347 --id 11ab:4363 --id 11ab:4352 --id 11ab:4356 --id 11ab:4366 --id 11ab:4364 --id 11ab:4369 --id 11ab:4353 --id 11ab:4365 --id 11ab:436B --id 11ab:4354 --id 11ab:4367 --id 11ab:4368 --id 11ab:436A --id 11ab:436C --id 11ab:4357 --id 11ab:4370 --id 11ab:4355 --id 11ab:435A --id 11ab:436D --id 11ab:4380]
+DriverVer = 10/28/2009, 9.55.1.3
 LayoutFile = layout.inf
 Signature = $CHICAGO$
 Class = Net

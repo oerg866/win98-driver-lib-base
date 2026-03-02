@@ -2,7 +2,8 @@
 ;NDIS2 Wrapper INF v2.0
 ;(C) 2026 Eric Voirin (oerg866@googlemail.com)
 ;http://github.com/oerg866/ndis2infer9x
-;Command Line: [ndis2infer9x.py --rel --lookup --dir realtek_8168 --out rtlgbnd2.inf --id 10ec:8168::04 --id 10ec:8168::05 --id 10ec:8168::06 --id 10ec:8168::07 --id 10ec:8168::08 --id 10ec:8168::09 --id 10ec:8168::0A]
+;Command Line: [ndis2infer9x.py --rel --lookup --dir realtek_8168 --out rtlgbnd2.inf --ver 05/15/2019 1.54.0.0 --id 10ec:8168::04 --id 10ec:8168::05 --id 10ec:8168::06 --id 10ec:8168::07 --id 10ec:8168::08 --id 10ec:8168::09 --id 10ec:8168::0A]
+DriverVer = 05/15/2019, 1.54.0.0
 LayoutFile = layout.inf
 Signature = $CHICAGO$
 Class = Net

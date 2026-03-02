@@ -229,6 +229,7 @@ parser.add_argument('--out', type=str, help='Windows 9x INF output file name', r
 parser.add_argument('--rel', action='store_true', help='Treat --out parameter as relative to source directory', default=False)
 parser.add_argument('--lookup', help='Look up device names in pci.ids', required=False, default=False, action='store_true')
 parser.add_argument('--exclude', type=str, help='Exclude all PCI IDs found in this INF file', required=False)
+parser.add_argument('--ver', type=str, nargs=2, metavar=('DATE', 'VERSION'), help='Driver Version (date format: MM/DD/YYYY version format x.x.x.x)')
 
 args = parser.parse_args()
 
@@ -247,6 +248,9 @@ if args.rel:
     outFile = os.path.join(os.path.dirname(os.path.abspath(infFile)), args.out)
 else:
     outFile = args.out
+
+if args.ver:
+    versionStr = f'{args.ver[0]}, {args.ver[1]}'
 
 if infFile is None or os.path.exists(infFile) == False:
     raise Exception('Cannot find OEMSETUP.INF')
@@ -327,6 +331,8 @@ outVersion.AddComment('NDIS2 Wrapper INF v2.0')
 outVersion.AddComment('(C) 2026 Eric Voirin (oerg866@googlemail.com)')
 outVersion.AddComment('http://github.com/oerg866/ndis2infer9x')
 outVersion.AddComment(f'Command Line: [{subprocess.list2cmdline(sys.argv)}]')
+if args.ver:
+    outVersion.AddData('DriverVer', versionStr)
 outVersion.AddData('LayoutFile', 'layout.inf')
 outVersion.AddData('Signature', '$CHICAGO$')
 outVersion.AddData('Class', 'Net')
