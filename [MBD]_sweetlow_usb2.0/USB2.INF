@@ -38,8 +38,8 @@ INF.CopyFiles          = 17
 %Generic%=Generic
 %Intel%=Intel
 %NEC%=NEC
-%VIA%=VIA
 %SIS%=SIS
+%VIA%=VIA
 
 ; --------------------------------------------------------------
 ; EHCI 
@@ -120,13 +120,14 @@ usbccgp.sys
 [Intel]
 %PCI\VEN_8086&DEV_24CD.DeviceDesc%=EHCI,PCI\VEN_8086&DEV_24CD
 
+; =================== SIS ===================================
+[SIS]
+%PCI\VEN_1039&DEV_7002.DeviceDesc%=EHCI,PCI\VEN_1039&DEV_7002
+
 ; =================== VIA ===================================
 [VIA]
 %PCI\VEN_1106&DEV_3104.DeviceDesc%=EHCI,PCI\VEN_1106&DEV_3104
 
-; =================== SIS ===================================
-[SIS]
-%PCI\VEN_1039&DEV_7002.DeviceDesc%=EHCI,PCI\VEN_1039&DEV_7002
 
 ; =================== DefaultInstall ========================
 [DefaultInstall]
@@ -144,8 +145,8 @@ Msft="Microsoft"
 Generic="(Standard USB Host Controller / Hub)"
 Intel="Intel"
 NEC="NEC"
-VIA="VIA"
 SIS="SiS"
+VIA="VIA"
 
 PCI\VEN_1033&DEV_00E0&REV_01.DeviceDesc="NEC PCI to USB Enhanced Host Controller B0"
 PCI\VEN_1033&DEV_00E0&REV_02.DeviceDesc="NEC PCI to USB Enhanced Host Controller B1"
