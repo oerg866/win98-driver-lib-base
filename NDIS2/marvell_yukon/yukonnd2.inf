@@ -1,0 +1,336 @@
+[Version]
+;NDIS2 Wrapper INF v2.0
+;(C) 2026 Eric Voirin (oerg866@googlemail.com)
+;http://github.com/oerg866/ndis2infer9x
+;Command Line: [ndis2infer9x.py --rel --lookup --dir marvell_yukon --out yukonnd2.inf --exclude ../[NIC]_marvell_yukon/yukonw9x.inf --id 11ab:4381 --id 11ab:4360 --id 11ab:4361 --id 11ab:4362 --id 11ab:4350 --id 11ab:4351 --id 11ab:4340 --id 11ab:4341 --id 11ab:4342 --id 11ab:4343 --id 11ab:4344 --id 11ab:4345 --id 11ab:4346 --id 11ab:4347 --id 11ab:4363 --id 11ab:4352 --id 11ab:4356 --id 11ab:4366 --id 11ab:4364 --id 11ab:4369 --id 11ab:4353 --id 11ab:4365 --id 11ab:436B --id 11ab:4354 --id 11ab:4367 --id 11ab:4368 --id 11ab:436A --id 11ab:436C --id 11ab:4357 --id 11ab:4370 --id 11ab:4355 --id 11ab:435A --id 11ab:436D --id 11ab:4380]
+LayoutFile = layout.inf
+Signature = $CHICAGO$
+Class = Net
+Provider = %VENDOR%
+
+[Manufacturer]
+%VENDOR% = ND2WRAP
+
+[ND2WRAP]
+"Yukon Optima 88E8059 [PCIe Gigabit Ethernet Controller with AVB] (NDIS2)" = nd2wrap0.ndi,PCI\VEN_11AB&DEV_4381
+"88E8036 PCI-E Fast Ethernet Controller (NDIS2)" = nd2wrap1.ndi,PCI\VEN_11AB&DEV_4351
+"88E8021 PCI-X IPMI Gigabit Ethernet Controller (NDIS2)" = nd2wrap2.ndi,PCI\VEN_11AB&DEV_4340
+"88E8022 PCI-X IPMI Gigabit Ethernet Controller (NDIS2)" = nd2wrap3.ndi,PCI\VEN_11AB&DEV_4341
+"88E8061 PCI-E IPMI Gigabit Ethernet Controller (NDIS2)" = nd2wrap4.ndi,PCI\VEN_11AB&DEV_4342
+"88E8062 PCI-E IPMI Gigabit Ethernet Controller (NDIS2)" = nd2wrap5.ndi,PCI\VEN_11AB&DEV_4343
+"88E8021 PCI-X IPMI Gigabit Ethernet Controller (NDIS2)" = nd2wrap6.ndi,PCI\VEN_11AB&DEV_4344
+"88E8022 PCI-X IPMI Gigabit Ethernet Controller (NDIS2)" = nd2wrap7.ndi,PCI\VEN_11AB&DEV_4345
+"88E8061 PCI-E IPMI Gigabit Ethernet Controller (NDIS2)" = nd2wrap8.ndi,PCI\VEN_11AB&DEV_4346
+"88E8062 PCI-E IPMI Gigabit Ethernet Controller (NDIS2)" = nd2wrap9.ndi,PCI\VEN_11AB&DEV_4347
+"88E8055 PCI-E Gigabit Ethernet Controller (NDIS2)" = nd2wrap10.ndi,PCI\VEN_11AB&DEV_4363
+"88E8038 PCI-E Fast Ethernet Controller (NDIS2)" = nd2wrap11.ndi,PCI\VEN_11AB&DEV_4352
+"88EC033 PCI-E Fast Ethernet Controller (NDIS2)" = nd2wrap12.ndi,PCI\VEN_11AB&DEV_4356
+"88EC036 PCI-E Gigabit Ethernet Controller (NDIS2)" = nd2wrap13.ndi,PCI\VEN_11AB&DEV_4366
+"88E8056 PCI-E Gigabit Ethernet Controller (NDIS2)" = nd2wrap14.ndi,PCI\VEN_11AB&DEV_4364
+"88EC042 Ethernet Controller (NDIS2)" = nd2wrap15.ndi,PCI\VEN_11AB&DEV_4369
+"88E8039 PCI-E Fast Ethernet Controller (NDIS2)" = nd2wrap16.ndi,PCI\VEN_11AB&DEV_4353
+"88E8070 based Ethernet Controller (NDIS2)" = nd2wrap17.ndi,PCI\VEN_11AB&DEV_4365
+"88E8071 PCI-E Gigabit Ethernet Controller (NDIS2)" = nd2wrap18.ndi,PCI\VEN_11AB&DEV_436B
+"88E8040 PCI-E Fast Ethernet Controller (NDIS2)" = nd2wrap19.ndi,PCI\VEN_11AB&DEV_4354
+"88EC032 Ethernet Controller (NDIS2)" = nd2wrap20.ndi,PCI\VEN_11AB&DEV_4367
+"88EC034 Ethernet Controller (NDIS2)" = nd2wrap21.ndi,PCI\VEN_11AB&DEV_4368
+"88E8058 PCI-E Gigabit Ethernet Controller (NDIS2)" = nd2wrap22.ndi,PCI\VEN_11AB&DEV_436A
+"88E8072 PCI-E Gigabit Ethernet Controller (NDIS2)" = nd2wrap23.ndi,PCI\VEN_11AB&DEV_436C
+"88E8042 PCI-E Fast Ethernet Controller (NDIS2)" = nd2wrap24.ndi,PCI\VEN_11AB&DEV_4357
+"88E8075 PCI-E Gigabit Ethernet Controller (NDIS2)" = nd2wrap25.ndi,PCI\VEN_11AB&DEV_4370
+"88E8040T PCI-E Fast Ethernet Controller (NDIS2)" = nd2wrap26.ndi,PCI\VEN_11AB&DEV_4355
+"88E8048 PCI-E Fast Ethernet Controller (NDIS2)" = nd2wrap27.ndi,PCI\VEN_11AB&DEV_435A
+"88E8055 PCI-E Gigabit Ethernet Controller (NDIS2)" = nd2wrap28.ndi,PCI\VEN_11AB&DEV_436D
+"88E8057 PCI-E Gigabit Ethernet Controller (NDIS2)" = nd2wrap29.ndi,PCI\VEN_11AB&DEV_4380
+
+[SourceDisksNames]
+1 = "Oerg866 NDIS2INFER9X Driver",,
+
+[SourceDisksFiles]
+yuknd.dos = 1
+
+[nd2wrap0.ndi]
+AddReg = nd2wrap0.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap0.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4381"
+
+[nd2wrap1.ndi]
+AddReg = nd2wrap1.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap1.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4351"
+
+[nd2wrap2.ndi]
+AddReg = nd2wrap2.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap2.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4340"
+
+[nd2wrap3.ndi]
+AddReg = nd2wrap3.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap3.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4341"
+
+[nd2wrap4.ndi]
+AddReg = nd2wrap4.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap4.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4342"
+
+[nd2wrap5.ndi]
+AddReg = nd2wrap5.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap5.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4343"
+
+[nd2wrap6.ndi]
+AddReg = nd2wrap6.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap6.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4344"
+
+[nd2wrap7.ndi]
+AddReg = nd2wrap7.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap7.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4345"
+
+[nd2wrap8.ndi]
+AddReg = nd2wrap8.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap8.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4346"
+
+[nd2wrap9.ndi]
+AddReg = nd2wrap9.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap9.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4347"
+
+[nd2wrap10.ndi]
+AddReg = nd2wrap10.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap10.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4363"
+
+[nd2wrap11.ndi]
+AddReg = nd2wrap11.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap11.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4352"
+
+[nd2wrap12.ndi]
+AddReg = nd2wrap12.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap12.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4356"
+
+[nd2wrap13.ndi]
+AddReg = nd2wrap13.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap13.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4366"
+
+[nd2wrap14.ndi]
+AddReg = nd2wrap14.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap14.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4364"
+
+[nd2wrap15.ndi]
+AddReg = nd2wrap15.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap15.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4369"
+
+[nd2wrap16.ndi]
+AddReg = nd2wrap16.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap16.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4353"
+
+[nd2wrap17.ndi]
+AddReg = nd2wrap17.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap17.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4365"
+
+[nd2wrap18.ndi]
+AddReg = nd2wrap18.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap18.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_436B"
+
+[nd2wrap19.ndi]
+AddReg = nd2wrap19.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap19.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4354"
+
+[nd2wrap20.ndi]
+AddReg = nd2wrap20.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap20.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4367"
+
+[nd2wrap21.ndi]
+AddReg = nd2wrap21.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap21.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4368"
+
+[nd2wrap22.ndi]
+AddReg = nd2wrap22.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap22.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_436A"
+
+[nd2wrap23.ndi]
+AddReg = nd2wrap23.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap23.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_436C"
+
+[nd2wrap24.ndi]
+AddReg = nd2wrap24.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap24.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4357"
+
+[nd2wrap25.ndi]
+AddReg = nd2wrap25.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap25.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4370"
+
+[nd2wrap26.ndi]
+AddReg = nd2wrap26.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap26.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4355"
+
+[nd2wrap27.ndi]
+AddReg = nd2wrap27.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap27.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_435A"
+
+[nd2wrap28.ndi]
+AddReg = nd2wrap28.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap28.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_436D"
+
+[nd2wrap29.ndi]
+AddReg = nd2wrap29.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap29.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11AB&DEV_4380"
+
+[nd2wrap.ndi.reg]
+HKR,,DevLoader,,*ndis
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+; NDIS Info
+HKR,NDIS,LogDriverName,,"yuknd"
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,NDIS\NDIS2,DriverName,,"yuknd$"
+HKR,NDIS\NDIS2,FileName,,"yuknd.dos"
+; Interfaces
+HKR,Ndi\Interfaces,DefUpper,,"ndis2"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"ndis2"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+; Install sections
+HKR,Ndi\Install,ndis2,,"nd2wrap.inst.ndis2"
+HKR,Ndi\Remove,ndis2,,"nd2wrap.rmv.ndis2"
+;Original NDIS2 Parameter: CONTYPE,"Connection Type",text,"AUTO,_100FD,_100HD,_10FD,_10HD","AUTO",0x32
+HKR,Ndi\params\CONTYPE,ParamDesc,,"Connection Type"
+HKR,Ndi\params\CONTYPE,default,,AUTO
+HKR,Ndi\params\CONTYPE,type,,enum
+HKR,Ndi\params\CONTYPE,AUTO,,"AUTO"
+HKR,Ndi\params\CONTYPE,_100FD,,"_100FD"
+HKR,Ndi\params\CONTYPE,_100HD,,"_100HD"
+HKR,Ndi\params\CONTYPE,_10FD,,"_10FD"
+HKR,Ndi\params\CONTYPE,_10HD,,"_10HD"
+
+;Original NDIS2 Parameter: CHECKLINK,"Use First Link Found",int,"0,1,1",0,0x32
+HKR,Ndi\params\CHECKLINK,ParamDesc,,"Use First Link Found"
+HKR,Ndi\params\CHECKLINK,default,,0
+HKR,Ndi\params\CHECKLINK,min,,0
+HKR,Ndi\params\CHECKLINK,max,,1
+HKR,Ndi\params\CHECKLINK,step,,1
+HKR,Ndi\params\CHECKLINK,base,,10
+HKR,Ndi\params\CHECKLINK,type,,int
+
+;Original NDIS2 Parameter: BUSNUM,"Adapter's PCI Bus Number",int,"0,255,1",0,0x32
+HKR,Ndi\params\BUSNUM,ParamDesc,,"Adapter's PCI Bus Number"
+HKR,Ndi\params\BUSNUM,default,,0
+HKR,Ndi\params\BUSNUM,min,,0
+HKR,Ndi\params\BUSNUM,max,,255
+HKR,Ndi\params\BUSNUM,step,,1
+HKR,Ndi\params\BUSNUM,base,,10
+HKR,Ndi\params\BUSNUM,type,,int
+
+;Original NDIS2 Parameter: DEVNUM,"Adapter's PCI Device Number",int,"0,31,1",0,0x32
+HKR,Ndi\params\DEVNUM,ParamDesc,,"Adapter's PCI Device Number"
+HKR,Ndi\params\DEVNUM,default,,0
+HKR,Ndi\params\DEVNUM,min,,0
+HKR,Ndi\params\DEVNUM,max,,31
+HKR,Ndi\params\DEVNUM,step,,1
+HKR,Ndi\params\DEVNUM,base,,10
+HKR,Ndi\params\DEVNUM,type,,int
+
+;Original NDIS2 Parameter: MAXRECEIVES,"Number of Receive Buffers",int,"1,3,1",1,0x32
+HKR,Ndi\params\MAXRECEIVES,ParamDesc,,"Number of Receive Buffers"
+HKR,Ndi\params\MAXRECEIVES,default,,1
+HKR,Ndi\params\MAXRECEIVES,min,,1
+HKR,Ndi\params\MAXRECEIVES,max,,3
+HKR,Ndi\params\MAXRECEIVES,step,,1
+HKR,Ndi\params\MAXRECEIVES,base,,10
+HKR,Ndi\params\MAXRECEIVES,type,,int
+
+;Original NDIS2 Parameter: MAXTRANSMITS,"Number of Transmit Buffers",int,"1,3,1",1,0x32
+HKR,Ndi\params\MAXTRANSMITS,ParamDesc,,"Number of Transmit Buffers"
+HKR,Ndi\params\MAXTRANSMITS,default,,1
+HKR,Ndi\params\MAXTRANSMITS,min,,1
+HKR,Ndi\params\MAXTRANSMITS,max,,3
+HKR,Ndi\params\MAXTRANSMITS,step,,1
+HKR,Ndi\params\MAXTRANSMITS,base,,10
+HKR,Ndi\params\MAXTRANSMITS,type,,int
+
+;Original NDIS2 Parameter: HWPORT,"Designated port",text,"A,B,L","L",0x32
+HKR,Ndi\params\HWPORT,ParamDesc,,"Designated port"
+HKR,Ndi\params\HWPORT,default,,L
+HKR,Ndi\params\HWPORT,type,,enum
+HKR,Ndi\params\HWPORT,A,,"A"
+HKR,Ndi\params\HWPORT,B,,"B"
+HKR,Ndi\params\HWPORT,L,,"L"
+
+HKR,,MsPciScan,0,"2"
+
+[nd2wrap.inst.ndis2]
+CopyFiles = nd2wrap.ndis2.CopyFiles
+AddReg = nd2wrap.inst.ndis2.reg
+
+[nd2wrap.rmv.ndis2]
+AddReg = nd2wrap.rmv.ndis2.reg
+
+[nd2wrap.inst.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",yuknd.dos,,low
+
+[nd2wrap.rmv.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",yuknd.dos
+
+[nd2wrap.ndis2.CopyFiles]
+yuknd.dos
+
+[DestinationDirs]
+nd2wrap.ndis2.CopyFiles = 26
+
+[Strings]
+VENDOR = "NDIS2INFER by Oerg866"
+DEVICE = "Marvell(R) Yukon(R) Ethernet Controller (NDIS2)"
+

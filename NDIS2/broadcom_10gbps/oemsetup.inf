@@ -1,0 +1,9 @@
+; OEMSETUP.INF for Broadcom NetXtreme II 10Gbps Ethernet Adapter
+
+[netcard]
+BNX2EV$="Broadcom NetXtreme II 10Gbps Ethernet", 0, NDIS, Ethernet, REAL, BNX2EV$_ini, BNX2EV$_ini
+
+[BNX2EV$_ini]
+DriverName=BNX2EV$
+device=BNX2EV.dos, @INST\BNX2EV.dos
+NETDIR=5:BNX2EV.dos

@@ -1,0 +1,9 @@
+; OEMSETUP.INF for Broadcom Ethernet Adapter
+
+[netcard]
+B57$="Broadcom Ethernet", 0, NDIS, Ethernet, REAL, B57$_ini, B57$_ini
+
+[B57$_ini]
+DriverName=B57$
+device=B57.dos, @INST\B57.dos
+NETDIR=5:B57.dos

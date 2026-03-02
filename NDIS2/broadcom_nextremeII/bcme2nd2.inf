@@ -1,0 +1,119 @@
+[Version]
+;NDIS2 Wrapper INF v2.0
+;(C) 2026 Eric Voirin (oerg866@googlemail.com)
+;http://github.com/oerg866/ndis2infer9x
+;Command Line: [ndis2infer9x.py --rel --lookup --dir broadcom_nextremeII --out bcme2nd2.inf --id 14e4:163C --id 14e4:163B --id 14e4:1639 --id 14e4:163A --id 14e4:164C --id 14e4:16AC --id 14e4:164A --id 14e4:16AA]
+LayoutFile = layout.inf
+Signature = $CHICAGO$
+Class = Net
+Provider = %VENDOR%
+
+[Manufacturer]
+%VENDOR% = ND2WRAP
+
+[ND2WRAP]
+"NetXtreme II BCM5716S Gigabit Ethernet (NDIS2)" = nd2wrap0.ndi,PCI\VEN_14E4&DEV_163C
+"NetXtreme II BCM5716 Gigabit Ethernet (NDIS2)" = nd2wrap1.ndi,PCI\VEN_14E4&DEV_163B
+"NetXtreme II BCM5709 Gigabit Ethernet (NDIS2)" = nd2wrap2.ndi,PCI\VEN_14E4&DEV_1639
+"NetXtreme II BCM5709S Gigabit Ethernet (NDIS2)" = nd2wrap3.ndi,PCI\VEN_14E4&DEV_163A
+"NetXtreme II BCM5708 Gigabit Ethernet (NDIS2)" = nd2wrap4.ndi,PCI\VEN_14E4&DEV_164C
+"NetXtreme II BCM5708S Gigabit Ethernet (NDIS2)" = nd2wrap5.ndi,PCI\VEN_14E4&DEV_16AC
+"NetXtreme II BCM5706 Gigabit Ethernet (NDIS2)" = nd2wrap6.ndi,PCI\VEN_14E4&DEV_164A
+"NetXtreme II BCM5706S Gigabit Ethernet (NDIS2)" = nd2wrap7.ndi,PCI\VEN_14E4&DEV_16AA
+
+[SourceDisksNames]
+1 = "Oerg866 NDIS2INFER9X Driver",,
+
+[SourceDisksFiles]
+BXND20X.dos = 1
+
+[nd2wrap0.ndi]
+AddReg = nd2wrap0.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap0.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_163C"
+
+[nd2wrap1.ndi]
+AddReg = nd2wrap1.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap1.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_163B"
+
+[nd2wrap2.ndi]
+AddReg = nd2wrap2.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap2.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_1639"
+
+[nd2wrap3.ndi]
+AddReg = nd2wrap3.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap3.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_163A"
+
+[nd2wrap4.ndi]
+AddReg = nd2wrap4.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap4.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_164C"
+
+[nd2wrap5.ndi]
+AddReg = nd2wrap5.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap5.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16AC"
+
+[nd2wrap6.ndi]
+AddReg = nd2wrap6.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap6.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_164A"
+
+[nd2wrap7.ndi]
+AddReg = nd2wrap7.ndi.reg,nd2wrap.ndi.reg
+
+[nd2wrap7.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_14E4&DEV_16AA"
+
+[nd2wrap.ndi.reg]
+HKR,,DevLoader,,*ndis
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+; NDIS Info
+HKR,NDIS,LogDriverName,,"BXND20X"
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+HKR,NDIS\NDIS2,DriverName,,"BXND20X$"
+HKR,NDIS\NDIS2,FileName,,"BXND20X.dos"
+; Interfaces
+HKR,Ndi\Interfaces,DefUpper,,"ndis2"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+HKR,Ndi\Interfaces,UpperRange,,"ndis2"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+; Install sections
+HKR,Ndi\Install,ndis2,,"nd2wrap.inst.ndis2"
+HKR,Ndi\Remove,ndis2,,"nd2wrap.rmv.ndis2"
+HKR,,MsPciScan,0,"2"
+
+[nd2wrap.inst.ndis2]
+CopyFiles = nd2wrap.ndis2.CopyFiles
+AddReg = nd2wrap.inst.ndis2.reg
+
+[nd2wrap.rmv.ndis2]
+AddReg = nd2wrap.rmv.ndis2.reg
+
+[nd2wrap.inst.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",BXND20X.dos,,low
+
+[nd2wrap.rmv.ndis2.reg]
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",BXND20X.dos
+
+[nd2wrap.ndis2.CopyFiles]
+BXND20X.dos
+
+[DestinationDirs]
+nd2wrap.ndis2.CopyFiles = 26
+
+[Strings]
+VENDOR = "NDIS2INFER by Oerg866"
+DEVICE = "Broadcom NetXtreme II Ethernet (NDIS2)"
+

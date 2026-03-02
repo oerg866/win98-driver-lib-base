@@ -1,0 +1,279 @@
+<HTML>
+<HEAD>
+<TITLE>yuknd.htm</TITLE>
+<meta http-equiv="content-type" content="text-html; charset=ISO-8859-1">
+</HEAD>
+<BODY BGCOLOR=#FFFFFF TEXT=#000000 LINK=#0000FF VLINK=#003366 ALINK=#FF0000
+>
+<PRE>
+&#x202A;&copy;Copyright 2003-2009 Marvell&reg;.&#x202C;
+All rights reserved..
+</PRE>
+<HR WIDTH="100%">
+<PRE>
+yuknd.htm created 28-Oct-2009
+
+Readme File for yuknd.dos v9.55.1.3 NDIS2 Driver supporting the
+Marvell&reg; Yukon&reg; Ethernet Controller
+
+
+</PRE>
+<H1>
+	<FONT FACE="Arial, Helevetica" SIZE=+2>
+		<B>This file contains</B>
+	</FONT>
+</H1>
+<UL>
+	<FONT FACE="Arial, Helvetica" SIZE=+1>
+		<B><A HREF="#Section1">1&nbsp;&nbsp;Overview</A></B>
+	</FONT>
+	<BR>
+
+<FONT FACE="Arial, Helvetica" SIZE=+1>
+	<B><A HREF="#Section2">2&nbsp;&nbsp;Required Files</A></B>
+</FONT>
+<BR>
+
+<FONT FACE="Arial, Helvetica" SIZE=+1>
+	<B><A HREF="#Section3">3&nbsp;&nbsp;Installation</A></B>
+</FONT>
+<BR>
+
+<FONT FACE="Arial, Helvetica" SIZE=+1>
+	<B><A HREF="#Section4">4&nbsp;&nbsp;Operation on dual port controllers</A></B>
+</FONT>
+<BR>
+
+<FONT FACE="Arial, Helvetica" SIZE=+1>
+	<B><A HREF="#Section5">5&nbsp;&nbsp;Driver Parameters</A></B>
+</FONT>
+<BR>
+
+<FONT FACE="Arial, Helvetica" SIZE=+1>
+	<B><A HREF="#Section6">6&nbsp;&nbsp;Sample Installation/Configuration</A></B>
+</FONT>
+<BR>
+</UL><PRE>
+</PRE>
+<HR WIDTH="100%">
+<PRE>
+
+</PRE>
+<H2>
+	<FONT FACE="Arial, Helvetica" SIZE=+2>
+		<B><A NAME="Section1">1&nbsp;&nbsp;Overview</A></B>
+	</FONT>
+</H2>
+<PRE>The driver yuknd.dos is the NDIS2 driver for the Microsoft Network Client
+for DOS for the Marvell&reg; Yukon&reg; Ethernet Controller.
+</PRE>
+<H2>
+	<FONT FACE="Arial, Helvetica" SIZE=+2>
+		<B><A NAME="Section2">2&nbsp;&nbsp;Required Files</A></B>
+	</FONT>
+</H2>
+<PRE>    YUKND.DOS          the driver
+    OEMSETUP.INF        installation skript
+    PROTOCOL.INI        SAMPLE configuration file
+
+    Microsoft Network Client 3.0 for MS-DOS
+</PRE>
+<H2>
+	<FONT FACE="Arial, Helvetica" SIZE=+2>
+		<B><A NAME="Section3">3&nbsp;&nbsp;Installation</A></B>
+	</FONT>
+</H2>
+<PRE>When installing the Microsoft Network Client for DOS follow these steps
+to install yuknd.dos:
+
+1.  Start the installation of the Microsoft Network Client.
+2.  When you are prompted to select a network adapter, select
+    &quot;Network adapter not shown on list below ...&quot;.
+3.  Enter the path where the files yuknd.dos and
+    oemsetup.inf are located.
+4.  Select &quot;Marvell&reg; Yukon&reg; Ethernet Controller&quot;.
+5.  Answer the questions in the following dialogs to best fit your needs.
+6.  When prompted if the listed options are correct, you should select
+    &quot;Change Network Configuration&quot;.
+7.  Add the protocols that are needed for your network and configure them
+    to best fit your needs.
+8.  Return from the dialog and confirm that the listed options are
+    correct.
+9.  Finish the installation of the Microsoft Network Client.
+10. If you have more than one network adapter you might want to change
+    the bus number and device number in the protocol.ini as described
+    in the next section.
+</PRE>
+<H2>
+	<FONT FACE="Arial, Helvetica" SIZE=+2>
+		<B><A NAME="Section4">4&nbsp;&nbsp;Operation on dual port controllers</A></B>
+	</FONT>
+</H2>
+<PRE>The driver will run on that port that first came up with a link when the
+driver is loaded. It does not switch if the current port loses its link
+and the other comes up.
+If none of the ports has a link at the time the driver is loaded, it will
+setup port A in case a cable is plugged in after loading the driver.
+</PRE>
+<H2>
+	<FONT FACE="Arial, Helvetica" SIZE=+2>
+		<B><A NAME="Section5">5&nbsp;&nbsp;Driver Parameters</A></B>
+	</FONT>
+</H2>
+<PRE>After the installation of the driver, the file protocol.ini in your
+Microsoft Network Client installation directory contains the following
+lines:
+
+[MRVL$yuknd]
+    DriverName = yuknd$
+
+When you have more than one adapter supported by the driver in your system
+you might want to specify which adapter should be used. There are two ways
+to specify the adapter.
+
+Bus and device number (optional)
+
+    BUSNUM = &lt;busnum&gt;
+    DEVNUM = &lt;devnum&gt;
+
+    With these parameters you can specify the network adapter the
+    driver should bind on.
+    The bus and device numbers are assigned by the BIOS at boot time.
+
+Connection type (optional)
+
+    CONTYPE = &lt;contype&gt;
+
+    This parameter can be used to force link speed and duplex mode.
+    Using other values than AUTO turns off auto-negotiation and is not
+    recommended.
+    Possible values are:
+
+    AUTO
+    NOFLO		(like AUTO but flowcontrol disabled)
+    _1000		(like AUTO but advertise only speed of 1000 MBps)
+    _100FD
+    _100HD
+    _10FD
+    _10HD
+
+Check link mode (optional)
+
+    CHECKLINK = 1
+
+    When this parameter has been specified the driver uses the first
+    supported adapter in the system with a valid link. This parameter
+    will be ignored when BUSNUM and DEVNUM are used.
+
+Number of receive and transmit buffers (optional)
+
+    MAXRECEIVES
+    MAXTRANSMITS
+
+    Possible values: 1..3, but the sum of receive and transmit buffers
+    cannot be greater than 4.
+
+    These parameters specify how many transmit and receive buffers the
+    driver shall use. Using more buffers might improve the performance
+    but the driver will consume more memory.
+
+Designated port (optional)
+
+    HWPORT = A
+
+    Possible values: A, B, L(default)
+
+    On controllers with two ports, the driver will use the port that is
+    selected (Port A or B) or it will use the port that has a link.
+    On controllers with only one port, this parameter will be ignored and
+    defaults to 'A'.
+    If the parameter CHECKLINK is selected at the same time, the parameter
+    PORT is automatically reset to 'L'.
+
+Adjust internal behavior (optional)
+
+    FIX = &lt;bitmask&gt;
+
+    A bitmask to change some internal behavior of the driver. May be
+    entered as a number (e.g. 3) or as a bitstring (e.g. &quot;011&quot;).
+
+    - Bit 0 (&quot;FIX=1&quot;) avoids crashes caused by a stack overflow
+      problem (observed only with MtTool 3.0). Use only if you
+      experience crashes or system stops.
+
+    - Bit 1 (&quot;FIX=2&quot;) will let the driver queue packets internally.
+      MS network client 3.11 with IPX (nwlink) may otherwise stop
+      working if out of send buffers.
+
+    Bit values can be combined by simply using their sum (e.g. &quot;FIX=3&quot;).
+</PRE>
+<H2>
+	<FONT FACE="Arial, Helvetica" SIZE=+2>
+		<B><A NAME="Section6">6&nbsp;&nbsp;Sample Installation/Configuration</A></B>
+	</FONT>
+</H2>
+<PRE>Below you find a sample protocol.ini and system.ini from the Microsoft
+Client Installation directory:
+
+Sample system.ini:
+
+   [network]
+   filesharing=no
+   printsharing=no
+   autologon=yes
+   computername=MyComputer
+   lanroot=C:\NET
+   username=Me
+   workgroup=MyWorkgroup
+   reconnect=yes
+   dospophotkey=N
+   lmlogon=0
+   logondomain=MyWorkgroup
+   preferredredir=basic
+   autostart=basic
+   maxconnections=8
+
+   [network drivers]
+   netcard=yuknd.dos
+   transport=tcpdrv.dos,nemm.dos
+   devdir=C:\NET
+   LoadRMDrivers=yes
+
+   [386enh]
+   TimerCriticalSection=5000
+   UniqueDosPSP=TRUE
+   PSPIncrement=2
+
+   [Password Lists]
+   *Shares=C:\NET\Shares.PWL
+
+
+Sample protocol.ini:
+
+   [network.setup]
+   version=0x3110
+   netcard=MRVL$yuknd,1,MRVL$yuknd,1
+   transport=tcpip,TCPIP
+   lana0=MRVL$yuknd,1,tcpip
+
+   [TCPIP]
+   NBSessions=6
+   SubNetMask0=255 255 0 0
+   IPAddress0=10 9 1 41
+   DisableDHCP=1
+   DriverName=TCPIP$
+   BINDINGS=MRVL$yuknd
+   LANABASE=0
+
+   [protman]
+   DriverName=PROTMAN$
+   PRIORITY=MS$NDISHLP
+
+   [MRVL$yuknd]
+   DriverName=yuknd$
+   CHECKLINK=1
+
+*** End of Readme file ***
+</PRE>
+</BODY>
+</HTML>

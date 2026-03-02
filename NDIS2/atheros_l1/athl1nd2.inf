@@ -2,7 +2,7 @@
 ;NDIS2 Wrapper INF v2.0
 ;(C) 2026 Eric Voirin (oerg866@googlemail.com)
 ;http://github.com/oerg866/ndis2infer9x
-;Command Line: [ndis2infer9x.py --inf X:\win98-quickinstall\win98-driver-lib-base\[NIC]_atheros_ar8151\oemsetup.inf --id 1969:1083 --id 1969:2062 --lookup --out ar815x.inf]
+;Command Line: [ndis2infer9x.py --rel --lookup --dir atheros_l1 --out athl1nd2.inf --id 1969:1048]
 LayoutFile = layout.inf
 Signature = $CHICAGO$
 Class = Net
@@ -12,36 +12,29 @@ Provider = %VENDOR%
 %VENDOR% = ND2WRAP
 
 [ND2WRAP]
-"AR8151 v2.0 Gigabit Ethernet" = nd2wrap0.ndi,PCI\VEN_1969&DEV_1083
-"AR8152 v2.0 Fast Ethernet" = nd2wrap1.ndi,PCI\VEN_1969&DEV_2062
+"Attansic L1 Gigabit Ethernet (NDIS2)" = nd2wrap0.ndi,PCI\VEN_1969&DEV_1048
 
 [SourceDisksNames]
 1 = "Oerg866 NDIS2INFER9X Driver",,
 
 [SourceDisksFiles]
-atnds2.dos = 1
+l1.dos = 1
 
 [nd2wrap0.ndi]
 AddReg = nd2wrap0.ndi.reg,nd2wrap.ndi.reg
 
 [nd2wrap0.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_1969&DEV_1083"
-
-[nd2wrap1.ndi]
-AddReg = nd2wrap1.ndi.reg,nd2wrap.ndi.reg
-
-[nd2wrap1.ndi.reg]
-HKR,Ndi,DeviceID,,"PCI\VEN_1969&DEV_2062"
+HKR,Ndi,DeviceID,,"PCI\VEN_1969&DEV_1048"
 
 [nd2wrap.ndi.reg]
 HKR,,DevLoader,,*ndis
 HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
 ; NDIS Info
-HKR,NDIS,LogDriverName,,"ATNDS2"
+HKR,NDIS,LogDriverName,,"ATL1"
 HKR,NDIS,MajorNdisVersion,1,03
 HKR,NDIS,MinorNdisVersion,1,0A
-HKR,NDIS\NDIS2,DriverName,,"ATNDS2$"
-HKR,NDIS\NDIS2,FileName,,"atnds2.dos"
+HKR,NDIS\NDIS2,DriverName,,"ATL1$"
+HKR,NDIS\NDIS2,FileName,,"l1.dos"
 ; Interfaces
 HKR,Ndi\Interfaces,DefUpper,,"ndis2"
 HKR,Ndi\Interfaces,DefLower,,"ethernet"
@@ -66,18 +59,18 @@ AddReg = nd2wrap.inst.ndis2.reg
 AddReg = nd2wrap.rmv.ndis2.reg
 
 [nd2wrap.inst.ndis2.reg]
-HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",atnds2.dos,,low
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",l1.dos,,low
 
 [nd2wrap.rmv.ndis2.reg]
-HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",atnds2.dos
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Network\Real Mode Net",l1.dos
 
 [nd2wrap.ndis2.CopyFiles]
-atnds2.dos
+l1.dos
 
 [DestinationDirs]
 nd2wrap.ndis2.CopyFiles = 26
 
 [Strings]
 VENDOR = "NDIS2INFER by Oerg866"
-DEVICE = "Atheros PCI-E Ethernet Adapter (NDIS2)"
+DEVICE = "Attansic L1 Gigabit Ethernet Adapter (NDIS2)"
 

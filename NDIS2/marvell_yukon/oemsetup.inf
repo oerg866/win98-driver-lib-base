@@ -1,0 +1,27 @@
+;
+; OEMSETUP.INF for the yuknd.dos v9.55.1.3 NDIS2 driver supporting the
+; Marvell(R) Yukon(R) Ethernet Controller.
+;
+; (C)Copyright 2003-2009 Marvell(R).
+; All rights reserved..
+;
+
+[disks]
+
+[netcard]
+MRVL$yuknd="Marvell(R) Yukon(R) Ethernet Controller",0,ndis,ethernet,real,MRVL$yuknd,MRVL$yuknd_nif
+
+[MRVL$yuknd]
+devdir=?:yuknd.dos
+device=yuknd.dos,@devdir\yuknd.dos
+
+[MRVL$yuknd_nif]
+DriverName="yuknd$"
+param=FIX,"FIX (see readme)",static,"2",2,0x30
+param=CONTYPE,"Connection Type",text,"AUTO,_100FD,_100HD,_10FD,_10HD","AUTO",0x32
+param=CHECKLINK,"Use First Link Found",int,"0,1,1",0,0x32
+param=BUSNUM,"Adapter's PCI Bus Number",int,"0,255,1",0,0x32
+param=DEVNUM,"Adapter's PCI Device Number",int,"0,31,1",0,0x32
+param=MAXRECEIVES,"Number of Receive Buffers",int,"1,3,1",1,0x32
+param=MAXTRANSMITS,"Number of Transmit Buffers",int,"1,3,1",1,0x32
+param=HWPORT,"Designated port",text,"A,B,L","L",0x32

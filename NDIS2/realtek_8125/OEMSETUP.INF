@@ -1,0 +1,18 @@
+
+;RTL8125  OEMSETUP.INF File:
+
+[netcard]
+RTL8125="RTL8125 Family 2.5 Gigabit Ethernet Adapter",000,ndis,ethernet,real,RTL8125,RTL8125_nif
+
+
+[RTL8125]
+devdir=?:rt25gnd.dos
+device=rt25gnd.dos,@devdir\rt25gnd.dos
+
+[RTL8125_nif]
+drivername=rt25gnd$
+param=Medium,"Medium type ",text,"_Auto,_2500Full,_1000Full,_100Full,_100Half,_10Full,_10Half",_Auto,0x30
+param=NETADDRESS,"Network Address",chars,13,"@000000000000",0x02
+param=ETHERID,"Node Address",chars,13,"@000000000000",0x02
+param=BusNo ,"Adpater's Bus Number",int,"0,255,1",0,0x32
+param=DeviceNo ,"Adpater's Device Number",int,"0,31,1",0,0x32

@@ -1,0 +1,9 @@
+; OEMSETUP.INF for Broadcom NetXtreme II Ethernet Adapter
+
+[netcard]
+BXND20X$="Broadcom NetXtreme II Ethernet", 0, NDIS, Ethernet, REAL, BXND20X$_ini, BXND20X$_ini
+
+[BXND20X$_ini]
+DriverName=BXND20X$
+device=BXND20X.dos, @INST\BXND20X.dos
+NETDIR=5:BXND20X.dos
