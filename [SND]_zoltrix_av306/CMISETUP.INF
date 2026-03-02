@@ -1,0 +1,115 @@
+
+[Version]
+Signature=$WINDOWS95$
+Class=Media
+Provider=%String0%
+LayoutFile=layout.inf
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[DestinationDirs]
+DefaultDestDir = 11
+Reload.DelList = 11
+Sinit.CopyList = 10
+Sinit.DelList = 10
+ADC.CopyINF = 17
+
+[Manufacturer]
+%String1%=ADChipsIc
+
+[ADChipsIc]
+"Audio PnP WSS\SB16\MPU401\Game"=ADChips_SB16PnP_Dev,ISAPNP\*PXQ4304
+%String2%=ADChips_SB16DOS_Dev,ISAPNP\*CMI0000
+
+[ADChips_SB16PnP_Dev]
+DelFiles=Reload.DelList,Sinit.DelList
+CopyFiles=ADC.CopyINF,WSS.CopyList,Mpu401.CopyList,FM.CopyList,JoyStick.CopyList,Sinit.CopyList,SB16.CopyList
+UpdateAutoBat=Sinit.Update
+Reboot
+
+[ADChips_SB16DOS_Dev]
+
+
+[SB16.CopyList]
+sb16.vxd
+sb16snd.drv
+cspman.dll
+wfm0200.acv
+wfm0200a.csp
+wfm0201.acv
+wfm0201a.csp
+wfm0202.acv
+wfm0202a.csp
+wfm0203.acv
+wfm0203a.csp
+
+[Reload.DelList]
+ad8329.drv
+ad8329.vxd
+
+[Sinit.DelList]
+aeinit.exe
+aemix.com
+
+[Mpu401.CopyList]
+msmpu401.drv
+msmpu401.vxd
+
+[JoyStick.CopyList]
+msjstick.drv
+vjoyd.vxd
+
+[WSS.CopyList]
+ad8329.drv
+ad8329.vxd
+
+[Sinit.CopyList]
+aeinit.exe
+aemix.com
+winst.exe
+
+
+[ADC.CopyINF]
+cmisetup.INF ; qi fix - inf file name was bad
+
+[FM.CopyList]
+msopl.drv
+msopl.vxd
+
+[PreCopySection]
+HKR,,NoSetupUI,0,1
+
+[Class.AddReg]
+HKR,,,0,%MediaClassName%
+HKR,,Icon,0,-1
+HKR,,Installer,0,mmci.dll
+
+[ControlFlags]
+
+[Sinit.Update]
+PreFixPath=10
+CmdAdd=aeinit,"%AEinitparam%"
+CmdAdd=aemix,"%AEmixparam%"
+CmdAdd=winst
+CmdDelete=aemix
+CmdDelete=aeinit
+
+[SourceDisksNames]
+1="AD-Chips WIN95 Drivers Disk",,0000
+
+[SourceDisksFiles]
+ad8329.drv=1
+ad8329.vxd=1
+aeinit.exe=1
+aemix.com=1
+winst.exe=1
+
+[Strings]
+String0="AD-Chips Inc."
+String1="AD-Chips Inc."
+String2="DOS Mode SB16 Audio Device"
+MediaClassName="Sound, video and game controllers"
+AEinitparam="/WE /WA:530 /WI:11 /WM:0 /VE /VA:220 /VI:5 /VL:1 /VH:5 /GE /ME /MA:330 /MI:9 /MX:100 "
+AEmixparam="/V:15,15 /C:00,00 /F:15,15 /I:00,00 /M:00 /D:O /R:A  /X "
+
