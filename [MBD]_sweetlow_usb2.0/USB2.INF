@@ -19,6 +19,7 @@ usbehci.sys = 1
 usbport.sys = 1
 usbhub20.sys = 1
 usbccgp.sys = 1
+usbd.sys = 1
 usb2.inf = 1
 
 [ControlFlags]
@@ -57,6 +58,7 @@ HKR,,EnumPropPages,,"sysclass.dll,USBControllerPropPage"
 [EHCI.CopyFiles]
 usbehci.sys
 usbport.sys
+usbd.sys
 
 ; --------------------------------------------------------------
 ; USB ROOT HUB (USB 2.0)
@@ -119,6 +121,7 @@ usbccgp.sys
 ; =================== INTEL ===================================
 [Intel]
 %PCI\VEN_8086&DEV_24CD.DeviceDesc%=EHCI,PCI\VEN_8086&DEV_24CD
+%PCI\VEN_8086&DEV_24CD.DeviceDesc%=EHCI,PCI\VEN_8086&DEV_24DD
 
 ; =================== SIS ===================================
 [SIS]
