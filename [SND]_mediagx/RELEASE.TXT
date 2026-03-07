@@ -1,0 +1,22 @@
+Version		Comment
+#######		###############################################################################
+
+ 1003       Added code to make the BLASTER env variable more complete.  This fixes Quake 
+ 			and probably some other games running in a DOS box.  Also modified the INF files
+ 			so they have no references to Creative, only work with PNPB003 and CRX0002 and
+ 			there are two INF's now.  One to be used with Compaq's DRVINS.EXE program and
+ 			the other to be used on all other devices. 
+
+ 1004		Added code to enable MUTE for the MIDI slider control and added a fix for the
+ 			Quake 2 audio problem.  
+			Files Changed: controls.c, init.c, mgxsb16.rc, mix_objs.c, mixer.h, cnfgmgr.h
+
+
+ 1005		Fixed a bug that caused the midi output to mute when the user muted the wave output.
+			Files Changed: controls.c
+
+ 1006		Fixed the Quake I bug #1796 which was two problems.  The mixer was hozing the 
+ 			HW instance allocation in the system VM.  Eggplant was also reseting the SB HW 
+ 			which turned the CD volume off.	
+			Files Changed: mgxsb16.asm
+			

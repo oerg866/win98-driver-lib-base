@@ -1,0 +1,112 @@
+; INF file for National Semiconductor Windows 9x display driver
+; Copyright 1995-2000, National Semiconductor Corporation
+
+[version]
+Class=DISPLAY
+signature="$Windows 95$"
+Provider=%Mfg%
+
+; Disk & Directory sections
+;----------------------------------------
+[DestinationDirs]
+DefaultDestDir  = 11	; LDID_SYS
+NSC.Copy = 11
+
+[SourceDisksNames]
+1="National Semiconductor XpressGRAPHICS(TM) Windows 9x Display Driver",,0
+
+[SourceDisksFiles]
+gx95.drv=1
+gxmini.vxd=1
+gxdraw.dll=1
+nscvid.dll=1
+nscctl.dll=1
+gxtv.dll=1
+gxtvpos.dll=1
+gxtvfb.dll=1
+
+; Manufacturers 
+;----------------------------------------
+[Manufacturer]
+%Mfg%=Mfg
+
+
+; Driver sections
+;----------------------------------------
+[Mfg]
+%NSCGX.DeviceDesc%=NSC, PCI\VEN_1078&DEV_0104, *NSC0003, *NSC0001
+
+
+; Install sections
+;----------------------------------------
+[NSC]
+CopyFiles=NSC.Copy
+DelReg=Prev.DelReg
+AddReg=NSC.AddReg
+
+[NSC.Copy]
+gx95.drv
+gxmini.vxd
+gxdraw.dll
+gxtv.dll
+gxtvpos.dll
+gxtvfb.dll
+nscvid.dll
+nscctl.dll
+
+[NSC.PosDup]
+*PNP0900
+
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+
+[NSC.AddReg]
+HKR,,Ver,,4.10.01.1320
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,gx95.drv
+HKR,DEFAULT,drv2,,gx95.drv
+HKR,DEFAULT,vdd,,"*vdd"
+HKR,DEFAULT,minivdd,,gxmini.vxd
+HKR,DEFAULT,minivdd2,,gxmini.vxd
+HKR,DEFAULT,RefreshRate,,-1
+HKR,DEFAULT,DDC,,1
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+HKR,"MODES\8\640,480",,,"60,72,75"
+HKR,"MODES\8\800,600",,,"60,72,75"
+HKR,"MODES\8\1024,768",,,"60,70,75"
+HKR,"MODES\8\1280,1024",,,"60,75,85"
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\16\1280,1024"
+
+HKCR,"CLSID\{4676caa4-73a6-11d0-995b-0020af6d015d}\InProcServer32",,,"nscctl.dll"
+HKCR,"CLSID\{4676caa4-73a6-11d0-995b-0020af6d015d}\InProcServer32",ThreadingModel,,"Apartment"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\NSC Control",,,"{4676caa4-73a6-11d0-995b-0020af6d015d}"
+
+HKCR,"CLSID\{4676caa1-73a6-11d0-995b-0020af6d015d}\InProcServer32",,,"nscvid.dll"
+HKCR,"CLSID\{4676caa1-73a6-11d0-995b-0020af6d015d}\InProcServer32",ThreadingModel,,"Apartment"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\NSC GX Gamma",,,"{4676caa1-73a6-11d0-995b-0020af6d015d}"
+
+HKCR,"CLSID\{4676caa0-73a6-11d0-995b-0020af6d015d}\InProcServer32",,,"gxtv.dll"
+HKCR,"CLSID\{4676caa0-73a6-11d0-995b-0020af6d015d}\InProcServer32",ThreadingModel,,"Apartment"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\NSC GX TV",,,"{4676caa0-73a6-11d0-995b-0020af6d015d}"
+HKCR,"CLSID\{4676caa2-73a6-11d0-995b-0020af6d015d}\InProcServer32",,,"gxtvpos.dll"
+HKCR,"CLSID\{4676caa2-73a6-11d0-995b-0020af6d015d}\InProcServer32",ThreadingModel,,"Apartment"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\NSC GX TV Position",,,"{4676caa2-73a6-11d0-995b-0020af6d015d}"
+HKCR,"CLSID\{4676caa3-73a6-11d0-995b-0020af6d015d}\InProcServer32",,,"gxtvfb.dll"
+HKCR,"CLSID\{4676caa3-73a6-11d0-995b-0020af6d015d}\InProcServer32",ThreadingModel,,"Apartment"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\NSC GX TV Advanced",,,"{4676caa3-73a6-11d0-995b-0020af6d015d}"
+
+; User visible strings
+;----------------------------------------
+[Strings]
+Class="Display"
+Mfg="National Semiconductor Corporation"
+NSCGX.DeviceDesc="National Semiconductor XpressGRAPHICS(TM)"

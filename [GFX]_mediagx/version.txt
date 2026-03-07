@@ -1,0 +1,453 @@
+_______________________________________________________________________________
+
+Cyrix Corp, MediaGX, Copyright 1996-1998.
+
+Version history of Windows 9x display drivers for MediaGX
+GX95.DRV is the display driver for both Windows 95 and 98.
+_______________________________________________________________________________
+
+12/20/96    v4.03.1109  
+_______________________________________________________________________________
+
+GXDRAW.DLL  764 Fixed UpdateFlipStatus bug for TDDRAW.
+GX95.DRV    765 Cursor exclusion added to SrcDevice on S-S BLTs to fix cursor 
+                droppings.  
+            650 Removed 320x200x8 and 320x240x8 accelerated DDraw modes
+                to support The HIVE.
+_______________________________________________________________________________
+
+1/28/97     v4.03.1110
+_______________________________________________________________________________
+
+GXDRAW.DLL  824 Faster transparent BLT code added.
+            833 Fixed Flip32 bug for The Neverhood.
+GXMINI.VXD  815 Windows won't load when set to 16bpp after changing memory
+                setting in CMOS to low.
+_______________________________________________________________________________
+
+2/20/97     v4.03.1111
+_______________________________________________________________________________
+
+GX95.DRV    NEW TV control initialization code added.
+GX95TV.DRV  NEW 576x400 mode only driver created.
+GXTV.DLL    NEW TV control property sheet added.
+GXMINI.VXD  NEW Changed GetChipID to always return 1.4 for all revisions of GX.  Will
+                return 3.0 for all revisions of GXi.
+
+_______________________________________________________________________________
+
+3/17/97     v4.03.1112
+_______________________________________________________________________________
+
+GX95TV.DRV  NEW Single driver support for the 576x400 desktop resolution.
+GXMINI.VXD  935 Fixed bug when switching between a full screen DOS box in
+                Kanji text mode and English text mode.
+
+_______________________________________________________________________________
+
+4/01/97     v4.03.1113      New INF's require system BIOS ROM 75 or above
+_______________________________________________________________________________
+
+*.INF       NEW Changed PNP BIOS node to CRX0001
+GX95TV.DRV  964 Fixed bug when switching Fox and Bear from 320x200x8 to
+                320x240x8.
+
+_______________________________________________________________________________
+
+4/17/97     v4.03.1114
+_______________________________________________________________________________
+
+GX95.DRV    1054 Fixed bug in the vector clipping code (extra pixels were 
+                 produced outside of the clip region).  
+            NEW  Added code to initialize the high byte of the palette 
+                 for video chroma key support.
+GX95TV.DRV  NEW  Modified driver to only use the 576x400 resolution for the 
+                 "NTSC - 576x400" option.  The PAL format always uses 640x480.
+
+_______________________________________________________________________________
+
+6/12/97     v4.03.1116      Requires system BIOS ROM A9 or above
+_______________________________________________________________________________
+
+GX95.DRV    NEW  Added direct palette access code and Cx5520 core logic support.
+            NEW  Modified cursor panning code to improve general performance.
+            NEW  Single driver now supports all platforms.
+GX95.INF    NEW  Single INF now supports all platforms.
+GXMINI.VXD  NEW  Added support to query the CPU speed, CPU ID and core logic ID.
+GXDRAW.DLL  NEW  Added support for Cx5520 core logic, including video overlay.
+GXGAMMA.DLL NEW  Gamma/brightness/contrast control video overlay property sheet added.
+
+_______________________________________________________________________________
+
+7/10/97     v4.03.1117      Requires system BIOS ROM A9 or above
+_______________________________________________________________________________
+
+GX95.DRV    NEW  Added support for the Chrontel 7001.
+            1320 Fixed bug with mouse tracking 640x480 when screen is 800x600.
+            1321 Fixed GPF bug with Hangual Windows 95 (OSR2) with PPP
+                 dial-up terminal window.
+GXTVPOS.DLL NEW  TV position control property sheet added.
+
+_______________________________________________________________________________
+
+9/8/97      v4.10.01.1200   DirectX 5.0 support added
+_______________________________________________________________________________
+
+GX95.DRV    NEW  Added support for GXm.
+GXMINI.VXD  NEW  Added support for GXm.
+
+_______________________________________________________________________________
+
+9/29/97     v4.10.01.1201
+_______________________________________________________________________________
+
+GXMINI.VXD  1451 Fixed VDD bank setting bug in Microsoft DCT DISPTEST with
+                 mode 0x0D and GXi or GXm.
+
+_______________________________________________________________________________
+
+9/30/97     v4.10.01.1202
+_______________________________________________________________________________
+
+GX95.INF         Minor INF change.
+
+_______________________________________________________________________________
+
+11/3/97     v4.10.01.1203
+_______________________________________________________________________________
+
+GX95.DRV    1651 Fixed 16 byte alignment problem with GXm solid fills.
+GXDRAW.DLL  1651 
+
+_______________________________________________________________________________
+
+11/7/97     v4.10.01.1204
+_______________________________________________________________________________
+
+GX95.DRV    1671 Removed DSTBLT colorkey capability bits.
+GXDRAW.DLL  1671
+
+_______________________________________________________________________________
+
+11/11/97    v4.10.01.1205
+_______________________________________________________________________________
+
+GX95.DRV    NEW  320x200x8 and 320x240x8 DirectDraw modes are now accelerated
+                 and do not use ModeX.
+            NEW  Masked off top 10 bit of cursor base address.
+
+_______________________________________________________________________________
+
+11/25/97    v4.10.01.1206
+_______________________________________________________________________________
+
+GXDRAW.DLL  NEW  Added special setup code for video overlay enable to support
+                 GXm in 6X clock mode.
+
+_______________________________________________________________________________
+
+12/3/97     v4.10.01.1207
+_______________________________________________________________________________
+
+GXDRAW.DLL  1712 Fixed bug with 1.5M frame buffers and 800x600x16 resolution
+                 with the Xing 3.12 MPEG player.
+            1723 Fixed bug with GXm and video playback which causes the video
+                 display to turn into garbage and lock the system.
+            1724 Fixed problem when switching from full screen DOS to windows
+                 while video playback occuring.
+          
+_______________________________________________________________________________
+
+1/20/98     v4.10.01.1208
+_______________________________________________________________________________
+
+GXDRAW.DLL  NEW  Added support for the Cx5530 core logic chip.
+            NEW  Added DDVERSIONINFO escape.
+            NEW  Improved AVI playback for widths greater than 384 pixels.
+GX95.DRV    NEW  Added support for the Cx5530 core logic chip.
+            NEW  Added support for TV encoder capabilities bits.
+            NEW  Improved display control register locking.
+GXGAMMA.DLL NEW  Added support for the Cx5530 core logic chip.
+
+_______________________________________________________________________________
+
+2/9/98      v4.10.01.1209
+_______________________________________________________________________________
+
+GXDRAW.DLL  NEW  Added support for GXm 4.3 early ready video bits.
+
+_______________________________________________________________________________
+
+3/9/98      v4.10.01.1300   
+_______________________________________________________________________________
+
+GXMINI.VXD  NEW  Added multi-monitor support for Win98, requires
+GXDRAW.DLL       Cx5530 core logic and system BIOS 39 or above.
+GX95.DRV    
+GX95.INF    
+GXDRAW.DLL  1854 Changed page flipping to return status instead of waiting
+                 for flipped.
+
+_______________________________________________________________________________
+
+3/24/98     v4.10.01.1301
+_______________________________________________________________________________
+
+GX95.DRV    1869 Fixed palette corruption when returning from a monitor
+                 shut-down state via the mouse with a Microsoft Plus!
+                 (high color) desktop theme.
+
+_______________________________________________________________________________
+
+4/02/98     v4.10.01.1302
+_______________________________________________________________________________
+
+GXDRAW.DLL  NEW  Added code to handle > 266MHz CPU's and video overlay.
+GXMINI.VXD  NEW  Added support for odd clocked CPU's and video overlay.
+GX95.DRV         
+
+_______________________________________________________________________________
+
+4/20/98     v4.10.01.1303
+_______________________________________________________________________________
+
+GXMINI.VXD  NEW  Added CPU speed detection code for GXm.
+            1925 Fixed DispTest displays garbage during mode 0xD.   
+
+_______________________________________________________________________________
+
+5/1/98      v4.10.01.1304
+_______________________________________________________________________________
+
+GX95.DRV    1854 Mouse becomes jerky during map mode of Deer Hunter.
+            1940 Video remains enabled on Windows shutdown.
+            
+_______________________________________________________________________________
+
+5/18/98     v4.10.01.1305
+_______________________________________________________________________________
+
+GXDRAW.DLL  1979 Video playback is red when 8bpp and IE 4.0 is installed.
+            
+_______________________________________________________________________________
+
+6/29/98     v4.10.01.1306
+_______________________________________________________________________________
+
+GXMINI.VXD  NEW  Added interrupt protection around all PCI config cycles and
+                 CPU register accesses.
+ 
+_______________________________________________________________________________
+
+8/5/98      v4.10.01.1307
+_______________________________________________________________________________
+
+GXDRAW.DLL  2048 Fixed DCT Overfly test in 8bpp mode if same as primary 
+                 is selected.
+GX95.DRV    2083 Allow 1024x768x16 modes on notebooks.
+ 
+_______________________________________________________________________________
+
+8/26/98     v4.10.01.1308
+_______________________________________________________________________________
+
+GX95.DRV    NEW  Added support for the Chrontel 7003 NTSC encoder.
+GXTVFB.DLL  NEW  Added support for the Chrontel 7003 NTSC encoder. 
+
+_______________________________________________________________________________
+
+10/19/98    v4.10.01.1309
+_______________________________________________________________________________
+
+GX95.DRV    NEW  Removed flat panel panning support.
+
+_______________________________________________________________________________
+
+10/30/98    v4.10.01.1310
+_______________________________________________________________________________
+
+GXDRAW.DLL  NEW  Removed VGA based DirectDraw screen flipping.
+GX95.DRV    NEW  Added flat panel panning with video overlay support.
+
+_______________________________________________________________________________
+
+11/10/98    v4.10.01.1312
+_______________________________________________________________________________
+
+GX95.DRV    NEW  Added video overlay support with TV output enabled.
+GXDRAW.DLL  NEW  Added 2x overlay support for modes <= 512.
+CYRIXCTL.DLL     New control applet for disabling acceleration.
+CYRIXVID.DLL     Changed name of control applet for video gamma control.
+
+_______________________________________________________________________________
+
+12/22/98    v4.10.01.1313
+_______________________________________________________________________________
+
+GX95.DRV    2309 Fixed rectangles for Output with destination data.
+
+_______________________________________________________________________________
+
+01/15/99    v4.10.01.1314
+_______________________________________________________________________________
+
+GXDRAW.DLL  2323 and 2326: Fixed MPEG related bug introduced with v1310. 
+
+_______________________________________________________________________________
+
+09/28/99    v4.10.01.1315
+_______________________________________________________________________________
+
+Check for VSA2
+
+_______________________________________________________________________________
+
+06/05/00    v4.10.01.1316
+_______________________________________________________________________________
+
+06/05/00:
+Added support for VSA2 in VDD and Display driver.
+Added 1280x1024x16 mode for the GX1 chip.
+
+FILES CHANGED:
+vdd\source\gxmini.asm:      Added check for VSA2 and also to do the check for
+                            presence of SoftVGA in VSA2.
+							Added code to detect CPU clock speed and to detect
+							available graphics memory from register 3E.
+display\source\enable.c:    Added a function that detects VSA2 and sets the
+                            GXFlags bit accordingly.
+							Changed check for sufficient memory to account for
+							the fact that in 1280x1024x16 modes there is no
+							extra memory because the pitch is 4096 bytes.
+                            Added some logic to disable 1280x1024x16 modes for
+							older GX processors because this mode is supported
+							only in GX1.
+display\source\gxcode.c:    Added the new mode number in the VESAmode array.
+                            Also added code to set the 4096 stride bit in the
+							BLT_STATUS register.
+display\source\bitblta.asm: Added check in GxColorToScreen to take care of
+                            4096 screen stride.
+display\source\driver.h:    Increased GX_NUM_MODES to 19 to account for the
+                            new mode.
+display\source\gx95.inf:    Added the new mode info so that when the Display
+                            Settings Menu is shown, this new mode will appear
+							in it as an option.
+
+Added compression support to the Display driver as SoftVGA has no support 
+in VSA2.
+
+FILES CHANGED:
+display\source\enable.c:    Changed the comments to reflect correct modes.
+display\source\gxcode.c:    Added code to support compression/decompression.
+display\source\driver.h:    Exported linear_data.
+display\source\gx95.inf:    Changed the version Number.
+                         
+Modified code to diable compression in Full screen dos mode.
+
+FILES CHANGED:
+display\source\enable.c:    gfx_disable_compresssion used only in VSA2.
+display\source\gxcode.c:    gfx_disable/enable_compresssion used only in VSA2.
+display\source\dur_rtns.c:  Durango based routines.
+display\source\dur_rtns.h:  Durango based routines.
+display\source\gx95.inf:    Changed the version Number.
+vdd\source\gxmini.asm:      Disable compression on in VSA2.
+
+                         
+1) fixed the hanging problen in Directdraw.
+
+FILES CHANGED:
+display\source\enable.c:    added code to update OsmBase and Osmsize variables
+                            for use by Diretcdraw.
+
+display\source\gx95.inf:    Changed the version Number.
+
+_______________________________________________________________________________
+
+06/07/00    v4.10.01.1317
+_______________________________________________________________________________
+
+06/07/00:
+
+changed the version to 1317. 
+win95\gx\display\source\gx95.inf 
+win95\gx\display\source\version.txt 
+
+changed the registry variable from CYRIX to NSC	
+win95\gx\display\source\registry.c 
+win95\gx\gxgamma\source\gxgamma.rc
+win95\gx\gxtv\source\gxtv.rc
+win95\gx\gxtvfb\source\gxtvfb.rc
+win95\gx\gxtvpos\source\gxtvpos.rc
+win95\gx\vmapd\source\vmapd.rc
+win95\gx\vsim\source\vsim.rc
+
+Modified the cyrixctl, cyrixvid, cyrixdbg to nscctl, nscvid, nscdbg.
+win95\gx\display\source\gx95.inf
+win95\makefile
+applets\*\source\*.*
+
+Number of modes supported
+win95\gx\display\source\driver.h - added 1280x1024x16
+win95\gx\display\source\enable.c - added 1280x1024x16
+win95\gx\display\source\bitblta.asm - added 1280x1024x16
+
+Moved gu1_detect_vsa2
+from win95\gx\display\source\enable.c
+to win95\gx\display\source\dur_rtns.c, win95\gx\display\source\dur_rtns.h
+
+_______________________________________________________________________________
+
+06/09/00    v4.10.01.1318
+_______________________________________________________________________________
+
+06/09/00:
+
+changed the version to 1318. 
+win95\gx\display\source\gx95.inf
+win95\gx\display\source\version.txt
+win95\include\version.h
+
+Exported rect_data
+win95\gx\display\source\driver.h
+
+computed compression buffer pitch
+cursor offset setup code moved to gx_enable
+win95\gx\display\source\gxcode.c
+
+_______________________________________________________________________________
+
+06/13/00    v4.10.01.1319
+_______________________________________________________________________________
+
+06/13/00:
+
+changed the version to 1319. 
+win95\gx\display\source\gx95.inf
+win95\gx\display\source\version.txt
+win95\include\version.h
+
+Corrected the Off screen Memory Calculation
+Modified the vdeo heap end calculation
+win95\gx\display\source\enable.c
+
+Corrected the available heap for DirectDraw.
+win95\gx\display\source\ddrv16.c
+
+_______________________________________________________________________________
+
+06/16/00    v4.10.01.1320
+_______________________________________________________________________________
+
+06/16/00:
+
+changed the version to 1320. 
+win95\gx\display\source\gx95.inf
+win95\gx\display\source\version.txt
+win95\include\version.h
+
+Added support for the following refresh rates.
+640x480, 800x600: 60, 72, 75
+1024x768: 60, 70,75
+1280x1024: 60, 75,85
+win95\gx\display\source\enable.c
+win95\gx\display\source\gx95.inf

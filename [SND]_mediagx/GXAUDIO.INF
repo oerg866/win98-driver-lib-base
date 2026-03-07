@@ -1,0 +1,301 @@
+;================================================================================================
+;
+;	Author		: Bill Wagner, Brian Glover 
+;	Date		: 5-7-98
+;	Version		: 5.05.00.1006
+;	Perpared for	: National Semiconductor Corporation & 
+;			  Eggplant Systems Corporation
+;	Legal Notice	: Copyright (c) 1997 Eggplant Systems Corporation.  All Rights Reserved.
+;
+;	Support for installing the following audio subsystems:
+;		CRX0002	: National XpressAUDIO(TM) 16-bit Sound
+;		PNPB003	: SB16 Legacy Device
+;
+;================================================================================================
+
+[Version]
+Signature="$Windows 95$"
+Class=MEDIA
+InfVersion=%VersionNumber%
+Provider=%CyrixMfgName%
+;*use this when on Windows CD* LayoutFile=layout.inf
+
+[InfVersion]
+InfName=GXAUDIO.INF
+
+[ControlFlags]
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"-1"
+HKR,,Installer,,mmci.dll
+
+[Manufacturer]
+%CyrixMfgName%=Cyrix
+%LegacyAudioMfgName%=Legacy Audio
+
+[Cyrix]
+%*CRX0002.DeviceDesc%=CRX0002_Device, *CRX0002
+%*WDM_CYRIX.DeviceDesc%=WDM_CYRIX, pci\ven_1078&dev_0103
+
+[LegacyAudio]
+%*PNPB003.DeviceDesc%=PNPB003_Device, *PNPB003
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+;================================================================================================
+
+[WDM_CYRIX]
+CopyFiles=
+AddReg=
+DelReg=
+UpdateInit=
+
+[CRX0002_Device]
+DelReg=SB.DelReg
+DelFiles=SB.DelList
+CopyFiles=Inf.CopyList, XpressAudio.CopyList
+AddReg=CRX0002.AddReg, XpressAudio.AddReg, WAVE.AddReg, Mixer.AddReg
+
+[*CRX0002.Det]
+
+[PNPB003_Device]
+DelReg=SB.DelReg
+DelFiles=SB.DelList
+LogConfig=SB16.LC1,SB16.LC2,SB16.LC3,SB16.LC4,SB16.LC5,SB16.LC6,SB16.LC7,SB16.LC8
+CopyFiles=SB16.CopyList
+AddReg=PNPB003.AddReg, SB16.AddReg, WAVE.AddReg, Mixer.AddReg
+Reboot=1
+
+[PNPB003_Device.FactDef]
+ConfigPriority=NORMAL
+IOConfig=220-22F
+IOConfig=330-331
+IOConfig=388-38B
+IRQConfig=5
+DMAConfig=1
+DMAConfig=5
+
+;================================================================================================
+
+[SB16.LC1]
+ConfigPriority=NORMAL
+IOConfig=220-22F , 240-24F , 260-26F , 280-28F
+IRQConfig=5 , 7 , 9 , 10
+DMAConfig=0 , 1 , 3
+DMAConfig=5 , 6 , 7
+
+[SB16.LC2]
+ConfigPriority=NORMAL
+IOConfig=220-22F , 240-24F , 260-26F , 280-28F
+IRQConfig=5 , 7 , 9 , 10
+DMAConfig=0 , 1 , 3
+
+[SB16.LC3]
+ConfigPriority=NORMAL
+IOConfig=220-22F , 240-24F , 260-26F , 280-28F
+IOConfig=388-38B
+IRQConfig=5 , 7 , 9 , 10
+DMAConfig=0 , 1 , 3
+DMAConfig=5 , 6 , 7
+
+[SB16.LC4]
+ConfigPriority=NORMAL
+IOConfig=220-22F , 240-24F , 260-26F , 280-28F
+IOConfig=388-38B
+IRQConfig=5 , 7 , 9 , 10
+DMAConfig=0 , 1 , 3
+
+[SB16.LC5]
+ConfigPriority=NORMAL
+IOConfig=220-22F , 240-24F , 260-26F , 280-28F
+IOConfig=330-331, 300-301
+IRQConfig=5 , 7 , 9 , 10
+DMAConfig=0 , 1 , 3
+DMAConfig=5 , 6 , 7
+
+[SB16.LC6]
+ConfigPriority=NORMAL
+IOConfig=220-22F , 240-24F , 260-26F , 280-28F
+IOConfig=330-331, 300-301
+IRQConfig=5 , 7 , 9 , 10
+DMAConfig=0 , 1 , 3
+
+[SB16.LC7]
+ConfigPriority=NORMAL
+IOConfig=220-22F , 240-24F , 260-26F , 280-28F
+IOConfig=330-331, 300-301
+IOConfig=388-38B
+IRQConfig=5 , 7 , 9 , 10
+DMAConfig=0 , 1 , 3
+DMAConfig=5 , 6 , 7
+
+[SB16.LC8]
+ConfigPriority=NORMAL
+IOConfig=220-22F , 240-24F , 260-26F , 280-28F
+IOConfig=330-331, 300-301
+IOConfig=388-38B
+IRQConfig=5 , 7 , 9 , 10
+DMAConfig=0 , 1 , 3
+
+[*PNPB003.Det]
+;*t* AddReg=PreCopySection
+
+[*PNPB003.KnownDrivers]
+sb16snd.drv
+
+;================================================================================================
+
+[DestinationDirs]
+Inf.CopyList=17				; \windows\inf (ie. LDID_INF)
+XpressAudio.CopyList=11		; \windows\system (ie. LDID_SYS)
+SB16.CopyList=11			; \windows\system (ie. LDID_SYS)
+
+[Inf.CopyList]
+gxaudio.inf,,
+
+[XpressAudio.CopyList]
+mgxsb16.vxd,,
+mgxsb16w.drv,,
+mgxfm.drv,,
+mgx401.drv,,
+
+[SB16.CopyList]
+mgxsb16.vxd,,
+mgxsb16w.drv,,
+mgxfm.drv,,
+mgx401.drv,,
+
+[SourceDisksNames]
+1=%ID1%,"",0
+
+[SourceDisksFiles]
+mgxsb16.vxd=1
+mgxsb16w.drv=1
+mgxfm.drv=1
+mgx401.drv=1
+
+;================================================================================================
+
+[PNPB003.AddReg]
+HKR,Drivers\wave\mgxsb16w.drv,Description,,%*PNPB003.DeviceDesc%
+HKR,Drivers\midi\mgxfm.drv,Description,,%V_INTERNAL%
+HKR,Drivers\midi\mgx401.drv,Description,,%V_EXTERNAL%
+HKR,Drivers\mixer\mgxsb16w.drv,Description,,%*PNPB003.DeviceDesc%
+HKR,Drivers\aux\mgxsb16w.drv,Description,,%*PNPB003.DeviceDesc%
+
+;================================================================================================
+
+[XpressAudio.AddReg]
+HKR,,Driver,,mgxsb16.vxd
+HKR,Drivers\wave\mgxsb16w.drv,Driver,,mgxsb16w.drv
+HKR,Drivers\midi\mgxfm.drv,Driver,,mgxfm.drv
+HKR,Drivers\midi\mgx401.drv,Driver,,mgx401.drv
+HKR,Drivers\midi\mgx401.drv.drv,External,1,01,00,00,00
+HKR,Drivers\aux\mgxsb16w.drv,Driver,,mgxsb16w.drv
+HKR,Drivers\mixer\mgxsb16w.drv,Driver,,mgxsb16w.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+;*later* HKR,,EnumPropPages,,"mgxsb16w.drv,DrvEnumPropPages"
+
+[SB16.AddReg]
+HKR,,Driver,,mgxsb16.vxd
+HKR,Drivers\wave\mgxsb16w.drv,Driver,,mgxsb16w.drv
+HKR,Drivers\midi\mgxfm.drv,Driver,,mgxfm.drv
+HKR,Drivers\midi\mgx401.drv,Driver,,mgx401.drv
+HKR,Drivers\midi\mgx401.drv,External,1,01,00,00,00
+HKR,Drivers\aux\mgxsb16w.drv,Driver,,mgxsb16w.drv
+HKR,Drivers\mixer\mgxsb16w.drv,Driver,,mgxsb16w.drv
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+;*later* HKR,,EnumPropPages,,"mgxsb16w.drv,DrvEnumPropPages"
+
+;================================================================================================
+
+[WAVE.AddReg]
+HKR,,DriverVersion,,%VersionNumber%
+HKR,,ProviderName,,%CyrixMfgName%
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\wave,,,
+HKR,Drivers\mixer,,,
+HKR,Drivers\aux,,,
+HKR,Drivers\midi,,,
+HKLM,SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents\acm,,,
+HKLM,SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents\Rec,,,
+HKLM,SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents\MPlay,,,
+
+[MIXER.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents\Vol,,,
+
+; Mute MIC to elimante hum on a warm reset
+; Must be careful - assumption is this XpressAUDIO is device 0000 
+; The right fix is to change the Driver but this requires recertification through WHQL
+HKLM,SYSTEM\CurrentControlSet\Services\Class\MEDIA\0000\Config,MicMute,1,1
+
+; For Compaq Installation Only!!!!
+; HKLM,Software\Microsoft\Windows\CurrentVersion\RunOnce,DrvIns,,"C:\WINDOWS\OPTIONS\CABS\DRVINS.EXE -r -0"
+
+[SB.DelList]
+wgn0200.acv,,,1
+wgn0201.acv,,,1
+wgn0202.acv,,,1
+wgn0203.acv,,,1
+wgn0200a.csp,,,1
+wgn0201a.csp,,,1
+wgn0202a.csp,,,1
+wgn0203a.csp,,,1
+csp.dll,,,1
+fm.drv,,,1
+snd.drv,,,1
+snd.vxd,,,1
+wfm0200.acv,,,1
+wfm0201.acv,,,1
+wfm0202.acv,,,1
+wfm0203.acv,,,1
+wfm0200a.csp,,,1
+wfm0201a.csp,,,1
+wfm0202a.csp,,,1
+wfm0203a.csp,,,1
+cspman.dll,,,1
+sbfm.drv,,,1
+sb16snd.drv,,,1
+sb16.vxd,,,1
+
+[SB.DelReg]
+HKR,Drivers\wave\sb16snd.drv
+HKR,Drivers\midi\sbfm.drv
+HKR,Drivers\midi\sb16snd.drv
+HKR,Drivers\mixer\sb16snd.drv
+HKR,Drivers\aux\sb16snd.drv
+HKR,Drivers\wave\snd.drv
+HKR,Drivers\midi\fm.drv
+HKR,Drivers\midi\snd.drv
+HKR,Drivers\mixer\snd.drv
+HKR,Drivers\aux\snd.drv
+
+;================================================================================================
+
+[Strings]
+
+; Language-independent Strings
+
+LegacyAudioMfgName="Legacy Audio"
+*PNPB003.DeviceDesc="16-bit Sound"
+VersionNumber="5.05.00.1006"
+
+
+; *** Nationalized Strings ***
+
+CyrixMfgName="National Semiconductor Corporation"
+
+MediaClassName="Sound, video and game controllers"
+
+*CRX0002.DeviceDesc="National XpressAUDIO(TM) 16-bit Sound"
+*WDM_CYRIX.DeviceDesc="National XpressAUDIO(TM) PCI Bridge"
+V_INTERNAL="National XpressAUDIO(TM) FM Synthesizer"
+V_EXTERNAL="External MIDI Port"
+ID1="National XpressAUDIO(TM) Driver Disk"
