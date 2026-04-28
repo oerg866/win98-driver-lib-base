@@ -1,0 +1,262 @@
+; INF file for Cirrus Logic 546X Windows 95/98 display driver
+; Copyright 1995-1997, Cirrus Logic, Inc. All rights reserved.
+; pd build by "fdc". Version: "fw200b01"
+
+[version]
+Class=DISPLAY
+signature="$CHICAGO$"
+Provider=%Mfg%
+SetupClass=BASE
+
+[DestinationDirs]
+DefaultDestDir  = 11    ; LDID_SYS
+Driver.Copy = 11        ; LDID_SYS
+Driver_65.Copy = 11     ; LDID_SYS
+
+[SourceDisksNames]
+1="CL-GD546X Windows 95/98 Driver 2.00 1 of 1",,0
+
+[SourceDisksFiles]
+546X.dr_=1
+546X.vx_=1
+modesw16.dl_=1
+mode65.bi_=1
+clgdd32.dl_=1
+546x_hbc.dl_=1
+546x_hbc.hl_=1
+546x_hbc.tx_=1
+cl3d.dl_=1
+cl3d.tx_=1
+cl3d.hl_=1
+clrefrsh.dl_=1
+clrefrsh.tx_=1
+clrefrsh.hl_=1
+lgm32thk.dl_=1
+clvmd3d.dl_=1
+vgartd.vx_=1
+5465vpm.dl_=1
+vpm16t.dl_=1
+vpm32t.dl_=1
+pnp16vpm.dl_=1
+pnp32vpm.dl_=1
+
+[Manufacturer]
+%Mfg%=Mfg
+
+[Mfg]
+%PCI\VEN_1013&DEV_00D6.DeviceDesc%=Driver_65.Install, PCI\VEN_1013&DEV_00D6	;Install for 5465 Display Drivers
+
+[Driver_65.Install]
+CopyFiles=Driver.Copy,Driver_65.Copy
+DelReg=Prev.DelReg, CLTVPrev.DelReg
+AddReg=Driver.AddReg,Driver_6x.AddReg
+UpdateInis=VPM.Ini
+
+
+[Driver_65.Copy]
+mode65.bin,mode65.bi_
+
+[Driver.Copy]
+546X.drv,546X.dr_
+546X.vxd,546X.vx_
+modesw16.dll,modesw16.dl_
+clgdd32.dll,clgdd32.dl_
+546x_hbc.dll,546x_hbc.dl_
+546x_hbc.hlp,546x_hbc.hl_
+546x_hbc.txt,546x_hbc.tx_
+cl3d.dll,cl3d.dl_
+cl3d.txt,cl3d.tx_
+cl3d.hlp,cl3d.hl_
+clrefrsh.dll,clrefrsh.dl_
+clrefrsh.txt,clrefrsh.tx_
+clrefrsh.hlp,clrefrsh.hl_
+lgm32thk.dll,lgm32thk.dl_
+clvmd3d.dll,clvmd3d.dl_
+vgartd.vxd,vgartd.vx_
+5465vpm.dll,5465vpm.dl_
+vpm16t.dll,vpm16t.dl_
+vpm32t.dll,vpm32t.dl_
+pnp16vpm.dll,pnp16vpm.dl_
+pnp32vpm.dll,pnp32vpm.dl_
+
+
+
+;
+; Added 04-26-97 MAY.  Remove the TVMODES subtree.
+; Modified 09-10-97 MGM.  *Always* remove the TVMODES subtree.
+;
+[CLTVPrev.DelReg]
+HKR,TVMODES
+
+[Prev.DelReg]
+HKR,,Ver
+HKR,,DevLoader
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+HKLM,"System\CurrentControlSet\Services\VxD\PCI",00D61013
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\DriverPages"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\CL 546X HBC CPL Extension"
+HKLM,"Software\CirrusLogic\Laguna\Performance"
+HKLM,"Software\CirrusLogic\ModeData"
+HKR,,DriverInformation.Version
+HKR,,DriverInformation.ChipNum
+
+[Driver.AddReg]
+HKR,,Ver,,4.0
+HKR,,DevLoader,,*vdd
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,546X.drv
+HKR,DEFAULT,drv2,,546X.drv
+HKR,DEFAULT,vdd,,"*vdd"
+HKR,DEFAULT,minivdd,,546X.vxd
+HKR,DEFAULT,minivdd2,,546X.vxd
+HKR,DEFAULT,DDC,,"1"
+HKR,DEFAULT,REFRESHRATE,,"-1"
+HKR,DEFAULT,VPM16,,5465VPM.DLL
+HKR,DEFAULT,VPM32,,vpm32t.DLL
+
+; Auto Detect/Installation from ISDCorp Downloads Website
+HKR,,DriverInformation.Version,,2.00
+HKR,,DriverInformation.ChipNum,,5465
+
+
+
+; Standard Desktop Modes
+
+HKR,"MODES\4\640,480",drv,,vga.drv
+HKR,"MODES\4\640,480",vdd,,*vdd
+
+HKR,"MODES\8\640,480"
+
+
+HKR,"MODES\8\800,600"
+HKR,"MODES\8\1024,768"
+HKR,"MODES\8\1152,864"
+HKR,"MODES\8\1280,960"
+HKR,"MODES\8\1280,1024"
+HKR,"MODES\8\1600,1200"
+HKR,"MODES\16\640,480"
+
+
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\16\1152,864"
+HKR,"MODES\16\1280,960"
+HKR,"MODES\16\1280,1024"
+HKR,"MODES\16\1600,1200"
+HKR,"MODES\24\640,480"
+
+
+HKR,"MODES\24\800,600"
+HKR,"MODES\24\1024,768"
+HKR,"MODES\24\1152,864"
+HKR,"MODES\24\1280,960"
+HKR,"MODES\24\1280,1024"
+HKR,"MODES\32\640,480"
+
+
+HKR,"MODES\32\800,600"
+HKR,"MODES\32\1024,768"
+
+; DirectDraw Modes
+HKR,"DDMODES\8\320,200"
+HKR,"DDMODES\8\320,240"
+HKR,"DDMODES\8\320,400"
+HKR,"DDMODES\8\320,480"
+HKR,"DDMODES\8\360,400"
+HKR,"DDMODES\8\400,300"
+HKR,"DDMODES\8\512,384"
+HKR,"DDMODES\8\512,480"
+HKR,"DDMODES\8\640,350"
+HKR,"DDMODES\8\640,400"
+HKR,"DDMODES\16\320,200"
+HKR,"DDMODES\16\320,240"
+HKR,"DDMODES\16\320,400"
+HKR,"DDMODES\16\320,480"
+HKR,"DDMODES\16\360,400"
+HKR,"DDMODES\16\400,300"
+HKR,"DDMODES\16\512,384"
+HKR,"DDMODES\16\512,480"
+HKR,"DDMODES\16\640,350"
+HKR,"DDMODES\16\640,400"
+HKR,"DDMODES\24\640,400"
+HKR,"DDMODES\32\320,200"
+HKR,"DDMODES\32\320,240"
+HKR,"DDMODES\32\320,400"
+HKR,"DDMODES\32\320,480"
+HKR,"DDMODES\32\360,400"
+HKR,"DDMODES\32\400,300"
+HKR,"DDMODES\32\512,384"
+HKR,"DDMODES\32\512,480"
+HKR,"DDMODES\32\640,350"
+HKR,"DDMODES\32\640,400"
+
+; Chipset information table
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","Chipset",1,0x11,0x0E,0x00,0x10,0x03,0x00,0x86,0x80,0x37,0x12,0x04,0x00,0x86,0x80,0x80,0x71,0x0C,0x00
+
+; The GART Manager from Intel
+HKLM,"System\CurrentControlSet\Services\VxD\VGARTD","StaticVxD",,"vgartd.vxd"
+
+; The Refresh Rate Property Page
+HKCR,"CLSID\{a2e44d60-ad6b-11ce-93f7-444553540000}\InProcServer32",,,clrefrsh.dll
+HKCR,"CLSID\{a2e44d60-ad6b-11ce-93f7-444553540000}\InProcServer32","ThreadingModel",,"Apartment"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\CL Refresh CPL Extension",,,"{a2e44d60-ad6b-11ce-93f7-444553540000}"
+; The 3D Properties Page
+HKCR,"CLSID\{eaade929-0fa9-11d0-9180-080009bbceed}\InProcServer32",,,cl3d.dll
+HKCR,"CLSID\{eaade929-0fa9-11d0-9180-080009bbceed}\InProcServer32","ThreadingModel",,"Apartment"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\CL D3D Performance CPL Extension",,,"{eaade929-0fa9-11d0-9180-080009bbceed}"
+
+; The 546x Host Bus Configuration Page
+HKCR,"CLSID\{3C594240-1302-11d1-B38D-080009BBE306}\InProcServer32",,,546x_hbc.dll
+HKCR,"CLSID\{3C594240-1302-11d1-B38D-080009BBE306}\InProcServer32","ThreadingModel",,"Apartment"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\CL 546X HBC CPL Extension",,,"{3C594240-1302-11d1-B38D-080009BBE306}"
+
+; The Performance Page
+;HKCR,"CLSID\{6148d680-ba05-11cf-adba-0020afa1146e}\InProcServer32",,,cl_perf.dll
+;HKCR,"CLSID\{6148d680-ba05-11cf-adba-0020afa1146e}\InProcServer32","ThreadingModel",,"Apartment"
+;HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers\CL Perf CPL Extension",,,"{6148d680-ba05-11cf-adba-0020afa1146e}"
+
+; HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","PageControl",REG_SZ,"1"
+
+; HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","User",,"1"
+; HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","WC",,"1"
+
+
+; 3D Performance Parameters
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","Previous Speed",1,4
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","Speed Control",1,4
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","Default Speed",1,4
+
+; 2D Performance Parameters
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","AGPDataStreaming",1,0
+
+[Driver_6x.AddReg]
+HKLM,"Software\CirrusLogic\ModeData\VEN_1013&DEV_00D6\DEFAULT","ModeFile",,"mode65.bin"
+HKLM,"Software\CirrusLogic\ModeData\VEN_1013&DEV_00D6\SUBSYS_00000000","ModeFile",,"mode65.bin"
+HKLM,"Software\CirrusLogic\ModeData\VEN_1013&DEV_00D6\SUBSYS_BEEFDEAD","ModeFile",,"mode65.bin"
+HKLM,"Software\CirrusLogic\ModeData\VEN_1013&DEV_00D6\SUBSYS_3EEFDEAD","ModeFile",,"mode65.bin"
+
+; Additional 5465 3D Performance Parameters
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","Enable TextureJet",1,1
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","Previous TextureJet",1,4
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","TextureJet Control",1,4
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","Default TextureJet",1,4
+
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","DisplayListEnableBox",1,1
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","AGP DisplayList",1,1
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","DisplayListPreviousControl",1,2
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","DisplayListControl",1,2
+HKLM,"SOFTWARE\CirrusLogic\Laguna\Performance","DisplayListDefault",1,2
+
+
+
+
+[VPM.Ini]
+system.ini, drivers,,"vpm=pnp16vpm.dll",0
+system.ini, drivers32,,"vpm=pnp32vpm.dll",0
+
+
+[Strings]
+Mfg="Cirrus Logic"
+PCI\VEN_1013&DEV_00D6.DeviceDesc="Cirrus Logic 546X - ISDCorp (c) v2.00"

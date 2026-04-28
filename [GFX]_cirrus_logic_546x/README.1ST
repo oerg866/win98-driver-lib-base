@@ -1,0 +1,534 @@
+Note: This product no longer installs the DX5 executables. To use DX5 features, 
+      install the DX5 executables shipped by MicroSoft.
+
+
+5465 Graphics Display Device Driver for Microsoft Windows 95/98
+_____________________________________________________________
+
+
+   Device Driver Version: 2.00
+
+
+   Contents
+   ________
+
+           1.0  Changes in this release
+             1.1 Changes in previous releases
+           2.0  Installing the Device Drivers
+           3.0  Current Known Issues
+           4.0  Current Driver Limitation
+           5.0  Component Description
+
+  1.0 Changes in this release
+  _________________________________________
+
+  Version: 2.00
+  Release Date: 1/01/2000
+  Internal#: 200b01
+  - Modified company info/copyright/version strings.
+  - Added Auto Installation and Detection capabilities
+    when purchasing drivers on the ISDCorp Website.
+  - Corrected copy/paste problem in Microsoft Paint in 1024x768x16bpp 
+    when using Windows 98 Japanese. PDR#11796.
+
+
+
+
+  1.1 Changes in previous releases
+  _________________________________________
+
+  Version: 1.71j
+  Release Date: 10/08/99
+  Internal#: 171b01j
+  - Fixed NEC Japan Win98 bitmap corrupte problem. PDR#11796
+
+
+  _________________________________________
+
+  Version: 1.71g
+  Release Date: 11/16/98
+  Internal#: 171b04g 
+  - Fixed double byte character corruption in 
+    "99 Takuchitatemono" program. PDR#11790.
+
+  _________________________________________
+
+  Version: 1.71g
+  Release Date: 11/16/98
+  Internal#: 171b03g 
+  - Hanery Exploreres no longer hangs while running. PDR#11645.
+
+
+  _________________________________________
+
+  Version: 1.71g
+  Release Date: 10/12/98
+  Internal#: 171b02g (based on 1.71e)
+
+  - Resolved the number display problem from the DirectX6 
+    SDK Mipmap sample. PDR#11644.
+
+  - Corrected a lock-up problem when running Hanery Explorer.
+    PDR#11645.
+
+  _________________________________________
+
+  Version: 1.71e
+  Release Date: 9/15/98
+  Internal#: 171b01e (based on 1.71+172b08)
+
+  This version is based on the 1.71 production release plus
+  the 172alpha (b08). See below for fixes contained in 1.71. 
+  Notes for the fixes in 172alphab08 will become available 
+  when 1.72 becomes officially released.
+
+
+  _________________________________________
+
+  Version: 1.71
+  Release Date: 07/02/98
+  Internal#: fw171b14
+  Default Setting: Graphics Bus Priority OFF
+
+  Files removed: DX5 files (setupdx5.1 and setupdx5.2) 
+                 DX5 File Merging Utility (clmerge.exe)
+
+
+  NEW FEATUES:
+  -----------
+  * Significant performance improvements on high end Winbench 98.
+  * Bandwidth equation has been updated to include 300Mhz or 600MB/s concurrent 
+    support and to fix video noise in certain modes.
+  * The Perf2d property page now has updated on-line help and text.
+  * All new I2c Code now integrated with the mini-VDD.
+  * Updated runtime module msvcrt.dll from Windows 98.
+  * A Programmable Blitter Stride has been added for PC98 certification.
+
+
+  BUG FIXES:
+  ---------
+  - With the Jazz desktop theme installed, the wall paper is slow to draw in 
+    16 and 32 bpp. PDR#11540  
+  - In dual monitor, corrupted video appears in secondary monitor when 
+    stretching video window more than 1x. PDR#11553  
+  - Added SubSystem ID to the INF file to comply with WHQL.
+  - In Win95 OSR1,  Bus config tab incorrectly remains in Display Property page 
+    when running in 16 colors. PDR#11324  
+  - In dual monitor mode, noise appears in some modes when running Overfly or 
+    Avi playback. PDR#11418  
+  - Command & Conquer WIn95 edition shows black boxes after Alt-Tab to desktop 
+    and back to game. PDR#11439  
+  - In Dual monitor mode with 2 5465 boards,  with video split across the 
+    screen, the secondary video fails to update.  PDR#11494  
+  - Screen is flashing with video noise in Winbench 98 VideoTESTS. 
+    desktop resolution set to 1024x768, 32Bpp@60Hz. PDR#11506  
+  - When 5465 is primary using CL drivers and 5464 is secondary using MS 
+    drivers, screen corruption occurs on primary VGA. PDR#11516  
+  - When running the VPE/Kernel portion of the Direct Draw tests in WHQL PC 98 
+    test, the screen will occasionally go black. PDR#11527  
+  - Noise appears when running Avi file at full screen in 1600x1200-8bpp 75 & 
+    85Hz and 1280x1024-16bpp 85Hz. PDR#11541  
+  - Win 98  Dual Monitor Mode.  Unable to change refresh rate when installed as 
+    secondary display device and primary is other vendor. PDR#11544  
+  - Updated the Bus Configuration Help and Localization file with new 
+    translation strings for Universal Serial Bus Features. 
+  - Win95 (OSR1) Bus config tab still remains in Display Property page when 
+    running in 16 colors. PDR#11324. 
+  - Updated CL3D.HLP file with new translation strings for the Display List 
+    option.
+  - With Gradus Konomi Game Systems Hangs with Dsplay List is ON(DirectDraw 
+    +Direct3D). PDR#11438	
+  - With  Japanese application Paint Shop Pro Ver4.2J there is strange line. 
+    PDR#11461	
+  - A trailing icon image appears when moving the icon around the Guest PC while 
+    taking control of another PC (Host PC) using NetOp PDR#11465 	
+  - When installing drivers and a vendors applets, a blue screen Fatal Exception 
+    Error message occurs. PDR#11487 	
+  - With OSR2-Japanese,  Cannot go back to Windows desktop after type 'exit' 
+    or ALT+ENTER from Full screen DOS at 16 color mode. PDR#11496 	
+  - Screen is flashing with video noise in Winbench 98 VideoTESTS.
+    Desktop Resolution set to 1024x768, 32Bpp@60Hz. PDR#11506  	
+  - Moving a video window stretched to use hardware can cause the window frame 
+    to become corrupted. PDR#11520 	
+  - Win95 PCI, Jedi Knight game and demo incorrectly quits to desktop. PDR#11265 
+  - A portion of Corbis photography   background is corrupted when overlapping 
+    with another window in 16bpp & 32bpp modes. PDR#11454 
+  - Horizontal  noise appears intermittently in 1600x1200x16bpp 60Hz. PDR#11312. 
+  - G-Police has textures missing when game and windows are in 800x600x16. 
+    PDR#11319. 
+  - In dual monitor mode, secondary display is corrupted when using 4MB for 
+    primary display and 2MB for secondary display. PDR#11424. 
+  - WINBENCH 98  Displays video noise @ 320x240 30FPS, in video test. This 
+    occurs in vga,s-video & composite modes. noise looks like black dash lines. 
+    PDR#11430. 
+  - When Win98 boots up with 5464 as primary and 5465 as secondary, screen 
+    background bitmap displays partially and system hangs. PDR#11445. 
+  - GPF in 546x_HBC module occurs when click on advanced properties for primary 
+    display when 5465 is primary and 5464 is secondary. PDR#11450. 
+  - A portion of Corbis photography background is corrupted when overlapping 
+    with another window in 16bpp & 32bpp modes. PDR#11454. 
+  - Win95, 2MB, 5465. Corruption when playing back two video clips.PDR#11390 
+  - Resolved screen becoming black when PC is connected to NEC 15 inch monitor 
+    at 640x400 resolution refresh rate    150Hz. PDR#11182
+  - Corrected GPF occuring after Japanese Laplink/V installation and restarting. 
+    PDR#11133.
+  - Corrected graphics display problems in the program Kamui when playing at 
+    modes closest to 480x480. PDR#11367
+  - Display full screen of special characters during restarting Windows when 
+    changing color depth with ViewSonic P815 monitor. PDR#11283.
+  - With 2 videos running, (1 MPEG, 1 AVI) and changing resolution on the fly 
+    causes the AVI video to grab the hardware and freeze. PDR#11299
+  - Monitor displays garbage after driver is installed on Windows 95 OSR1. 
+    PDR#11310.
+  - SEGA Touring Car - polygon dropout at bottom of window. PDR#11320
+  - Bus config tab still remains in Display Property page when running in 16 
+    colors. PDR#11324
+  - D3D fixes for the z-buffer on z-compare and z-textures
+  - In dual monitor mode, software mouse is corrupted after switching from dos 
+    full screen to dos window. PDR#11220
+  - MultiMonitor with one AGP and one PCI board.  Shutting down to DOS causes 
+    the secondary monitor to display a screen full of characters. PDR#11241
+  - Die Hard Trilogy - 'Use 3D Hardware' option is not selectable under Advanced 
+    Visual Configuration. PDR#11251
+  - Win95-screen saver Scrolling Marquee: see some garbage in middle of the 
+    screen when use Full speed, Arial, Bold, 72, Red characters in screen saver 
+    at 1600x1200x256. PDR#11268
+  - With ShowGDI4.EXE, 800x600x8bpp  there is rop problem. PDR#11222.
+  - System hang when waking from ACPI resume system event. PDR#11216
+  - WIRL Interactive is missing a lightning bolt picture at the bottom of the 
+    screen and runs slower than other video cards. PDR#11146
+  - The ClRefresh property page Chinese text has been corrected.
+
+
+
+  _________________________________________
+
+  Version: 1.70
+  Release Date: 03/06/98
+  Internal#: fw170b07
+  Default Setting: Graphics Bus Priority OFF
+
+  Problems Resolved/New Features
+  ------------------------------
+  - Added code to help when debugging.
+  - Use new bitfield  mask when tweaking texture registers for mipmapping.
+  - Consolidated and cleaned mipmap choosing code into a single subroutine.
+  - Fixed bilinear filtering shift bias.
+  - Removed non-conformant code paths.
+  - Streamlined liner-texture setup code.
+
+  Bug Fixes
+  ---------
+  - Display corrupted on DOS windowed box when toggling DOS prompt after 
+    activating screen saver. PDR#10940.
+  - With ShowGDI4.EXE,with 8bpp/16bpp,MONOCKURO->VRAMs MERGECOPY,systems 
+    Hangs. PDR#11138.
+  - With 24bpp  Windows explorer  hangs, when moves/drag  though mouse. 
+    PDR#11059.
+  - System hang when scrolling text in Scrolling Marquee screen saver at
+    1024x768x24bpp. PDR#11200.
+  - When we enter Japanese character(Kanji conversion).When space is 
+    enter the previous character to space is corrupted. PDR#11135.
+  - The Bus Config property page appears on the Display Properties Page 
+    after driver/Win '98 upgrade. PDR#11148.
+  - Quickly Moving an the MPEG video Money around the Desktop causes the 
+    system to hang. PDR#11154.
+  - Microsoft Flight Simulator '98  1024x768 screen/D3D mode.  
+    Drawing/ReDrawing of cockpit control panel is slow. PDR#10846 
+  - TextureJet is enabled in 3D performance page with 2MB AGP system. PDR#11100.
+  - No texture shows up when running Direct3D Boids (& Direct3D Flipcube) 
+    in mode 800x600x32. PDR#11183.
+  - When Texture Jet is ON ,the Game GTA will  finished without  running 
+    properly. PDR#11087.
+  - On a fresh copy of Win '98, with Matrox Mellinium as primary and 5465 
+    as secondary, the system will hang when trying to start 5465. PDR#11144 
+  - Enabled font pre-realization in WinBench to improve WinBench performance.
+  - In CorelDraw 7, moving the KPT MetaToy f/x  Plug-in tool over a  24bpp 
+    bitmap causes random rectangles to be painted on the desktop. PDR#10817 
+  - Changing resolution  while  Running RealPlayer cause GPF. PDR#11134.
+  - With CR Rom performance software Chosoku 95  systems Hangs if CD Rom 
+    is removed from the CR ROM drive. PDR#11141.
+  - System hangs when D3D is selected in TrueSpace 3.0 or 3.1, 800x600 
+    16bpp after navigating scene.  (Display list on or off). PDR#10726 
+  - The bitmap on the "Display Properties" page on the "Screen Saver" tab 
+    is corrupt due to a problem with the Stretch Blt.  Occurs in 8bpp
+    modes. PDR#10820.
+  - WHQL Flight Sim 98:  Black box appears around steam textures on the 
+    Flight 1983 Kilavea. PDR#11020.
+  - Z-buffer related problem.  The polys at the far edge of the Z-buffer 
+    are wrapping to the front. A float to fix conversion problem. PDR#11075.
+  - Character corruption with Henry Explorer.640x480.  The polygons that 
+    make up the creatures are not fitting together; spaces in between. 
+    PDR#11064.
+  - Mouse cursor motion slows down when moving on a particular highlight 
+    area(map). PDR#11070.
+  - Circle is not drawn properly with Clipping/BS_SOLID,NOTXORPEN options. 
+    PDR#10972. 
+  - Display Properties icon can NOT run after installing drivers. PDR#11099.
+  - Run Hanery Explorer two times, after the second time there is a GPF. 
+    System hangs. PDR#11093.
+
+
+  ______________________________________
+
+  Version: 1.62 (USB_ON), 1.62a (USB_OFF)
+  Release Date: 12/22/97
+  QA  Version: fw162b14
+  Engineer Version: <none>
+
+  Problems Resolved/New Features
+  ------------------------------
+  - Removed reporting of 32bpp texture format support.
+  - Increased maximum texture height/width to 512.
+  - Fixed HostBasedTexture Display List (hyperblade bug) that caused blts to 
+    hang.
+  - Added DrawPrimitive callback prototypes.
+  - Added support for DirectX 5.0 to the D3D API.
+  - Enabled 3D conformant code to pass flutestress.
+  - Added initialization code to differentiate between AGP and PCI buses.
+  - Corrected issues for DDC/EDID handling and monitor display refresh.
+  - Added foreign language localization to utilities.
+  - Added new and improved bandwidth equation for video.
+  - Added more robust DDC/EDID handling.
+  - Enabled 3D Display List.
+  - Added MIP mapping for the conformant parameterization.
+  - Added four 2D performance improvements (MonoSafety=off, Prealloc, 
+    OpaqueText, UI_Object).
+  - VPM added DirectX 5.0 cooperation to avoid conflicts with video port.
+  - Added installation of DX5 runtime components.
+  - Added ACPI power management functionality.
+  - Multi-Monitor Phase 0. Make all global variables in the VxD local.
+    Needed prior to the Phase 1 Multi-Monitor.
+
+  ____________________________________________________________
+  Version: 1.60 (AGP USB_ON), 1.60a (PCI), 1.60b (AGP USB_OFF)
+  Release Date: 10/15/97
+  QA  Version: bw160b12
+  Engineer Version: <none>
+
+  Problems Resolved/New Features
+  ------------------------------
+  - Control is added to select/unselect 3D Display List for Direct3D and 
+    DirectDraw CL-GD546x "3D Performance" display property page. 
+  - 3D Display List is currently disabled, so the Control panel is not present.
+  - PCI TextureJet capability is enabled and control was added to select the 
+    aggressiveness of the TextureJet use of memory for PCI systems.
+  - PCI TextureJet is available on PCI motherboards.  PCI texture Jet is not 
+    available on 440LX motherboards.
+  - Added a wide variety of performance optimizations.
+  - Added an improved memory manager.
+  - Fixed screen noise that appeared at higher screen resolutions.
+  - Fixed memory leak anomalies.  Acquired memory was not correctly released 
+    after a mode change.
+  - Fixed incorrect pen colors at 24 and 32 bits-per-pixel.
+  - Enabled hardware clipping for all text operations.
+  - Added physical-to-logical color translation for 16, 24, and 32 bits per 
+    pixel.
+  - Added functionality to save/restore CRTC registers in the miniVDD.
+  - Fixed issue that caused Taiwanese Windows to hang during a restart.
+  - Added full localization support to the Host Bus Configuration property page.
+  - Modified 3D Performance property page help file for Japanese Windows and 
+    fixed Japanese Windows related display anomalies.
+  - Multiple changes made to Monitor Refresh property page.  Localization added 
+    and notification message displayed when refresh rate changed for non-current 
+    Windows display mode.
+
+  ____________________
+  Version: 1.52, 1.52a
+  Release Date: 09/12/97
+  QA  Version: 
+  Engineer Version: <none>
+
+  Problems Resolved/New Features
+  ------------------------------
+  - Added support for 5465 AF Silicon.  Removed errant code that makes previous 
+    release specific to AD and earlier Silicon. 
+  - Vgartd.vxd upgraded to 1.0.16 - release candidate 4
+  - Maximum AGP heap size increased to 32Mb for production ROMs
+  - PCI Data Streaming support added ("USB fix") -- defaults to ON
+  - New Host Bus Configuration property sheet to support PCI Data Streaming 
+    select/deselect
+  - 3-D property sheet added to support Speed/Quality Control
+  - Fix 1280x1024 at 72Hz
+  - MiniVDD changes to correctly manage base VGA registers
+  - Function ResetVideoWindow added to reset VW0 for ReEnable
+  - DevToBackground does HostifyBitmaps if PreHiresToVGA hasn't been called
+  - DevToBackground no longer invokes PostCRTCmodeChange in miniVDD
+  - New int 2F function called from MiniVDD in PreHiresToVGA which does the 
+    HostifyBitmap
+  - Check if cursor needs excluding before checking if we need to translate 
+    brush and drawmodes
+  - CRTC VM data added in miniVDD for DOS fixups
+  - Next switch to Window's HiRes will now also do save for VESA modes
+  - Odd field in FlipOverlay() now uses the second buffer address
+  - FlipOverlay() attempts to use the field polarity from FlipVideoPort
+  - FlipOverlay() checks VideoPortID before checking FieldID
+  - VESA modeset sets fetch tiles per line
+  - Moved code from PostCRTCmodeChange to PostHiresToVGA for full-screen DOS 
+    session
+  - MiniVDD does minimum frame buffer save/restore for VESA modes
+  - No longer tell VESA apps we have only 1-Meg video memory so DUKE doesn't 
+    flicker after full-screen DOS switch
+  - Eliminate handling of BeginMessageMode in miniVDD
+  - Skip restore of DOS register state for MessageMode VMs
+  - Update_DTTR_TCR and InterleaveOFF moved to PostHiresToVGA from 
+    PostCRTCmodeChange since DEV_TO_BACKGROUND no longer does HostifyBitmap
+  - Skip saving of DOS VM register state and frame buffer for Pseudo VMs in 
+    PreVGAToHires.  VM Control Block doesn't have our extensions to store state 
+    info.
+  - In PostCRTCmodeChange when going to full-screen DOS, skip restore of DOS 
+    VM's frame buffer when: (a) VM is Pseudo VM and doesn't have the data 
+    structure (GPFs), or (b) VM handle is from a dead VM (GPFs) 
+  - Disable DAC when going to full screen or exiting Windows
+  - Hook for apps that don't work correctly when the primary surface pitch 
+    does not equal the frame buffer pitch
+  - DWORD align potentially flipable surfaces when multibuffering is disabled
+  - Make sure the surface width is not bigger than 2K for VIP in CreateSurface()
+  - Fix issue in DestroySurface32 that caused lpSurfaceData not to be destroyed
+  - Create linear video port surfaces if screen width is greater than or equal 
+    to 2K
+  - Disable overlay in 640x480x32 at 85Hz by calling KillOverlay()
+  - ColorKeyBlt24() added
+
+
+
+  2.0 Installing the Device Drivers
+  _________________________________
+
+  1. Click Start, then Settings, then Control Panel.
+  2. Start the "Display" applet program. 
+  3. Select the "Settings" page, push the "Change Display Type" button.
+  4. Push the "Change" button in the "Adapter Type" area.
+  5. Push the "Have Disk" button and press "OK".
+  6. Specify the path to the new driver and press the <ENTER> key:
+
+          Example 1: Insert the drivers disk in the A: floppy drive,
+                     and enter A:\.
+
+          Example 2: Type in the name of the directory where you copied
+                     the drivers, either on your local hard drive or
+                     on a network share.
+
+          Example 3: If you're not sure exactly where the drivers are,
+                     choose the "Browse..." button are find them.
+
+  7. The "Select Device" dialog box will appear. Select the adapter that
+     corresponds to the one you installed in your machine and click OK.
+
+  8. Windows 95 will copy the display drivers to the proper directories
+     on your system.
+
+  9. Continue choosing Close until asked to restart your machine from the
+     "Systems Settings Change" dialog box.
+
+  10. After the system has restarted, you can go back into the Display
+      applet and select alternate screen resolutions and color depths.
+
+
+
+  3.0  Current Known Issues
+  _______________________________
+  <none>
+
+
+
+  4.0  Current Driver Limitation
+  _______________________________
+  <none>
+
+
+
+  5.0 Component Versions
+  _______________________________
+
+  FILE NAME         VERSION             COMPONENT DESCRIPTION
+  -----------       ------------        ---------------------
+  5465VPM.DLL       1.10.13.0000        Implements the 5465 hardware dependent 
+                                        portion of the VPM provider.
+
+  546X.DRV          4.10.01.2000        The 546x display driver. Implements 2D 
+                                        GDI draw function as well as cursor 
+                                        and memory management functions.
+
+  546X.inf          N/A                 CL546x driver installation file.
+
+  546X.VXD          4.10.01.2000        The 546x miniVDD. Used to implement 
+                                        device virtualization, context 
+                                        save/restore. For Win98 Kernel VPE, IRQ 
+                                        and I2C functions are also provided.
+
+  546X_HBC.DLL      1.10.0005           Implements the Bus Configuration Page of 
+                                        Display Properties. It is used to 
+                                        turn on/off the graphic bus priority 
+                                        feature.             
+
+  546X_HBC.HLP      N/A                 Help file for 546x_hbc.dll
+
+  546X_HBC.TXT      N/A                 Localization file containing foreign 
+                                        language translations for all the text 
+                                        used in 546x_hbc.dll.
+
+  CL3D.DLL          1.00.00.0017        File to implement the 3D Performance 
+                                        Page of Display Properties. It is used 
+                                        to adjust the behavior of the 3D driver.
+
+  CL3D.HLP          N/A                 Help file for cl3d.dll.
+
+  CL3D.TXT          N/A                 Localization file containing foreign 
+                                        language translations for all the text 
+                                        used in cl3d.dll.
+
+  CLGDD32.DLL       4.10.01.2000        DirectDraw driver for 5465.
+
+  CLREFRSH.DLL      1.10.0004        Implements the Monitor Refresh Page of 
+                                        Display Properties. It is used to 
+                                        adjust the graphic controller's refresh 
+                                        rate to fit a user's monitor.
+
+  CLREFRSH.HLP      N/A                 Help file for clrefrsh.dll.
+
+  CLREFRSH.TXT      N/A                 Localization file containing foreign 
+                                        language translations for all the text 
+                                        used in clrefrsh.dll
+
+  CLVMD3D.DLL       4.10.01.2000        The Direct3D for the 5465. 
+
+  LGM32THK.DLL      4.10.01.2000        Thunker dll used to allow 32 bit 
+                                        property pages to talk to the 16bit 
+                                        modesw16.dll.
+
+  MODE65.BIN        NONE                Binary file used to define all Windows 
+                                        mode information. Used by the 
+                                        modesw16.dll for non TVOut systems.
+
+  MODESW16.DLL      4.10.01.2000        Mode switch dll. Used to effect changing 
+                                        Windows display modes.
+
+  MSVCIRT.DLL       4.20.00.6201        Microsoft (R) C++ Runtime Library
+
+  MSVCRT.DLL        4.20.00.6201        Microsoft (R) C Runtime Library
+
+  MSVCRT40.DLL      4.10.00.6038        Microsoft® C Runtime Library
+
+  PNP16VPM.DLL      1.10.01.0000        Hardware independent file used by 16 bit 
+                                        VPM clients. This file determines 
+                                        the hardware platform and which VPM 
+                                        driver to use.
+
+  PNP32VPM.DLL      1.10.01.0000        Hardware independent file used by 32 bit 
+                                        VPM clients. This file determines 
+                                        the hardware platform and which VPM 
+                                        driver to use.
+
+  VGARTD.VXD        1.00.16.0000        The Intel GART VxD to handle the AGP 
+                                        GART tables.
+
+  VPM16T.DLL        1.10.11.0000        Thunker dll used by VPM to allow 16 bit 
+                                        code to talk to 32 bit code. 
+
+  VPM32T.DLL        1.10.14.0000        Thunker dll used by VPM to allow 32 bit 
+                                        code to talk to 16 bit code. 
+
+  readme.1st        N/A			ASCII Text file
+
+
