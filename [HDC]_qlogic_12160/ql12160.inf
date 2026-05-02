@@ -1,0 +1,100 @@
+; QL12160.INF
+;
+; This file enables all QLogic SCSI adapters supported in Windows 95/98/ME.
+; Copyright (c) 1996-1999, QLogic Corp.  All Rights Reserved.
+;
+;-----------------------------------------------------------------------------
+; version information
+
+[Version]
+signature="$CHICAGO$"
+Class=SCSIAdapter
+Provider=%QLOGIC%
+LayoutFile=LAYOUT.INF
+CatalogFile=QL12160.cat
+DriverVer = 01/10/2001,1.06.00
+
+;-----------------------------------------------------------------------------
+; Class Install
+
+[ClassInstall]
+Addreg=SCSIReg
+
+;-----------------------------------------------------------------------------
+; SCSIReg Data
+
+[SCSIReg]
+HKR,,,,%SCSIClassName%
+HKR,,Icon,,-10
+
+;-----------------------------------------------------------------------------
+; Manufacturer Information
+
+[Manufacturer]
+%QLOGIC%=QLOGIC
+
+;-----------------------------------------------------------------------------
+; QLogic-manufacturer device list
+; DeviceDescription = InstallSectionName, DeviceID
+
+[QLOGIC]
+%PCI\VEN_1077&DEV_1216.DeviceDesc%=QL12160,PCI\VEN_1077&DEV_1216
+%PCI\VEN_1077&DEV_1016.DeviceDesc%=QL12160,PCI\VEN_1077&DEV_1016
+
+;-----------------------------------------------------------------------------
+; QLogic Driver Installation Sections
+
+[QL12160]
+CopyFiles=@QL12160.mpd
+AddReg=IOS,QL12160.Reg
+UpdateInis=QL12160.UpdateInis
+
+[QL12160.Reg]
+HKR,,PortDriver,,QL12160.mpd
+HKR,,AdapterSettings,,%AdapterSettings%
+
+;-----------------------------------------------------------------------------
+; Qlogic DriverInstallation.UpdateInis sections
+
+[QL12160.UpdateInis]
+%10%\ios.ini, SafeList,, "ql28aspi.sys    ; Qlogic PCI DOS/ASPI Driver. Added by Qlogic.inf file"
+
+;-----------------------------------------------------------------------------
+
+[IOS]
+HKR,,DevLoader,,*IOS
+
+;-----------------------------------------------------------------------------
+
+; DestinationDirectory = \windows\system\iosubsys
+
+[DestinationDirs]
+DefaultDestDir=12
+
+;-----------------------------------------------------------------------------
+; Filename = DiskNumber
+
+[SourceDisksFiles]
+QL12160.mpd=30
+QL12160.cat=30
+
+;-----------------------------------------------------------------------------
+; disk-ordinal = DiskDescriptionString, DiskLabel, DiskSerialNumber
+
+[SourceDisksNames]
+30=%ID1%,,
+
+;-----------------------------------------------------------------------------
+; Localizable Strings
+
+[Strings]
+MSFT="Microsoft"
+SCSIClassName="SCSI Controllers"
+QLOGIC="QLogic"
+PCI\VEN_1077&DEV_1216.DeviceDesc="QLogic QLA12160 Ultra160M PCI Dual SCSI Adapter"
+PCI\VEN_1077&DEV_1016.DeviceDesc="QLogic QLA10160 Ultra160M PCI SCSI Adapter"
+AdapterSettings="MaximumSGList=17"
+ID1="QLogic Software Drivers Diskette"
+
+;-----------------------------------------------------------------------------
+

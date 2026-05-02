@@ -1,0 +1,34 @@
+Release Notes: Qlogic QL12160 MiniPort Driver for Windows 9X/ME
+===============================================================
+
+Revision 1.06          01/10/2001
+* RISC Firmware Rev 10.04.30 Updated.
+
+Revision 1.05	       12/14/2000
+* RISC Firmware Rev 10.04.08.
+* Re-added support for QL10160 adapter.
+
+Revision 1.04	       11/16/2000
+* RISC Firmware Rev 10.04.08.
+* Removed support for QL10160 adapter.
+
+Revision 1.03	       11/08/2000
+* RISC Firmware Rev 10.04.08 Updated.
+* Added support for QL10160 adapter.
+
+Revision 1.02          11/08/99
+* RISC Firmware Rev 10.01.19 Updated.
+* Add Firmware features bit 6 (PCI firmware retry) and
+  adjust features mask and NVRAM defaults to include bit 6.
+* Changed Input/Output register count from 6 to 7 for
+  MBOX_CMD_SET_TARGET_PARAMETERS MailboxCommand.  This fixed
+  the performance problem with 8 drives.
+
+Revision 1.01          9/28/99
+* RISC Firmware Rev 10.01.09 Updated.
+
+Revision 1.00 Beta 1   8/16/99
+* RISC Firmware Rev 10.01.00 Updated.
+* Initial release, based on miniport driver for QLA1280, version 1.02.
+
+

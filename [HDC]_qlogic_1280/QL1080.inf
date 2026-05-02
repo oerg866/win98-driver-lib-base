@@ -1,0 +1,98 @@
+; QLOGIC.INF
+;
+; This file enables all QLogic SCSI adapters supported in Windows 95/98.
+; Copyright (c) 1996-1999, QLogic Corp.  All Rights Reserved.
+;
+;-----------------------------------------------------------------------------
+; version information
+
+[Version]
+signature="$CHICAGO$"
+Class=SCSIAdapter
+Provider=%QLOGIC%
+LayoutFile=LAYOUT.INF
+CatalogFile=ql1080.cat
+
+;-----------------------------------------------------------------------------
+; Class Install
+
+[ClassInstall]
+Addreg=SCSIReg
+
+;-----------------------------------------------------------------------------
+; SCSIReg Data
+
+[SCSIReg]
+HKR,,,,%SCSIClassName%
+HKR,,Icon,,-10
+
+;-----------------------------------------------------------------------------
+; Manufacturer Information
+
+[Manufacturer]
+%QLOGIC%=QLOGIC
+
+;-----------------------------------------------------------------------------
+; QLogic-manufacturer device list
+; DeviceDescription = InstallSectionName, DeviceID
+
+[QLOGIC]
+%PCI\VEN_1077&DEV_1080.DeviceDesc%=QL1080,PCI\VEN_1077&DEV_1080
+
+;-----------------------------------------------------------------------------
+; QLogic Driver Installation Sections
+
+
+[QL1080]
+CopyFiles=@ql1080.mpd
+AddReg=IOS,QL1080.Reg
+UpdateInis=QL1080.UpdateInis
+
+[QL1080.Reg]
+HKR,,PortDriver,,ql1080.mpd
+HKR,,AdapterSettings,,%AdapterSettings%
+
+;-----------------------------------------------------------------------------
+; Qlogic DriverInstallation.UpdateInis sections
+
+[QL1080.UpdateInis]
+%10%\ios.ini, SafeList,, "ql18aspi.sys    ; Qlogic PCI DOS/ASPI Driver. Added by Qlogic.inf file"
+
+;-----------------------------------------------------------------------------
+
+[IOS]
+HKR,,DevLoader,,*IOS
+
+;-----------------------------------------------------------------------------
+
+; DestinationDirectory = \windows\system\iosubsys
+
+[DestinationDirs]
+DefaultDestDir=12
+
+;-----------------------------------------------------------------------------
+; Filename = DiskNumber
+
+[SourceDisksFiles]
+ql1080.mpd=30
+ql1080.cat=30
+
+;-----------------------------------------------------------------------------
+; disk-ordinal = DiskDescriptionString, DiskLabel, DiskSerialNumber
+
+[SourceDisksNames]
+30=%ID1%,,
+
+;-----------------------------------------------------------------------------
+; Localizable Strings
+
+[Strings]
+MSFT="Microsoft"
+SCSIClassName="SCSI Controllers"
+QLOGIC="QLogic"
+PCI\VEN_1077&DEV_1080.DeviceDesc="QLogic QLA1080 LVD PCI SCSI Adapter"
+AdapterSettings="MaximumSGList=17"
+ID1="QLogic Software Drivers Diskette"
+
+;-----------------------------------------------------------------------------
+
