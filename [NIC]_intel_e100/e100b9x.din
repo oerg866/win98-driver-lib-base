@@ -1,0 +1,90 @@
+;*******************************************************************************
+;*                                                                            **
+;*                     I N T E L   P R O P R I E T A R Y                      **
+;*                                                                            **
+;*   COPYRIGHT (c) 2000 BY INTEL CORPORATION. ALL RIGHTS RESERVED.  NO        **
+;*   PART  OF  THIS  PROGRAM OR PUBLICATION MAY BE REPRODUCED, TRANSMITTED,   **
+;*   TRANSCRIBED, STORED IN A RETRIEVAL  SYSTEM,  OR  TRANSLATED  INTO  ANY   **
+;*   LANGUAGE OR COMPUTER LANGUAGE IN ANY FORM OR BY ANY MEANS, ELECTRONIC,   **
+;*   MECHANICAL, MAGNETIC, OPTICAL, CHEMICAL, MANUAL, OR OTHERWISE, WITHOUT   **
+;*   THE PRIOR WRITTEN PERMISSION OF :                                        **
+;*                                                                            **
+;*                             INTEL CORPORATION                              **
+;*                                                                            **
+;*                          2200 MISSION COLLEGE BLVD                         **
+;*                                                                            **
+;*                     SANTA CLARA, CALIFORNIA 95052-8119                     **
+;*                                                                            **
+;*******************************************************************************
+;
+;*******************************************************************************
+; e100b9x.din
+; $Revision: 8 $
+;
+; Intel 82557-based PCI Ethernet Adapters
+; PnP Un-install script for Windows 9x
+
+[Version]
+Signature   = "$Chicago$"
+Compatible  = 1
+SetupClass  = BASE
+Provider    = %V_INTEL%
+
+[Manufacturer]
+%V_INTEL%   = Intel
+
+[ControlFlags]
+
+[Intel]
+
+[DestinationDirs]
+DefaultDestDir            = 11
+Uninstall.DelFiles        = 11
+8255x.System.DelFiles	  = 11
+8255x.DelFiles            = 26
+ProsetWk5Dr.DelFiles      = 12
+8255x.Inf.DelFiles        = 17
+
+[8255x.Uninstall]
+DelFiles=8255x.System.DelFiles, 8255x.DelFiles, 8255x.Inf.DelFiles, ProsetWk5Dr.DelFiles, Uninstall.DelFiles
+DelReg=8255x.DelReg
+
+[8255x.System.DelFiles]
+e100b.sys,,,1
+e100bnt.sys,,,1
+e100bnt5.sys,,,1
+WOL558.vxd,,,1
+8255xndi.dll,,,1
+IntelNic.dll,,,1
+e100bodi.com,,,1
+
+
+[8255x.Inf.DelFiles]
+Other\INTELE~1.inf,,,1
+
+[8255x.DelFiles]
+e100bodi.com,,,1
+
+[ProsetWk5Dr.DelFiles]
+e100b.sys,,,1
+e100bnt.sys,,,1
+e100bnt5.sys,,,1
+
+[Uninstall.DelFiles]
+8255xDel.exe,,,1
+Prounstl.exe,,,1
+e100b9x.din,,,1
+
+[8255x.DelReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\PROSet
+HKLM,System\CurrentControlSet\Services\VxD\ACPIWOL
+HKLM,Software\INTEL\Prounstl
+HKLM,Software\INTEL\NIC
+
+;----------------------------------------------------------------------------
+; Localizable Strings
+; 
+[Strings]
+; Vendors
+V_INTEL="Intel"
+

@@ -1,0 +1,921 @@
+;*******************************************************************************
+;*                                                                            **
+;*                     I N T E L   P R O P R I E T A R Y                      **
+;*                                                                            **
+;*   COPYRIGHT (c) 1993-2006 BY INTEL CORPORATION. ALL RIGHTS RESERVED.  NO   **
+;*   PART  OF  THIS  PROGRAM OR PUBLICATION MAY BE REPRODUCED, TRANSMITTED,   **
+;*   TRANSCRIBED, STORED IN A RETRIEVAL  SYSTEM,  OR  TRANSLATED  INTO  ANY   **
+;*   LANGUAGE OR COMPUTER LANGUAGE IN ANY FORM OR BY ANY MEANS, ELECTRONIC,   **
+;*   MECHANICAL, MAGNETIC, OPTICAL, CHEMICAL, MANUAL, OR OTHERWISE, WITHOUT   **
+;*   THE PRIOR WRITTEN PERMISSION OF :                                        **
+;*                                                                            **
+;*                             INTEL CORPORATION                              **
+;*                                                                            **
+;*                          2200 MISSION COLLEGE BLVD                         **
+;*                                                                            **
+;*                     SANTA CLARA, CALIFORNIA 95052-8119                     **
+;*                                                                            **
+;*******************************************************************************
+;
+;*******************************************************************************
+; NET5579x.INF
+; $Revision: 8 $
+;
+; Intel 8255x-based PCI Ethernet Adapters
+; PnP install script for Windows 9x
+;   Version 8.0.27
+
+[Version]
+Signature       = "$Chicago$"
+Class           = Net
+ClassGUID       = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider        = %V_INTEL%
+DriverVer       = 01/12/2006,8.0.27.0
+
+[Manufacturer]
+%V_INTEL%   = Intel
+
+[ControlFlags]
+ExcludeFromSelect =  \
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00018086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00028086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00038086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00048086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00058086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00068086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00078086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00088086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_000B8086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_000C8086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00118086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00138086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00308086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00418086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10098086&REV_05,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10138086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10308086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10418086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10518086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10528086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10F08086&REV_04,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10F08086&REV_05,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_21038086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_21048086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_21058086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_21068086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_21088086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_22018086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_22048086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_22058086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_22068086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_22078086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_22088086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_24028086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_24078086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_24088086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_24098086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_240F8086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_24108086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_24118086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_24128086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_24138086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_30078086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_005C1014&REV_04,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_005C1014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_105C1014&REV_08,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_105C1014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_01F11014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_01F21014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_01BC1014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_02071014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_023F1014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_305C1014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_405C1014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_505C1014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_605C1014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_705C1014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_805C1014,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10C0103C,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10C3103C,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10CA103C,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10CB103C,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10E3103C,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_10E4103C,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_1200103C,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_30010E11,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_30020E11,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_30030E11,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_30040E11,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_30050E11,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_30060E11,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_30070E11,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_30118086,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_009B1028&REV_08,\
+                        PCI\VEN_8086&DEV_1229&SUBSYS_00708086,\
+                        PCI\VEN_8086&DEV_1229&REV_01,\
+                        PCI\VEN_8086&DEV_1229&REV_02,\
+                        PCI\VEN_8086&DEV_1229&REV_04,\
+                        PCI\VEN_8086&DEV_1229&REV_05,\
+                        PCI\VEN_8086&DEV_1229&REV_08,\
+                        PCI\VEN_8086&DEV_1229&REV_09,\
+                        PCI\VEN_8086&DEV_1229&REV_0C,\
+                        PCI\VEN_8086&DEV_1229&REV_0D,\
+                        PCI\VEN_8086&DEV_1229&REV_0E,\
+                        PCI\VEN_8086&DEV_1229&REV_0F,\
+                        PCI\VEN_8086&DEV_1229&REV_10,\
+                        PCI\VEN_8086&DEV_1059
+
+
+[Intel]
+; DisplayName                Section        DeviceID
+; -----------                -------        --------
+%PCIE10PPCI.DeviceDesc%  	= E10P.ndi,	PCI\VEN_8086&DEV_1229&SUBSYS_00038086
+
+%PCIE100BTX.DeviceDesc%         = E100B.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00018086
+%PCIE100BT4.DeviceDesc%         = E100B.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00028086
+%PCIE100RWU.DeviceDesc%         = E100B.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00048086
+%I557IFE.DeviceDesc%            = E100B.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00058086
+%I557IFEWFM.DeviceDesc%         = E100B.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00068086
+
+%I558IFE.DeviceDesc%            = D101.ndi,     PCI\VEN_8086&DEV_1229&SUBSYS_00078086
+%I558IFEWFM.DeviceDesc%         = D101.ndi,     PCI\VEN_8086&DEV_1229&SUBSYS_00088086
+%PCIE100PLUS.DeviceDesc%        = D101r5.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_00098086
+%PCIE100MAN.DeviceDesc%         = D101r5.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_000A8086
+
+%PCIE100PLUS.DeviceDesc%        = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_000B8086
+%PCIE100MAN.DeviceDesc%         = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_000C8086
+%PCIE100AOL.DeviceDesc%         = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_000D8086
+%PCIE100MANAOL.DeviceDesc%      = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_000E8086
+%PCIE100S0.DeviceDesc%          = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_000F8086
+
+%PCIE100S.DeviceDesc%           = D101S.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00108086
+%PCIE100S.DeviceDesc%           = D101S.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00118086
+%PCIE100SADV.DeviceDesc%        = D101S.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00128086
+%PCIE100SADV.DeviceDesc%        = D101S.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00138086
+
+%PCIE100MANAOLGC.DeviceDesc%    = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00308086
+%PCIE100S0.DeviceDesc%          = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00318086
+%PCIE100Sx.DeviceDesc%          = D102SC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_00408086
+%PCIE100Sx.DeviceDesc%          = D102SC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_00418086
+%PCIE100S0.DeviceDesc%          = D102SCN.ndi,  PCI\VEN_8086&DEV_1229&SUBSYS_00428086
+
+%PCIE100Sx.DeviceDesc%          = D102mC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_00508086
+%PCIE100Sx.DeviceDesc%          = D102mC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_00518086
+%PCIE100DUALx.DeviceDesc%       = D102m0.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_10148086
+%PCIE100DUALSx.DeviceDesc%      = D102mS.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_10158086
+%PCIE100DUALSx.DeviceDesc%      = D102mS.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_10168086
+%PCIE100SxSVR.DeviceDesc%       = D102mS.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_10508086
+
+%PCIE100BSPLUSD.DeviceDesc%     = D102mC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_00608086
+%PCIE100LAVON.DeviceDesc%       = Lavon.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00708086
+%PCIE100LAVON.DeviceDesc%       = Lavon.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_00718086
+
+%PCIE100SxL.DeviceDesc%         = D102mC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_30108086
+%PCIE100SxL.DeviceDesc%         = D102mC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_30118086
+
+
+
+%PCIE100SERVER.DeviceDesc%      = D101.ndi,     PCI\VEN_8086&DEV_1229&SUBSYS_10098086&REV_04
+%PCIE100SERVER.DeviceDesc%      = D101r5.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_10098086&REV_05
+%PCIE100SERVERW.DeviceDesc%     = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_100C8086
+%PCIE100SSVR.DeviceDesc%        = D101SS.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_10128086
+%PCIE100SSVR.DeviceDesc%        = D101SS.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_10138086
+%PCIE100DUAL.DeviceDesc%        = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_10178086
+%PCIE100MANAOLGS.DeviceDesc%    = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_10308086
+%PCIE100SxSVR.DeviceDesc%       = D102SSC.ndi,  PCI\VEN_8086&DEV_1229&SUBSYS_10408086
+%PCIE100SxSVR.DeviceDesc%       = D102SSC.ndi,  PCI\VEN_8086&DEV_1229&SUBSYS_10418086
+%PCIE100S0SVR.DeviceDesc%       = D102SSCN.ndi, PCI\VEN_8086&DEV_1229&SUBSYS_10428086
+%PCIE100S0SVR.DeviceDesc%       = D102SSCN.ndi, PCI\VEN_8086&DEV_1229&SUBSYS_10518086
+%PCIE100S0SVR.DeviceDesc%       = D102SSCN.ndi, PCI\VEN_8086&DEV_1229&SUBSYS_10528086
+%PCIE100DUAL.DeviceDesc%        = D101.ndi,     PCI\VEN_8086&DEV_1229&SUBSYS_10F08086&REV_04
+%PCIE100DUAL.DeviceDesc%        = D101r5D.ndi,  PCI\VEN_8086&DEV_1229&SUBSYS_10F08086&REV_05
+%PCIE100BSPLUSS.DeviceDesc%     = D102mS.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_10608086
+
+%I559IFE.DeviceDesc%            = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_30008086
+%I559IFEAOL.DeviceDesc%         = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_30018086
+%I559IFEAOLII.DeviceDesc%       = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_30028086
+%PCIE100SxL.DeviceDesc%         = D102SC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_30068086
+%PCIE100SxL.DeviceDesc%         = D102SC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_30078086
+%PCIE100S0L.DeviceDesc%         = D102SCN.ndi,  PCI\VEN_8086&DEV_1229&SUBSYS_30088086
+
+; IBM with intel device name
+
+%I559CLONPCI.DeviceDesc%        = D101S.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_B2090E11
+%I559IFEAOLCPQ.DeviceDesc%      = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_30010E11
+%I559IFEAOLCPQ.DeviceDesc%      = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_30020E11
+%I559IFEAOLCPQ.DeviceDesc%      = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_30030E11
+%I559IFEAOLCPQ.DeviceDesc%      = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_30040E11
+%I559IFEAOLCPQ.DeviceDesc%      = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_30050E11
+%I559IFEAOLCPQ.DeviceDesc%      = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_30060E11
+%I559IFEAOLCPQ.DeviceDesc%      = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_30070E11
+
+%HPTX.DeviceDesc%               = E100B.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_10C0103C
+%HPTX.DeviceDesc%               = D101r5.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_10C3103C
+%HPTX.DeviceDesc%               = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_10CA103C
+%HPTX.DeviceDesc%               = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_10CB103C
+%HPTX.DeviceDesc%               = D102SC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_10E3103C
+%HPTX.DeviceDesc%               = D102SC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_10E4103C
+%HPTX.DeviceDesc%               = E100B.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_1200103C
+%HPTX.DeviceDesc%               = D102m0.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_1273103C
+
+%IBMFE9.DeviceDesc%             = D101M.ndi,    PCI\VEN_8086&DEV_1229&SUBSYS_01BC1014
+%IBMFED.DeviceDesc%             = D102SC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_02071014
+%IBMFED.DeviceDesc%             = D102SC.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_023F1014
+
+;Dell Viper
+%PCIE100B.DeviceDesc%           = D101MG.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_00DA1028&REV_08
+%PCIE100B.DeviceDesc%           = D101MG.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_009B1028&REV_08
+%PCIE100B.DeviceDesc%           = D101MG.ndi,   PCI\VEN_8086&DEV_1229&SUBSYS_01061028&REV_08
+
+;Intel Generic catchalls
+%PCIE100B.DeviceDesc%           = E100B.ndi,    PCI\VEN_8086&DEV_1229&REV_01
+%PCIE100B.DeviceDesc%           = E100B.ndi,    PCI\VEN_8086&DEV_1229&REV_02
+%PCIE100B.DeviceDesc%           = D101.ndi,     PCI\VEN_8086&DEV_1229&REV_04
+%PCIE100B.DeviceDesc%           = D101r5.ndi,   PCI\VEN_8086&DEV_1229&REV_05
+%PCIE100B.DeviceDesc%           = D101MG.ndi,   PCI\VEN_8086&DEV_1229&REV_08
+%PCIE100B.DeviceDesc%           = D101SG.ndi,   PCI\VEN_8086&DEV_1229&REV_09
+%PCIE100B.DeviceDesc%           = D102SCNG.ndi, PCI\VEN_8086&DEV_1229&REV_0C
+%PCIE100B.DeviceDesc%           = D102mG.ndi,   PCI\VEN_8086&DEV_1229&REV_0D
+%PCIE100B.DeviceDesc%           = D102mG.ndi,   PCI\VEN_8086&DEV_1229&REV_0E
+%PCIE100LAVONLOM.DeviceDesc%    = Lavon.ndi,    PCI\VEN_8086&DEV_1229&REV_0F
+%PCIE100LAVONLOM.DeviceDesc%    = Lavon.ndi,    PCI\VEN_8086&DEV_1229&REV_10
+%PCIE100LAVONMB.DeviceDesc%     = Lavonmb.ndi,  PCI\VEN_8086&DEV_1059&REV_0F
+%PCIE100LAVONMB.DeviceDesc%     = Lavonmb.ndi,  PCI\VEN_8086&DEV_1059&REV_10
+
+;--- 82557 Rev 1, 2
+;
+[E100B.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = 8255x_Legacy.DelReg, SpeedDpx.DelReg
+AddReg          = Speed100.reg, 82557.reg, e100b.ndi.reg, PowerSave.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82558 Rev 4
+;
+[D101.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = 8255x_Legacy.DelReg, SpeedDpx.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, e100b.ndi.reg, PowerSave.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82558 Rev 5
+;
+[D101r5.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = 8255x_Legacy.DelReg, SpeedDpx.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, PowerSave.reg, e100b.ndi.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82558 Rev 5 (Dual)
+;
+[D101r5D.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = 8255x_Legacy.DelReg, SpeedDpx.DelReg, 82558BDelReg.DelReg, 82558r5dDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, e100b.ndi.reg, LogLinkState.reg, WakeOnDisable.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82559 Rev 8
+;
+[D101M.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = SpeedDpx.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, e100b.ndi.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82559 Rev 8 Generic
+;
+[D101MG.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = SpeedDpx.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, EnableLLPD.reg, LLPDD_OFF.reg, e100b.ndi.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82559 Rev 9 Security
+;
+[D101S.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = SpeedDpx.DelReg, TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, e100b.ndi.reg, Security.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82559 Rev 9 Security Generic
+;
+[D101SG.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = SpeedDpx.DelReg, TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, EnableLLPD.reg, LLPDD_OFF.reg, e100b.ndi.reg, Security.reg, SecOff.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- D101S Rev 9 Server
+;
+[D101SS.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = SpeedDpx.DelReg, TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, e100b.ndi.reg, Security.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev C Server
+;
+[D102SC.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, e100b.ndi.reg, Security.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev C
+;
+[D102SCN.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, e100b.ndi.reg, SecDisable.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev C Generic
+;
+[D102SCNG.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, EnableLLPD.reg, LLPDD_OFF.reg, e100b.ndi.reg, Security.reg, SecOff.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev C Security Server
+;
+[D102SSC.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, e100b.ndi.reg, Security.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev C Server
+;
+[D102SSCN.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, e100b.ndi.reg, SecDisable.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev C MiniPCI Security
+;
+[D102MPS.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, EnableLLPD.reg, e100b.ndi.reg, Security.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev D Server
+;
+[D102mS.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, e100b.ndi.reg, Security.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev D Client
+;
+[D102mC.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, e100b.ndi.reg, Security.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev D Client Mobile
+;
+[D102mCm.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, e100b.ndi.reg, Security.reg, EnableLLPD.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev D Server NoDes
+;
+[D102m0.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, PowerSave.reg, e100b.ndi.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev F Lavon mobile
+;
+[Lavonmb.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnableLLPD.reg, PowerSave.reg, EnablePME.reg, e100b.ndi.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev D Generic
+;
+[D102mG.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = TaskOffload.DelReg, 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnableLLPD.reg, PowerSave.reg, EnablePME.reg, e100b.ndi.reg, Security.reg, SecOff.reg, LLPDD_OFF.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- 82550 Rev F Lavon
+;
+[Lavon.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = 82558BDelReg.DelReg
+AddReg          = Speed100.reg, 82557.reg, AcpiWol.reg, 82558.reg, 82558B.reg, EnablePME.reg, e100b.ndi.reg, PowerSave.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- Intel(R) PRO/10+ PCI Adapter
+;
+[E10P.ndi]
+DriverVer       = 12/05/2005,8.0.25.0
+DelReg          = 8255x_Legacy.DelReg, SpeedDpx.DelReg
+AddReg          = Speed10.reg, 82557.reg, e100b.ndi.reg, PowerSave.reg, LogLinkState.reg
+CopyFiles       = E100B.ndi.copyfiles
+
+;--- Common 82557 NDI parameters
+;
+[82557.reg]
+HKR,Ndi\Params\NumRfd,                ParamDesc,  0, "Receive Buffers"
+HKR,Ndi\Params\NumRfd,                Type,       0, "int"
+HKR,Ndi\Params\NumRfd,                Default,    0, "48"
+HKR,Ndi\Params\NumRfd,                Min,        0, "8"
+HKR,Ndi\Params\NumRfd,                Max,        0, "1024"
+HKR,Ndi\Params\NumRfd,                Step,       0, "1"
+HKR,Ndi\Params\NumRfd,                Base,       0, "10"
+HKR,PROSetNdi\NdiExt\Params\NumRfd,   MiniHelp,   0, "Number of buffers used by the driver when copying data to the protocol memory."
+
+HKR,Ndi\Params\NumTcb,                ParamDesc,  0, "Transmit Control Blocks"
+HKR,Ndi\Params\NumTcb,                Type,       0, "int"
+HKR,Ndi\Params\NumTcb,                Default,    0, "16"
+HKR,Ndi\Params\NumTcb,                Min,        0, "8"
+HKR,Ndi\Params\NumTcb,                Max,        0, "64"
+HKR,Ndi\Params\NumTcb,                Step,       0, "1"
+HKR,Ndi\Params\NumTcb,                Base,       0, "10"
+HKR,PROSetNdi\NdiExt\Params\NumTcb,   MiniHelp,   0, "Sets the number of control blocks available for adapter use."
+
+HKR,Ndi\Params\NumCoalesce,           ParamDesc,  0, "Coalesce Buffers"
+HKR,Ndi\Params\NumCoalesce,           Type,       0, "int"
+HKR,Ndi\Params\NumCoalesce,           Default,    0, "8"
+HKR,Ndi\Params\NumCoalesce,           Min,        0, "1"
+HKR,Ndi\Params\NumCoalesce,           Max,        0, "32"
+HKR,Ndi\Params\NumCoalesce,           Step,       0, "1"
+HKR,Ndi\Params\NumCoalesce,           Base,       0, "10"
+HKR,PROSetNdi\NdiExt\Params\NumCoalesce, MiniHelp, 0, "Number of buffers available for transmits acceleration."
+
+HKR,Ndi\Params\Adaptive_IFS,          ParamDesc,  0, "Adaptive Inter-Frame Spacing"
+HKR,Ndi\Params\Adaptive_IFS,          Type,       0, "int"
+HKR,Ndi\Params\Adaptive_IFS,          Default,    0, "1"
+HKR,Ndi\Params\Adaptive_IFS,          Min,        0, "0"
+HKR,Ndi\Params\Adaptive_IFS,          Max,        0, "255"
+HKR,Ndi\Params\Adaptive_IFS,          Step,       0, "1"
+HKR,Ndi\Params\Adaptive_IFS,          Base,       0, "10"
+HKR,PROSetNdi\NdiExt\Params\Adaptive_IFS, MiniHelp, 0, "Compensates for excessive Ethernet packet collisions."
+
+HKR,Ndi\Params\Threshold,             ParamDesc,  0, "Adaptive Transmit Threshold"
+HKR,Ndi\Params\Threshold,             Type,       0, "int"
+HKR,Ndi\Params\Threshold,             Default,    0, "200"
+HKR,Ndi\Params\Threshold,             Min,        0, "0"
+HKR,Ndi\Params\Threshold,             Max,        0, "200"
+HKR,Ndi\Params\Threshold,             Step,       0, "1"
+HKR,Ndi\Params\Threshold,             Base,       0, "10"
+HKR,PROSetNdi\NdiExt\Params\Threshold, MiniHelp,  0, "Sets number of bytes before adapter empties its FIFO buffer. Actual value is 8 times setting."
+
+HKR,Ndi\Params\HPQPriorityLevel,             ParamDesc,  0, "Priority Level Definition"
+HKR,Ndi\Params\HPQPriorityLevel,             Type,       0, "int"
+HKR,Ndi\Params\HPQPriorityLevel,             Default,    0, "4"
+HKR,Ndi\Params\HPQPriorityLevel,             Min,        0, "0"
+HKR,Ndi\Params\HPQPriorityLevel,             Max,        0, "7"
+HKR,Ndi\Params\HPQPriorityLevel,             Step,       0, "1"
+HKR,Ndi\Params\HPQPriorityLevel,             Base,       0, "10"
+HKR,PROSetNdi\NdiExt\Params\HPQPriorityLevel, MiniHelp,  0, "Sets the controlled cutoff level for using HPQ."
+
+HKR,Ndi\Params\UcodeSW,               ParamDesc,  0, "Adaptive Technology"
+HKR,Ndi\Params\UcodeSW,               Type,       0, "enum"
+HKR,Ndi\Params\UcodeSW,               Default,    0, "1"
+HKR,Ndi\Params\UcodeSW\Enum,          "1",        0, "On"
+HKR,Ndi\Params\UcodeSW\Enum,          "0",        0, "Off"
+HKR,PROSetNdi\NdiExt\Params\UcodeSW,  MiniHelp,   0, "Enables/Disables the Adaptive Technology performance feature."
+
+HKR,Ndi\Params\Coalesce,              ParamDesc,  0, "PCI Bus Efficiency"
+HKR,Ndi\Params\Coalesce,              Type,       0, "enum"
+HKR,Ndi\Params\Coalesce,              Default,    0, "0"
+HKR,Ndi\Params\Coalesce\Enum,         "1",        0, %Enabled%
+HKR,Ndi\Params\Coalesce\Enum,         "0",        0, %Disabled%
+HKR,PROSetNdi\NdiExt\Params\Coalesce, MiniHelp,   0, "Coalesces transmit packets into single buffer before sending them to network."
+
+HKR,Ndi\Params\AlwaysConnectGoal,              ParamDesc,  0, "Low Resource Connectivity"
+HKR,Ndi\Params\AlwaysConnectGoal,              Type,       0, "enum"
+HKR,Ndi\Params\AlwaysConnectGoal,              Default,    0, "1"
+HKR,Ndi\Params\AlwaysConnectGoal\Enum,         "1",        0, %Enabled%
+HKR,Ndi\Params\AlwaysConnectGoal\Enum,         "0",        0, %Disabled%
+HKR,PROSetNdi\NdiExt\Params\AlwaysConnectGoal, MiniHelp,   0,  "Try to load the driver in low resources environment."
+
+HKR,Ndi\Params\NetworkAddress,  ParamDesc,  0, "Locally Administered Address"
+HKR,Ndi\Params\NetworkAddress,  Type,       0, "edit"
+HKR,Ndi\Params\NetworkAddress,  Default,    0, "0"
+HKR,NDI\params\NetworkAddress,  LimitText,  0, "12"
+HKR,NDI\params\NetworkAddress,  UpperCase,  0, "1"
+HKR,PROSetNdi\NdiExt\Params\NetworkAddress,  MiniHelp,   0, "By default, an address is not present and the value field is left blank. To set a LAA in Intel(R) PROSet, enter one in the value field. Note: To set a LAA in Device Manager, select the Value option and enter an address in the field provided."
+
+HKR,Ndi\Params\ConfigIFS,                ParamDesc,  0, "Retransmit Inter-Frame Spacing"
+HKR,Ndi\Params\ConfigIFS,                Type,       0, "int"
+HKR,Ndi\Params\ConfigIFS,                Default,    0, "6"
+HKR,Ndi\Params\ConfigIFS,                Min,        0, "0"
+HKR,Ndi\Params\ConfigIFS,                Max,        0, "15"
+HKR,Ndi\Params\ConfigIFS,                Step,       0, "1"
+HKR,Ndi\Params\ConfigIFS,                Base,       0, "10"
+HKR,PROSetNdi\NdiExt\Params\ConfigIFS,   MiniHelp,   0, "Compensates for excessive Ethernet packet collisions by controlling retransmit timing."
+
+HKR,,PcNic,                     0, "1"
+HKR,,MWIEnable,                 2, "0"
+HKR,,AdaptiveStalledInterrupts, 2, "1"
+HKR,,AdaptiveCarrierLoss,       2, "1"
+HKR,,AdaptiveTransmitMethod,    2, "1"
+HKR,,Threshold,                 0, "200"
+
+HKR,,DeviceVxDsPrefix,          0, "e100b"
+
+;--- 82558 ACPI Wake On LAN parameter
+;
+[AcpiWol.reg]
+HKR,Ndi\Params\AcpiWol,               ParamDesc,  0, "ACPI Wake On LAN"
+HKR,Ndi\Params\AcpiWol,               Type,       0, "enum"
+HKR,Ndi\Params\AcpiWol,               Default,    0, "1"
+HKR,Ndi\Params\AcpiWol\Enum,          "1",        0, %Enabled%
+HKR,Ndi\Params\AcpiWol\Enum,          "0",        0, %Disabled%
+HKR,PROSetNdi\NdiExt\Params\AcpiWol,  MiniHelp,   0, "Enables or disables the Magic Packet* service for Wake On LAN with Windows 98 version 4.10.1998."
+
+HKLM,System\CurrentControlSet\Services\VxD\ACPIWOL,Start,     1, 00
+HKLM,System\CurrentControlSet\Services\VxD\ACPIWOL,StaticVxD, 0, "WOL558.vxd"
+
+;--- Log Link State Event
+;
+[LogLinkState.reg]
+HKR,,LogLinkStateEvent, 0,      "1"
+
+;--- 82558 specifics
+;
+[82558.reg]
+; 802.1p/802.1q Packet Tagging
+HKR,Ndi\Params\TaggingMode,         ParamDesc,  0, "QoS Packet Tagging"
+HKR,Ndi\Params\TaggingMode,         Type,       0, "enum"
+HKR,Ndi\Params\TaggingMode,         Default,    0, "0"
+HKR,Ndi\Params\TaggingMode\Enum,    "1",        0, %Enabled%
+HKR,Ndi\Params\TaggingMode\Enum,    "0",        0, %Disabled%
+HKR,PROSetNdi\NdiExt\Params\TaggingMode, MiniHelp, 0, "Send and receive IEEE Tagged frames (802.3ac/802.1p/802.1Q)."
+
+; Flow Control Settings
+HKR,Ndi\Params\FlowControl,              ParamDesc,  0, "Flow Control"
+HKR,Ndi\Params\FlowControl,              Type,       0, "enum"
+HKR,Ndi\Params\FlowControl,              Default,    0, "3"
+HKR,Ndi\Params\FlowControl\Enum,         "3",        0, "Generate and Respond"
+HKR,Ndi\Params\FlowControl\Enum,         "2",        0, "Respond"
+HKR,Ndi\Params\FlowControl\Enum,         "1",        0, "Generate"
+HKR,Ndi\Params\FlowControl\Enum,         "0",        0, "Off"
+HKR,PROSetNdi\NdiExt\Params\FlowControl, MiniHelp,   0, "Pauses packet transmission on receipt of full flow control frame and Send full flow control frame to notify the other side to stop transmission."
+HKR,,				   	FlowControl, 0, "3"
+
+; Adaptive Performance Tuning
+HKR,PROSetNdi\Params\CPUSaver,        ParamDesc,  0, "Adaptive Performance Tuning"
+HKR,PROSetNdi\Params\CPUSaver,        Type,       0, "slider"
+HKR,PROSetNdi\Params\CPUSaver,        Default,    0, "512"
+HKR,,CPUSaver,                                    0, "512"
+HKR,PROSetNdi\Params\CPUSaver,        LeftLabel,  0, "Adapter Bandwidth"
+HKR,PROSetNdi\Params\CPUSaver,        RightLabel, 0, "CPU Utilization"
+HKR,PROSetNdi\Params\CPUSaver,        MiniHelp,   0, "Sets optimal point of CPU/Adapter performance for this system."
+HKR,PROSetNdi\Params\CPUSaver\Values, "0",        0, "0"
+HKR,PROSetNdi\Params\CPUSaver\Values, "1",        0, "1"
+HKR,PROSetNdi\Params\CPUSaver\Values, "2",        0, "512"
+HKR,PROSetNdi\Params\CPUSaver\Values, "3",        0, "768"
+HKR,PROSetNdi\Params\CPUSaver\Values, "4",        0, "1024"
+HKR,PROSetNdi\Params\CPUSaver\Values, "5",        0, "1280"
+HKR,PROSetNdi\Params\CPUSaver\Values, "6",        0, "1536"
+HKR,PROSetNdi\Params\CPUSaver\Values, "7",        0, "1792"
+HKR,PROSetNdi\Params\CPUSaver\Values, "8",        0, "2048"
+HKR,PROSetNdi\Params\CPUSaver\Values, "9",        0, "2304"
+HKR,PROSetNdi\Params\CPUSaver\Values, "10",       0, "2560"
+HKR,PROSetNdi\Params\CPUSaver\Values, "11",       0, "2816"
+HKR,PROSetNdi\Params\CPUSaver\Values, "12",       0, "3072"
+HKR,PROSetNdi\Params\CPUSaver\Values, "13",       0, "3328"
+HKR,PROSetNdi\Params\CPUSaver\Values, "14",       0, "3584"
+HKR,PROSetNdi\Params\CPUSaver\Values, "15",       0, "3840"
+HKR,PROSetNdi\Params\CPUSaver\Values, "16",       0, "4096"
+
+;--- 82558 B Rev 5
+;
+[82558B.reg]
+; WakeOn
+HKR, Ndi\Params\WakeOn,       	  ParamDesc,          0, "Wake On Settings"
+HKR, Ndi\Params\WakeOn,       	  default,            0, "246"
+HKR, Ndi\Params\WakeOn\Enum,  	  "0",                0, %Disabled%
+HKR, Ndi\Params\WakeOn\Enum,  	  "6",                0, "Wake on Magic Packet"
+HKR, Ndi\Params\WakeOn\Enum,  	  "116",              0, "Wake on Directed Packet"
+HKR, Ndi\Params\WakeOn\Enum,  	  "118",              0, "Wake on Magic & Directed"
+HKR, Ndi\Params\WakeOn\Enum,      "246",              0, %OSControlled%
+HKR, Ndi\Params\WakeOn,       	  type,               0, "enum"
+HKR, Ndi\Params\WakeOn,       	  ExposeLevel,        0, "2"
+HKR, Ndi\Params\WakeOn,       	  MiniHelp,           0, "Determines which packets can be enabled to Wake up the system (Direct Packets, Magic Packet etc.)."
+HKR,,				  WakeOn, 	      0, "246"
+
+;Wake on Link parameter
+HKR, Ndi\Params\WakeOnLink,       ParamDesc,            0, %WakeOnLinkSettings%
+HKR, Ndi\Params\WakeOnLink,	  default,	        0, "0"
+HKR, Ndi\Params\WakeOnLink\Enum,  "0",                  0, %Disabled%
+;  HKR, Ndi\Params\WakeOnLink\Enum,  "1",                  0, %OSControlled% 
+HKR, Ndi\Params\WakeOnLink\Enum,  "2",                  0, %Enabled%
+HKR, Ndi\Params\WakeOnLink,       type,                 0, "enum"
+;HKR, Ndi\Params\WakeOnLink,       ExposeLevel,        0, "2"
+HKR, PROSetNdi\NdiExt\Params\WakeOnLink, MiniHelp,      0, %WakeOnLinkHelp% 
+
+;--- Wake on disable - sets WakeOn registry key to 0
+;
+[WakeOnDisable.reg]
+HKR,,				  WakeOn, 	      0, "0"
+
+;--- 82559 Enable PME
+;
+[EnablePME.reg]
+HKR,Ndi\Params\EnablePME,             ParamDesc,  0, "Enable PME"
+HKR,Ndi\Params\EnablePME,             Type,       0, "enum"
+HKR,Ndi\Params\EnablePME,             Default,    0, "2"
+HKR,Ndi\Params\EnablePME\Enum,        "1",        0, %Enabled%
+HKR,Ndi\Params\EnablePME\Enum,        "0",        0, %Disabled%
+HKR,Ndi\Params\EnablePME\Enum,        "2",        0, %OsControlled%
+HKR,PROSetNdi\NdiExt\Params\EnablePME, MiniHelp,  0, "Allows wake-up from APM power management when enabled. Disable shuts down LAN controller under ACPI"
+
+;--- Clkrun
+[Clkrun.reg]
+HKR,,CLKRUN,                                      0, "1"
+
+;--- Enable Power Down
+;
+[EnableLLPD.reg]
+HKR,Ndi\Params\EnablePowerDownOnLinkLoss,      ParamDesc,  0, "Smart Power Down"
+HKR,Ndi\Params\EnablePowerDownOnLinkLoss,      Type,       0, "enum"
+HKR,Ndi\Params\EnablePowerDownOnLinkLoss,      Default,    0, "1"
+HKR,Ndi\Params\EnablePowerDownOnLinkLoss\Enum, "1",        0, %Enabled%
+HKR,Ndi\Params\EnablePowerDownOnLinkLoss\Enum, "0",        0, %Disabled%
+HKR,PROSetNdi\NdiExt\Params\EnablePowerDownOnLinkLoss, MiniHelp, 0, "Removes adapter power when LAN cable disconnected."
+
+HKR,Ndi\Params\LinkBasedLogin,              ParamDesc,  0, "Adaptive Link Response"
+HKR,Ndi\Params\LinkBasedLogin,              Type,       0, "enum"
+HKR,Ndi\Params\LinkBasedLogin,              Default,    0, "0"
+HKR,Ndi\Params\LinkBasedLogin\Enum,         "1",        0, "On"
+HKR,Ndi\Params\LinkBasedLogin\Enum,         "0",        0, "Off"
+HKR,PROSetNdi\NdiExt\Params\LinkBasedLogin, MiniHelp,   0, "Enables Adaptive Link Response to check PHYLink status."
+
+;--- Expose Power Mangement feature in Lavon
+[PowerSave.reg]
+HKR,,AutoPowerSaveModeEnabled, 0, "1"
+HKR,,Force10MbOnD3, 0, "1"
+HKR,,SavePowerNowEnabled,    0, "1"
+
+[LLPDD_OFF.reg]
+HKR,Ndi\Params\EnablePowerDownOnLinkLoss,      Default,    0, "0"
+
+;--- Security
+;
+[Security.reg]
+HKR,Ndi\Params\MaxNumSecAssoc,  ParamDesc,  0, %SecurityAssociations%
+HKR,Ndi\Params\MaxNumSecAssoc,  Type,       0, "int"
+HKR,Ndi\Params\MaxNumSecAssoc,  Default,    0, "64"     ; Client
+HKR,Ndi\Params\MaxNumSecAssoc,  Min,        0, "1"
+HKR,Ndi\Params\MaxNumSecAssoc,  Max,        0, "5000"
+HKR,Ndi\Params\MaxNumSecAssoc,  Step,       0, "1"
+HKR,Ndi\Params\MaxNumSecAssoc,  Base,       0, "10"
+HKR,PROSetNdi\NdiExt\Params\MaxNumSecAssoc, MiniHelp, 0, "Simultaneous Security Associations that can be offloaded to the adapters co-processor."
+
+HKR,Ndi\Params\IPSecEnabled,     ParamDesc,  0, %IPSecEnabled%
+HKR,Ndi\Params\IPSecEnabled,     Type,       0, "enum"
+HKR,Ndi\Params\IPSecEnabled,     Default,    0, "1"
+HKR,Ndi\Params\IPSecEnabled\Enum,"0",        0, "Off"
+HKR,Ndi\Params\IPSecEnabled\Enum,"1",        0, "On"
+HKR,PROSetNdi\NdiExt\Params\IPSecEnabled, MiniHelp, 0, "Saves CPU cycles if set to correspond to the adapter type. Range: Enabled | Disabled"
+
+HKR,,IPSecTunnelMode, 2, "1"
+HKR,,MaxNumSecAssoc,  2, "64"
+
+[SecSerDef.reg]
+HKR,Ndi\Params\MaxNumSecAssoc,  Default,    0, "1000"   ; Server
+
+[SecOff.reg]
+HKR,Ndi\Params\IPSecEnabled,     Default,    0, "0"
+
+[SecDisable.reg]
+HKR,,IPSecEnabled,    0, "0"
+
+;--- CPUSaver override for Cardbus
+;
+[CPUSaverOverride.reg]
+HKR,PROSetNdi\Params\CPUSaver,  Default,    0, "1"
+HKR,,CPUSaver,                              0, "1"
+
+;--- Speed Duplex Mode common base 10Mb
+;
+[Speed10.reg]
+HKR, Ndi\params\SpeedDuplex,       ParamDesc,  0, %SpeedDuplex%
+HKR, Ndi\params\SpeedDuplex,       default,    0, "1"
+HKR, Ndi\params\SpeedDuplex,       type,       0, "enum"
+HKR, Ndi\params\SpeedDuplex\enum,  "1",        0, %10Mb-Half-Duplex%
+HKR, Ndi\params\SpeedDuplex\enum,  "2",        0, %10Mb-Full-Duplex%
+HKR, PROSetNdi\NdiExt\params\SpeedDuplex, MiniHelp,    0, "Sets link speed to 10 Mbps and duplex to half or full. Must coincide with switch port or no link will occur."
+HKR, PROSetNdi\NdiExt\params\SpeedDuplex, ExposeLevel, 0, "2"
+
+;--- Speed Duplex Mode common base 10/100Mb
+;
+[Speed100.reg]
+HKR, Ndi\params\SpeedDuplex,       ParamDesc,  0, %SpeedDuplex%
+HKR, Ndi\params\SpeedDuplex,       default,    0, "0"
+HKR, Ndi\params\SpeedDuplex,       type,       0, "enum"
+HKR, Ndi\params\SpeedDuplex\enum,  "0",        0, %AutoDetect%
+HKR, Ndi\params\SpeedDuplex\enum,  "1",        0, %10Mb-Half-Duplex%
+HKR, Ndi\params\SpeedDuplex\enum,  "2",        0, %10Mb-Full-Duplex%
+HKR, Ndi\params\SpeedDuplex\enum,  "3",        0, %100Mb-Half-Duplex%
+HKR, Ndi\params\SpeedDuplex\enum,  "4",        0, %100Mb-Full-Duplex%
+HKR, PROSetNdi\NdiExt\params\SpeedDuplex, MiniHelp,    0, "Sets link speed to 10/100 Mbps and duplex to half or full. Must coincide with switch port or no link will occur."
+HKR, PROSetNdi\NdiExt\params\SpeedDuplex, ExposeLevel, 0, "2"
+
+;--- Settings to be cleaned up
+;
+[8255x_Legacy.DelReg]
+HKR,Ndi\Params\Eid
+HKR,Ndi\Params\MapRegisters
+HKR,,Eid
+HKR,,MapRegisters
+
+;Remove old TaskOffload registry keys
+[TaskOffload.DelReg]
+HKR,Ndi\Params\TaskOffload
+HKR,,TaskOffload
+
+[82558BDelReg.DelReg]
+HKR, PROSetNdi\Params\WakeOn
+HKR, Ndi\Params\WakeOn
+HKR, Ndi\Params\WakeOnLink
+
+[82558r5dDelReg.DelReg]
+HKR,,AutoPowerSaveModeEnabled
+HKR,,Force10MbOnD3
+
+
+;--- Win9x NDI object registration
+;
+[E100B.ndi.reg]
+HKR,,               DevLoader,        0, "*ndis"
+HKR,,               DeviceVxDs,       0, "e100bnt5.sys"
+HKR,,               EnumPropPages,    0, "netdi.dll,EnumPropPages"
+HKR,,               Driver,           0, "e100bnt.sys"
+HKR,NDIS,           LogDriverName,    0, "E100B"
+HKR,NDIS,           MajorNdisVersion, 1, 03
+HKR,NDIS,           MinorNdisVersion, 1, 0A
+HKR,Ndi,            NdiInstaller,     0, "8255indi.dll,i557NdiProc"
+HKR,Ndi,            DeviceID,         0, "PCI\VEN_8086&DEV_1229"
+HKR,Ndi\Interfaces, DefUpper,         0, "ndis3"
+HKR,Ndi\Interfaces, DefLower,         0, "ethernet"
+HKR,Ndi\Interfaces, UpperRange,       0, "ndis3"
+HKR,Ndi\Interfaces, LowerRange,       0, "ethernet"
+
+;--- Uninstallation
+;adapters not hardcoded to remove
+HKLM,Software\Intel\Prounstl\SupportedDevices\8086, 1059, 0, "82551"
+
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\PROSet,DisplayName, 0, "Intel(R) PRO Network Connections Drivers"
+HKLM,Software\Microsoft\Windows\CurrentVersion\Uninstall\PROSet,UninstallString, 0, "8255xDel.exe"
+HKLM,Software\Intel\Prounstl\Dins, e100b9x.din, 0, "8255x.Uninstall"
+
+;--- Driver Install
+;
+; NDIS5
+[E100B.ndis5]
+CopyFiles = E100B.ndis5.CopyFiles
+
+; NDIS4
+[E100B.ndis4]
+CopyFiles = E100B.ndis4.CopyFiles
+
+; NDIS3
+[E100B.ndis3]
+CopyFiles = E100B.ndis3.CopyFiles
+
+;--- Copy files
+;
+[DestinationDirs]
+DefaultDestDir            = 11
+
+[SourceDisksNames]
+1 = %DISKNAME%,,,
+
+[SourceDisksFiles]
+e100b9x.din = 1
+8255indi.dll = 1
+wol558.vxd   = 1
+e100bnt5.sys = 1
+e100bnt.sys  = 1
+e100b.sys    = 1
+8255xDel.exe = 1
+
+; Install NDI Helper Dll
+[E100B.ndi.copyfiles]
+8255indi.dll,,,2
+e100bnt5.sys,,,2
+WOL558.vxd,,,2
+8255xDel.exe,,,2
+e100b9x.din,,,2
+
+[E100B.ndis5.CopyFiles]
+e100bnt5.sys,,,2
+WOL558.vxd,,,2
+
+[E100B.ndis4.CopyFiles]
+e100bnt.sys,,,2
+
+[E100B.ndis3.CopyFiles]
+e100b.sys,,,2
+
+[SpeedDpx.DelReg]
+HKR,Ndi\Params\Speed
+HKR,Ndi\Params\ForceDpx
+HKR,Ndi\Params\PacketTagging
+HKR,,Speed
+HKR,,ForceDpx
+HKR,,PacketTagging
+
+;--- Localizable Strings
+;
+[Strings]
+; Vendors
+V_INTEL="Intel"
+
+; Source disk name
+DISKNAME="Intel PRO Network Connection CD-ROM or floppy disk"
+
+; Parameters
+AutoDetect               = "Auto Detect"
+SpeedDuplex              = "Link Speed & Duplex"
+10Mb-Half-Duplex         = "10Mbps/Half Duplex"
+10Mb-Full-Duplex         = "10Mbps/Full Duplex"
+100Mb-Half-Duplex        = "100Mbps/Half Duplex"
+100Mb-Full-Duplex        = "100Mbps/Full Duplex"
+None                     = "None"
+IPSecEnabled             = "Offload IP Security"
+Enabled                  = "Enabled"
+Disabled                 = "Disabled"
+Checksum_str             = "Checksum"
+OSControlled             = "OS Controlled"
+Forced                   = "Forced"
+WakeOnLinkSettings       = "Wake On Link Settings"
+WakeOnLinkHelp           = "Allows wake-up from APM power management when link is reconnected."
+TaskOffload              = "Offloading"
+SecurityAssociations     = "Security Associations"
+
+; Device descriptions
+PCIE100B.DeviceDesc       = "Intel(R) PRO/100 Network Connection"
+PCIE100BTX.DeviceDesc     = "Intel(R) PRO/100B PCI Adapter (TX)"
+PCIE100BT4.DeviceDesc     = "Intel(R) PRO/100B PCI Adapter (T4)"
+PCIE10PPCI.DeviceDesc     = "Intel(R) PRO/10+ PCI Adapter"
+PCIE100RWU.DeviceDesc     = "Intel(R) PRO/100 WfM PCI Adapter"
+I557IFE.DeviceDesc        = "Intel 82557-based Integrated Ethernet PCI (10/100)"
+I557IFEWFM.DeviceDesc     = "82557-based Integrated Ethernet with Wake on LAN"
+I558IFE.DeviceDesc        = "Intel 82558-based Integrated Ethernet"
+I558IFEWFM.DeviceDesc     = "Intel 82558-based Integrated Ethernet with Wake on LAN"
+PCIE100PLUS.DeviceDesc    = "Intel(R) PRO/100+ PCI Adapter"
+PCIE100MAN.DeviceDesc     = "Intel(R) PRO/100+ Management Adapter"
+PCIE100SERVER.DeviceDesc  = "Intel(R) PRO/100+ Server Adapter"
+PCIE100SERVERW.DeviceDesc = "Intel(R) PRO/100+ Server Adapter (PILA8470B)"
+PCIE100DUAL.DeviceDesc    = "Intel(R) PRO/100+ Dual Port Server Adapter"
+PCIE100AOL.DeviceDesc     = "Intel(R) PRO/100+ Alert on LAN* 2 Management Adapter"
+PCIE100MANAOL.DeviceDesc  = "Intel(R) PRO/100+ Alert on LAN* Management Adapter"
+PCIE100MANAOLGC.DeviceDesc= "Intel(R) PRO/100+ Management Adapter with Alert On LAN* GC"
+PCIE100MANAOLGS.DeviceDesc= "Intel(R) PRO/100+ Management Adapter with Alert On LAN* G Server"
+I559CLONPCI.DeviceDesc    = "Intel(R) PRO/100 S Mobile LAN on Motherboard"
+I559IFE.DeviceDesc        = "Intel(R) 82559 Fast Ethernet LAN on Motherboard"
+I559IFEAOL.DeviceDesc     = "Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+I559IFEAOLII.DeviceDesc   = "Intel(R) 82559 Fast Ethernet LOM with Alert on LAN* 2"
+PCIE100DUALx.DeviceDesc   = "Intel(R) PRO/100 Dual Port Server Adapter"
+PCIE100DUALSx.DeviceDesc  = "Intel(R) PRO/100 S Dual Port Server Adapter"
+PCIE100S.DeviceDesc       = "Intel(R) PRO/100 S Management Adapter"
+PCIE100SADV.DeviceDesc    = "Intel(R) PRO/100 S Advanced Management Adapter"
+PCIE100SSVR.DeviceDesc    = "Intel(R) PRO/100 S Server Adapter"
+
+
+PCIE100BSPLUSD.DeviceDesc = "Intel(R) PRO/100 S+ Desktop Adapter"
+PCIE100S0.DeviceDesc       = "Intel(R) PRO/100 Desktop Adapter"
+PCIE100Sx.DeviceDesc       = "Intel(R) PRO/100 S Desktop Adapter"
+PCIE100S0SVR.DeviceDesc    = "Intel(R) PRO/100 Server Adapter"
+PCIE100SxSVR.DeviceDesc    = "Intel(R) PRO/100 S Server Adapter"
+PCIE100S0L.DeviceDesc      = "Intel(R) PRO/100 Network Connection"
+PCIE100SxL.DeviceDesc      = "Intel(R) PRO/100 S Network Connection"
+PCIE100LAVON.DeviceDesc    = "Intel(R) PRO/100 M Desktop Adapter"
+PCIE100LAVONLOM.DeviceDesc = "Intel(R) PRO/100 M Network Connection"
+PCIE100LAVONMB.DeviceDesc  = "Intel(R) PRO/100 M Mobile Connection"
+I559IFEAOLCPQ.DeviceDesc  = "Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+
+; Fujitsu Siemens Computers
+
+HPTX.DeviceDesc    = "NetServer 10/100TX PCI LAN Adapter"
+
+IBMFE9.DeviceDesc  = "Intel(R) 82559 Fast Ethernet LAN On Motherboard"
+IBMFED.DeviceDesc  = "Intel(R) PRO/100 S Network Connection"
+
+PCIE100BSPLUSS.DeviceDesc = "Intel(R) PRO/100 S+ Server Adapter"
+PCIE100SCBRCOMBONODES.DeviceDesc= "Intel(R) PRO/100 R Mobile Combo Adapter"
+
+Toshiba82559B.DeviceDesc     = "Intel 8255x-based Fast Ethernet"
+
+
+; NT service name
+e100bnt.Service.DispName = "Intel(R) PRO Network Connection Driver"
