@@ -1,0 +1,142 @@
+            ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+            º                                                   º
+            º     Compex RL2000A PnP Series Ethernet Adapter    º
+            º  Copyright (C) 1996 by PDS. All Rights Reserved.  º
+            º                                                   º
+	    ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ GENERAL INFORMATION ³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ 1.1) RL2000A.SYS v2.20
+      The NDIS drivers v2.20 for Windows 95 was written to the
+      Network Driver Interface Specification (NDIS) Version 3.0/3.1.
+
+ 1.2) RL2000A.INF
+
+      This is a Windows 95 setup file for RL2000A PnP Ethernet adapters.
+
+
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ * IMPORTANT NOTE:                                                      ³
+ ³   The RL2000A PnP Ethernet adapter should be set to Plug & Play	  ³
+ ³   mode (PnP mode) before installing Windows 95 so as to take advantage ³
+ ³   of Windows 95 Plug and Play operation.                               ³
+ ³                                                                        ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ Hint:
+ -----
+  Under Windows 95 environment, RL2000A PnP Ethernet adapter also work with
+  Windows 95 default NE2000 compatible driver.
+  To install Windows 95 default NE2000 compatible driver, check on the option,
+  "Windows default driver" from the new hardware detected diaglog box.
+  See Method 2 installation procedure.
+   
+ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ INSTALLATION GUIDE  ³
+ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ Microsoft Windows 95
+ ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+ 1) Install RL2000A PnP Ethernet adapter (in PnP mode) into the
+     computer and start Windows 95.
+
+ 2) Windows 95 will detect the new installation of RL2000A PnP Ethernet
+    adapter and a similar message box shown as below will be displayed out.
+    ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³ New Hardware Found                                                     ³
+    ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+    ³   [SYMBOL]    Compex RL2000A PnP Ethernet Adapter  	             ³
+    ³                                                                        ³
+    ³ Windows has found a new hardware and is installing the software for it.³
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ 3) In the "New Hardware Found" box, the following options are available
+     to install the driver:-
+
+      After selection, Click the OK button.
+    ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³ New Hardware Found                                                     ³
+    ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+    ³   [SYMBOL]    Compex RL2000A PnP Ethernet Adapter     		     ³
+    ³                                                                        ³
+    ³ Select which driver you want to install for your new hardware:         ³
+    ³ (0)  Windows default driver                                            ³
+    ³ ( )  Driver from disk provided by hardware manufacturer                ³
+    ³ ( )  Do not install a driver (Windows will not prompt you again)       ³
+    ³ ( )  Select from a list of alternate drivers                           ³
+    ³                            ÚÄÄÄÄÄÄÄÄ¿    ÚÄÄÄÄÄÄÄÄ¿    ÚÄÄÄÄÄÄÄÄ¿      ³
+    ³                            ³   OK   ³    ³ Cancel ³    ³  Help  ³      ³
+    ³                            ÀÄÄÄÄÄÄÄÄÙ    ÀÄÄÄÄÄÄÄÄÙ    ÀÄÄÄÄÄÄÄÄÙ      ³
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+    Recommended to select `Driver from disk provided by hardware manufacturer'
+    If you select `Windows default driver' see Method 2 installation.
+    
+ 4) Insert Compex RL2000A PnP Ethernet Adapter Disk into the drive (eg. A:).
+
+ 5) In the "Install From Disk" box, enter the following pathname of the
+    directory:-
+                A:\WIN95
+    and then select the OK button.
+    ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³ Install From Disk                                                      ³
+    ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+    ³ [SYMBOL] Insert the manufacturer's installation disk into              ³
+    ³          the driver selected and then click OK.          ÚÄÄÄÄÄÄÄÄ¿    ³
+    ³                                                          ³   OK   ³    ³
+    ³                                                          ÀÄÄÄÄÄÄÄÄÙ    ³
+    ³                                                          ÚÄÄÄÄÄÄÄÄ¿    ³
+    ³                                                          ³ Cancel ³    ³
+    ³                                                          ÀÄÄÄÄÄÄÄÄÙ    ³
+    ³    Copy manufacturer's files from:                       ÚÄÄÄÄÄÄÄÄ¿    ³
+    ³                                                          ³Browse..³    ³
+    ³     A:\WIN95                                             ÀÄÄÄÄÄÄÄÄÙ    ³
+    ³                                                                        ³
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+ 6) Windows 95 will copy the driver (RL2000A.SYS) and the necessary files
+    from Windows 95 Diskettes/CD-ROM.
+
+ 7) After installation, Windows 95 may be ask you to restart the computer so
+    that the new hardware can take effect. Click the  YES button.
+    ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³ System Settings Change                                                 ³
+    ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+    ³   [SYMBOL]  To finish setting up your new hardware,                    ³
+    ³             you must restart your computer.                            ³
+    ³                                                                        ³
+    ³             Do you want to restart your computer now ?                 ³
+    ³                                                                        ³
+    ³                                            ÚÄÄÄÄÄÄÄÄÄ¿    ÚÄÄÄÄÄÄÄÄ¿   ³
+    ³                                            ³   Yes   ³    ³   No   ³   ³
+    ³                                            ÀÄÄÄÄÄÄÄÄÄÙ    ÀÄÄÄÄÄÄÄÄÙ   ³
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+
+The method below describe how to install using Windows Default Driver.
+
+ Method 2: Using Windows Default Driver
+ ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+ 1) In the "New Hardware Found" box, check on `Using Windows Default Driver'
+
+ 2) Windows 95 will copy the driver and the necessary files from Windows 95
+    Diskettes/CD-ROM.
+
+ 3) After installation, Windows 95 may be ask you to restart the computer so
+    that the new hardware can take effect. Click the YES button.
+    ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+    ³ System Settings Change                                                 ³
+    ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+    ³   [SYMBOL]  To finish setting up your new hardware,                    ³
+    ³             you must restart your computer.                            ³
+    ³                                                                        ³
+    ³             Do you want to restart your computer now ?                 ³
+    ³                                                                        ³
+    ³                                            ÚÄÄÄÄÄÄÄÄÄ¿    ÚÄÄÄÄÄÄÄÄ¿   ³
+    ³                                            ³   Yes   ³    ³   No   ³   ³
+    ³                                            ÀÄÄÄÄÄÄÄÄÄÙ    ÀÄÄÄÄÄÄÄÄÙ   ³
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+
+

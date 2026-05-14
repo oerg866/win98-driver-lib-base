@@ -1,0 +1,182 @@
+;
+; Filename              : RL2000A.INF v2.20
+; Operating Systems     : Windows 95
+; Hardware Supported    :
+;                         Compex RL2000  PNP Ethernet Adapter
+;                         Compex RL2000A PNP Ethernet Adapter
+;                         Compex RL2000  PCI Ethernet Adapter
+;                         Compex RL2000  Generic Ethernet Adapter
+;
+[version]
+signature="$WINDOWS95$"
+Class=Net
+provider=%V_MS%
+
+[Manufacturer]
+%V_CPX%=CPX
+
+[CPX]
+%*CPX1401.DeviceDesc%=*CPX1401.ndi, PCI\VEN_11F6&DEV_1401  ; Compex RL2000 PCI
+%*CPX1301.DeviceDesc%=*CPX1301.ndi, *CPX1301               ; Compex RL2000 PNP
+%*CPX1101.DeviceDesc%=*CPX1101.ndi, *CPX1101               ; Compex RL2000 Generic
+%*CPX1501.DeviceDesc%=*CPX1501.ndi, *CPX1501               ; Compex RL2000A PNP
+
+
+;****************************************************************************
+;    *CPX1401      Compex RL2000 PCI
+;****************************************************************************
+
+[*CPX1401.ndi]
+AddReg=*CPX1401.ndi.reg,RL2000A.ndi.reg
+
+[*CPX1401.ndi.reg]
+HKR,Ndi,DeviceID,,"PCI\VEN_11F6&DEV_1401"
+
+;****************************************************************************
+;    *CPX1301      Compex RL2000 PNP
+;****************************************************************************
+
+[*CPX1301.ndi]
+AddReg=*CPX1301.ndi.reg,RL2000A.ndi.reg,RL2000A.params.reg
+LogConfig=*CPX1301.LogConfig
+
+[*CPX1301.ndi.reg]
+HKR,Ndi,DeviceID,,"*CPX1301"
+
+[*CPX1301.LogConfig]
+IRQConfig=2,3,4,5,10,11,12,15
+IOConfig=20@200-3FF%FFE0(3FF::)
+
+;****************************************************************************
+;    *CPX1501      Compex RL2000A PNP
+;****************************************************************************
+
+[*CPX1501.ndi]
+AddReg=*CPX1501.ndi.reg,RL2000A.ndi.reg,RL2000A.params.reg
+LogConfig=*CPX1501.LogConfig
+
+[*CPX1501.ndi.reg]
+HKR,Ndi,DeviceID,,"*CPX1501"
+
+[*CPX1501.LogConfig]
+IRQConfig=3,4,5,9,10,11,12,15
+IOConfig=20@200-3FF%FFE0(3FF::)
+
+;****************************************************************************
+;    *CPX1101      Compex RL2000 Generic
+;****************************************************************************
+
+[*CPX1101.ndi]
+AddReg=*CPX1101.ndi.reg,RL2000A.ndi.reg,RL2000A.params.reg
+LogConfig=*CPX1101.LogConfig
+
+[*CPX1101.ndi.reg]
+HKR,Ndi,DeviceID,,"*CPX1101"
+
+[*CPX1101.LogConfig]
+IRQConfig=2,3,4,5,10,11,12,15
+IOConfig=240-25F(3FF::),280-29F(3FF::),2C0-2DF(3FF::),300-31F(3FF::),320-33F(3FF::),340-35F(3FF::),360-37F(3FF::)
+ConfigPriority=HARDRECONFIG
+
+;****************************************************************************
+; RL2000A Driver
+;****************************************************************************
+; Base section for RL2000A users
+[RL2000A.ndi.reg]
+; key,subkey,valuname,type,value
+HKR,,DevLoader,,*ndis
+HKR,,DeviceVxDs,,RL2000A.sys
+HKR,,EnumPropPages,,"netdi.dll,EnumPropPages"
+; NDIS Info
+HKR,NDIS,LogDriverName,,"RL2000A"
+HKR,NDIS,MajorNdisVersion,1,03
+HKR,NDIS,MinorNdisVersion,1,0A
+;HKR,NDIS\NDIS2,DriverName,,"RL2000A$"
+;HKR,NDIS\NDIS2,FileName,,"RL2000A.dos"
+;HKR,NDIS\ODI,DriverName,,"RL2000A"
+;HKR,NDIS\ODI,FileName,,"RL2000A.com"
+; Interfaces
+;HKR,Ndi\Interfaces,DefUpper,,"ndis2,ndis3"
+HKR,Ndi\Interfaces,DefUpper,,"ndis3"
+HKR,Ndi\Interfaces,DefLower,,"ethernet"
+;HKR,Ndi\Interfaces,UpperRange,,"ndis2,ndis3,odi"
+HKR,Ndi\Interfaces,UpperRange,,"ndis3"
+HKR,Ndi\Interfaces,LowerRange,,"ethernet"
+; Install sectioins
+HKR,Ndi\Install,ndis3,,"RL2000A.ndis3"
+;HKR,Ndi\Install,ndis2,,"RL2000A.ndis2"
+;HKR,Ndi\Install,odi,,"RL2000A.odi"
+
+
+; Install NDIS3
+[RL2000A.ndis3]
+CopyFiles=RL2000A.ndis3.CopyFiles
+[RL2000A.ndis3.CopyFiles]
+RL2000A.sys
+
+; Install NDIS2
+[RL2000A.ndis2]
+CopyFiles=RL2000A.ndis2.CopyFiles
+[RL2000A.ndis2.CopyFiles]
+RL2000A.dos
+
+; Install ODI
+[RL2000A.odi]
+CopyFiles=RL2000A.odi.CopyFiles
+[RL2000A.odi.CopyFiles]
+RL2000A.com
+
+
+; extra params for RL2000A
+[RL2000A.params.reg]
+; Resources
+HKR,,InterruptNumber,1,04,00,00,00
+HKR,,IOBaseAddress,1,02,00,00,00
+HKR,NDI\params\InterruptNumber,resc,1,04,00,00,00
+HKR,Ndi\params\interruptNumber,ParamDesc,,"Interrupt Level"
+HKR,NDI\params\InterruptNumber,flag,1,20,00,00,00
+HKR,NDI\params\IOBaseAddress,resc,1,02,00,00,00
+HKR,NDI\params\IOBaseAddress,ParamDesc,,"I/O Base Address"
+HKR,NDI\params\IOBaseAddress,flag,1,20,00,00,00
+;ndis2
+;HKR,NDI\params\Interrupt,resc,1,04,00,00,00
+;HKR,Ndi\params\interrupt,ParamDesc,,"Interrupt Level"
+;HKR,NDI\params\Interrupt,flag,1,10,00,00,00
+;HKR,NDI\params\IOBase,resc,1,02,00,00,00
+;HKR,NDI\params\IOBase,ParamDesc,,"I/O Base Address"
+;HKR,NDI\params\IOBase,flag,1,10,00,00,00
+
+;****************************************************************************
+; Source Directories
+;****************************************************************************
+
+[SourceDisksNames]
+1="Compex RL2000A Ethernet Adapter Driver Disk",,
+
+[SourceDisksFiles]
+RL2000A.sys=1
+
+;****************************************************************************
+; Destination Directories
+;****************************************************************************
+[DestinationDirs]
+DefaultDestDir              =11 ; LDID_SYS
+RL2000A.ndis3.CopyFiles      =11
+;RL2000A.ndis2.CopyFiles      =26 ; LDID_WINBOOT
+;RL2000A.odi.CopyFiles        =26
+
+;****************************************************************************
+; Localizable Strings
+;****************************************************************************
+[strings]
+; Provider
+V_MS="Microsoft"
+
+; Manufacturers
+V_CPX="Compex"
+
+; Compex RL2000A Network Adapter
+*CPX1401.DeviceDesc="Compex RL2000  PCI Ethernet Adapter"
+*CPX1301.DeviceDesc="Compex RL2000  PNP Ethernet Adapter"
+*CPX1101.DeviceDesc="Compex RL2000  Generic Ethernet Adapter"
+*CPX1501.DeviceDesc="Compex RL2000A PNP Ethernet Adapter"
