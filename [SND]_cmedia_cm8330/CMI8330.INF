@@ -1,12 +1,13 @@
 ;
 ; PnP Device Infomations file
+;
 ; (disable MPU-401 MIDI device) 7/24/97
 ; (add logconfig to mask IRQ12 for ACT test ) 01/08/98
 ; (add en/disable IRQ12) 01/19/98
 ; (merge softmidi & DOSmidi into MPU-401 MIDI device and reject MIDI IRQ) 03/02/98
 ; (merge A3D drivers) 04/10/98
 ; (set library) 05/20/98
-; separate DOS mode MPU-401 emulator drivers 6/23/98'
+; (remove softmidi & DOSmidi for light version) 10/6/98
 ;
 
 [Version]
@@ -31,7 +32,6 @@ DefaultDestDir=11
 %String3%=CMedia_Mpu401_Dev,ISAPNP\CMI0001_DEV0001
 %String4%=CMedia_JoyStick_Dev,ISAPNP\CMI0001_DEV0002
 %String5%=CMedia_SB16PnP_Dev,ISAPNP\CMI0001_DEV0003
-%SWMIDI.DeviceDesc%=CMedia_SWMIDI, VIRTUAL\CMedia_SWMIDI
 
 [CMedia_SB16PnP_Dev]
 LogConfig=CMedia_SB16PnP_Dev.LC1,CMedia_SB16PnP_Dev.LC2
@@ -65,8 +65,8 @@ cm8330sb.drv
 
 [SB16PnP.AddReg]
 HKR,,Devloader,0,mmdevldr.vxd
-; mask IRQ12
-HKR,Config,EnableIRQ12,1,0
+; enable IRQ12
+HKR,Config,EnableIRQ12,1,1
 HKR,Drivers,MIGRATED,0,0
 HKR,Drivers\wave,,0,
 ;HKR,Drivers\midi,,0,
@@ -210,9 +210,9 @@ HKR,Drivers\joystick\cmjstick.drv,Description,0,%JOY.DeviceDesc%
 
 [WSS.AddReg]
 HKR,,Devloader,0,mmdevldr.vxd
-; mask IRQ12
-HKR,Config,EnableIRQ12,1,0
-HKR,Config,enable_lib,1,0
+; enable IRQ12
+HKR,Config,EnableIRQ12,1,1
+HKR,Config,enable_lib,1,1
 HKR,Drivers,MIGRATED,0,0
 HKR,Drivers\wave,,0,
 HKR,Drivers\midi,,0,
@@ -282,31 +282,8 @@ system.ini,drivers,"mixer*=cs31ba11.drv",,1
 system.ini,drivers,"mixer*=cs32ba11.drv",,1
 system.ini,drivers,"mixer*=nmcmssnd.drv",,1
 
-[CMedia_SWMIDI]
-CopyFiles=SWMIDI.CopyFiles
-AddReg=SW_MIDI.AddReg, SMIDI.AddReg, OPL_Dev.AddReg
-
-[SWMIDI.CopyFiles]
-cmsmidi.drv,,
-softmidi.dll,,
-wave.dat,,
-table.dat,,
-
-[SW_MIDI.AddReg]
-HKR,,Devloader,,mmdevldr.vxd
-HKR,Drivers,MIGRATED,,0
-HKR,Drivers\midi,,,
-
-[SMIDI.AddReg]
-HKR,,Driver,,cmmpu401.vxd
-HKR,Drivers\midi\cmsmidi.drv,Driver,,cmsmidi.drv
-HKR,Drivers,SubClasses,,"midi"
-
-[OPL_Dev.AddReg]
-HKR,Drivers\midi\cmsmidi.drv,Description,,%SMIDI.DeviceDesc%
-
 [SourceDisksNames]
-1="Sound Pro WIN98 Driver Disk",,0000
+1="CMI8330 WIN98 light Driver Disk",,0000
 
 [SourceDisksFiles]
 CM8330.drv=1
@@ -329,12 +306,6 @@ cmmpu401.vxd=1
 cmjstick.drv=1
 vjoyd.vxd=1
 cmopl.drv=1
-cmmpu.exe=1
-smidi32.dll=1
-cmsmidi.drv=1
-softmidi.dll=1
-wave.dat=1
-table.dat=1
 Audio3D.dll=1
 
 [Strings]
@@ -351,7 +322,4 @@ JOY.DeviceDesc="C-Media Inc. Joystick"
 KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
 WAVE.DeviceDesc="C-Media Inc. Wave Mixer Aux"
 MediaClassName="Sound, video and game controllers"
-SMIDI.DeviceDesc="C-Media SoftMidi Driver"
-DOSemu.DeviceDesc="DOS Mode MPU-401 Emulator"
-SWMIDI.DeviceDesc="C-Media SoftMidi Driver"
 Audio3D_CLSID="{D8F1EEE0-F634-11CF-8700-00A0245D918B}"

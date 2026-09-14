@@ -1,41 +1,20 @@
+C-Media CMI8330 MODDED Windows 98 driver by oerg866
 
-IMPORTANT NOTES:
+This is not a stock C-Media package. It combines:
 
+  * WSS core from C-Media "ver 2.0": CM8330.VXD 4.10.00.0200 (Jan 2000)
+    and CM8330.DRV (Jan 1999 build)
+  * Everything else from the C-Media "6.4 light" disk (Oct 1998): INF,
+    SB16 driver 4.10.00.0163/0161, MPU-401 VxD 4.0.961, joystick, OPL3.
+    No software MIDI synthesizer, no DOS-box MPU-401 emulator.
 
-* for Windows 98 installation
+Changes made to the binaries:
 
-  1. Make sure that your Windows 98 system is setup completed.
-  2. Turn off power and plug in sound card then turn on power.
-  3. Windows 98 will auto detect your sound card and ask drivers
-     disk. Insert the disk,Windows 98 will auto setup PnP drivers
-     and enter Windows 98 system. Now, you can hear the Windows
-     starting sound. If not,please run UINSTDRV.EXE to uninstall
-     PnP device drivers and reboot Windows 98 to install again.
-  4. Press Start button and select run item. Typing your drivers
-     disk path and SETUP (ex. A:\SETUP) to install sound card
-     Windows applications.
+  * CM8330.DRV, CM8330SB.DRV: the "Digital CD Audio" (S/PDIF in) mute
+    checkbox in the volume control now works (bug in mixer's mute handler)
+  * CM8330.DRV: version resource raised 4.10.00.0161 -> 4.10.00.0200 -
+    prevents versioning warning when updating the driver
+  * CM8330SB.DRV: fixed-version field, which C-Media had left at
+    4.0.0.0, set to match its version string (4.10.0.163) - ditto
 
-  SPECIAL NOTE:
-  1. The DOS mode MPU-401 emulator uses WSS mode to output, so
-     please select SB16 mode as waves (voice) output device.
-  2. Please notice the I/O resource of DOS mode MPU-401 emulator in
-     'System' of 'Control Panel'. Select same I/O resource as I/O
-     port of MPU-401 General MIDI in DOS games or applications.
-  3. Because we use two devices (SB16 & WSS) to perform full-
-     duplex functions, some applications will detect the sound card
-     not a full-duplex one. Please make sure that the playback 
-     device is set to "Sound System Playback" and the record device
-     is set to "SB16 Record" in "Multimedia" of "Control Panel", 
-     the item "Use preferred devices only" must also be marked.
-     In IPhone 5.0, even when you select the playback and record 
-     devices to different ones, still the system will detects the 
-     card as being not full-duplex. Even so, you have to set the 
-     devices to different ones to enable the full-duplex functions.
-     In fact, the full-duplex functions still work in this way.
-  4. A3D interface is available only when the playback device is set 
-     to "Sound System Playback" in "Multimedia" of "Control Panel".
-  5. If you want to run games in Windows 98 DOS box or shut down to
-     DOS, you don't have to install DOS drivers. But, If you want to
-     run games in pure DOS enviroment, please press 'F8' key and
-     select 'COMMAND PROMPT ONLY' to enter DOS during booting to
-     install DOS drivers only (don't specify windows directory).
+No other functional changes.
