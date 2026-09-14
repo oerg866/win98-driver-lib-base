@@ -1,0 +1,301 @@
+;; NETDLKR5.INF (Win2K, WinXP & Win98 combined inf for NDIS5 driver)
+;;
+;;  D-Link DFE-538TX 10/100 Adapter
+;;
+;; Copyright 2001-2002, D-Link Corporation. All Rights Reserved.
+;;
+;; .this release is primarily for motherboard OEM for WHQL test.
+
+[version]
+Signature      = "$Chicago$"
+Compatible     = 1
+Class          = Net
+ClassGUID      = {4d36e972-e325-11ce-bfc1-08002be10318}
+Provider       = %D-Link%                             ;;
+CatalogFile    = NETDLKR5.CAT                               ;; for WHQL certified
+CatalogFile.NT = NETDLKRN.CAT
+DriverVer      = 08/23/2001,5.397.0823.2001
+
+[Manufacturer]
+%D-Link%   = D-Link
+
+[ControlFlags]
+;;ExcludeFromSelect     = PCI\VEN_1186&DEV_1300
+;;ExcludeFromSelect     = PCI\VEN_1186&DEV_1300&SUBSYS_13001186                 
+;;ExcludeFromSelect     = PCI\VEN_10EC&DEV_8139
+
+[D-Link]
+%DFE538.DeviceDesc%  = DFE538.ndi, PCI\VEN_1186&DEV_1300
+%DFE538_A.DeviceDesc%  = DFE538_A.ndi, PCI\VEN_1186&DEV_1300&SUBSYS_13001186
+%DFE538_A.DeviceDesc%  = DFE538_A.ndi, PCI\VEN_10EC&DEV_8139&SUBSYS_13001186
+
+;;****************************************************************************
+;; Windows 9x
+;;****************************************************************************
+[DFE538.ndi]
+DriverVer       = 08/23/2001,397
+AddReg          = DFE538.id.reg, DFE538.common.reg, DFE538.win.reg, DFE538.oncbs.reg
+CopyFiles       = DFE538.CopyFiles98
+;DeviceID        = "PCI\VEN_1186&DEV_1300"
+;LogConfig       = DefaultConfig
+
+[DFE538_A.ndi]
+DriverVer       = 08/23/2001,397
+AddReg          = DFE538.id.reg, DFE538.common.reg, DFE538.win.reg, DFE538.oncbs.reg
+CopyFiles       = DFE538.CopyFiles98
+;DeviceID        = "PCI\VEN_1186&DEV_1300&SUBSYS_13001186"
+;LogConfig       = DefaultConfig
+
+;;****************************************************************************
+;; Win2K, WinXP
+;;****************************************************************************
+[DFE538.ndi.NT]
+AddReg          = DFE538.common.reg, DFE538.reg, DFE538.oncbs.reg
+Characteristics = 0x84
+BusType         = 5
+CopyFiles       = DFE538.CopyFiles
+
+[DFE538.ndi.NT.Services]
+AddService = DLKRTS, 2, rtsnt.Service, DFE538.EventLog
+
+[DFE538_A.ndi.NT]
+AddReg          = DFE538.common.reg, DFE538.reg, DFE538.oncbs.reg
+Characteristics = 0x84
+BusType         = 5
+CopyFiles       = DFE538.CopyFiles
+
+[DFE538_A.ndi.NT.Services]
+AddService = DLKRTS, 2, rtsnt.Service, DFE538.EventLog
+
+[DFE538.CopyFiles]
+DLKRTS.SYS,,,2
+
+[DFE538.CopyFiles98]
+DLKRTS.SYS,,,2
+
+;;----------------------------------------------------------------------------
+;; DFE-538TX Parameters
+;;----------------------------------------------------------------------------
+;;***************************************************************************
+;; Windows 9x parameters
+;;***************************************************************************
+[DFE538.id.reg]
+HKR, Ndi,       DeviceID,       0,      "PCI\VEN_1186&DEV_1300"
+
+HKR, Ndi\Install,                       ,       0,      rtsnt.install
+HKR, NDI\Params\DuplexMode,             flag,   1,      30, 00, 00, 00
+HKR, Ndi\Params\EarlyTxThreshold,       flag,   1,      20, 00, 00, 00
+HKR, NDI\Params\NetworkAddress,         flag,   1,      30, 00, 00, 00
+HKR, NDI\Params\WakeUpFrame,            flag,   1,      30, 00, 00, 00
+
+[DFE538.win.reg]
+;; key,subkey,valuname,type,value
+HKR, ,  DriverDesc,     0,      "D-Link DFE-538TX 10/100 Adapter"
+HKR, ,  DevLoader,      0,      *ndis
+HKR, ,  DeviceVxDs,     0,      DLKRTS.SYS
+HKR, ,  EnumPropPages,  0,      netdi.dll,      EnumPropPages
+
+;;params
+HKR, ,  MediaType,      0,      1
+HKR, ,  AdapterType,    0,      5
+HKR, ,  BusType,        0,      5
+
+;; NDIS Info
+HKR, NDIS,              MajorNdisVersion,       1,      03
+HKR, NDIS,              MinorNdisVersion,       1,      0a
+HKR, NDIS,              LogDriverName,          0,      "DLKRTS"
+
+;; Interfaces
+HKR, Ndi\Interfaces,    DefLower,               ,       "ethernet"
+HKR, Ndi\Interfaces,    LowerRange,             ,       "ethernet"
+HKR, Ndi\Interfaces,    DefUpper,               ,       "ndis3"
+HKR, Ndi\Interfaces,    UpperRange,             ,       "ndis3"
+
+;; Install sections
+HKR, Ndi\Install,       ndis3,                  0,      "DFE538.ndis5"
+
+;;****************************************************************************
+;; DFE-538TX common parameters
+;;****************************************************************************
+[DFE538.oncbs.reg]
+HKR,,ChipOnCardbus,,"0"
+
+[DFE538.common.reg]
+HKR, Ndi\params\DuplexMode,      ParamDesc, 0, %DuplexMode%
+HKR, Ndi\params\DuplexMode,      type,      0, "enum"
+HKR, Ndi\params\DuplexMode,      default,   0, "1"
+HKR, Ndi\params\DuplexMode\enum, 1,         0, %dmAutoMode%
+HKR, Ndi\params\DuplexMode\enum, 2,         0, %dm10HalfMode%
+HKR, Ndi\params\DuplexMode\enum, 3,         0, %dm10FullMode%
+HKR, Ndi\params\DuplexMode\enum, 4,         0, %dm100HalfMode%
+HKR, Ndi\params\DuplexMode\enum, 5,         0, %dm100FullMode%
+
+HKR,Ndi\Params\EarlyTxThreshold, ParamDesc, 0, %EarlyTxThreshold%
+HKR,Ndi\Params\EarlyTxThreshold, Type,      0, "int"
+HKR,Ndi\Params\EarlyTxThreshold, Default,   0, "15"
+HKR,Ndi\Params\EarlyTxThreshold, Min,       0, "0"
+HKR,Ndi\Params\EarlyTxThreshold, Max,       0, "63"
+HKR,Ndi\Params\EarlyTxThreshold, Step,      0, "1"
+HKR,Ndi\Params\EarlyTxThreshold, Base,      0, "10"
+
+HKR,Ndi\params\NetworkAddress,   ParamDesc, 0, %NetworkAddress%
+HKR,Ndi\params\NetworkAddress,   type,      0, "edit"
+HKR,Ndi\params\NetworkAddress,   default,   0, "000000000000"
+HKR,Ndi\params\NetworkAddress,   LimitText, 0, "12"
+HKR,Ndi\params\NetworkAddress,   UpperCase, 0, "1"
+HKR,Ndi\params\NetworkAddress,   Optional,  0, "1"
+
+;HKR,NDI\Params\TxMaxDMABurst,flag,1,30,00,00,00
+;HKR,Ndi\params\TxMaxDMABurst,ParamDesc,0,"Transmit DMA burst size"
+;HKR,Ndi\params\TxMaxDMABurst,type,0,enum
+;HKR,Ndi\params\TxMaxDMABurst,default,0,6
+;HKR,Ndi\params\TxMaxDMABurst\enum,0,0,"0:16 bytes"
+;HKR,Ndi\params\TxMaxDMABurst\enum,1,0,"1:32 bytes"
+;HKR,Ndi\params\TxMaxDMABurst\enum,2,0,"2:64 bytes"
+;HKR,Ndi\params\TxMaxDMABurst\enum,3,0,"3:128 bytes"
+;HKR,Ndi\params\TxMaxDMABurst\enum,4,0,"4:256 bytes"
+;HKR,Ndi\params\TxMaxDMABurst\enum,5,0,"5:512 bytes"
+;HKR,Ndi\params\TxMaxDMABurst\enum,6,0,"6:1024 bytes"
+;HKR,Ndi\params\TxMaxDMABurst\enum,7,0,"7:2048 bytes"
+
+;HKR,NDI\Params\RxMaxDMABurst,flag,1,30,00,00,00
+;HKR,Ndi\params\RxMaxDMABurst,ParamDesc,0,"Receive DMA burst size"
+;HKR,Ndi\params\RxMaxDMABurst,type,0,enum
+;HKR,Ndi\params\RxMaxDMABurst,default,0,6
+;HKR,Ndi\params\RxMaxDMABurst\enum,0,0,"0:16 bytes"
+;HKR,Ndi\params\RxMaxDMABurst\enum,1,0,"1:32 bytes"
+;HKR,Ndi\params\RxMaxDMABurst\enum,2,0,"2:64 bytes"
+;HKR,Ndi\params\RxMaxDMABurst\enum,3,0,"3:128 bytes"
+;HKR,Ndi\params\RxMaxDMABurst\enum,4,0,"4:256 bytes"
+;HKR,Ndi\params\RxMaxDMABurst\enum,5,0,"5:512 bytes"
+;HKR,Ndi\params\RxMaxDMABurst\enum,6,0,"6:1024 bytes"
+;HKR,Ndi\params\RxMaxDMABurst\enum,7,0,"7:unlimitted"
+
+;HKR,NDI\Params\EarlyRxThreshold,flag,1,30,00,00,00
+;HKR,Ndi\params\EarlyRxThreshold,ParamDesc,0,"Receive FIFO threshold"
+;HKR,Ndi\params\EarlyRxThreshold,type,0,enum
+;HKR,Ndi\params\EarlyRxThreshold,default,0,2
+;HKR,Ndi\params\EarlyRxThreshold\enum,0,0,"0:16 bytes"
+;HKR,Ndi\params\EarlyRxThreshold\enum,1,0,"1:32 bytes"
+;HKR,Ndi\params\EarlyRxThreshold\enum,2,0,"2:64 bytes"
+;HKR,Ndi\params\EarlyRxThreshold\enum,3,0,"3:128 bytes"
+;HKR,Ndi\params\EarlyRxThreshold\enum,4,0,"4:256 bytes"
+;HKR,Ndi\params\EarlyRxThreshold\enum,5,0,"5:512 bytes"
+;HKR,Ndi\params\EarlyRxThreshold\enum,6,0,"6:1024 bytes"
+;HKR,Ndi\params\EarlyRxThreshold\enum,7,0,"7:No threshold"
+
+;HKR,NDI\Params\TxInterFrameGap,flag,1,30,00,00,00
+;HKR,Ndi\params\TxInterFrameGap,ParamDesc,0,"Tx IFG(10M/100M)"
+;HKR,Ndi\params\TxInterFrameGap,type,0,enum
+;HKR,Ndi\params\TxInterFrameGap,default,0,3
+;HKR,Ndi\params\TxInterFrameGap\enum,0,0,"8.4us/840ns"
+;HKR,Ndi\params\TxInterFrameGap\enum,1,0,"8.8us/880ns"
+;HKR,Ndi\params\TxInterFrameGap\enum,2,0,"9.2us/920ns"
+;HKR,Ndi\params\TxInterFrameGap\enum,3,0,"9.6us/960ns"
+
+;HKR, Ndi\params\WakeOnLan,         ParamDesc,  0, "Smart Power Saving"
+;HKR, Ndi\params\WakeOnLan,         default,    0, "0"  
+;HKR, Ndi\params\WakeOnLan,         type,       0, "enum"
+;HKR, Ndi\params\WakeOnLan\enum,    "0",        0, "Disable"
+;HKR, Ndi\params\WakeOnLan\enum,    "1",        0, "Enable (No WakeUp)"
+
+HKR,Ndi\params\RxBufLen,	   ParamDesc,  0, "Receive Buffer Size"
+HKR,Ndi\params\RxBufLen,	   type,       0, "enum"
+HKR,Ndi\params\RxBufLen,	   default,    0, "3"
+HKR,Ndi\params\RxBufLen\enum,	   "0",	       0, "8K bytes"
+HKR,Ndi\params\RxBufLen\enum,	   "1",	       0, "16K bytes"
+HKR,Ndi\params\RxBufLen\enum,	   "2",	       0, "32K bytes"
+HKR,Ndi\params\RxBufLen\enum,	   "3",	       0, "64K bytes"
+
+HKR, Ndi\params\LinkUp,            ParamDesc,  0, "WakeUp on Link Change"
+HKR, Ndi\params\LinkUp,            default,    0, "0"
+HKR, Ndi\params\LinkUp,            type,       0, "enum"
+HKR, Ndi\params\LinkUp\enum,       "1",        0, "Enable"
+HKR, Ndi\params\LinkUp\enum,       "0",        0, "Disable"
+
+HKR, Ndi\params\WakeUpFrame,       ParamDesc,  0, "WakeUp on ARP/PING"
+HKR, Ndi\params\WakeUpFrame,       default,    0, "0"
+HKR, Ndi\params\WakeUpFrame,       type,       0, "enum"
+HKR, Ndi\params\WakeUpFrame\enum,  "0",        0, "Enable"
+HKR, Ndi\params\WakeUpFrame\enum,  "1",        0, "Disable"
+
+HKR, Ndi\params\PME,               ParamDesc,  0, "WakeUp using APM Mode"
+HKR, Ndi\params\PME,               default,    0, "1"
+HKR, Ndi\params\PME,               type,       0, "enum"
+HKR, Ndi\params\PME\enum,          "0",        0, "Enable"
+HKR, Ndi\params\PME\enum,          "1",        0, "Disable"
+
+HKR, Ndi\params\EnableLDPS,        ParamDesc,  0, "Link Down Power Saving"
+HKR, Ndi\params\EnableLDPS,        default,    0, "0"
+HKR, Ndi\params\EnableLDPS,        type,       0, "enum"
+HKR, Ndi\params\EnableLDPS\enum,   "0",        0, "Disable"
+HKR, Ndi\params\EnableLDPS\enum,   "1",        0, "Enable"
+
+
+;;****************************************************************************
+;; Win2K, WinXP parameters
+;;****************************************************************************
+[DFE538.reg]
+HKR, Ndi\Interfaces,            UpperRange, 0, "ndis5"
+HKR, Ndi\Interfaces,            LowerRange, 0, "ethernet"
+HKR, Ndi,                       Service,    0, "DLKRTS"
+
+[rtsnt.Service]
+DisplayName     = %DFE538.Service.DispName%
+ServiceType     = 1                             ; %SERVICE_KERNEL_DRIVER%
+StartType       = 3                             ; %SERVICE_DEMAND_START%
+ErrorControl    = 1                             ; %SERVICE_ERROR_NORMAL%
+ServiceBinary   = %12%\DLKRTS.SYS
+LoadOrderGroup  = NDIS
+
+[DFE538.EventLog]
+Addreg = DFE538.AddEventLog.reg
+
+[DFE538.AddEventLog.reg]
+HKR,    ,   EventMessageFile,   0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR,    ,   TypesSupported,     0x00010001, 7
+
+;;****************************************************************************
+;; Destination Directory
+;;****************************************************************************
+[DestinationDirs]
+DFE538.CopyFiles           = 12
+DFE538.CopyFiles98         = 11
+DefaultDestDir              = 11        ; LDID_SYS
+
+;;****************************************************************************
+;; Source Files
+;;****************************************************************************
+[SourceDisksNames]
+1=%DISKNAME%,,,
+
+[SourceDisksFiles]
+DLKRTS.SYS  = 1
+DLKRTS.SYS  = 1              ;;Windows 2K,XP 
+;NETDLKR5.INF  = 1
+;NETDLKR5.INF  = 1             ;;Windows 2K,XP
+;NETDLKR5.CAT  = 1
+;NETDLKRN.CAT  = 1
+
+;;****************************************************************************
+;; Strings
+;;****************************************************************************
+[Strings]
+;Msft                      = "D-Link Corporation."
+D-Link                   = "D-Link Corporation."
+
+;;Source disk name
+DISKNAME = "D-Link DFE-538TX 10/100 Adapter Driver Disk"
+
+NetworkAddress            = "Network Address"
+EarlyTxThreshold          = "Early Tx Threshold"
+DuplexMode                = "Link Speed/Duplex Mode"
+dmAutoMode                = "Auto Mode"
+dm10HalfMode              = "10 Half Mode"
+dm10FullMode              = "10 Full Mode"
+dm100HalfMode             = "100 Half Mode"
+dm100FullMode             = "100 Full Mode"
+
+DFE538.DeviceDesc        = "D-Link DFE-538TX 10/100 Adapter"
+DFE538.Service.DispName  = "D-Link DFE-538TX 10/100 Adapter"
+DFE538_A.DeviceDesc      = "D-Link DFE-538TX 10/100 Adapter"
