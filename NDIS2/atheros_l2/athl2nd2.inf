@@ -47,6 +47,7 @@ HKR,Ndi\Remove,ndis2,,"nd2wrap.rmv.ndis2"
 ;Original NDIS2 Parameter: ETHERID,"Node Address",chars,13,"@000000000000",0x02
 HKR,Ndi\params\ETHERID,ParamDesc,,"Node Address"
 HKR,Ndi\params\ETHERID,default,,"@000000000000"
+HKR,Ndi\params\ETHERID,optional,,1
 HKR,Ndi\params\ETHERID,LimitText,,13
 HKR,Ndi\params\ETHERID,type,,edit
 

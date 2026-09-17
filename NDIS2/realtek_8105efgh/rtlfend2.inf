@@ -100,18 +100,21 @@ HKR,Ndi\params\Medium,_10Half,,"_10Half"
 ;Original NDIS2 Parameter: NETADDRESS,"Network Address",chars,13,"@000000000000",0x02
 HKR,Ndi\params\NETADDRESS,ParamDesc,,"Network Address"
 HKR,Ndi\params\NETADDRESS,default,,"@000000000000"
+HKR,Ndi\params\NETADDRESS,optional,,1
 HKR,Ndi\params\NETADDRESS,LimitText,,13
 HKR,Ndi\params\NETADDRESS,type,,edit
 
 ;Original NDIS2 Parameter: ETHERID,"Node Address",chars,13,"@000000000000",0x02
 HKR,Ndi\params\ETHERID,ParamDesc,,"Node Address"
 HKR,Ndi\params\ETHERID,default,,"@000000000000"
+HKR,Ndi\params\ETHERID,optional,,1
 HKR,Ndi\params\ETHERID,LimitText,,13
 HKR,Ndi\params\ETHERID,type,,edit
 
 ;Original NDIS2 Parameter: BusNo ,"Adpater's Bus Number",int,"0,255,1",0,0x32
 HKR,Ndi\params\BusNo,ParamDesc,,"Adpater's Bus Number"
 HKR,Ndi\params\BusNo,default,,0
+HKR,Ndi\params\BusNo,optional,,1
 HKR,Ndi\params\BusNo,min,,0
 HKR,Ndi\params\BusNo,max,,255
 HKR,Ndi\params\BusNo,step,,1
@@ -121,6 +124,7 @@ HKR,Ndi\params\BusNo,type,,int
 ;Original NDIS2 Parameter: DeviceNo ,"Adpater's Device Number",int,"0,31,1",0,0x32
 HKR,Ndi\params\DeviceNo,ParamDesc,,"Adpater's Device Number"
 HKR,Ndi\params\DeviceNo,default,,0
+HKR,Ndi\params\DeviceNo,optional,,1
 HKR,Ndi\params\DeviceNo,min,,0
 HKR,Ndi\params\DeviceNo,max,,31
 HKR,Ndi\params\DeviceNo,step,,1

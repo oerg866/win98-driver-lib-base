@@ -53,41 +53,48 @@ def splitInfValue(value: str) -> list[str]:
     return result
 
 
-def ndisInfIntParam(section: INFsection, paramName: str, valueRange:str, default: str):
+# Writes the "default" value of a parameter and marks it as "optional" if the param flags in the
+# OEMSETUP.INF says so.
+def ndisInfParamDefault(section: INFsection, paramName: str, default: str, optional: bool):
+    section.AddData(f'HKR,Ndi\\params\\{paramName},default,,{default}')
+    if optional:
+        section.AddData(f'HKR,Ndi\\params\\{paramName},optional,,1')
+
+def ndisInfIntParam(section: INFsection, paramName: str, valueRange:str, default: str, optional: bool):
     paramRange = splitInfValue(valueRange)
     min = paramRange[0]
     max = paramRange[1]
     step = paramRange[2]
 
-    print(f'NDIS INF Param "{paramName}" (Int): Range {min}-{max}, step {step}, default {default}')
+    print(f'NDIS INF Param "{paramName}" (Int): Range {min}-{max}, step {step}, default {default}, optional {optional}')
 
-    section.AddData(f'HKR,Ndi\\params\\{paramName},default,,{default}')
+    ndisInfParamDefault(section, paramName, default, optional)
     section.AddData(f'HKR,Ndi\\params\\{paramName},min,,{min}')
     section.AddData(f'HKR,Ndi\\params\\{paramName},max,,{max}')
     section.AddData(f'HKR,Ndi\\params\\{paramName},step,,{step}')
     section.AddData(f'HKR,Ndi\\params\\{paramName},base,,10')
     section.AddData(f'HKR,Ndi\\params\\{paramName},type,,int')
 
-def ndisInfTextParam(section: INFsection, paramName: str, valueRange:str, default: str):
+def ndisInfTextParam(section: INFsection, paramName: str, valueRange:str, default: str, optional: bool):
     # In text params, this isn't a range but just a CSV list of possible values.
     paramRange = splitInfValue(valueRange)
 
-    print(f'NDIS INF Param "{paramName}" (Text/Enum): Values: {paramRange}, default {default}')
+    print(f'NDIS INF Param "{paramName}" (Text/Enum): Values: {paramRange}, default {default}, optional {optional}')
 
-    section.AddData(f'HKR,Ndi\\params\\{paramName},default,,{default}')
+    ndisInfParamDefault(section, paramName, default, optional)
     section.AddData(f'HKR,Ndi\\params\\{paramName},type,,enum')
 
     for val in paramRange:
         section.AddData(f'HKR,Ndi\\params\\{paramName},{val},,"{val}"')
 
-def ndisInfCharsParam(section: INFsection, paramName: str, valueRange:str, default: str):
+def ndisInfCharsParam(section: INFsection, paramName: str, valueRange:str, default: str, optional: bool):
     # Chars param is a manual text field
     # The range param is the size of the text field
     limitText = int(valueRange, base=0)
 
-    print(f'NDIS INF Param "{paramName}" (Chars/Edit): Maximum length {limitText} default {default}')
+    print(f'NDIS INF Param "{paramName}" (Chars/Edit): Maximum length {limitText} default {default}, optional {optional}')
 
-    section.AddData(f'HKR,Ndi\\params\\{paramName},default,,"{default}"')
+    ndisInfParamDefault(section, paramName, f'"{default}"', optional)
     section.AddData(f'HKR,Ndi\\params\\{paramName},LimitText,,{limitText}')
     section.AddData(f'HKR,Ndi\\params\\{paramName},type,,edit')
 
@@ -440,6 +447,9 @@ for key, value, comment in nifSection:
     valueRange = splitParam[3]
     default = splitParam[4]
     flags = int(splitParam[5], base=0)
+    # NOTE: the fact that 0x02 = optional flag is based on circumstancial evidence
+    # since I can't find any NDIS2 DDKs :|
+    optional = (flags & 0x02) != 0
 
     if paramType == 'static': 
         print('Skipping unimplemented "static" param')
@@ -449,11 +459,11 @@ for key, value, comment in nifSection:
     nd2wrapNdiRegSection.AddData(f'HKR,Ndi\\params\\{paramName},ParamDesc,,"{paramDesc}"')
 
     if (paramType == 'int'):
-        ndisInfIntParam(nd2wrapNdiRegSection, paramName, valueRange, default)
+        ndisInfIntParam(nd2wrapNdiRegSection, paramName, valueRange, default, optional)
     elif (paramType == 'text'):
-        ndisInfTextParam(nd2wrapNdiRegSection, paramName, valueRange, default)
+        ndisInfTextParam(nd2wrapNdiRegSection, paramName, valueRange, default, optional)
     elif (paramType == 'chars'):
-        ndisInfCharsParam(nd2wrapNdiRegSection, paramName, valueRange, default)
+        ndisInfCharsParam(nd2wrapNdiRegSection, paramName, valueRange, default, optional)
     else:
         raise Exception(f'Unknown parameter type {paramType}')
     

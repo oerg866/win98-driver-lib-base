@@ -54,6 +54,7 @@ HKR,Ndi\Remove,ndis2,,"nd2wrap.rmv.ndis2"
 ;Original NDIS2 Parameter: BUSNUM,"Adapter's PCI Bus Number",int,"0,255,1",0,0x32
 HKR,Ndi\params\BUSNUM,ParamDesc,,"Adapter's PCI Bus Number"
 HKR,Ndi\params\BUSNUM,default,,0
+HKR,Ndi\params\BUSNUM,optional,,1
 HKR,Ndi\params\BUSNUM,min,,0
 HKR,Ndi\params\BUSNUM,max,,255
 HKR,Ndi\params\BUSNUM,step,,1
@@ -63,6 +64,7 @@ HKR,Ndi\params\BUSNUM,type,,int
 ;Original NDIS2 Parameter: DEVNUM,"Adapter's PCI Device Number",int,"0,31,1",0,0x32
 HKR,Ndi\params\DEVNUM,ParamDesc,,"Adapter's PCI Device Number"
 HKR,Ndi\params\DEVNUM,default,,0
+HKR,Ndi\params\DEVNUM,optional,,1
 HKR,Ndi\params\DEVNUM,min,,0
 HKR,Ndi\params\DEVNUM,max,,31
 HKR,Ndi\params\DEVNUM,step,,1
@@ -72,6 +74,7 @@ HKR,Ndi\params\DEVNUM,type,,int
 ;Original NDIS2 Parameter: FUNNUM,"Adapter's PCI Function Number",int,"0,7,1",0,0x32
 HKR,Ndi\params\FUNNUM,ParamDesc,,"Adapter's PCI Function Number"
 HKR,Ndi\params\FUNNUM,default,,0
+HKR,Ndi\params\FUNNUM,optional,,1
 HKR,Ndi\params\FUNNUM,min,,0
 HKR,Ndi\params\FUNNUM,max,,7
 HKR,Ndi\params\FUNNUM,step,,1
