@@ -27,17 +27,12 @@ ExcludeFromSelect = *
 ; DisplayName            Section            DeviceID
 ; -----------            -------            --------
 ;8139
-%RTL8139.DeviceDesc%    = RTL8139.ndi,      PCI\VEN_10EC&DEV_8139&REV_10
+%RTL8139.DeviceDesc%    = RTL8139.ndi,      PCI\VEN_10EC&DEV_8139
 %RTL8139P.DeviceDesc%   = RTL8139P.ndi,     PCI\VEN_10EC&DEV_8139&REV_20
-%RTL8139.DeviceDesc%    = RTL8139.ndi,      PCI\VEN_10EC&DEV_8139&SUBSYS_813910EC&REV_10
-%RTL8139P.DeviceDesc%   = RTL8139P.ndi,     PCI\VEN_10EC&DEV_8139&SUBSYS_813910EC&REV_20
-%RTL8139.DeviceDesc%    = RTL8139_TOS.ndi,  PCI\VEN_10EC&DEV_8139&SUBSYS_813610EC
 
 ;8169
 %RTL8169.DeviceDesc%    = RTL8169.ndi,      PCI\VEN_10EC&DEV_8169
 %RTL8169.DeviceDesc%    = RTL8169.ndi,      PCI\VEN_10EC&DEV_8167
-%RTL8169.DeviceDesc%    = RTL8169.ndi,      PCI\VEN_10EC&DEV_8169&SUBSYS_816910EC
-%RTL8169.DeviceDesc%    = RTL8169.ndi,      PCI\VEN_10EC&DEV_8167&SUBSYS_816710EC
 
 [Realtek.NTx86.5.1]; This section will only be installed by Windows XP
 ;8139
@@ -165,7 +160,7 @@ AddService      = RTL8023, 2, rtsnt.Service, common.EventLog
 Rtnic.sys,,,2
 
 [RTNicProp.CopyList2k]
-RtNicProp32.dll,,,0x10
+;RtNicProp32.dll,,,0x10
 
 ;;****************************************************************************
 ;; Windows XP
@@ -226,10 +221,10 @@ CopyFiles       = Rtlnic.CopyFilesXP, RTNicProp.CopyListXP
 AddService      = RTL8023xp, 2, rtsntxp.Service, common.EventLog
 
 [Rtlnic.CopyFilesXP]
-Rtnicxp.sys,,,2
+;Rtnicxp.sys,,,2
 
 [RTNicProp.CopyListXP]
-RtNicProp32.dll,,,0x10
+;RtNicProp32.dll,,,0x10
 
 ;;****************************************************************************
 ;; Windows XP 64-bit
@@ -276,10 +271,10 @@ CopyFiles       = Rtlnic.CopyFilesX64, RTNicProp.CopyListX64
 AddService      = RTL8023x64, 2, rtsntx64.Service, common.EventLog
 
 [Rtlnic.CopyFilesX64]
-Rtnic64.sys,,,2
+;Rtnic64.sys,,,2
 
 [RTNicProp.CopyListX64]
-RtNicProp64.dll,,,0x10
+;RtNicProp64.dll,,,0x10
 
 ;;***************************************************************************
 ;; Windows 9x parameters
@@ -725,10 +720,10 @@ DefaultDestDir             = 11        ; LDID_SYS
 
 [SourceDisksFiles]
 Rtnic.sys	= 1
-Rtnicxp.sys	= 1
-Rtnic64.sys	= 1
-RTNicProp32.dll	= 1
-RTNicProp64.dll	= 1
+;Rtnicxp.sys	= 1
+;Rtnic64.sys	= 1
+;RTNicProp32.dll	= 1
+;RTNicProp64.dll	= 1
 
 ;;****************************************************************************
 ;; Strings

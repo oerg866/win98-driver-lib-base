@@ -483,7 +483,6 @@ DM9Inst.dll = 50,,10000
 DM9PCI4.sys = 50,,10000
 DM9PCI3.sys = 50,,10000
 DM9NDI.dll  = 50,,10000
-DM9PCI.DOS  = 50,,10000
 
 [Strings]
 V_DSI    = "DAVICOM Semiconductor, Inc."

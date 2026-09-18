@@ -115,16 +115,16 @@ CopyFiles=RL2000A.ndis3.CopyFiles
 RL2000A.sys
 
 ; Install NDIS2
-[RL2000A.ndis2]
-CopyFiles=RL2000A.ndis2.CopyFiles
-[RL2000A.ndis2.CopyFiles]
-RL2000A.dos
+; [RL2000A.ndis2]
+; CopyFiles=RL2000A.ndis2.CopyFiles
+; [RL2000A.ndis2.CopyFiles]
+; RL2000A.dos
 
 ; Install ODI
-[RL2000A.odi]
-CopyFiles=RL2000A.odi.CopyFiles
-[RL2000A.odi.CopyFiles]
-RL2000A.com
+; [RL2000A.odi]
+; CopyFiles=RL2000A.odi.CopyFiles
+; [RL2000A.odi.CopyFiles]
+; RL2000A.com
 
 
 ; extra params for RL2000A
