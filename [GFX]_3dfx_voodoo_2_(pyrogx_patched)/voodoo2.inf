@@ -36,10 +36,6 @@ MSVCRT.DLL   =1
 GLIDE.DLL    =1
 GLIDE2X.DLL  =1
 GLIDE3X.DLL  =1
-;GLIDE2X.MMX  =1
-;GLIDE3X.MMX  =1
-;GLIDE2X.3DN  =1
-;GLIDE3X.3DN  =1
 FXOEM2X.DLL  =1
 GLIDE2X.OVL  =1
 3dfxVGL.DLL  =1
@@ -61,27 +57,12 @@ CSH.DLL      =1
 ;----------------------------------------
 [Mfg]
 %PCI\VEN_121A&DEV_0002.DeviceDesc%=Voodoo, PCI\VEN_121A&DEV_0002
-; commented out so we only pick one during auto driver installs
-;%PCI\VEN_121A&DEV_0002.DeviceDesc.MMX%=VoodooMMX, PCI\VEN_121A&DEV_0002
-;%PCI\VEN_121A&DEV_0002.DeviceDesc.3DN%=Voodoo3DN, PCI\VEN_121A&DEV_0002
 
 ; Install sections
 ;----------------------------------------
 [Voodoo]
 DelFiles=Voodoo2.DelFiles,Voodoo2.DelWinFiles,WinHelp.DelFiles,Voodoo2Ini.DelFiles
 CopyFiles=Voodoo2.Copy,Voodoo2.CopyWin,Voodoo2.CopyRedist,WinHelp.Copy,Voodoo2Inf.Copy
-DelReg=Prev.DelReg
-AddReg=Voodoo2.AddReg,Voodoo2.AddControl
-Reboot
-[VoodooMMX]
-DelFiles=Voodoo2.DelFiles,Voodoo2.DelWinFiles,WinHelp.DelFiles,Voodoo2Ini.DelFiles
-CopyFiles=Voodoo2MMX.Copy,Voodoo2.CopyWin,Voodoo2.CopyRedist,WinHelp.Copy,Voodoo2Inf.Copy
-DelReg=Prev.DelReg
-AddReg=Voodoo2.AddReg,Voodoo2.AddControl
-Reboot
-[Voodoo3DN]
-DelFiles=Voodoo2.DelFiles,Voodoo2.DelWinFiles,WinHelp.DelFiles,Voodoo2Ini.DelFiles
-CopyFiles=Voodoo23DN.Copy,Voodoo2.CopyWin,Voodoo2.CopyRedist,WinHelp.Copy,Voodoo2Inf.Copy
 DelReg=Prev.DelReg
 AddReg=Voodoo2.AddReg,Voodoo2.AddControl
 Reboot
@@ -119,37 +100,6 @@ GLIDE3X.DLL,,,2
 3dfxSpl2.dll,,,2
 3dfxSpl3.dll,,,2
 sst1init.dll,,,2
-
-[Voodoo2MMX.Copy]
-FXMEMMAP.VXD,,,2
-3dfxV2.DRV,,,2
-3dfx16V2.DLL,,,2
-3dfx32V2.DLL,,,2
-GLIDE.DLL,,,2
-GLIDE2X.DLL,GLIDE2X.MMX,,2
-FXOEM2X.DLL,,,2
-GLIDE3X.DLL,GLDEI3X.MMX,,2
-3dfxVGL.DLL,,,2
-3dfxV2PS.DLL,,,2
-3dfxSpl2.dll,,,2
-3dfxSpl3.dll,,,2
-sst1init.dll,,,2
-
-[Voodoo23DN.Copy]
-FXMEMMAP.VXD,,,2
-3dfxV2.DRV,,,2
-3dfx16V2.DLL,,,2
-3dfx32V2.DLL,,,2
-GLIDE.DLL,,,2
-GLIDE2X.DLL,GLIDE2X.3DN,,2
-FXOEM2X.DLL,,,2
-GLIDE3X.DLL,GLIDE3X.3DN,,2
-3dfxVGL.DLL,,,2
-3dfxV2PS.DLL,,,2
-3dfxSpl2.dll,,,2
-3dfxSpl3.dll,,,2
-sst1init.dll,,,2
-
 
 [Voodoo2.CopyRedist]
 MSVCRT.DLL,,,2
