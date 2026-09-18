@@ -1,0 +1,20 @@
+FileSize Typ Name
+======== === =================================
+   12112 dat 3dfx16v2.dll
+  462848 dat 3dfx32v2.dll
+ 1105408 dat 3dfxSpl2.dll
+ 1105408 dat 3dfxSpl3.dll
+   18023 dat 3dfxV2PS.HLP
+  752128 dat 3dfxV2ps.dll
+ 1298432 dat 3dfxVGL.dll
+   39996 dat 3dfxv2.drv
+   50176 dat Csh.dll
+  294672 dat RICHED20.DLL
+    8048 dat fxmemmap.vxd
+   47104 dat fxoem2x.dll
+  226304 dat glide2x.dll
+  228196 dat glide2x.ovl
+  256512 dat glide3x.dll
+    5833 txt license.txt
+  266293 dat msvcrt.dll
+  481078 dat voodoo2.bmp

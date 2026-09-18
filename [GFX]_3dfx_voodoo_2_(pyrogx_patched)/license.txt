@@ -1,0 +1,96 @@
+3DFX INTERACTIVE, INC. LICENSE AGREEMENT 
+
+LICENSE AND CONFIDENTIALITY:  3dfx Interactive, Inc. ("3dfx") grants you the
+right to install the enclosed software and related documentation (collectively,
+the "Materials") onto a single computer for your personal use.  You may not use,
+copy, modify, sell, transfer or disclose any part of the Materials except as
+provided in this Agreement. You may only use the Materials in connection with
+3dfx products.
+ 
+RESTRICTIONS:  You may not:
+1.	Sublicense the Materials;
+2.	Reverse engineer, decompile, or disassemble the enclosed software;
+3.	Use the Materials for any platform or products other
+	than 3dfx products;
+4.	Make copies of the Materials other than for back-up purposes, and you
+	may not use the back-up copies other than as a replacement for the
+	original copy.  You must include on the back-up copies all copyright
+	and other notices included on the Materials; and
+5.	Export the Materials in violation of the export control laws of the
+	United States of America and other countries.
+
+Demo Software:  3dfx hereby grants to you the right to use the demo software on 
+your personal computer with 3dfx products.  You agree to indemnify 3dfx and its 
+affiliates against any loss, liability or expense (including reasonable legal 
+fees) arising out of or in connection with the use, marketing, licensing or sale 
+of the demo software or the maintenance, support or other services or activities 
+related thereto.
+
+TERMINATION:  Upon any violation of any of the provisions of this Agreement,
+your right to use the Materials shall automatically terminate and you shall be
+obligated to return to 3dfx or destroy all of your copies of the Materials.
+ 
+OWNERSHIP AND COPYRIGHT OF MATERIALS:  Except for the license expressly granted
+hereunder, 3dfx retains all rights, title and interests in and to the Materials
+and all copies thereof.  The Materials are copyrighted and are protected by
+United States copyright laws and international treaty provisions.  You
+acknowledge that the Materials are valuable trade secrets of 3dfx.  You may
+not remove the copyright and other proprietary rights notices from the
+Materials.  You agree that this Agreement shall be retained with all printed
+and electronic copies the software and documentation constituting the Materials.
+You agree to prevent any unauthorized copying of the Materials.  Except as
+expressly provided herein, 3dfx does not grant any express or implied right to
+you under 3dfx patents, copyrights, trademarks, or trade secret information.
+
+NO WARRANTY; NO LIABILITY FOR DAMAGES:  THE MATERIALS ARE PROVIDED "AS IS" 
+WITHOUT ANY EXPRESS OR IMPLIED WARRANTY OF ANY KIND INCLUDING WARRANTIES 
+OF SATISFACTORY QUALITY, MERCHANTABILITY, NONINFRINGEMENT OF THIRD-PARTY 
+INTELLECTUAL PROPERTY, OR FITNESS FOR ANY PARTICULAR PURPOSE.  IN NO EVENT 
+SHALL 3DFX BE LIABLE FOR ANY DAMAGES WHATSOEVER (INCLUDING, WITHOUT 
+LIMITATION, DIRECT OR INDIRECT DAMAGES, DAMAGES FOR LOSS OF PROFITS, BUSINESS 
+INTERRUPTION, LOSS OF INFORMATION) ARISING OUT OF THE USE OF OR INABILITY TO 
+USE THE MATERIALS, EVEN IF 3DFX HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH 
+DAMAGES. Without limiting the generality of the foregoing, no warranty is made
+that the enclosed software will generate computer programs with the
+characteristics or specifications desired by you or that the demo software
+will be error-free.  THESE DISCLAIMERS OF WARRANTY CONSTITUTE AN ESSENTIAL PART
+OF THIS AGREEMENT.  Because some jurisdictions prohibit the exclusion or
+limitation of liability for damages, the above limitation may not apply to you
+and you may have other legal rights that vary by jurisdiction.
+
+NO SUPPORT:  3dfx does not provide any support for the Materials.  However,
+3dfx does have a newsgroup at its web site in which the enclosed software is
+discussed.  3dfx does not, however, make any representations or warranties as
+to the accuracy of any statements or advice provided by any participant in the
+newsgroup. 
+
+US GOVERNMENT RESTRICTED RIGHTS.  Use, duplication or disclosure by the U.S.
+government is subject to restrictions set forth in subparagraphs (a) through
+(d) of the Commercial Computer-Restricted Rights clause at FAR 52.227-19 when
+applicable, or in subparagraph (c)(l)(ii) of the Rights in Technical Data and
+Computer Software clause at DFARS 252.227-7013, or at 252.211-7015, or to
+3dfx’s standard commercial license, as applicable, and in similar clauses in
+the NASA FAR Supplement. Contractor/manufacturer is 3dfx Interactive, Inc.,
+4435 Fortran Drive, San Jose, California  95134.
+
+OTHER AGREEMENT:  If you have executed another license agreement with 3dfx
+with respect to the Materials, then notwithstanding any other term in this
+Agreement the terms of that license agreement shall control your use of the
+Materials.
+
+MISCELLANEOUS.  Subject to the immediately preceding paragraph, this Agreement
+represents the complete agreement concerning this license and may amended only
+by a writing executed by both parties.  If any provision of this Agreement is
+held to be unenforceable, such provision shall be reformed only to the extent
+necessary to make it enforceable.  This Agreement shall be governed by
+California, U.S.A. law (except for conflict of law provisions). The application
+the United Nations Convention on Contracts for the International Sale of Goods
+is expressly excluded.
+ 
+"3dfx Interactive", the 3dfx Interactive logo, and other 3dfx Interactive
+product names are trademarks, and in some jurisdictions may be registered
+trademarks, of 3dfx Interactive or its affiliated companies.  Other trademarks
+are the property of their respective owners.
+
+Copyright 1996, 1997, 1998, 1999, 2000 by 3dfx Interactive, Inc.  All rights reserved.
+
