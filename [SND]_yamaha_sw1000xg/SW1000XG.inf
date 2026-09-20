@@ -1,0 +1,90 @@
+[Version]
+Signature=$CHICAGO$
+Class=MEDIA
+Provider=%String0%
+
+[ClassInstall]
+AddReg=Class.AddReg
+
+[DestinationDirs]
+DefaultDestDir=11
+
+[Manufacturer]
+%String1%=YAMAHA
+
+[YAMAHA]
+%String2%=SW1000.Install,PCI\VEN_1073&DEV_1000
+;%String3%=DS2416.Install,PCI\VEN_1073&DEV_2000
+[SW1000.Install]
+CopyFiles=YMHXGDSP.CopyFiles
+AddReg=SW1000.AddReg
+LogConfig=YMHXGDSP.LogConfig
+Restart
+
+[DS2416.Install]
+CopyFiles=YMHXGDSP.CopyFiles
+AddReg=DS2416.AddReg
+LogConfig=YMHXGDSP.LogConfig
+Restart
+
+[YMHXGDSP.CopyFiles]
+vswxgdsp.vxd
+ymhxgdsp.dll
+
+[SW1000.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,0,vswxgdsp.vxd
+HKR,Drivers\wave\ymhxgdsp.dll,Driver,0,ymhxgdsp.dll
+HKR,Drivers\wave\ymhxgdsp.dll,Description,0,%waveDesc%
+HKR,Drivers\midi\ymhxgdsp.dll,Driver,0,ymhxgdsp.dll
+HKR,Drivers\midi\ymhxgdsp.dll,Description,0,%midiDesc%
+HKR,Drivers\mixer\ymhxgdsp.dll,Driver,0,ymhxgdsp.dll
+HKR,Drivers\mixer\ymhxgdsp.dll,Description,0,%mixerDesc%
+
+[DS2416.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,0,vswxgdsp.vxd
+HKR,Drivers\wave\ymhxgdsp.dll,Driver,0,ymhxgdsp.dll
+HKR,Drivers\wave\ymhxgdsp.dll,Description,0,%waveDesc%
+HKR,Drivers\mixer\ymhxgdsp.dll,Driver,0,ymhxgdsp.dll
+HKR,Drivers\mixer\ymhxgdsp.dll,Description,0,%mixerDesc%
+
+[Class.AddReg]
+HKR,,,0,%MediaClassName%
+HKR,,Icon,0,-1
+HKR,,Installer,0,mmci.dll
+
+[YMHXGDSP.LogConfig]
+ConfigPriority=NORMAL
+IRQConfig=S:5,9,10,11
+
+[ControlFlags]
+
+[ConfigReg.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,0,ymhxgdsp.dll
+HKR,,Driver,0,vswxgdsp.vxd
+;HKR,,Driver,0,ymhmix.dll
+
+[PreCopySection]
+HKR,,NoSetupUI,0,1
+
+[SourceDisksNames]
+1=SW1000XG CD-ROM Win95drv,SWDisk,0
+2=DS2416 DRIVER SOFTWARE Disk,DSDisk,0
+
+[SourceDisksFiles]
+vswxgdsp.vxd=1
+ymhxgdsp.dll=1
+
+[Strings]
+String0="YAMAHA"
+String1="YAMAHA"
+String2="YAMAHA SW1000XG Sound System"
+String3="YAMAHA DS2416 Sound System"
+waveDesc="YAMAHA SWXGDSP Audio CODEC"
+midiDesc="YAMAHA SW1000XG Synthesizer"
+mixerDesc="YAMAHA SWXGDSP Mixer"
+waveDesc="YAMAHA SWXGDSP Audio CODEC"
+mixerDesc="YAMAHA SWXGDSP Mixer"
+MediaClassName="Media Devices"
