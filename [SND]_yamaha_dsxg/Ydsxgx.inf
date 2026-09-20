@@ -1,21 +1,22 @@
 ;---------------------------------------------------------------------------;
 ;                                                                           ;
-; Copyright (C) 1997-1999  YAMAHA Corporation  All rights reserved.         ;
+; Copyright (C) 1997-2000  YAMAHA Corporation  All rights reserved.         ;
 ;                                                                           ;
 ;---------------------------------------------------------------------------;
 
 ; Feature   : YAMAHA PCI Audio DS-XG series driver for Windows 95/98.
 ; Version   : 4.06.10xx
-; Copyright : Copyright 1997-1999, YAMAHA Corporation.
-; YMF740x(DS-1L) operation
+; Copyright : Copyright 1997-2000, YAMAHA Corporation.
+; YMF744x(DS-1S) operation
 ; If customer specific Subsystem ID and Subsystem Vendor ID will be programmed,
 ; they should be added in [DEV_SECTION].
 
 [Version]
-Signature="$WINDOWS 95$"
+Signature="$WINDOWS95$"
 Class=MEDIA
 Provider=%PvrName%
 LayoutFile=layout.inf
+;CatalogFile=ydsdev.cat
 
 [ClassInstall]
 AddReg=Class.AddReg
@@ -24,13 +25,63 @@ AddReg=Class.AddReg
 DefaultDestDir=11
 Audio3D.CopyList=11
 Help.Copy=18
+dsmixer.copy=10
 
 [Manufacturer]
 %MfrName%=DEV_SECTION
 
 [DEV_SECTION]
-%XgName%=dev.install,PCI\VEN_1073&DEV_000A
+;-----------------------------
+;YMF724 and OEMs
+;-----------------------------
+;Yamaha reference
+%XgName%=dev.install,PCI\VEN_1073&DEV_000D
+%XgName%=dev.install,PCI\VEN_1073&DEV_0004
+
+;Intel and Intel OEMs
+%XgName%=dev.install,PCI\VEN_1073&DEV_000D&SUBSYS_41528086
+%XgName%=dev.install,PCI\VEN_1073&DEV_000D&SUBSYS_53458086
+%XgName%=dev.install,PCI\VEN_1073&DEV_0004&SUBSYS_41528086
+%XgName%=dev.install,PCI\VEN_1073&DEV_0004&SUBSYS_53458086
+;Labway
+%XgName%=dev.install,PCI\VEN_1073&DEV_000D&SUBSYS_47501483
+;AOpen
+%XgName%=dev.install,PCI\VEN_1073&DEV_000D&SUBSYS_0005A0A0
+;-----------------------------
+;YMF40 and OEMs
+;-----------------------------
+;Yamaha Reference
 %XgName%=dev.install,PCI\VEN_1073&DEV_000C
+%XgName%=dev.install,PCI\VEN_1073&DEV_000A
+%XgName%=dev.install,PCI\VEN_1073&DEV_000A&SUBSYS_00041073
+;Intel and Intel OEMs
+%XgName%=dev.install,PCI\VEN_1073&DEV_000C&SUBSYS_4D558086
+%XgName%=dev.install,PCI\VEN_1073&DEV_000C&SUBSYS_53328086
+%XgName%=dev.install,PCI\VEN_1073&DEV_000C&SUBSYS_53458086
+%XgName%=dev.install,PCI\VEN_1073&DEV_000C&SUBSYS_41428086
+%XgName%=dev.install,PCI\VEN_1073&DEV_000A&SUBSYS_4D558086
+%XgName%=dev.install,PCI\VEN_1073&DEV_000A&SUBSYS_53328086
+%XgName%=dev.install,PCI\VEN_1073&DEV_000A&SUBSYS_53458086
+%XgName%=dev.install,PCI\VEN_1073&DEV_000A&SUBSYS_41428086
+;-----------------------------
+;YMF744 and OEMs
+;-----------------------------
+;Yamaha Reference
+%XgName%=dev.install,PCI\VEN_1073&DEV_0010&SUBSYS_00061073
+%XgName%=dev.install,PCI\VEN_1073&DEV_0010&SUBSYS_00101073
+%XgName%=dev.install,PCI\VEN_1073&DEV_0008&SUBSYS_00081073
+;Gateway
+%XgName%=dev.install,PCI\VEN_1073&DEV_0010&SUBSYS_2550107b
+;Labway
+%XgName%=dev.install,PCI\VEN_1073&DEV_0010&SUBSYS_52101483
+;-----------------------------
+;YMF754 and OEMs
+;-----------------------------
+;Yamaha Reference
+%XgName%=dev.install,PCI\VEN_1073&DEV_0012&SUBSYS_00121073
+;Labway
+%XgName%=dev.install,PCI\VEN_1073&DEV_0012&SUBSYS_4E601483
+
 %LgName%=lg.install,YDSXG\*YMH0100
 %GpName%=gp.install,YDSXG\*YMH0101
 %FmName%=fm.install,YDSXG\*YMH0102
@@ -39,8 +90,14 @@ Help.Copy=18
 %FmxName%=fmx.install,YDSXG\*YMH010A
 
 [dev.install]
-CopyFiles=dev.copy, help.copy
-AddReg=dev.AddReg, ydsapp.AddReg
+;-- Case 1 (Enable DS-XG Mixer & DS-XG Power Control) --;
+;CopyFiles=dev.copy, help.copy, Audio3D.CopyList, DsPower.copy, dsmixer.copy, dsmixerdll.copy
+;AddReg=dev.AddReg, ydsapp.AddReg, Audio3D.AddReg, DsPower.AddReg, dsmixer.AddReg
+;;DelFiles=dev.DelList, dsmixer.DelFiles
+
+;-- Case 2 (Enable DS-XG Power Control) --;
+CopyFiles=dev.copy, help.copy, Audio3D.CopyList, DsPower.copy
+AddReg=dev.AddReg, ydsapp.AddReg, Audio3D.AddReg, DsPower.AddReg
 ;DelFiles=dev.DelList
 
 [lg.install]
@@ -69,11 +126,27 @@ UpdateInis=MSJSTICK.UpdateInis
 ydsxg.vxd,,
 ydsxg.dat,,
 ydsxg.drv,,
+vsvl.vxd,,
 ds1.cpl,,
+crlds3d.vxd,,
 
 [help.copy]
-ds1.cnt,,
 ds1.hlp,,
+dspowext.hlp,,
+
+[Audio3D.CopyList]
+a3d.dll,Audio3D.dll,,4
+Audio3D.dll
+
+[DsPower.copy]
+DsPowExt.dll,,
+
+[dsmixer.copy]
+dslaunch.exe,,
+dsxmixer.exe,,
+
+[dsmixerdll.copy]
+dsxaplib.dll,,
 
 [lg.CopyList]
 ydslg.drv,,
@@ -87,9 +160,20 @@ msjstick.drv,,
 ydsxg.vxd,,
 ydsxg.dat,,
 ydsxg.drv,,
+vsvl.vxd,,
 ds1.cpl,,
 ds1.cnt,,
 ds1.hlp,,
+crlds3d.vxd,,
+a3d.dll,,
+Audio3D.dll,,
+dspowext.dll,,
+dspowext.hlp,,
+
+[dsmixer.DelFiles]
+dsxaplib.dll,,
+dslaunch.exe,,
+dsxmixer.exe,,
 
 [Class.AddReg]
 HKR,,,,%MediaClassName%
@@ -115,14 +199,14 @@ HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
 ; Basic Settings
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,LoadLegacy,             1,01
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,LoadGamePort,           1,01
-HKLM,SOFTWARE\YAMAHA\Driver\YMF724,LoadC3d,                1,00
-HKLM,SOFTWARE\YAMAHA\Driver\YMF724,LoadVsvl,               1,00
-HKLM,SOFTWARE\YAMAHA\Driver\YMF724,LoadSpdif,              1,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,LoadC3d,                1,01
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,LoadVsvl,               1,01
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,LoadSpdif,              1,01
 
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,MaxModVoices,           1,20,00,00,00
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,MaxWodVoices,           1,04,00,00,00
-HKLM,SOFTWARE\YAMAHA\Driver\YMF724,MaxDsVoices,            1,0a,00,00,00
-HKLM,SOFTWARE\YAMAHA\Driver\YMF724,Max3dVoices,            1,00,00,00,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,MaxDsVoices,            1,18,00,00,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,Max3dVoices,            1,08,00,00,00
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,AC97wait,               1,00,00,00,00
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,NoEffects,              1,00
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,POTSVideo,              1,00
@@ -136,7 +220,7 @@ HKLM,SOFTWARE\YAMAHA\Driver\YMF724,SrcDefault,             1,00
 
 ; AC'97 Volume EnableControl/Default/Max/Min
 ;------------------------------------------------------------01-----------------------------11-----------------------------21-----------------------------31-----------------------------41-----------------------------51-----------------------------61-----------------------------71-----------------------------81------------
-HKLM,SOFTWARE\YAMAHA\Driver\YMF724,EnableControls,         1,01,01,01,01,01,01,00,01,00,00, 01,00,00,00,00,00,00,01,01,01, 01,00,00,00,00,01,01,01,01,01, 01,01,01,01,01,01,01,01,01,01, 01,00,01,01,00,01,01,01,01,01, 01,01,01,01,01,01,01,01,01,01, 00,00,01,01,01,01,01,01,01,01, 01,01,01,01,01,01,01,00,00,00, 00,01,01,00,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,EnableControls,         1,01,01,01,01,01,01,01,01,00,00, 01,00,00,00,00,00,00,00,00,00, 00,01,01,00,00,00,00,01,01,01, 01,01,01,01,01,01,01,00,00,01, 01,00,01,01,00,01,01,01,01,01, 01,01,01,01,01,01,00,00,01,01, 00,00,01,01,01,01,01,01,01,01, 01,01,01,00,00,01,01,00,00,00, 00,00,00,01,01
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,ControlsDef,            1,8F,00,E4,96,96,01,01,00,00,00, 00,00,00,00,00,00,00,96,01,96, 00,8F,01,88,01,88,00,8F,00,8F, 01,8F,00,8F,00,8F,00,88,00,8F, 00,00,8F,00,00,02,96,00,96,00, 96,00,96,00,96,00,88,00,96,00, 88,00,02,96,00,96,00,96,00,96, 00,96,00,88,00,96,00,88,00,96, 00,96,00,96,00
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,VolumeMax,              1,96,00,FA,a0,a0,00,00,00,00,00, 00,00,00,00,00,00,00,96,00,96, 00,96,00,96,00,96,00,96,00,96, 00,96,00,96,00,96,00,96,00,96, 00,00,96,00,00,00,A2,00,A2,00, A2,00,A2,00,A2,00,A2,00,A2,00, A2,00,00,A2,00,A2,00,A2,00,A2, 00,A2,00,A2,00,A2,00,A2,00,96, 00,96,00,96,00
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,VolumeMin,              1,73,00,96,8c,8c,00,00,00,00,00, 00,00,00,00,00,00,00,73,00,73, 00,73,00,73,00,73,00,73,00,73, 00,73,00,73,00,73,00,73,00,73, 00,00,73,00,00,00,73,00,73,00, 73,00,73,00,73,00,73,00,73,00, 73,00,00,73,00,73,00,73,00,73, 00,73,00,73,00,73,00,73,00,73, 00,73,00,73,00
@@ -173,14 +257,15 @@ HKLM,SOFTWARE\YAMAHA\Driver\YMF724,MIC,                    1,00
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,Mpu401Mode,             1,01,00,00,00
 
 ; AC'97 PCM Volume Settings
-;;HKLM,SOFTWARE\YAMAHA\Driver\YMF724,PCMVolDef,              1,08,08,00,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,PCMVolDef,              1,08,08,00,00
 ; AC'97 PCM Volume Resume wait time (50msec)
-;;HKLM,SOFTWARE\YAMAHA\Driver\YMF724,PCMVolWait,             1,32,00,00,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,PCMVolWait,             1,32,00,00,00
 
 ; Micelleaous Settings
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,Rec8BitNoise,           1,01
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,PCICfgSave,             1,01
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,OneIRQ,                 1,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,HwVolWait,              1,64,00,00,00
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,Cut8bitNoise,           1,E0,01,00,00
 ; "0" data of 480 -0x01E0- samples are covered.
 
@@ -188,13 +273,54 @@ HKLM,SOFTWARE\YAMAHA\Driver\YMF724,Cut8bitNoise,           1,E0,01,00,00
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,PowerLevel1PR,          1,01
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,AC97WriteCheck,         1,00
 
+; GPIO pins settings
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,IoMute,                 1,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,IoPwrDown,              1,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,IoPwrWait,              1,F4,01,00,00
+
 ;	EAPD support
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,PowerEAPD,              1,00
 
 ; DVD-ROM Issue
 HKLM,SOFTWARE\YAMAHA\Driver\YMF724,CallbackCSEnable,       1,01
 
+; PCM SPDIF & AC-3 SPDIF Output settings
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,SpdifMode,              1,01,00,00,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,SpdifModeDefault,       1,01,00,00,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,SpdifMute,              1,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,AC3SpdifMode,           1,01
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,SpdifAC3Default,        1,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,SpdifAC3Disable,        1,00
+
+; SPDIF Input settings
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,LoadSpdifIn,            1,02
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,ShowSpdifInDirect,      1,01
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,SpdifinDirect,          1,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,SpdifinDirectDefault,   1,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,SpdifinZVSel,           1,01
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,SpdifinZVSelDefault,    1,01
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,CheckSpdifinChannel,    1,01
+
+; Power Management settings
+;  "PowerLevel" is power save levels.(0=FullOn,1-3=Level1-Level3)
+;  "PowerTime" is enter power save time.(Hex sec) 05=05sec
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,PowerLevel,             1,00
+HKLM,SOFTWARE\YAMAHA\Driver\YMF724,PowerSaveTime,          1,05,00,00,00
+
 ; --------------------------------------------------------------- ;
+
+[Audio3D.AddReg]
+HKCR,Audio3D,,0,Audio3DObject
+HKCR,Audio3D\CLSID,,0,%Audio3D_CLSID%
+HKCR,CLSID\%Audio3D_CLSID%,,0,Audio3DObject
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,,0,Audio3D.dll
+HKCR,CLSID\%Audio3D_CLSID%\InProcServer32,ThreadingModel,0,Apartment
+
+[DsPower.AddReg]
+HKCR,CLSID\%DsPowerGUID%,,,%DsPowerDesc%
+HKCR,CLSID\%DsPowerGUID%\InProcServer32,,,"DsPowExt.dll"
+HKCR,CLSID\%DsPowerGUID%\InProcServer32,ThreadingModel,,"Apartment"
+HKLM,SOFTWARE\Microsoft\%KEY_POW%\%DsPowerDesc%,,,%DsPowerGUID%
 
 [ydsapp.AddReg]
 HKR,Drivers,MIGRATED,,0
@@ -260,6 +386,30 @@ HKR,Drivers\joystick\msjstick.drv,Description,,%GpDesc%
 HKR,Drivers\joystick\msjstick.drv,Driver,,msjstick.drv
 HKR,Drivers,SubClasses,,joystick
 
+[dsmixer.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,"YAMAHA DS-XG Launcher",,"%10%\dslaunch.exe"
+;; modified ike start ********
+;; launcher menu customize
+HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu mixer",65537,00,00,00,00
+HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu joy",65537,01,00,00,00
+HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu sndrec",65537,01,00,00,00
+HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu cdplayer",65537,01,00,00,00
+HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu mplayer",65537,01,00,00,00
+HKLM,Software\YAMAHA\Mixer\DSx\Launch,"menu mplayer2",65537,01,00,00,00
+HKLM,Software\YAMAHA\Mixer\DSx\Launch,"stabout",65537,01,00,00,00
+HKLM,Software\YAMAHA\Mixer\DSx\Launch,"hwvol",65537,00,00,00,00
+HKLM,Software\YAMAHA\Mixer\DSx\Launch,"splash",65537,00,00,00,00
+
+HKLM,Software\YAMAHA\Mixer\DSx,"specialtip",65537,01,00,00,00
+HKLM,Software\YAMAHA\Mixer\DSx,"multiline",65537,01,00,00,00
+HKLM,Software\YAMAHA\Mixer\DSx,"compact",65537,01,00,00,00
+
+HKLM,Software\YAMAHA\Mixer\DSx\String,"About - SpecialBuild",,"DS-XG PCI Audio Driver for Windows 95/98"
+HKLM,Software\YAMAHA\Mixer\DSx\Launch\String,"About - SpecialBuild",,"DS-XG PCI Audio Driver for Windows 95/98"
+HKLM,Software\YAMAHA\Mixer\DSx,"about lverstr",65537,00,00,00,00
+HKLM,Software\YAMAHA\Mixer\DSx\Launch,"about lverstr",65537,00,00,00,00
+;; modified ike end **********
+
 [BasicJoyStick.LC0]
 ConfigPriority=HARDWIRED
 IOConfig=201-201(3ff::)
@@ -278,9 +428,18 @@ ydsxg.dat=1
 ydsxg.vxd=1
 ydslg.drv=1
 ydslg.vxd=1
+vsvl.vxd=1
 ds1.cpl=1
-ds1.cnt=1
+;ds1.cnt=1
 ds1.hlp=1
+crlds3d.vxd=1
+audio3d.dll=1
+dspowext.dll=1
+dspowext.hlp=1
+dsxaplib.dll=1
+dslaunch.exe=1
+dsxmixer.exe=1
+;ydsdev.cat=1
 
 [Strings]
 PvrName="YAMAHA"
@@ -301,3 +460,8 @@ FMDesc="YAMAHA DS-XG FM"
 GpDesc="Gameport Joystick"
 KEY_IOC="SYSTEM\CurrentControlSet\Control\MediaResources\InstallOptionalComponents"
 MediaClassName="Sound, video and game controllers"
+Audio3D_CLSID={D8F1EEE0-F634-11CF-8700-00A0245D918B}
+DsPowerDesc="DS-XG Power Management Control Panel Extension"
+DsPowerGUID={C33A0B20-6A98-11d2-A46C-00C04FCCEF26}
+KEY_POW="Windows\CurrentVersion\Controls Folder\Power\shellex\PropertySheetHandlers"
+KEY_DSLAUNCH="SOFTWARE\YAMAHA\Mixer\DSx\Launch"
