@@ -26,8 +26,8 @@ DriverVer      = 08/23/2001,5.397.0823.2001
 
 [D-Link]
 %DFE538.DeviceDesc%  = DFE538.ndi, PCI\VEN_1186&DEV_1300
-%DFE538_A.DeviceDesc%  = DFE538_A.ndi, PCI\VEN_1186&DEV_1300&SUBSYS_13001186
-%DFE538_A.DeviceDesc%  = DFE538_A.ndi, PCI\VEN_10EC&DEV_8139&SUBSYS_13001186
+%DFE538.DeviceDesc%  = DFE538.ndi, PCI\VEN_10EC&DEV_8139&SUBSYS_13001186
+%DFE538.DeviceDesc%  = DFE538.ndi, PCI\VEN_10EC&DEV_8139&SUBSYS_13011186
 
 ;;****************************************************************************
 ;; Windows 9x
@@ -296,6 +296,4 @@ dm10FullMode              = "10 Full Mode"
 dm100HalfMode             = "100 Half Mode"
 dm100FullMode             = "100 Full Mode"
 
-DFE538.DeviceDesc        = "D-Link DFE-538TX 10/100 Adapter"
-DFE538.Service.DispName  = "D-Link DFE-538TX 10/100 Adapter"
-DFE538_A.DeviceDesc      = "D-Link DFE-538TX 10/100 Adapter"
+DFE538.DeviceDesc        = "D-Link DFE-538TX / DFE-530TX+ 10/100 Adapter"
