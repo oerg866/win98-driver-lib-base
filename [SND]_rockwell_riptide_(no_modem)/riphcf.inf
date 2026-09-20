@@ -1,0 +1,711 @@
+;/*
+;******************************************************************
+;******************************************************************
+;******************************************************************
+;***                    Copyright (c) 1999-00                   ***
+;***                      Conexant Systems                      ***
+;***            Multimedia Communications Division              ***
+;***                     All Rights Reserved                    ***
+;***                                                            ***
+;***                 CONFIDENTIAL -- No Dissemination or        ***
+;***              use without prior written permission.         ***
+;***                                                            ***
+;******************************************************************
+;******************************************************************
+
+;********************************************************************************************
+;********************** P V C S  V e r s i o n  I n f o r m a t i o n ***********************
+;********************************************************************************************
+; $Header:   P:\d874\riptidew\archives\D7400_HCF_3D_HPDom.inv   1.10   04 Oct 1999 14:04:44   wihardjw  $
+;********************************************************************************************
+;********************************************************************************************
+
+; 
+; MODULE NAME:    riptide.inf
+; 
+; AUTHOR:         Duong D. Nguyen 
+;
+;
+; HISTORY:     Major Revision                   Date       By
+;              -----------------------------    --------   -----
+;              Created for riptide hardware     9-5-1997   DDN
+;              Modified for Ring3 Mmedia        10-1-97    KRS
+;              Added Legacy Device Node         03-13/98   KRS
+;	           Added Joystick Support		    03/26/98   SXL
+;	           Added Uninstall Support          05/11/98   DLE
+;              Added multiple device IDs        05/12/98   KRS
+;	           Modified Uninstall Support	    05/13/98   DLE	
+;	           Changed Device ID's to support
+;              windows 98 and Install Utility   07/07/98   DLE
+;	           More Changes for Gui Install	    07/16/98   DLE
+;              Fixed uninstall string		    07/28/98   DLE
+;              Added WaveStream install		    07/31/98   CASS (NemeSys)
+;	           Added uninstall for new 
+;              wavestream files and
+;	           Removed msopl.drv from del list  08/04/98   DLE
+;	           Added RipUtil.exe to CopyFiles	08/17/98   TLE 
+;	           Added RipUtil.exe to             08/21/98   TLE
+;              SourceDisksFiles 		        
+;	           Added riptdrv.drv to removing    08/21/95   TLE
+;	                        list				
+;              Added ripleg.bat to removing list    08/24/98   DGN
+;              Force rwawsdrv.drv to be removed     09/02/98   DGN
+;		   when system is restart           
+;
+;
+;  DESCRIPTION:
+;
+;              An INF file for Riptide.
+;				
+;        
+;
+;  NOTES:        None.
+;******************************************************************
+;******************************************************************
+;****************************************************************** 
+
+
+
+
+;***************************
+;*     Header Version      *
+;*************************** 
+               
+[Version]
+Signature=$CHICAGO$
+Class=MEDIA
+Provider=%Mfg% 
+LayoutFile = Layout.inf  
+
+                
+                
+;***************************
+;*     Manufacturers       *
+;*************************** 
+               
+[Manufacturer]
+%Mfg% = Conexant    
+
+
+
+;***************************
+;*     Driver Section      *
+;***************************
+
+[Conexant]
+;
+; Default ASIC
+;
+;%DeviceDesc% = Riptide.Install, PCI\VEN_127A&DEV_4300,PCI\VEN_127A&DEV_4300&SUBSYS_4300127A&REV_00
+;
+; Audio driver for MMX (HSF - Soft Modem)
+;
+;%DeviceDesc% = Riptide.Install, PCI\VEN_127A&DEV_4310,PCI\VEN_127A&DEV_4310&SUBSYS_4310127A&REV_00
+;
+; Audio for DSP (HCF Modem)
+;
+%DeviceDesc% = Riptide.Install, PCI\VEN_127A&DEV_4320,PCI\VEN_127A&DEV_4320&SUBSYS_43201235&REV_00
+;
+; Audio for 2-Line Modem
+;
+;%DeviceDesc% = Riptide.Install, PCI\VEN_127A&DEV_4330,PCI\VEN_127A&DEV_4330&SUBSYS_4330127A&REV_00
+
+; Audio driver for MMX D7300 (HSF - Soft Modem)
+;
+;%DeviceDesc% = Riptide.Install, PCI\VEN_127A&DEV_4340,PCI\VEN_127A&DEV_4340&SUBSYS_4340127A&REV_00
+;
+
+%DeviceDescLeg% = RiptideLeg.Install, RIPTIDE\LEGACY
+
+;%DeviceDescPCIJoy% = RipJoy.Install, PCI\VEN_127A&DEV_4302,PCI\VEN_127A&DEV_4302&SUBSYS_4302127A&REV_00
+;%DeviceDescPCIJoy% = RipJoy.Install, PCI\VEN_127A&DEV_4312,PCI\VEN_127A&DEV_4312&SUBSYS_4312127A&REV_00
+%DeviceDescPCIJoy% = RipJoy.Install, PCI\VEN_127A&DEV_4322,PCI\VEN_127A&DEV_4322&SUBSYS_43221235&REV_00
+;%DeviceDescPCIJoy% = RipJoy.Install, PCI\VEN_127A&DEV_4332,PCI\VEN_127A&DEV_4332&SUBSYS_4332127A&REV_00
+
+%DeviceDescVGP% = RipVGP.Install, RIPTIDE\RIPTVGP
+
+;***************************
+;*     Pre-Copy Section    *
+;***************************
+
+[PreCopySection]
+HKR,,NoSetupUI,,1
+
+
+;***************************
+;*     ClassInstall        *
+;*************************** 
+           
+[ClassInstall]
+AddReg=Class.AddReg
+
+[Class.AddReg]
+HKR,,,,%MediaClassName%
+HKR,,Icon,,"-1"
+HKR,,Installer,,mmci.dll
+
+                          
+;***************************
+;*    Install Section      * 
+;*************************** 
+         
+[Riptide.Install]
+CopyFiles=Riptide.CopyFiles, WaveStream.CopyFiles,Splash.CopyFiles
+AddReg=Riptide.Addreg, Uninstall_AddReg, WAVE.AddReg, MIXER.AddReg, Filename_AddReg, WStream_AddReg
+UpdateIniFields=Drivers.fields
+
+[RiptideLeg.Install]
+AddReg=Legacy.Addreg
+
+[RipJoy.Install]
+AddReg=RipJoy.AddReg
+
+[RipVGP.Install]
+AddReg=RipVGP.AddReg
+CopyFiles=RipVGP.CopyFiles
+UpdateInis=MSJSTICK.UpdateInis
+
+[Drivers.fields]
+system.ini,boot,drivers,msmixmgr.dll
+system.ini,boot,drivers,mmmixer.dll
+
+
+[Uninstall_AddReg] ;for inf deinstaller -xz
+HKLM, "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Rockwell PCI Audio", DisplayName,, "Riptide PCI Audio"
+HKLM, "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Rockwell PCI Audio", UninstallString,, "Ripunist.exe"
+
+; ************************************************************
+; To remove a file, add it to the "INUSE" list.  The file will be deleted when user 
+; launch the Add/Remove program from the ControlPanel.
+; For Example:
+;   "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",ripleg.bat ,, "ripleg.bat"
+; ************************************************************
+[Filename_AddReg]
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\OTHER",RockwellRIPTIDE.inf,,"RockwellRIPTIDE.inf"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\VXDDLL",riptide.vxd ,,  "riptide.vxd"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\VXDDLL",riptide.hex ,,    "riptide.hex"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",rwawsdrv.drv ,, "rwawsdrv.drv"
+;HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\VXDDLL",msopl.drv ,, "msopl.drv"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\VXDDLL",Install.vxd,,"Install.vxd"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",InstDLL.dll,,"InstDll.dll"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",RipUnist.exe,,"RipUnist.exe"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",wstream.dll ,, "wstream.dll"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",msgloop.exe ,,  "msgloop.exe"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",vwstream.vxd ,, "vwstream.vxd"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",wstrm32.dll ,, "wstrm32.dll"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",msg32.exe ,, "msg32.exe"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",ewctl32.dll ,, "ewctl32.dll"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",wsthk16.dll ,, "wsthk16.dll"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",wsthk32.dll ,, "wsthk32.dll"
+;HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",genmidi.wsl ,, "gemmidi.wsl"
+;;;;;;<-EW
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",gmram.ewa ,, "gmram.ewa"
+;;;;;;>-EW
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",wstream.bin ,, "wstream.bin"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",RipUtil.exe ,, "RipUtil.exe"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",riptdrv.drv ,, "riptdrv.drv"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",ripleg.bat ,, "ripleg.bat"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\VXDDLL",a3d.vxd ,,  "a3d.vxd"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",a3d.dll ,,  "a3d.dll"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",A3DSplsh.exe ,,  "A3DSplsh.exe"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",A3dsplh.wav ,,  "A3dsplh.wav"
+HKLM, "SOFTWARE\Rockwell\Rockwell PCI Audio\Files\INUSE",A3dspls.wav ,,  "A3dspls.wav"
+
+
+[WStream_AddReg]
+HKLM, "SOFTWARE\Rockwell\WaveStream\Configuration",LibraryPath,FLG_ADDREG_NOCLOBBER ,""
+HKLM, "SOFTWARE\Rockwell\WaveStream\Configuration",Polyphony,FLG_ADDREG_NOCLOBBER ,"24"
+HKLM, "SOFTWARE\Rockwell\WaveStream\Configuration",Number of Channels,FLG_ADDREG_NOCLOBBER ,"16"
+HKLM, "SOFTWARE\Rockwell\WaveStream\Configuration",Warnings,FLG_ADDREG_NOCLOBBER ,"No"
+HKCU, "Software\Microsoft\Windows\CurrentVersion\Multimedia\MIDIMap",CurrentInstrument,,"RipTide WaveStream Sythesizer"
+HKU,  ".Default\Software\Microsoft\Windows\CurrentVersion\Multimedia\MIDIMap",CurrentInstrument,,"RipTide WaveStream Sythesizer"
+;;;;;;<-EW
+HKU,  ".Default\Software\Microsoft\Windows\CurrentVersion\Multimedia\MIDIMap",CurrentInstrument,,"RipTide WaveTable Sythesizer"
+;;;;;;->EW
+;
+; Modify this to reflect the name used by the mixer for the Wavetable synthesizer control.
+;
+HKLM, "SOFTWARE\Rockwell\WaveStream\Configuration",MixerName,,"MIDI"
+;;;;;;<-EW
+; Setup the WaveTable options here. You have two possible configuration:
+;  Output Sample rate -         22.05 kHz (0x5622)
+;                               44.10 kHz (0xac44)
+;   location: <Hardware Key>\Config\WaveStreamSamplingRate
+;
+;  Default Wavetable Type -     Legacy Mode (WaveStream only)
+;                               Endless Wave
+;
+;HKR,Config,WaveStreamSamplingRate,1,22,56
+HKR,Config,WaveStreamSamplingRate,1,44,AC
+HKR,Config,WaveStreamPersist,1,00,00
+;
+; Defaults to using RAMEW as the synth, change the last value from 00 to 01 if
+; you want legacy WaveStream to be the default.
+;
+
+HKCU,  "Software\Conexant\WaveStream",LegacyMode,1,00
+
+
+;;;;Sound Blaster Virtualized Interrupt Used By WaveSTream for DOS Box..
+;;;;Note: if this entry is taken out or set to zero, the VxD still tries to
+;;;;get Configmgr to allocate a hardware IRQ to us for SB.  However, if this entry
+;;;;is here, then the value (usually 5 or 7) is used by the VxD to simulate that
+;;;;IRQ to the DOS VM where a game is running without asking for the resource...it is assumed
+;;;;that ithe hardware IRQ might be used by another device but NOT in the VM running the DOS game...
+;;;;Note also that if this entry is used, then the RipLeg and/or Autoexec, DOSSTART.BAT files being
+;;;;edited by the driver for DOS Mode, will use the value identified here with SoundBlasterVirtualizedInt
+;;;;since no Windows allocated IRQ is asked for...this assumes that the IRQ specified is not a problem
+;;;;for RIPUTIL to "grab" in real mode DOS....
+HKR,Config,SoundBlasterVirtualizedInt,1,05,00
+
+
+;;;;;;->EW
+
+;***************************
+;*   Copy files sections   * 
+;***************************
+
+[Riptide.CopyFiles]
+riptide.vxd,,,2
+riptdrv.drv,,,2
+msopl.drv,,,
+rwawsdrv.drv,,,2
+riptide.hex,,,2
+RipUnist.exe,,,2
+Install.vxd,,,2
+InstDll.dll,,,2
+RipUtil.exe,,,2
+A3d.dll,,,2
+A3d.vxd,,,2
+
+[Splash.CopyFiles]
+A3DSplsh.exe,,,2
+A3dsplh.wav,,,2
+A3dspls.wav,,,2
+
+[WaveStream.CopyFiles]
+msgloop.exe,,,2
+vwstream.vxd,,,2
+wstream.dll,,,2
+wstrm32.dll,,,2
+msg32.exe,,,2
+ewctl32.dll,,,2
+wsthk16.dll,,,2
+wsthk32.dll,,,2
+;genmidi.wsl,,,2
+wstream.bin,,,2
+;;;;;;<-EW
+gmram.ewa,,,2
+;;;;;;->EW
+
+[RipVGP.CopyFiles]
+; MSJSTICK.DRV supports the Windows MultiMedia APIs for older games written 
+; before DirectInput supported joysticks.  It should be copied from the 
+; original Windows installation disk.
+; VJOYD.VXD provides further support for these APIs and is the manager for 
+; all the mini-drivers.  Since significant changes have been made, this 
+; should be copied from the DirectX 5.0 installation.
+; MSANALOG.VXD supports analog joysticks and should be copied in case another 
+; game controller is added which needs this support but was released before 
+; DirectX 5.0.  This should also be copied from the DirectX 5.0 installation.
+; Gchand.dll provides services and support for DirectInput Control Panel
+; (Game Controller). Gcdef.dll is the default analog device property sheet.
+; These two dll's should be copied from the DX5.0 installation.
+vjoyd.vxd,,
+msjstick.drv,,
+;msanalog.vxd,,
+;gchand.dll,,
+;gcdef.dll,,
+
+[DestinationDirs]
+DefaultDestDir = 11             ; SYSTEM directory
+WaveStream.CopyFiles = 11 	; SYSTEM directory
+Splash.CopyFiles=10		; Windows directory
+;WaveStream.CopyFiles = 28700,wstream ; Program Files\wstream
+
+;***************************
+;*     AddReg sections     * 
+;*************************** 
+[MIXER.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,SystemTray,,"SysTray.Exe"
+HKLM,%KEY_IOC%\Vol,,,
+
+
+[WAVE.AddReg]
+HKR,,DevLoader,,mmdevldr.vxd
+;HKR,Drivers,MIGRATED,,0
+HKR,Drivers\midi,,,
+HKR,Drivers\wave,,,
+HKR,Drivers\mixer,,,
+HKR,Drivers\aux,,,
+
+[Legacy.Addreg]
+HKR,,Driver,,riptide.vxd
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+
+[Riptide.Addreg]
+HKR,,Enumerator,,riptide.vxd 
+HKR,,Driver,,"riptide.vxd,vwstream.vxd"
+HKR,,DevLoader,,mmdevldr.vxd
+HKR,Drivers,MIGRATED,,0
+HKR,Drivers\wave\riptdrv.drv,Driver,,riptdrv.drv
+HKR,Drivers\wave\riptdrv.drv,Description,,%RWAV.DeviceDesc%
+HKR,Drivers\aux\riptdrv.drv,Driver,,riptdrv.drv
+HKR,Drivers\aux\riptdrv.drv,Description,,%RAUX.DeviceDesc%
+HKR,Drivers\mixer\riptdrv.drv,Driver,,riptdrv.drv
+HKR,Drivers\mixer\riptdrv.drv,Description,,%RMIX.DeviceDesc%
+;
+; OPL3
+;
+
+HKR,Drivers\midi\msopl.drv,Driver,,msopl.drv
+HKR,Drivers\midi\msopl.drv,Description,,%WAFM.DeviceDesc%
+
+;
+;//mpu401 --- add the following three lines for mpu401
+;
+HKR,Drivers\midi\riptdrv.drv,Driver,,riptdrv.drv
+HKR,Drivers\midi\riptdrv.drv,Description,,%RMPU.DeviceDesc%
+HKR,Drivers\midi\riptdrv.drv,External,1,01,00,00,00
+
+
+HKR,Drivers\midi\rwawsdrv.drv,Driver,,rwawsdrv.drv
+HKR,Drivers\midi\rwawsdrv.drv,Description,,%WSTREAM.DeviceDesc%
+HKR,,EnumPropPages,,"RipTdrv.drv,DrvEnumPropPages"
+HKR,Drivers,SubClasses,,"wave,midi,aux,mixer"
+HKR,Config,InstallationFlag,1,00
+
+;DS Options
+;This turns DirectSound Dynamic Allocation of Hardware voices to ON
+HKR,Config,"DS Mono Buffers",1,18,00
+
+;
+; Enable/Disable HRTF
+;
+HKR,Config,HRTF,1,1,0
+HKLM, "SOFTWARE\Aureal\A3D","EnableDS3D",0x00010001,0,0,0,0	
+HKLM, "SOFTWARE\Aureal\A3D","SplashAudio",0x00010001,1,0,0,0	
+HKLM, "SOFTWARE\Aureal\A3D","SplashScreen",0x00010001,1,0,0,0	
+;
+; Enable/Disable ToneControl and Eq
+;
+HKR,Config,PCEffects,1,1,0
+
+; Flexmixer Options (not all operational yet)
+
+HKR,Config,Panels,1,03,00
+HKR,Config,Coef3D,1,00,03
+HKR,Config,CoefBass,1,00,09
+HKR,Config,CoefWStrm,1,00,A0
+HKR,Config,ACEffects,1,03,00
+HKR,Config,AsicVolume,1,00,00
+HKR,Config,DmixSumBits,1,03,00
+;
+;for these volume controls, the second from last value ranges 
+;from 10 (low) to 1f (high) in 1.5 dB increments
+;MaxAnalog controls CD In, Line In, Aux In, Video In
+;
+HKR,Config,MaxMaster,1,1f,00
+HKR,Config,MaxAnalog,1,1f,00
+;
+;
+; The following strings (last string in each line) are the Mixer Volume Controls' label.
+; The strings can be changed/customized.  
+; For example: To change the Master Control's label to LineOut label
+;              HKR,Config,NamePanelPlayback,,"LineOut"
+; In all these tables, OPL and FM labels also apply to Wavestream
+;
+HKR,Config,NameCD,,CD
+HKR,Config,NameLine,,"Line In"
+HKR,Config,NameVideo,,Video
+HKR,Config,NameAux,,Aux
+HKR,Config,NamePanelPlayback,,"Master Volume"
+HKR,Config,NamePanelRecording,,Recording
+HKR,Config,NameOPL,,MIDI
+HKR,Config,NameAllWave,,"All Waves"
+HKR,Config,NameSpeakerphone,,Speakerphone
+HKR,Config,NameMicrophone,,Microphone
+HKR,Config,NameMixer,,Mixer
+HKR,Config,NameI2S1,,I2S1
+HKR,Config,NameI2S2,,I2S2
+HKR,Config,NameEAX,,EAX
+HKR,Config,NameDirectX,,DirectX
+HKR,Config,NameWave1,,Wave1
+HKR,Config,NameWave2,,Wave2
+HKR,Config,NameWave3,,Wave3
+HKR,Config,NameWave4,,Wave4
+HKR,Config,NameWave5,,Wave5
+HKR,Config,NameWave6,,Wave6
+HKR,Config,NameWave7,,Wave7
+HKR,Config,NameWave8,,Wave8
+HKR,Config,NameWave9,,Wave9
+HKR,Config,NameWave10,,Wave10
+HKR,Config,NamePanel3,,""
+HKR,Config,NamePanel4,,"All Waves"
+HKR,Config,NamePanel5,,""
+;Short Names
+HKR,Config,SNameCD,,CD
+HKR,Config,SNameLine,,Line
+HKR,Config,SNameVideo,,Video
+HKR,Config,SNameAux,,Aux
+HKR,Config,SNamePanelPlayback,,MsVol
+HKR,Config,SNamePanelRecording,,Recd
+HKR,Config,SNameOPL,,MIDI
+HKR,Config,SNameAllWave,,WvAll
+HKR,Config,SNameExternal,,Extrn
+HKR,Config,SNameSpeakerphone,,Phone
+HKR,Config,SNameMicrophone,,Mic
+HKR,Config,SNameMixer,,Mixer
+HKR,Config,SNameI2S1,,I2S1
+HKR,Config,SNameI2S2,,I2S2
+HKR,Config,SNameEAX,,EAX
+HKR,Config,SNameDirectX,,Game
+HKR,Config,SNameWave1,,1
+HKR,Config,SNameWave2,,2
+HKR,Config,SNameWave3,,3
+HKR,Config,SNameWave4,,4
+HKR,Config,SNameWave5,,5
+HKR,Config,SNameWave6,,6
+HKR,Config,SNameWave7,,7
+HKR,Config,SNameWave8,,8
+HKR,Config,SNameWave9,,9
+HKR,Config,SNameWave10,,10
+HKR,Config,SNamePanel3,,""
+HKR,Config,SNamePanel4,,AWave
+HKR,Config,SNamePanel5,,""
+;
+;
+; The following lines list default value for Volume level.  The last digit dictates
+; the level.  To change, both left and right gain values have to be changed.
+;    100% 00, ff
+;    50%  00, 80
+;    0%   00, 00
+; Example: Set the Master Volume level to the MAX
+;	HKR,Config,lMixMaster,1,00,ff
+;	HKR,Config,rMixMaster,1,00,ff
+; ----------------------------------------------------------------------------------
+; Volume controls for the Playback panel (left value)
+;
+HKR,Config,lMixAuxGn,1,00,C0
+HKR,Config,lMixCdGn,1,00,C0
+HKR,Config,lMixFMGn,1,00,C0
+HKR,Config,lMixI2S2Gn,1,00,C0
+HKR,Config,lMixI2SGn,1,00,C0
+HKR,Config,lMixEaxGn,1,00,80
+HKR,Config,lMixLineGn,1,00,C0
+HKR,Config,lMixMaster,1,00,C0
+HKR,Config,lMixMicGn,1,00,C0
+HKR,Config,lMixPhnGn,1,00,C0
+HKR,Config,lMixVidGn,1,00,C0
+HKR,Config,lMixWaveGn,1,00,C0
+;
+; Volume controls for the Recording panel (left value)
+;
+HKR,Config,lMuxMaster,1,00,80
+HKR,Config,lMuxAuxGn,1,00,80
+HKR,Config,lMuxCdGn,1,00,80
+HKR,Config,lMuxLineGn,1,00,80
+HKR,Config,lMuxMicGn,1,00,80
+HKR,Config,lMuxMixGn,1,00,80
+HKR,Config,lMuxVidGn,1,00,80
+;
+; Volume controls for the Playback panel (right value)
+;
+HKR,Config,rMixAuxGn,1,00,C0
+HKR,Config,rMixCdGn,1,00,C0
+HKR,Config,rMixFMGn,1,00,C0
+HKR,Config,rMixI2S2Gn,1,00,C0
+HKR,Config,rMixI2SGn,1,00,C0
+HKR,Config,rMixLineGn,1,00,C0
+HKR,Config,rMixMaster,1,00,C0
+HKR,Config,rMixMicGn,1,00,C0
+HKR,Config,rMixPhnGn,1,00,C0
+HKR,Config,rMixVidGn,1,00,C0
+HKR,Config,rMixWaveGn,1,00,C0
+;
+; Volume controls for the Recording panel (right value)
+;
+HKR,Config,rMuxMaster,1,00,80
+HKR,Config,rMuxAuxGn,1,00,80
+HKR,Config,rMuxCdGn,1,00,80
+HKR,Config,rMuxLineGn,1,00,80
+HKR,Config,rMuxMicGn,1,00,80
+HKR,Config,rMuxMixGn,1,00,80
+HKR,Config,rMuxVidGn,1,00,80
+;
+; Mute controls.  To Mute, set the second value from the end of the line to 01.
+; Example:
+;   HKR,Config,MuteMic,1,01,00  -- Mute the microphone
+;   HKR,Config,MuteCd,1,00,00   -- Unmute the CD
+;
+HKR,Config,MuteAux,1,00,00
+HKR,Config,MuteCd,1,00,00
+HKR,Config,MuteFM,1,00,00
+HKR,Config,MuteLine,1,00,00
+HKR,Config,MuteMaster,1,00,00
+HKR,Config,MuteMic,1,01,00
+HKR,Config,MutePhn,1,00,00
+HKR,Config,MuteVid,1,00,00
+HKR,Config,MuteWave,1,00,00
+HKR,Config,MuteWStr,1,00,00
+;
+; Controls are listed under "All Waves" panel.  To bring up the All Wave panel:
+;   1) Open voulme control (double click on the volume icon)
+;   2) Select Properties from Options' menu
+;   3) Enable "Other" option from "Adjust Volume For"; and select "All Wave"
+;
+HKR,Config,lStrGame,1,00,C0
+HKR,Config,lStrWave1,1,00,C0
+HKR,Config,lStrWave2,1,00,C0
+HKR,Config,lStrWave3,1,00,C0
+HKR,Config,lStrWave4,1,00,C0
+HKR,Config,lStrWave5,1,00,C0
+HKR,Config,lStrWave6,1,00,C0
+HKR,Config,lStrWave7,1,00,C0
+HKR,Config,lStrWave8,1,00,C0
+HKR,Config,lStrWave9,1,00,C0
+HKR,Config,lStrWave10,1,00,C0
+HKR,Config,rStrGame,1,00,C0
+HKR,Config,rStrWave1,1,00,C0
+HKR,Config,rStrWave2,1,00,C0
+HKR,Config,rStrWave3,1,00,C0
+HKR,Config,rStrWave4,1,00,C0
+HKR,Config,rStrWave5,1,00,C0
+HKR,Config,rStrWave6,1,00,C0
+HKR,Config,rStrWave7,1,00,C0
+HKR,Config,rStrWave8,1,00,C0
+HKR,Config,rStrWave9,1,00,C0
+HKR,Config,rStrWave10,1,00,C0
+HKR,Config,StrMuteGame,1,00,00
+HKR,Config,StrMuteWave1,1,00,00
+HKR,Config,StrMuteWave2,1,00,00
+HKR,Config,StrMuteWave3,1,00,00
+HKR,Config,StrMuteWave4,1,00,00
+HKR,Config,StrMuteWave5,1,00,00
+HKR,Config,StrMuteWave6,1,00,00
+HKR,Config,StrMuteWave7,1,00,00
+HKR,Config,StrMuteWave8,1,00,00
+HKR,Config,StrMuteWave9,1,00,00
+HKR,Config,StrMuteWave10,1,00,00
+
+[RipJOY.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,,Driver,,RipTide.vxd
+
+[RipVGP.AddReg]
+HKR,,DevLoader,0,mmdevldr.vxd
+HKR,Drivers,MIGRATED,0,0
+HKR,Drivers\joystick,,0,
+HKR,,Driver,0,vjoyd.vxd
+HKR,Drivers\joystick\msjstick.drv,Description,0,%RVGP%
+HKR,Drivers\joystick\msjstick.drv,Driver,0,msjstick.drv
+HKR,Drivers,SubClasses,0,joystick
+HKLM,%KEY_OEM%\%RVGPKEY%,OEMName,0,%RVGP%
+HKLM,%KEY_OEM%\%RVGPKEY%,OEMCallout,0,%RVGPVXDNAME%
+HKLM,%KEY_OEM%\%RVGPKEY%,OEMData,1,00,00,00,0c,00,00,00,00
+
+; **************************
+; * Start A3d support      *
+; * Start A3d support      *
+; * Start A3d support      *
+;***************************
+
+HKCR,"CLSID\{92FA2C24-253C-11d2-90FB-006008A1F441}","",,"A3dApi Object"
+HKCR,"CLSID\{92FA2C24-253C-11d2-90FB-006008A1F441}","AppID",,"{92FA2C24-253C-11D2-90FB-006008A1F441}"
+HKCR,"CLSID\{92FA2C24-253C-11d2-90FB-006008A1F441}\InprocServer32","",,"A3dapi.dll"
+HKCR,"CLSID\{92FA2C24-253C-11d2-90FB-006008A1F441}\InprocServer32","ThreadingModel",,"Apartment"
+HKCR,"CLSID\{442D12A1-2641-11d2-90FB-006008A1F441}","",,"A3dDAL Object"
+HKCR,"CLSID\{442D12A1-2641-11d2-90FB-006008A1F441}","AppID",,"{442D12A1-2641-11D2-90FB-006008A1F441}"
+HKCR,"CLSID\{442D12A1-2641-11d2-90FB-006008A1F441}\InprocServer32","",,"a3d.dll"
+HKCR,"CLSID\{442D12A1-2641-11d2-90FB-006008A1F441}\InprocServer32","ThreadingModel",,"Apartment"
+HKCR,"CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b}","",,"A3d Object"
+HKCR,"CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b}\InprocServer32","",,"a3d.dll"
+HKCR,"CLSID\{d8f1eee0-f634-11cf-8700-00a0245d918b}\InprocServer32","ThreadingModel",,"Apartment"
+HKCR,"A3dDAL","",,"A3dDAL Object"
+HKCR,"A3dDAL\CLSID","",,"{442D12A1-2641-11d2-90FB-006008A1F441}"
+HKCR,"A3dApi","",,"A3dApi Object"
+HKCR,"A3dApi\CLSID","",,"{92FA2C24-253C-11d2-90FB-006008A1F441}"
+HKCR,"A3d","",,"A3d Object"
+HKCR,"A3d\CLSID","",,"{d8f1eee0-f634-11cf-8700-00a0245d918b}"
+;***************************
+; * End A3d support        *
+; * End A3d support        *
+; * End A3d support        *
+;***************************
+
+
+;***************************
+;*     Disk & Directory    * 
+;***************************
+
+[SourceDisksNames]
+1=%DName%,RIPTIDE,0000-0000
+
+[SourceDisksFiles]
+riptide.vxd = 1
+riptdrv.drv = 1
+rwawsdrv.drv = 1
+msgloop.exe = 1
+vwstream.vxd = 1
+wstream.dll = 1
+RipUnist.exe = 1
+Riptide.hex = 1
+wstrm32.dll = 1
+msg32.exe = 1
+ewctl32.dll = 1
+wsthk16.dll = 1
+wsthk32.dll = 1
+;btvctls.dll = 1
+;genmidi.wsl = 1
+;btv_sfx.wsl = 1
+;genmidis.wsl = 1
+;wsmonlit.exe = 1
+;wstream.hlp = 1
+wstream.bin = 1
+RipUtil.exe = 1
+Install.vxd = 1
+InstDll.dll = 1
+;;;;;;<-EW
+gmram.ewa = 1
+;;;;;;->EW
+; **************************
+; * Start A3d support      *
+; * Start A3d support      *
+; * Start A3d support      *
+;***************************
+A3d.dll      = 1
+A3d.vxd      = 1
+A3DSplsh.exe = 1
+A3dsplh.wav  = 1
+A3dspls.wav  = 1
+;***************************
+; * End A3d support        *
+; * End A3d support        *
+; * End A3d support        *
+;***************************
+
+;***************************
+;*         Strings         * 
+;*************************** 
+     
+[Strings]   
+Mfg         = Conexant
+DeviceDesc  = "Master Riptide PCI Audio Device"
+DeviceDescLeg  = "Riptide PCI Audio Legacy Resources"
+DeviceDescPCIJoy = "Riptide PCI Game Controller"
+DeviceDescVGP = "Riptide Virtual Gameport"
+RVGP = "Riptide Virtual Gameport"
+RVGPKEY="RVGP"
+RVGPVXDNAME="RipTide.VxD"
+RMIX.DeviceDesc="RipTide Mixer"
+RWAV.DeviceDesc="RipTide Wave I/O"
+RAUX.DeviceDesc="RipTide Aux"
+RMPU.DeviceDesc="RipTide MPU401"
+WAFM.DeviceDesc="Riptide FM Synthesizer"
+;;;;;;<-EW
+WSTREAM.DeviceDesc="Riptide Wavetable Synthesizer"
+;;;;;;->EW
+KEY_OEM="System\CurrentControlSet\Control\MediaProperties\PrivateProperties\Joystick\OEM"
+MediaClassName="Sound, video and game controllers"
+DName="RipTide Installation Media"
