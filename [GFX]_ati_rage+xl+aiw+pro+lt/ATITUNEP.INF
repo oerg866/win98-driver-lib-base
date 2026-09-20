@@ -1,0 +1,73 @@
+; ativtuxx.INF  -- This file installs ativtuxx.sys
+;
+;*** Created 6/6/97  (Creation Date)
+;
+
+[Version]
+CatalogFile=ati9xwdm.cat
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%AtiTech%
+LayoutFile=LAYOUT.INF, layout1.inf, layout2.inf
+DriverVer=04/09/2001, 4.13.7103
+
+;;INFDEL;;[SourceDisksNames]
+;;INFDEL;;1="ATI WDM Drivers",,,c:\ati\install
+
+;;INFDEL;;[SourceDisksFiles]
+;;INFDEL;;ativtuxx.sys=1
+
+; F i l e   c o p y i n g   s e c t i o n s (where the files go to).
+
+;;INFDEL;;[DestinationDirs]
+;;INFDEL;;ATITUNEP.CopyDrivers=10,system32\drivers  ; eg.  \windows\system32\drivers
+
+[Manufacturer]
+%ATI%=ATI
+
+; =================== Generic ==================================
+
+[ATI]
+%ATITUNEP.DeviceDesc%=ATITUNEP.Device,DISPLAY\ATITUNEP
+
+[ATITUNEP.Device]
+Include  =  ks.inf
+Needs    =  KS.Registration
+AddReg   =  atitunep.addreg
+;;INFDEL;;CopyFiles=  ATITUNEP.CopyDrivers
+;;INFDEL;;KnownFiles= ATITUNEP.KnownFiles
+
+;;INFDEL;;[ATITUNEP.CopyDrivers]
+;;INFDEL;;stream.sys
+;;INFDEL;;ativtuxx.sys
+
+;;INFDEL;;[ATITUNEP.KnownFiles]
+;;INFDEL;;ativtuxx.sys=safe
+
+[ATITUNEP.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ativtuxx.sys
+HKR,,PageOutWhenUnopened,3,01
+HKR,,DebugLevel,3,0
+
+; =================== atitunep ==================================
+
+
+[ATITUNEP.Device.Interfaces]
+AddInterface={a799a800-a46d-11d0-a18c-00a02401dcd4},"GLOBAL",TvTuner,
+
+[TvTuner]
+AddReg=TvTuner.AddReg
+
+[TvTuner.AddReg]
+HKR,,CLSID,,{266EEE40-6C63-11cf-8A03-00AA006ECB65}
+HKR,,FriendlyName,,%ATITUNEP.TUNER%
+
+[Strings]
+AtiTech="ATI Technologies Inc."
+ATI="ATI"
+captureClassName="Sound, video and game controllers"
+ATITUNEP.DeviceDesc="ATI WDM TV Tuner"
+ATITUNEP.Tuner="ATI TV Tuner"
+REG_DWORD=0x00010001

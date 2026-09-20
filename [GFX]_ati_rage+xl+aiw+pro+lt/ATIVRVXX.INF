@@ -1,0 +1,125 @@
+; ativrvxx.INF  -- This file installs Rage Theater Video Decoder Driver
+;               for Toronto Board
+;
+;*** Created 05/27/99  (Creation Date)
+;
+
+[Version]
+CatalogFile=ati9xwdm.cat
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%AtiTech%
+LayoutFile=LAYOUT.INF, layout1.inf, layout2.inf
+DriverVer=04/09/2001, 4.13.7103
+
+;;DELINF;;[SourceDisksNames]
+;;DELINF;;1="ATI WDM Drivers",,,c:\ati\install
+
+;;DELINF;;[SourceDisksFiles]
+;;DELINF;;ativrvxx.sys=1
+
+;;DELINF;;[DestinationDirs]
+;;DELINF;;Decoder.CopyDrivers=10,system32\drivers  ; eg.  \windows\system32\drivers
+;;DELINF;;Decoder.CopyCodec=11
+
+[Manufacturer]
+%ATI%=ATI
+
+[ATI]
+;%Decoder.DeviceDesc%=Decoder.Device,DISPLAY\ATIRTVIDEO
+%DecoderPro.DeviceDesc%=DecoderPro.Device,DISPLAY\ATIRTVIDEO
+
+[Decoder.Device]
+Include  =  ks.inf, ativmvxx.inf, kscaptur.inf, ksfilter.inf
+Needs=      KS.Registration, DefaultInstall,MSPCLOCK.Installation
+AddReg   =  Decoder.AddReg,Categories,TopologyNodes,PlugIns,Filters
+;UpdateInis= Decoder.UpdateIni
+;;DELINF;;CopyFiles=  Decoder.CopyDrivers
+;;DELINF;;DelFiles =  Decoder.DelDrivers
+;;DELINF;;KnownFiles= Decoder.KnownFiles
+
+[Decoder.Device.NT]
+Include  =  ks.inf, ativmvxx.inf, kscaptur.inf, ksfilter.inf
+Needs=      KS.Registration, DefaultInstall,MSPCLOCK.Installation
+AddReg   =  Decoder.AddReg,Categories,TopologyNodes,PlugIns,Filters
+;UpdateInis= Decoder.UpdateIni
+;;DELINF;;CopyFiles=  Decoder.CopyDrivers
+;;DELINF;;DelFiles =  Decoder.DelDrivers
+
+[DecoderPro.Device]
+Include  =  ks.inf, ativmvxx.inf, kscaptur.inf, ksfilter.inf
+Needs=      KS.Registration, DefaultInstall,MSPCLOCK.Installation
+AddReg   =  Decoder.AddReg, DecoderPro.AddReg,Categories,TopologyNodes,PlugIns,Filters
+;UpdateInis= Decoder.UpdateIni
+;;DELINF;;CopyFiles=  Decoder.CopyDrivers
+;;DELINF;;DelFiles =  Decoder.DelDrivers
+;;DELINF;;KnownFiles= Decoder.KnownFiles
+
+[DecoderPro.Device.NT]
+Include  =  ks.inf, ativmvxx.inf, kscaptur.inf, ksfilter.inf
+Needs=      KS.Registration, DefaultInstall,MSPCLOCK.Installation
+AddReg   =  Decoder.AddReg, DecoderPro.AddReg,Categories,TopologyNodes,PlugIns,Filters
+;UpdateInis= Decoder.UpdateIni
+;;DELINF;;CopyFiles=  Decoder.CopyDrivers
+;;DELINF;;DelFiles =  Decoder.DelDrivers
+
+
+;;DELINF;;[Decoder.CopyDrivers]
+;;DELINF;;ativrvxx.sys
+;;DELINF;;stream.sys
+
+;;DELINF;;[Decoder.CopyCodec]
+;;DELINF;;;msyuv.dll
+
+;;DELINF;;[Decoder.UpdateIni]
+;;DELINF;;;system.ini, drivers32,,"VIDC.UYVY=msyuv.dll"
+
+;;DELINF;;[Decoder.KnownFiles]
+;;DELINF;;ativrvxx.sys=safe
+
+;;DELINF;;[Decoder.DelDrivers]
+
+[Decoder.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ativrvxx.sys
+HKR,,DebugLevel,3,0
+
+[DecoderPro.AddReg]
+HKR,,OutputEnablePolarity,,1
+HKR,,DefaultDecoderWidth,,720
+
+[Decoder.Device.Interfaces]
+AddInterface={65e8773d-8f56-11d0-a3b9-00a0c9223196},"GLOBAL",VideoCapture,
+AddInterface={a799a801-a46d-11d0-a18c-00a02401dcd4},"GLOBAL",VideoCrossbar,
+
+[DecoderPro.Device.Interfaces]
+AddInterface={65e8773d-8f56-11d0-a3b9-00a0c9223196},"GLOBAL",VideoCapture,
+AddInterface={a799a801-a46d-11d0-a18c-00a02401dcd4},"GLOBAL",VideoCrossbar,
+
+[VideoCapture]
+AddReg=VideoCapture.AddReg
+
+[VideoCrossbar]
+AddReg=VideoXBar.AddReg
+
+
+[VideoCapture.AddReg]
+HKR,,CLSID,,{17CCA71B-ECD7-11D0-B908-00A0C9223196}
+HKR,,FriendlyName,,%Decoder.Capture%
+HKR,,PageOutWhenUnopened,3,01
+HKR,,DontSuspendIfStreamsAreRunning,3,01
+
+[VideoXBar.AddReg]
+HKR,,CLSID,,{71F96460-78F3-11d0-A18C-00A0C9118956}
+HKR,,FriendlyName,,%Decoder.Crossbar%
+
+[Strings]
+AtiTech="ATI Technologies Inc."
+ATI="ATI"
+captureClassName="Sound, video and game controllers"
+Decoder.DeviceDesc="ATI WDM Rage Theater Video"
+DecoderPro.DeviceDesc="ATI WDM Rage Theater Video"
+Decoder.Capture="ATI Rage Theater Video Capture"
+Decoder.Crossbar="ATI Rage Theater Video Crossbar"
+REG_DWORD=0x00010001

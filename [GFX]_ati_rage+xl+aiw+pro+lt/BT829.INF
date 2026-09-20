@@ -1,0 +1,131 @@
+; ativbtxx.INF  -- This file installs Bt829.sys
+;               for ATI All-In-Wonder and All-In-Wonder Pro
+;
+;*** Created 03/26/97  (Creation Date)
+;
+
+[Version]
+CatalogFile=ati9xwdm.cat
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%AtiTech%
+LayoutFile=LAYOUT.INF, layout1.inf, layout2.inf
+DriverVer=04/09/2001, 4.13.7103
+
+;;DELINF;;[SourceDisksNames]
+;;DELINF;;1="ATI WDM Drivers",,,c:\ati\install
+
+;;DELINF;;[SourceDisksFiles]
+;;DELINF;;ativbtxx.sys=1
+
+;;DELINF;;[DestinationDirs]
+;;DELINF;;BT829.CopyDrivers=10,system32\drivers  ; eg.  \windows\system32\drivers
+;;DELINF;;BT829.CopyCodec=11
+
+[Manufacturer]
+%ATI%=ATI
+
+[ATI]
+%Bt829.DeviceDesc%=Bt829.Device,DISPLAY\Bt829
+%Bt829Pro.DeviceDesc%=Bt829Pro.Device,DISPLAY\Bt829Pro
+
+[Bt829.Device]
+Include  =  ks.inf, ativmvxx.inf, kscaptur.inf, ksfilter.inf
+Needs=      KS.Registration, DefaultInstall,MSPCLOCK.Installation
+AddReg   =  Bt829.AddReg,Categories,TopologyNodes,PlugIns,Filters
+;UpdateInis= Bt829.UpdateIni
+;;DELINF;;CopyFiles=  BT829.CopyDrivers
+;;DELINF;;DelFiles =  BT829.DelDrivers
+;;DELINF;;KnownFiles= BT829.KnownFiles
+
+[Bt829.Device.NT]
+Include  =  ks.inf, ativmvxx.inf, kscaptur.inf, ksfilter.inf
+Needs=      KS.Registration, DefaultInstall,MSPCLOCK.Installation
+AddReg   =  Bt829.AddReg,Categories,TopologyNodes,PlugIns,Filters
+;UpdateInis= Bt829.UpdateIni
+;;DELINF;;CopyFiles=  BT829.CopyDrivers
+;;DELINF;;DelFiles =  BT829.DelDrivers
+
+[Bt829Pro.Device]
+Include  =  ks.inf, ativmvxx.inf, kscaptur.inf, ksfilter.inf
+Needs=      KS.Registration, DefaultInstall,MSPCLOCK.Installation
+AddReg   =  Bt829.AddReg, Bt829Pro.AddReg,Categories,TopologyNodes,PlugIns,Filters
+;UpdateInis= Bt829.UpdateIni
+;;DELINF;;CopyFiles=  BT829.CopyDrivers
+;;DELINF;;DelFiles =  BT829.DelDrivers
+;;DELINF;;KnownFiles= BT829.KnownFiles
+
+[Bt829Pro.Device.NT]
+Include  =  ks.inf, ativmvxx.inf, kscaptur.inf, ksfilter.inf
+Needs=      KS.Registration, DefaultInstall,MSPCLOCK.Installation
+AddReg   =  Bt829.AddReg, Bt829Pro.AddReg,Categories,TopologyNodes,PlugIns,Filters
+;UpdateInis= Bt829.UpdateIni
+;;DELINF;;CopyFiles=  BT829.CopyDrivers
+;;DELINF;;DelFiles =  BT829.DelDrivers
+
+
+;;DELINF;;[BT829.CopyDrivers]
+;;DELINF;;ativbtxx.sys
+;;DELINF;;stream.sys
+
+;;DELINF;;[BT829.CopyCodec]
+;;DELINF;;;msyuv.dll
+
+;;DELINF;;[BT829.UpdateIni]
+;;DELINF;;;system.ini, drivers32,,"VIDC.UYVY=msyuv.dll"
+
+;;DELINF;;[BT829.KnownFiles]
+;;DELINF;;ativbtxx.sys=safe
+
+;;DELINF;;[BT829.DelDrivers]
+
+[Bt829.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ativbtxx.sys
+HKR,,I2cAddress,,0x8a
+HKR,,MUX0,,Composite
+HKR,,MUX1,,Tuner
+HKR,,MUX2,,SVideo
+HKR,,DataWidth,,8
+HKR,,EmbeddedControl,,true
+HKR,,DebugLevel,3,0
+
+[Bt829Pro.AddReg]
+HKR,,OutputEnablePolarity,,1
+HKR,,DefaultDecoderWidth,,720
+
+[Bt829.Device.Interfaces]
+AddInterface={65e8773d-8f56-11d0-a3b9-00a0c9223196},"GLOBAL",VideoCapture,
+AddInterface={a799a801-a46d-11d0-a18c-00a02401dcd4},"GLOBAL",VideoCrossbar,
+
+[Bt829Pro.Device.Interfaces]
+AddInterface={65e8773d-8f56-11d0-a3b9-00a0c9223196},"GLOBAL",VideoCapture,
+AddInterface={a799a801-a46d-11d0-a18c-00a02401dcd4},"GLOBAL",VideoCrossbar,
+
+[VideoCapture]
+AddReg=VideoCapture.AddReg
+
+[VideoCrossbar]
+AddReg=VideoXBar.AddReg
+
+
+[VideoCapture.AddReg]
+HKR,,CLSID,,{17CCA71B-ECD7-11D0-B908-00A0C9223196}
+HKR,,FriendlyName,,%Bt829.Capture%
+HKR,,PageOutWhenUnopened,3,01
+HKR,,DontSuspendIfStreamsAreRunning,3,01
+
+[VideoXBar.AddReg]
+HKR,,CLSID,,{71F96460-78F3-11d0-A18C-00A0C9118956}
+HKR,,FriendlyName,,%Bt829.Crossbar%
+
+[Strings]
+AtiTech="ATI Technologies Inc."
+ATI="ATI"
+captureClassName="Sound, video and game controllers"
+Bt829.DeviceDesc="ATI WDM Bt829 Video Capture"
+Bt829.Capture="ATI Bt829 Video Capture"
+Bt829.Crossbar="ATI Bt829 Video Crossbar"
+Bt829Pro.DeviceDesc="ATI WDM Bt829Pro Video Capture"
+REG_DWORD=0x00010001

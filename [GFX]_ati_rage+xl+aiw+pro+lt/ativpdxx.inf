@@ -1,0 +1,110 @@
+;
+; ATIVpdxx.INF  -- This file installs the VBI codec for Parental control detection
+;               
+;*** Created 12/24/99  (Creation Date)
+;
+; Copyright 2000, ATI Technologies Inc.
+
+
+[Version]
+CatalogFile=ati9xwdm.cat
+signature="$CHICAGO$"
+Class=Media
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%AtiTech%
+DriverVer=04/09/2001, 4.13.7103
+
+; F i l e   c o p y i n g   s e c t i o n s (where the files go to).
+[Manufacturer]
+%ATI%=ATI
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+; =================== Generic ==================================
+
+[ATI]
+%PCDCodec.DeviceDesc%=PCDCodec.Device,DISPLAY\ATIVPDXX
+
+[PCDCodec.Device]
+AddReg=     PCDCodec.Device.AddReg
+
+[PCDCodec.Device.NT]
+AddReg=     PCDCodec.Device.NT.AddReg
+
+[PCDCodec.Device.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ativpdxx.sys
+HKR,,DebugLevel,3,0
+
+[PCDCodec.Device.NT.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,atinpdxx.sys
+HKR,,DebugLevel,3,0
+
+[PCDCodec.Device.Interfaces]
+AddInterface=%KSCATEGORY_VBICODEC%,"GLOBAL",VBICodec,
+
+[PCDCodec.Device.NT.Interfaces]
+AddInterface=%KSCATEGORY_VBICODEC%,"GLOBAL",VBICodec,
+
+
+[VBICodec]
+AddReg=VBICodec.AddReg
+
+[VBICodec.AddReg]
+HKR,,CLSID,,%CLSID_Proxy%
+HKR,,FriendlyName,,%PCDCodec.FriendlyName%
+HKLM,Software\CLASSES\CLSID\%CLSID_AMCat%\Instance\%KSCATEGORY_VBICODEC%
+HKLM,Software\CLASSES\CLSID\%CLSID_AMCat%\Instance\%KSCATEGORY_VBICODEC%,,,%WDMCodecs%
+HKLM,Software\CLASSES\CLSID\%CLSID_AMCat%\Instance\%KSCATEGORY_VBICODEC%,FriendlyName,,%WDMCodecs%
+HKLM,Software\CLASSES\CLSID\%CLSID_AMCat%\Instance\%KSCATEGORY_VBICODEC%,CLSID,,%KSCATEGORY_VBICODEC%
+
+[PCDCodec.Device.Services]
+AddService = PCDCODEC,0x00000002,PCDCodec.ServiceInstall
+
+[PCDCodec.Device.NT.Services]
+AddService = PCDCODEC,0x00000002,PCDCodec.NT.ServiceInstall
+
+
+[PCDCodec.ServiceInstall]
+DisplayName   = %PCDCodec.DeviceDesc%
+ServiceType   = %SERVICE_KERNEL_DRIVER%
+StartType     = %SERVICE_AUTO_START%
+ErrorControl  = %SERVICE_ERROR_NORMAL%
+ServiceBinary = %12%\ativpdxx.sys
+
+[PCDCodec.NT.ServiceInstall]
+DisplayName   = %PCDCodec.DeviceDesc%
+ServiceType   = %SERVICE_KERNEL_DRIVER%
+StartType     = %SERVICE_AUTO_START%
+ErrorControl  = %SERVICE_ERROR_NORMAL%
+ServiceBinary = %12%\atinpdxx.sys
+
+;---------------------------------------------------------------
+;                S t r i n g s
+;---------------------------------------------------------------
+
+[Strings]
+
+;----------------
+; Non-Localizable
+;----------------
+
+SERVICE_KERNEL_DRIVER	=1
+SERVICE_AUTO_START	=2
+SERVICE_ERROR_NORMAL	=1
+
+CLSID_Proxy=	"{17CCA71B-ECD7-11D0-B908-00A0C9223196}"	; KsProxy.ax's ID, REQUIRED
+CLSID_AMCat=	"{DA4E3DA0-D07D-11d0-BD50-00A0C911CE86}"
+KSCATEGORY_VBICODEC="{07DAD660-22F1-11d1-A9F4-00C04FBBDE8F}"
+
+;----------------
+; Localizable
+;----------------
+
+AtiTech="ATI Technologies Inc."
+ATI="ATI"
+PCDCodec.DeviceDesc	= "ATI Specialized PCD WDM VBI Codec"
+PCDCodec.FriendlyName	= "ATI Specialized PCD WDM VBI Codec"
+WDMCodecs		= "WDM Streaming VBI Codecs"

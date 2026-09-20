@@ -1,0 +1,77 @@
+; ativsnxx.INF  -- This file installs ativsnxx.sys
+;
+;*** Created 6/6/97  (Creation Date)
+;
+
+[Version]
+CatalogFile=ati9xwdm.cat
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%AtiTech%
+LayoutFile=LAYOUT.INF, layout1.inf, layout2.inf
+DriverVer=04/09/2001, 4.13.7103
+
+;;INFDEL;;[SourceDisksNames]
+;;INFDEL;;1="ATI WDM Drivers",,,c:\ati\install
+
+;;INFDEL;;[SourceDisksFiles]
+;;INFDEL;;ativsnxx.sys=1
+
+; F i l e   c o p y i n g   s e c t i o n s (where the files go to).
+
+;;INFDEL;;[DestinationDirs]
+;;INFDEL;;ATITVAudio.CopyDrivers=10,system32\drivers  ; eg.  \windows\system32\drivers
+
+
+[Manufacturer]
+%ATI%=ATI
+
+; =================== Generic ==================================
+
+[ATI]
+%ATITVAudio.DeviceDesc%=ATITVAudio.Device,DISPLAY\ATITVAudio
+
+[ATITVAudio.Device]
+Include  =  ks.inf
+Needs    =  KS.Registration
+AddReg   =  ATITVAudio.addreg
+;;INFDEL;;CopyFiles=  ATITVAudio.CopyDrivers
+;;INFDEL;;KnownFiles= ATITVAudio.KnownFiles
+
+
+[ATITVAudio.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ativsnxx.sys
+HKR,,PageOutWhenUnopened,3,01
+HKR,,DebugLevel,3,0
+
+;;INFDEL;;[ATITVAudio.CopyDrivers]
+;;INFDEL;;stream.sys
+;;INFDEL;;;ks.sys
+;;INFDEL;;ativsnxx.sys
+
+;;INFDEL;;[ATITVAudio.KnownFiles]
+;;INFDEL;;ativsnxx.sys=safe
+
+; =================== ATITVAudio ==================================
+
+
+[ATITVAudio.Device.Interfaces]
+AddInterface={a799a802-a46d-11d0-a18c-00a02401dcd4},"GLOBAL",TVAudio,
+
+[TVAudio]
+AddReg=TVAudio.AddReg
+HKR,,FriendlyName,,%ATITVAudio.TVAudio%
+
+[TVAudio.AddReg]
+HKR,,CLSID,,{71F96462-78F3-11d0-A18C-00A0C9118956}
+
+[Strings]
+AtiTech="ATI Technologies Inc."
+ATI="ATI"
+captureClassName="Sound, video and game controllers"
+ATITVAudio.DeviceDesc="ATI WDM TV Audio"
+ATITVAudio.TVAudio="ATI TV Audio"
+REG_DWORD=0x00010001
+

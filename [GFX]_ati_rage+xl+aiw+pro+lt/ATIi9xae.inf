@@ -1,0 +1,501 @@
+; ATI Display Information file : ATII9xAE.INF
+; Installation INF for the ATI display driver.
+; Copyright(C) 1985-2002 ATI Technologies Inc.
+; Windows 9x
+
+[version]
+Class=DISPLAY
+signature="$Windows 95$"
+Provider=%Mfg%
+;DontMatchASICFamily=1
+DriverVer=02/28/2002, 4.13.1.2655
+CatalogFile=atii9xae.cat
+
+[SourceDisksNames]
+1="ATI Installation CD ROM",,1
+
+[SourceDisksFiles]
+
+;[INFFiles]
+atixbar.inf =1
+atitunep.inf = 1
+atitvsnd.inf =1
+ativmvxx.inf = 1
+bt829.inf = 1
+
+;[INFOther]
+ativmdxx.inf = 1
+ativmvxx.inf = 1
+ativpdxx.inf = 1
+ativraxx.inf = 1
+ativrvxx.inf = 1
+ativttxx.inf = 1
+ativxsxx.inf = 1
+
+;[WDMSysFiles]
+ativbtxx.SYS = 1
+ativmdxx.sys = 1
+ativpdxx.sys = 1
+ativraxx.SYS = 1
+ativrvxx.SYS = 1
+ativttxx.sys = 1
+ativtuxx.SYS = 1
+ativxsxx.sys = 1
+ativxbxx.sys = 1
+ativsnxx.sys = 1
+
+;[SysFiles]
+atiiisxx.exe = 1
+atiiiexx.dll = 1
+atiicdxx.dll = 1
+atiicdxx.vxd = 1
+atiicdxx.sys = 1
+;atricdxx.enu = 1
+atiiihxx.exe = 1
+ativmvxx.ax = 1
+
+;[MACXW4_CopyFiles]
+ati2drae.drv=1
+ati2i9ae.dll=1
+atr9diae.dft=1
+ati9diae.dll=1
+atr9dgae.dft=1
+ati9dgae.exe=1
+atimiaae.dll=1
+
+;[MACXW4_CopyFiles_3DFiles]
+ati2vxae.vxd=1
+atid32ae.dll=1
+ati3dcif.dll=1
+ati3drae.dll=1
+ativpeae.dll=1
+;ati2cwxx.exe=1
+atitvo32.dll=1
+ativvxxx.vxd=1
+ativifxx.dll=1
+ativ16xx.dll=1
+atio9xae.dll=1
+atimcrae.dll=1
+
+;[MACXW4_Desktop_Files]
+atipdsxx.dll=1
+atippaxx.dll=1
+atipuixx.dll=1
+atrpuixx.enu=1
+atfenuxx.hlx=1
+atmenuxx.hlx=1
+attenuxx.hlx=1
+atmenuxx.cnt=1
+atiptaxx.exe=1
+atiphexx.exe=1
+atpenuxx.hlx=1
+atsenuxx.cnt=1
+atsenuxx.hlx=1
+atvenuxx.hlx=1
+ati9dtxx.dll=1
+atr9dtxx.dft=1
+atii16xx.dll=1
+atii32xx.dll=1
+
+atiiiexx.dll=1
+atiicdxx.dll=1
+atiicdxx.vxd=1
+atiicdxx.sys=1
+atricdxx.dft=1
+atiiprxx.exe=1
+atriprxx.dft=1
+ati9unae.bat=1
+
+;--------------
+; Manufacturer
+;--------------
+
+[Manufacturer]
+"%Mfg%"=Mfg
+
+[Player.Config]
+Pages=Driver.Page
+Description=ATI Setup
+
+[License.Page]
+PageType=LicensePage
+LicenseFile=..\atiplay\LICENSE.TXT
+
+[Driver.Page]
+PageType=DriverPage
+
+[Express.Page]
+PageType=ExpressPage
+
+[Custom.Page]
+PageType=CustomPage
+
+[PrivateInstall]
+Install=Player
+
+;-----------------
+; Driver sections
+;-----------------
+
+[Mfg]
+"RAGE XL AGP 2X"                      = MACXW4, PCI\VEN_1002&DEV_474D
+"RAGE XL PCI"                         = MACXW4, PCI\VEN_1002&DEV_474F
+"RAGE XL PCI   "                      = MACXW4, PCI\VEN_1002&DEV_4752
+
+"RAGE XC AGP"                         = MACXW4, PCI\VEN_1002&DEV_474E
+"XPERT 98 AGP 2X  "                   = MACXW4, PCI\VEN_1002&DEV_4C4D ;Mobility
+
+"All-in-Wonder PRO PCI"               = MACXW4, PCI\VEN_1002&DEV_4749
+
+"RAGE PRO TURBO AGP 2X"               = MACXW4, PCI\VEN_1002&DEV_4742
+"RAGE PRO TURBO AGP"                  = MACXW4, PCI\VEN_1002&DEV_4744
+"RAGE PRO TURBO PCI"                  = MACXW4, PCI\VEN_1002&DEV_4750
+
+"RAGE LT PRO AGP 2X"                  = MACXW4, PCI\VEN_1002&DEV_4C42
+"RAGE LT PRO PCI"                     = MACXW4, PCI\VEN_1002&DEV_4C50
+
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+;------------------
+; Install sections
+;------------------
+
+[MACXW4]
+Include=msdv.inf
+CopyFiles=SysFiles, MACXW4_CopyFiles, MACXW4_CopyFiles_3DFiles, MACXW4_Desktop_Files, INFFiles, WDMFiles, WDMSysFiles, INFOther
+DelFiles=MACXW4_DelFiles
+DelReg=MACXW4_DelReg, MACXW4_DelReg_Pages
+AddReg=MACXW4_AddReg, MACXW4_Desktop_AddReg, MACXW4_AddReg_1CRTC
+UpdateInis=DVCR.UpdateIni
+
+UninstallFiles=MACXW4_UnInstall_Files, MACXW4_Desktop_Files
+CleanFiles=MACXW4_CopyFiles_3DFiles, INFFiles, WDMFiles, WDMSysFiles, INFOther, SysFiles
+UninstallReg=MACXW4_Desktop_AddReg, MACXW4_DelReg_Pages
+CleanReg=MACXW4_AddReg, MACXW4_CleanReg
+
+;------------------------
+; Common DelReg sections
+;------------------------
+
+[MACXW4_DelReg]
+HKR,,DevLoader
+HKR,,Ver
+HKR,DEFAULT
+HKR,MODES
+HKR,CURRENT
+HKLM,"%SW_DSP_PSH%\DriverPages"
+HKLM,"%SS_DSP%\00\TVOut"
+HKLM,"%SS_DSP%\00\Modes\TVOut"
+HKLM,"%SW_DSK_PSH%\ATIPages"
+HKLM,%SW_MS_RUN%,Atitask
+HKLM,%SW_MS_RUN%,AtiPTA
+HKLM,%SW_MS_RUN%,AtiKey
+HKLM,"Software\Microsoft\Windows\CurrentVersion\RunServices",ATIPOLAB
+HKLM,"Software\Microsoft\Windows NT\CurrentVersion\OpenGLDrivers\ATI ICD Settings"
+HKLM,"%SW_DSP_PSH%\ATIPagesEx"
+HKLM,"%SW_DSK_PSH%\ATIPagesEx"
+HKR,"%SX_PSH%\ATIPagesEx"
+HKLM,"%SW_DSP_PSH%\ATIPages"
+HKLM,"%SW_DSP_PSH%\ATIPagesX"
+HKLM,"%SW_DSP_PSH%\ATIPagesX2"
+HKLM,"%SW_DSK_PSH%\ATIPages"
+HKLM,"%SW_DSK_PSH%\ATIPagesX"
+HKLM,"%SW_DSK_PSH%\ATIPagesX2"
+HKR,"%SX_PSH%\ATIPagesX"
+HKR,"%SX_PSH%\ATIPagesX2"
+;HKLM,"Software\ATI Technologies\Desktop"
+HKLM,"Software\ATI Technologies\Desktop\Icon"
+HKLM,"Software\ATI Technologies\Driver\DVD"
+HKR,Desktop
+
+[MACXW4_DelReg_Pages]
+HKLM,"%SW_DSP_PSH%\DriverPages"
+HKLM,"%SW_DSP_PSH%\ATIPagesEx"
+HKLM,"%SW_DSK_PSH%\ATIPagesEx"
+HKR,"%SX_PSH%\ATIPagesEx"
+HKLM,"%SW_DSP_PSH%\ATIPages"
+HKLM,"%SW_DSP_PSH%\ATIPagesX"
+HKLM,"%SW_DSK_PSH%\ATIPages"
+HKLM,"%SW_DSK_PSH%\ATIPagesX"
+HKR,"%SX_PSH%\ATIPagesX"
+HKR,"%SX_PSH%\ATIPagesX2"
+
+;-----------------------
+; Model AddReg sections
+;-----------------------
+
+[MACXW4_AddReg]
+HKR,,Ver,,"4.00"
+HKR,,DevLoader,,"*vdd"
+HKR,DEFAULT,Mode,,"8,640,480"
+HKR,DEFAULT,drv,,"ati2drae.drv"
+HKR,DEFAULT,drv2,,"ati2drae.drv"
+HKR,DEFAULT,vdd,,"*vdd,*vflatd"
+HKR,DEFAULT,minivdd,,"ati2vxae.vxd"
+HKR,DEFAULT,minivdd2,,"ati2vxae.vxd"
+HKR,DEFAULT,RefreshRate,,"-1"
+HKR,DEFAULT,DDC,,"1"
+;;HKR,"MODES\4\640,480",drv,,"vga.drv"
+;;HKR,"MODES\4\640,480",vdd,,"*vdd"
+
+HKR,"MODES\8\640,480",,,"60,72,75,85,90,100,120,160"
+HKR,"MODES\8\720,480",,,"60,72,75,85"
+HKR,"MODES\8\768,576",,,"60"
+HKR,"MODES\8\800,600",,,"60,70,72,75,85,90,100,120,160"
+HKR,"MODES\8\848,480"
+HKR,"MODES\8\864,480"
+HKR,"MODES\8\1024,600"
+HKR,"MODES\8\1024,768",,,"60,70,72,75,85,90,100,120,140,150"
+HKR,"MODES\8\1152,864",,,"60,70,72,75,85,90,100"
+HKR,"MODES\8\1280,1024",,,"60,70,75,85,90"
+HKR,"MODES\8\1600,1200",,,"60,75,85"
+
+HKR,"MODES\16\640,480"
+HKR,"MODES\16\720,480"
+HKR,"MODES\16\768,576"
+HKR,"MODES\16\800,600"
+HKR,"MODES\16\848,480"
+HKR,"MODES\16\864,480"
+HKR,"MODES\16\1024,600"
+HKR,"MODES\16\1024,768"
+HKR,"MODES\16\1152,864"
+HKR,"MODES\16\1280,1024"
+HKR,"MODES\16\1600,1200",,,"60,75,85"
+
+HKR,"MODES\32\640,480"
+HKR,"MODES\32\720,480"
+HKR,"MODES\32\768,576"
+HKR,"MODES\32\800,600"
+HKR,"MODES\32\848,480"
+HKR,"MODES\32\864,480"
+HKR,"MODES\32\1024,600"
+HKR,"MODES\32\1024,768"
+HKR,"MODES\32\1152,864"
+HKR,"MODES\32\1280,1024"
+HKR,"MODES\32\1600,1200",,,"60"
+
+HKR,"INFO\INFO",INIT,1,1
+HKR,"INFO\INFO\ROOT",Path,,"%a%s"
+HKR,"INFO\INFO\ROOT",ReleaseVersion,,"J5.30.1-B02"
+HKR,,ReleaseVersion,,"J5.30.1-B02"
+HKR,"INFO\INFO\3DHAL",eBMMode,1,1
+HKR,"INFO\INFO\3DHAL",PBFlag,1,10
+HKR,"INFO\INFO\DAL",Path,,"%a%sDAL"
+HKR,"INFO\INFO\DAL",DALRULE_NOTVANDLCDONCRTC,1,01,00,00,00
+;HKR,"INFO\INFO\DAL",DALRULE_SELECTION_SCHEME,1,01,00,00,00
+HKR,"INFO\INFO\DAL",DALRULE_NOFORCEBOOT,1,01,00,00,00
+HKR,"INFO\INFO\DAL",DALRestrictedModesBCD,1, 00,00,00,00,00,24,00,00
+HKR,"INFO\INFO\DAL",DALNonStandardModesBCD,1, 06,40,04,80,00,00,01,60, 07,68,05,76,00,00,00,00, 08,00,06,00,00,00,01,20, 08,00,06,00,00,00,01,60, 10,24,07,68,00,00,01,20, 10,24,07,68,00,00,01,40, 10,24,07,68,00,00,01,50, 16,00,12,00,00,00,00,85
+HKLM,"Software\ATI Technologies\Driver",BMDefault,,"0"
+HKLM,"Software\ATI Technologies\Driver",MPP,,"1"
+HKLM,"Software\ATI Technologies\Driver",Restore3,,"1"
+HKLM,"Software\ATI Technologies\Driver",StrictMode,,"1"
+HKLM,"Software\ATI Technologies\Driver\DVD","2",,"Atimiaae.dll"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\RunServicesOnce",Atiiihxx.exe,,"%11%\Atiiihxx.exe 1"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",1,,"%17%\Other\Ativmdxx.inf"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",2,,"%17%\Other\Ativmvxx.inf"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",3,,"%17%\Other\Ativraxx.inf"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",4,,"%17%\Other\ativrvxx.inf"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",5,,"%17%\Other\ATIVXSXX.INF"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",6,,"%17%\Other\ativttxx.inf"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",7,,"%17%\Other\ativpdxx.inf"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",8,,"%17%\Atitunep.inf"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",9,,"%17%\Bt829.inf"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",10,,"%17%\Ativmvxx.inf"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",11,,"%17%\Atixbar.inf"
+HKLM,"SOFTWARE\ATI Technologies\ATIIIHXX.EXE",12,,"%17%\AtitvSnd.inf"
+HKR,"Desktop",,,
+
+[MACXW4_Desktop_AddReg]
+HKR,,EnumPropPages,,"ati9diae.dll,EnumPropPages"
+HKLM,"%SW_DSP_PSH%\ATIPagesEx",,,"{700B1221-CAFF-11d1-B9DE-000000001B1B}"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Controls Folder\Desktop\shellex\PropertySheetHandlers\ATIPagesEx",,,"{700B1221-CAFF-11d1-B9DE-000000001B1B}"
+HKR,"shellex\PropertySheetHandlers\ATIPagesEx",,,"{700B1221-CAFF-11d1-B9DE-000000001B1B}"
+HKCR,"CLSID\{700B1221-CAFF-11d1-B9DE-000000001B1B}\InProcServer32",,,"atippaxx.dll"
+HKCR,"CLSID\{700B1221-CAFF-11d1-B9DE-000000001B1B}\InProcServer32",ThreadingModel,,"Apartment"
+HKCR,"Display.DisplayServer",,,"DisplayServer Class"
+HKCR,"Display.DisplayServer\CLSID",,,"{E62DCD80-C262-11d1-A419-006097923041}"
+HKCR,"Display.DisplayServer.1",,,"DisplayServer Class"
+HKCR,"Display.DisplayServer.1\CLSID",,,"{E62DCD80-C262-11d1-A419-006097923041}"
+HKCR,"CLSID\{E62DCD80-C262-11d1-A419-006097923041}",,,"DisplayServer Class"
+HKCR,"CLSID\{E62DCD80-C262-11d1-A419-006097923041}\InProcServer32",,,"atipdsxx.dll"
+HKCR,"CLSID\{E62DCD80-C262-11d1-A419-006097923041}\ProgID",,,"Display.DisplayServer.1"
+HKCR,"CLSID\{E62DCD80-C262-11d1-A419-006097923041}\VersionIndependentProgID",,,"Display.DisplayServer"
+HKCR,"CLSID\{F2B8E361-D2E2-11D1-A41F-00609729B902}",,,"User Interface Object, AtiPropertySheet"
+HKCR,"CLSID\{F2B8E361-D2E2-11D1-A41F-00609729B902}\InProcServer32",,,"atipuixx.dll"
+HKCR,"CLSID\{F2B8E361-D2E2-11D1-A41F-00609729B902}\ProgID",,,"UserInterfaceObject.AtiPropertySheet.1"
+HKCR,"CLSID\{F2B8E361-D2E2-11D1-A41F-00609729B902}\VersionIndependentProgID",,,"UserInterfaceObject.AtiPropertySheet"
+HKLM,"Software\ATI Technologies\Desktop",HelpID,,"3"
+HKLM,"Software\ATI Technologies\Desktop",EnableIcon,,"1"
+HKLM,"Software\ATI Technologies\Desktop",NoAtipta,,"0"
+;HKR,"Desktop",LoadPages,1,03,00,00,00
+HKR,"Desktop",D3D,1,00,00,00,00
+HKR,"Desktop",OpenGL,1,00,00,00,00
+HKR,"Desktop",CopyDesktopKey,,""
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Run",AtiPTA,,"Atiptaxx.exe"
+HKCR,"CLSID\{EBB5845F-CA80-11CF-BD3C-008029E89281}\InProcServer32",,,"atitvo32.dll"
+HKCR,"CLSID\{EBB5845F-CA80-11CF-BD3C-008029E89281}\InProcServer32",ThreadingModel,,"Both"
+HKLM,"Software\ATI Technologies\Desktop",Retail,,"0"
+HKLM,"Software\ATI Technologies\Driver\OptimalMPEG",,,"1"
+HKLM,"Software\ATI Technologies\Driver\MpegInstall",,,"0"
+;HKLM,"Software\Microsoft\Windows\CurrentVersion\Run",Ati2cwxx,,"Ati2cwxx.exe"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\ATI Display Driver",UninstallString,,"rundll32 %11%\atiiiexx.dll,_InfEngUnInstallINFFile_RunDLL@16 -force_restart -flags:0x2010001 -inf_class:DISPLAY -clean"
+;HKLM,"Software\Microsoft\Windows\CurrentVersion\RunOnce",ATITbDet,,"atitbdet.exe -tbinstall"
+HKLM,"Software\ATI Technologies\Driver", PMBIOS, , "1"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\OpenGLDrivers",ATOGLRP9,,"atio9xae"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\ATI Display Driver",DisplayName,,"ATI Display Driver"
+
+[MACXW4_AddReg_1CRTC]
+HKR,"INFO\INFO\3DHAL",Path,,"%a%s3DHAL"
+HKR,"INFO\INFO\DDHAL",Path,,"%a%sDDHAL"
+
+;----------------------------------------
+; File Update References
+;----------------------------------------
+
+[DestinationDirs]
+DefaultDestDir=11               	; LDID_SYS
+INFFiles=17				; windows\inf
+INFOther=17,OTHER			; windows\inf\other
+WDMFiles=30,ATI\INSTALL			; c:\ati\install
+WDMSysFiles=10,system32\drivers      ; system32\drivers
+
+[INFFiles]
+Atixbar.inf
+atitunep.inf
+ativmvxx.inf
+AtitvSnd.inf
+bt829.inf
+
+[INFOther]
+ativmdxx.inf
+ativmvxx.inf
+ativpdxx.inf
+ativraxx.inf
+ativrvxx.inf
+ativttxx.inf
+ativxsxx.inf
+
+[WDMSysFiles]
+ativbtxx.SYS
+ativmdxx.sys
+ativpdxx.sys
+ativraxx.SYS
+ativrvxx.SYS
+ativttxx.sys
+ativtuxx.SYS
+ativxsxx.sys
+ativxbxx.sys
+ativsnxx.sys
+
+;----------------------------------------
+; CopyFiles sections
+;----------------------------------------
+[SysFiles]
+atiiisxx.exe
+atiiiexx.dll
+atiicdxx.dll
+atiicdxx.vxd
+atiicdxx.sys
+atricdxx.dft
+ati9unae.bat
+atiiihxx.exe
+ativmvxx.ax
+
+[MACXW4_CopyFiles]
+ati2drae.drv
+ati2i9ae.dll
+atimiaae.dll
+
+[MACXW4_CopyFiles_3DFiles]
+ati2vxae.vxd
+atid32ae.dll
+ati3dcif.dll
+ati3drae.dll
+ativpeae.dll
+;ati2cwxx.exe
+atitvo32.dll
+ativvxxx.vxd
+ativifxx.dll
+ativ16xx.dll
+atio9xae.dll
+atimcrae.dll
+
+[MACXW4_Desktop_Files]
+atipdsxx.dll
+atippaxx.dll
+atipuixx.dll
+atiptaxx.exe
+atiphexx.exe
+
+atiiprxx.exe
+atii16xx.dll
+atii32xx.dll
+ati9dtxx.dll
+ati9diae.dll
+ati9dgae.exe
+
+;ENU
+atriprxx.dft
+atrpuixx.enu
+atr9dtxx.dft
+atr9diae.dft
+atr9dgae.dft
+atfenuxx.hlx
+atmenuxx.hlx
+atmenuxx.cnt
+atpenuxx.hlx
+atsenuxx.cnt
+atsenuxx.hlx
+attenuxx.hlx
+atvenuxx.hlx
+
+
+[MACXW4_UnInstall_Files]
+atipdsxx.dll
+atippaxx.dll
+atipuixx.dll
+atrpuixx.enu
+atfenuxx.hlp
+atmenuxx.hlp
+attenuxx.hlp
+atmenuxx.cnt
+atiptaxx.exe
+atpenuxx.hlp
+atsenuxx.cnt
+atsenuxx.hlp
+atvenuxx.hlp
+;atisserv.dll
+atii16xx.dll
+atii32xx.dll
+
+
+;----------------------------------------
+; DeleteFiles sections
+;----------------------------------------
+
+[MACXW4_DelFiles]
+ati64hlp.stb,,,1
+ati64hl2.stb,,,1
+
+;----------------------------------------
+; System.ini Updates
+;----------------------------------------
+
+;----------------------------------------
+; User visible strings
+;----------------------------------------
+
+[Strings]
+ClassName="Display"
+Mfg="ATI Tech. - Enhanced"
+
+SW_DSK="Software\ATI Technologies\Desktop"
+SW_DSP_PSH="Software\Microsoft\Windows\CurrentVersion\Controls Folder\Display\shellex\PropertySheetHandlers"
+SW_DSK_PSH="Software\Microsoft\Windows\CurrentVersion\Controls Folder\Desktop\shellex\PropertySheetHandlers"
+SX_PSH="shellex\PropertySheetHandlers"
+SS_DSP="System\CurrentControlSet\Services\Class\DISPLAY\ATI"
+SW_MS_RUN="Software\Microsoft\Windows\CurrentVersion\Run"
+SW_MS_RUO="Software\Microsoft\Windows\CurrentVersion\RunOnce"

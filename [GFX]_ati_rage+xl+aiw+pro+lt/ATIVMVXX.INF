@@ -1,0 +1,86 @@
+[version]
+CatalogFile=ati9xwdm.cat
+signature="$CHICAGO$"
+SetupClass=BASE
+DriverVer=04/09/2001, 4.13.7103
+
+;;INFDEL;;[DestinationDirs]
+;;INFDEL;;MVDetection.CopyDriver=11
+
+[DefaultInstall]
+AddReg          = MVDetection.Add.Reg,MVProtection.Add.Reg,MVDetectProperty.Add.Reg,PCDetection.Add.Reg,PCProtection.Add.Reg,PCDetectProperty.Add.Reg
+;;INFDEL;;CopyFiles	= MVDetection.CopyDriver
+
+;;INFDEL;;[MVDetection.CopyDriver]
+;;INFDEL;;ativmvxx.ax
+
+[MVDetection.Add.Reg]
+HKCR,CLSID\{02AB0740-C008-11d2-8AFF-00609729B914},,,%PlugIn_MVDetection%
+HKCR,CLSID\{02AB0740-C008-11d2-8AFF-00609729B914}\InprocServer32,,,ativmvxx.ax
+HKCR,CLSID\{02AB0740-C008-11d2-8AFF-00609729B914}\InprocServer32,ThreadingModel,,Both
+
+;
+; This IID is aggregated for the filter given the CLSID of the property set PROPSETID_VIDCAP_MACROVISION_DETECTION
+;
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{02AB0740-C008-11d2-8AFF-00609729B914},,,%PlugIn_MVDetection%
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{02AB0740-C008-11d2-8AFF-00609729B914},IID,1,40,07,AB,02,08,C0,d2,11,8A,FF,00,60,97,29,B9,14
+
+[PCDetection.Add.Reg]
+HKCR,CLSID\{DBE88301-B6F4-11d3-836B-0050DA0F748C},,,%PlugIn_PCDetection%
+HKCR,CLSID\{DBE88301-B6F4-11d3-836B-0050DA0F748C}\InprocServer32,,,ativmvxx.ax
+HKCR,CLSID\{DBE88301-B6F4-11d3-836B-0050DA0F748C}\InprocServer32,ThreadingModel,,Both
+
+;
+; This IID is aggregated for the filter given the CLSID of the property set PROPSETID_VIDCAP_PARENTALCONTROL_DETECTION
+;
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{DBE88301-B6F4-11d3-836B-0050DA0F748C},,,%PlugIn_PCDetection%
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{DBE88301-B6F4-11d3-836B-0050DA0F748C},IID,1,01,83,E8,DB,F4,B6,d3,11,83,6B,00,50,DA,0F,74,8C
+
+[MVProtection.Add.Reg];
+HKCR,CLSID\{DDD28680-CBD5-11d2-8AFF-00609729B914},,,%PlugIn_MVProtection%
+HKCR,CLSID\{DDD28680-CBD5-11d2-8AFF-00609729B914}\InprocServer32,,,ativmvxx.ax
+HKCR,CLSID\{DDD28680-CBD5-11d2-8AFF-00609729B914}\InprocServer32,ThreadingModel,,Both
+
+; This IID is aggregated for the filter given the CLSID of the property set PROPSETID_VIDCAP_MACROVISION_PROTECTION
+;
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{DDD28680-CBD5-11d2-8AFF-00609729B914},,,%PlugIn_MVProtection%
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{DDD28680-CBD5-11d2-8AFF-00609729B914},IID,1,80,86,D2,DD,D5,CB,d2,11,8A,FF,00,60,97,29,B9,14
+
+[PCProtection.Add.Reg];
+HKCR,CLSID\{641CE061-BED2-11d3-BABD-006097326F79},,,%PlugIn_PCProtection%
+HKCR,CLSID\{641CE061-BED2-11d3-BABD-006097326F79}\InprocServer32,,,ativmvxx.ax
+HKCR,CLSID\{641CE061-BED2-11d3-BABD-006097326F79}\InprocServer32,ThreadingModel,,Both
+
+; This IID is aggregated for the filter given the CLSID of the property set PROPSETID_VIDCAP_PARENTALCONTROL_PROTECTION
+;
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{641CE061-BED2-11d3-BABD-006097326F79},,,%PlugIn_PCProtection%
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{641CE061-BED2-11d3-BABD-006097326F79},IID,1,61,E0,1C,64,D2,BE,d3,11,BA,BD,00,60,97,32,6F,79
+
+[MVDetectProperty.Add.Reg];
+HKCR,CLSID\{42D65080-3A07-11d3-93F2-00609729B914},,,%PlugIn_MVDetectionPropertyPage%
+HKCR,CLSID\{42D65080-3A07-11d3-93F2-00609729B914}\InprocServer32,,,ativmvxx.ax
+HKCR,CLSID\{42D65080-3A07-11d3-93F2-00609729B914}\InprocServer32,ThreadingModel,,Both
+
+; This IID is aggregated for the PropertySet given the CLSID of the property set PROPSETID_VIDCAP_MACROVISION_DETECTION
+;
+HKLM,System\CurrentControlSet\Control\MediaSets\{02AB0740-C008-11d2-8AFF-00609729B914}\PropertyPages\{42D65080-3A07-11d3-93F2-00609729B914},,,%PlugIn_MVDetectionPropertyPage%
+
+[PCDetectProperty.Add.Reg];
+HKCR,CLSID\{4F33C001-C383-11d3-BABD-006097326F79},,,%PlugIn_PCDetectionPropertyPage%
+HKCR,CLSID\{4F33C001-C383-11d3-BABD-006097326F79}\InprocServer32,,,ativmvxx.ax
+HKCR,CLSID\{4F33C001-C383-11d3-BABD-006097326F79}\InprocServer32,ThreadingModel,,Both
+
+; This IID is aggregated for the PropertySet given the CLSID of the property set PROPSETID_VIDCAP_PARENTALCONTROL_DETECTION
+;
+HKLM,System\CurrentControlSet\Control\MediaSets\{DBE88301-B6F4-11d3-836B-0050DA0F748C}\PropertyPages\{4F33C001-C383-11d3-BABD-006097326F79},,,%PlugIn_PCDetectionPropertyPage%
+
+[Strings]
+;
+; Localizable
+;
+PlugIn_MVDetection="WDM Analogue Video Streaming Macrovision Detection Property Set Interface Handler"
+PlugIn_MVProtection="WDM Analogue Video Streaming Macrovision Protection Property Set Interface Handler"
+PlugIn_MVDetectionPropertyPage="Macrovision Detection Property Page"
+PlugIn_PCDetection="WDM Analogue Video Streaming Parental Control Detection Property Set Interface Handler"
+PlugIn_PCProtection="WDM Analogue Video Streaming Parental Control Protection Property Set Interface Handler"
+PlugIn_PCDetectionPropertyPage="Parental Control Detection Property Page"

@@ -1,0 +1,119 @@
+;
+; ATIVmdxx.INF  -- This file installs the VBI codec for Macrovision detection
+;               
+;*** Created 03/02/99  (Creation Date)
+;
+
+[Version]
+CatalogFile=ati9xwdm.cat
+LayoutFile=Layout.inf, Layout1.inf, Layout2.inf
+signature="$CHICAGO$"
+Class=Media
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%AtiTech%
+DriverVer=04/09/2001, 4.13.7103
+
+;;INFDEL;;[SourceDisksNames]
+;;INFDEL;;1="ATI WDM Drivers",,,c:\ati\install
+
+;;INFDEL;;[SourceDisksFiles]
+;;INFDEL;;ATIVmdxx.sys=1
+
+; F i l e   c o p y i n g   s e c t i o n s (where the files go to).
+
+;;INFDEL;;[DestinationDirs]
+;;INFDEL;;MVDCodec.CopyDrivers=10,system32\drivers  ; eg.  \windows\system32\drivers
+
+[Manufacturer]
+%ATI%=ATI
+
+; =================== Generic ==================================
+
+[ATI]
+%MVDCodec.DeviceDesc%=MVDCodec.Device,DISPLAY\MVDCodec
+
+[MVDCodec.Device]
+;Include=    ks.inf, kscaptur.inf
+;Needs=      KS.Registration,KSCAPTUR.Registration
+AddReg=     MVDCodec.Device.AddReg
+;;INFDEL;;CopyFiles=  MVDCodec.Device.CopyDrivers
+
+[MVDCodec.Device.NT]
+Include=    ks.inf, kscaptur.inf
+Needs=      KS.Registration,KSCAPTUR.Registration.NT
+AddReg=     MVDCodec.Device.NT.AddReg
+;;INFDEL;;CopyFiles=  MVDCodec.Device.CopyDrivers
+
+[MVDCodec.Device.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ativmdxx.sys
+HKR,,DebugLevel,3,0
+
+[MVDCodec.Device.NT.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,atinmdxx.sys
+HKR,,DebugLevel,3,0
+
+;;INFDEL;;[MVDCodec.Device.CopyDrivers]
+;;INFDEL;;stream.sys
+;;INFDEL;;ativmdxx.sys
+
+[MVDCodec.Device.Interfaces]
+AddInterface={07DAD660-22F1-11d1-A9F4-00C04FBBDE8F},"GLOBAL",VBICodec,
+
+[MVDCodec.Device.NT.Interfaces]
+AddInterface={07DAD660-22F1-11d1-A9F4-00C04FBBDE8F},"GLOBAL",VBICodec,
+
+[VBICodec]
+AddReg=VBICodec.AddReg
+
+[VBICodec.AddReg]
+HKR,,CLSID,,%CLSID%
+HKR,,FriendlyName,,%MVDCodec.FriendlyName%
+HKLM,Software\CLASSES\CLSID\%AMcatID%\Instance\%VBIcatID%
+HKLM,Software\CLASSES\CLSID\%AMcatID%\Instance\%VBIcatID%,,,%WDMCodecs%
+HKLM,Software\CLASSES\CLSID\%AMcatID%\Instance\%VBIcatID%,FriendlyName,,%WDMCodecs%
+HKLM,Software\CLASSES\CLSID\%AMcatID%\Instance\%VBIcatID%,CLSID,,"%VBIcatID%"
+
+[MVDCodec.Device.Services]
+AddService = MVDCODEC,0x00000002,MVDCodec.ServiceInstall
+
+[MVDCodec.Device.NT.Services]
+AddService = MVDCODEC,0x00000002,MVDCodec.ServiceInstall
+
+[MVDCodec.ServiceInstall]
+DisplayName   = %MVDCodec.DeviceDesc%
+ServiceType   = %SERVICE_KERNEL_DRIVER%
+StartType     = %SERVICE_AUTO_START%
+ErrorControl  = %SERVICE_ERROR_NORMAL%
+ServiceBinary = %12%\ativmdxx.sys
+
+;---------------------------------------------------------------
+;                S t r i n g s
+;---------------------------------------------------------------
+
+[Strings]
+
+;----------------
+; Non-Localizable
+;----------------
+
+SERVICE_KERNEL_DRIVER	=1
+SERVICE_AUTO_START		=2
+SERVICE_ERROR_NORMAL	=1
+
+;CLSID="{07DAD661-22F1-11d1-A9F4-00C04FBBDE8F}"			; CHANGE_ME
+CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"	; KsProxy.ax's ID, REQUIRED
+VBIcatID="{07DAD660-22F1-11d1-A9F4-00C04FBBDE8F}"
+AMcatID="{DA4E3DA0-D07D-11d0-BD50-00A0C911CE86}"
+
+
+;----------------
+; Localizable
+;----------------
+
+AtiTech="ATI Technologies Inc."
+ATI="ATI"
+MVDCodec.DeviceDesc		= "Specialized MVD WDM VBI Codec"
+MVDCodec.FriendlyName	= "Specialized MVD WDM VBI Codec"
+WDMCodecs					= "WDM Streaming VBI Codecs"

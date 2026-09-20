@@ -1,0 +1,127 @@
+; ATIVraxx.INF  -- This file installs ATIVraxx.sys
+;
+
+[Version]
+CatalogFile=ati9xwdm.cat
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%AtiTech%
+LayoutFile=LAYOUT.INF, layout1.inf, layout2.inf
+DriverVer=04/09/2001, 4.13.7103
+
+;;INFDEL;;[SourceDisksNames]
+;;INFDEL;;1="ATI WDM Drivers",,,c:\ati\install
+;;INFDEL;;1="ATI WDM Drivers",,,a:\
+
+;;INFDEL;;[SourceDisksFiles]
+;;INFDEL;;ATIVraxx.sys=1
+
+; F i l e   c o p y i n g   s e c t i o n s (where the files go to).
+
+;;INFDEL;;[DestinationDirs]
+;;INFDEL;;AtiRtAudio.CopyDrivers=10,system32\drivers  ; eg.  \windows\system32\drivers
+
+[Manufacturer]
+%ATI%=ATI
+
+; =================== Generic ==================================
+
+[ATI]
+%AtiRtAudio.DeviceDesc%=AtiRtAudio.Device,DISPLAY\ATIRTAUDIO
+
+[AtiRtAudio.Device]
+Include  =  ks.inf, kscaptur.inf, ksfilter.inf
+Needs    =  KS.Registration,MSPCLOCK.Installation
+AddReg   =  AtiRtAudio.AddReg, AtiRTAudio.Nodes, DAControl.Add.Reg,Categories,TopologyNodes,PlugIns,Filters
+;;INFDEL;;CopyFiles=  AtiRtAudio.CopyDrivers
+;;INFDEL;;KnownFiles= AtiRtAudio.KnownFiles
+
+
+[AtiRtAudio.Device.NT]
+Include  =  ks.inf, ativdaxx.inf, kscaptur.inf, ksfilter.inf
+Needs    =  KS.Registration,DefaultInstall,MSPCLOCK.Installation
+AddReg   =  AtiRtAudio.AddReg, AtiRTAudio.Nodes, DAControl.Add.Reg,Categories,TopologyNodes,PlugIns,Filters
+;;INFDEL;;CopyFiles=  AtiRtAudio.CopyDrivers
+;;INFDEL;;DelFiles =  AtiRtAudio.DelDrivers
+
+
+[AtiRtAudio.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ATIVraxx.sys
+HKR,,PageOutWhenUnopened,3,01
+HKR,,DebugLevel,3,0
+HKR,Provider,TurboMode,3,0
+;HKR,,DataWidth,,8
+;HKR,,EmbeddedControl,,true
+
+
+;;INFDEL;;[AtiRtAudio.CopyDrivers]
+;;INFDEL;;stream.sys
+;;INFDEL;;;ks.sys
+;;INFDEL;;ATIVraxx.sys
+
+;;INFDEL;;[AtiRtAudio.KnownFiles]
+;;INFDEL;;ATIVraxx.sys=safe
+
+[AtiRtAudio.Device.Interfaces]
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",AtiRtAudio.Capture,
+AddInterface=%KSCATEGORY_RENDER%,"GLOBAL",AtiRtAudio.Render,
+AddInterface=%KSCATEGORY_AUDIO%,"GLOBAL",AtiRtAudio.Audio,
+
+[AtiRtAudio.Capture]
+AddReg=AudioCapture.AddReg
+
+[AtiRtAudio.Render]
+AddReg=AudioRender.AddReg
+
+[AudioCapture.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AtiRtAudio.Capture%
+HKR,,PageOutWhenUnopened,3,01
+HKR,,DontSuspendIfStreamsAreRunning,3,01
+
+[AudioRender.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AtiRtAudio.Render%
+HKR,,PageOutWhenUnopened,3,01
+HKR,,DontSuspendIfStreamsAreRunning,3,01
+
+[AtiRTAudio.Nodes]
+HKLM,%MediaCategories%\%GUID.SpdifPin%,Name,,%Node.SpdifPin%
+HKLM,%MediaCategories%\%GUID.SpdifPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.PcmInPin%,Name,,%Node.PcmInPin%
+HKLM,%MediaCategories%\%GUID.PcmInPin%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.PcmOutPin%,Name,,%Node.PcmOutPin%
+HKLM,%MediaCategories%\%GUID.PcmOutPin%,Display,1,00,00,00,00
+
+[DAControl.Add.Reg]
+HKCR,CLSID\{979F5041-248F-11d3-9EB2-006097A78F9D},,,%PlugIn_DAControl%
+HKCR,CLSID\{979F5041-248F-11d3-9EB2-006097A78F9D}\InprocServer32,,,ativdaxx.ax
+HKCR,CLSID\{979F5041-248F-11d3-9EB2-006097A78F9D}\InprocServer32,ThreadingModel,,Both
+
+;
+; This IID is aggregated for the filter given the CLSID of the property set KSPROPSETID_Audio_ATI
+;
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{979F5041-248F-11d3-9EB2-006097A78F9D},,,%PlugIn_DAControl%
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{979F5041-248F-11d3-9EB2-006097A78F9D},IID,1,41,50,9F,97,8F,24,D3,11,9E,B2,00,60,97,A7,8F,9D
+
+[Strings]
+AtiTech="ATI Technologies Inc."
+ATI="ATI"
+captureClassName="Sound, video and game controllers"
+KSCATEGORY_CAPTURE=	"{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_RENDER=	"{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_AUDIO=	"{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+Proxy.CLSID=		"{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+AtiRtAudio.DeviceDesc=	"ATI WDM Rage Theater Audio"
+AtiRtAudio.Capture=	"ATI Rage Theater Audio"
+AtiRtAudio.Render=	"ATI Rage Theater Audio"
+AtiRtAudio.Audio=	"ATI Rage Theater Audio"
+GUID.SpdifPin=		"{ECDA4882-9501-11d2-BD1E-00105A196FB7}"
+GUID.PcmInPin=		"{ECDA4881-9501-11d2-BD1E-00105A196FB7}"
+GUID.PcmOutPin=		"{ECDA4880-9501-11d2-BD1E-00105A196FB7}"
+Node.SpdifPin=		"S/PDIF"
+Node.PcmInPin=		"PCM Render"
+Node.PcmOutPin=		"PCM Capture"
+MediaCategories=	"SYSTEM\CurrentControlSet\Control\MediaCategories"

@@ -1,0 +1,67 @@
+; ativxsxx.INF  -- This file installs ativxsxx.sys
+;
+;*** Created 4/10/2000  (Creation Date)
+;
+
+[Version]
+CatalogFile=ati9xwdm.cat
+signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%AtiTech%
+LayoutFile=LAYOUT.INF, layout1.inf, layout2.inf
+DriverVer=04/09/2001, 4.13.7103
+
+; F i l e   c o p y i n g   s e c t i o n s (where the files go to).
+
+
+[Manufacturer]
+%ATI%=ATI
+
+; =================== Generic ==================================
+
+[ATI]
+%ATIXSAudio.DeviceDesc%=ATIXSAudio.Device,DISPLAY\ATIXSAudio
+
+[ATIXSAudio.Device]
+Include  =  ks.inf
+Needs    =  KS.Registration
+AddReg   =  ATIXSAudio.addreg
+
+
+[ATIXSAudio.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,ativxsxx.sys
+HKR,,PageOutWhenUnopened,3,01
+HKR,,DebugLevel,3,0
+
+; =================== ATITVAudio ==================================
+
+
+[ATIXSAudio.Device.Interfaces]
+AddInterface={a799a802-a46d-11d0-a18c-00a02401dcd4},"GLOBAL",TVAudio,
+AddInterface={a799a801-a46d-11d0-a18c-00a02401dcd4},"GLOBAL",Crossbar,
+
+[TVAudio]
+AddReg=TVAudio.AddReg
+HKR,,FriendlyName,,%ATITVAudio.TVAudio%
+
+[TVAudio.AddReg]
+HKR,,CLSID,,{71F96462-78F3-11d0-A18C-00A0C9118956}
+
+[Crossbar]
+AddReg=Crossbar.AddReg
+
+[Crossbar.AddReg]
+HKR,,CLSID,,{71F96460-78F3-11d0-A18C-00A0C9118956}
+HKR,,FriendlyName,,%atixbar.Crossbar%
+
+[Strings]
+AtiTech="ATI Technologies Inc."
+ATI="ATI"
+captureClassName="Sound, video and game controllers"
+ATIXSAudio.DeviceDesc="ATI WDM TV Audio Crossbar"
+ATITVAudio.TVAudio="ATI TV Audio"
+atixbar.Crossbar="ATI AV Crossbar"
+REG_DWORD=0x00010001
+
